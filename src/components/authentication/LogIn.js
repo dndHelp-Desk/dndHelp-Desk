@@ -163,11 +163,11 @@ const LogIn = () => {
               </button>
               <small className="mt-4 text-gray-400 flex justify-center">
                 Forgot password ?
-                <a
+                <p
                   className="text-blue-500 pl-1 outline-none focus:outline-none"
                 >
                   Reset
-                </a>
+                </p>
               </small>
             </form>
           </div>
