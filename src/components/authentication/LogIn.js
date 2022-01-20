@@ -1,8 +1,17 @@
-import React from "react";
-import { FaDyalog, FaSellsy, FaHome, FaSlack } from "react-icons/fa";
+import React, { useState } from "react";
+import {
+  FaDyalog,
+  FaSellsy,
+  FaHome,
+  FaSlack,
+  FaAlignRight,
+} from "react-icons/fa";
 import Background from "./images/welcome.png";
 
 const LogIn = () => {
+  const [menu, setMenu] = useState(false);
+
+  //React Component ================
   return (
     <div className="bg-slate-900 w-screen h-screen min-h-[45rem] flex relative overflow-hidden">
       {/**Top Nav ================= */}
@@ -11,15 +20,69 @@ const LogIn = () => {
           <FaDyalog className="inline-block" />
           ial n Dine
         </h3>
-        <div className="text-gray-200 flex space-x-10">
-          <a href="" className="flex items-center space-x-1 hover:opacity-80">
+
+        {/**Small Screen Menu ================ */}
+        <FaAlignRight
+          onClick={() => setMenu(menu === false ? true : false)}
+          className="font-semibold text-xl text-gray-200 md:hidden flex cursor-pointer"
+        />
+        <div
+          className={`md:hidden flex absolute top-14 right-2 w-[16rem] border border-slate-800 shadow-2xl rounded-lg bg-[#131538] ${
+            menu ? "h-[10rem]" : "h-0 opacity-0"
+          } transition-scale duration-300 flex flex-col space-y-2 p-4 justify-center`}
+        >
+          <div className="text-gray-200 md-hidden flex flex-col space-y-2">
+            <a
+              href="https://call-center-erp.netlify.app"
+              target={"_blank"}
+              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+            >
+              <FaSellsy
+                className="inline-block
+			  "
+              />
+              <span>Dashboard</span>
+            </a>
+            <a
+              href="https://dial-n-dine.netlify.app"
+              target={"_blank"}
+              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+            >
+              <FaHome
+                className="inline-block
+			  "
+              />
+              <span>Home</span>
+            </a>
+          </div>
+          <a
+            href="https://join.slack.com/t/dialndine/signup"
+            target={"_blank"}
+            className="md:hidden flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-200 rounded-xl p-2 px-4"
+          >
+            <FaSlack className="text-lg inline-block" />
+            <span>Our Workspace</span>
+          </a>
+        </div>
+
+        {/**Large Screens Menu Items===================== */}
+        <div className="text-gray-200 hidden md:flex space-x-10">
+          <a
+            href="https://call-center-erp.netlify.app"
+            target={"_blank"}
+            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+          >
             <FaSellsy
               className="inline-block
 			  "
             />
             <span>Dashboard</span>
           </a>
-          <a href="" className="flex items-center space-x-1 hover:opacity-80">
+          <a
+            href="https://dial-n-dine.netlify.app"
+            target={"_blank"}
+            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+          >
             <FaHome
               className="inline-block
 			  "
@@ -28,8 +91,9 @@ const LogIn = () => {
           </a>
         </div>
         <a
-          href=""
-          className="flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-200 rounded-xl p-2 px-4"
+          href="https://join.slack.com/t/dialndine/signup"
+          target={"_blank"}
+          className="hidden md:flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-200 rounded-xl p-2 px-4"
         >
           <FaSlack className="text-lg inline-block" />
           <span>Our Workspace</span>
@@ -93,7 +157,10 @@ const LogIn = () => {
               </button>
               <small className="mt-4 text-gray-400 flex justify-center">
                 Forgot password ?
-                <a href="" className="text-blue-500 pl-1">
+                <a
+                  href=""
+                  className="text-blue-500 pl-1 outline-none focus:outline-none"
+                >
                   Reset
                 </a>
               </small>
