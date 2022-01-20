@@ -35,6 +35,7 @@ const LogIn = () => {
             <a
               href="https://call-center-erp.netlify.app"
               target={"_blank"}
+              rel="noreferrer"
               className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
             >
               <FaSellsy
@@ -46,6 +47,7 @@ const LogIn = () => {
             <a
               href="https://dial-n-dine.netlify.app"
               target={"_blank"}
+              rel="noreferrer"
               className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
             >
               <FaHome
@@ -58,6 +60,7 @@ const LogIn = () => {
           <a
             href="https://join.slack.com/t/dialndine/signup"
             target={"_blank"}
+            rel="noreferrer"
             className="md:hidden flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-200 rounded-xl p-2 px-4"
           >
             <FaSlack className="text-lg inline-block" />
@@ -70,6 +73,7 @@ const LogIn = () => {
           <a
             href="https://call-center-erp.netlify.app"
             target={"_blank"}
+            rel="noreferrer"
             className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
           >
             <FaSellsy
@@ -81,6 +85,7 @@ const LogIn = () => {
           <a
             href="https://dial-n-dine.netlify.app"
             target={"_blank"}
+            rel="noreferrer"
             className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
           >
             <FaHome
@@ -93,6 +98,7 @@ const LogIn = () => {
         <a
           href="https://join.slack.com/t/dialndine/signup"
           target={"_blank"}
+          rel="noreferrer"
           className="hidden md:flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-200 rounded-xl p-2 px-4"
         >
           <FaSlack className="text-lg inline-block" />
