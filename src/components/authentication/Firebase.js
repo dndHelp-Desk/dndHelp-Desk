@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateAlert } from "../../store/NotificationsSlice";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -31,24 +33,37 @@ export function signup(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
 
+//Upload Status Alert
+let status = { message: "", color: "bg-green-200" };
+
+
 export function login(email, password) {
   signInWithEmailAndPassword(auth, email, password)
-    .then((cred) => {
-      console.log(cred);
+    .then(() => {
+      status = {
+        message: "Logged In Successfully",
+        color: "bg-green-200",
+      };
     })
-    .catch((err) => {
-      console.log(err.message);
-    });
+    .catch((error) => {
+      status = {
+        message: error.message,
+        color: "bg-red-200",
+      };
+    });;
 }
+
 
 // Custom Hook / React Component ====================
 export function useAuth() {
+  const dispatch = useDispatch()
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
+    dispatch(updateAlert(status))
     return unsub;
-  }, []);
+  }, [dispatch,status]);
 
   return currentUser;
 }
@@ -62,5 +77,5 @@ export async function upload(file, currentUser) {
 
   updateProfile(currentUser, { photoURL });
 
-  alert("Profile Changed Succesfully");
+  return true
 }

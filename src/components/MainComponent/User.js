@@ -4,6 +4,7 @@ import { isAuthenticated } from "../../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, getAuth, updateProfile } from "firebase/auth";
 import Profile from "../authentication/Profile";
+import { updateAlert } from "../../store/NotificationsSlice";
 
 const User = () => {
   const [usernameInput, changeInput] = useState("");
@@ -45,7 +46,7 @@ const User = () => {
       <div className="flex space-x-2 relative">
         <button
           onClick={() => setSettingsModal(settings === false ? true : false)}
-          className="px-3 p-1 bg-slate-800 text-slate-300 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
+          className="px-3 p-1 bg-slate-800 text-slate-400 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
         >
           <FaUserEdit />
         </button>
@@ -62,7 +63,11 @@ const User = () => {
               e.preventDefault();
               updateProfile(auth.currentUser, {
                 displayName: usernameInput,
-              });
+              }).then(()=>{
+                dispatch(updateAlert({message:"Display Name Changed Successfully",color:"bg-green-200"}))
+              }).catch(()=>{
+                 dispatch(updateAlert({message:"Failed To Change The Name",color:"bg-red-200"}))
+              })
             }}
             className="flex space-x-2 justify-center items-center overflow-hidden"
           >
@@ -86,7 +91,7 @@ const User = () => {
 
         <button
           onClick={() => signOutUser()}
-          className="px-4 p-1 bg-slate-800 text-slate-300 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
+          className="px-4 p-1 bg-slate-800 text-slate-400 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
         >
           Sign Out
         </button>

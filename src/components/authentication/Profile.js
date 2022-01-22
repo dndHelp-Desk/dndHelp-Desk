@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth, upload } from "./Firebase";
 import { BsCameraFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { updateAlert } from "../../store/NotificationsSlice";
 
 const Profile = () => {
   const currentUser = useAuth();
@@ -8,6 +10,7 @@ const Profile = () => {
   const [showChange, setChange] = useState(false);
   const [showChangeIcon, setChangeIcon] = useState("scale-0");
   const [photoURL, setPhotoURL] = useState("https://cutt.ly/mIFoGkV");
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -19,10 +22,15 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault(e);
     upload(photo, currentUser);
+    upload(photo, currentUser) &&
+      dispatch(
+        updateAlert({
+          message: "Profile Changed Successfully",
+          color: "bg-green-200",
+        })
+      );
     setChange(false);
   };
-
-  useEffect(() => {}, [photo]);
 
   useEffect(() => {
     if (currentUser?.photoURL) {
@@ -39,7 +47,7 @@ const Profile = () => {
         <button
           className={`text-xs ${
             showChange ? "" : "hidden"
-          } font-bold top-[1.8rem] left-[-3rem] w-18 rotate-[-90deg] absolute bg-slate-800 p-1 px-3 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
+          } font-bold text-xs tracking-wide top-[1.7rem] left-[-3rem] w-18 rotate-[-90deg] absolute bg-slate-800 p-1 px-3 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
           type="submit"
         >
           Upload
@@ -48,7 +56,7 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="custom-shadow h-20 w-20 border-[3px] border-slate-600 rounded-xl flex justify-center items-center cursor-pointer p-[2px]"
+            className="h-20 w-20 border-[3px] border-slate-600 rounded-xl flex justify-center items-center cursor-pointer p-[2px]"
           >
             <img
               className="rounded-lg bg-slate-500 h-full w-full object-cover object-center"

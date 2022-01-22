@@ -24,7 +24,7 @@
   }
 
   .TabsLinks {
-    @apply flex items-center space-x-1 hover:opacity-80 text-sm outline-none focus:outline-none font-medium transition-opacity duration-300;
+    @apply flex items-center space-x-1 hover:opacity-80 text-sm outline-none focus:outline-none font-sans font-semibold uppercase tracking-wide transition-opacity duration-300;
   }
   .navlinks.active {
     @apply text-blue-600;
@@ -50,7 +50,7 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply dark:bg-gray-700 bg-indigo-500 rounded-[1vh];
+    @apply bg-slate-900 rounded-[1vh];
   }
 
   .custom-shadow {

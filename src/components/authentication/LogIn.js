@@ -56,13 +56,14 @@ const LogIn = () => {
 
   //SetPath Location ==========
   useEffect(() => {
-    window.localStorage.setItem("logged", logged);
     document.title = `Dial n Dine Help-Desk ${location.pathname}`;
   }, [location, logged]);
 
   //React Component ================
   return (
     <div className="bg-slate-900 w-screen h-screen min-h-[45rem] flex relative overflow-hidden">
+      {/**Alert */}
+
       {/**Top Nav ================= */}
       <nav className="absolute w-[75%] h-[4rem] bg-transparent backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center">
         <h3 className="uppercase font-semibold text-lg text-gray-200 flex items-center">
