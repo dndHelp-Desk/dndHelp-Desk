@@ -1,0 +1,98 @@
+import React, { useState } from "react";
+import { FaRegCalendarAlt, FaUserEdit } from "react-icons/fa";
+import { isAuthenticated } from "../../store/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut, getAuth, updateProfile } from "firebase/auth";
+import Profile from "../authentication/Profile";
+
+const User = () => {
+  const [usernameInput, changeInput] = useState("");
+  const username = useSelector((state) => state.UserInfo.username);
+  const [settings, setSettingsModal] = useState(false);
+  const auth = getAuth();
+  const dispatch = useDispatch();
+
+  //Sign Out User =================
+  const signOutUser = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("user signed out");
+        dispatch(isAuthenticated(false));
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  //React Component =======================
+  return (
+    <div className="h-[8rem] z-0 w-full bg-[#4a72df2f] backdrop-blur-lg p-2 pl-[9.5%] pr-[10.5%] flex justify-between  relative">
+      <div className="flex space-x-4 h-full">
+        {/** Profile =================== */}
+        <Profile />
+
+        {/**User Name & Time ================= */}
+        <div className="space-y-2 mt-4">
+          <h2 className="text-slate-800 text-base font-bold">{username}</h2>
+          <small className="text-slate-600 text-sm">
+            <FaRegCalendarAlt className="inline" />{" "}
+            {`${new Date().toDateString()}`}
+          </small>
+        </div>
+      </div>
+
+      {/**Other Settings And Sign Out ================ */}
+      <div className="flex space-x-2 relative">
+        <button
+          onClick={() => setSettingsModal(settings === false ? true : false)}
+          className="px-3 p-1 bg-slate-800 text-slate-300 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
+        >
+          <FaUserEdit />
+        </button>
+
+        {/**Change name =========== */}
+        <div
+          className={`absolute  right-[11rem] z-20 shadow-2xl rounded-lg bg-slate-900 after:content-[""] after:absolute after:top-2/4 after:right-[-1rem] after:mt-[-8px] after:border-[8px] after:border-t-transparent after:border-r-transparent after:border-b-transparent after:border-l-slate-900 ${
+            settings ? "scale-100 w-[23rem]" : "scale-0 w-0"
+          } transition-scale duration-200 flex space-y-2 p-4 justify-center items-center`}
+        >
+          <form
+            action=""
+            onSubmit={(e) => {
+              e.preventDefault();
+              updateProfile(auth.currentUser, {
+                displayName: usernameInput,
+              });
+            }}
+            className="flex space-x-2 justify-center items-center overflow-hidden"
+          >
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Your username..."
+              onChange={(e) => changeInput(e.target.value)}
+              className="log_In_Input focus:ring-0 input:-webkit-autofill input:-webkit-autofill:hover input:-webkit-autofill:focus textarea:-webkit-autofill textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus select:-webkit-autofill select:-webkit-autofill:hover select:-webkit-autofill:focus"
+            />
+            <button
+              onClick={() => setSettingsModal(false)}
+              type="submit"
+              className="px-4 p-1 bg-blue-600 text-slate-300 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] outline-none focus:outline-none hover:bg-blue-700 transition-bg duration-300"
+            >
+              Change
+            </button>
+          </form>
+        </div>
+
+        <button
+          onClick={() => signOutUser()}
+          className="px-4 p-1 bg-slate-800 text-slate-300 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
+        >
+          Sign Out
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default User;

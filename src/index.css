@@ -4,8 +4,9 @@
 
 @layer components {
   .log_In_Input {
-    @apply h-12 bg-[#0f1535] border-[1px] border-gray-700 outline-none focus:outline-none focus:ring focus:ring-blue-400 px-4 text-gray-500 rounded-[1.25rem] placeholder:text-gray-500 placeholder:text-sm placeholder:font-semibold;
+    @apply h-12 bg-[#0f1535] border-[1px] border-gray-700 outline-none focus:outline-none focus:ring focus:ring-blue-400 px-4 text-gray-400 rounded-xl placeholder:text-gray-400 placeholder:text-sm placeholder:font-semibold;
   }
+
   /* Change Autocomplete styles in Chrome*/
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -20,5 +21,61 @@
     -webkit-text-fill-color: #ccc;
     -webkit-box-shadow: 0 0 0px 1000px #0f1535 inset;
     transition: background-color 5000s ease-in-out 0s;
+  }
+
+  .TabsLinks {
+    @apply flex items-center space-x-1 hover:opacity-80 text-sm outline-none focus:outline-none font-medium transition-opacity duration-300;
+  }
+  .navlinks.active {
+    @apply text-blue-600;
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5vh;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[#63626213] rounded-[1vh];
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply dark:bg-gray-700 bg-indigo-500 rounded-[1vh];
+  }
+
+  .custom-shadow {
+    box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);
+  }
+
+  /* Handle on hover */
+  html::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#555];
+  }
+
+  html,
+  *,
+  body {
+    scroll-behavior: smooth;
+    scrollbar-color: #374151;
+    scrollbar-width: none;
+    font-family: "PT Sans", sans-serif;
+  }
+  .custom-shadow {
+    box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);
+  }
+  abbr[title] {
+    border-bottom: none !important;
+    cursor: inherit !important;
+    text-decoration: none !important;
   }
 }
