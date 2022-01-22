@@ -63,7 +63,7 @@ export function useAuth() {
     const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
     dispatch(updateAlert(status))
     return unsub;
-  }, [dispatch,status]);
+  }, [dispatch]);
 
   return currentUser;
 }
