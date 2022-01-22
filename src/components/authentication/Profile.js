@@ -42,7 +42,7 @@ const Profile = () => {
           } font-bold top-[1.8rem] left-[-3rem] w-18 rotate-[-90deg] absolute bg-slate-800 p-1 px-3 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
           type="submit"
         >
-          Change
+          Upload
         </button>
         <div className="h-20  flex justify-center relative">
           <div
