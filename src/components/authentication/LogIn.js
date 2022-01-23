@@ -54,7 +54,7 @@ const LogIn = () => {
 
     //SetPath Location ==========
     document.title = `Dial n Dine Help-Desk ${location.pathname}`;
-  }, [location, logged, user, dispatch]);
+  }, [location, logged, user, dispatch, navigate]);
 
   //React Component ================
   return (
