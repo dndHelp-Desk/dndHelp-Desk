@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import LogIn from "./components/authentication/LogIn";
 import MainComponent from "./components/MainComponent/MainComponent";
 import ReportsComponent from "./components/Reports/ReportComponent";
@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="overflow-hidden">
       <BrowserRouter>
-        <Routes>
+        <Routes path="/">
           <Route exact path="/" element={<LogIn />} />
           <Route path="/help-desk" element={<MainComponent />}>
             <Route path="reports" element={<ReportsComponent />} />

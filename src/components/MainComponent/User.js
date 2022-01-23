@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaRegCalendarAlt, FaUserEdit } from "react-icons/fa";
-import { isAuthenticated } from "../../store/UserSlice";
+import { isAuthenticated, updateUser } from "../../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, getAuth, updateProfile } from "firebase/auth";
 import Profile from "../authentication/Profile";
@@ -63,11 +63,31 @@ const User = () => {
               e.preventDefault();
               updateProfile(auth.currentUser, {
                 displayName: usernameInput,
-              }).then(()=>{
-                dispatch(updateAlert({message:"Display Name Changed Successfully",color:"bg-green-200"}))
-              }).catch(()=>{
-                 dispatch(updateAlert({message:"Failed To Change The Name",color:"bg-red-200"}))
               })
+                .then(() => {
+                  setTimeout(() => {
+                    dispatch(
+                      updateUser([
+                        auth.currentUser.email,
+                        auth.currentUser.displayName,
+                      ])
+                    );
+                    dispatch(
+                      updateAlert({
+                        message: "Display Name Changed Successfully",
+                        color: "bg-green-200",
+                      })
+                    );
+                  }, 3000);
+                })
+                .catch(() => {
+                  dispatch(
+                    updateAlert({
+                      message: "Failed To Change The Name",
+                      color: "bg-red-200",
+                    })
+                  );
+                });
             }}
             className="flex space-x-2 justify-center items-center overflow-hidden"
           >
@@ -77,7 +97,7 @@ const User = () => {
               id="username"
               placeholder="Your username..."
               onChange={(e) => changeInput(e.target.value)}
-              className="log_In_Input focus:ring-0 input:-webkit-autofill input:-webkit-autofill:hover input:-webkit-autofill:focus textarea:-webkit-autofill textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus select:-webkit-autofill select:-webkit-autofill:hover select:-webkit-autofill:focus"
+              className="log_In_Input focus:ring-0 input:-webkit-autofill input:-webkit-autofill:hover input:-webkit-autofill:focus textarea:-webkit-autofill textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus select:-webkit-autofill select:-webkit-autofill:hover select:-webkit-autofill:focus placeholder:text-slate-400"
             />
             <button
               onClick={() => setSettingsModal(false)}

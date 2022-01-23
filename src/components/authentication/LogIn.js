@@ -11,10 +11,7 @@ import {
 } from "react-icons/fa";
 import Background from "./images/welcome.png";
 import { login } from "./Firebase";
-import {
-  updateUser,
-  isAuthenticated,
-} from "../../store/UserSlice";
+import { updateUser, isAuthenticated } from "../../store/UserSlice";
 
 //Initialize Services ======
 const auth = getAuth();
@@ -35,29 +32,29 @@ const LogIn = () => {
     login(inputValues.email, inputValues.password);
   };
 
-  //Check If user is logged in ===================
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      dispatch(isAuthenticated(true));
-    } else {
-      dispatch(isAuthenticated(false));
-    }
-  });
-
-  //Rederect User If logged ==============
   const logged = useSelector((state) => state.UserInfo.authenticated);
-  logged && navigate("/help-desk");
-
-  //Add User Details ==============
   const user = auth.currentUser;
-  if (user !== null) {
-   user && dispatch(updateUser(user));
-  }
 
-  //SetPath Location ==========
   useEffect(() => {
+    //Check If user is logged in ===================
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(isAuthenticated(true));
+        //Rederect User If logged ==============
+        navigate("/help-desk");
+      } else {
+        dispatch(isAuthenticated(false));
+      }
+    });
+
+    //Add User Details ==============
+    if (user !== null) {
+      user && dispatch(updateUser([user.email, user.displayName]));
+    }
+
+    //SetPath Location ==========
     document.title = `Dial n Dine Help-Desk ${location.pathname}`;
-  }, [location, logged]);
+  }, [location, logged, user, dispatch]);
 
   //React Component ================
   return (
