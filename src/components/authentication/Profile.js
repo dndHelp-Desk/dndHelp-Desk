@@ -7,10 +7,11 @@ import { updateAlert } from "../../store/NotificationsSlice";
 const Profile = () => {
   const currentUser = useAuth();
   const [photo, setPhoto] = useState(null);
+  const [change, setNewChange] = useState(true);
   const [showChange, setChange] = useState(false);
   const [showChangeIcon, setChangeIcon] = useState("scale-0");
-  const [photoURL, setPhotoURL] = useState("https://cutt.ly/mIFoGkV");
-  const dispatch = useDispatch()
+  const [photoURL, setPhotoURL] = useState("https://cutt.ly/qIBorLE");
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -19,18 +20,25 @@ const Profile = () => {
     setChange(true);
   };
 
+  //Submit profile to the DB =========
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    upload(photo, currentUser);
-    upload(photo, currentUser) &&
-      dispatch(
+    photo && upload(photo, currentUser);
+    setNewChange(false);
+    setChange(false);
+  };
+
+  //Apply Changes to the Profile =========
+  change === false &&
+    setTimeout(() => {
+      setPhotoURL(currentUser.photoURL);
+      setNewChange(true);dispatch(
         updateAlert({
           message: "Profile Changed Successfully",
           color: "bg-green-200",
         })
       );
-    setChange(false);
-  };
+    }, 3000);
 
   useEffect(() => {
     if (currentUser?.photoURL) {

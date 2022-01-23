@@ -20,6 +20,6 @@ export const UserSlice = createSlice({
   },
 });
 
-export const { isAuthenticated, updateUser, setLocation } = UserSlice.actions;
+export const { isAuthenticated, updateUser } = UserSlice.actions;
 
 export default UserSlice.reducer;
