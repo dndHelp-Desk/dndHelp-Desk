@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import {
-  FaChartBar,
-  FaReceipt,
-  FaHeadset,
-  FaUserTie,
-} from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import { BsBell, BsGearFill, BsSearch, BsTextRight } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
+import { changeLocation, updateUser } from "../../store/UserSlice";
 import User from "./User";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
@@ -16,16 +13,35 @@ import Alert from "../Others/Alert";
 const MainComponent = () => {
   const [menu, setMenu] = useState(false);
   const logged = useSelector((state) => state.UserInfo.authenticated);
+  const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const currentUser = getAuth().currentUser;
+
+  useEffect(() => {
+    window.localStorage.setItem("locationPath", routeLocation);
+    document.title =
+      location.pathname === "/"
+        ? "Dial n Dine Help-Desk"
+        : "Dial n Dine Help-Desk" + routeLocation;
+    dispatch(changeLocation(location.pathname));
+
+    //Add User Details ==============
+    if (currentUser !== null) {
+      currentUser &&
+        dispatch(updateUser([currentUser.email, currentUser.displayName]));
+    }
+  }, [routeLocation, dispatch, location, currentUser]);
 
   if (logged !== true) {
     return <Navigate to="/" />;
   }
 
+  //Component =================================
   return (
     <div className="bg-slate-300 w-screen h-screen min-h-[60rem] overflow-hidden relative">
       {/**Alert */}
-      <Alert/>
+      <Alert />
       {/**Small Screens Menu ====================== */}
       <div
         className={`flex lg:hidden absolute top-12 right-[17%] w-[8rem] border border-slate-400 z-[100] shadow-2xl rounded-lg bg-slate-800 ${
@@ -36,7 +52,7 @@ const MainComponent = () => {
           to="/help-desk"
           className={`TabsLinks ${
             location.pathname === "/help-desk" ? "navlinks" : ""
-          } ${(document.title = `Dial n Dine Help-Desk${location.pathname}`)}`}
+          }`}
         >
           <FaHeadset
             className="inline-block
@@ -120,7 +136,7 @@ const MainComponent = () => {
             to="/help-desk"
             className={`TabsLinks ${
               location.pathname === "/help-desk" ? "navlinks" : ""
-            } ${(document.title = `Dial n Dine Help-Desk${location.pathname}`)}`}
+            }`}
           >
             Home
           </NavLink>

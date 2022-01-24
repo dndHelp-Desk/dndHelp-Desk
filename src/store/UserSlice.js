@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const initialLocation = () => window.localStorage.getItem("locationPath") || "Dial n Dine Help-Desk";
+
 const initialState = {
   username: "Unkown User",
   email: "",
   authenticated: false,
+  routeLocation: initialLocation(),
 };
 
 export const UserSlice = createSlice({
@@ -17,9 +20,12 @@ export const UserSlice = createSlice({
     isAuthenticated: (state, action) => {
       state.authenticated = action.payload;
     },
+    changeLocation:(state,action)=>{
+      state.routeLocation = action.payload
+    }
   },
 });
 
-export const { isAuthenticated, updateUser } = UserSlice.actions;
+export const { isAuthenticated, updateUser ,changeLocation} = UserSlice.actions;
 
 export default UserSlice.reducer;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaRegCalendarAlt, FaUserEdit } from "react-icons/fa";
-import { isAuthenticated, updateUser } from "../../store/UserSlice";
+import { isAuthenticated, updateUser,changeLocation } from "../../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, getAuth, updateProfile } from "firebase/auth";
 import Profile from "../authentication/Profile";
@@ -19,11 +19,15 @@ const User = () => {
       .then(() => {
         console.log("user signed out");
         dispatch(isAuthenticated(false));
+        window.localStorage.clear()
+        dispatch(changeLocation("Dial n Dine Help-Desk"));
+        document.title = "Dial n Dine Help-Desk";
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
+
 
   //React Component =======================
   return (
@@ -65,7 +69,6 @@ const User = () => {
                 displayName: usernameInput,
               })
                 .then(() => {
-                  setTimeout(() => {
                     dispatch(
                       updateUser([
                         auth.currentUser.email,
@@ -78,7 +81,6 @@ const User = () => {
                         color: "bg-green-200",
                       })
                     );
-                  }, 3000);
                 })
                 .catch(() => {
                   dispatch(

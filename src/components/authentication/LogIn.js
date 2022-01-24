@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   FaDyalog,
@@ -17,7 +17,6 @@ import { updateUser, isAuthenticated } from "../../store/UserSlice";
 const auth = getAuth();
 
 const LogIn = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [menu, setMenu] = useState(false);
@@ -32,7 +31,7 @@ const LogIn = () => {
     login(inputValues.email, inputValues.password);
   };
 
-  const logged = useSelector((state) => state.UserInfo.authenticated);
+  const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const user = auth.currentUser;
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const LogIn = () => {
       if (user) {
         dispatch(isAuthenticated(true));
         //Rederect User If logged ==============
-        navigate("/help-desk");
+        routeLocation === "Dial n Dine Help-Desk" ? navigate("/help-desk") : navigate(routeLocation);
       } else {
         dispatch(isAuthenticated(false));
       }
@@ -51,12 +50,9 @@ const LogIn = () => {
     if (user !== null) {
       user && dispatch(updateUser([user.email, user.displayName]));
     }
+  }, [user, dispatch, navigate]);
 
-    //SetPath Location ==========
-    document.title = `Dial n Dine Help-Desk ${location.pathname}`;
-  }, [location, logged, user, dispatch, navigate]);
-
-  //React Component ================
+  //React Component =====================================================================================
   return (
     <div className="bg-slate-900 w-screen h-screen min-h-[45rem] flex relative overflow-hidden">
       {/**Alert */}
