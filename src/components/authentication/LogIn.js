@@ -40,7 +40,9 @@ const LogIn = () => {
       if (user) {
         dispatch(isAuthenticated(true));
         //Rederect User If logged ==============
-        routeLocation === "Dial n Dine Help-Desk" ? navigate("/help-desk") : navigate(routeLocation);
+        routeLocation === "Dial n Dine Help-Desk"
+          ? navigate("/help-desk")
+          : navigate(routeLocation);
       } else {
         dispatch(isAuthenticated(false));
       }
@@ -50,7 +52,7 @@ const LogIn = () => {
     if (user !== null) {
       user && dispatch(updateUser([user.email, user.displayName]));
     }
-  }, [user, dispatch, navigate]);
+  }, [user, dispatch, navigate, routeLocation]);
 
   //React Component =====================================================================================
   return (
