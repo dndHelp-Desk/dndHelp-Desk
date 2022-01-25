@@ -156,10 +156,10 @@ const LogIn = () => {
         style={{ backgroundImage: `url(${Background})` }}
         className="hidden lg:flex lg:flex-col w-[50%] h-full  bg-no-repeat bg-cover bg-center items-center justify-center px-4"
       >
-        <h2 className="uppercase font-bold text-gray-200 text-2xl tracking-[.5rem]">
+        <h2 className="uppercase font-bold text-gray-200 text-2xl tracking-[.4rem]">
           Inspired by the future :
         </h2>
-        <h1 className="uppercase font-bold text-gray-200 text-[2.5rem] tracking-[.5rem]">
+        <h1 className="uppercase font-bold text-center text-gray-200 text-[2.5rem] tracking-[.5rem]">
           Dial & Dine Help-desk
         </h1>
       </div>

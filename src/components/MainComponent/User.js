@@ -32,14 +32,19 @@ const User = () => {
   //React Component =======================
   return (
     <div className="h-[8rem] z-0 w-full bg-[#4a72df2f] backdrop-blur-lg p-2 pl-[9.5%] pr-[10.5%] flex justify-between  relative">
-      <div className="flex space-x-4 h-full">
+      <div className="flex space-x-2 h-full">
         {/** Profile =================== */}
         <Profile />
 
         {/**User Name & Time ================= */}
-        <div className="space-y-2 mt-4">
-          <h2 className="text-slate-800 text-base font-bold">{username}</h2>
-          <small className="text-slate-600 text-sm">
+        <div className="mt-[.3rem]">
+          <h2 className="text-slate-800 text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+            {username}
+          </h2>
+          <h2 className="text-slate-700 border-b border-slate-500 text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+            Full-Stack Developer
+          </h2>
+          <small className="text-slate-600 text-xs">
             <FaRegCalendarAlt className="inline" />{" "}
             {`${new Date().toDateString()}`}
           </small>
@@ -69,18 +74,18 @@ const User = () => {
                 displayName: usernameInput,
               })
                 .then(() => {
-                    dispatch(
-                      updateUser([
-                        auth.currentUser.email,
-                        auth.currentUser.displayName,
-                      ])
-                    );
-                    dispatch(
-                      updateAlert({
-                        message: "Display Name Changed Successfully",
-                        color: "bg-green-200",
-                      })
-                    );
+                  dispatch(
+                    updateUser([
+                      auth.currentUser.email,
+                      auth.currentUser.displayName,
+                    ])
+                  );
+                  dispatch(
+                    updateAlert({
+                      message: "Display Name Changed Successfully",
+                      color: "bg-green-200",
+                    })
+                  );
                 })
                 .catch(() => {
                   dispatch(

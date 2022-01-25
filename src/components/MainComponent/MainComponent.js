@@ -17,7 +17,7 @@ const MainComponent = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const currentUser = getAuth().currentUser;
-
+  
   useEffect(() => {
     window.localStorage.setItem("locationPath", routeLocation);
     document.title =
