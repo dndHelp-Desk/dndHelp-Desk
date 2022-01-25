@@ -5,7 +5,7 @@ const apiLink =
   "https://script.google.com/macros/s/AKfycbxFRyiEr9oT9hUcIM6MHLy95ag9MkOdkqnDZL37vBcKaZ1BIOsuynNDevkgfFdM1gl6/exec";
 
 const GmailAPItest = () => {
-  const { data: emails, isPending, error } = useFetch(apiLink);
+  const { data: emails} = useFetch(apiLink);
   console.log(emails);
 
   //Loop Through
