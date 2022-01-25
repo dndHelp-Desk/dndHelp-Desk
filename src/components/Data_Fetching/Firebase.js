@@ -24,7 +24,7 @@ const firebaseConfig = {
   measurementId: "G-GZCS9SQW3Z",
 };
 
-// Initialize Firebase
+// Initialize Firebase for auth======================
 initializeApp(firebaseConfig);
 const auth = getAuth();
 const storage = getStorage();
@@ -35,7 +35,6 @@ export function signup(email, password) {
 
 //Upload Status Alert
 let status = { message: "", color: "bg-green-200" };
-
 
 export function login(email, password) {
   signInWithEmailAndPassword(auth, email, password)
@@ -50,18 +49,17 @@ export function login(email, password) {
         message: error.message,
         color: "bg-red-200",
       };
-    });;
+    });
 }
-
 
 // Custom Hook / React Component ====================
 export function useAuth() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
-    dispatch(updateAlert(status))
+    dispatch(updateAlert(status));
     return unsub;
   }, [dispatch]);
 
@@ -75,7 +73,7 @@ export async function upload(file, currentUser) {
   await uploadBytes(fileRef, file);
   const photoURL = await getDownloadURL(fileRef);
 
-  updateProfile(currentUser, { photoURL })
+  updateProfile(currentUser, { photoURL });
 
-  return true
+  return true;
 }

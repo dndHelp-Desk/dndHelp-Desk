@@ -1,10 +1,11 @@
 import React from "react";
-import GmailAPItest from "./GmailAPItest"
+import { useSelector } from "react-redux";
 
 const TicketsComponent = () => {
-  // console.log(getEmails())
+  const tickets = useSelector((state) => state.AllTickects);
+  console.log(tickets)
   return (
-    <div className="bg-slate-900 mt-[-2rem] absolute left-[9.5%] z-0 rounded-lg h-[40rem] w-[80%]"><GmailAPItest/></div>
+    <div className="bg-slate-900 mt-[-2rem] absolute left-[9.5%] z-0 rounded-lg h-[40rem] w-[80%]"></div>
   );
 };
 

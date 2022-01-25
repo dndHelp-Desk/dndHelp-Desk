@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth, upload } from "./Firebase";
+import { useAuth, upload } from "./../Data_Fetching/Firebase";
 import { BsCameraFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { updateAlert } from "../../store/NotificationsSlice";

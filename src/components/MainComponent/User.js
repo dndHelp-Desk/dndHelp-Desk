@@ -8,9 +8,9 @@ import { updateAlert } from "../../store/NotificationsSlice";
 
 const User = () => {
   const [usernameInput, changeInput] = useState("");
-  const username = useSelector((state) => state.UserInfo.username);
   const [settings, setSettingsModal] = useState(false);
   const auth = getAuth();
+  const member_details = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
 
   //Sign Out User =================
@@ -28,7 +28,6 @@ const User = () => {
       });
   };
 
-
   //React Component =======================
   return (
     <div className="h-[8rem] z-0 w-full bg-[#4a72df2f] backdrop-blur-lg p-2 pl-[9.5%] pr-[10.5%] flex justify-between  relative">
@@ -39,10 +38,10 @@ const User = () => {
         {/**User Name & Time ================= */}
         <div className="mt-[.3rem]">
           <h2 className="text-slate-800 text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
-            {username}
+            {member_details && member_details[0].name}
           </h2>
           <h2 className="text-slate-700 border-b border-slate-500 text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
-            Full-Stack Developer
+            {member_details && member_details[0].dept}
           </h2>
           <small className="text-slate-600 text-xs">
             <FaRegCalendarAlt className="inline" />{" "}

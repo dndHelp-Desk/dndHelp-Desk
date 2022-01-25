@@ -4,11 +4,12 @@ import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import { BsBell, BsGearFill, BsSearch, BsTextRight } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
-import { changeLocation, updateUser } from "../../store/UserSlice";
+import { changeLocation } from "../../store/UserSlice";
 import User from "./User";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
 import Alert from "../Others/Alert";
+import TickectsnUserData from "../Data_Fetching/TickectsnUserData";
 
 const MainComponent = () => {
   const [menu, setMenu] = useState(false);
@@ -16,8 +17,7 @@ const MainComponent = () => {
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const location = useLocation();
   const dispatch = useDispatch();
-  const currentUser = getAuth().currentUser;
-  
+
   useEffect(() => {
     window.localStorage.setItem("locationPath", routeLocation);
     document.title =
@@ -25,13 +25,7 @@ const MainComponent = () => {
         ? "Dial n Dine Help-Desk"
         : "Dial n Dine Help-Desk" + routeLocation;
     dispatch(changeLocation(location.pathname));
-
-    //Add User Details ==============
-    if (currentUser !== null) {
-      currentUser &&
-        dispatch(updateUser([currentUser.email, currentUser.displayName]));
-    }
-  }, [routeLocation, dispatch, location, currentUser]);
+  }, [routeLocation, dispatch, location]);
 
   if (logged !== true) {
     return <Navigate to="/" />;
@@ -206,6 +200,7 @@ const MainComponent = () => {
       </nav>
       <User />
       <Main />
+      <TickectsnUserData/>
       <Outlet />
     </div>
   );

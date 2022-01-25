@@ -10,8 +10,8 @@ import {
   FaAlignRight,
 } from "react-icons/fa";
 import Background from "./images/welcome.png";
-import { login } from "./Firebase";
-import { updateUser, isAuthenticated } from "../../store/UserSlice";
+import { login } from "../Data_Fetching/Firebase";
+import { isAuthenticated } from "../../store/UserSlice";
 
 //Initialize Services ======
 const auth = getAuth();
@@ -47,11 +47,6 @@ const LogIn = () => {
         dispatch(isAuthenticated(false));
       }
     });
-
-    //Add User Details ==============
-    if (user !== null) {
-      user && dispatch(updateUser([user.email, user.displayName]));
-    }
   }, [user, dispatch, navigate, routeLocation]);
 
   //React Component =====================================================================================
