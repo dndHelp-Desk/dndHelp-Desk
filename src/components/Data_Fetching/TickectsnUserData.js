@@ -1,38 +1,28 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAuth } from "firebase/auth";
-import {
-  updateUser,
-  addAllMembers,
-} from "./../../store/UserSlice";
-import { addAllTickects } from '../../store/TicketsSlice';
+import { updateUser, addAllMembers } from "./../../store/UserSlice";
+import { addAllTickects } from "../../store/TicketsSlice";
 //Firestore ===================
 import {
   getFirestore,
   collection,
   onSnapshot,
-  addDoc,
-  doc,
-  deleteDoc,
-  updateDoc,
-  enableIndexedDbPersistence,
 } from "firebase/firestore";
 
 // init services for firestore =========================
 const db = getFirestore();
 
-
 // collection ref
 let membersRef = collection(db, "members");
 let tickectsRef = collection(db, "tickects");
-
 
 const TickectsnUserData = () => {
   const dispatch = useDispatch();
   const currentUser = getAuth().currentUser;
 
-    //User/Members Data =====================================
-	useEffect(() => {
+  //User/Members Data =====================================
+  useEffect(() => {
     return (
       //Members Data Fetching
       onSnapshot(membersRef, (snapshot) => {
@@ -57,10 +47,10 @@ const TickectsnUserData = () => {
         );
       })
     );
-  }, [dispatch]);
+  }, [dispatch, currentUser.email]);
 
   //Tickets Data =====================================
-	useEffect(() => {
+  useEffect(() => {
     return (
       //Tickects Data Fetching
       onSnapshot(tickectsRef, (snapshot) => {

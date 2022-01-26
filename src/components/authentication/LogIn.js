@@ -211,7 +211,7 @@ const LogIn = () => {
                 type="submit"
                 className="h-12 mt-6 bg-blue-700 outline-none focus:outline-none hover:bg-blue-800 text-gray-300 transition-bg duration-300 w-full rounded-xl uppercase font-bold text-xs"
               >
-                Sing In
+                Sign In
               </button>
               <small className="mt-4 text-gray-400 flex justify-center">
                 Forgot password ?

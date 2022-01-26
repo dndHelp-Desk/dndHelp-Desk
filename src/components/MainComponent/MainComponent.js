@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { getAuth } from "firebase/auth";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import { BsBell, BsGearFill, BsSearch, BsTextRight } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +8,6 @@ import User from "./User";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
 import Alert from "../Others/Alert";
-import TickectsnUserData from "../Data_Fetching/TickectsnUserData";
 
 const MainComponent = () => {
   const [menu, setMenu] = useState(false);
@@ -200,7 +198,6 @@ const MainComponent = () => {
       </nav>
       <User />
       <Main />
-      <TickectsnUserData/>
       <Outlet />
     </div>
   );
