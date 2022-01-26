@@ -81,7 +81,7 @@ const MainComponent = () => {
           to="/help-desk/contacts"
           end={true}
           className={`TabsLinks ${
-            location.pathname === "/help-desk/tickets" ? "navlinks" : ""
+            location.pathname === "/help-desk/contacts" ? "navlinks" : ""
           }`}
         >
           <FaUserTie
@@ -94,7 +94,7 @@ const MainComponent = () => {
           to="/help-desk/settings"
           end={true}
           className={`TabsLinks ${
-            location.pathname === "/help-desk/tickets" ? "navlinks" : ""
+            location.pathname === "/help-desk/settings" ? "navlinks" : ""
           }`}
         >
           <BsGearFill
@@ -153,7 +153,7 @@ const MainComponent = () => {
             to="/help-desk/contacts"
             end={true}
             className={`TabsLinks ${
-              location.pathname === "/help-desk/tickets" ? "navlinks" : ""
+              location.pathname === "/help-desk/contacts" ? "navlinks" : ""
             }`}
           >
             Contacts
@@ -162,7 +162,7 @@ const MainComponent = () => {
             to="/help-desk/settings"
             end={true}
             className={`TabsLinks ${
-              location.pathname === "/help-desk/tickets" ? "navlinks" : ""
+              location.pathname === "/help-desk/settings" ? "navlinks" : ""
             }`}
           >
             Settings

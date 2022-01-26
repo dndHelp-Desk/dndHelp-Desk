@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAuth } from "firebase/auth";
-import { updateUser, addAllMembers } from "./../../store/UserSlice";
+import { updateUser, addAllMembers } from "../../store/UserSlice";
 import { addAllTickects } from "../../store/TicketsSlice";
 //Firestore ===================
 import {
@@ -17,7 +17,7 @@ const db = getFirestore();
 let membersRef = collection(db, "members");
 let tickectsRef = collection(db, "tickects");
 
-const TickectsnUserData = () => {
+const TicketsnUserData = () => {
   const dispatch = useDispatch();
   const currentUser = getAuth().currentUser;
 
@@ -45,14 +45,8 @@ const TickectsnUserData = () => {
               )
           )
         );
-      })
-    );
-  }, [dispatch, currentUser.email]);
-
-  //Tickets Data =====================================
-  useEffect(() => {
-    return (
-      //Tickects Data Fetching
+      }),
+      //Tickects Data Fetching ======================
       onSnapshot(tickectsRef, (snapshot) => {
         dispatch(
           addAllTickects(
@@ -61,8 +55,8 @@ const TickectsnUserData = () => {
         );
       })
     );
-  }, [dispatch]);
+  }, [dispatch, currentUser.email]);
   return <></>;
 };
 
-export default TickectsnUserData;
+export default TicketsnUserData;
