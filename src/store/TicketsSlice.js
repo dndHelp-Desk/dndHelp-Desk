@@ -1,19 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  allTickects: [],
+  allTickets: [],
+  contacts:[],
+  settings:[]
 };
 
 export const TicketsSlice = createSlice({
-  name: "Tickects",
+  name: "Tickets",
   initialState,
   reducers: {
-    addAllTickects: (state, action) => {
-      state.allTickects = action.payload;
+    addAllTickets: (state, action) => {
+      state.allTickets = action.payload;
     },
+    setContacts:(state, action)=>{
+      state.contacts = action.payload
+    },
+    loadSettings:(state, action)=>{
+      state.settings = action.payload
+    }
   },
 });
 
-export const { addAllTickects } = TicketsSlice.actions;
+export const { addAllTickets,setContacts,loadSettings } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;

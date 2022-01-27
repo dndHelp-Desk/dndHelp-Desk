@@ -176,12 +176,12 @@ const MainComponent = () => {
         {/*Notifications Control ====================*/}
         <div className="flex space-x-2">
           {/**Small Screen Menu Btn ================ */}
-          <buttom
+          <button
             onClick={() => setMenu(menu === false ? true : false)}
             className="text-slate-400 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl hover:bg-slate-700 items-center justify-center flex"
           >
             <BsTextRight className="text-2xl text-slate-400 lg:hidden flex cursor-pointer" />
-          </buttom>
+          </button>
 
           <button className="text-slate-400 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl hover:bg-slate-700 items-center justify-center flex">
             <abbr className="relative" title="notifiations">

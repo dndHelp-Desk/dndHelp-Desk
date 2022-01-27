@@ -38,10 +38,10 @@ const User = () => {
         {/**User Name & Time ================= */}
         <div className="mt-[.3rem]">
           <h2 className="text-slate-800 text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
-            {member_details && member_details[0].name}
+            {member_details.length !== undefined && member_details[0].name}
           </h2>
           <h2 className="text-slate-700 border-b border-slate-500 text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
-            {member_details && member_details[0].dept}
+            {member_details.length !== undefined && member_details[0].dept}
           </h2>
           <small className="text-slate-600 text-xs">
             <FaRegCalendarAlt className="inline" />{" "}

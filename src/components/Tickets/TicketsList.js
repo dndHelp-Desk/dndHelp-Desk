@@ -1,19 +1,34 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BsEnvelope, BsChevronDown, BsPersonPlus } from "react-icons/bs";
-import placeHolderImg from "./images/email-open.png"
+import {
+  BsEnvelope,
+  BsPencilSquare,
+} from "react-icons/bs";
+import placeHolderImg from "./images/email-open.png";
 
-const TicketsList = () => {
-  let allTickects = useSelector((state) => state.Tickects.allTickects);
+const TicketsList = ({ searchResults }) => {
+  let allTickets = useSelector((state) => state.Tickets.allTickets);
 
   //Loop Through Each Tickects =================
-  const tickects =
-    allTickects.length >= 1 &&
-    allTickects.map((ticket, index) => {
+  const tickets =
+    allTickets.length >= 1 &&
+    allTickets.map((ticket, index) => {
       return (
         <div
           key={ticket.id}
-          className="w-full h-[5rem] snap_childTwo rounded-lg bg-slate-900 p-3 flex space-x-2 overflow-hidden"
+          className={`w-full border-l-2 ${
+            ((ticket.recipient_name).toLowerCase()).includes(searchResults.toLowerCase()) === true
+              ? "flex"
+              : "hidden"
+          } ${
+            ticket.priority.toLowerCase().trim() === "low"
+              ? "border-green-500"
+              : ticket.priority.toLowerCase().trim() === "medium"
+              ? "border-blue-600"
+              : ticket.priority.toLowerCase().trim() === "high"
+              ? "border-yellow-400"
+              : "border-red-600"
+          } h-[5rem] snap_childTwo rounded-lg bg-slate-900 p-3 space-x-2 overflow-hidden`}
         >
           <div className="col-span-1 h-full md:w-[7rem] flex justify-between px-1 items-center">
             <input
@@ -28,47 +43,22 @@ const TicketsList = () => {
               )}`}</h4>
             </div>
           </div>
-          <div className="col-span-5  h-full w-full border-l-2 border-slate-600 px-2 py-1">
+          <div className="col-span-5  h-full w-full border-l-2 border-slate-600 px-2 py-1 overflow-hidden">
             <h2 className="text-slate-300 text-base font-bold font-sans capitalize">
               {ticket.category} <span>#{index + 1}</span>
             </h2>
-            <h5 className="text-slate-400 text-xs tracking-wide font-base font-sans flex items-center space-x-1 capitalize">
+            <h5 className="text-slate-400 max-w-[26rem] whitespace-nowrap overflow-hidden overflow-ellipsis text-xs tracking-wide font-base font-sans flex items-center space-x-1 capitalize">
               <BsEnvelope className="inline" />{" "}
               <span className="">{ticket.recipient_name}</span>{" "}
               <span>{`(${ticket.branch_company})`} •</span>
-              <small className="tracking-widest">{`Created 2 Days Ago`}</small>
+              <small className="tracking-widest">{`Created on ${new Date(
+                ticket.date
+              ).toDateString()}`}</small>
             </h5>
           </div>
-          <div className="col-span-5 hidden float-right h-full w-[20rem] md:flex flex-col items-center justify-center space-y-1">
-            <button className="text-xs w-[10rem] px-1 text-left justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize">
-              <span>
-                <span
-                  className={`text-green-600 ${
-                    ticket.priority.toLowerCase().trim() === "low"
-                      ? "text-green-500"
-                      : ticket.priority.toLowerCase().trim() === "medium"
-                      ? "text-blue-600"
-                      : ticket.priority.toLowerCase().trim() === "high"
-                      ? "bg-yellow-500"
-                      : "text-red-600"
-                  }`}
-                >
-                  ■
-                </span>{" "}
-                {ticket.priority}
-              </span>{" "}
-              <BsChevronDown />
-            </button>
-            <button className="text-xs w-[10rem] px-1 text-left justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize">
-              <span className="capitalize">⇨ {ticket.status}</span>
-              <BsChevronDown />
-            </button>
-            <button className="text-xs w-[10rem] px-1 text-left justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize">
-              <span className="flex items-center space-x-1">
-                <BsPersonPlus className="inline" />
-                <span>Assign</span>
-              </span>{" "}
-              <BsChevronDown />
+          <div className="col-span-5 hidden float-right h-full md:flex flex-col items-center justify-center space-y-1">
+            <button className="text-xl w-[2rem] px-1 text-left justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize">
+              <BsPencilSquare />
             </button>
           </div>
         </div>
@@ -78,26 +68,34 @@ const TicketsList = () => {
   //Component ======================================
   return (
     <div className="p-1 space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
-      {allTickects.length <= 0 && (
+      {/**Do DataPlaceholder  ==========================  */}
+      {allTickets.length <= 0 && (
         <div className="bg-slate-900 min-h-[35rem] max-h-[40rem] w-full rounded-lg p-12 flex items-center justify-center">
           <div className="h-[15rem] w-[15rem]">
-            <img src={placeHolderImg} className="h-full w-full object-center object-contain" alt="no-tickects" />
+            <img
+              src={placeHolderImg}
+              className="h-full w-full object-center object-contain"
+              alt="no-tickects"
+            />
           </div>
           <div className="space-y-3">
             <h2 className="text-slate-300 font-bold text-2xl capitalize font-sans">
               There Are no tickets to display
             </h2>
             <p className="text-base font-sans text-slate-400">
-            A data search did obtain not any results.<br/>
-            Create a new ticket or change the date to previous data.<br></br>
+              A data search did not obtain any results.
+              <br />
+              Create a new ticket or change the date to see previous data.
+              <br></br>
             </p>
-            <button className="bg-blue-600 rounded-full px-6 py-2 text-slate-300 capitalize font-semibold text-sm tracking-wide">new ticket</button>
+            <button className="bg-blue-600 rounded-full px-6 py-2 text-slate-300 capitalize font-semibold text-sm tracking-wide">
+              new ticket
+            </button>
           </div>
         </div>
       )}
-      {tickects}
-      {tickects}
-      {tickects}
+      {/**Tickets ========================================== */}
+      {tickets}
     </div>
   );
 };

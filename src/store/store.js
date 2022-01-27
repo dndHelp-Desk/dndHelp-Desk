@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     UserInfo: UserSlice,
     NotificationsData: NotificationsSlice,
-    Tickects: TicketsSlice,
+    Tickets: TicketsSlice,
   },
 });
