@@ -14,7 +14,7 @@ const TicketsComponent = () => {
         <div className="flex bg-slate-900 rounded-lg h-full items-center justify-center relative">
           <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
           <input
-            className="w-10 md:w-[18rem] h-full bg-transparent rounded-lg focus:w-[15rem] md:focus:w-[18rem] focus:px-4 md:focus:px-10 focus:bg-slate-900 md:focus:bg-transparent text-slate-400 text-sm md:px-10 z-[999] pl-10 placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-500 transition-h duration-300"
+            className="w-11 md:w-[18rem] h-full bg-transparent rounded-lg focus:w-[15rem] md:focus:w-[18rem] focus:px-4 md:focus:px-10 focus:bg-slate-900 md:focus:bg-transparent text-slate-400 text-sm md:px-10 z-[999] placeholder-slate-900 md:placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-500 transition-h duration-300"
             type="search"
             placeholder="Quick Search ..."
           />
