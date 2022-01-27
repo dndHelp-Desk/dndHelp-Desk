@@ -54,7 +54,7 @@ const User = () => {
       <div className="flex space-x-2 relative">
         <button
           onClick={() => setSettingsModal(settings === false ? true : false)}
-          className="px-3 p-1 bg-slate-800 text-slate-400 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
+          className="px-3 p-1 bg-slate-900 text-slate-400 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-800 transition-bg duration-300"
         >
           <FaUserEdit />
         </button>
@@ -117,7 +117,7 @@ const User = () => {
 
         <button
           onClick={() => signOutUser()}
-          className="px-4 p-1 bg-slate-800 text-slate-400 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] mt-5 outline-none focus:outline-none hover:bg-slate-700 transition-bg duration-300"
+          className="px-4 p-1 bg-slate-900 text-slate-400 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] mt-5 outline-none focus:outline-none hover:bg-slate-800 transition-bg duration-300"
         >
           Sign Out
         </button>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { getAuth } from "firebase/auth";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
-import { BsBell, BsGearFill, BsSearch, BsTextRight } from "react-icons/bs";
+import { BsBell, BsGearFill, BsChatSquareText, BsTextRight } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation } from "../../store/UserSlice";
@@ -8,6 +9,7 @@ import User from "./User";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
 import Alert from "../Others/Alert";
+import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 
 const MainComponent = () => {
   const [menu, setMenu] = useState(false);
@@ -32,11 +34,13 @@ const MainComponent = () => {
   //Component =================================
   return (
     <div className="bg-slate-300 w-screen h-screen min-h-[60rem] overflow-hidden relative">
+      {/**Data Fetching Components */}
+      <TicketsnUserData />
       {/**Alert */}
       <Alert />
       {/**Small Screens Menu ====================== */}
       <div
-        className={`flex lg:hidden absolute top-12 right-[17%] w-[8rem] border border-slate-400 z-[100] shadow-2xl rounded-lg bg-slate-800 ${
+        className={`flex lg:hidden absolute top-12 right-[30%] w-[8rem] z-[100] shadow-2xl rounded-lg bg-slate-800 ${
           menu ? "h-[10rem]" : "h-0 opacity-0"
         } transition-scale duration-300 flex flex-col text-slate-400 space-y-2 p-4 justify-center overflow-hidden`}
       >
@@ -170,30 +174,39 @@ const MainComponent = () => {
         </div>
 
         {/*Notifications Control ====================*/}
-        <div className="flex space-x-4">
+        <div className="flex space-x-2">
           {/**Small Screen Menu Btn ================ */}
-          <BsTextRight
+          <buttom
             onClick={() => setMenu(menu === false ? true : false)}
-            className="text-2xl text-slate-400 lg:hidden flex cursor-pointer"
-          />
+            className="text-slate-400 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl hover:bg-slate-700 items-center justify-center flex"
+          >
+            <BsTextRight className="text-2xl text-slate-400 lg:hidden flex cursor-pointer" />
+          </buttom>
 
-          <button className="text-slate-400 text-xl relative">
-            <abbr title="notifiations">
+          <button className="text-slate-400 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl hover:bg-slate-700 items-center justify-center flex">
+            <abbr className="relative" title="notifiations">
               <BsBell />
               <span
-                className={`flex h-3 w-3 absolute top-[-5%] right-[-5%] scale-100 z-[999]`}
+                className={`flex h-2 w-2 absolute top-[-5%] right-[-5%] scale-100 z-[999]`}
               >
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
               </span>
             </abbr>
           </button>
 
-          <button className="text-slate-400 text-xl relative">
+          <button className="text-slate-400 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl hover:bg-slate-700 items-center justify-center flex">
             <abbr title="Serach">
-              <BsSearch />
+              <BsChatSquareText />
             </abbr>
           </button>
+          <div className="h-10 w-10 rounded-xl bg-slate-700 overflow-hidden">
+            <img
+              src={`${getAuth().currentUser.photoURL}`}
+              className="object-cover object-center h-full w-full"
+              alt=""
+            />
+          </div>
         </div>
       </nav>
       <User />

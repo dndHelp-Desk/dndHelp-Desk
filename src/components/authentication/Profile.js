@@ -64,7 +64,7 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-20 w-20 border-[3px] border-slate-600 rounded-xl flex justify-center items-center cursor-pointer p-[2px]"
+            className="h-20 w-20 border-[3px] border-slate-800 rounded-xl flex justify-center items-center cursor-pointer p-[2px]"
           >
             <img
               className="rounded-lg bg-slate-500 h-full w-full object-cover object-center"

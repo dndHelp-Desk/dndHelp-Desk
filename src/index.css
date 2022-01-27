@@ -78,4 +78,13 @@
     cursor: inherit !important;
     text-decoration: none !important;
   }
+  .scroll-snap {
+    scroll-snap-type: y mandatory;
+  }
+  .snap_child {
+    scroll-snap-align: center;
+  }
+  .snap_childTwo {
+    scroll-snap-align: start end;
+  }
 }

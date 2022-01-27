@@ -1,43 +1,34 @@
 import React from "react";
 import WelcomeSvg from "./images/welcome.svg";
-import {
-  BsArrowRepeat,
-  BsCheck2Square,
-  BsXSquare,
-  BsArrowUpSquare,
-} from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 const Main = () => {
+  const location = useLocation();
   const cardsArr = [
     { id: 1, name: "Resolved", count: 12 },
     { id: 2, name: "Closed", count: 52 },
     { id: 3, name: "Open", count: 23 },
     { id: 4, name: "Pending", count: 4 },
   ];
+
+  //Loop through different status for each cards
   const cards =  cardsArr.map((card,index)=>{
     return (
       <div
         key={index}
         className="custom-shadow
-        col-span-1 bg-gradient-to-tr from-slate-900 to-slate-700 rounded-lg p-3 grid grid-cols-3 xl:grid-rows-3"
+        col-span-1 bg-slate-900 rounded-lg p-3 py-4"
       >
-        <div className="col-span-1 xl:row-span-1 xl:col-span-3 flex justify-center items-center">
-          <div className="custom-shadow h-[40%] max-h-[3rem] min-h-[3rem] w-[80%] max-w-[3rem] rounded-xl bg-slate-400 flex justify-center items-center text-gray-900 text-2xl">
-            {card.name === "Resolved" && <BsCheck2Square />}
-            {card.name === "Closed" && <BsXSquare />}
-            {card.name === "Open" && <BsArrowUpSquare />}
-            {card.name === "Pending" && <BsArrowRepeat />}
-          </div>
-        </div>
-        <div className="col-span-2 xl:order-first xl:row-span-2 xl:col-span-3 h-full  flex items-center justify-center border-l xl:border-l-0 xl:border-b border-slate-600">
-          <div className="p-2">
+        <div className="w-full h-full flex flex-col items-center justify-center">
             <h3 className="w-full h-full flex items-center justify-center text-sm font-bold text-gray-400">
               {card.name}
             </h3>
             <h3 className="text-center w-full h-full flex items-center justify-center text-[3rem] font-bold text-gray-500">
               {card.count}
             </h3>
-          </div>
+            <div className="h-5 w-14 rounded-full bg-[#00e98865] flex justify-center items-center text-green-400 font-bold text-xs tracking-wider">
+              <small>▴12%</small>
+            </div>
         </div>
       </div>
     );
@@ -45,32 +36,40 @@ const Main = () => {
 
   //Component ========================
   return (
-    <div className="bg-[#0f172a28] backdrop-blur-lg custom-shadow mt-[-2rem] absolute left-[9.5%] z-0 rounded-xl h-[40rem] w-[80%] p-2 hidden sm:grid grid-rows-2 gap-2 overflow-hidden">
-      <div className="row-span-1 rounded-lg md:grid grid-cols-3 gap-2 overflow-hidden">
+    <div
+      className={`${
+        location.pathname === "/help-desk" ? "grid" : "hidden"
+      } bg-slate-300 mt-[-2rem] absolute left-[9.5%] z-0 rounded-xl w-[80%] p-2 grid-rows-2 gap-2 overflow-hidden`}
+    >
+      <div className="row-span-1rounded-lg md:grid grid-cols-3 gap-2 overflow-hidden">
         {/**Welcome Card ================================= */}
-        <div className="col-span-1 p-4 bg-gradient-to-tr from-slate-900 to-slate-500 rounded-lg flex  3xl:flex md:grid grid-rows-4 overflow-hidden">
-          <div className="row-span-3 3xl:col-span-3 flex justify-center 3xl:items-center p-1 overflow-hidden">
-            <img
-              className="object-cover object-center "
-              src={WelcomeSvg}
-              alt=""
-            />
-          </div>
-          <div className="row-span-1 3xl:col-span-2 flex justify-center items-center 3xl:pt-[5rem]">
-            <h2 className="text-slate-400 pb-2 font-sans font-semibold text-lg 2xl:text-xl 3xl:text-2xl text-center rotate-[-10deg]">
+        <div className="col-span-1  p-4 h-full bg-gradient-to-tr from-slate-900 to-slate-500 rounded-lg overflow-hidden justify-center grid grid-rows-3">
+          <div
+            style={{ backgroundImage: `url(${WelcomeSvg})` }}
+            className="row-span-2 bg-local bg-contain bg-no-repeat bg-center h-full w-full flex justify-center items-center overflow-hidden"
+          ></div>
+          <div className="row-span-1 flex justify-center items-center bg-transparent backdrop-blur-[1px] w-full h-full">
+            <h2 className="text-slate-400 pb-2 font-sans font-semibold text-2xl md:text-lg lg:text-xl xl:text-2xl  text-center rotate-[-5deg]">
               <span className="whitespace-nowrap">Welcome Back 🖐️!</span>,
               <br /> Let's Get You Started
             </h2>
           </div>
         </div>
 
-        <div className="hidden col-span-2 rounded-lg md:grid grid-cols-2 grid-rows-2 xl:grid-rows-1 xl:grid-cols-4 gap-2">
+        <div className="hidden col-span-2 rounded-lg md:grid grid-cols-2 grid-rows-1 xl:grid-rows-2  xl:grid-cols-4 gap-2">
           {cards}
+          <div className="hidden xl:flex bg-slate-900 col-span-1 rounded-lg"></div>
+          <div className="hidden xl:flex bg-slate-900 col-span-1 rounded-lg"></div>
+          <div className="hidden xl:flex bg-slate-900 col-span-1 rounded-lg"></div>
+          <div className="hidden xl:flex bg-slate-900 col-span-1 rounded-lg"></div>
         </div>
       </div>
-      
+
       {/**Bottom Half ============================= */}
-      <div className="bg-slate-900 h-full w-full rounded-lg"></div>
+      <div className="h-full w-full grid grid-cols-2 gap-2 rounded-lg">
+        <div className="cols-span-1 rounded-lg bg-slate-900 "></div>
+        <div className="cols-span-1 rounded-lg bg-slate-900 "></div>
+      </div>
     </div>
   );
 };
