@@ -32,7 +32,8 @@ const Profile = () => {
   change === false &&
     setTimeout(() => {
       setPhotoURL(currentUser.photoURL);
-      setNewChange(true);dispatch(
+      setNewChange(true);
+      dispatch(
         updateAlert({
           message: "Profile Changed Successfully",
           color: "bg-green-200",

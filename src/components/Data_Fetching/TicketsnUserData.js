@@ -13,6 +13,9 @@ import {
   collection,
   onSnapshot,
   addDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 // init services for firestore =========================
@@ -24,6 +27,35 @@ let ticketsRef = collection(db, "tickects");
 let contactsRef = collection(db, "contacts");
 let settingsRef = collection(db, "settings");
 
+// deleting Tickets
+export const deleteTicket = (id) => {
+  const docRef = doc(db, "tickects", id);
+  deleteDoc(docRef);
+};
+
+// Assign Different Agent ================
+export const assignAgent = (id, agent) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    agent_name: agent,
+  });
+};
+
+// Change Priority ================
+export const changePriority = (id, selected) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    priority: selected,
+  });
+};
+
+// Change Status ================
+export const changeStatus = (id, state) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    status: state,
+  });
+};
 
 // New Tickects ==============================
 export const addTicket = (
@@ -34,7 +66,8 @@ export const addTicket = (
   category,
   branch_company,
   message,
-  state,date
+  state,
+  date
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -50,8 +83,6 @@ export const addTicket = (
     tickect_id: Date.now() - Math.random(),
     status: state,
     due_date: date,
-  }).then(() => {
-    console.log("done");
   });
 };
 

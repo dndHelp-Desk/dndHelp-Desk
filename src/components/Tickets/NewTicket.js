@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import useOnClickOutside from "./../../../Custom-Hooks/useOnClickOutsideRef";
-import { useSelector } from "react-redux";
-import { addTicket } from "../../Data_Fetching/TicketsnUserData";
+import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import { useSelector, useDispatch } from "react-redux";
+import { addTicket } from "./../Data_Fetching/TicketsnUserData";
+import { updateAlert } from "./../../store/NotificationsSlice";
 
 const NewTicket = ({ newTicketModal, setModal }) => {
   const closeModalRef = useOnClickOutside(() => {
@@ -10,12 +11,14 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const contacts = useSelector((state) => state.Tickets.contacts);
   const settings = useSelector((state) => state.Tickets.settings);
   const categories = settings.length >= 1 && settings[0].categories;
+  const member_details = useSelector((state) => state.UserInfo.member_details);
+  const dispatch = useDispatch();
 
   //Form Input Values =========================
   const [inputValue, setValues] = useState({
     recipient_name: "",
     recipient_email: "",
-    agent: "",
+    agent: member_details.length !== undefined && member_details[0].name,
     priority: "",
     category: "",
     branch_company: "",
@@ -48,10 +51,13 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       );
     });
 
+  //Link To new Tickect ================
+  const link =
+    "https://script.google.com/macros/s/AKfycbwuB68-q4HaoLldyWX7cat8GAIHZIbZ-V_uV_QAh9MH8WnVAhXhh7Wvyj5egmn72m02/exec";
+
   //Submit New Ticket ===============
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputValue);
     addTicket(
       inputValue.recipient_name,
       inputValue.recipient_email,
@@ -63,7 +69,27 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       inputValue.state,
       inputValue.date
     );
-	setModal(false)
+    fetch(link, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: inputValue.recipient_name,
+        email: inputValue.recipient_email,
+        subject: inputValue.category,
+        message: inputValue.message,
+        tickect_id: Math.random(10) * 10,
+      }),
+    });
+    setModal(false);
+    dispatch(
+      updateAlert({
+        message: "New Ticket Created Successfully",
+        color: "bg-green-200",
+      })
+    );
   };
 
   //Component ===========================
