@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsEnvelope } from "react-icons/bs";
 import placeHolderImg from "./images/email-open.png";
@@ -7,14 +7,21 @@ import {
   changePriority,
   changeStatus,
 } from "./../Data_Fetching/TicketsnUserData";
+import { setThreadId } from "./../../store/TicketsSlice";
 
 const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
+  const dispatch = useDispatch();
   let allTickets = useSelector((state) => state.Tickets.allTickets);
+  let threadId = useSelector((state) => state.Tickets.threadId);
+
+  //Filter Message in a thread ============================
+  const firstMessages =
+    allTickets && allTickets.filter((ticket) => ticket.message_position === 1);
 
   //Loop Through Each Tickects =================
   const tickets =
-    allTickets.length >= 1 &&
-    allTickets.map((ticket, index) => {
+    firstMessages.length >= 1 &&
+    firstMessages.map((ticket, index) => {
       return (
         <div
           key={ticket.id}
@@ -32,6 +39,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
               className="rounded border-slate-300 text-blue-600 h-3 w-3 shadow-sm  focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
               name="mark"
               id="mark"
+              checked={deleteArray.includes(ticket.id) === true ? true : false}
               onChange={(e) =>
                 e.target.checked === true
                   ? setDelete([...deleteArray, ticket.id])
@@ -48,6 +56,10 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
           </div>
           <Link
             to="/help-desk/thread"
+            onClick={() => {
+              dispatch(setThreadId(ticket.ticket_id));
+              window.localStorage.setItem("threadId", JSON.stringify(threadId));
+            }}
             className="col-span-5  h-full w-full border-l-2 border-slate-600 px-2 py-1"
           >
             <h2 className="text-slate-300 text-base font-bold font-sans capitalize">
@@ -100,7 +112,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
               </select>
             </div>
             <div className="w-[10rem] flex items-baseline justify-end">
-              <span className="text-slate-400">⇨</span>{" "}
+              <span className="text-slate-400">↝</span>{" "}
               <select
                 defaultValue={ticket.status}
                 onChange={(e) => changeStatus(ticket.id, e.target.value)}

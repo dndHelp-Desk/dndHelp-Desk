@@ -33,7 +33,7 @@ const TicketsComponent = () => {
     setDelete([]);
     dispatch(
       updateAlert({
-        message: "Tickect/s Deleted Successfully",
+        message: "Tickets Deleted Successfully",
         color: "bg-green-200",
       })
     );
@@ -47,7 +47,7 @@ const TicketsComponent = () => {
     setDelete([]);
     dispatch(
       updateAlert({
-        message: `Ticket/ s Assigned to ${name} Successfully`,
+        message: `Tickets Assigned to ${name} Successfully`,
         color: "bg-green-200",
       })
     );
@@ -73,7 +73,7 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-slate-300 mt-[-2rem] px-1 absolute left-[9.5%] z-0 rounded-lg max-h-[42rem] w-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
+    <div className="bg-slate-300 border border-[#b5c2e1] min-h-[40rem] mt-[-2rem] px-1 absolute left-[9.5%] z-0 rounded-lg max-h-[42rem] w-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
       {/**Navbar or Control Bar  ====================== */}
       <nav className="h-[3.5rem] sticky top-0 bg-slate-300 pt-2 flex justify-between items-center w-full overflow-x-hidden p-1">
         {/**Search Bar ============================== */}

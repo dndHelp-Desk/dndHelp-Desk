@@ -80,9 +80,10 @@ export const addTicket = (
     branch_company: branch_company,
     message: message,
     time: `${new Date().getHours() + 1}:${new Date().getMinutes() + 1}`,
-    tickect_id: Date.now() - Math.random(),
+    ticket_id: Date.now() - Math.random(),
     status: state,
     due_date: date,
+    from:"agent"
   });
 };
 
@@ -121,11 +122,6 @@ const TicketsnUserData = () => {
           addAllTickets(
             snapshot.docs
               .map((doc) => ({ ...doc.data(), id: doc.id }))
-              .sort(
-                (a, b) =>
-                  new Date(a.date).toISOString() >
-                  new Date(b.date).toISOString()
-              )
           )
         );
       }),
