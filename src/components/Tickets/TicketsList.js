@@ -13,7 +13,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
   const dispatch = useDispatch();
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   let threadId = useSelector((state) => state.Tickets.threadId);
-
+  
   //Filter Message in a thread ============================
   const firstMessages =
     allTickets && allTickets.filter((ticket) => ticket.message_position === 1);

@@ -70,7 +70,7 @@ const MessageThread = () => {
 
   //Component ============================
   return (
-    <div className="bg-slate-900 border border-slate-400 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[42rem] flex flex-col">
+    <div className="bg-slate-900 border border-slate-400 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-screen flex flex-col">
       <div className="p-2 h-[2.5rem] w-full">
         <Link
           to="/help-desk/tickets"
