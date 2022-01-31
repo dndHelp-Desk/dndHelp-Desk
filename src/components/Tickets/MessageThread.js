@@ -70,13 +70,13 @@ const MessageThread = () => {
 
   //Component ============================
   return (
-    <div className="bg-slate-900 border border-slate-400 mt-[-2rem] absolute left-[9.5%] z-0 rounded-lg h-[42rem] w-[80%] flex flex-col overflow-hidden">
+    <div className="bg-slate-900 border border-slate-400 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[42rem] flex flex-col">
       <div className="p-2 h-[2.5rem] w-full">
         <Link
           to="/help-desk/tickets"
           className="bg-slate-800 text-slate-400 px-4 py-1 h-full w-full text-sm hover:opacity-80 rounded-md space-y-1"
         >
-          <BsCaretLeftFill className="inline"/>
+          <BsCaretLeftFill className="inline" />
         </Link>
       </div>
       {/**Messages Thread =========================== */}

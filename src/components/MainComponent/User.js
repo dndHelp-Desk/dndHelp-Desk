@@ -30,7 +30,7 @@ const User = () => {
 
   //React Component =======================
   return (
-    <div className="h-[8rem] z-0 w-full bg-[#4a72df2f] backdrop-blur-lg p-2 pl-[9.5%] pr-[10.5%] flex justify-between  relative">
+    <div className="h-[8rem] z-0 w-full bg-[#4a72df2f] backdrop-blur-lg p-2 pl-[9.5%] 2xl:pl-[15%] pr-[10.5%] 2xl:pr-[15%] flex justify-between  relative">
       <div className="flex space-x-2 h-full">
         {/** Profile =================== */}
         <Profile />
