@@ -57,6 +57,17 @@ export const changeStatus = (id, state) => {
   });
 };
 
+//Add Reply or Send Reply ============
+export const addReply = (message,message_position,ticket_id)=>{
+  addDoc(ticketsRef, {
+    date: new Date().toISOString(),
+    from: "agent",
+    message: message,
+    message_position: message_position,
+    ticket_id: ticket_id,
+  });
+}
+
 // New Tickects ==============================
 export const addTicket = (
   recipient_name,

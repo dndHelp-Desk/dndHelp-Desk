@@ -31,6 +31,11 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
               .includes(searchResults.toLowerCase()) === true
               ? "flex"
               : "hidden"
+          } ${
+            ticket.status.toLowerCase() === "resolved" ||
+            ticket.status.toLowerCase() === "closed"
+              ? "opacity-90"
+              : ""
           }`}
         >
           <div className="col-span-1 h-full md:w-[7rem] flex justify-between px-1 items-center">

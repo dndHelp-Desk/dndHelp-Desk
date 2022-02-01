@@ -16,23 +16,6 @@ import {
 const Main = () => {
   const location = useLocation();
   let allTickets = useSelector((state) => state.Tickets.allTickets);
-  const recentTickets = allTickets.length >= 1 && allTickets.slice(0, 3);
-
-  //Recent Added Tickets =========================
-  const recents =
-    recentTickets.length >= 1 &&
-    recentTickets.map((recent) => {
-      return (
-        <div
-          key={recent.ticket_id}
-          className="h-10 w-10 rounded-lg bg-slate-800 flex items-center justify-center uppercase text-slate-400 font-semibold text-lg"
-        >
-          <abbr title={recent.recipient_name}>{`${recent.recipient_name.charAt(
-            0
-          )}`}</abbr>
-        </div>
-      );
-    });
 
   const [demoArr, setDemoArr] = useState([
     { id: 1, task: "Finish document review", date: "", doneStatus: false },
@@ -54,6 +37,7 @@ const Main = () => {
     console.log(id);
   };
 
+  //Map Through Each Task =============================
   const tasks = demoArr.map((task) => {
     return (
       <div
@@ -126,27 +110,53 @@ const Main = () => {
             style={{ backgroundImage: `url(${WelcomeSvg})` }}
             className="col-span-1 rounded-lg h-full w-full grid grid-rows-2 2xl:flex p-1 overflow-hidden bg-no-repeat bg-contain bg-center"
           ></div>
+          {/** Online Members ==================================*/}
           <div className="col-span-1 grid grid-rows-2 overflow-hidden px-2">
             <div className="row-span-1 overflow-hidden">
               <h2 className="text-base font-bold text-slate-400 capitalize">
-                recent tickets
+                Online Users
               </h2>
               <p className="text-thin text-slate-500 text-sm">
-                Hover your mouse on top of below letters to see the reciepent
-                name or alternatively select <b>tickets</b> on the navbar.
+                You can click on the chat icon on your top right to chat with
+                active members & share thoughts ideas.
               </p>
             </div>
             <div className="row-span-1 flex items-center space-x-1">
-              {recents}
+              <div className="h-10 w-10 rounded-lg bg-slate-800 flex items-center justify-center relative">
+                <img
+                  src="https://cutt.ly/1OxImPP"
+                  alt="user"
+                  className="object-center h-full w-full object-cover rounded-lg"
+                />
+                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border border-slate-900"></span>
+              </div>
+              <div className="h-10 w-10 rounded-lg bg-slate-800 flex items-center justify-center relative">
+                <img
+                  src="https://cutt.ly/jOxI9s4"
+                  alt="user"
+                  className="object-center h-full w-full object-cover rounded-lg"
+                />
+                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border border-slate-900"></span>
+              </div>
+              <div className="h-10 w-10 rounded-lg bg-slate-800 flex items-center justify-center relative">
+                <img
+                  src="https://cutt.ly/aOxUWV8"
+                  alt="user"
+                  className="object-center h-full w-full object-cover rounded-lg"
+                />
+                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border border-slate-900"></span>
+              </div>
             </div>
           </div>
+          {/**End Of Online Members ==================================*/}
+
           <div className="col-span-1 border-l border-slate-700 grid grid-rows-2 px-4 overflow-hidden">
             <div className="row-span-1 overflow-hidden">
               <h2 className="text-base font-bold text-slate-400 capitalize">
                 contacts
               </h2>
               <p className="text-thin text-slate-500 text-sm">
-                Make sure you add all the contacts before starting opening a new
+                Make sure to add/check if your contact is saved before you open a new
                 ticket.
               </p>
             </div>
