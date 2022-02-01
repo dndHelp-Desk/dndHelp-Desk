@@ -9,7 +9,17 @@ const MessageThread = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
+  let [lastMessagePosition, setLastMessage] = useState(
+    threadMessage.length + 1
+  );
   const dispatch = useDispatch();
+
+  //Reply State and value ==================================
+  const [reply, setReply] = useState({
+    message: "",
+    message_position: lastMessagePosition,
+    ticket_id: threadId,
+  });
 
   //Filter Thread Messages =====================================
   useEffect(() => {
@@ -19,18 +29,12 @@ const MessageThread = () => {
           allTickets
             .filter((ticket) => ticket.ticket_id === threadId)
             .sort((a, b) => {
-              return a.message_position > b.message_position;
+              return Number(a.message_position) - Number(b.message_position);
             })
         )
       );
-  }, [dispatch, allTickets, threadId]);
-
-  //Reply State and value ==================================
-  const [reply, setReply] = useState({
-    message: "",
-    message_position: threadMessage.length + 1,
-    ticket_id: threadId,
-  });
+    reply.message !== "" && setLastMessage(threadMessage.length + 1);
+  }, [dispatch, allTickets, threadId, threadMessage.length, reply.message]);
 
   //Get Name of Reciepent and Agent and email ===============
   let agentName =
@@ -94,13 +98,13 @@ const MessageThread = () => {
   const sendReply = (e) => {
     e.preventDefault();
     addReply(reply.message, reply.message_position, reply.ticket_id);
-    setReply({...reply,message:""})
+    setReply({ ...reply, message: "" });
   };
 
   //Component ============================
   return (
     <div className="bg-slate-900 border border-slate-400 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
-      <div className="p-2 h-[3rem] border-b border-slate-800 w-full">
+      <div className="p-2 max-h-[3.2rem] min-h-[3rem] h-[5%] border-b border-slate-800 w-full">
         <Link
           to="/help-desk/tickets"
           className="text-slate-400 px-4 py-1 h-full w-full text-xl hover:opacity-80 rounded-md space-y-1 flext items-center space-x-1"
@@ -110,51 +114,51 @@ const MessageThread = () => {
         </Link>
       </div>
       {/**Messages Thread =========================== */}
-      <div className="w-full h-full overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar relative">
+      <div className="w-full h-[85%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar relative">
         <div className="px-6 pt-4 space-y-3 z-0 h-full">{thread}</div>
-        {/**New message =========================== */}
-        <form
-          onSubmit={(e) => sendReply(e)}
-          className="w-full backdrop-blur-md flex items-center space-x-2 bg-[#03002942] z-[9999] sticky bottom-0 p-2"
-        >
-          <div className="w-full h-[2.5rem] bg-slate-800 rounded-lg flex space-x-1 justify-between">
-            <textarea
-              type="text"
-              name="reply"
-              id="reply"
-              placeholder="Reply Here ✉️ ..."
-              autoComplete="off"
-              onKeyUp={(e)=>{
-                if(e.key === "Enter"){
-                  e.preventDefault()
-                  sendReply(e);
-                }
-              }}
-              onChange={(e) => setReply({ ...reply, message: e.target.value })}
-              className="bg-transparent w-full text-sm placeholder:text-sm rounded-lg bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
-              value={reply.message}
-            ></textarea>
-            {/**Other Btns =========================== */}
-            <label htmlFor="attachment">
-              <div className="h-[2.5rem] flex outline-none focus:outline-none items-center justify-center border-l border-slate-700 px-2 text-slate-400 font-bold text-base">
-                <BsPaperclip />
-              </div>
-              <input
-                type="file"
-                name="attachment"
-                id="attachment"
-                className="hidden"
-              />
-            </label>
-          </div>
-          <button
-            type="submit"
-            className="h-[2.3rem] outline-none focus:outline-none focus:border-0 bg-blue-700 hover:opacity-80 transition-opacity duration-300 rounded-lg flex items-center justify-center text-slate-300 font-bold text-sm px-4"
-          >
-            Send
-          </button>
-        </form>
       </div>
+      {/**New message =========================== */}
+      <form
+        onSubmit={(e) => sendReply(e)}
+        className="w-full backdrop-blur-md flex items-center space-x-2 bg-[#03002942] z-[9999] sticky bottom-0 p-2"
+      >
+        <div className="w-full h-[2.5rem] bg-slate-800 rounded-lg flex space-x-1 justify-between">
+          <textarea
+            type="text"
+            name="reply"
+            id="reply"
+            placeholder="Reply Here ✉️ ..."
+            autoComplete="off"
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                sendReply(e);
+              }
+            }}
+            onChange={(e) => setReply({ ...reply, message: e.target.value })}
+            className="bg-transparent w-full text-sm placeholder:text-sm rounded-lg bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
+            value={reply.message}
+          ></textarea>
+          {/**Other Btns =========================== */}
+          <label htmlFor="attachment">
+            <div className="h-[2.5rem] flex outline-none focus:outline-none items-center justify-center border-l border-slate-700 px-2 text-slate-400 font-bold text-base">
+              <BsPaperclip />
+            </div>
+            <input
+              type="file"
+              name="attachment"
+              id="attachment"
+              className="hidden"
+            />
+          </label>
+        </div>
+        <button
+          type="submit"
+          className="h-[2.3rem] outline-none focus:outline-none focus:border-0 bg-blue-700 hover:opacity-80 transition-opacity duration-300 rounded-lg flex items-center justify-center text-slate-300 font-bold text-sm px-4"
+        >
+          Send
+        </button>
+      </form>
     </div>
   );
 };

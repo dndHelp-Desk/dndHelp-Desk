@@ -156,8 +156,8 @@ const Main = () => {
                 contacts
               </h2>
               <p className="text-thin text-slate-500 text-sm">
-                Make sure to add/check if your contact is saved before you open a new
-                ticket.
+                Make sure to add/check if your contact is saved before you open
+                a new ticket.
               </p>
             </div>
             <div className="row-span-1 flex items-center space-x-1">
@@ -211,7 +211,7 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 &&
+                        data.message_position === 1 && data.status &&
                         data.status.toLowerCase() === "resolved"
                     ).length
                   }
@@ -228,7 +228,7 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 &&
+                        data.message_position === 1 && data.status &&
                         data.status.toLowerCase() === "closed"
                     ).length
                   }
@@ -245,7 +245,7 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 &&
+                        data.message_position === 1 && data.status &&
                         data.status.toLowerCase() === "pending"
                     ).length
                   }
@@ -262,7 +262,7 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 &&
+                        data.message_position === 1 && data.status &&
                         data.status.toLowerCase() === "open"
                     ).length
                   }
