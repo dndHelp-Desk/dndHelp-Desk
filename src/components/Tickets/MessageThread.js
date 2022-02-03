@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BsPaperclip, BsArrowLeft, BsEnvelope } from "react-icons/bs";
 import { setThreadMessage } from "../../store/TicketsSlice";
@@ -9,15 +9,23 @@ const MessageThread = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
-  let [lastMessagePosition, setLastMessage] = useState(
+  const scrollToLastMessage = useRef();
+  const scrollToNone = useRef();
+  let [addMessagePosition, setLastMessage] = useState(
     threadMessage.length + 1
   );
   const dispatch = useDispatch();
 
+  //Functio ToScroll to last message
+  const lastMsg = () => {
+    scrollToLastMessage.current &&
+      scrollToLastMessage.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   //Reply State and value ==================================
   const [reply, setReply] = useState({
     message: "",
-    message_position: lastMessagePosition,
+    message_position: addMessagePosition,
     ticket_id: threadId,
   });
 
@@ -33,6 +41,7 @@ const MessageThread = () => {
             })
         )
       );
+      lastMsg();
     reply.message !== "" && setLastMessage(threadMessage.length + 1);
   }, [dispatch, allTickets, threadId, threadMessage.length, reply.message]);
 
@@ -48,6 +57,8 @@ const MessageThread = () => {
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
       .recipient_email;
+  let lastMsgPosition = threadMessage[threadMessage.length];
+
 
   //Loop Through Each Message In a thread ====================
   const thread =
@@ -55,6 +66,9 @@ const MessageThread = () => {
     threadMessage.map((message, index) => {
       return (
         <div
+          ref={
+            message.message_position === lastMsgPosition ? scrollToLastMessage :scrollToNone
+          }
           key={index}
           className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex space-x-2"
         >

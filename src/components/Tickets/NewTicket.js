@@ -55,7 +55,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
 
   //Link Google Appscript API for sendind Emails To new Tickect ================
   const sendMailAPI =
-    "https://script.google.com/macros/s/AKfycbx_DKttnTIqWiuhfVakrf6bBZ_5czFwtbu9bz1kXI7kfwMpTF90IJWa2FE6JAZXaPB6/exec?action=addData";
+    "https://script.google.com/macros/s/AKfycbyAWRBiPB0UcqtL4a6qGySTScYj-VwecLpqOI_eQAJUUkPZMj--RNw-lY9uD_F7EXhg/exec?action=addData";
 
   //Submit New Ticket ===============
   const handleSubmit = (e) => {
