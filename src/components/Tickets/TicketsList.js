@@ -98,10 +98,12 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
                 ■
               </span>{" "}
               <select
-                defaultValue={ticket.priority}
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
                 className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize"
               >
+                <option className="capitalize p-2" value="low">
+                  {ticket.priority} 
+                </option>
                 <option className="capitalize p-2" value="low">
                   Low
                 </option>
@@ -119,10 +121,12 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
             <div className="w-[10rem] flex items-baseline justify-end">
               <span className="text-slate-400">↝</span>{" "}
               <select
-                defaultValue={ticket.status}
                 onChange={(e) => changeStatus(ticket.id, e.target.value)}
                 className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize"
               >
+                <option className="capitalize p-2" value="resolved">
+                  {ticket.status}
+                </option>
                 <option className="capitalize p-2" value="resolved">
                   resolved
                 </option>
