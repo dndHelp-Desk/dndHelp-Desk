@@ -70,7 +70,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
             <h2 className="text-slate-300 text-base font-bold font-sans capitalize">
               {ticket.category}{" "}
               <span className="text-slate-400 font-medium text-sm">
-                #{index + 1}
+                {ticket.ticket_id}
               </span>
             </h2>
             <h5 className="text-slate-400 text-xs tracking-wide font-base font-sans flex items-center space-x-1 capitalize">
