@@ -10,6 +10,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   });
   const contacts = useSelector((state) => state.Tickets.contacts);
   const settings = useSelector((state) => state.Tickets.settings);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = settings.length >= 1 && settings[0].categories;
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     message: "",
     state: "",
     date: "",
+    ticket_id: "",
   });
 
   const contactsList =
@@ -51,9 +53,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       );
     });
 
-  //Link To new Tickect ================
-  const link =
-    "https://script.google.com/macros/s/AKfycbwuB68-q4HaoLldyWX7cat8GAIHZIbZ-V_uV_QAh9MH8WnVAhXhh7Wvyj5egmn72m02/exec";
+  //Link Google Appscript API for sendind Emails To new Tickect ================
+  const sendMailAPI =
+    "https://script.google.com/macros/s/AKfycbz-VciZfX_cnBeaX94TdB7DeP5Q0tmTyzP7K9BrApSgf3p9sWLZU9cy4jmEnh-fn6tt/exec?action=addData";
 
   //Submit New Ticket ===============
   const handleSubmit = (e) => {
@@ -67,9 +69,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       inputValue.branch_company,
       inputValue.message,
       inputValue.state,
-      inputValue.date
+      inputValue.date,
+      inputValue.ticket_id
     );
-    fetch(link, {
+    fetch(sendMailAPI, {
       method: "POST",
       mode: "no-cors",
       headers: {
@@ -80,7 +83,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         email: inputValue.recipient_email,
         subject: inputValue.category,
         message: inputValue.message,
-        tickect_id: Math.random(10) * 10,
+        priority: inputValue.priority,
+        opened_by: inputValue.agent,
+        tickect_id: inputValue.ticket_id,
       }),
     });
     setModal(false);
@@ -132,6 +137,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       recipient_name: e.target.value.split(",")[0],
                       recipient_email: e.target.value.split(",")[1],
                       branch_company: e.target.value.split(",")[2],
+                      ticket_id:
+                        "#" +
+                        (allTickets.length + 1) +
+                        e.target.value.split(",")[0].charAt(0) +
+                        e.target.value.split(",")[2].charAt(0),
                     })
                   }
                 >

@@ -78,7 +78,8 @@ export const addTicket = (
   branch_company,
   message,
   state,
-  date
+  date,
+  ticket_id
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -91,10 +92,10 @@ export const addTicket = (
     branch_company: branch_company,
     message: message,
     time: `${new Date().getHours() + 1}:${new Date().getMinutes() + 1}`,
-    ticket_id: Date.now() - Math.random(),
+    ticket_id: ticket_id,
     status: state,
     due_date: date,
-    from:"agent"
+    from: "agent",
   });
 };
 

@@ -56,7 +56,7 @@ const MessageThread = () => {
       return (
         <div
           key={index}
-          className="w-full text-slate-400 text-sm leading-6 p-2 rounded-lg flex space-x-2"
+          className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex space-x-2"
         >
           <div
             className={`h-[2.5rem] w-[5%] max-w-[2.5rem] min-w-[2.5rem] flex justify-center items-center rounded-xl uppercase text-2xl text-gray-300 ${
@@ -114,7 +114,7 @@ const MessageThread = () => {
         </Link>
       </div>
       {/**Messages Thread =========================== */}
-      <div className="w-full h-[85%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar relative">
+      <div className="w-full h-[85%] overflow-y-scroll scroll-snap relative">
         <div className="px-6 pt-4 space-y-3 z-0 h-full">{thread}</div>
       </div>
       {/**New message =========================== */}

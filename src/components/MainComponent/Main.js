@@ -146,6 +146,9 @@ const Main = () => {
                 />
                 <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border border-slate-900"></span>
               </div>
+              <div className="h-10 w-10 rounded-lg bg-slate-800 text-slate-400 text-xl flex items-center justify-center">
+                +
+              </div>
             </div>
           </div>
           {/**End Of Online Members ==================================*/}
