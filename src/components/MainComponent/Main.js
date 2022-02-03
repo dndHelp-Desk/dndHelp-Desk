@@ -1,101 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import WelcomeSvg from "./images/welcome.svg";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Businnes from "./images/businnes.jpg";
 import {
-  BsCalendarPlusFill,
-  BsCheck2All,
   BsArrowRightShort,
   BsDashSquare,
   BsCheckAll,
   BsArrowRepeat,
   BsEnvelopeOpen,
 } from "react-icons/bs";
+import ToDo from "./ToDo";
 
 const Main = () => {
   const location = useLocation();
   let allTickets = useSelector((state) => state.Tickets.allTickets);
-
-  const [demoArr, setDemoArr] = useState([
-    { id: 1, task: "Finish document review", date: "", doneStatus: false },
-    { id: 2, task: "Project Meeting", date: "", doneStatus: true },
-    { id: 3, task: "Meet with Kacey M.", date: "", doneStatus: false },
-    { id: 4, task: "Review final draft", date: "", doneStatus: false },
-  ]);
-
-  const handleChange = (e, id) => {
-    setDemoArr(
-      demoArr.map((item) => {
-        return item.id === id && e === true
-          ? { ...item, doneStatus: true }
-          : item.id === id && e === false
-          ? { ...item, doneStatus: false }
-          : { ...item };
-      })
-    );
-    console.log(id);
-  };
-
-  //Map Through Each Task =============================
-  const tasks = demoArr.map((task) => {
-    return (
-      <div
-        key={task.id}
-        className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg bg-slate-800 p-2"
-      >
-        <label
-          htmlFor="taskCkeckBox"
-          className="cursor-pointer checked:bg-gray-50"
-          onClick={() => console.log(task.id)}
-        >
-          <input
-            type="checkbox"
-            name="taskCkeckBox"
-            id="taskCkeckBox"
-            className="hidden"
-            onChange={(e) => handleChange(e.target.checked, task.id)}
-          />
-          <div
-            className={`h-8 w-8 rounded-full border border-dashed transition-all duration-500 flex items-center justify-center ${
-              task.doneStatus === true ? "border-blue-600" : "border-slate-400"
-            } `}
-          >
-            <div
-              className={`h-6 w-6 rounded-full transition-all duration-500 border flex items-center justify-center overflow-hidden ${
-                task.doneStatus === true
-                  ? "border-blue-600"
-                  : "border-slate-400"
-              }`}
-            >
-              <BsCheck2All
-                className={`text-blue-700 font-bold ${
-                  task.doneStatus === true ? "" : "hidden"
-                }`}
-              />
-            </div>
-          </div>
-        </label>
-        <div className="h-full overflow-hidden">
-          <p className="text-slate-400 w-[5rem] md:w-[10rem] lg:w-[7rem] 2xl:w-[10rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
-            <abbr title="Finish Document Review">{task.task}</abbr>
-          </p>
-          <small className="text-slate-500 text-xs font-semibold">
-            at 11:00 AM
-          </small>
-        </div>
-        <div
-          className={`h-6 border border-slate-700 flex items-center justify-center rounded-full px-2 text-xs  p-1 ${
-            task.doneStatus === true
-              ? "bg-[#4ef31c33] text-green-400"
-              : "bg-slate-900 text-slate-400"
-          }`}
-        >
-          {`${task.doneStatus === true ? "Completed" : "Pending"}`}
-        </div>
-      </div>
-    );
-  });
 
   //Component ========================
   return (
@@ -172,26 +91,7 @@ const Main = () => {
         </div>
         {/**Bottom Half ================================ */}
         <div className="row-span-2 rounded-lg grid grid-cols-2 xl:grid-cols-3 gap-2">
-          <div className="col-span-1 rounded-lg space-y-2">
-            <div className="h-[17%] p-1 px-3 bg-slate-900 w-full rounded-lg flex justify-between items-center space-x-1">
-              <div className="h-12 w-full bg-slate-800 rounded-lg relative">
-                <button className="h-11 w-[3rem] border-l border-slate-700 absolute top-[4%] right-0 flex justify-center items-center outline-none focus:outline-none hover:text-blue-600 text-slate-400 transition-all">
-                  <BsCalendarPlusFill />
-                </button>
-                <input
-                  type="text"
-                  name="search"
-                  id="search"
-                  className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent border-slate-700 placeholder:text-sm text-slate-400"
-                  placeholder="Add New Task Here ..."
-                  autoComplete="off"
-                />
-              </div>
-            </div>
-            <div className="h-[81%] w-full bg-slate-900 rounded-lg p-4 space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-              {tasks}
-            </div>
-          </div>
+          <ToDo/>
           <div className="col-span-1 grid grid-rows-5 bg-slate-900 rounded-lg px-2">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b border-slate-700 flex flex-col justify-center items-center px-4">
               <h2 className="text-slate-400 text-2xl font-bold capitalize">

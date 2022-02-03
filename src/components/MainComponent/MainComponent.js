@@ -57,18 +57,6 @@ const MainComponent = () => {
           <span>Home</span>
         </NavLink>
         <NavLink
-          to="/help-desk/reports"
-          className={`TabsLinks ${
-            location.pathname === "/help-desk/reports" ? "navlinks" : ""
-          }`}
-        >
-          <FaChartBar
-            className="inline-block
-			  "
-          />
-          <span>Reports</span>
-        </NavLink>
-        <NavLink
           to="/help-desk/tickets"
           end={true}
           className={`TabsLinks ${
@@ -80,6 +68,18 @@ const MainComponent = () => {
 			  "
           />
           <span>Tickets</span>
+        </NavLink>
+        <NavLink
+          to="/help-desk/reports"
+          className={`TabsLinks ${
+            location.pathname === "/help-desk/reports" ? "navlinks" : ""
+          }`}
+        >
+          <FaChartBar
+            className="inline-block
+			  "
+          />
+          <span>Reports</span>
         </NavLink>
         <NavLink
           to="/help-desk/contacts"
@@ -137,14 +137,6 @@ const MainComponent = () => {
             Home
           </NavLink>
           <NavLink
-            to="/help-desk/reports"
-            className={`TabsLinks ${
-              location.pathname === "/help-desk/reports" ? "navlinks" : ""
-            }`}
-          >
-            Reports
-          </NavLink>
-          <NavLink
             to="/help-desk/tickets"
             end={true}
             className={`TabsLinks ${
@@ -152,6 +144,14 @@ const MainComponent = () => {
             }`}
           >
             Tickets
+          </NavLink>
+          <NavLink
+            to="/help-desk/reports"
+            className={`TabsLinks ${
+              location.pathname === "/help-desk/reports" ? "navlinks" : ""
+            }`}
+          >
+            Reports
           </NavLink>
           <NavLink
             to="/help-desk/contacts"

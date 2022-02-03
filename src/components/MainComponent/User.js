@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { FaRegCalendarAlt, FaUserEdit } from "react-icons/fa";
-import { isAuthenticated, updateUser,changeLocation } from "../../store/UserSlice";
+import {
+  isAuthenticated,
+  updateUser,
+  changeLocation,
+} from "../../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, getAuth, updateProfile } from "firebase/auth";
 import Profile from "../authentication/Profile";
 import { updateAlert } from "../../store/NotificationsSlice";
+import { changeName } from "../Data_Fetching/TicketsnUserData";
 
 const User = () => {
   const [usernameInput, changeInput] = useState("");
@@ -19,7 +24,7 @@ const User = () => {
       .then(() => {
         console.log("user signed out");
         dispatch(isAuthenticated(false));
-        window.localStorage.clear()
+        window.localStorage.clear();
         dispatch(changeLocation("Dial n Dine Help-Desk"));
         document.title = "Dial n Dine Help-Desk";
       })
@@ -69,31 +74,13 @@ const User = () => {
             action=""
             onSubmit={(e) => {
               e.preventDefault();
-              updateProfile(auth.currentUser, {
-                displayName: usernameInput,
-              })
-                .then(() => {
-                  dispatch(
-                    updateUser([
-                      auth.currentUser.email,
-                      auth.currentUser.displayName,
-                    ])
-                  );
-                  dispatch(
-                    updateAlert({
-                      message: "Display Name Changed Successfully",
-                      color: "bg-green-200",
-                    })
-                  );
+              changeName(member_details[0].id, usernameInput);
+              dispatch(
+                updateAlert({
+                  message: "Display Name Changed Successfully",
+                  color: "bg-green-200",
                 })
-                .catch(() => {
-                  dispatch(
-                    updateAlert({
-                      message: "Failed To Change The Name",
-                      color: "bg-red-200",
-                    })
-                  );
-                });
+              );
             }}
             className="flex space-x-2 justify-center items-center overflow-hidden"
           >

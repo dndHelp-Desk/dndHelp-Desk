@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAuth } from "firebase/auth";
-import { updateUser, addAllMembers } from "../../store/UserSlice";
+import { updateUser, addAllMembers, setToDo } from "../../store/UserSlice";
 import {
   addAllTickets,
   setContacts,
@@ -49,6 +49,14 @@ export const changePriority = (id, selected) => {
   });
 };
 
+// Change User Name ================
+export const changeName = (id, name) => {
+  let docRef = doc(db, "members", id);
+  updateDoc(docRef, {
+    name: name,
+  });
+};
+
 // Change Status ================
 export const changeStatus = (id, state) => {
   let docRef = doc(db, "tickects", id);
@@ -58,7 +66,7 @@ export const changeStatus = (id, state) => {
 };
 
 //Add Reply or Send Reply ============
-export const addReply = (message,message_position,ticket_id)=>{
+export const addReply = (message, message_position, ticket_id) => {
   addDoc(ticketsRef, {
     date: new Date().toISOString(),
     from: "agent",
@@ -66,7 +74,7 @@ export const addReply = (message,message_position,ticket_id)=>{
     message_position: message_position,
     ticket_id: ticket_id,
   });
-}
+};
 
 // New Tickects ==============================
 export const addTicket = (
@@ -102,6 +110,7 @@ export const addTicket = (
 const TicketsnUserData = () => {
   const dispatch = useDispatch();
   const currentUser = getAuth().currentUser;
+  const member_details = useSelector((state) => state.UserInfo.member_details);
 
   //User/Members Data =====================================
   useEffect(() => {
@@ -132,8 +141,7 @@ const TicketsnUserData = () => {
       onSnapshot(ticketsRef, (snapshot) => {
         dispatch(
           addAllTickets(
-            snapshot.docs
-              .map((doc) => ({ ...doc.data(), id: doc.id }))
+            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
           )
         );
       }),
@@ -155,6 +163,18 @@ const TicketsnUserData = () => {
       })
     );
   }, [dispatch, currentUser.email]);
+
+  //Todo CollectionRef ====================
+  useEffect(() => {
+    let toDoRef = collection(db, `members/${member_details[0].id}/to-do`);
+    return onSnapshot(toDoRef, (snapshot) => {
+    member_details[0].id && dispatch(
+        setToDo(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        )
+      );
+    });
+  }, [member_details[0].id, dispatch]);
   return <></>;
 };
 

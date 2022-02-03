@@ -15,6 +15,7 @@ const initialState = {
   }],
   authenticated: false,
   routeLocation: initialLocation(),
+  toDo:[]
 };
 
 export const UserSlice = createSlice({
@@ -33,10 +34,13 @@ export const UserSlice = createSlice({
     changeLocation: (state, action) => {
       state.routeLocation = action.payload;
     },
+    setToDo:(state,action)=>{
+      state.toDo  = action.payload
+    }
   },
 });
 
-export const { isAuthenticated, updateUser, addAllMembers, changeLocation } =
+export const { isAuthenticated, updateUser, addAllMembers, changeLocation, setToDo } =
   UserSlice.actions;
 
 export default UserSlice.reducer;

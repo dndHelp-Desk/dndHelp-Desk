@@ -1,8 +1,13 @@
 import React, { useState, useEffect,useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { BsPaperclip, BsArrowLeft, BsEnvelope } from "react-icons/bs";
+import {
+  BsPaperclip,
+  BsArrowLeft,
+  BsFillTrashFill,
+  BsEnvelope,
+} from "react-icons/bs";
 import { setThreadMessage } from "../../store/TicketsSlice";
-import { addReply } from "../Data_Fetching/TicketsnUserData";
+import { addReply,deleteTicket } from "../Data_Fetching/TicketsnUserData";
 import { Link } from "react-router-dom";
 
 const MessageThread = () => {
@@ -67,7 +72,7 @@ const MessageThread = () => {
       return (
         <div
           ref={
-            message.message_position === lastMsgPosition ? scrollToLastMessage :scrollToNone
+            Number(message.message_position) === Number(lastMsgPosition) ? scrollToLastMessage :scrollToNone
           }
           key={index}
           className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex space-x-2"
@@ -88,9 +93,12 @@ const MessageThread = () => {
               <span>{`${
                 message.from === "agent" ? agentName : clientName
               }`}</span>{" "}
-              <span className="text-xs text-slate-400 font-medium">
-                {`${new Date(message.date).toDateString()}`}
-              </span>
+              <h4 className="flex space-x-4">
+                <span className="text-xs text-slate-400 font-medium">
+                  {`${new Date(message.date).toDateString()}`}
+                </span>
+                <BsFillTrashFill onClick={()=>deleteTicket(message.id)} className="inline hover:text-red-500 cursor-pointer"/>
+              </h4>
             </h4>
             <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-700 text-slate-500">
               <BsEnvelope className="inline" />
