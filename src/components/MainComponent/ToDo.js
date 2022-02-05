@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { BsCalendarPlusFill, BsCheck2All } from "react-icons/bs";
+import {
+  BsCheck2All,
+  BsFillTrashFill,
+} from "react-icons/bs";
 import { useSelector } from "react-redux"; //Firestore ===================
 import {
   getFirestore,
@@ -7,7 +10,9 @@ import {
   updateDoc,
   collection,
   addDoc,
+  deleteDoc,
 } from "firebase/firestore";
+import ToDODatePicker from "./ToDoDatePicker";
 
 // init services for firestore =========================
 const db = getFirestore();
@@ -16,6 +21,8 @@ const ToDo = () => {
   const todoList = useSelector((state) => state.UserInfo.toDo);
   const member_details = useSelector((state) => state.UserInfo.member_details);
   let toDoRef = collection(db, `members/${member_details[0].id}/to-do`);
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [taskName,setTask] = useState("")
 
   //Update to-do List ===========================
   const markToDo = (id, state) => {
@@ -24,19 +31,24 @@ const ToDo = () => {
       status: state,
     });
   };
-  const handleChange = (e, id) => {
-    markToDo(id, e);
+
+  // deleting Task ===========================
+  const deleteTask = (id) => {
+    const docRef = doc(db, `members/${member_details[0].id}/to-do`, id);
+    deleteDoc(docRef);
   };
 
   //Add Task ==========================
-  const addTask = (message, message_position, ticket_id) => {
-    addDoc(toDoRef, {
-      date: new Date().toISOString(),
-      from: "agent",
-      message: message,
-      message_position: message_position,
-      ticket_id: ticket_id,
+  const addTask = (e) => {
+    e.preventDefault();
+   selectedDay && addDoc(toDoRef, {
+     date: new Date(
+        `${selectedDay.month}-${selectedDay.day}-${selectedDay.year}`
+      ).toISOString(),
+      task: taskName,
+      status: "pending",
     });
+     setTask("");
   };
 
   //Map Through Each Task =============================
@@ -46,46 +58,32 @@ const ToDo = () => {
       return (
         <div
           key={task.id}
-          className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg bg-slate-800 p-2"
+          className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg bg-slate-800 p-2 snap_childTwo"
         >
-          <label
-            htmlFor="taskCkeckBox"
-            className="cursor-pointer checked:bg-gray-50"
+          <button
+            onClick={() => markToDo(task.id, task.status ? false : true)}
+            className={`h-8 w-8 rounded-full border border-dashed transition-all duration-500 flex items-center justify-center focus:outline-none outline-none hover:border-blue-600 ${
+              task.status === true ? "border-blue-600" : "border-slate-400"
+            } `}
           >
-            <input
-              type="checkbox"
-              name="taskCkeckBox"
-              id="taskCkeckBox"
-              className="hidden"
-              onChange={(e) => {
-                handleChange(e.target.checked, task.id);
-                console.log(task.id);
-              }}
-            />
             <div
-              className={`h-8 w-8 rounded-full border border-dashed transition-all duration-500 flex items-center justify-center ${
+              className={`h-6 w-6 rounded-full transition-all duration-500 border flex items-center justify-center overflow-hidden ${
                 task.status === true ? "border-blue-600" : "border-slate-400"
-              } `}
+              }`}
             >
-              <div
-                className={`h-6 w-6 rounded-full transition-all duration-500 border flex items-center justify-center overflow-hidden ${
-                  task.status === true ? "border-blue-600" : "border-slate-400"
+              <BsCheck2All
+                className={`text-blue-700 font-bold ${
+                  task.status === true ? "" : "hidden"
                 }`}
-              >
-                <BsCheck2All
-                  className={`text-blue-700 font-bold ${
-                    task.status === true ? "" : "hidden"
-                  }`}
-                />
-              </div>
+              />
             </div>
-          </label>
+          </button>
           <div className="h-full overflow-hidden">
             <p className="text-slate-400 w-[5rem] md:w-[10rem] lg:w-[7rem] 2xl:w-[10rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
               <abbr title="Finish Document Review">{task.task}</abbr>
             </p>
             <small className="text-slate-500 text-xs font-semibold">
-              {`${new Date(!task.date === "" && task.date).toDateString()}`}
+              {`${new Date(task.date).toDateString()}`}
             </small>
           </div>
           <div
@@ -97,6 +95,10 @@ const ToDo = () => {
           >
             {`${task.status === true ? "Completed" : "Pending"}`}
           </div>
+          <BsFillTrashFill
+            onClick={() => deleteTask(task.id)}
+            className="text-slate-400 hover:text-red-500 cursor-pointer transition-all duration-300"
+          />
         </div>
       );
     });
@@ -104,26 +106,39 @@ const ToDo = () => {
   //Component =============================================
   return (
     <div className="col-span-1 rounded-lg space-y-2">
-      <div className="h-[17%] p-1 px-3 bg-slate-900 w-full rounded-lg flex justify-between items-center space-x-1">
-        <div className="h-12 w-full bg-slate-800 rounded-lg relative">
-          <label htmlFor="date">
-            <button className="h-11 w-[3rem] border-l border-slate-700 absolute top-[4%] right-0 flex justify-center items-center outline-none focus:outline-none hover:text-blue-600 text-slate-400 transition-all">
-              <BsCalendarPlusFill />
-            </button>
-            <input type="date" name="date" id="date" className="hidden" />
-          </label>
+      <form
+        onSubmit={(e) => addTask(e)}
+        className="h-[15%] p-1 px-3 bg-slate-900 w-full rounded-lg flex justify-between items-center space-x-1"
+      >
+        <div className="h-11 w-full bg-slate-800 rounded-lg relative overflow-hidden">
           <input
             type="text"
             name="search"
             id="search"
+            required
             className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent border-slate-700 placeholder:text-sm text-slate-400"
             placeholder="Add New Task Here ..."
             autoComplete="off"
+            onChange={(e) => setTask(e.target.value)}
+            value={taskName}
           />
         </div>
-      </div>
-      <div className="h-[81%] w-full bg-slate-900 rounded-lg p-4 space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-        {tasks}
+        <ToDODatePicker
+          selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay}
+        />
+        <button
+          type="submit"
+          className="h-11 w-[10rem] bg-blue-700 rounded-lg flex justify-center items-center outline-none focus:outline-none hover:bg-blue-800 text-slate-300 font-sans font-bold capitalize text-sm transition-all"
+        >
+          Add task
+        </button>
+      </form>
+      {/**Task List ===================== */}
+      <div className="h-[22rem] w-full bg-slate-900 rounded-lg p-4 overflow-hidden">
+        <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
+          {tasks}
+        </div>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ const initialState = {
   threadId: initialId(),
   contacts: [],
   settings: [],
+  frequentlyAsked:[]
 };
 
 export const TicketsSlice = createSlice({
@@ -31,6 +32,9 @@ export const TicketsSlice = createSlice({
     },
     setThreadId:(state,action)=>{
       state.threadId = action.payload
+    },
+    loadFrequentlyAsked:(state,action)=>{
+      state.frequentlyAsked = action.payload
     }
   },
 });
@@ -41,6 +45,7 @@ export const {
   loadSettings,
   setThreadMessage,
   setThreadId,
+  loadFrequentlyAsked,
 } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;

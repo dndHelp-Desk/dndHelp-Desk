@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
-//Config Firebase =======
+//Config Firebase ==================================
 const firebaseConfig = {
   apiKey: "AIzaSyA62ZCv7_0Ktz4y-gU2EvHIpKTn3WFXM3U",
   authDomain: "dial-n-dine-help-desk.firebaseapp.com",

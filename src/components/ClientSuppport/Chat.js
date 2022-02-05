@@ -1,31 +1,15 @@
-import React, { useState, useEffect,useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  BsPaperclip,
-  BsArrowLeft,
-  BsFillTrashFill,
-  BsEnvelope,
-} from "react-icons/bs";
-import { setThreadMessage } from "../../store/TicketsSlice";
-import { addReply,deleteTicket } from "../Data_Fetching/TicketsnUserData";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BsPaperclip, BsFillTrashFill, BsEnvelope } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { deleteTicket } from "../Data_Fetching/TicketsnUserData";
+import { addClientReply } from "./DataFetching";
 
-const MessageThread = () => {
+const Chat = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
-  let allTickets = useSelector((state) => state.Tickets.allTickets);
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
-  const scrollToLastMessage = useRef();
-  const scrollToNone = useRef();
-  let [addMessagePosition, setLastMessage] = useState(
-    threadMessage.length + 1
-  );
-  const dispatch = useDispatch();
-
-  //Functio ToScroll to last message
-  const lastMsg = () => {
-    scrollToLastMessage.current &&
-      scrollToLastMessage.current.scrollIntoView({ behavior: "smooth" });
-  };
+  let [addMessagePosition, setLastMessage] = useState(threadMessage.length + 1);
+  const textFieldReadOnly = threadMessage.length >= 1 ? false : true;
+  const preloaderData = [1, 2, 3, 4, 5, 6];
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({
@@ -34,21 +18,9 @@ const MessageThread = () => {
     ticket_id: threadId,
   });
 
-  //Filter Thread Messages =====================================
   useEffect(() => {
-    allTickets.length >= 1 &&
-      dispatch(
-        setThreadMessage(
-          allTickets
-            .filter((ticket) => ticket.ticket_id === threadId)
-            .sort((a, b) => {
-              return Number(a.message_position) - Number(b.message_position);
-            })
-        )
-      );
-      lastMsg();
     reply.message !== "" && setLastMessage(threadMessage.length + 1);
-  }, [dispatch, allTickets, threadId, threadMessage.length, reply.message]);
+  }, [reply.message, threadMessage.length, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
   let agentName =
@@ -62,8 +34,6 @@ const MessageThread = () => {
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
       .recipient_email;
-  let lastMsgPosition = threadMessage[threadMessage.length];
-
 
   //Loop Through Each Message In a thread ====================
   const thread =
@@ -71,9 +41,6 @@ const MessageThread = () => {
     threadMessage.map((message, index) => {
       return (
         <div
-          ref={
-            Number(message.message_position) === Number(lastMsgPosition) ? scrollToLastMessage :scrollToNone
-          }
           key={index}
           className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex space-x-2"
         >
@@ -97,7 +64,12 @@ const MessageThread = () => {
                 <span className="text-xs text-slate-400 font-medium">
                   {`${new Date(message.date).toDateString()}`}
                 </span>
-                <BsFillTrashFill onClick={()=>deleteTicket(message.id)} className="inline hover:text-red-500 cursor-pointer"/>
+                <BsFillTrashFill
+                  onClick={() =>
+                    message.from === "client" && deleteTicket(message.id)
+                  }
+                  className="inline hover:text-red-500 cursor-pointer"
+                />
               </h4>
             </div>
             <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-900 text-slate-500">
@@ -116,33 +88,52 @@ const MessageThread = () => {
       );
     });
 
+  //Preloaders =======================================
+  const preloader = preloaderData.map((data) => {
+    return (
+      <div
+        key={data}
+        className="flex space-x-3 animate-pulse w-full overflow-hidden"
+      >
+        <div className="h-14 w-14 rounded-full bg-slate-500"></div>
+        <div className="w-[80%] space-y-2 flex flex-col justify-center">
+          <div className="h-3 w-full rounded-full bg-slate-500"></div>
+          <div className="h-3 w-full flex justify-between">
+            <div className="h-3 w-[60%] rounded-full bg-slate-500"></div>
+            <div className="h-3 w-[35%] rounded-full bg-slate-500"></div>
+          </div>
+          <div className="h-3 w-[40%] rounded-full bg-slate-500"></div>
+        </div>
+      </div>
+    );
+  });
+
   //Send Reply Function ============================
   const sendReply = (e) => {
     e.preventDefault();
-    addReply(reply.message, reply.message_position, reply.ticket_id);
+    threadMessage.length >= 1 &&
+      addClientReply(reply.message, reply.message_position, reply.ticket_id);
     setReply({ ...reply, message: "" });
   };
 
-  //Component ============================
+  //Component ===============================
   return (
-    <div className="bg-slate-900 border border-slate-400 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
-      <div className="p-2 max-h-[3.2rem] min-h-[3rem] h-[5%] border-b border-slate-800 w-full">
-        <Link
-          to="/help-desk/tickets"
-          className="text-slate-400 px-4 py-1 h-full w-full text-xl hover:opacity-80 rounded-md space-y-1 flext items-center space-x-1"
-        >
-          <BsArrowLeft className="inline" />
-          <span className="text-sm">Back</span>
-        </Link>
-      </div>
+    <div className=" bg-slate-600 custom-shadow h-[35rem] w-full rounded-lg mt-6 p-4 flex flex-col">
+      {threadMessage.length <= 0 && (
+        <div className="w-full h-full space-y-4 flex flex-col justify-center">
+          {preloader}
+        </div>
+      )}
       {/**Messages Thread =========================== */}
-      <div className="w-full h-[85%] overflow-y-scroll scroll-snap relative">
-        <div className="px-6 pt-4 space-y-3 z-0 h-full">{thread}</div>
-      </div>
-      {/**New message =========================== */}
+      {threadMessage.length >= 1 && (
+        <div className="w-full h-full overflow-y-scroll scroll-snap relative">
+          <div className="px-6 pt-4 space-y-3 z-0 h-full">{thread}</div>
+        </div>
+      )}
+      {/**New message // Reply =========================== */}
       <form
         onSubmit={(e) => sendReply(e)}
-        className="w-full backdrop-blur-md flex items-center space-x-2 bg-[#03002942] z-[9999] sticky bottom-0 p-2"
+        className="w-full backdrop-blur-md flex items-center space-x-2 bg-[#03002942] rounded-lg z-[9999] sticky bottom-0 p-2"
       >
         <div className="w-full h-[2.5rem] bg-slate-800 rounded-lg flex space-x-1 justify-between">
           <textarea
@@ -151,16 +142,23 @@ const MessageThread = () => {
             id="reply"
             placeholder="Reply Here ✉️ ..."
             autoComplete="off"
+            onChange={(e) =>
+              setReply({
+                ...reply,
+                message: e.target.value,
+                ticket_id: threadId,
+              })
+            }
             onKeyUp={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
                 sendReply(e);
               }
             }}
-            required
-            onChange={(e) => setReply({ ...reply, message: e.target.value })}
-            className="bg-transparent w-full text-sm placeholder:text-sm rounded-lg bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
             value={reply.message}
+            required
+            readOnly={textFieldReadOnly}
+            className="bg-transparent w-full text-sm placeholder:text-sm rounded-lg bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
           ></textarea>
           {/**Other Btns =========================== */}
           <label htmlFor="attachment">
@@ -186,4 +184,4 @@ const MessageThread = () => {
   );
 };
 
-export default MessageThread;
+export default Chat;

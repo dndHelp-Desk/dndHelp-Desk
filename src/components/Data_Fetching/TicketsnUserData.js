@@ -168,13 +168,12 @@ const TicketsnUserData = () => {
   useEffect(() => {
     let toDoRef = collection(db, `members/${member_details[0].id}/to-do`);
     return onSnapshot(toDoRef, (snapshot) => {
-    member_details[0].id && dispatch(
-        setToDo(
-          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        )
-      );
+      member_details[0].id &&
+        dispatch(
+          setToDo(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        );
     });
-  }, [member_details[0].id, dispatch]);
+  }, [dispatch, member_details]);
   return <></>;
 };
 

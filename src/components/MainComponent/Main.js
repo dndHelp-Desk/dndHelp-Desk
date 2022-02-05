@@ -24,23 +24,23 @@ const Main = () => {
       } bg-slate-300 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden`}
     >
       <div className="h-[40rem] grid grid-rows-3 gap-2">
-        <div className="row-span-1 w-full bg-slate-900 rounded-lg grid grid-cols-3 overflow-hidden py-6 p-2 gap-1">
+        <div className="row-span-1 w-full bg-slate-900 rounded-lg grid grid-cols-1 md:grid-cols-3 overflow-hidden py-6 p-2 gap-1">
           <div
             style={{ backgroundImage: `url(${WelcomeSvg})` }}
-            className="col-span-1 rounded-lg h-full w-full grid grid-rows-2 2xl:flex p-1 overflow-hidden bg-no-repeat bg-contain bg-center"
+            className="col-span-1 rounded-lg h-full w-full hidden md:grid grid-rows-2 2xl:flex p-1 overflow-hidden bg-no-repeat bg-contain bg-center"
           ></div>
           {/** Online Members ==================================*/}
           <div className="col-span-1 grid grid-rows-2 overflow-hidden px-2">
             <div className="row-span-1 overflow-hidden">
-              <h2 className="text-base font-bold text-slate-400 capitalize">
+              <h2 className="text-base font-bold text-slate-400 capitalize text-center md:text-left">
                 Online Users
               </h2>
-              <p className="text-thin text-slate-500 text-sm">
+              <p className="text-thin text-slate-500 text-sm text-center md:text-left">
                 You can click on the chat icon on your top right to chat with
                 active members & share thoughts ideas.
               </p>
             </div>
-            <div className="row-span-1 flex items-center space-x-1">
+            <div className="row-span-1 flex justify-center md:justify-start items-center space-x-1">
               <div className="h-10 w-10 rounded-lg bg-slate-800 flex items-center justify-center relative">
                 <img
                   src="https://cutt.ly/1OxImPP"
@@ -72,7 +72,8 @@ const Main = () => {
           </div>
           {/**End Of Online Members ==================================*/}
 
-          <div className="col-span-1 border-l border-slate-700 grid grid-rows-2 px-4 overflow-hidden">
+          {/**Manage Contacts ==================================*/}
+          <div className="col-span-1 border-l border-slate-700 hidden md:grid grid-rows-2 px-4 overflow-hidden">
             <div className="row-span-1 overflow-hidden">
               <h2 className="text-base font-bold text-slate-400 capitalize">
                 contacts
@@ -89,10 +90,11 @@ const Main = () => {
             </div>
           </div>
         </div>
+
         {/**Bottom Half ================================ */}
-        <div className="row-span-2 rounded-lg grid grid-cols-2 xl:grid-cols-3 gap-2">
-          <ToDo/>
-          <div className="col-span-1 grid grid-rows-5 bg-slate-900 rounded-lg px-2">
+        <div className="row-span-2 rounded-lg grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
+          <ToDo />
+          <div className="col-span-1 hidden md:grid grid-rows-5 bg-slate-900 rounded-lg px-2">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b border-slate-700 flex flex-col justify-center items-center px-4">
               <h2 className="text-slate-400 text-2xl font-bold capitalize">
                 Today's Sumary
@@ -114,7 +116,8 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 && data.status &&
+                        data.message_position === 1 &&
+                        data.status &&
                         data.status.toLowerCase() === "resolved"
                     ).length
                   }
@@ -131,7 +134,8 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 && data.status &&
+                        data.message_position === 1 &&
+                        data.status &&
                         data.status.toLowerCase() === "closed"
                     ).length
                   }
@@ -148,7 +152,8 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 && data.status &&
+                        data.message_position === 1 &&
+                        data.status &&
                         data.status.toLowerCase() === "pending"
                     ).length
                   }
@@ -165,7 +170,8 @@ const Main = () => {
                   {
                     allTickets.filter(
                       (data) =>
-                        data.message_position === 1 && data.status &&
+                        data.message_position === 1 &&
+                        data.status &&
                         data.status.toLowerCase() === "open"
                     ).length
                   }
@@ -187,7 +193,7 @@ const Main = () => {
                 Here are the eight key trends every company will have to tackle
                 in order to succeed.
               </p>
-              <button className="bg-blue-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 ring-blue-400 hover:opacity-90 transition-all  text-sm text-slate-300 font-semibold px-4 py-2 rounded-lg">
+              <button className="bg-blue-700 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 ring-blue-800 hover:opacity-90 transition-all  text-sm text-slate-300 font-semibold px-4 py-2 rounded-lg">
                 Read more <BsArrowRightShort className="inline text-lg" />
               </button>
             </div>

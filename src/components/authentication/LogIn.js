@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  FaDyalog,
   FaSellsy,
-  FaHome,
+  FaHeadset,
   FaSlack,
   FaAlignRight,
 } from "react-icons/fa";
@@ -94,18 +93,16 @@ const LogIn = () => {
               />
               <span>Dashboard</span>
             </a>
-            <a
-              href="https://dial-n-dine.netlify.app"
-              target={"_blank"}
-              rel="noreferrer"
+            <Link
+              to="/support"
               className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
             >
-              <FaHome
+              <FaHeadset
                 className="inline-block
 			  "
               />
-              <span>Home</span>
-            </a>
+              <span>Support</span>
+            </Link>
           </div>
           <a
             href="https://join.slack.com/t/dialndine/signup"
@@ -132,18 +129,16 @@ const LogIn = () => {
             />
             <span>Dashboard</span>
           </a>
-          <a
-            href="https://dial-n-dine.netlify.app"
-            target={"_blank"}
-            rel="noreferrer"
+          <Link
+            to="/support"
             className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
           >
-            <FaHome
+            <FaHeadset
               className="inline-block
 			  "
             />
-            <span>Home</span>
-          </a>
+            <span>Support</span>
+          </Link>
         </div>
         <a
           href="https://join.slack.com/t/dialndine/signup"
@@ -159,7 +154,7 @@ const LogIn = () => {
       {/**First Half ================ */}
       <div
         style={{ backgroundImage: `url(${Background})` }}
-        className="hidden lg:flex lg:flex-col w-[50%] h-full  bg-no-repeat bg-contain bg-center bg-[#1c4cdba4] items-center justify-center px-4"
+        className="hidden lg:flex lg:flex-col w-[50%] h-full  bg-no-repeat bg-contain bg-center items-center justify-center px-4"
       ></div>
 
       {/**Second Half ==================================== */}

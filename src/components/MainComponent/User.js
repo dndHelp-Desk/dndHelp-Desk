@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { FaRegCalendarAlt, FaUserEdit } from "react-icons/fa";
-import {
-  isAuthenticated,
-  updateUser,
-  changeLocation,
-} from "../../store/UserSlice";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { isAuthenticated, changeLocation } from "../../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut, getAuth, updateProfile } from "firebase/auth";
+import { signOut, getAuth } from "firebase/auth";
 import Profile from "../authentication/Profile";
 import { updateAlert } from "../../store/NotificationsSlice";
 import { changeName } from "../Data_Fetching/TicketsnUserData";
@@ -56,7 +53,10 @@ const User = () => {
       </div>
 
       {/**Other Settings And Sign Out ================ */}
-      <div className="flex space-x-2 relative">
+      <button className="bg-slate-900 h-11 w-11 flex md:hidden justify-center items-center rounded-lg mt-5 text-xl font-bold text-slate-300 hover:text-slate-400 hover:bg-slate-800 transition-all outline-none focus:outline-none">
+        <BsThreeDotsVertical className="" />
+      </button>
+      <div className="hidden md:flex space-x-2 relative">
         <button
           onClick={() => setSettingsModal(settings === false ? true : false)}
           className="px-3 p-1 bg-slate-900 text-slate-400 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-800 transition-bg duration-300"

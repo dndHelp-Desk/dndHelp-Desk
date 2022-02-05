@@ -44,6 +44,7 @@
     "mini-css-extract-plugin": "2.4.5",
     "postcss": "^8.4.5",
     "react-icons": "^4.3.1",
+    "react-modern-calendar-datepicker": "^3.1.6",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "tailwindcss": "^3.0.15"

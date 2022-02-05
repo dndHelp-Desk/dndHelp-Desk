@@ -7,6 +7,8 @@ import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
 import SettingsComponent from "./components/Settings/SettingsComponents";
 import MessageThread from "./components/Tickets/MessageThread";
+import SupportHome from "./components/ClientSuppport/SupportHome";
+import NewTicket from "./components/ClientSuppport/NewTicket";
 
 const App = () => {
   return (
@@ -14,6 +16,9 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LogIn />} />
+          <Route exact path="/support" element={<SupportHome />}>
+            <Route path="new-ticket" element={<NewTicket />} />
+          </Route>
           <Route path="/help-desk" element={<MainComponent />}>
             <Route path="tickets" element={<TicketsComponent />} />
             <Route path="reports" element={<ReportsComponent />} />
