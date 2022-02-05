@@ -73,9 +73,9 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-[#b5c3e0] border border-slate-400 min-h-[40rem] mt-[-2rem] px-1 absolute left-[9.5%] 2xl:left-[15%] z-0 2xl:w-[70%] p-2 overflow-hidden rounded-lg max-h-[42rem] w-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
+    <div className="bg-[#b5c3e0] border border-slate-400 min-h-[40rem] mt-[-2rem]  absolute left-[9.5%] 2xl:left-[15%] z-0 2xl:w-[70%] px-1 overflow-hidden rounded-lg max-h-[42rem] w-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
       {/**Navbar or Control Bar  ====================== */}
-      <nav className="h-[3.5rem] sticky top-0  pt-2 flex justify-between items-center w-full overflow-x-hidden p-1">
+      <nav className="h-[3.5rem] sticky top-0 pt-2 flex justify-between items-center w-full overflow-x-hidden p-1">
         {/**Search Bar ============================== */}
         <div className="flex space-x-2 h-full">
           <div className="flex bg-slate-900 rounded-lg h-full items-center justify-center relative">

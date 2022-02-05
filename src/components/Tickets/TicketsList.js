@@ -13,7 +13,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
   const dispatch = useDispatch();
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   let threadId = useSelector((state) => state.Tickets.threadId);
-  
+
   //Filter Message in a thread ============================
   const firstMessages =
     allTickets && allTickets.filter((ticket) => ticket.message_position === 1);
@@ -26,14 +26,15 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
         <div
           key={ticket.id}
           className={`w-full h-[5rem] snap_childTwo rounded-lg bg-slate-900 p-3 space-x-2 overflow-hidden ${
+            ticket.recipient_name &&
             ticket.recipient_name
               .toLowerCase()
               .includes(searchResults.toLowerCase()) === true
               ? "flex"
               : "hidden"
           } ${
-            ticket.status.toLowerCase() === "resolved" ||
-            ticket.status.toLowerCase() === "closed"
+            (ticket.status && ticket.status.toLowerCase() === "resolved") ||
+            (ticket.status && ticket.status.toLowerCase() === "closed")
               ? "opacity-90"
               : ""
           }`}
@@ -53,9 +54,9 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
             />
             <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-lg bg-slate-500 hidden md:flex justify-center items-center">
               <abbr title={ticket.recipient_name}>
-                <h4 className="text-slate-300 font-semibold text-xl">{`${ticket.recipient_name.charAt(
-                  0
-                )}`}</h4>
+                <h4 className="text-slate-300 font-semibold text-xl">{`${
+                  ticket.recipient_name && ticket.recipient_name.charAt(0)
+                }`}</h4>
               </abbr>
             </div>
           </div>
@@ -86,11 +87,14 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
             <div className="w-[10rem] flex items-baseline justify-end">
               <span
                 className={`text-green-600 ${
+                  ticket.priority &&
                   ticket.priority.toLowerCase().trim() === "low"
                     ? "text-green-500"
-                    : ticket.priority.toLowerCase().trim() === "medium"
+                    : ticket.priority &&
+                      ticket.priority.toLowerCase().trim() === "medium"
                     ? "text-blue-600"
-                    : ticket.priority.toLowerCase().trim() === "high"
+                    : ticket.priority &&
+                      ticket.priority.toLowerCase().trim() === "high"
                     ? "text-yellow-500"
                     : "text-red-600"
                 }`}
@@ -102,7 +106,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
                 className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize"
               >
                 <option className="capitalize p-2" value="low">
-                  {ticket.priority} 
+                  {ticket.priority}
                 </option>
                 <option className="capitalize p-2" value="low">
                   Low
