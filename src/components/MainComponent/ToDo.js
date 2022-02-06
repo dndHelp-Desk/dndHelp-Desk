@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import {
-  BsCheck2All,
-  BsFillTrashFill,
-} from "react-icons/bs";
+import { BsCheck2All, BsFillTrashFill } from "react-icons/bs";
 import { useSelector } from "react-redux"; //Firestore ===================
 import {
   getFirestore,
@@ -21,8 +18,8 @@ const ToDo = () => {
   const todoList = useSelector((state) => state.UserInfo.toDo);
   const member_details = useSelector((state) => state.UserInfo.member_details);
   let toDoRef = collection(db, `members/${member_details[0].id}/to-do`);
-  const [selectedDay, setSelectedDay] = useState(null);
-  const [taskName,setTask] = useState("")
+  const [startDate, setStartDate] = useState(null);
+  const [taskName, setTask] = useState("");
 
   //Update to-do List ===========================
   const markToDo = (id, state) => {
@@ -41,14 +38,13 @@ const ToDo = () => {
   //Add Task ==========================
   const addTask = (e) => {
     e.preventDefault();
-   selectedDay && addDoc(toDoRef, {
-     date: new Date(
-        `${selectedDay.month}-${selectedDay.day}-${selectedDay.year}`
-      ).toISOString(),
-      task: taskName,
-      status: "pending",
-    });
-     setTask("");
+    startDate &&
+      addDoc(toDoRef, {
+        date: startDate.toLocaleDateString(),
+        task: taskName,
+        status: "pending",
+      });
+    setTask("");
   };
 
   //Map Through Each Task =============================
@@ -108,30 +104,31 @@ const ToDo = () => {
     <div className="col-span-1 rounded-lg space-y-2">
       <form
         onSubmit={(e) => addTask(e)}
-        className="h-[15%] p-1 px-3 bg-slate-900 w-full rounded-lg flex justify-between items-center space-x-1"
+        className="h-[15%] p-1 px-3 bg-slate-900 w-full rounded-lg grid grid-cols-10 gap-1 place-content-center"
       >
-        <div className="h-11 w-full bg-slate-800 rounded-lg relative overflow-hidden">
+        <div className="h-10 w-full col-span-6 bg-slate-800 rounded-lg relative overflow-hidden">
           <input
             type="text"
             name="search"
             id="search"
             required
             className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent border-slate-700 placeholder:text-sm text-slate-400"
-            placeholder="Add New Task Here ..."
+            placeholder="Type Your Task Here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}
             value={taskName}
           />
         </div>
-        <ToDODatePicker
-          selectedDay={selectedDay}
-          setSelectedDay={setSelectedDay}
-        />
+        <div className="col-span-2 h-10">
+          <abbr title="Pick a date">
+            <ToDODatePicker startDate={startDate} setStartDate={setStartDate} />
+          </abbr>
+        </div>
         <button
           type="submit"
-          className="h-11 w-[10rem] bg-blue-700 rounded-lg flex justify-center items-center outline-none focus:outline-none hover:bg-blue-800 text-slate-300 font-sans font-bold capitalize text-sm transition-all"
+          className="h-10 col-span-2 bg-blue-700 rounded-lg flex justify-center items-center outline-none focus:outline-none hover:bg-blue-800 text-slate-300 font-sans font-bold capitalize text-sm transition-all"
         >
-          Add task
+          Add
         </button>
       </form>
       {/**Task List ===================== */}
