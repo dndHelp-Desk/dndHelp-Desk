@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -38,11 +39,22 @@ let status = { message: "", color: "bg-green-200" };
 
 export function login(email, password) {
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      status = {
-        message: "Logged In Successfully",
-        color: "bg-green-200",
-      };
+    .then((currentUser) => {
+      if (!currentUser.user.emailVerified) {
+        sendEmailVerification(auth.currentUser)
+          .then(() => {
+            status = {
+              message: "Check Your Email To Verify The Account.",
+              color: "bg-green-200",
+            };
+          })
+          .catch((error) => {
+            status = {
+              message: error.message,
+              color: "bg-red-200",
+            };
+          });
+      }
     })
     .catch((error) => {
       status = {

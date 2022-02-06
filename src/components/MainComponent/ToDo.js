@@ -54,7 +54,7 @@ const ToDo = () => {
       return (
         <div
           key={task.id}
-          className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg bg-slate-800 p-2 snap_childTwo"
+          className="h-14 w-full flex items-center justify-between space-x-2 rounded-xl bg-slate-800 p-2 snap_childTwo"
         >
           <button
             onClick={() => markToDo(task.id, task.status ? false : true)}
@@ -101,18 +101,18 @@ const ToDo = () => {
 
   //Component =============================================
   return (
-    <div className="col-span-1 rounded-lg space-y-2">
+    <div className="col-span-1 rounded-xl space-y-2">
       <form
         onSubmit={(e) => addTask(e)}
-        className="h-[15%] p-1 px-3 bg-slate-900 w-full rounded-lg grid grid-cols-10 gap-1 place-content-center"
+        className="h-[15%] p-1 px-3 bg-slate-900 w-full rounded-xl grid grid-cols-10 gap-1 place-content-center"
       >
-        <div className="h-10 w-full col-span-6 bg-slate-800 rounded-lg relative overflow-hidden">
+        <div className="h-10 w-full col-span-6 bg-slate-800 rounded-xl relative overflow-hidden">
           <input
             type="text"
             name="search"
             id="search"
             required
-            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent border-slate-700 placeholder:text-sm text-slate-400"
+            className="w-full h-full rounded-xl outline-none focus:outline-none bg-transparent border-slate-700 placeholder:text-sm text-slate-400"
             placeholder="Type Your Task Here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}
@@ -126,13 +126,13 @@ const ToDo = () => {
         </div>
         <button
           type="submit"
-          className="h-10 col-span-2 bg-blue-700 rounded-lg flex justify-center items-center outline-none focus:outline-none hover:bg-blue-800 text-slate-300 font-sans font-bold capitalize text-sm transition-all"
+          className="h-10 col-span-2 bg-blue-700 rounded-xl flex justify-center items-center outline-none focus:outline-none hover:bg-blue-800 text-slate-300 font-sans font-bold capitalize text-sm transition-all"
         >
           Add
         </button>
       </form>
       {/**Task List ===================== */}
-      <div className="h-[22rem] w-full bg-slate-900 rounded-lg p-4 overflow-hidden">
+      <div className="h-[22rem] w-full bg-slate-900 rounded-xl p-4 overflow-hidden">
         <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
           {tasks}
         </div>

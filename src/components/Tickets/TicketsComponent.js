@@ -17,6 +17,7 @@ const TicketsComponent = () => {
   const [searchResults, setSearchResults] = useState("");
   const [deleteArray, setDelete] = useState([]);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
+  const activeUser = useSelector((state) => state.UserInfo.member_details);
   const [contactsPanel, setPanel] = useState(false);
   const dispatch = useDispatch();
 
@@ -64,7 +65,7 @@ const TicketsComponent = () => {
             assgn(contact.name);
             setPanel(false);
           }}
-          className="bg-slate-400 w-full h-8 text-sm font-semibold text-slate-800 rounded-lg capitalize"
+          className="bg-slate-400 w-full h-8 text-sm font-semibold text-slate-800 rounded-xl capitalize"
         >
           {contact.name}
         </button>
@@ -73,15 +74,15 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-[#b5c3e0] border border-slate-400 min-h-[40rem] mt-[-2rem]  absolute left-[9.5%] 2xl:left-[15%] z-0 2xl:w-[70%] px-1 overflow-hidden rounded-lg max-h-[42rem] w-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
+    <div className="bg-gradient-to-b from-slate-500 to-slate-700 min-h-[40rem] mt-[-2rem]  absolute left-[9.5%] 2xl:left-[15%] z-0 2xl:w-[70%] px-1 overflow-hidden rounded-xl max-h-[42rem] 3xl:min-h-[80%] w-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
       {/**Navbar or Control Bar  ====================== */}
       <nav className="h-[3.5rem] sticky top-0 pt-2 flex justify-between items-center w-full overflow-x-hidden p-1">
         {/**Search Bar ============================== */}
         <div className="flex space-x-2 h-full">
-          <div className="flex bg-slate-900 rounded-lg h-full items-center justify-center relative">
+          <div className="flex bg-slate-900 rounded-xl h-full items-center justify-center relative">
             <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
             <input
-              className="w-11 md:w-[18rem] h-full bg-transparent rounded-lg focus:w-[15rem] md:focus:w-[18rem] focus:px-4 md:focus:px-10 focus:bg-slate-900 md:focus:bg-transparent text-slate-400 text-sm md:px-10 z-[999] placeholder-slate-900 md:placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-500 transition-h duration-300"
+              className="w-11 md:w-[18rem] h-full bg-transparent rounded-xl focus:w-[15rem] md:focus:w-[18rem] focus:px-4 md:focus:px-10 focus:bg-slate-900 md:focus:bg-transparent text-slate-400 text-sm md:px-10 z-[999] placeholder-slate-900 md:placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-600 transition-h duration-300"
               type="search"
               placeholder="Quick Search ..."
               onChange={(e) => setSearchResults(e.target.value)}
@@ -89,7 +90,7 @@ const TicketsComponent = () => {
           </div>
           <button
             onClick={() => deleteSelected()}
-            className={`bg-slate-900 h-full w-10 rounded-lg text-red-600 ${
+            className={`bg-slate-900 h-full w-10 rounded-xl text-red-600 ${
               deleteArray.length >= 1 ? "flex" : "hidden"
             } items-center justify-center text-lg`}
           >
@@ -99,7 +100,7 @@ const TicketsComponent = () => {
           </button>
           <button
             onClick={() => setPanel(true)}
-            className={`bg-slate-900 h-full w-10 rounded-lg text-blue-600 ${
+            className={`bg-slate-900 h-full w-10 rounded-xl text-blue-600 ${
               deleteArray.length >= 1 ? "flex" : "hidden"
             } items-center justify-center text-lg`}
           >
@@ -110,14 +111,14 @@ const TicketsComponent = () => {
         </div>
 
         {/**Date Filter & New Tickect ============================== */}
-        <div className="rounded-lg h-full flex justify-between items-center space-x-2">
+        <div className="rounded-xl h-full flex justify-between items-center space-x-2">
           <button
             onClick={() => setModal(true)}
-            className="bg-slate-900 h-full w-[92px] rounded-lg flex justify-center items-center text-slate-400 text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring focus:ring-slate-500 hover:bg-slate-800 duration-300 transition-bg"
+            className="bg-slate-900 h-full w-[92px] rounded-xl flex justify-center items-center text-slate-400 text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg"
           >
             + New
           </button>
-          <button className="w-10 md:w-[200px] h-full rounded-lg flex justify-center items-center relative bg-slate-900 focus:outline-none outline-none  focus:ring focus:ring-slate-500 hover:bg-slate-800 duration-300 transition-bg text-slate-400 text-sm font-bas">
+          <button className="w-10 md:w-[200px] h-full rounded-xl flex justify-center items-center relative bg-slate-900 focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg text-slate-400 text-sm font-bas">
             <BsFillCalendar2RangeFill className="absolute left-3 text-slate-400" />
             <span className="hidden md:flex">Pick A Date ...</span>
           </button>
@@ -125,22 +126,24 @@ const TicketsComponent = () => {
       </nav>
 
       {/**Agent List to assign ============= */}
-      <div
-        ref={contactRef}
-        className={`h-[15rem] w-[12rem] bg-[#141a697e] backdrop-blur-sm p-2 rounded-lg border border-slate-400 absolute left-[45px] md:left-[280px] z-[9999] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
-          contactsPanel ? "" : "hidden"
-        }`}
-      >
-        <div className="flex sticky top-0 bg-slate-400 rounded-lg h-10 items-center justify-center ">
-          <BsSearch className="absolute left-3 text-slate-800 font-semibold" />
-          <input
-            className="w-full h-10 bg-transparent rounded-lg text-slate-900 text-sm md:px-10 z-[999] placeholder-slate-800 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-700 transition-h duration-300"
-            type="search"
-            placeholder="Search ..."
-          />
+      {activeUser[0].access === "admin" && (
+        <div
+          ref={contactRef}
+          className={`h-[15rem] w-[12rem] bg-[#141a697e] backdrop-blur-sm p-2 rounded-xl border border-slate-400 absolute left-[45px] md:left-[280px] z-[9999] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            contactsPanel ? "" : "hidden"
+          }`}
+        >
+          <div className="flex sticky top-0 bg-slate-400 rounded-xl h-10 items-center justify-center ">
+            <BsSearch className="absolute left-3 text-slate-800 font-semibold" />
+            <input
+              className="w-full h-10 bg-transparent rounded-xl text-slate-900 text-sm md:px-10 z-[999] placeholder-slate-800 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-700 transition-h duration-300"
+              type="search"
+              placeholder="Search ..."
+            />
+          </div>
+          {membersList}
         </div>
-        {membersList}
-      </div>
+      )}
 
       {/**Tickects /Not Expanded=========== */}
       <TicketsList

@@ -11,12 +11,21 @@ import { setThreadId } from "./../../store/TicketsSlice";
 
 const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
   const dispatch = useDispatch();
-  let allTickets = useSelector((state) => state.Tickets.allTickets);
-  let threadId = useSelector((state) => state.Tickets.threadId);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const threadId = useSelector((state) => state.Tickets.threadId);
+  const activeUser = useSelector((state) => state.UserInfo.member_details);
 
   //Filter Message in a thread ============================
   const firstMessages =
-    allTickets && allTickets.filter((ticket) => ticket.message_position === 1);
+    allTickets && activeUser[0].access !== "admin"
+      ? allTickets.filter(
+          (ticket) =>
+            ticket.message_position === 1 &&
+            ticket.agent_email === activeUser[0].email
+        )
+      : allTickets
+      ? allTickets.filter((ticket) => ticket.message_position === 1)
+      : "";
 
   //Loop Through Each Tickects =================
   const tickets =
@@ -25,7 +34,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5rem] snap_childTwo rounded-lg bg-slate-900 p-3 space-x-2 overflow-hidden ${
+          className={`w-full h-[5rem] snap_childTwo rounded-xl bg-slate-900 p-3 space-x-2 overflow-hidden ${
             ticket.recipient_name &&
             ticket.recipient_name
               .toLowerCase()
@@ -52,7 +61,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
                   : setDelete(deleteArray.filter((data) => data !== ticket.id))
               }
             />
-            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-lg bg-slate-500 hidden md:flex justify-center items-center">
+            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl bg-slate-500 hidden md:flex justify-center items-center">
               <abbr title={ticket.recipient_name}>
                 <h4 className="text-slate-300 font-semibold text-xl">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
@@ -155,7 +164,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
     <div className="p-1 space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
       {/**Do DataPlaceholder  ==========================  */}
       {allTickets.length <= 0 && (
-        <div className="bg-slate-900 min-h-[35rem] max-h-[40rem] w-full rounded-lg p-12 flex items-center justify-center">
+        <div className="bg-slate-900 min-h-[35rem] max-h-[40rem] w-full rounded-xl p-12 flex items-center justify-center">
           <div className="h-[15rem] w-[15rem]">
             <img
               src={placeHolderImg}

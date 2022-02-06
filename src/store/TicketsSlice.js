@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-  const initialId = () => {
-    const init = window.localStorage.getItem("threadId");
-    return JSON.parse(init);
-  };
+const initialId = () => {
+  const init = window.localStorage.getItem("threadId");
+  return JSON.parse(init);
+};
 
 const initialState = {
   allTickets: [],
@@ -11,7 +11,18 @@ const initialState = {
   threadId: initialId(),
   contacts: [],
   settings: [],
-  frequentlyAsked:[]
+  filters: {
+    startDate: new Date(
+      new Date().setDate(new Date().getDate() - 30)
+    ).toLocaleDateString(),
+    endDate: new Date().toLocaleDateString(),
+    client: "",
+    status: "",
+    agent: "",
+    category: "",
+  },
+  filteredTickets: [],
+  frequentlyAsked: [],
 };
 
 export const TicketsSlice = createSlice({
@@ -27,15 +38,21 @@ export const TicketsSlice = createSlice({
     loadSettings: (state, action) => {
       state.settings = action.payload;
     },
-    setThreadMessage:(state,action)=>{
-      state.threadMessage = action.payload
+    setThreadMessage: (state, action) => {
+      state.threadMessage = action.payload;
     },
-    setThreadId:(state,action)=>{
-      state.threadId = action.payload
+    setThreadId: (state, action) => {
+      state.threadId = action.payload;
     },
-    loadFrequentlyAsked:(state,action)=>{
-      state.frequentlyAsked = action.payload
-    }
+    loadFrequentlyAsked: (state, action) => {
+      state.frequentlyAsked = action.payload;
+    },
+    filter: (state, action) => {
+      state.filters = action.payload;
+    },
+    updateFilteredTickets: (state, action) => {
+      state.filteredTickets = action.payload;
+    },
   },
 });
 
@@ -46,6 +63,8 @@ export const {
   setThreadMessage,
   setThreadId,
   loadFrequentlyAsked,
+  filter,
+  updateFilteredTickets,
 } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;

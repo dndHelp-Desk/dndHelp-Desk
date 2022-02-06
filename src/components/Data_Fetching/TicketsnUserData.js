@@ -87,7 +87,8 @@ export const addTicket = (
   message,
   state,
   date,
-  ticket_id
+  ticket_id,
+  agent_email
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -95,7 +96,7 @@ export const addTicket = (
     message_position: 1,
     priority: priority,
     agent_name: agent,
-    date: new Date().toISOString(),
+    date: new Date().toLocaleDateString(),
     category: category,
     branch_company: branch_company,
     message: message,
@@ -104,6 +105,7 @@ export const addTicket = (
     status: state,
     due_date: date,
     from: "agent",
+    agent_email: agent_email,
   });
 };
 

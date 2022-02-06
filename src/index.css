@@ -90,8 +90,5 @@
   .snap_childTwo {
     scroll-snap-align: start end;
   }
-  .datepicker{
-    @apply bg-red-200
-  }
 }
 

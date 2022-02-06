@@ -32,20 +32,20 @@ const User = () => {
 
   //React Component =======================
   return (
-    <div className="h-[8rem] z-0 w-full bg-[#4a72df2f] backdrop-blur-lg p-2 pl-[9.5%] 2xl:pl-[15%] pr-[10.5%] 2xl:pr-[15%] flex justify-between  relative">
+    <div className="h-[8rem] z-0 w-full bg-slate-800 backdrop-blur-lg p-2 pl-[9.5%] 2xl:pl-[15%] pr-[10.5%] 2xl:pr-[15%] flex justify-between  relative">
       <div className="flex space-x-2 h-full">
         {/** Profile =================== */}
         <Profile />
 
         {/**User Name & Time ================= */}
         <div className="mt-[.3rem]">
-          <h2 className="text-slate-800 text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+          <h2 className="text-slate-400 text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].name}
           </h2>
-          <h2 className="text-slate-700 border-b border-slate-500 text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+          <h2 className="text-slate-400 border-b border-slate-500 text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].dept}
           </h2>
-          <small className="text-slate-600 text-xs">
+          <small className="text-slate-500 text-xs">
             <FaRegCalendarAlt className="inline" />{" "}
             {`${new Date().toDateString()}`}
           </small>
@@ -53,13 +53,13 @@ const User = () => {
       </div>
 
       {/**Other Settings And Sign Out ================ */}
-      <button className="bg-slate-900 h-11 w-11 flex md:hidden justify-center items-center rounded-lg mt-5 text-xl font-bold text-slate-300 hover:text-slate-400 hover:bg-slate-800 transition-all outline-none focus:outline-none">
+      <button className="bg-slate-400 h-11 w-11 flex md:hidden justify-center items-center rounded-lg mt-5 text-xl font-bold text-slate-900 hover:text-slate-800 hover:bg-slate-500 transition-all outline-none focus:outline-none">
         <BsThreeDotsVertical className="" />
       </button>
       <div className="hidden md:flex space-x-2 relative">
         <button
           onClick={() => setSettingsModal(settings === false ? true : false)}
-          className="px-3 p-1 bg-slate-900 text-slate-400 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-800 transition-bg duration-300"
+          className="px-3 p-1 bg-slate-400 text-slate-900 font-bold text-xl uppercase rounded-lg h-10 mt-5 outline-none focus:outline-none hover:bg-slate-500 transition-bg duration-300"
         >
           <FaUserEdit />
         </button>
@@ -104,7 +104,7 @@ const User = () => {
 
         <button
           onClick={() => signOutUser()}
-          className="px-4 p-1 bg-slate-900 text-slate-400 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] mt-5 outline-none focus:outline-none hover:bg-slate-800 transition-bg duration-300"
+          className="px-4 p-1 bg-slate-400 text-slate-900 font-bold text-sm uppercase rounded-lg h-10 w-[7rem] mt-5 outline-none focus:outline-none hover:bg-slate-500 transition-bg duration-300"
         >
           Sign Out
         </button>

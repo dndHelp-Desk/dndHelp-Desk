@@ -62,6 +62,10 @@ const MessageThread = () => {
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
       .recipient_email;
+  let agentEmail =
+    threadMessage.length >= 1 &&
+    threadMessage.filter((data) => data.message_position === 1)[0]
+      .agent_email;
   let lastMsgPosition = threadMessage[threadMessage.length];
 
 
@@ -72,10 +76,12 @@ const MessageThread = () => {
       return (
         <div
           ref={
-            Number(message.message_position) === Number(lastMsgPosition) ? scrollToLastMessage :scrollToNone
+            Number(message.message_position) === Number(lastMsgPosition)
+              ? scrollToLastMessage
+              : scrollToNone
           }
           key={index}
-          className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex space-x-2"
+          className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-xl flex space-x-2"
         >
           <div
             className={`h-[2.5rem] w-[5%] max-w-[2.5rem] min-w-[2.5rem] flex justify-center items-center rounded-xl uppercase text-2xl text-gray-300 ${
@@ -88,7 +94,7 @@ const MessageThread = () => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full bg-slate-800 p-2 rounded-lg">
+          <div className="w-[95%] 2xl:w-full bg-slate-800 p-2 rounded-xl">
             <div className="font-bold  text-slate-300 justify-between w-full flex">
               <span>{`${
                 message.from === "agent" ? agentName : clientName
@@ -97,17 +103,17 @@ const MessageThread = () => {
                 <span className="text-xs text-slate-400 font-medium">
                   {`${new Date(message.date).toDateString()}`}
                 </span>
-                <BsFillTrashFill onClick={()=>deleteTicket(message.id)} className="inline hover:text-red-500 cursor-pointer"/>
+                <BsFillTrashFill
+                  onClick={() => deleteTicket(message.id)}
+                  className="inline hover:text-red-500 cursor-pointer"
+                />
               </h4>
             </div>
             <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-900 text-slate-500">
               <BsEnvelope className="inline" />
               {""}
               <i>
-                From :{" "}
-                {message.from === "agent"
-                  ? "support@helpdesk.co.za"
-                  : clientEmail}
+                From : {message.from === "agent" ? agentEmail : clientEmail}
               </i>
             </h5>
             <p className="mt-2">{message.message}</p>
@@ -125,7 +131,7 @@ const MessageThread = () => {
 
   //Component ============================
   return (
-    <div className="bg-slate-900 border border-slate-400 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
+    <div className="bg-slate-900 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
       <div className="p-2 max-h-[3.2rem] min-h-[3rem] h-[5%] border-b border-slate-800 w-full">
         <Link
           to="/help-desk/tickets"
@@ -142,9 +148,9 @@ const MessageThread = () => {
       {/**New message =========================== */}
       <form
         onSubmit={(e) => sendReply(e)}
-        className="w-full backdrop-blur-md flex items-center space-x-2 bg-[#03002942] z-[9999] sticky bottom-0 p-2"
+        className="w-full backdrop-blur-md flex items-center space-x-2 rounded-xl bg-[#5850ce2d] z-[9999] sticky bottom-0 p-2"
       >
-        <div className="w-full h-[2.5rem] bg-slate-800 rounded-lg flex space-x-1 justify-between">
+        <div className="w-full h-[2.5rem] bg-slate-800 rounded-xl flex space-x-1 justify-between">
           <textarea
             type="text"
             name="reply"
@@ -159,7 +165,7 @@ const MessageThread = () => {
             }}
             required
             onChange={(e) => setReply({ ...reply, message: e.target.value })}
-            className="bg-transparent w-full text-sm placeholder:text-sm rounded-lg bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
+            className="bg-transparent w-full text-sm placeholder:text-sm rounded-xl bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
             value={reply.message}
           ></textarea>
           {/**Other Btns =========================== */}
@@ -177,7 +183,7 @@ const MessageThread = () => {
         </div>
         <button
           type="submit"
-          className="h-[2.3rem] outline-none focus:outline-none focus:border-0 bg-blue-700 hover:opacity-80 transition-opacity duration-300 rounded-lg flex items-center justify-center text-slate-300 font-bold text-sm px-4"
+          className="h-[2.3rem] outline-none focus:outline-none focus:border-0 bg-blue-700 hover:opacity-80 transition-opacity duration-300 rounded-xl flex items-center justify-center text-slate-300 font-bold text-sm px-4"
         >
           Send
         </button>

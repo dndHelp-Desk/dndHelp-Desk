@@ -33,7 +33,7 @@ const MainComponent = () => {
 
   //Component =================================
   return (
-    <div className="bg-slate-300 w-screen h-screen min-h-[60rem] overflow-hidden relative">
+    <div className="bg-slate-500 w-screen h-screen min-h-[60rem] overflow-hidden relative">
       {/**Data Fetching Components */}
       <TicketsnUserData />
       {/**Alert */}

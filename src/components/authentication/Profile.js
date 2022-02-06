@@ -56,7 +56,7 @@ const Profile = () => {
         <button
           className={`text-xs ${
             showChange ? "" : "hidden"
-          } font-bold text-xs tracking-wide top-[1.7rem] left-[-3rem] w-18 rotate-[-90deg] absolute bg-slate-800 p-1 px-3 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
+          } font-bold text-xs tracking-wide top-[1.7rem] left-[-3rem] w-18 rotate-[-90deg] absolute bg-slate-500 p-1 px-3 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
           type="submit"
         >
           Upload
@@ -65,7 +65,7 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-20 w-20 border-[3px] border-slate-800 rounded-xl flex justify-center items-center cursor-pointer p-[2px]"
+            className="h-20 w-20 border-[3px] border-slate-400 rounded-xl flex justify-center items-center cursor-pointer p-[2px]"
           >
             <img
               className="rounded-lg bg-slate-500 h-full w-full object-cover object-center"

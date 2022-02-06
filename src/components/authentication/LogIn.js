@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   getAuth,
   onAuthStateChanged,
-  sendEmailVerification,
 } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +9,6 @@ import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
 import Background from "./images/welcome.svg";
 import { login } from "../Data_Fetching/Firebase";
 import { isAuthenticated } from "../../store/UserSlice";
-import { updateAlert } from "./../../store/NotificationsSlice";
 
 //Initialize Services ======
 const auth = getAuth();
@@ -25,7 +23,6 @@ const LogIn = () => {
   });
 
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
-  const logged = useSelector((state) => state.UserInfo.authenticated);
   const user = auth.currentUser;
 
   //Log in User =====================
@@ -39,20 +36,6 @@ const LogIn = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(isAuthenticated(true));
-        if (logged === true && user.emailVerified === false) {
-          sendEmailVerification(auth.currentUser)
-            .then(() => {
-              dispatch(
-                updateAlert({
-                  message: "Logged In Successfully",
-                  color: "bg-green-200",
-                })
-              );
-            })
-            .catch((error) => {
-              console.log("Email verification error", error);
-            });
-        }
         //Rederect User If logged ==============
         routeLocation === "Dial n Dine Help-Desk"
           ? navigate("/help-desk")
@@ -61,7 +44,7 @@ const LogIn = () => {
         dispatch(isAuthenticated(false));
       }
     });
-  }, [user, dispatch, navigate, routeLocation, logged]);
+  }, [user, dispatch, navigate, routeLocation]);
 
   //React Component =====================================================================================
   return (

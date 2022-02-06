@@ -27,6 +27,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     state: "",
     date: "",
     ticket_id: "",
+    agent_email: member_details.length !== undefined && member_details[0].email,
   });
 
   const contactsList =
@@ -70,7 +71,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       inputValue.message,
       inputValue.state,
       inputValue.date,
-      inputValue.ticket_id
+      inputValue.ticket_id,
+      inputValue.agent_email
     );
     fetch(sendMailAPI, {
       method: "POST",
