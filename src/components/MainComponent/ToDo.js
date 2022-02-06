@@ -76,7 +76,7 @@ const ToDo = () => {
           </button>
           <div className="h-full overflow-hidden">
             <p className="text-slate-400 w-[5rem] md:w-[10rem] lg:w-[7rem] 2xl:w-[10rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
-              <abbr title="Finish Document Review">{task.task}</abbr>
+              <abbr title={task.task}>{task.task}</abbr>
             </p>
             <small className="text-slate-500 text-xs font-semibold">
               {`${new Date(task.date).toDateString()}`}
