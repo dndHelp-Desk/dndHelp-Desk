@@ -95,7 +95,7 @@ const Main = () => {
               </p>
             </div>
             <div className="row-span-1 flex items-center space-x-1">
-              <button className="bg-slate-800 rounded-xl text-slate-400 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 ring-slate-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
+              <button className="bg-slate-800 rounded-lg text-slate-400 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 ring-slate-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
                 Manage Contacts
               </button>
             </div>
@@ -204,7 +204,7 @@ const Main = () => {
                 Here are the eight key trends every company will have to tackle
                 in order to succeed.
               </p>
-              <button className="bg-blue-700 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 ring-blue-800 hover:opacity-90 transition-all  text-sm text-slate-300 font-semibold px-4 py-2 rounded-xl">
+              <button className="bg-blue-700 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 ring-blue-800 hover:opacity-90 transition-all  text-sm text-slate-300 font-semibold px-4 py-2 rounded-lg">
                 Read more <BsArrowRightShort className="inline text-lg" />
               </button>
             </div>
