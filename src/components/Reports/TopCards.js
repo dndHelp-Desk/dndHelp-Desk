@@ -115,20 +115,20 @@ const TopCards = () => {
           <h3>Labels</h3>
           <BsThreeDotsVertical className="text-lg cursor-pointer" />
         </div>
-        <div className="w-full flex flex-wrap gap-2 p-1 font-medium text-blue-600 font-sans">
-          <div className="border border-blue-600 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
+        <div className="w-full flex flex-wrap gap-2 p-1 font-medium text-blue-700 font-sans">
+          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
             Resolve
           </div>
-          <div className="border border-blue-600 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
+          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
             Closed
           </div>
-          <div className="text-slate-300 bg-blue-600 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
+          <div className="text-slate-300 bg-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
             Open
           </div>
-          <div className="border border-blue-600 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
+          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
             Pending
           </div>
-          <div className="border border-blue-600 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
+          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
             Urgent
           </div>
         </div>
