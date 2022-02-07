@@ -110,7 +110,7 @@ const MainComponent = () => {
       </div>
 
       {/**NavBar ============== */}
-      <nav className="sticky  pl-[9.5%] 2xl:pl-[15%] pr-[10.5%] 2xl:pr-[15%]  top-0 h-[4rem] w-full bg-slate-900 backdrop-blur-lg p-2 flex justify-between items-center">
+      <nav className="pl-[9.5%] 2xl:pl-[15%] pr-[10.5%] 2xl:pr-[15%]  top-0 h-[4rem] w-full bg-slate-900 backdrop-blur-lg p-2 flex justify-between items-center">
         {/**Logo ==================== */}
         <svg
           className="stroke-slate-400 text-[1.5rem] font-sans fill-transparent"
