@@ -66,14 +66,15 @@ const Filters = () => {
   //Component ==============================
   return (
     <>
-      <div className="col-span-1">
-        <BsCalendar2Week className="text-slate-500 absolute h-10 left-6 z-[999]" />
+      <div className="col-span-1 min-w-[15rem] lg:min-w-0 flex items-center relative">
+        <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
         <DateFilter />
       </div>
-      <div className="col-span-1 rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsSearch className="text-slate-500 absolute h-10 left-3" />
         <input
           type="search"
+          autoComplete="off"
           name="category"
           id="category"
           onChange={(e) =>
@@ -83,10 +84,11 @@ const Filters = () => {
           placeholder="Category ..."
         />
       </div>
-      <div className="col-span-1 rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
+          autoComplete="off"
           name="agent"
           id="agent"
           onChange={(e) =>
@@ -96,10 +98,11 @@ const Filters = () => {
           placeholder="Agent Name ..."
         />
       </div>
-      <div className="col-span-1 rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
+          autoComplete="off"
           name="client"
           id="client"
           onChange={(e) =>
@@ -109,10 +112,11 @@ const Filters = () => {
           placeholder="Company / Brand ..."
         />
       </div>
-      <div className="col-span-1 rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsReceiptCutoff className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
+          autoComplete="off"
           name="status"
           id="status"
           onChange={(e) =>

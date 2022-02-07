@@ -148,7 +148,7 @@ const MessageThread = () => {
       {/**New message =========================== */}
       <form
         onSubmit={(e) => sendReply(e)}
-        className="w-full backdrop-blur-md flex items-center space-x-2 rounded-xl bg-[#5850ce2d] z-[9999] sticky bottom-0 p-2"
+        className="w-full backdrop-blur-md flex items-center space-x-2 rounded-xl z-[9999] sticky bottom-0 p-2"
       >
         <div className="w-full h-[2.5rem] bg-slate-800 rounded-xl flex space-x-1 justify-between">
           <textarea

@@ -5,6 +5,7 @@ import { BsBell, BsGearFill, BsChatSquareText, BsTextRight } from "react-icons/b
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation } from "../../store/UserSlice";
+import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import User from "./User";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
@@ -17,6 +18,12 @@ const MainComponent = () => {
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const location = useLocation();
   const dispatch = useDispatch();
+
+  //Small Screen Mene ===================
+  const [showMenu, setShowMenu] = useState(false);
+  const menuModalRef = useOnClickOutside(() => {
+    setShowMenu(false);
+  });
 
   useEffect(() => {
     window.localStorage.setItem("locationPath", routeLocation);
@@ -40,8 +47,9 @@ const MainComponent = () => {
       <Alert />
       {/**Small Screens Menu ====================== */}
       <div
-        className={`flex lg:hidden absolute top-12 right-[30%] w-[8rem] z-[100] shadow-2xl rounded-lg bg-slate-800 ${
-          menu ? "h-[10rem]" : "h-0 opacity-0"
+        ref={menuModalRef}
+        className={`flex lg:hidden absolute top-12 right-[30%] w-[8rem] z-[100] shadow-2xl rounded-lg backdrop-blur-lg border border-slate-400 ${
+          showMenu ? "h-[10rem]" : "h-0 opacity-0"
         } transition-scale duration-300 flex flex-col text-slate-400 space-y-2 p-4 justify-center overflow-hidden`}
       >
         <NavLink
@@ -177,7 +185,7 @@ const MainComponent = () => {
         <div className="flex space-x-2">
           {/**Small Screen Menu Btn ================ */}
           <button
-            onClick={() => setMenu(menu === false ? true : false)}
+            onClick={() => setShowMenu(showMenu === false ? true : false)}
             className="text-slate-400 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl hover:bg-slate-700 items-center justify-center flex"
           >
             <BsTextRight className="text-2xl text-slate-400 lg:hidden flex cursor-pointer" />
