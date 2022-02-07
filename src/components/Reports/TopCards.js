@@ -63,14 +63,14 @@ const TopCards = () => {
       <div
         style={{ backgroundImage: `url(${cardsBg})` }}
         key={data.id}
-        className="bg-slate-900 h-full cols-span-1 rounded-xl
+        className="bg-slate-900 h-[10rem]  cols-span-1 rounded-xl
 		 p-4 grid-rows-3 bg-no-repeat bg-bottom"
       >
         <div className="flex justify-between items-center">
           <h2 className="text-slate-400 font-semibold font-sans text-base capitalize">
             {data.name}
           </h2>
-          <div className="h-10 w-10 rounded-full flex items-center justify-center font-bold text-lg text-slate-300 bg-blue-700 custom-shadow">
+          <div className="h-10 w-10 rounded-xl flex items-center justify-center font-bold text-lg text-slate-300 bg-blue-700 custom-shadow">
             {data.name === "open" && <BsEnvelopeOpen />}
             {data.name === "pending" && <BsArrowRepeat />}
             {data.name === "closed" && <BsDashSquare />}
@@ -108,12 +108,9 @@ const TopCards = () => {
 
   //Component ==================================
   return (
-    <div
-      className="w-full rounded-xl
-	 h-[20rem] md:h-[10rem] grid grid-cols-2 md:grid-cols-4 3xl:grid-cols-5 gap-4 overflow-hidden"
-    >
+    <div className="w-full rounded-xl grid grid-cols-2 md:grid-cols-4 3xl:grid-cols-5 gap-4 overflow-hidden">
       {cards}
-      <div className="bg-slate-900 h-full cols-span-1 rounded-xl hidden 3xl:flex flex-col justify-center space-y-4 p-5">
+      <div className="bg-slate-900 h-[10rem]  cols-span-1 rounded-xl hidden 3xl:flex flex-col justify-center space-y-4 p-5">
         <div className="w-full flex justify-between p-1 text-sm font-bold text-slate-500 font-sans">
           <h3>Labels</h3>
           <BsThreeDotsVertical className="text-lg cursor-pointer" />
