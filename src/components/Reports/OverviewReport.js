@@ -3,7 +3,7 @@ import ReactECharts from "echarts-for-react";
 
 const OverviewReport = () => {
   return (
-    <div className="col-span-3 bg-slate-900 rounded-xl overflow-hidden">
+    <div className="col-span-3 min-h-[20rem] bg-slate-900 rounded-xl overflow-hidden">
       <div className="h-full w-full p-4 pt-6 grid grid-rows-6 overflow-hidden">
         <div className="row-span-2">
           <h2 className="text-base text-slate-400 font-semibold tracking-normal">

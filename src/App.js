@@ -12,7 +12,7 @@ import NewTicket from "./components/ClientSuppport/NewTicket";
 
 const App = () => {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden pb-6 bg-slate-500">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LogIn />} />
