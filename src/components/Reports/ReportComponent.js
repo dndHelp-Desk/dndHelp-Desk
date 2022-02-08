@@ -17,7 +17,7 @@ const ReportsComponent = () => {
       {/**Filters or TopNav ================= */}
       <button
         onClick={() => setShowFilters(true)}
-        className="h-12 w-full outline-none focus:outline-none bg-slate-900 rounded-xl flex lg:hidden justify-center items-center overflow-hidden"
+        className="h-12 w-full outline-none focus:outline-none bg-slate-900 rounded-xl flex lg:hidden justify-center items-center"
       >
         <h5 className="uppercase font-bold text-base font-sans text-slate-500 tracking-wide">
           click here to select filters ...
@@ -32,7 +32,7 @@ const ReportsComponent = () => {
         </div>
       </button>
       {/**Larger BreakPoint ============ */}
-      <nav className="h-12 w-full bg-slate-900 rounded-xl hidden lg:grid grid-cols-5 p-1 gap-4 overflow-hidden">
+      <nav className="h-12 w-full bg-slate-900 rounded-xl hidden lg:grid grid-cols-5 p-1 gap-4">
         <Filters />
       </nav>
       {/**End Of Filters or TopNav ================= */}

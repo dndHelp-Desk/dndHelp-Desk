@@ -23,35 +23,49 @@ const Filters = () => {
     firstMessages.length >= 1 &&
       dispatch(
         updateFilteredTickets(
-          (firstMessages.filter(
-            (ticket) =>
-              ticket.status
-                .toLowerCase()
-                .replace(/\s/g, "")
-                .includes(filters.status.toLowerCase().replace(/\s/g, "")) &&
-              ticket.category
-                .toLowerCase()
-                .replace(/\s/g, "")
-                .includes(filters.category.toLowerCase().replace(/\s/g, "")) &&
-              ticket.agent_name
-                .toLowerCase()
-                .replace(/\s/g, "")
-                .includes(filters.agent.toLowerCase().replace(/\s/g, "")) &&
-              ticket.branch_company
-                .toLowerCase()
-                .replace(/\s/g, "")
-                .includes(filters.client.toLowerCase().replace(/\s/g, "")) &&
-              new Date( new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)).toISOString() >=
+          firstMessages
+            .filter(
+              (ticket) =>
+                ticket.status
+                  .toLowerCase()
+                  .replace(/\s/g, "")
+                  .includes(filters.status.toLowerCase().replace(/\s/g, "")) &&
+                ticket.category
+                  .toLowerCase()
+                  .replace(/\s/g, "")
+                  .includes(
+                    filters.category.toLowerCase().replace(/\s/g, "")
+                  ) &&
+                ticket.agent_name
+                  .toLowerCase()
+                  .replace(/\s/g, "")
+                  .includes(filters.agent.toLowerCase().replace(/\s/g, "")) &&
+                ticket.branch_company
+                  .toLowerCase()
+                  .replace(/\s/g, "")
+                  .includes(filters.client.toLowerCase().replace(/\s/g, "")) &&
                 new Date(
-                  filters.startDate !== null && filters.startDate
-                ).toISOString() &&
-              new Date( new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)).toISOString() <=
+                  new Date(ticket.date).setDate(
+                    new Date(ticket.date).getDate() - 1
+                  )
+                ).toISOString() >=
+                  new Date(
+                    filters.startDate !== null && filters.startDate
+                  ).toISOString() &&
                 new Date(
-                  filters.endDate !== null && filters.endDate
-                ).toISOString()
-          )).sort((a,b)=>{
-            return a.date > b.date
-          })
+                  new Date(ticket.date).setDate(
+                    new Date(ticket.date).getDate() - 1
+                  )
+                ).toISOString() <=
+                  new Date(
+                    filters.endDate !== null && filters.endDate
+                  ).toISOString()
+            )
+            .sort((a, b) => {
+              return (
+                Number(a.ticket_id.charAt(1)) - Number(b.ticket_id.charAt(1))
+              );
+            })
         )
       );
   }, [
@@ -68,11 +82,11 @@ const Filters = () => {
   //Component ==============================
   return (
     <>
-      <div className="col-span-1 min-w-[15rem] lg:min-w-0 flex items-center relative">
+      <div className="col-span-1 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
         <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
         <DateFilter />
       </div>
-      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsSearch className="text-slate-500 absolute h-10 left-3" />
         <input
           type="search"
@@ -86,7 +100,7 @@ const Filters = () => {
           placeholder="Category ..."
         />
       </div>
-      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -100,7 +114,7 @@ const Filters = () => {
           placeholder="Agent Name ..."
         />
       </div>
-      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -114,7 +128,7 @@ const Filters = () => {
           placeholder="Company / Brand ..."
         />
       </div>
-      <div className="col-span-1 bg-slate-900 min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsReceiptCutoff className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"

@@ -9,6 +9,7 @@ import {
 import { setThreadMessage } from "../../store/TicketsSlice";
 import { addReply, deleteTicket } from "../Data_Fetching/TicketsnUserData";
 import { Link } from "react-router-dom";
+import { updateAlert } from "../../store/NotificationsSlice";
 
 const MessageThread = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -88,7 +89,7 @@ const MessageThread = () => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full bg-slate-800 p-4 space-y-2 rounded-xl">
+          <div className="w-[95%] 2xl:w-full bg-slate-900 p-4 space-y-2 rounded-xl">
             <div className="font-bold  text-slate-300 justify-between w-full flex flex-col md:flex-row">
               <span>{`${
                 message.from === "agent" ? agentName : clientName
@@ -116,7 +117,7 @@ const MessageThread = () => {
                 />
               </h4>
             </div>
-            <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-900 text-slate-500">
+            <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-800 text-slate-500">
               <BsEnvelope className="inline" />
               {""}
               <i>
@@ -129,20 +130,45 @@ const MessageThread = () => {
       );
     });
 
+  //Link Google Appscript API for sendind Emails To new Tickect ================
+  const sendMailAPI =
+    "https://script.google.com/macros/s/AKfycbzkiHwJbA0lXnz40HZ7mls-oNMUJdMjMbvyNTMlx513iXSADnSkLlaYfL1TUV0WPBOS3w/exec?action=addData";
+
   //Send Reply Function ============================
   const sendReply = (e) => {
     e.preventDefault();
     addReply(reply.message, reply.message_position, reply.ticket_id);
     setReply({ ...reply, message: "" });
+    //Send Email =============
+    fetch(sendMailAPI, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: clientName,
+        email: clientEmail,
+        message:
+          "You have a new response from Dial & Dine regarding your ticket.",
+        ticket_id: threadId,
+      }),
+    });
+    dispatch(
+      updateAlert({
+        message: "Response Has Been Sent.",
+        color: "bg-green-200",
+      })
+    );
   };
 
   //Component ============================
   return (
-    <div className="bg-slate-900 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
-      <div className="p-2 max-h-[3.2rem] min-h-[3rem] h-[5%] border-b border-slate-800 w-full">
+    <div className="to-slate-900 from-slate-500 bg-gradient-to-b mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
+      <div className="p-2 max-h-[3.2rem] min-h-[3rem] h-[5%] border-b border-slate-600 w-full">
         <Link
           to="/help-desk/tickets"
-          className="text-slate-400 px-4 py-1 h-full w-full text-xl hover:opacity-80 rounded-md space-y-1 flext items-center space-x-1"
+          className="text-slate-900 font-bold px-4 py-1 h-full w-full text-xl hover:opacity-80 rounded-md space-y-1 flext items-center space-x-1"
         >
           <BsArrowLeft className="inline" />
           <span className="text-sm">Back</span>
@@ -157,7 +183,7 @@ const MessageThread = () => {
         onSubmit={(e) => sendReply(e)}
         className="w-full backdrop-blur-md flex items-center space-x-2 rounded-xl z-[9999] sticky bottom-0 p-2"
       >
-        <div className="w-full h-[2.5rem] bg-slate-800 rounded-xl flex space-x-1 justify-between">
+        <div className="w-full h-[2.5rem] bg-slate-800 border border-slate-500 rounded-xl flex space-x-1 justify-between">
           <textarea
             type="text"
             name="reply"

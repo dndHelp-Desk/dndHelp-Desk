@@ -68,7 +68,7 @@ export const changeStatus = (id, state) => {
 //Add Reply or Send Reply ============
 export const addReply = (message, message_position, ticket_id) => {
   addDoc(ticketsRef, {
-    date: new Date().toISOString(),
+    date: new Date().toLocaleDateString(),
     from: "agent",
     message: message,
     message_position: message_position,
@@ -104,7 +104,7 @@ export const addTicket = (
     time: `${new Date().getHours() + 1}:${new Date().getMinutes() + 1}`,
     ticket_id: ticket_id,
     status: state,
-    due_date: date,
+    due_date: new Date(date).toLocaleDateString(),
     from: "agent",
     agent_email: agent_email,
   });

@@ -12,6 +12,11 @@ import { useSelector } from "react-redux";
 
 const TopCards = () => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const filters = useSelector((state) => state.Tickets.filters);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const firstMessages =
+    allTickets.length >= 1 &&
+    allTickets.filter((ticket) => ticket.message_position === 1);
 
   //Cards Data ==============
   const cardsData = [
@@ -24,6 +29,21 @@ const TopCards = () => {
               (data) => data.status.toLowerCase() === "resolved"
             ).length
           : 0,
+      compare:
+        firstMessages.length >= 1
+          ? firstMessages.filter(
+              (data) =>
+                data.status.toLowerCase() === "resolved" &&
+                new Date(data.date).toISOString() >=
+                  new Date(filters.startDate).toISOString() &&
+                new Date(
+                  filters.startDate !== null && data.date
+                ).toISOString() >=
+                  new Date(
+                    filters.endDate !== null && filters.endDate
+                  ).toISOString()
+            ).length
+          : 0,
     },
     {
       name: "closed",
@@ -32,6 +52,21 @@ const TopCards = () => {
         filteredTickets.length >= 1
           ? filteredTickets.filter(
               (data) => data.status.toLowerCase() === "closed"
+            ).length
+          : 0,
+      compare:
+        firstMessages.length >= 1
+          ? firstMessages.filter(
+              (data) =>
+                data.status.toLowerCase() === "closed" &&
+                new Date(data.date).toISOString() >=
+                  new Date(filters.startDate).toISOString() &&
+                new Date(
+                  filters.startDate !== null && data.date
+                ).toISOString() >=
+                  new Date(
+                    filters.endDate !== null && filters.endDate
+                  ).toISOString()
             ).length
           : 0,
     },
@@ -44,6 +79,21 @@ const TopCards = () => {
               (data) => data.status.toLowerCase() === "open"
             ).length
           : 0,
+      compare:
+        firstMessages.length >= 1
+          ? firstMessages.filter(
+              (data) =>
+                data.status.toLowerCase() === "open" &&
+                new Date(data.date).toISOString() >=
+                  new Date(filters.startDate).toISOString() &&
+                new Date(
+                  filters.startDate !== null && data.date
+                ).toISOString() >=
+                  new Date(
+                    filters.endDate !== null && filters.endDate
+                  ).toISOString()
+            ).length
+          : 0,
     },
     {
       name: "pending",
@@ -52,6 +102,21 @@ const TopCards = () => {
         filteredTickets.length >= 1
           ? filteredTickets.filter(
               (data) => data.status.toLowerCase() === "pending"
+            ).length
+          : 0,
+      compare:
+        firstMessages.length >= 1
+          ? firstMessages.filter(
+              (data) =>
+                data.status.toLowerCase() === "pending" &&
+                new Date(data.date).toISOString() >=
+                  new Date(filters.startDate).toISOString() &&
+                new Date(
+                  filters.startDate !== null && data.date
+                ).toISOString() >=
+                  new Date(
+                    filters.endDate !== null && filters.endDate
+                  ).toISOString()
             ).length
           : 0,
     },
@@ -85,18 +150,44 @@ const TopCards = () => {
         <div className="flex justify-start items-center overflow-hidden">
           <h5
             className={`${
-              data.count > 0 ? "text-green-600" : "text-red-600"
+              data.count - data.compare >= 0 ? "text-green-600" : "text-red-600"
             } flex space-x-1 items-center font-bold font-sans text-sm`}
           >
-            {data.count > 0 && (
+            {data.count - data.compare >= 0 && (
               <>
-                <span>6.57%</span> <HiTrendingUp />
+                <span>
+                  {((data.count - data.compare / data.count) * 100).toFixed(
+                    1
+                  ) === "NaN" ||
+                  ((data.count - data.compare / data.count) * 100).toFixed(
+                    1
+                  ) === "-Infinity"
+                    ? 0
+                    : ((data.count - data.compare / data.count) * 100).toFixed(
+                        1
+                      )}
+                  %
+                </span>{" "}
+                <HiTrendingUp />
                 <small>Increase</small>
               </>
             )}
-            {data.count <= 0 && (
+            {data.count - data.compare < 0 && (
               <>
-                <span>2.98%</span> <HiTrendingDown />
+                <span>
+                  {((data.count - data.compare / data.count) * 100).toFixed(
+                    1
+                  ) === "NaN" ||
+                  ((data.count - data.compare / data.count) * 100).toFixed(
+                    1
+                  ) === "-Infinity"
+                    ? 0
+                    : ((data.count - data.compare / data.count) * 100).toFixed(
+                        1
+                      )}
+                  %
+                </span>{" "}
+                <HiTrendingDown />
                 <small>Decrease</small>
               </>
             )}

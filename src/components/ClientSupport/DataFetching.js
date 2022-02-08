@@ -22,7 +22,7 @@ let frequentlyAskedRef = collection(
 //Add Reply or Send Reply ============
 export const addClientReply = (message, message_position, ticket_id) => {
   addDoc(ticketsRef, {
-    date: new Date().toISOString(),
+    date: new Date().toLocaleDateString(),
     from: "client",
     message: message,
     message_position: message_position,

@@ -5,8 +5,45 @@ import {
   BsEmojiFrownFill,
 } from "react-icons/bs";
 import CategoryPies from "./CategoryPies";
+import { useSelector } from "react-redux";
 
 const AdditionalStats = () => {
+  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const settings = useSelector((state) => state.Tickets.settings);
+  const categories = settings.length >= 1 && settings[0].categories;
+  const dataArray = []
+   categories.length >= 1 && categories.forEach(element => {
+    dataArray.push({
+      name: element,
+      value:
+        (((filteredTickets.length >= 1 &&
+          filteredTickets.filter(
+            (ticket) => ticket.category.toLowerCase() === element.toLowerCase()
+          ).length) / filteredTickets.length) * 100).toFixed(1),
+    });
+  });
+
+  dataArray.sort((a,b)=>{
+    return parseFloat(a.value) > parseFloat(b.value)
+  })
+
+  const topThree = dataArray.length >= 3 ? dataArray.slice(0,3): dataArray 
+  const category = topThree.length >= 1 && topThree.map((element,index)=>{
+    return (
+      <div
+        key={index}
+        className="col-span-1 flex flex-col space-y-1 overflow-hidden items-center justify-center"
+      >
+        <CategoryPies data={element.value} />
+        <h3 className="text-slate-400 text-base font-bold">{Number(element.value)?parseFloat(element.value):"0.00"}%</h3>
+        <h3 className="text-slate-500 text-xs font-semibold">
+          {element.name}
+        </h3>
+      </div>
+    );
+  })
+
+  //Component ==========================================
   return (
     <div className="col-span-3 lg:col-span-2 rounded-xl grid grid-rows-2 gap-4">
       <div className="row-span-1 bg-slate-900 rounded-xl space-y-2 p-4 pt-6">
@@ -14,23 +51,7 @@ const AdditionalStats = () => {
           Top 3 Categories
         </h2>
         <div className="grid grid-cols-3 gap-1 xl:gap-3 px-1 xl:px-4">
-          <div className="col-span-1 flex flex-col space-y-1 overflow-hidden items-center justify-center">
-            <CategoryPies data={23} />
-            <h3 className="text-slate-400 text-base font-bold">23</h3>
-            <h3 className="text-slate-500 text-xs font-semibold">
-              Late Deliveries
-            </h3>
-          </div>
-          <div className="col-span-1 flex flex-col space-y-1 overflow-hidden items-center justify-center">
-            <CategoryPies data={43} />
-            <h3 className="text-slate-400 text-base font-bold">40</h3>
-            <h3 className="text-slate-500 text-xs font-semibold">Offiline</h3>
-          </div>
-          <div className="col-span-1 flex flex-col space-y-1 overflow-hidden items-center justify-center">
-            <CategoryPies data={53} />
-            <h3 className="text-slate-400 text-base font-bold">53</h3>
-            <h3 className="text-slate-500 text-xs font-semibold">Complaints</h3>
-          </div>
+          {category}
         </div>
       </div>
       <div className="row-span-1 bg-slate-900 rounded-xl space-y-2 p-4 pt-6 overflow-hidden">

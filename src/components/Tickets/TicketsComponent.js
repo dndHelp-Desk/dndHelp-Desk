@@ -125,7 +125,7 @@ const TicketsComponent = () => {
           ref={filtersModalRef}
           className={`fixed ${
             filtersModal ? "" : "hidden"
-          } bg-[#33415563] right-[11%] 2xl:right-[15%] top-[13.5rem] z-[999] w-[20rem] h-[15rem] rounded-lg backdrop-blur-md border-2 border-slate-400 flex flex-col items-center justify-center space-y-2 p-4`}
+          } bg-[#33415563] right-[11%] 2xl:right-[15%] top-[13.5rem] z-[999] w-[18rem] h-[15rem] rounded-lg backdrop-blur-md border-2 border-slate-400 flex flex-col items-center justify-center space-y-2 p-4`}
         >
           <Filters />
         </div>

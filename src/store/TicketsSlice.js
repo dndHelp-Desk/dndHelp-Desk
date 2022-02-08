@@ -13,9 +13,15 @@ const initialState = {
   settings: [],
   filters: {
     startDate: new Date(
-      new Date().setDate(new Date().getDate() - 30)
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      1
     ).toLocaleDateString(),
-    endDate: new Date().toLocaleDateString(),
+    endDate: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      30
+    ).toLocaleDateString(),
     client: "",
     status: "",
     agent: "",
