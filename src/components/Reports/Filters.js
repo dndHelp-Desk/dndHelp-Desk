@@ -23,7 +23,7 @@ const Filters = () => {
     firstMessages.length >= 1 &&
       dispatch(
         updateFilteredTickets(
-          firstMessages.filter(
+          (firstMessages.filter(
             (ticket) =>
               ticket.status
                 .toLowerCase()
@@ -49,7 +49,9 @@ const Filters = () => {
                 new Date(
                   filters.endDate !== null && filters.endDate
                 ).toISOString()
-          )
+          )).sort((a,b)=>{
+            return a.date > b.date
+          })
         )
       );
   }, [

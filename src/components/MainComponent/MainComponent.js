@@ -13,7 +13,6 @@ import Alert from "../Others/Alert";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 
 const MainComponent = () => {
-  const [menu, setMenu] = useState(false);
   const logged = useSelector((state) => state.UserInfo.authenticated);
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const location = useLocation();
@@ -45,78 +44,6 @@ const MainComponent = () => {
       <TicketsnUserData />
       {/**Alert */}
       <Alert />
-      {/**Small Screens Menu ====================== */}
-      <div
-        ref={menuModalRef}
-        className={`flex lg:hidden absolute top-12 right-[30%] w-[8rem] z-[100] shadow-2xl rounded-lg backdrop-blur-lg border border-slate-400 ${
-          showMenu ? "h-[10rem]" : "h-0 opacity-0"
-        } transition-scale duration-300 flex flex-col text-slate-400 space-y-2 p-4 justify-center overflow-hidden`}
-      >
-        <NavLink
-          to="/help-desk"
-          className={`TabsLinks ${
-            location.pathname === "/help-desk" ? "navlinks" : ""
-          }`}
-        >
-          <FaHeadset
-            className="inline-block
-			  "
-          />
-          <span>Home</span>
-        </NavLink>
-        <NavLink
-          to="/help-desk/tickets"
-          end={true}
-          className={`TabsLinks ${
-            location.pathname === "/help-desk/tickets" ? "navlinks" : ""
-          }`}
-        >
-          <FaReceipt
-            className="inline-block
-			  "
-          />
-          <span>Tickets</span>
-        </NavLink>
-        <NavLink
-          to="/help-desk/reports"
-          className={`TabsLinks ${
-            location.pathname === "/help-desk/reports" ? "navlinks" : ""
-          }`}
-        >
-          <FaChartBar
-            className="inline-block
-			  "
-          />
-          <span>Reports</span>
-        </NavLink>
-        <NavLink
-          to="/help-desk/contacts"
-          end={true}
-          className={`TabsLinks ${
-            location.pathname === "/help-desk/contacts" ? "navlinks" : ""
-          }`}
-        >
-          <FaUserTie
-            className="inline-block
-			  "
-          />
-          <span>Contacts</span>
-        </NavLink>
-        <NavLink
-          to="/help-desk/settings"
-          end={true}
-          className={`TabsLinks ${
-            location.pathname === "/help-desk/settings" ? "navlinks" : ""
-          }`}
-        >
-          <BsGearFill
-            className="inline-block
-			  "
-          />
-          <span>Settings</span>
-        </NavLink>
-      </div>
-
       {/**NavBar ============== */}
       <nav className="pl-[9.5%] 2xl:pl-[15%] pr-[10.5%] 2xl:pr-[15%]  top-0 h-[4rem] w-full bg-slate-900 backdrop-blur-lg p-2 flex justify-between items-center">
         {/**Logo ==================== */}
@@ -217,6 +144,79 @@ const MainComponent = () => {
           </div>
         </div>
       </nav>
+
+      {/**Small Screens Menu ====================== */}
+      <div
+        ref={menuModalRef}
+        className={`flex lg:hidden absolute top-12 right-[26%] w-[8rem] z-[100] shadow-2xl rounded-lg backdrop-blur-lg border border-slate-400 ${
+          showMenu ? "h-[10rem]" : "h-0 opacity-0"
+        } transition-scale duration-300 flex flex-col text-slate-400 space-y-2 p-4 justify-center overflow-hidden`}
+      >
+        <NavLink
+          to="/help-desk"
+          className={`TabsLinks ${
+            location.pathname === "/help-desk" ? "navlinks" : ""
+          }`}
+        >
+          <FaHeadset
+            className="inline-block
+			  "
+          />
+          <span>Home</span>
+        </NavLink>
+        <NavLink
+          to="/help-desk/tickets"
+          end={true}
+          className={`TabsLinks ${
+            location.pathname === "/help-desk/tickets" ? "navlinks" : ""
+          }`}
+        >
+          <FaReceipt
+            className="inline-block
+			  "
+          />
+          <span>Tickets</span>
+        </NavLink>
+        <NavLink
+          to="/help-desk/reports"
+          className={`TabsLinks ${
+            location.pathname === "/help-desk/reports" ? "navlinks" : ""
+          }`}
+        >
+          <FaChartBar
+            className="inline-block
+			  "
+          />
+          <span>Reports</span>
+        </NavLink>
+        <NavLink
+          to="/help-desk/contacts"
+          end={true}
+          className={`TabsLinks ${
+            location.pathname === "/help-desk/contacts" ? "navlinks" : ""
+          }`}
+        >
+          <FaUserTie
+            className="inline-block
+			  "
+          />
+          <span>Contacts</span>
+        </NavLink>
+        <NavLink
+          to="/help-desk/settings"
+          end={true}
+          className={`TabsLinks ${
+            location.pathname === "/help-desk/settings" ? "navlinks" : ""
+          }`}
+        >
+          <BsGearFill
+            className="inline-block
+			  "
+          />
+          <span>Settings</span>
+        </NavLink>
+      </div>
+      
       <User />
       <Main />
       <Outlet />

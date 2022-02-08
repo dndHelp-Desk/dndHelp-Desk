@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { FaRegCalendarAlt, FaUserEdit } from "react-icons/fa";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import {
+  BsThreeDotsVertical,
+  BsFillDoorOpenFill,
+  BsFillCheckCircleFill,
+} from "react-icons/bs";
 import { isAuthenticated, changeLocation } from "../../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, getAuth } from "firebase/auth";
 import Profile from "../authentication/Profile";
 import { updateAlert } from "../../store/NotificationsSlice";
 import { changeName } from "../Data_Fetching/TicketsnUserData";
+import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const User = () => {
   const [usernameInput, changeInput] = useState("");
   const [settings, setSettingsModal] = useState(false);
+  const settingsModalRef = useOnClickOutside(() => {
+    setSettingsModal(false);
+  });
   const auth = getAuth();
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
@@ -53,9 +61,65 @@ const User = () => {
       </div>
 
       {/**Other Settings And Sign Out ================ */}
-      <button className="bg-slate-400 h-11 w-11 flex md:hidden justify-center items-center rounded-lg mt-5 text-xl font-bold text-slate-900 hover:text-slate-800 hover:bg-slate-500 transition-all outline-none focus:outline-none">
+      <button
+        onClick={() => setSettingsModal(true)}
+        className="bg-slate-400 h-11 w-11 flex md:hidden justify-center items-center rounded-lg mt-5 text-xl font-bold text-slate-900 hover:text-slate-800 hover:bg-slate-500 transition-all outline-none focus:outline-none"
+      >
         <BsThreeDotsVertical className="" />
       </button>
+
+      {/**Small Screens Menu ================== */}
+      <div
+        ref={settingsModalRef}
+        className={`border border-slate-400 backdrop-blur-md md:hidden flex items-center justify-between p-2 shadow-2xl w-[71%] h-20 rounded-xl absolute z-[999] right-[20%] ${
+          settings ? "" : "hidden"
+        }`}
+      >
+        <button
+          onClick={() => {
+            signOutUser();
+            setSettingsModal(false);
+          }}
+          className="px-4 p-1 bg-slate-400 text-slate-900 font-bold text-sm uppercase rounded-lg h-10 w-[13%] items-center justify-center flex outline-none focus:outline-none hover:bg-slate-500 transition-bg duration-300"
+        >
+          <BsFillDoorOpenFill />
+        </button>
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            changeName(member_details[0].id, usernameInput);
+            dispatch(
+              updateAlert({
+                message: "Display Name Changed Successfully",
+                color: "bg-green-200",
+              })
+            );
+          }}
+          className="flex space-x-2 justify-center items-center w-[85%] overflow-hidden"
+        >
+          <div className=" w-full bg-slate-900 rounded-xl relative">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Your username..."
+              onChange={(e) => changeInput(e.target.value)}
+              autoComplete="off"
+              className="log_In_Input focus:ring-0 bg-slate-900 placeholder:text-slate-400 w-full pr-8"
+            />
+            <button
+              onClick={() => setSettingsModal(false)}
+              type="submit"
+              className="px-4 p-1 bg-transparent text-slate-300 absolute top-0 right-0 h-full font-bold text-sm uppercase border-l border-slate-700 outline-none focus:outline-none hover:opacity-80 transition-opaacity duration-300"
+            >
+              <BsFillCheckCircleFill />
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/**Large Screens Menu ============================= */}
       <div className="hidden md:flex space-x-2 relative">
         <button
           onClick={() => setSettingsModal(settings === false ? true : false)}

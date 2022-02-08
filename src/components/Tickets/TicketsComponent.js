@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   BsSearch,
-  BsFillCalendar2RangeFill,
+  BsSliders,
   BsFillTrashFill,
   BsPersonPlus,
 } from "react-icons/bs";
@@ -11,10 +11,14 @@ import TicketsList from "./TicketsList";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { deleteTicket, assignAgent } from "./../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
+import Filters from "../Reports/Filters";
 
 const TicketsComponent = () => {
   const [newTicketModal, setModal] = useState(false);
-  const [searchResults, setSearchResults] = useState("");
+  const [filtersModal, setfiltersModal] = useState(false);
+  const filtersModalRef = useClickOutside(() => {
+    setfiltersModal(false);
+  });
   const [deleteArray, setDelete] = useState([]);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const activeUser = useSelector((state) => state.UserInfo.member_details);
@@ -65,7 +69,7 @@ const TicketsComponent = () => {
             assgn(contact.name);
             setPanel(false);
           }}
-          className="bg-slate-400 w-full h-8 text-sm font-semibold text-slate-800 rounded-xl capitalize"
+          className="bg-slate-400 w-full h-8 text-sm font-semibold text-slate-800 rounded-lg capitalize"
         >
           {contact.name}
         </button>
@@ -79,18 +83,15 @@ const TicketsComponent = () => {
       <nav className="h-[3.5rem] sticky top-0 pt-2 flex justify-between items-center w-full overflow-x-hidden p-1">
         {/**Search Bar ============================== */}
         <div className="flex space-x-2 h-full">
-          <div className="flex bg-slate-900 rounded-xl h-full items-center justify-center relative">
-            <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
-            <input
-              className="w-11 md:w-[18rem] h-full bg-transparent rounded-xl focus:w-[15rem] md:focus:w-[18rem] focus:px-4 md:focus:px-10 focus:bg-slate-900 md:focus:bg-transparent text-slate-400 text-sm md:px-10 z-[999] placeholder-slate-900 md:placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-600 transition-h duration-300"
-              type="search"
-              placeholder="Quick Search ..."
-              onChange={(e) => setSearchResults(e.target.value)}
-            />
-          </div>
+          <button
+            onClick={() => setModal(true)}
+            className="bg-slate-900 h-full px-8 rounded-lg flex justify-center items-center text-slate-400 text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg"
+          >
+            + New Ticket
+          </button>
           <button
             onClick={() => deleteSelected()}
-            className={`bg-slate-900 h-full w-10 rounded-xl text-red-600 ${
+            className={`bg-slate-900 h-full w-10 rounded-lg text-red-600 ${
               deleteArray.length >= 1 ? "flex" : "hidden"
             } items-center justify-center text-lg`}
           >
@@ -100,7 +101,7 @@ const TicketsComponent = () => {
           </button>
           <button
             onClick={() => setPanel(true)}
-            className={`bg-slate-900 h-full w-10 rounded-xl text-blue-600 ${
+            className={`bg-slate-900 h-full w-10 rounded-lg text-blue-600 ${
               deleteArray.length >= 1 ? "flex" : "hidden"
             } items-center justify-center text-lg`}
           >
@@ -110,18 +111,23 @@ const TicketsComponent = () => {
           </button>
         </div>
 
-        {/**Date Filter & New Tickect ============================== */}
-        <div className="rounded-xl h-full flex justify-between items-center space-x-2">
-          <button
-            onClick={() => setModal(true)}
-            className="bg-slate-900 h-full w-[92px] rounded-xl flex justify-center items-center text-slate-400 text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg"
-          >
-            + New
-          </button>
-          <button className="w-10 md:w-[200px] h-full rounded-xl flex justify-center items-center relative bg-slate-900 focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg text-slate-400 text-sm font-bas">
-            <BsFillCalendar2RangeFill className="absolute left-3 text-slate-400" />
-            <span className="hidden md:flex">Pick A Date ...</span>
-          </button>
+        {/**Filter Btn ============================== */}
+        <button
+          onClick={() => setfiltersModal(filtersModal ? false : true)}
+          className="min-w-10 px-8 h-full rounded-lg flex space-x-2 justify-between items-center relative bg-slate-900 focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg text-slate-400 text-sm font-bas"
+        >
+          <BsSliders className=" text-slate-400" />
+          <span className="hidden md:flex">Filters</span>
+        </button>
+
+        {/**Filters Menu =================== */}
+        <div
+          ref={filtersModalRef}
+          className={`fixed ${
+            filtersModal ? "" : "hidden"
+          } bg-[#33415563] right-[11%] 2xl:right-[15%] top-[13.5rem] z-[999] w-[20rem] h-[15rem] rounded-lg backdrop-blur-md border-2 border-slate-400 flex flex-col items-center justify-center space-y-2 p-4`}
+        >
+          <Filters />
         </div>
       </nav>
 
@@ -129,14 +135,14 @@ const TicketsComponent = () => {
       {activeUser[0].access === "admin" && (
         <div
           ref={contactRef}
-          className={`h-[15rem] w-[12rem] bg-[#141a697e] backdrop-blur-sm p-2 rounded-xl border border-slate-400 absolute left-[45px] md:left-[280px] z-[9999] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+          className={`h-[15rem] w-[12rem] bg-[#141a697e] backdrop-blur-sm p-2 rounded-lg border border-slate-400 absolute left-[45px] md:left-[280px] z-[9999] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
             contactsPanel ? "" : "hidden"
           }`}
         >
-          <div className="flex sticky top-0 bg-slate-400 rounded-xl h-10 items-center justify-center ">
+          <div className="flex sticky top-0 bg-slate-400 rounded-lg h-10 items-center justify-center ">
             <BsSearch className="absolute left-3 text-slate-800 font-semibold" />
             <input
-              className="w-full h-10 bg-transparent rounded-xl text-slate-900 text-sm md:px-10 z-[999] placeholder-slate-800 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-700 transition-h duration-300"
+              className="w-full h-10 bg-transparent rounded-lg text-slate-900 text-sm md:px-10 z-[999] placeholder-slate-800 border-0 focus:outline-none outline-none  focus:ring focus:ring-slate-700 transition-h duration-300"
               type="search"
               placeholder="Search ..."
             />
@@ -147,7 +153,6 @@ const TicketsComponent = () => {
 
       {/**Tickects /Not Expanded=========== */}
       <TicketsList
-        searchResults={searchResults}
         setModal={setModal}
         deleteArray={deleteArray}
         setDelete={setDelete}

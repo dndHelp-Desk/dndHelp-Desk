@@ -7,8 +7,8 @@ import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
 import SettingsComponent from "./components/Settings/SettingsComponents";
 import MessageThread from "./components/Tickets/MessageThread";
-import SupportHome from "./components/ClientSuppport/SupportHome";
-import NewTicket from "./components/ClientSuppport/NewTicket";
+import SupportHome from "./components/ClientSupport/SupportHome";
+import NewTicket from "./components/ClientSupport/NewTicket";
 
 const App = () => {
   return (

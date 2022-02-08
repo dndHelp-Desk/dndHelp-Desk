@@ -24,7 +24,7 @@ const ReportsComponent = () => {
         </h5>
         <div
           ref={filtersModalRef}
-          className={`absolute w-[18rem] shadow-2xl left-[18%] md:left-[32%] top-[3.75rem]  backdrop-blur-lg border border-slate-400 rounded-xl z-[999] flex lg:hidden flex-col space-y-2 p-4 items-center justify-center ${
+          className={`absolute w-[18rem] shadow-2xl left-[18%] md:left-[32%] top-[3.75rem] bg-[#33415563]  backdrop-blur-lg border border-slate-400 rounded-xl z-[999] flex lg:hidden flex-col space-y-2 p-4 items-center justify-center ${
             showFilters ? "" : "hidden"
           }`}
         >

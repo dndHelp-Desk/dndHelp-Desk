@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BsPaperclip, BsFillTrashFill, BsEnvelope } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { deleteTicket } from "../Data_Fetching/TicketsnUserData";
@@ -7,20 +7,17 @@ import { addClientReply } from "./DataFetching";
 const Chat = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
-  let [addMessagePosition, setLastMessage] = useState(threadMessage.length + 1);
   const textFieldReadOnly = threadMessage.length >= 1 ? false : true;
   const preloaderData = [1, 2, 3, 4, 5, 6];
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({
     message: "",
-    message_position: addMessagePosition,
+    message_position: threadMessage.length + 1,
     ticket_id: threadId,
   });
 
-  useEffect(() => {
-    reply.message !== "" && setLastMessage(threadMessage.length + 1);
-  }, [reply.message, threadMessage.length, threadId]);
+
 
   //Get Name of Reciepent and Agent and email ===============
   let agentName =
@@ -50,12 +47,12 @@ const Chat = () => {
             }`}
           >
             {`${
-              message.from === "agent"
+              message.from === "agent" && agentName && clientName
                 ? agentName.charAt(0)
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full bg-slate-800 p-2 rounded-lg">
+          <div className="w-[95%] 2xl:w-full bg-slate-800 p-4 rounded-lg">
             <div className="font-bold  text-slate-300 justify-between w-full flex">
               <span>{`${
                 message.from === "agent" ? agentName : clientName
@@ -64,10 +61,21 @@ const Chat = () => {
                 <span className="text-xs text-slate-400 font-medium">
                   {`${new Date(message.date).toDateString()}`}
                 </span>
+                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
+                <span className="text-xs text-slate-400 font-medium">
+                  {`${
+                    Number(message.time.split(":")[0]) < 10
+                      ? "0" + Number(message.time.split(":")[0])
+                      : message.time.split(":")[0]
+                  }:${
+                    Number(message.time.split(":")[1]) < 10
+                      ? "0" + Number(message.time.split(":")[1])
+                      : message.time.split(":")[1]
+                  }`}
+                </span>
+                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
                 <BsFillTrashFill
-                  onClick={() =>
-                    message.from === "client" && deleteTicket(message.id)
-                  }
+                  onClick={() => deleteTicket(message.id)}
                   className="inline hover:text-red-500 cursor-pointer"
                 />
               </h4>
@@ -142,13 +150,14 @@ const Chat = () => {
             id="reply"
             placeholder="Reply Here ✉️ ..."
             autoComplete="off"
-            onChange={(e) =>
+            onChange={(e) =>{
               setReply({
                 ...reply,
                 message: e.target.value,
                 ticket_id: threadId,
-              })
-            }
+                message_position:threadMessage.length + 1
+              });
+            }}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();

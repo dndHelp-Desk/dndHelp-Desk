@@ -9,42 +9,23 @@ import {
 } from "./../Data_Fetching/TicketsnUserData";
 import { setThreadId } from "./../../store/TicketsSlice";
 
-const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
+const TicketsList = ({ setModal, setDelete, deleteArray }) => {
   const dispatch = useDispatch();
+  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const threadId = useSelector((state) => state.Tickets.threadId);
-  const activeUser = useSelector((state) => state.UserInfo.member_details);
-
-  //Filter Message in a thread ============================
-  const firstMessages =
-    allTickets && activeUser[0].access !== "admin"
-      ? allTickets.filter(
-          (ticket) =>
-            ticket.message_position === 1 &&
-            ticket.agent_email === activeUser[0].email
-        )
-      : allTickets
-      ? allTickets.filter((ticket) => ticket.message_position === 1)
-      : "";
 
   //Loop Through Each Tickects =================
   const tickets =
-    firstMessages.length >= 1 &&
-    firstMessages.map((ticket, index) => {
+    filteredTickets.length >= 1 &&
+    filteredTickets.map((ticket) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5rem] snap_childTwo rounded-xl bg-slate-900 p-3 space-x-2 overflow-hidden ${
-            ticket.recipient_name &&
-            ticket.recipient_name
-              .toLowerCase()
-              .includes(searchResults.toLowerCase()) === true
-              ? "flex"
-              : "hidden"
-          } ${
+          className={`w-full h-[5.5rem] snap_childTwo rounded-lg bg-slate-900 p-3 space-x-2 overflow-hidden flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
-              ? "opacity-90"
+              ? "bg-slate-800"
               : ""
           }`}
         >
@@ -75,7 +56,7 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
               dispatch(setThreadId(ticket.ticket_id));
               window.localStorage.setItem("threadId", JSON.stringify(threadId));
             }}
-            className="col-span-5  h-full w-full border-l-2 border-slate-600 px-2 py-1"
+            className="col-span-5 flex flex-col justify-center h-full w-full border-l-2 border-slate-600 px-2 py-1"
           >
             <h2 className="text-slate-300 text-base font-bold font-sans capitalize">
               {ticket.category}{" "}
@@ -83,11 +64,11 @@ const TicketsList = ({ searchResults, setModal, setDelete, deleteArray }) => {
                 {ticket.ticket_id}
               </span>
             </h2>
-            <h5 className="text-slate-400 text-xs tracking-wide font-base font-sans flex items-center space-x-1 capitalize">
+            <h5 className="text-slate-400 text-xs tracking-wide font-base font-sans flex flex-wrap items-center space-x-1 capitalize">
               <BsEnvelope className="inline" />{" "}
               <span className="">{ticket.recipient_name}</span>{" "}
-              <span>{`(${ticket.branch_company})`} •</span>
-              <small className="tracking-widest">{`Created on ${new Date(
+              <span>{`(${ticket.branch_company})`}</span>
+              <small className="tracking-widest">{` • Created on ${new Date(
                 ticket.date
               ).toDateString()}`}</small>
             </h5>

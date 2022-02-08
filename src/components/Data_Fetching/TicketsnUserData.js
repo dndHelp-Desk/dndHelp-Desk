@@ -73,6 +73,7 @@ export const addReply = (message, message_position, ticket_id) => {
     message: message,
     message_position: message_position,
     ticket_id: ticket_id,
+    time: `${new Date().getHours() + 1}:${new Date().getMinutes() + 1}`,
   });
 };
 

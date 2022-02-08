@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   BsPaperclip,
@@ -7,7 +7,7 @@ import {
   BsEnvelope,
 } from "react-icons/bs";
 import { setThreadMessage } from "../../store/TicketsSlice";
-import { addReply,deleteTicket } from "../Data_Fetching/TicketsnUserData";
+import { addReply, deleteTicket } from "../Data_Fetching/TicketsnUserData";
 import { Link } from "react-router-dom";
 
 const MessageThread = () => {
@@ -16,9 +16,6 @@ const MessageThread = () => {
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
   const scrollToLastMessage = useRef();
   const scrollToNone = useRef();
-  let [addMessagePosition, setLastMessage] = useState(
-    threadMessage.length + 1
-  );
   const dispatch = useDispatch();
 
   //Functio ToScroll to last message
@@ -30,7 +27,7 @@ const MessageThread = () => {
   //Reply State and value ==================================
   const [reply, setReply] = useState({
     message: "",
-    message_position: addMessagePosition,
+    message_position: threadMessage.length + 1,
     ticket_id: threadId,
   });
 
@@ -46,9 +43,8 @@ const MessageThread = () => {
             })
         )
       );
-      lastMsg();
-    reply.message !== "" && setLastMessage(threadMessage.length + 1);
-  }, [dispatch, allTickets, threadId, threadMessage.length, reply.message]);
+    lastMsg();
+  }, [dispatch, allTickets, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
   let agentName =
@@ -64,10 +60,8 @@ const MessageThread = () => {
       .recipient_email;
   let agentEmail =
     threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0]
-      .agent_email;
+    threadMessage.filter((data) => data.message_position === 1)[0].agent_email;
   let lastMsgPosition = threadMessage[threadMessage.length];
-
 
   //Loop Through Each Message In a thread ====================
   const thread =
@@ -94,8 +88,8 @@ const MessageThread = () => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full bg-slate-800 p-2 rounded-xl">
-            <div className="font-bold  text-slate-300 justify-between w-full flex">
+          <div className="w-[95%] 2xl:w-full bg-slate-800 p-4 space-y-2 rounded-xl">
+            <div className="font-bold  text-slate-300 justify-between w-full flex flex-col md:flex-row">
               <span>{`${
                 message.from === "agent" ? agentName : clientName
               }`}</span>{" "}
@@ -103,6 +97,19 @@ const MessageThread = () => {
                 <span className="text-xs text-slate-400 font-medium">
                   {`${new Date(message.date).toDateString()}`}
                 </span>
+                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
+                <span className="text-xs text-slate-400 font-medium">
+                  {`${
+                    Number(message.time.split(":")[0]) < 10
+                      ? "0" + Number(message.time.split(":")[0])
+                      : message.time.split(":")[0]
+                  }:${
+                    Number(message.time.split(":")[1]) < 10
+                      ? "0" + Number(message.time.split(":")[1])
+                      : message.time.split(":")[1]
+                  }`}
+                </span>
+                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
                 <BsFillTrashFill
                   onClick={() => deleteTicket(message.id)}
                   className="inline hover:text-red-500 cursor-pointer"
@@ -164,9 +171,15 @@ const MessageThread = () => {
               }
             }}
             required
-            onChange={(e) => setReply({ ...reply, message: e.target.value })}
-            className="bg-transparent w-full text-sm placeholder:text-sm rounded-xl bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
+            onChange={(e) => {
+              setReply({
+                ...reply,
+                message: e.target.value,
+                message_position: threadMessage.length + 1,
+              });
+            }}
             value={reply.message}
+            className="bg-transparent w-full text-sm placeholder:text-sm rounded-xl bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
           ></textarea>
           {/**Other Btns =========================== */}
           <label htmlFor="attachment">
