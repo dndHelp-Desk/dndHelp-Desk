@@ -34,7 +34,7 @@ const MainComponent = () => {
   }, [routeLocation, dispatch, location]);
 
   if (logged !== true) {
-    return <Navigate to="/" />;
+    return <Navigate to="/logIn" />;
   }
 
   //Component =================================
@@ -64,51 +64,51 @@ const MainComponent = () => {
         {/**Large Screens Menu Items===================== */}
         <div className="text-gray-400 hidden lg:flex space-x-5">
           <NavLink
-            to="/help-desk"
+            to="/"
             className={`TabsLinks ${
-              location.pathname === "/help-desk" ? "navlinks" : ""
+              location.pathname === "/" ? "navlinks" : ""
             }`}
           >
             Home
           </NavLink>
           <NavLink
-            to="/help-desk/tickets"
+            to="/tickets"
             end={true}
             className={`TabsLinks ${
-              location.pathname === "/help-desk/tickets" ? "navlinks" : ""
+              location.pathname === "/tickets" ? "navlinks" : ""
             }`}
           >
             Tickets
           </NavLink>
           <NavLink
-            to="/help-desk/reports"
+            to="/reports"
             className={`TabsLinks ${
-              location.pathname === "/help-desk/reports" ? "navlinks" : ""
+              location.pathname === "/reports" ? "navlinks" : ""
             }`}
           >
             Reports
           </NavLink>
           <NavLink
-            to="/help-desk/contacts"
+            to="/contacts"
             end={true}
             className={`TabsLinks ${
-              location.pathname === "/help-desk/contacts" ? "navlinks" : ""
+              location.pathname === "/contacts" ? "navlinks" : ""
             }`}
           >
             Contacts
           </NavLink>
           <NavLink
-            to="/help-desk/settings"
+            to="/settings"
             end={true}
             className={`TabsLinks ${
-              location.pathname === "/help-desk/settings" ? "navlinks" : ""
+              location.pathname === "/settings" ? "navlinks" : ""
             }`}
           >
             Settings
           </NavLink>
         </div>
 
-        {/*Notifications Control ====================*/}
+        {/*Notifications & Controls ====================*/}
         <div className="flex space-x-2">
           {/**Small Screen Menu Btn ================ */}
           <button
@@ -131,7 +131,7 @@ const MainComponent = () => {
           </button>
 
           <button className="text-slate-400 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl hover:bg-slate-700 items-center justify-center flex">
-            <abbr title="Serach">
+            <abbr title="Chat">
               <BsChatSquareText />
             </abbr>
           </button>
@@ -153,9 +153,9 @@ const MainComponent = () => {
         } transition-scale duration-300 flex flex-col text-slate-400 space-y-2 p-4 justify-center overflow-hidden`}
       >
         <NavLink
-          to="/help-desk"
+          to="/"
           className={`TabsLinks ${
-            location.pathname === "/help-desk" ? "navlinks" : ""
+            location.pathname === "/" ? "navlinks" : ""
           }`}
         >
           <FaHeadset
@@ -165,10 +165,10 @@ const MainComponent = () => {
           <span>Home</span>
         </NavLink>
         <NavLink
-          to="/help-desk/tickets"
+          to="/tickets"
           end={true}
           className={`TabsLinks ${
-            location.pathname === "/help-desk/tickets" ? "navlinks" : ""
+            location.pathname === "/tickets" ? "navlinks" : ""
           }`}
         >
           <FaReceipt
@@ -178,9 +178,9 @@ const MainComponent = () => {
           <span>Tickets</span>
         </NavLink>
         <NavLink
-          to="/help-desk/reports"
+          to="/reports"
           className={`TabsLinks ${
-            location.pathname === "/help-desk/reports" ? "navlinks" : ""
+            location.pathname === "/reports" ? "navlinks" : ""
           }`}
         >
           <FaChartBar
@@ -190,10 +190,10 @@ const MainComponent = () => {
           <span>Reports</span>
         </NavLink>
         <NavLink
-          to="/help-desk/contacts"
+          to="/contacts"
           end={true}
           className={`TabsLinks ${
-            location.pathname === "/help-desk/contacts" ? "navlinks" : ""
+            location.pathname === "/contacts" ? "navlinks" : ""
           }`}
         >
           <FaUserTie
@@ -203,10 +203,10 @@ const MainComponent = () => {
           <span>Contacts</span>
         </NavLink>
         <NavLink
-          to="/help-desk/settings"
+          to="/settings"
           end={true}
           className={`TabsLinks ${
-            location.pathname === "/help-desk/settings" ? "navlinks" : ""
+            location.pathname === "/settings" ? "navlinks" : ""
           }`}
         >
           <BsGearFill

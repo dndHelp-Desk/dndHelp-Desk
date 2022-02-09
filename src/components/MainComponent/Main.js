@@ -29,7 +29,7 @@ const Main = () => {
   return (
     <div
       className={`${
-        location.pathname === "/help-desk" ? "grid" : "hidden"
+        location.pathname === "/" ? "grid" : "hidden"
       } bg-slate-500 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden`}
     >
       <div className="h-[40rem] grid grid-rows-3 gap-2">
@@ -84,7 +84,7 @@ const Main = () => {
           {/**End Of Online Members ==================================*/}
 
           {/**Manage Contacts ==================================*/}
-          <div className="col-span-1 border-l border-slate-700 hidden md:grid grid-rows-2 px-4 overflow-hidden">
+          <div className="col-span-1 border-l border-slate-700 hidden md:grid grid-rows-2 px-4 justify-between overflow-hidden">
             <div className="row-span-1 overflow-hidden">
               <h2 className="text-base font-bold text-slate-400 capitalize">
                 contacts

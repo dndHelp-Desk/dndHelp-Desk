@@ -6,7 +6,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
-import Background from "./images/welcome.svg";
+import Background from "./images/welcome.jpg";
 import { login } from "../Data_Fetching/Firebase";
 import { isAuthenticated } from "../../store/UserSlice";
 
@@ -38,7 +38,7 @@ const LogIn = () => {
         dispatch(isAuthenticated(true));
         //Rederect User If logged ==============
         routeLocation === "Dial n Dine Help-Desk"
-          ? navigate("/help-desk")
+          ? navigate("/")
           : navigate(routeLocation);
       } else {
         dispatch(isAuthenticated(false));
@@ -52,16 +52,16 @@ const LogIn = () => {
       {/**Alert */}
 
       {/**Top Nav ================= */}
-      <nav className="absolute w-[75%] h-[4rem] bg-transparent backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center">
+      <nav className="absolute bg-[#11182780] w-[75%] h-[4rem] backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center">
         {/**Logo ==================== */}
         <svg
-          className="stroke-slate-400 text-[1.5rem] font-sans fill-transparent"
+          className="stroke-slate-300 text-[1.5rem] font-sans fill-transparent"
           width="210"
           height="50"
           viewBox="0 0 200 50"
         >
           <text x="0" y="35">
-            <tspan className="stroke-[1.5px]">dnd</tspan>
+            <tspan className="stroke-[1.5px] fill-slate-300">dnd</tspan>
             <tspan className="stroke-[.6px]" x="43" y="35">
               Help-Desk
             </tspan>
@@ -152,7 +152,7 @@ const LogIn = () => {
       {/**First Half ================ */}
       <div
         style={{ backgroundImage: `url(${Background})` }}
-        className="hidden lg:flex lg:flex-col w-[50%] h-full  bg-no-repeat bg-contain bg-center items-center justify-center px-4"
+        className="hidden lg:flex lg:flex-col w-[50%] h-full  bg-no-repeat bg-cover bg-center items-center justify-center px-4"
       ></div>
 
       {/**Second Half ==================================== */}

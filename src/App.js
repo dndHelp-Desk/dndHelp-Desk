@@ -15,11 +15,11 @@ const App = () => {
     <div className="overflow-hidden pb-6 bg-slate-500">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<LogIn />} />
+          <Route exact path="/logIn" element={<LogIn />} />
           <Route exact path="/support" element={<SupportHome />}>
             <Route path="new-ticket" element={<NewTicket />} />
           </Route>
-          <Route path="/help-desk" element={<MainComponent />}>
+          <Route path="/" element={<MainComponent />}>
             <Route path="tickets" element={<TicketsComponent />} />
             <Route path="reports" element={<ReportsComponent />} />
             <Route path="thread" element={<MessageThread />} />

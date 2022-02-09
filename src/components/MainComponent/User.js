@@ -130,6 +130,7 @@ const User = () => {
 
         {/**Change name =========== */}
         <div
+          ref={settingsModalRef}
           className={`absolute  right-[11rem] z-20 shadow-2xl rounded-lg bg-slate-900 after:content-[""] after:absolute after:top-2/4 after:right-[-1rem] after:mt-[-8px] after:border-[8px] after:border-t-transparent after:border-r-transparent after:border-b-transparent after:border-l-slate-900 ${
             settings ? "scale-100 w-[23rem]" : "scale-0 w-0"
           } transition-scale duration-200 flex space-y-2 p-4 justify-center items-center`}
