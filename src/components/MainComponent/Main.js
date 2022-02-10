@@ -30,7 +30,7 @@ const Main = () => {
     <div
       className={`${
         location.pathname === "/" ? "grid" : "hidden"
-      } bg-slate-500 mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden`}
+      } bg-slate-500 mt-[-2rem] z-0 rounded-xl w-[80%] 2xl:w-[72rem] p-2 overflow-hidden`}
     >
       <div className="h-[40rem] grid grid-rows-3 gap-2">
         <div className="row-span-1 w-full bg-slate-900 rounded-xl grid grid-cols-1 md:grid-cols-3 overflow-hidden py-6 p-2 gap-1">

@@ -199,31 +199,8 @@ const TopCards = () => {
 
   //Component ==================================
   return (
-    <div className="w-full rounded-xl grid grid-cols-2 md:grid-cols-4 3xl:grid-cols-5 gap-4 overflow-hidden">
+    <div className="w-full rounded-xl grid grid-cols-2 md:grid-cols-4 gap-4 overflow-hidden">
       {cards}
-      <div className="bg-slate-900 h-[10rem]  cols-span-1 rounded-xl hidden 3xl:flex flex-col justify-center space-y-4 p-5">
-        <div className="w-full flex justify-between p-1 text-sm font-bold text-slate-500 font-sans">
-          <h3>Labels</h3>
-          <BsThreeDotsVertical className="text-lg cursor-pointer" />
-        </div>
-        <div className="w-full flex flex-wrap gap-2 p-1 font-medium text-blue-700 font-sans">
-          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
-            Resolve
-          </div>
-          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
-            Closed
-          </div>
-          <div className="text-slate-300 bg-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
-            Open
-          </div>
-          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
-            Pending
-          </div>
-          <div className="border border-blue-700 py-1 px-3 h-7 flex justify-center items-center rounded-lg text-xs">
-            Urgent
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

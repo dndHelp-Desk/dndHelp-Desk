@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContactsComponent = () => {
   return (
-    <div className="bg-slate-900 mt-[-2rem] absolute left-[9.5%] z-0 rounded-lg h-[40rem] w-[80%]"></div>
+    <div className="bg-slate-900 mt-[-2rem] z-0 rounded-xl w-[80%] 2xl:w-[72rem] p-2 overflow-hidden"></div>
   );
 };
 

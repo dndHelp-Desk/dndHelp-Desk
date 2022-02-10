@@ -78,9 +78,9 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-gradient-to-b from-slate-500 to-slate-700 min-h-[40rem] mt-[-2rem]  absolute left-[9.5%] 2xl:left-[15%] z-0 2xl:w-[70%] px-1 overflow-hidden rounded-xl max-h-[42rem] 3xl:min-h-[80%] w-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
+    <div className="bg-gradient-to-b from-slate-500 to-slate-700 mt-[-2rem] z-0 w-[80%] 2xl:w-[72rem] p-2 px-1 overflow-hidden rounded-xl min-h-[40rem] max-h-[42rem] 3xl:min-h-[80%] overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar relative">
       {/**Navbar or Control Bar  ====================== */}
-      <nav className="h-[3.5rem] sticky top-0 pt-2 flex justify-between items-center w-full overflow-x-hidden p-1">
+      <nav className="h-[3.2rem] sticky top-0 flex justify-between items-center w-full overflow-x-hidden px-1 pb-1">
         {/**Search Bar ============================== */}
         <div className="flex space-x-2 h-full">
           <button
@@ -125,7 +125,7 @@ const TicketsComponent = () => {
           ref={filtersModalRef}
           className={`fixed ${
             filtersModal ? "" : "hidden"
-          } bg-[#33415563] right-[11%] 2xl:right-[15%] top-[13.5rem] z-[999] w-[18rem] h-[15rem] rounded-lg backdrop-blur-md border-2 border-slate-400 flex flex-col items-center justify-center space-y-2 p-4`}
+          } bg-[#33415563] right-[11%] 2xl:right-[20%] top-[14rem] z-[999] w-[18rem] h-[15rem] rounded-lg backdrop-blur-md border-2 border-slate-400 flex flex-col items-center justify-center space-y-2 p-4`}
         >
           <Filters />
         </div>
