@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillTrashFill,
   BsThreeDotsVertical,
   BsArrowLeft,
 } from "react-icons/bs";
+import noChatImg from "./images/email-open.svg";
 import { setThreadMessage } from "../../store/TicketsSlice";
 import { addReply, deleteTicket } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
@@ -155,60 +156,69 @@ const MessageThread = ({ isChatOpen, setChat }) => {
 
           <h2 className="font-semibold text-sm text-slate-400 tracking-wide hidden lg:flex flex-col">
             <span>Opened On</span>{" "}
-            <small className="text-xs text-slate-500">
-              {threadMessage.length >= 1 &&
-                new Date(
-                  threadMessage.filter(
-                    (message) => message.message_position === 1
-                  )[0].date
-                ).toDateString()}
-              , at{" "}
-              {`${
-                (threadMessage.length >= 1 &&
-                  Number(
-                    threadMessage
-                      .filter((message) => message.message_position === 1)[0]
-                      .time.split(":")[0]
-                  )) < 10
-                  ? "0" +
-                    (threadMessage.length >= 1 &&
+            {threadId && (
+              <small className="text-xs text-slate-500">
+                {threadMessage.length >= 1 &&
+                  new Date(
+                    threadMessage.filter(
+                      (message) => message.message_position === 1
+                    )[0].date
+                  ).toDateString()}
+                , at{" "}
+                {`${
+                  (threadMessage.length >= 1 &&
+                    Number(
+                      threadMessage
+                        .filter((message) => message.message_position === 1)[0]
+                        .time.split(":")[0]
+                    )) < 10
+                    ? "0" +
+                      (threadMessage.length >= 1 &&
+                        Number(
+                          threadMessage
+                            .filter(
+                              (message) => message.message_position === 1
+                            )[0]
+                            .time.split(":")[0]
+                        ))
+                    : threadMessage.length >= 1 &&
                       Number(
                         threadMessage
                           .filter(
                             (message) => message.message_position === 1
                           )[0]
                           .time.split(":")[0]
-                      ))
-                  : threadMessage.length >= 1 &&
+                      )
+                }:${
+                  (threadMessage.length >= 1 &&
                     Number(
                       threadMessage
                         .filter((message) => message.message_position === 1)[0]
-                        .time.split(":")[0]
-                    )
-              }:${
-                (threadMessage.length >= 1 &&
-                  Number(
-                    threadMessage
-                      .filter((message) => message.message_position === 1)[0]
-                      .time.split(":")[1]
-                  )) < 10
-                  ? "0" +
-                    (threadMessage.length >= 1 &&
+                        .time.split(":")[1]
+                    )) < 10
+                    ? "0" +
+                      (threadMessage.length >= 1 &&
+                        Number(
+                          threadMessage
+                            .filter(
+                              (message) => message.message_position === 1
+                            )[0]
+                            .time.split(":")[1]
+                        ))
+                    : threadMessage.length >= 1 &&
                       Number(
                         threadMessage
                           .filter(
                             (message) => message.message_position === 1
                           )[0]
                           .time.split(":")[1]
-                      ))
-                  : threadMessage.length >= 1 &&
-                    Number(
-                      threadMessage
-                        .filter((message) => message.message_position === 1)[0]
-                        .time.split(":")[1]
-                    )
-              }`}
-            </small>{" "}
+                      )
+                }`}
+              </small>
+            )}{" "}
+            {!threadId && (
+              <small className="text-xs text-slate-500">Click Any Ticket</small>
+            )}
           </h2>
           <div className="flex space-x-2">
             <h2 className="font-semibold text-sm text-slate-400 tracking-wide flex flex-col capitalize w-32 whitespace-nowrap overflow-hidden overflow-ellipsis">
@@ -217,23 +227,33 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   threadMessage.filter(
                     (message) => message.message_position === 1
                   )[0].category}
+                {!threadId && "Nothing selected"}
               </span>{" "}
               <small className="text-xs text-slate-500">
-                {clientName},{" "}
+                {clientName}{" "}
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
                     (message) => message.message_position === 1
                   )[0].branch_company}
+                {!threadId && "select any ticket"}
               </small>{" "}
             </h2>
             <div className="w-9 h-9 bg-slate-900 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase text-slate-500 text-lg">
               {clientName && clientName.charAt(0)}
+              {!threadId && "u"}
             </div>
           </div>
         </div>
         <div className="h-[20rem] w-full p-2 overflow-y-scroll scroll-snap space-y-2">
           {/**Messages ============================ */}
           {thread}
+          {!threadId && (
+            <img
+              src={noChatImg}
+              alt="No Ticket"
+              className="w-full h-[10rem] object-contain object-center"
+            />
+          )}
           {/**End of Messages ============================ */}
         </div>
       </div>
