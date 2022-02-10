@@ -51,7 +51,7 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
             </div>
           </div>
           <Link
-            to="/help-desk/thread"
+            to="/thread"
             onClick={() => {
               dispatch(setThreadId(ticket.ticket_id));
               window.localStorage.setItem("threadId", JSON.stringify(threadId));

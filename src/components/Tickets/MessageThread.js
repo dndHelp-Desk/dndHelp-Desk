@@ -164,10 +164,10 @@ const MessageThread = () => {
 
   //Component ============================
   return (
-    <div className="to-slate-900 from-slate-500 bg-gradient-to-b mt-[-2rem] absolute left-[9.5%] 2xl:left-[15%] z-0 rounded-xl w-[80%] 2xl:w-[70%] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
+    <div className="to-slate-900 from-slate-500 bg-gradient-to-b mt-[-2rem] z-0 rounded-xl w-[80%] 2xl:w-[72rem] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
       <div className="p-2 max-h-[3.2rem] min-h-[3rem] h-[5%] border-b border-slate-600 w-full">
         <Link
-          to="/help-desk/tickets"
+          to="/tickets"
           className="text-slate-900 font-bold px-4 py-1 h-full w-full text-xl hover:opacity-80 rounded-md space-y-1 flext items-center space-x-1"
         >
           <BsArrowLeft className="inline" />
