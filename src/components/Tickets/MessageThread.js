@@ -1,29 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  BsPaperclip,
-  BsArrowLeft,
   BsFillTrashFill,
-  BsEnvelope,
+  BsThreeDotsVertical,
+  BsArrowLeft,
 } from "react-icons/bs";
 import { setThreadMessage } from "../../store/TicketsSlice";
 import { addReply, deleteTicket } from "../Data_Fetching/TicketsnUserData";
-import { Link } from "react-router-dom";
 import { updateAlert } from "../../store/NotificationsSlice";
 
-const MessageThread = () => {
+const MessageThread = ({ isChatOpen, setChat }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
-  const scrollToLastMessage = useRef();
-  const scrollToNone = useRef();
+  const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
-
-  //Functio ToScroll to last message
-  const lastMsg = () => {
-    scrollToLastMessage.current &&
-      scrollToLastMessage.current.scrollIntoView({ behavior: "smooth" });
-  };
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({
@@ -44,7 +35,6 @@ const MessageThread = () => {
             })
         )
       );
-    lastMsg();
   }, [dispatch, allTickets, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
@@ -59,10 +49,6 @@ const MessageThread = () => {
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
       .recipient_email;
-  let agentEmail =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0].agent_email;
-  let lastMsgPosition = threadMessage[threadMessage.length];
 
   //Loop Through Each Message In a thread ====================
   const thread =
@@ -70,61 +56,48 @@ const MessageThread = () => {
     threadMessage.map((message, index) => {
       return (
         <div
-          ref={
-            Number(message.message_position) === Number(lastMsgPosition)
-              ? scrollToLastMessage
-              : scrollToNone
-          }
           key={index}
-          className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-xl flex space-x-2"
+          className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-xl flex space-x-2 transition-all"
         >
           <div
-            className={`h-[2.5rem] w-[5%] max-w-[2.5rem] min-w-[2.5rem] flex justify-center items-center rounded-xl uppercase text-2xl text-gray-300 ${
-              message.from === "agent" ? "bg-blue-500" : "bg-slate-500"
-            }`}
+            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase text-lg text-gray-400 bg-blue-700`}
           >
             {`${
-              message.from === "agent"
+              message.from === "agent" && clientName && agentName
                 ? agentName.charAt(0)
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full bg-slate-900 p-4 space-y-2 rounded-xl">
-            <div className="font-bold  text-slate-300 justify-between w-full flex flex-col md:flex-row">
-              <span>{`${
-                message.from === "agent" ? agentName : clientName
-              }`}</span>{" "}
-              <h4 className="flex space-x-4">
-                <span className="text-xs text-slate-400 font-medium">
-                  {`${new Date(message.date).toDateString()}`}
-                </span>
-                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
-                <span className="text-xs text-slate-400 font-medium">
-                  {`${
-                    Number(message.time.split(":")[0]) < 10
-                      ? "0" + Number(message.time.split(":")[0])
-                      : message.time.split(":")[0]
-                  }:${
-                    Number(message.time.split(":")[1]) < 10
-                      ? "0" + Number(message.time.split(":")[1])
-                      : message.time.split(":")[1]
-                  }`}
-                </span>
-                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
-                <BsFillTrashFill
-                  onClick={() => deleteTicket(message.id)}
-                  className="inline hover:text-red-500 cursor-pointer"
-                />
-              </h4>
+          <div className="w-[95%] 2xl:w-full p-2 bg-transparent bg-[#192235] rounded-lg space-y-2">
+            <div className="w-[95%] 2xl:w-full bg-transparent space-y-2 rounded-lg">
+              <div className="font-bold  text-slate-400 justify-between w-full flex flex-col py-2 md:flex-row border-b border-slate-900">
+                <span>{`${
+                  message.from === "agent" ? agentName : clientName
+                }`}</span>{" "}
+                <h4 className="flex space-x-4">
+                  <span className="text-xs text-slate-400 font-medium">
+                    {`${new Date(message.date).toDateString()}`}
+                  </span>
+                  <span className="text-xs text-slate-500 font-medium">
+                    {`${
+                      Number(message.time.split(":")[0]) < 10
+                        ? "0" + Number(message.time.split(":")[0])
+                        : message.time.split(":")[0]
+                    }:${
+                      Number(message.time.split(":")[1]) < 10
+                        ? "0" + Number(message.time.split(":")[1])
+                        : message.time.split(":")[1]
+                    }`}
+                  </span>
+                  <hr className="w-[1px] h-4 inline-block bg-slate-600 border-0 rounded-xl" />
+                  <BsFillTrashFill
+                    onClick={() => deleteTicket(message.id)}
+                    className="inline hover:text-red-500 cursor-pointer"
+                  />
+                </h4>
+              </div>
+              <p className="mt-2 text-slate-500">{message.message}</p>
             </div>
-            <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-800 text-slate-500">
-              <BsEnvelope className="inline" />
-              {""}
-              <i>
-                From : {message.from === "agent" ? agentEmail : clientEmail}
-              </i>
-            </h5>
-            <p className="mt-2">{message.message}</p>
           </div>
         </div>
       );
@@ -162,71 +135,168 @@ const MessageThread = () => {
     );
   };
 
-  //Component ============================
+  //Component ======================================
   return (
-    <div className="to-slate-900 from-slate-500 bg-gradient-to-b mt-[-2rem] z-0 rounded-xl w-[80%] 2xl:w-[72rem] p-2 overflow-hidden h-[75vh] max-h-[40rem] min-h-[20rem] flex flex-col">
-      <div className="p-2 max-h-[3.2rem] min-h-[3rem] h-[5%] border-b border-slate-600 w-full">
-        <Link
-          to="/tickets"
-          className="text-slate-900 font-bold px-4 py-1 h-full w-full text-xl hover:opacity-80 rounded-md space-y-1 flext items-center space-x-1"
-        >
-          <BsArrowLeft className="inline" />
-          <span className="text-sm">Back</span>
-        </Link>
-      </div>
-      {/**Messages Thread =========================== */}
-      <div className="w-full h-[85%] overflow-y-scroll scroll-snap relative">
-        <div className="px-6 pt-4 space-y-3 z-0 h-full">{thread}</div>
-      </div>
-      {/**New message =========================== */}
-      <form
-        onSubmit={(e) => sendReply(e)}
-        className="w-full backdrop-blur-md flex items-center space-x-2 rounded-xl z-[9999] sticky bottom-0 p-2"
-      >
-        <div className="w-full h-[2.5rem] bg-slate-800 border border-slate-500 rounded-xl flex space-x-1 justify-between">
-          <textarea
-            type="text"
-            name="reply"
-            id="reply"
-            placeholder="Reply Here ✉️ ..."
-            autoComplete="off"
-            onKeyUp={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                sendReply(e);
-              }
-            }}
-            required
-            onChange={(e) => {
-              setReply({
-                ...reply,
-                message: e.target.value,
-                message_position: threadMessage.length + 1,
-              });
-            }}
-            value={reply.message}
-            className="bg-transparent w-full text-sm placeholder:text-sm rounded-xl bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
-          ></textarea>
-          {/**Other Btns =========================== */}
-          <label htmlFor="attachment">
-            <div className="h-[2.5rem] flex outline-none focus:outline-none items-center justify-center border-l border-slate-700 px-2 text-slate-400 font-bold text-base">
-              <BsPaperclip />
+    <div
+      className={`h-[35rem] lg:h-[40rem] ${
+        isChatOpen ? "flex" : "hidden"
+      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l border-slate-800  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap bg-slate-900`}
+    >
+      <div className="h-[70%] w-full bg-slate-800 px-2 pb-2 space-y-4  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
+        <div className="h-14 bg-slate-800 sticky py-2 top-0 w-full flex justify-between border-b border-slate-700">
+          {/**Back To Main List  On Small Screens====================== */}
+          <div
+            onClick={() => setChat(false)}
+            className="text-slate-400 font-bold py-1 h-full w-full text-xl hover:opacity-80 rounded-md space-y-1 flex lg:hidden items-center space-x-1 cursor-pointer"
+          >
+            <BsArrowLeft className="inline" />
+            <span className="text-sm">Back</span>
+          </div>
+
+          <h2 className="font-semibold text-sm text-slate-400 tracking-wide hidden lg:flex flex-col">
+            <span>Opened On</span>{" "}
+            <small className="text-xs text-slate-500">
+              {threadMessage.length >= 1 &&
+                new Date(
+                  threadMessage.filter(
+                    (message) => message.message_position === 1
+                  )[0].date
+                ).toDateString()}
+              , at{" "}
+              {`${
+                (threadMessage.length >= 1 &&
+                  Number(
+                    threadMessage
+                      .filter((message) => message.message_position === 1)[0]
+                      .time.split(":")[0]
+                  )) < 10
+                  ? "0" +
+                    (threadMessage.length >= 1 &&
+                      Number(
+                        threadMessage
+                          .filter(
+                            (message) => message.message_position === 1
+                          )[0]
+                          .time.split(":")[0]
+                      ))
+                  : threadMessage.length >= 1 &&
+                    Number(
+                      threadMessage
+                        .filter((message) => message.message_position === 1)[0]
+                        .time.split(":")[0]
+                    )
+              }:${
+                (threadMessage.length >= 1 &&
+                  Number(
+                    threadMessage
+                      .filter((message) => message.message_position === 1)[0]
+                      .time.split(":")[1]
+                  )) < 10
+                  ? "0" +
+                    (threadMessage.length >= 1 &&
+                      Number(
+                        threadMessage
+                          .filter(
+                            (message) => message.message_position === 1
+                          )[0]
+                          .time.split(":")[1]
+                      ))
+                  : threadMessage.length >= 1 &&
+                    Number(
+                      threadMessage
+                        .filter((message) => message.message_position === 1)[0]
+                        .time.split(":")[1]
+                    )
+              }`}
+            </small>{" "}
+          </h2>
+          <div className="flex space-x-2">
+            <h2 className="font-semibold text-sm text-slate-400 tracking-wide flex flex-col capitalize w-32 whitespace-nowrap overflow-hidden overflow-ellipsis">
+              <span>
+                {threadMessage.length >= 1 &&
+                  threadMessage.filter(
+                    (message) => message.message_position === 1
+                  )[0].category}
+              </span>{" "}
+              <small className="text-xs text-slate-500">
+                {clientName},{" "}
+                {threadMessage.length >= 1 &&
+                  threadMessage.filter(
+                    (message) => message.message_position === 1
+                  )[0].branch_company}
+              </small>{" "}
+            </h2>
+            <div className="w-9 h-9 bg-slate-900 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase text-slate-500 text-lg">
+              {clientName && clientName.charAt(0)}
             </div>
-            <input
-              type="file"
-              name="attachment"
-              id="attachment"
-              className="hidden"
-            />
-          </label>
+          </div>
         </div>
-        <button
-          type="submit"
-          className="h-[2.3rem] outline-none focus:outline-none focus:border-0 bg-blue-700 hover:opacity-80 transition-opacity duration-300 rounded-xl flex items-center justify-center text-slate-300 font-bold text-sm px-4"
-        >
-          Send
-        </button>
-      </form>
+        <div className="h-[20rem] w-full p-2 overflow-y-scroll scroll-snap space-y-2">
+          {/**Messages ============================ */}
+          {thread}
+          {/**End of Messages ============================ */}
+        </div>
+      </div>
+
+      {/**Reply ====================================== */}
+      <div className="h-[45%] lg:h-[40%] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
+        <div className="h-full w-full p-2 rounded-lg bg-slate-800 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent after:border-b-slate-800 after:border-l-transparent overflow-hidden grid grid-rows-4">
+          <div className="w-full row-span-1 h-full flex justify-between">
+            <div className="flex space-x-2">
+              <div className="w-9 h-9 bg-slate-900 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase text-slate-500 text-lg">
+                {user[0].name.charAt(0)}
+              </div>
+              <h2 className="font-semibold text-xs justify-center text-slate-400 tracking-wide flex flex-col">
+                <span>Reply As</span>{" "}
+                <small className="text-xs text-slate-500">{user[0].name}</small>{" "}
+              </h2>
+            </div>
+            <button className="h-9 w-9 rounded-lg hover:bg-slate-900 flex items-center justify-center text-slate-400 transition-all outline-none focus:outline-none text-base font-bold">
+              <BsThreeDotsVertical />
+            </button>
+          </div>
+          <form
+            onSubmit={(e) => sendReply(e)}
+            className="row-span-3 h-full w-full bg-slate-800 rounded-lg relative"
+          >
+            <textarea
+              name="reply"
+              id="reply"
+              cols="30"
+              rows="10"
+              placeholder="Type your message here..."
+              autoComplete="off"
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  sendReply(e);
+                }
+              }}
+              required
+              onChange={(e) => {
+                setReply({
+                  ...reply,
+                  message: e.target.value,
+                  message_position: threadMessage.length + 1,
+                  ticket_id:
+                    threadMessage.length >= 1 &&
+                    threadMessage.filter(
+                      (message) => message.message_position === 1
+                    )[0].ticket_id,
+                });
+              }}
+              value={reply.message}
+              className="h-full w-full bg-slate-800 rounded-lg resize-none border- text-sm text-slate-400 border-0 focus:outline-none outline-none focus:border-0 transition-all focus:ring-slate-700 placeholder:text-slate-500 placeholder:text-sm"
+            ></textarea>
+            <button
+              type="submit"
+              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-sm right-2 p-2 px-4 font-semibold text-slate-400 bg-blue-700 z-[99]"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

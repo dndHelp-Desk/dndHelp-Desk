@@ -41,7 +41,7 @@ const User = () => {
   //React Component =======================
   return (
     <div className="h-[8rem] z-0 w-full bg-slate-800 backdrop-blur-lg p-2 flex justify-center">
-      <idv className="w-[80%] 2xl:w-[72rem] flex justify-between  relative">
+      <div className="w-[80%] 2xl:w-[72rem] flex justify-between  relative">
         <div className="flex space-x-2 h-full">
           {/** Profile =================== */}
           <Profile />
@@ -169,7 +169,7 @@ const User = () => {
             Sign Out
           </button>
         </div>
-      </idv>
+      </div>
     </div>
   );
 };

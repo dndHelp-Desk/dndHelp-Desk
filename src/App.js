@@ -6,13 +6,12 @@ import ReportsComponent from "./components/Reports/ReportComponent";
 import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
 import SettingsComponent from "./components/Settings/SettingsComponents";
-import MessageThread from "./components/Tickets/MessageThread";
 import SupportHome from "./components/ClientSupport/SupportHome";
 import NewTicket from "./components/ClientSupport/NewTicket";
 
 const App = () => {
   return (
-    <div className="overflow-hidden pb-6 bg-slate-500">
+    <div className="overflow-hidden">
       <BrowserRouter>
         <Routes>
           <Route exact path="/logIn" element={<LogIn />} />
@@ -22,7 +21,6 @@ const App = () => {
           <Route path="/" element={<MainComponent />}>
             <Route path="tickets" element={<TicketsComponent />} />
             <Route path="reports" element={<ReportsComponent />} />
-            <Route path="thread" element={<MessageThread />} />
             <Route path="contacts" element={<ContactsComponent />} />
             <Route path="settings" element={<SettingsComponent />} />
           </Route>

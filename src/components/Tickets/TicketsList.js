@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsEnvelope } from "react-icons/bs";
-import placeHolderImg from "./images/email-open.png";
+import Filters from "./Filters";
 import {
   changePriority,
   changeStatus,
 } from "./../Data_Fetching/TicketsnUserData";
 import { setThreadId } from "./../../store/TicketsSlice";
+import MessageThread from "./MessageThread";
 
 const TicketsList = ({ setModal, setDelete, deleteArray }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
 
   //Loop Through Each Tickects =================
@@ -22,14 +23,14 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5.5rem] snap_childTwo rounded-lg bg-slate-900 p-3 space-x-2 overflow-hidden flex ${
+          className={`w-full h-[5.5rem] snap_childTwo rounded-lg bg-slate-800 p-2 space-x-2 overflow-hidden flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
-              ? "bg-slate-800"
+              ? "opacity-60"
               : ""
           }`}
         >
-          <div className="col-span-1 h-full md:w-[7rem] flex justify-between px-1 items-center">
+          <div className="col-span-1 h-full xl:w-[7rem] flex justify-between space-x-2 items-center">
             <input
               type="checkbox"
               className="rounded border-slate-300 text-blue-600 h-3 w-3 shadow-sm  focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
@@ -42,7 +43,7 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
                   : setDelete(deleteArray.filter((data) => data !== ticket.id))
               }
             />
-            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl bg-slate-500 hidden md:flex justify-center items-center">
+            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl bg-slate-700 hidden sm:flex lg:hidden xl:flex justify-center items-center">
               <abbr title={ticket.recipient_name}>
                 <h4 className="text-slate-300 font-semibold text-xl">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
@@ -50,30 +51,28 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
               </abbr>
             </div>
           </div>
-          <Link
-            to="/thread"
+          <div
             onClick={() => {
               dispatch(setThreadId(ticket.ticket_id));
               window.localStorage.setItem("threadId", JSON.stringify(threadId));
+              setChat(true);
             }}
-            className="col-span-5 flex flex-col justify-center h-full w-full border-l-2 border-slate-600 px-2 py-1"
+            className="col-span-5 flex flex-col justify-center h-full w-full border-l-2 border-slate-600 px-2 py-1 cursor-pointer"
           >
-            <h2 className="text-slate-300 text-base font-bold font-sans capitalize">
+            <h2 className="text-slate-300 text-base font-bold font-sans capitalize whitespace-nowrap">
               {ticket.category}{" "}
-              <span className="text-slate-400 font-medium text-sm">
+              <span className="text-slate-400 font-medium text-sm hidden md:flex xl:flex">
                 {ticket.ticket_id}
               </span>
             </h2>
-            <h5 className="text-slate-400 text-xs tracking-wide font-base font-sans flex flex-wrap items-center space-x-1 capitalize">
-              <BsEnvelope className="inline" />{" "}
-              <span className="">{ticket.recipient_name}</span>{" "}
-              <span>{`(${ticket.branch_company})`}</span>
-              <small className="tracking-widest">{` • Created on ${new Date(
-                ticket.date
-              ).toDateString()}`}</small>
+            <h5 className="text-slate-400 text-xs tracking-wide font-base font-sans flex flex-col flex-wrap justify-center capitalize">
+              <span className="">
+                <BsEnvelope className="inline" /> {ticket.recipient_name}
+              </span>{" "}
+              <span className="flex lg:hidden 2xl:flex">{`${ticket.branch_company}`}</span>
             </h5>
-          </Link>
-          <div className="col-span-5 hidden float-right h-full w-[20rem] md:flex flex-col items-center justify-center space-y-1">
+          </div>
+          <div className="col-span-5 float-right h-full w-[20rem] flex flex-col items-center justify-center space-y-1">
             <div className="w-[10rem] flex items-baseline justify-end">
               <span
                 className={`text-green-600 ${
@@ -142,38 +141,19 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
 
   //Component ======================================
   return (
-    <div className="p-1 space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
-      {/**Do DataPlaceholder  ==========================  */}
-      {allTickets.length <= 0 && (
-        <div className="bg-slate-900 min-h-[35rem] max-h-[40rem] w-full rounded-xl p-12 flex items-center justify-center">
-          <div className="h-[15rem] w-[15rem]">
-            <img
-              src={placeHolderImg}
-              className="h-full w-full object-center object-contain"
-              alt="no-tickects"
-            />
+    <div className="p-1 overflow-hidden">
+      {/**Tickets ========================================== */}
+      <div className="flex flex-col lg:flex-row bg-slate-900 rounded-xl p-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
+        <div className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 ${isChatOpen?"hidden lg:flex lg:opacity-100 opacity-0":""}`}>
+          <div className="w-full bg-slate-800 rounded-full z-0 h-12 p-1">
+            <Filters />
           </div>
-          <div className="space-y-3">
-            <h2 className="text-slate-300 font-bold text-2xl capitalize font-sans">
-              There Are no tickets to display
-            </h2>
-            <p className="text-base font-sans text-slate-400">
-              A data search did not obtain any results.
-              <br />
-              Create a new ticket or change the date to see previous data.
-              <br></br>
-            </p>
-            <button
-              onClick={() => setModal(true)}
-              className="bg-blue-600 focus:outline-none outline-none hover:opacity-80 transition-opacity duration-300 rounded-full px-6 py-2 text-slate-300 capitalize font-semibold text-sm tracking-wide"
-            >
-              new ticket
-            </button>
+          <div className="w-full h-full space-y-2 overflow-y-scroll border-t border-slate-800 pt-2 lg:no-scrollbar lg:no-scrollbar::-webkit-scrollbar scroll-snap pr-2 lg:pr-0">
+            {tickets}
           </div>
         </div>
-      )}
-      {/**Tickets ========================================== */}
-      {tickets}
+        <MessageThread isChatOpen={isChatOpen} setChat={setChat} />
+      </div>
     </div>
   );
 };
