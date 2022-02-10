@@ -4,7 +4,6 @@ import {
   BsCheckAll,
   BsArrowRepeat,
   BsEnvelopeOpen,
-  BsThreeDotsVertical,
 } from "react-icons/bs";
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 import cardsBg from "./image/cardsBg.svg";
