@@ -1,13 +1,8 @@
 import React, { useEffect } from "react";
 import {
-  BsSearch,
-  BsPerson,
   BsShopWindow,
-  BsReceiptCutoff,
-  BsCalendar2Week,
 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import DateFilter from "./../Reports/DatePicker";
 import { filter, updateFilteredTickets } from "./../../store/TicketsSlice";
 
 const Filters = () => {
