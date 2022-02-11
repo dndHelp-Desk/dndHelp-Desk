@@ -103,12 +103,12 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   return (
     <div
       className={`fixed ${
-        newTicketModal === true ? "flex" : "hidden"
-      } top-0 left-0 right-0 min-h-[45rem] h-screen w-screen bg-[#030d2769] justify-center items-center`}
+        newTicketModal === true ? "fixed flex z-[999]" : "hidden"
+      } top-0 left-0 right-0 min-h-[45rem] h-screen w-screen bg-[#030d2769] justify-center pt-20`}
     >
       <div
         ref={closeModalRef}
-        className="bg-slate-300 shadow-2xl w-3/5 max-w-[30rem] rounded-lg relative py-4"
+        className="bg-slate-300 shadow-2xl w-3/5 max-w-[30rem] max-h-[36rem] rounded-lg relative py-4"
       >
         <h3 className="text-center slate-900 text-lg font-bold">New Ticket</h3>
 
@@ -307,7 +307,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
           <div className="w-full flex justify-center">
             <button
               type="submit"
-              className="px-6 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-full font-bold uppercase text-sm"
+              className="px-6 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-md font-bold uppercase text-sm"
             >
               Send
             </button>

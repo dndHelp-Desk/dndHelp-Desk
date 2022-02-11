@@ -54,27 +54,27 @@ const Main = () => {
             <div className="row-span-1 flex justify-center md:justify-start items-center space-x-1">
               <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 flex items-center justify-center relative">
                 <img
-                  src="https://cutt.ly/1OxImPP"
+                  src="https://images.unsplash.com/photo-1640951613773-54706e06851d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
                   alt="user"
                   className="object-center h-full w-full object-cover rounded-xl"
                 />
-                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border border-slate-900"></span>
+                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border dark:border-slate-900 border-slate-100"></span>
               </div>
               <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 flex items-center justify-center relative">
                 <img
-                  src="https://cutt.ly/jOxI9s4"
+                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
                   alt="user"
                   className="object-center h-full w-full object-cover rounded-xl"
                 />
-                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border border-slate-900"></span>
+                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border dark:border-slate-900 border-slate-100"></span>
               </div>
               <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 flex items-center justify-center relative">
                 <img
-                  src="https://cutt.ly/aOxUWV8"
+                  src="https://images.unsplash.com/photo-1524660988542-c440de9c0fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                   alt="user"
                   className="object-center h-full w-full object-cover rounded-xl"
                 />
-                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border border-slate-900"></span>
+                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border dark:border-slate-900 border-slate-100"></span>
               </div>
               <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 dark:text-slate-400 text-slate-300 text-xl flex items-center justify-center">
                 +
