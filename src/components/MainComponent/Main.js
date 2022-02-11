@@ -32,7 +32,7 @@ const Main = () => {
         location.pathname === "/" ? "grid" : "hidden"
       } dark:bg-slate-800 w-[90%] sm:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
     >
-      <div className="h-[40rem] grid grid-rows-3 gap-4">
+      <div className="h-[42rem] grid grid-rows-3 gap-4">
         <div className="row-span-1 w-full dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-3 overflow-hidden py-6 p-2 gap-1">
           <div
             style={{ backgroundImage: `url(${WelcomeSvg})` }}

@@ -26,14 +26,14 @@ const Alert = () => {
   //React Component ===========
   return (
     <div
-      className={`absolute left-[64.5%] top-[102%] z-[999] ${
+      className={`absolute h-screen w-screen z-[999] ${
         flag ? "" : "hidden"
       }`}
     >
       {/* Code block starts */}
       <div
         id="alert"
-        className={`transition duration-150 ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow rounded overflow-hidden ${alerts.color}`}
+        className={`transition duration-150 max-w-[35rem] fixed bottom-24 right-8 ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow rounded overflow-hidden ${alerts.color}`}
       >
         <div className="sm:flex sm:items-start lg:items-center">
           <div className="flex items-center space-x-2 justify-between px-2 border-r border-slate-900">

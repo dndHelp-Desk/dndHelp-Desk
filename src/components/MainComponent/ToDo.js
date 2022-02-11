@@ -132,7 +132,7 @@ const ToDo = () => {
         </button>
       </form>
       {/**Task List ===================== */}
-      <div className="h-[21rem] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
+      <div className="h-[22.5rem] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
         <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
           {tasks}
         </div>

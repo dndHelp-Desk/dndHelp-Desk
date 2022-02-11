@@ -22,7 +22,7 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5.5rem] snap_childTwo rounded-lg dark:bg-slate-800 bg-slate-200 p-2 space-x-2 overflow-hidden flex ${
+          className={`w-full h-[5.5rem] snap_childTwo rounded-lg dark:bg-slate-800  ${ticket.ticket_id === threadId?"border-2 dark:border-slate-600 border-slate-400":""} bg-slate-200 p-2 space-x-2 overflow-hidden flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
               ? "dark:opacity-60 opacity-70"
