@@ -2,7 +2,7 @@ import React from 'react';
 
 const SettingsComponents = () => {
   return (
-    <div className="bg-slate-900 mt-[-2rem] z-0 rounded-xl w-[80%] 2xl:w-[72rem] p-2 overflow-hidden"></div>
+    <div className="dark:bg-slate-900 bg-slate-100 mt-4 min-h-[40rem] container rounded-xl w-[90%] sm:w-full 2xl:w-[72rem] p-2 overflow-hidden"></div>
   );
 };
 

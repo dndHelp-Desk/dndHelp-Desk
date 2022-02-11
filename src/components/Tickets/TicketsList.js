@@ -22,10 +22,10 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5.5rem] snap_childTwo rounded-lg bg-slate-800 p-2 space-x-2 overflow-hidden flex ${
+          className={`w-full h-[5.5rem] snap_childTwo rounded-lg dark:bg-slate-800 bg-slate-200 p-2 space-x-2 overflow-hidden flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
-              ? "opacity-60"
+              ? "dark:opacity-60 opacity-70"
               : ""
           }`}
         >
@@ -42,7 +42,7 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
                   : setDelete(deleteArray.filter((data) => data !== ticket.id))
               }
             />
-            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl bg-slate-700 hidden sm:flex lg:hidden xl:flex justify-center items-center">
+            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl dark:bg-slate-700 bg-slate-500 hidden sm:flex lg:hidden xl:flex justify-center items-center">
               <abbr title={ticket.recipient_name}>
                 <h4 className="text-slate-300 font-semibold text-xl">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
@@ -56,15 +56,12 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
               window.localStorage.setItem("threadId", JSON.stringify(threadId));
               setChat(true);
             }}
-            className="col-span-5 flex flex-col justify-center h-full w-full border-l-2 border-slate-600 px-2 py-1 cursor-pointer"
+            className="col-span-5 flex flex-col justify-center h-full w-full border-l-2 dark:border-slate-600 border-slate-400 px-2 py-1 cursor-pointer"
           >
-            <h2 className="text-slate-300 text-base font-bold font-sans capitalize whitespace-nowrap">
-              {ticket.category}{" "}
-              <span className="text-slate-400 font-medium text-sm hidden md:flex xl:flex">
-                {ticket.ticket_id}
-              </span>
+            <h2 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans capitalize whitespace-nowrap">
+              {ticket.category} {ticket.ticket_id}
             </h2>
-            <h5 className="text-slate-400 text-xs tracking-wide font-base font-sans flex flex-col flex-wrap justify-center capitalize">
+            <h5 className="dark:text-slate-400 text-slate-500 text-xs tracking-wide font-base font-sans flex flex-col flex-wrap justify-center capitalize">
               <span className="">
                 <BsEnvelope className="inline" /> {ticket.recipient_name}
               </span>{" "}
@@ -91,7 +88,7 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
               </span>{" "}
               <select
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize"
+                className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-slate-500 focus:outline-none outline-none capitalize"
               >
                 <option className="capitalize p-2" value="low">
                   {ticket.priority}
@@ -111,10 +108,10 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
               </select>
             </div>
             <div className="w-[10rem] flex items-baseline justify-end">
-              <span className="text-slate-400">↝</span>{" "}
+              <span className="dark:text-slate-400 text-slate-500">↝</span>{" "}
               <select
                 onChange={(e) => changeStatus(ticket.id, e.target.value)}
-                className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex text-slate-400 focus:outline-none outline-none capitalize"
+                className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-slate-500 focus:outline-none outline-none capitalize"
               >
                 <option className="capitalize p-2" value="resolved">
                   {ticket.status}
@@ -140,14 +137,18 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
 
   //Component ======================================
   return (
-    <div className="p-1 overflow-hidden">
+    <div className="relative">
       {/**Tickets ========================================== */}
-      <div className="flex flex-col lg:flex-row bg-slate-900 rounded-xl p-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
-        <div className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 ${isChatOpen?"hidden lg:flex lg:opacity-100 opacity-0":""}`}>
-          <div className="w-full bg-slate-800 rounded-full z-0 h-12 p-1">
+      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-slate-100 rounded-xl p-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
+        <div
+          className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 ${
+            isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
+          }`}
+        >
+          <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-full z-0 h-12 p-1">
             <Filters />
           </div>
-          <div className="w-full h-full space-y-2 overflow-y-scroll border-t border-slate-800 pt-2 lg:no-scrollbar lg:no-scrollbar::-webkit-scrollbar scroll-snap pr-2 lg:pr-0">
+          <div className="w-full h-full space-y-2 overflow-y-scroll border-t dark:border-slate-800 border-slate-300 pt-2 lg:no-scrollbar lg:no-scrollbar::-webkit-scrollbar scroll-snap pr-2 lg:pr-0">
             {tickets}
           </div>
         </div>

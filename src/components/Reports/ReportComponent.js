@@ -13,25 +13,25 @@ const ReportsComponent = () => {
 
   //Component =========================
   return (
-    <div className="bg-slate-500 p-2 min-h-[40rem] mt-[-2rem] z-0 rounded-xl w-[80%] 2xl:w-[72rem] overflow-hidden gap-4 flex flex-col">
-
+    <div className="bg-transparent min-h-[40rem] mt-4 container w-[90%] sm:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col">
       {/**Filters or TopNav Small-Screens ================= */}
       <button
         onClick={() => setShowFilters(true)}
-        className="h-12 w-full outline-none focus:outline-none bg-slate-900 rounded-xl flex lg:hidden justify-center items-center"
+        className="h-12 w-full outline-none focus:outline-none dark:bg-slate-900 bg-slate-100 rounded-xl flex lg:hidden justify-center items-center"
       >
         <h5 className="uppercase font-bold text-base font-sans text-slate-500 tracking-wide">
           click here to select filters ...
         </h5>
         <div
           ref={filtersModalRef}
-          className={`absolute w-[18rem] shadow-2xl left-[18%] md:left-[32%] top-[13.6rem] bg-[#33415563]  backdrop-blur-lg border border-slate-400 rounded-xl z-[999] flex lg:hidden flex-col space-y-2 p-4 items-center justify-center ${
+          className={`absolute w-[18rem] shadow-2xl left-[18%] md:left-[32%] top-[9rem] bg-[#33415563]  backdrop-blur-lg border border-slate-400 rounded-xl z-[999] flex lg:hidden flex-col space-y-2 p-4 items-center justify-center ${
             showFilters ? "" : "hidden"
           }`}
         >
           <Filters />
         </div>
       </button>
+
       {/**Larger BreakPoint ============ */}
       <nav className="w-full rounded-xl hidden lg:grid grid-cols-5 gap-4">
         <Filters />

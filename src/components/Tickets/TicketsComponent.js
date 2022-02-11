@@ -75,25 +75,28 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-slate-500 mt-[-2rem] z-0 w-[80%] 2xl:w-[72rem] p-2 px-1 overflow-hidden rounded-xl min-h-[40rem] 3xl:min-h-[80%] relative">
+    <div className="bg-transparent space-y-4 container w-[90%] sm:w-full 2xl:w-[72rem] mt-4 rounded-xl min-h-[40rem] 3xl:min-h-[80%] relative">
       {/**Navbar or Control Bar  ====================== */}
-      <nav className="h-[3.2rem] sticky top-0 flex justify-between items-center w-full px-1 pb-1">
+      <nav className="h-[2.5rem] flex justify-between items-center w-full relative">
         {/**Search Bar ============================== */}
-        <div className="flex h-full gap-2">
+        <div className="flex h-full gap-4">
           {/**Filter Btn ============================== */}
-          <OffCanvasMenu filtersModal={filtersModal} setfiltersModal={setfiltersModal}/>
+          <OffCanvasMenu
+            filtersModal={filtersModal}
+            setfiltersModal={setfiltersModal}
+          />
           <button
             onClick={() => setfiltersModal(filtersModal ? false : true)}
-            className="min-w-10 px-8 h-full rounded-lg flex space-x-2 justify-between items-center relative bg-slate-900 focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg text-slate-400 text-sm font-bas"
+            className="min-w-10 px-8 h-full rounded-lg flex space-x-2 justify-between items-center relative dark:bg-slate-900 bg-slate-100 focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
           >
-            <BsSliders className="text-slate-400" />
+            <BsSliders className="dark:text-slate-400 text-slate-500 font-bold" />
             <span className="hidden md:flex">Filters</span>
           </button>
 
           {/**Delete Ticket ================================= */}
           <button
             onClick={() => deleteSelected()}
-            className={`bg-slate-900 h-full w-12 rounded-lg text-red-600 ${
+            className={`dark:bg-slate-900 bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-red-600  font-semibold ${
               deleteArray.length >= 1 ? "flex" : "hidden"
             } items-center justify-center text-lg`}
           >
@@ -105,7 +108,7 @@ const TicketsComponent = () => {
           {/**Assign Agent ================================= */}
           <button
             onClick={() => setPanel(true)}
-            className={`bg-slate-900 h-full w-12 rounded-lg text-blue-600 ${
+            className={`dark:bg-slate-900 bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-blue-600  font-semibold ${
               deleteArray.length >= 1 ? "flex" : "hidden"
             } items-center justify-center text-lg`}
           >
@@ -114,9 +117,11 @@ const TicketsComponent = () => {
             </abbr>
           </button>
         </div>
+
+        {/*** New Ticket ======================== */}
         <button
           onClick={() => setModal(true)}
-          className="bg-slate-900 h-full px-8 rounded-lg flex justify-center items-center text-slate-400 text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring focus:ring-slate-600 hover:bg-slate-800 duration-300 transition-bg"
+          className="dark:bg-slate-900 bg-slate-100 h-full px-8 rounded-lg flex justify-center items-center dark:text-slate-400 text-slate-500 text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg font-semibold"
         >
           + New Ticket
         </button>
@@ -126,7 +131,7 @@ const TicketsComponent = () => {
       {activeUser[0].access === "admin" && (
         <div
           ref={contactRef}
-          className={`h-[15rem] w-[12rem] bg-[#141a697e] backdrop-blur-sm p-2 rounded-lg border border-slate-400 absolute left-[45px] md:left-[280px] z-[9999] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+          className={`h-[15rem] w-[12rem] bg-[#141a697e] backdrop-blur-sm p-2 rounded-lg border border-slate-400 absolute left-[45px] md:left-[280px] z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
             contactsPanel ? "" : "hidden"
           }`}
         >

@@ -26,7 +26,7 @@ const Alert = () => {
   //React Component ===========
   return (
     <div
-      className={`absolute right-[10.5%] top-[7%] z-[999] ${
+      className={`absolute left-[64.5%] top-[102%] z-[999] ${
         flag ? "" : "hidden"
       }`}
     >
@@ -44,7 +44,7 @@ const Alert = () => {
             ) : (
               <BsFillExclamationTriangleFill className="text-red-600" />
             )}
-            <p className="mr-2 text-base font-bold text-gray-800 dark:text-gray-100">
+            <p className="mr-2 text-base font-bold text-gray-800">
               {`${
                 alerts.color === "bg-green-200"
                   ? "Success"
@@ -54,7 +54,7 @@ const Alert = () => {
               }`}
             </p>
           </div>
-          <p className="px-4 text-sm text-gray-800 tracking-wide dark:text-gray-400 pt-2 sm:pt-0 pb-2 sm:pb-0 capitalize">
+          <p className="px-4 text-sm text-gray-800 tracking-wide pt-2 sm:pt-0 pb-2 sm:pb-0 capitalize">
             {alerts.message}
           </p>
         </div>

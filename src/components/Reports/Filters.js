@@ -86,7 +86,7 @@ const Filters = () => {
         <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
         <DateFilter />
       </div>
-      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsSearch className="text-slate-500 absolute h-10 left-3" />
         <input
           type="search"
@@ -96,11 +96,11 @@ const Filters = () => {
           onChange={(e) =>
             dispatch(filter({ ...filters, category: e.target.value }))
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none border-slate-800 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-800 border-slate-400 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
           placeholder="Category ..."
         />
       </div>
-      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -110,11 +110,11 @@ const Filters = () => {
           onChange={(e) =>
             dispatch(filter({ ...filters, agent: e.target.value }))
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none border-slate-800 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-800 border-slate-400 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
           placeholder="Agent Name ..."
         />
       </div>
-      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -124,11 +124,11 @@ const Filters = () => {
           onChange={(e) =>
             dispatch(filter({ ...filters, client: e.target.value }))
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none border-slate-800 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-800 border-slate-400 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
           placeholder="Company / Brand ..."
         />
       </div>
-      <div className="col-span-1 bg-slate-900 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsReceiptCutoff className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -138,7 +138,7 @@ const Filters = () => {
           onChange={(e) =>
             dispatch(filter({ ...filters, status: e.target.value }))
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none border-slate-800 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-800 border-slate-400 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
           placeholder="Ticket Status ..."
         />
       </div>

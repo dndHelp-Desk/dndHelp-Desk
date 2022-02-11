@@ -1,7 +1,9 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import { useSelector } from "react-redux";
 
 const CategoryPies = ({ data }) => {
+  const theme = useSelector(state => state.UserInfo.theme)
   const series = [data];
   const options = {
     chart: {
@@ -17,7 +19,7 @@ const CategoryPies = ({ data }) => {
           show: false,
         },
         track: {
-          background: "#1e293b",
+          background: theme === "dark" ? "#1e293b" : "#cbd5e1",
         },
       },
     },

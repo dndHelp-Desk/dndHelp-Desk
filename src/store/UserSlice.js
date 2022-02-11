@@ -1,21 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialLocation = () =>
+const initialLocation = () =>
   window.localStorage.getItem("locationPath") || "Dial n Dine Help-Desk";
+
+//Get Theme From Local Storage ==============
+const initialTheme = () => {
+  const currentTheme = localStorage.getItem("theme");
+  return JSON.parse(currentTheme);
+};
 
 const initialState = {
   username: "Unkown User",
   allMembers: [],
-  member_details: [{
-    access: "none",
-    dept: "Unkown Dept",
-    email: "example@gmail.com",
-    id: "A1w2FvwWbcGBECBUj",
-    name: "User Loader",
-  }],
+  member_details: [
+    {
+      access: "none",
+      dept: "Unkown Dept",
+      email: "example@gmail.com",
+      id: "A1w2FvwWbcGBECBUj",
+      name: "User Loader",
+    },
+  ],
   authenticated: false,
   routeLocation: initialLocation(),
-  toDo:[]
+  toDo: [],
+  theme: initialTheme() === null ? "dark" : initialTheme(),
 };
 
 export const UserSlice = createSlice({
@@ -34,13 +43,22 @@ export const UserSlice = createSlice({
     changeLocation: (state, action) => {
       state.routeLocation = action.payload;
     },
-    setToDo:(state,action)=>{
-      state.toDo  = action.payload
-    }
+    setToDo: (state, action) => {
+      state.toDo = action.payload;
+    },
+    changeTheme: (state, action) => {
+      state.theme = action.payload;
+    },
   },
 });
 
-export const { isAuthenticated, updateUser, addAllMembers, changeLocation, setToDo } =
-  UserSlice.actions;
+export const {
+  isAuthenticated,
+  updateUser,
+  addAllMembers,
+  changeLocation,
+  setToDo,
+  changeTheme,
+} = UserSlice.actions;
 
 export default UserSlice.reducer;

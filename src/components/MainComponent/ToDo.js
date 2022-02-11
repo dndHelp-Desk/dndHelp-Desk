@@ -54,7 +54,7 @@ const ToDo = () => {
       return (
         <div
           key={task.id}
-          className="h-14 w-full flex items-center justify-between space-x-2 rounded-xl bg-slate-800 p-2 snap_childTwo"
+          className="h-14 w-full flex items-center justify-between space-x-2 rounded-xl dark:bg-slate-800 bg-slate-200 p-2 snap_childTwo"
         >
           <button
             onClick={() => markToDo(task.id, task.status ? false : true)}
@@ -75,7 +75,7 @@ const ToDo = () => {
             </div>
           </button>
           <div className="h-full overflow-hidden">
-            <p className="text-slate-400 w-[5rem] md:w-[10rem] lg:w-[7rem] 2xl:w-[10rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+            <p className="dark:text-slate-400 text-slate-500 w-[5rem] md:w-[10rem] lg:w-[7rem] 2xl:w-[10rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
               <abbr title={task.task}>{task.task}</abbr>
             </p>
             <small className="text-slate-500 text-xs font-semibold">
@@ -83,17 +83,17 @@ const ToDo = () => {
             </small>
           </div>
           <div
-            className={`h-6 border border-slate-700 flex items-center justify-center rounded-full px-2 text-xs  p-1 ${
+            className={`h-6 border dark:border-slate-700 border-slate-400 flex items-center justify-center rounded-full px-2 text-xs  p-1 ${
               task.status === true
-                ? "bg-[#4ef31c33] text-green-400"
-                : "bg-slate-900 text-slate-400"
+                ? "bg-[#4ef31c33] dark:text-green-400 text-green-600"
+                : "dark:bg-slate-900 bg-slate-300 dark:text-slate-400 text-slate-600"
             }`}
           >
             {`${task.status === true ? "Completed" : "Pending"}`}
           </div>
           <BsFillTrashFill
             onClick={() => deleteTask(task.id)}
-            className="text-slate-400 hover:text-red-500 cursor-pointer transition-all duration-300"
+            className="dark:text-slate-400 text-slate-400 hover:text-red-500 cursor-pointer transition-all duration-300"
           />
         </div>
       );
@@ -101,18 +101,18 @@ const ToDo = () => {
 
   //Component =============================================
   return (
-    <div className="col-span-1 rounded-xl space-y-2">
+    <div className="col-span-1 rounded-xl space-y-4">
       <form
         onSubmit={(e) => addTask(e)}
-        className="h-[15%] p-1 px-3 bg-slate-900 w-full rounded-xl grid grid-cols-10 gap-1 place-content-center"
+        className="h-[15%] p-1 px-3 dark:bg-slate-900  bg-slate-100 w-full rounded-xl grid grid-cols-10 gap-1 place-content-center"
       >
-        <div className="h-10 w-full col-span-6 bg-slate-800 rounded-lg relative overflow-hidden">
+        <div className="h-10 w-full col-span-6 dark:bg-slate-800 bg-slate-200 rounded-lg relative overflow-hidden">
           <input
             type="text"
             name="search"
             id="search"
             required
-            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent border-slate-700 placeholder:text-sm text-slate-400"
+            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent dark:border-slate-700 border-slate-300 placeholder:text-sm text-slate-400"
             placeholder="Type Your Task Here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}
@@ -132,7 +132,7 @@ const ToDo = () => {
         </button>
       </form>
       {/**Task List ===================== */}
-      <div className="h-[22rem] w-full bg-slate-900 rounded-xl p-4 overflow-hidden">
+      <div className="h-[21rem] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
         <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
           {tasks}
         </div>

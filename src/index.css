@@ -24,7 +24,7 @@
   }
 
   .TabsLinks {
-    @apply flex items-center space-x-1 hover:opacity-80 text-xs outline-none focus:outline-none font-sans font-semibold uppercase tracking-wide transition-opacity duration-300;
+    @apply flex items-center space-x-1 hover:opacity-80 text-xs outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wide transition-opacity duration-300;
   }
   .navlinks.active {
     @apply border-b border-slate-400;

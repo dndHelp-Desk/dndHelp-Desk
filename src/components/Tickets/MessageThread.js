@@ -55,13 +55,14 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   const thread =
     threadMessage.length >= 1 &&
     threadMessage.map((message, index) => {
+      let options = false;
       return (
         <div
           key={index}
           className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-xl flex space-x-2 transition-all"
         >
           <div
-            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase text-lg text-gray-400 bg-blue-700`}
+            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase text-lg dark:text-gray-400 text-slate-300 bg-blue-700`}
           >
             {`${
               message.from === "agent" && clientName && agentName
@@ -69,14 +70,14 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full p-2 bg-transparent bg-[#192235] rounded-lg space-y-2">
+          <div className="w-[95%] 2xl:w-full dark:p-2 bg-transparent dark:bg-[#192235] bg-slate-200 rounded-lg space-y-2">
             <div className="w-[95%] 2xl:w-full bg-transparent space-y-2 rounded-lg">
-              <div className="font-bold  text-slate-400 justify-between w-full flex flex-col py-2 md:flex-row border-b border-slate-900">
+              <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between items-center w-full flex flex-col dark:py-1 md:flex-row border-b dark:border-slate-900 border-slate-300 relative">
                 <span>{`${
                   message.from === "agent" ? agentName : clientName
                 }`}</span>{" "}
-                <h4 className="flex space-x-4">
-                  <span className="text-xs text-slate-400 font-medium">
+                <h4 className="flex h-full items-center space-x-4">
+                  <span className="text-xs dark:text-slate-400 text-slate-500  font-medium">
                     {`${new Date(message.date).toDateString()}`}
                   </span>
                   <span className="text-xs text-slate-500 font-medium">
@@ -90,11 +91,28 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                         : message.time.split(":")[1]
                     }`}
                   </span>
-                  <hr className="w-[1px] h-4 inline-block bg-slate-600 border-0 rounded-xl" />
-                  <BsFillTrashFill
-                    onClick={() => deleteTicket(message.id)}
-                    className="inline hover:text-red-500 cursor-pointer"
-                  />
+                  <button
+                    onClick={() => {
+                      options === true ? (options = false) : (options = true);
+                      console.log(options);
+                    }}
+                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-900 hover:bg-slate-400 flex items-center justify-center"
+                  >
+                    <BsThreeDotsVertical className="inline  cursor-pointer" />
+                  </button>
+                  <div
+                    className={`w-[10rem] h-[12rem] ${
+                      options === true ? "" : "hidden"
+                    } z-[99] shadow-lg border border-slate-700 bg-[#0f172a83] backdrop-blur-sm rounded-lg absolute right-0 top-10 p-2`}
+                  >
+                    <h5 className="text-slate-400 font-medium text-sm flex justify-between items-center">
+                      <span>Delete</span>
+                      <BsFillTrashFill
+                        onClick={() => deleteTicket(message.id)}
+                        className="hover:text-red-500 cursor-pointer"
+                      />
+                    </h5>
+                  </div>
                 </h4>
               </div>
               <p className="mt-2 text-slate-500">{message.message}</p>
@@ -141,10 +159,10 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     <div
       className={`h-[35rem] lg:h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l border-slate-800  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap bg-slate-900`}
+      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-300  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
-      <div className="h-[70%] w-full bg-slate-800 px-2 pb-2 space-y-4  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
-        <div className="h-14 bg-slate-800 sticky py-2 top-0 w-full flex justify-between border-b border-slate-700">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-200 px-2 pb-2 space-y-4  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
+        <div className="h-14 dark:bg-slate-800 bg-slate-200 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-700 border-slate-300">
           {/**Back To Main List  On Small Screens====================== */}
           <div
             onClick={() => setChat(false)}
@@ -154,7 +172,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             <span className="text-sm">Back</span>
           </div>
 
-          <h2 className="font-semibold text-sm text-slate-400 tracking-wide hidden lg:flex flex-col">
+          <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-500 tracking-wide hidden lg:flex flex-col">
             <span>Opened On</span>{" "}
             {threadId && (
               <small className="text-xs text-slate-500">
@@ -220,8 +238,8 @@ const MessageThread = ({ isChatOpen, setChat }) => {
               <small className="text-xs text-slate-500">Click Any Ticket</small>
             )}
           </h2>
-          <div className="flex space-x-2">
-            <h2 className="font-semibold text-sm text-slate-400 tracking-wide flex flex-col capitalize w-32 whitespace-nowrap overflow-hidden overflow-ellipsis">
+          <div className="flex space-x-2 dark:bg-slate-800 bg-slate-200">
+            <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-500 tracking-wide flex flex-col capitalize w-32 whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span>
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
@@ -238,7 +256,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 {!threadId && "select any ticket"}
               </small>{" "}
             </h2>
-            <div className="w-9 h-9 bg-slate-900 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase text-slate-500 text-lg">
+            <div className="w-9 h-9 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
               {clientName && clientName.charAt(0)}
               {!threadId && "u"}
             </div>
@@ -260,10 +278,10 @@ const MessageThread = ({ isChatOpen, setChat }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[45%] lg:h-[40%] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
-        <div className="h-full w-full p-2 rounded-lg bg-slate-800 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent after:border-b-slate-800 after:border-l-transparent overflow-hidden grid grid-rows-4">
+        <div className="h-full w-full p-2 rounded-lg dark:bg-slate-800 bg-slate-200 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-200 after:border-l-transparent overflow-hidden grid grid-rows-4">
           <div className="w-full row-span-1 h-full flex justify-between">
             <div className="flex space-x-2">
-              <div className="w-9 h-9 bg-slate-900 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase text-slate-500 text-lg">
+              <div className="w-9 h-9 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
                 {user[0].name.charAt(0)}
               </div>
               <h2 className="font-semibold text-xs justify-center text-slate-400 tracking-wide flex flex-col">
@@ -271,13 +289,13 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 <small className="text-xs text-slate-500">{user[0].name}</small>{" "}
               </h2>
             </div>
-            <button className="h-9 w-9 rounded-lg hover:bg-slate-900 flex items-center justify-center text-slate-400 transition-all outline-none focus:outline-none text-base font-bold">
+            <button className="h-9 w-9 rounded-lg dark:hover:bg-slate-900 hover:bg-slate-300 flex items-center justify-center text-slate-400 transition-all outline-none focus:outline-none text-base font-bold">
               <BsThreeDotsVertical />
             </button>
           </div>
           <form
             onSubmit={(e) => sendReply(e)}
-            className="row-span-3 h-full w-full bg-slate-800 rounded-lg relative"
+            className="row-span-3 h-full w-full bg-transparent rounded-lg relative"
           >
             <textarea
               name="reply"
@@ -306,11 +324,11 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 });
               }}
               value={reply.message}
-              className="h-full w-full bg-slate-800 rounded-lg resize-none border- text-sm text-slate-400 border-0 focus:outline-none outline-none focus:border-0 transition-all focus:ring-slate-700 placeholder:text-slate-500 placeholder:text-sm"
+              className="h-full w-full dark:bg-slate-800 bg-slate-200 rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 border-0 focus:outline-none outline-none focus:border-0 transition-all dark:focus:ring-slate-700 focus:ring-slate-300 placeholder:text-slate-500 placeholder:text-sm"
             ></textarea>
             <button
               type="submit"
-              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-sm right-2 p-2 px-4 font-semibold text-slate-400 bg-blue-700 z-[99]"
+              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-sm right-2 p-2 px-4 font-semibold dark:text-slate-400 text-slate-300 bg-blue-700 z-[99]"
             >
               Send Message
             </button>

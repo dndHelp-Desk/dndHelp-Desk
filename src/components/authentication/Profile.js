@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth, upload } from "./../Data_Fetching/Firebase";
-import { BsCameraFill } from "react-icons/bs";
+import { BsCameraFill, BsBoxArrowUp } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { updateAlert } from "../../store/NotificationsSlice";
 
@@ -56,27 +56,26 @@ const Profile = () => {
         <button
           className={`text-xs ${
             showChange ? "" : "hidden"
-          } font-bold text-xs tracking-wide top-[1.7rem] left-[-3rem] w-18 rotate-[-90deg] absolute bg-slate-500 p-1 px-3 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
+          } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
           type="submit"
         >
-          Upload
+          <BsBoxArrowUp/>
         </button>
-        <div className="h-20  flex justify-center relative">
+        <div className="h-10  flex justify-center relative">
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-20 w-20 border-[3px] border-slate-400 rounded-xl flex justify-center items-center cursor-pointer p-[2px]"
+            className="h-10 w-10 rounded-xl flex justify-center items-center cursor-pointer"
           >
             <img
-              className="rounded-lg bg-slate-500 h-full w-full object-cover object-center"
+              className="rounded-xl bg-slate-500 h-full w-full object-cover object-center"
               src={photoURL}
               alt="profile"
             />
             <label
-              className={`absolute bg-[#1c105283] h-20 w-20 rounded-xl flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
+              className={`absolute bg-[#1c105283] h-10 w-10 rounded-xl flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
               htmlFor="profile"
             >
-              <span className="text-xs font-bold">Change</span>
               <BsCameraFill />
               <input
                 className="hidden"

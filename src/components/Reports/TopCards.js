@@ -6,7 +6,6 @@ import {
   BsEnvelopeOpen,
 } from "react-icons/bs";
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
-import cardsBg from "./image/cardsBg.svg";
 import { useSelector } from "react-redux";
 
 const TopCards = () => {
@@ -125,16 +124,15 @@ const TopCards = () => {
   const cards = cardsData.map((data) => {
     return (
       <div
-        style={{ backgroundImage: `url(${cardsBg})` }}
         key={data.id}
-        className="bg-slate-900 h-[10rem]  cols-span-1 rounded-xl
-		 p-4 grid-rows-3 bg-no-repeat bg-bottom"
+        className="dark:bg-slate-900 bg-slate-100 h-[10rem]  cols-span-1 rounded-xl
+		 p-4 grid-rows-3"
       >
         <div className="flex justify-between items-center">
-          <h2 className="text-slate-400 font-semibold font-sans text-base capitalize">
+          <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans text-base capitalize">
             {data.name}
           </h2>
-          <div className="h-10 w-10 rounded-xl flex items-center justify-center font-bold text-lg text-slate-300 bg-blue-700 custom-shadow">
+          <div className="h-10 w-10 rounded-xl flex items-center justify-center font-bold text-lg text-slate-300 dark:text-slate-400 dark:bg-slate-700 bg-slate-500 custom-shadow">
             {data.name === "open" && <BsEnvelopeOpen />}
             {data.name === "pending" && <BsArrowRepeat />}
             {data.name === "closed" && <BsDashSquare />}
@@ -142,7 +140,7 @@ const TopCards = () => {
           </div>
         </div>
         <div className="flex justify-start items-center">
-          <h3 className="text-slate-400 font-bold font-sans text-[2rem]">
+          <h3 className="dark:text-slate-400 text-slate-500 font-bold font-sans text-[2rem]">
             {data.count}
           </h3>
         </div>

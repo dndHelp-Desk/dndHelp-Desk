@@ -25,14 +25,14 @@ const OverviewReport = () => {
 
   //Component =============================
   return (
-    <div className="col-span-3 min-h-[20rem] bg-slate-900 rounded-xl overflow-hidden">
+    <div className="col-span-3 min-h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden">
       <div className="h-full w-full p-4 pt-6 grid grid-rows-6 overflow-hidden">
         <div className="row-span-2">
-          <h2 className="text-base text-slate-400 font-semibold tracking-normal">
+          <h2 className="text-base dark:text-slate-400 text-slate-500 font-semibold tracking-normal">
             Total Messages
           </h2>
-          <div className="mt-4 flex space-x-4 h-14 border-b border-slate-800">
-            <div className="text-slate-400">
+          <div className="mt-4 flex space-x-4 h-14 border-b dark:border-slate-800 border-slate-300">
+            <div className="dark:text-slate-400 text-slate-500">
               <h4 className="text-xs space-y-2 font-medium capitalize">
                 this month
               </h4>
@@ -44,7 +44,7 @@ const OverviewReport = () => {
                   ).length}
               </h4>
             </div>
-            <div className="text-slate-400">
+            <div className="dark:text-slate-400 text-slate-500">
               <h4 className="text-xs space-y-2 font-medium capitalize">
                 last month
               </h4>
@@ -56,7 +56,7 @@ const OverviewReport = () => {
                   ).length}
               </h4>
             </div>
-            <div className="text-slate-400">
+            <div className="dark:text-slate-400 text-slate-500">
               <h4 className="text-xs space-y-2 font-medium capitalize">
                 difference
               </h4>
