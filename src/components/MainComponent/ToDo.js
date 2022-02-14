@@ -75,25 +75,16 @@ const ToDo = () => {
             </div>
           </button>
           <div className="h-full overflow-hidden">
-            <p className="dark:text-slate-400 text-slate-500 w-[5rem] md:w-[10rem] lg:w-[7rem] 2xl:w-[10rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+            <p className="dark:text-slate-400 text-slate-500 w-[12rem] lg:w-[11rem] 2xl:w-[12rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
               <abbr title={task.task}>{task.task}</abbr>
             </p>
             <small className="text-slate-500 text-xs font-semibold">
               {`${new Date(task.date).toDateString()}`}
             </small>
           </div>
-          <div
-            className={`h-6 border dark:border-slate-700 border-slate-400 flex items-center justify-center rounded-full px-2 text-xs  p-1 ${
-              task.status === true
-                ? "bg-[#4ef31c33] dark:text-green-400 text-green-600"
-                : "dark:bg-slate-900 bg-slate-300 dark:text-slate-400 text-slate-600"
-            }`}
-          >
-            {`${task.status === true ? "Completed" : "Pending"}`}
-          </div>
           <BsFillTrashFill
             onClick={() => deleteTask(task.id)}
-            className="dark:text-slate-400 text-slate-400 hover:text-red-500 cursor-pointer transition-all duration-300"
+            className="dark:text-slate-400 text-slate-400 dark:hover:text-red-500 hover:text-red-500 cursor-pointer transition-all duration-300"
           />
         </div>
       );
@@ -101,7 +92,7 @@ const ToDo = () => {
 
   //Component =============================================
   return (
-    <div className="col-span-1 rounded-xl space-y-4">
+    <div className="col-span-1 rounded-xl flex flex-col justify-between space-y-2">
       <form
         onSubmit={(e) => addTask(e)}
         className="h-[15%] p-1 px-3 dark:bg-slate-900  bg-slate-100 w-full rounded-xl grid grid-cols-10 gap-1 place-content-center"
@@ -132,7 +123,7 @@ const ToDo = () => {
         </button>
       </form>
       {/**Task List ===================== */}
-      <div className="h-[22.5rem] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
+      <div className="h-[83%] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
         <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
           {tasks}
         </div>

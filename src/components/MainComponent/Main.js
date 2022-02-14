@@ -1,5 +1,4 @@
 import React from "react";
-import WelcomeSvg from "./images/welcome.svg";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Businnes from "./images/businnes.jpg";
@@ -13,6 +12,7 @@ import {
 } from "react-icons/bs";
 import ToDo from "./ToDo";
 import Filters from "../Reports/Filters";
+import Calendar from "./Calendar";
 
 const Main = () => {
   const location = useLocation();
@@ -49,23 +49,24 @@ const Main = () => {
         location.pathname === "/" ? "grid" : "hidden"
       } dark:bg-slate-800 w-[90%] sm:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
     >
-      <div className="h-[42rem] grid grid-rows-3 gap-4">
-        <div className="row-span-1 w-full dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-3 overflow-hidden py-6 p-2 gap-1">
-          <div
-            style={{ backgroundImage: `url(${WelcomeSvg})` }}
-            className="col-span-1 rounded-xl h-full w-full hidden md:grid grid-rows-2 2xl:flex p-1 overflow-hidden bg-no-repeat bg-contain bg-center"
-          ></div>
+      <div className="h-[44rem] grid grid-rows-5 gap-4">
+        <div className="row-span-2 w-full dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-3 place-content-center overflow-hidden py-6 p-2 gap-1">
+          <div className="col-span-1 rounded-xl h-full w-full grid grid-rows-2 2xl:flex overflow-hidden ">
+            <Calendar />
+          </div>
           {/** Overdue Tickets ==================================*/}
-          <div className="col-span-1 grid grid-rows-3 overflow-hidden px-2">
+          <div className="col-span-1 hidden md:grid grid-rows-3 justify-between overflow-hidden px-2">
             {overDue.length >= 1 && (
-              <div className="row-span-2 flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+              <div className="row-span-2 flex flex-col gap-1 pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
                 <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center md:text-left">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin text-slate-500 text-sm text-center md:text-left">
+                <p className="text-thin text-slate-500 text-xs lg:text-sm text-center md:text-left">
                   {overDue.length} tickets displayed below are overdue. To
                   resolve these issues please visit the tickets page and filter
-                  by clients' name. Hover on top of each to see client name.
+                  by clients' name which can be seen if you hover on top of each
+                  letters below. Alternatively you can check/hover on top of the
+                  highlighted dates on the calendar to see upcoming deadline.
                 </p>
               </div>
             )}
@@ -76,10 +77,11 @@ const Main = () => {
                 </h2>
                 <p className="text-thin text-slate-500 text-sm text-center md:text-left">
                   You all catched up{" "}
-                  <BsFillHandThumbsUpFill className="inline text-yellow-500" />.
-                  Don’t dwell on what went wrong. Instead, focus on what to do
-                  next. Spend your energies on moving forward toward finding the
-                  answer.
+                  <BsFillHandThumbsUpFill className="inline text-yellow-500" />
+                  .You can check/hover on top of the highlighted dates on the
+                  calendar to see upcoming deadline. . Don’t dwell on what went
+                  wrong. Instead, focus on what to do next. Spend your energies
+                  on moving forward toward finding the answer.
                 </p>
               </div>
             )}
@@ -98,18 +100,20 @@ const Main = () => {
 
           {/**Manage Contacts ==================================*/}
           <div className="col-span-1 border-l dark:border-slate-700 border-slate-400 hidden md:grid grid-rows-3 px-4 justify-between overflow-hidden">
-            <div className="row-span-2 flex flex-col justify-between pb-2 overflow-hidden">
+            <div className="row-span-2 flex flex-col gap-2 pb-2 overflow-hidden">
               <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize">
                 contacts
               </h2>
               <p className="text-thin text-slate-500 text-sm">
-                Make sure to add/check if your contact is saved before you open
+                Click below button to manage yours contacts. It is important to
+                keep them upto date as it will ensure no email is sent to the
+                wrong recipient. All tickets must be added/saved before opening
                 a new ticket.
               </p>
             </div>
             <div className="row-span-1 flex items-center space-x-1">
               <Link to="./contacts">
-                <button className="dark:bg-slate-800 bg-slate-300 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
+                <button className="dark:bg-slate-800 bg-slate-300 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
                   Manage Contacts
                 </button>
               </Link>
@@ -121,7 +125,7 @@ const Main = () => {
         </div>
 
         {/**Bottom Half ================================ */}
-        <div className="row-span-2 rounded-xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           <ToDo />
           <div className="col-span-1 hidden md:grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4">
