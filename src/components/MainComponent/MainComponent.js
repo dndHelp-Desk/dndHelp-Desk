@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import {
   BsBoxArrowRight,
-  BsGearFill,
   BsChatSquareText,
   BsTextRight,
   BsBrightnessHigh,
+  BsGear,
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
@@ -74,7 +74,7 @@ const MainComponent = () => {
         <div className="flex justify-center h-[4rem] w-full bg-transparent mt-4 relative">
           {/**Alert */}
           <Alert />
-          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl custom-shadow justify-between items-center w-[90%] sm:w-full container 2xl:w-[72rem] relative">
+          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl custom-shadow justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative">
             {/**Logo ==================== */}
             <svg
               className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent"
@@ -84,7 +84,7 @@ const MainComponent = () => {
             >
               <text x="0" y="35">
                 <tspan className="stroke-[1.5px] fill-slate-500">dnd</tspan>
-                <tspan className="stroke-[.6px]" x="43" y="35">
+                <tspan className="stroke-[.6px] dark:fill-slate-900 fill-slate-400" x="43" y="35">
                   Help-Desk
                 </tspan>
               </text>
@@ -125,15 +125,6 @@ const MainComponent = () => {
                 }`}
               >
                 Contacts
-              </NavLink>
-              <NavLink
-                to="/settings"
-                end={true}
-                className={`TabsLinks ${
-                  location.pathname === "/settings" ? "navlinks" : ""
-                }`}
-              >
-                Settings
               </NavLink>
             </div>
 
@@ -194,19 +185,6 @@ const MainComponent = () => {
                 />
                 <span>Contacts</span>
               </NavLink>
-              <NavLink
-                to="/settings"
-                end={true}
-                className={`TabsLinks ${
-                  location.pathname === "/settings" ? "navlinks" : ""
-                }`}
-              >
-                <BsGearFill
-                  className="inline-block
-              "
-                />
-                <span>Settings</span>
-              </NavLink>
             </div>
 
             {/*Notifications & Controls ====================*/}
@@ -240,6 +218,15 @@ const MainComponent = () => {
                 <abbr title="Chat">
                   <BsChatSquareText />
                 </abbr>
+              </button>
+
+              {/**Settings ================================================ */}
+              <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
+                <NavLink to="/settings/account">
+                  <abbr title="Settings">
+                    <BsGear />
+                  </abbr>
+                </NavLink>
               </button>
 
               {/**Sign-Out ================================ */}

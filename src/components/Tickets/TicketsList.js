@@ -82,7 +82,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
           <div className="col-span-5 float-right h-full w-[20rem] flex flex-col items-center justify-center space-y-1">
             <div className="w-[10rem] flex items-baseline justify-end">
               <span
-                className={`text-green-600 ${
+                className={`${
                   ticket.priority &&
                   ticket.priority.toLowerCase().trim() === "low"
                     ? "text-green-500"

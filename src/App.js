@@ -8,6 +8,7 @@ import ContactsComponent from "./components/Contacts/ContactsComponent";
 import SettingsComponent from "./components/Settings/SettingsComponents";
 import SupportHome from "./components/ClientSupport/SupportHome";
 import NewTicket from "./components/ClientSupport/NewTicket";
+import Account from "./components/Settings/Account"
 
 const App = () => {
   return (
@@ -22,7 +23,9 @@ const App = () => {
             <Route path="tickets" element={<TicketsComponent />} />
             <Route path="reports" element={<ReportsComponent />} />
             <Route path="contacts" element={<ContactsComponent />} />
-            <Route path="settings" element={<SettingsComponent />} />
+            <Route path="settings" element={<SettingsComponent />}>
+              <Route path="account" element={<Account />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
