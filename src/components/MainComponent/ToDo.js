@@ -54,7 +54,7 @@ const ToDo = () => {
       return (
         <div
           key={task.id}
-          className="h-14 w-full flex items-center justify-between space-x-2 rounded-xl dark:bg-slate-800 bg-slate-200 p-2 snap_childTwo"
+          className="h-14 w-full flex items-center justify-between space-x-2 rounded-xl dark:bg-slate-800 bg-slate-200 p-2 snap_childTwo custom-shadow"
         >
           <button
             onClick={() => markToDo(task.id, task.status ? false : true)}

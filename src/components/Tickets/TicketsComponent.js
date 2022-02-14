@@ -87,7 +87,7 @@ const TicketsComponent = () => {
           />
           <button
             onClick={() => setfiltersModal(filtersModal ? false : true)}
-            className="min-w-10 px-8 h-full rounded-lg flex space-x-2 justify-between items-center relative dark:bg-slate-900 bg-slate-100 focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
+            className="min-w-10 px-8 h-10 rounded-lg flex space-x-2 justify-between items-center relative dark:bg-slate-900 bg-slate-100 focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
           >
             <BsSliders className="dark:text-slate-400 text-slate-500 font-bold" />
             <span className="hidden md:flex">Filters</span>
@@ -121,7 +121,7 @@ const TicketsComponent = () => {
         {/*** New Ticket ======================== */}
         <button
           onClick={() => setModal(true)}
-          className="bg-blue-700  h-full px-6 rounded-lg flex justify-center items-center text-slate-300  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
+          className="bg-blue-700  h-10 px-6 rounded-lg flex justify-center items-center text-slate-300  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
         >
           + New Ticket
         </button>
@@ -149,7 +149,6 @@ const TicketsComponent = () => {
 
       {/**Tickects /Not Expanded=========== */}
       <TicketsList
-        setModal={setModal}
         deleteArray={deleteArray}
         setDelete={setDelete}
       />

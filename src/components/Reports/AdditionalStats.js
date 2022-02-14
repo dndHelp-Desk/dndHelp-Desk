@@ -24,7 +24,7 @@ const AdditionalStats = () => {
   });
 
   dataArray.sort((a,b)=>{
-    return parseFloat(a.value) > parseFloat(b.value)
+    return Number(b.value) - Number(a.value)
   })
 
   const topThree = dataArray.length >= 3 ? dataArray.slice(0,3): dataArray 
@@ -59,7 +59,7 @@ const AdditionalStats = () => {
           Customer Satisfaction
         </h2>
         <div className="grid grid-cols-3 gap-2 xl:gap-4 w-full xl:px-2 2xl:px-4 overflow-hidden">
-          <div className="h-32 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
+          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
             <BsEmojiSmileFill className="text-3xl text-green-500" />
             <h5 className="dark:text-slate-400 text-slate-500 text-base font-sans font-bold">
               {" "}
@@ -70,7 +70,7 @@ const AdditionalStats = () => {
               Positive
             </h6>
           </div>
-          <div className="h-32 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
+          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
             <BsEmojiNeutralFill className="text-3xl text-yellow-500" />
             <h5 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans">
               {" "}
@@ -81,7 +81,7 @@ const AdditionalStats = () => {
               Neutral
             </h6>
           </div>
-          <div className="h-32 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
+          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
             <BsEmojiFrownFill className="text-3xl text-red-500" />
             <h5 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans">
               {" "}

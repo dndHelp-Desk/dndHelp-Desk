@@ -9,6 +9,7 @@ import noChatImg from "./images/email-open.svg";
 import { setThreadMessage } from "../../store/TicketsSlice";
 import { addReply, deleteTicket } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
+import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const MessageThread = ({ isChatOpen, setChat }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -23,6 +24,16 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     message_position: threadMessage.length + 1,
     ticket_id: threadId,
   });
+
+  //Message options ========================================
+  const [msgOptions, setOptions] = useState({
+    status: false,
+    id: "",
+    threadId: "",
+  });
+  const msgOptionsRef = useOnClickOutside(() =>
+    setOptions({ ...msgOptions, status: false, id: "", threadId: "" })
+  );
 
   //Filter Thread Messages =====================================
   useEffect(() => {
@@ -55,14 +66,17 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   const thread =
     threadMessage.length >= 1 &&
     threadMessage.map((message, index) => {
-      let options = false;
       return (
         <div
           key={index}
           className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-xl flex space-x-2 transition-all"
         >
           <div
-            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase text-lg dark:text-gray-400 text-slate-300 bg-blue-700`}
+            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase text-lg dark:text-gray-400 text-slate-300 ${
+              message.from === "agent" && clientName && agentName
+                ? "bg-blue-700"
+                : "bg-slate-500"
+            }`}
           >
             {`${
               message.from === "agent" && clientName && agentName
@@ -70,9 +84,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full dark:p-2 bg-transparent dark:bg-[#192235] bg-slate-200 rounded-lg space-y-2">
+          <div className="w-[95%] 2xl:w-full p-2 bg-transparent dark:bg-[#192235] bg-slate-100 rounded-lg space-y-2 custom-shadow">
             <div className="w-[95%] 2xl:w-full bg-transparent space-y-2 rounded-lg">
-              <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col dark:py-1 md:flex-row border-b dark:border-slate-900 border-slate-300 relative">
+              <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col dark:py-1 md:flex-row border-b dark:border-slate-800 border-slate-200 relative">
                 <span>{`${
                   message.from === "agent" ? agentName : clientName
                 }`}</span>{" "}
@@ -94,18 +108,29 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                     </span>
                   </span>
                   <button
-                    onClick={() => {
-                      options === true ? (options = false) : (options = true);
-                      console.log(options);
-                    }}
+                    onClick={() =>
+                      setOptions({
+                        ...msgOptions,
+                        status: true,
+                        id: message.message_position,
+                        threadId: message.ticket_id,
+                      })
+                    }
                     className="h-8 w-8 rounded-xl dark:hover:bg-slate-900 hover:bg-slate-400 flex items-center justify-center"
                   >
                     <BsThreeDotsVertical className="inline  cursor-pointer" />
                   </button>
+
+                  {/**Message Options =========================== */}
                   <div
-                    className={`w-[10rem] h-[12rem] ${
-                      options === true ? "" : "hidden"
-                    } z-[99] shadow-lg border border-slate-700 bg-[#0f172a83] backdrop-blur-sm rounded-lg absolute right-0 top-10 p-2`}
+                    ref={msgOptionsRef}
+                    className={`w-[10rem] ${
+                      msgOptions.status === true &&
+                      msgOptions.id === message.message_position &&
+                      msgOptions.threadId === message.ticket_id
+                        ? ""
+                        : "hidden"
+                    } z-[99] shadow-lg border border-slate-700 dark:bg-[#0f172a83] bg-slate-200 backdrop-blur-sm rounded-lg absolute right-0 top-10 p-4`}
                   >
                     <h5 className="text-slate-400 font-medium text-sm flex justify-between items-center">
                       <span>Delete</span>
@@ -161,10 +186,10 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     <div
       className={`h-[35rem] lg:h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-300  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
+      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-200 px-2 pb-2 space-y-4  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
-        <div className="h-14 dark:bg-slate-800 bg-slate-200 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-700 border-slate-300">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden">
+        <div className="h-14 dark:bg-slate-800 bg-slate-200 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-900 border-slate-300">
           {/**Back To Main List  On Small Screens====================== */}
           <div
             onClick={() => setChat(false)}

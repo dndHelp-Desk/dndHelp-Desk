@@ -82,11 +82,11 @@ const Filters = () => {
   //Component ==============================
   return (
     <>
-      <div className="col-span-1 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
+      <div className="col-span-1 h-12 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
         <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
         <DateFilter />
       </div>
-      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 h-12 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsSearch className="text-slate-500 absolute h-10 left-3" />
         <input
           type="search"
@@ -100,7 +100,7 @@ const Filters = () => {
           placeholder="Category ..."
         />
       </div>
-      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 h-12 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -114,7 +114,7 @@ const Filters = () => {
           placeholder="Agent Name ..."
         />
       </div>
-      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 h-12 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -128,7 +128,7 @@ const Filters = () => {
           placeholder="Company / Brand ..."
         />
       </div>
-      <div className="col-span-1 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="col-span-1 h-12 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-lg relative">
         <BsReceiptCutoff className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"

@@ -9,9 +9,10 @@ import {
 import { setThreadId } from "./../../store/TicketsSlice";
 import MessageThread from "./MessageThread";
 
-const TicketsList = ({ setModal, setDelete, deleteArray }) => {
+const TicketsList = ({ setDelete, deleteArray }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const user = useSelector((state) => state.UserInfo.member_details);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
 
@@ -22,7 +23,17 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5.5rem] snap_childTwo rounded-lg dark:bg-slate-800  ${ticket.ticket_id === threadId?"border-2 dark:border-slate-600 border-slate-400":""} bg-slate-200 p-2 space-x-2 overflow-hidden flex ${
+          className={`w-full h-[5.5rem]  ${
+            user[0].access === "agent" && ticket.agent_email === user[0].email
+              ? ""
+              : user[0].access === "admin"
+              ? ""
+              : "hidden"
+          } snap_childTwo rounded-lg dark:bg-slate-800  ${
+            ticket.ticket_id === threadId
+              ? "border-2 dark:border-slate-600 border-slate-400"
+              : ""
+          } bg-slate-200 p-2 space-x-2 overflow-hidden flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
               ? "dark:opacity-60 opacity-70"
@@ -145,7 +156,7 @@ const TicketsList = ({ setModal, setDelete, deleteArray }) => {
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
           }`}
         >
-          <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-full z-0 h-12 p-1">
+          <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-xl z-0 h-12 p-1">
             <Filters />
           </div>
           <div className="w-full h-full space-y-2 overflow-y-scroll border-t dark:border-slate-800 border-slate-300 pt-2 lg:no-scrollbar lg:no-scrollbar::-webkit-scrollbar scroll-snap pr-2 lg:pr-0">

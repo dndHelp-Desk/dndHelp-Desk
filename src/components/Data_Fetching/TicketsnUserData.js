@@ -65,6 +65,12 @@ export const changeStatus = (id, state) => {
   });
 };
 
+// Delete Contact ================
+export const deleteContact = (id) => {
+  let docRef = doc(db, "contacts", id);
+  deleteDoc(docRef);
+};
+
 //Add Reply or Send Reply ============
 export const addReply = (message, message_position, ticket_id) => {
   addDoc(ticketsRef, {
@@ -74,6 +80,16 @@ export const addReply = (message, message_position, ticket_id) => {
     message_position: message_position,
     ticket_id: ticket_id,
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+  });
+};
+
+// New Contact =================================
+export const newContact = (name, email, phone, company) => {
+  addDoc(contactsRef, {
+    name: name,
+    email: email,
+    phone: phone,
+    branch_company: company,
   });
 };
 

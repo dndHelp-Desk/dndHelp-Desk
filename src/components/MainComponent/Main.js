@@ -1,6 +1,6 @@
 import React from "react";
 import WelcomeSvg from "./images/welcome.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Businnes from "./images/businnes.jpg";
 import {
@@ -9,21 +9,38 @@ import {
   BsCheckAll,
   BsArrowRepeat,
   BsEnvelopeOpen,
+  BsFillHandThumbsUpFill,
 } from "react-icons/bs";
 import ToDo from "./ToDo";
+import Filters from "../Reports/Filters";
 
 const Main = () => {
   const location = useLocation();
   let allTickets = useSelector((state) => state.Tickets.allTickets);
-  // const overDue =
-  //   allTickets &&
-  //   allTickets
-  //     .filter((data) => data.message_position === 1)
-  //     .filter(
-  //       (firstMsg) =>
-  //         new Date(firstMsg.due_date).toISOString() <= new Date().toISOString()
-  //     );
-  // console.log(overDue)
+  let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const overDue =
+    filteredTickets &&
+    filteredTickets.filter(
+      (firstMsg) =>
+        new Date(firstMsg.due_date).toISOString() <= new Date().toISOString()
+    );
+
+  //Overdue Tickets =====================
+  const overDueTickets =
+    overDue.length >= 1 &&
+    overDue.map((ticket) => {
+      return (
+        <div
+          key={ticket.id}
+          className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 flex cursor-pointer items-center justify-center relative uppercase text-lg text-slate-300"
+        >
+          <abbr title={ticket.recipient_name}>
+            {ticket.recipient_name.charAt(0)}
+          </abbr>
+          <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-red-500 border dark:border-slate-900 border-slate-100"></span>
+        </div>
+      );
+    });
 
   //Component ========================
   return (
@@ -38,68 +55,69 @@ const Main = () => {
             style={{ backgroundImage: `url(${WelcomeSvg})` }}
             className="col-span-1 rounded-xl h-full w-full hidden md:grid grid-rows-2 2xl:flex p-1 overflow-hidden bg-no-repeat bg-contain bg-center"
           ></div>
-          {/** Online Members ==================================*/}
+          {/** Overdue Tickets ==================================*/}
           <div className="col-span-1 grid grid-rows-3 overflow-hidden px-2">
-            <div className="row-span-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-              <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center md:text-left">
-                Overdue Tickets
-              </h2>
-              <p className="text-thin text-slate-500 text-[13px] text-center md:text-left">
-                The tickets displayed have been overdue or will soon be overdue.
-                This doesn't indicate any good, try to resolve all isssue before
-                the deadline. More in-depth reports can be found on reports
-                page.
-              </p>
-            </div>
+            {overDue.length >= 1 && (
+              <div className="row-span-2 flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center md:text-left">
+                  Overdue Tickets
+                </h2>
+                <p className="text-thin text-slate-500 text-sm text-center md:text-left">
+                  {overDue.length} tickets displayed below are overdue. To
+                  resolve these issues please visit the tickets page and filter
+                  by clients' name. Hover on top of each to see client name.
+                </p>
+              </div>
+            )}
+            {overDue.length <= 0 && (
+              <div className="row-span-2 flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center md:text-left">
+                  Overdue Tickets
+                </h2>
+                <p className="text-thin text-slate-500 text-sm text-center md:text-left">
+                  You all catched up{" "}
+                  <BsFillHandThumbsUpFill className="inline text-yellow-500" />.
+                  Don’t dwell on what went wrong. Instead, focus on what to do
+                  next. Spend your energies on moving forward toward finding the
+                  answer.
+                </p>
+              </div>
+            )}
             <div className="row-span-1 flex justify-center md:justify-start items-center space-x-1">
-              <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 flex items-center justify-center relative">
-                <img
-                  src="https://images.unsplash.com/photo-1640951613773-54706e06851d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                  alt="user"
-                  className="object-center h-full w-full object-cover rounded-xl"
-                />
-                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border dark:border-slate-900 border-slate-100"></span>
-              </div>
-              <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 flex items-center justify-center relative">
-                <img
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                  alt="user"
-                  className="object-center h-full w-full object-cover rounded-xl"
-                />
-                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border dark:border-slate-900 border-slate-100"></span>
-              </div>
-              <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 flex items-center justify-center relative">
-                <img
-                  src="https://images.unsplash.com/photo-1524660988542-c440de9c0fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                  alt="user"
-                  className="object-center h-full w-full object-cover rounded-xl"
-                />
-                <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-green-500 border dark:border-slate-900 border-slate-100"></span>
-              </div>
-              <div className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-500 dark:text-slate-400 text-slate-300 text-xl flex items-center justify-center">
-                +
-              </div>
+              {overDueTickets}
+              {overDue.length <= 0 && (
+                <>
+                  <div className="h-10 w-10 border border-slate-600 rounded-xl dark:bg-slate-800 bg-slate-500 flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg text-slate-300"></div>
+                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-500 flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg text-slate-300"></div>
+                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-500 flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg text-slate-300"></div>
+                </>
+              )}
             </div>
           </div>
-          {/**End Of Online Members ==================================*/}
+          {/**End Of Overdue Tickets ==================================*/}
 
           {/**Manage Contacts ==================================*/}
-          <div className="col-span-1 border-l dark:border-slate-700 border-slate-400 hidden md:grid grid-rows-2 px-4 justify-between overflow-hidden">
-            <div className="row-span-1 overflow-hidden">
+          <div className="col-span-1 border-l dark:border-slate-700 border-slate-400 hidden md:grid grid-rows-3 px-4 justify-between overflow-hidden">
+            <div className="row-span-2 flex flex-col justify-between pb-2 overflow-hidden">
               <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize">
                 contacts
               </h2>
-              <p className="text-thin text-slate-500 text-[13px]">
+              <p className="text-thin text-slate-500 text-sm">
                 Make sure to add/check if your contact is saved before you open
                 a new ticket.
               </p>
             </div>
             <div className="row-span-1 flex items-center space-x-1">
-              <button className="dark:bg-slate-800 bg-slate-300 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
-                Manage Contacts
-              </button>
+              <Link to="./contacts">
+                <button className="dark:bg-slate-800 bg-slate-300 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
+                  Manage Contacts
+                </button>
+              </Link>
             </div>
           </div>
+        </div>
+        <div className="hidden">
+          <Filters />
         </div>
 
         {/**Bottom Half ================================ */}
@@ -110,7 +128,7 @@ const Main = () => {
               <h2 className="dark:text-slate-400 text-slate-600 text-2xl font-bold capitalize">
                 Today's Sumary
               </h2>
-              <p className="text-slate-500 text-center text-xs">
+              <p className="text-slate-500 text-center text-sm">
                 To see more analytics please visit the reports page and you can
                 also check the current progress or your tickets in tickets page.
               </p>

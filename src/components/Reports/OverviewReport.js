@@ -5,6 +5,12 @@ import { useSelector } from "react-redux";
 const OverviewReport = () => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const overDue =
+    filteredTickets &&
+    filteredTickets.filter(
+      (firstMsg) =>
+        new Date(firstMsg.due_date).toISOString() <= new Date().toISOString()
+    );
 
   //Preping daily count  Data==============
   let dailyCountObj =
@@ -70,6 +76,14 @@ const OverviewReport = () => {
                       (data) =>
                         new Date(data.date).getMonth() === new Date().getMonth()
                     ).length}
+              </h4>
+            </div>
+            <div className="dark:text-slate-400 text-slate-500">
+              <h4 className="text-xs space-y-2 font-medium capitalize">
+                Overdue
+              </h4>
+              <h4 className="text-base font-bold text-center text-red-600 capitalize">
+                {overDue.length}
               </h4>
             </div>
           </div>

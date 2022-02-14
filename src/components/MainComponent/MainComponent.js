@@ -74,7 +74,7 @@ const MainComponent = () => {
         <div className="flex justify-center h-[4rem] w-full bg-transparent mt-4 relative">
           {/**Alert */}
           <Alert />
-          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl justify-between items-center w-[90%] sm:w-full container 2xl:w-[72rem] relative">
+          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl custom-shadow justify-between items-center w-[90%] sm:w-full container 2xl:w-[72rem] relative">
             {/**Logo ==================== */}
             <svg
               className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent"

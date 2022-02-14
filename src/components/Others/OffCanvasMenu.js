@@ -9,11 +9,9 @@ const OffCanvasMenu = ({ filtersModal, setfiltersModal }) => {
 
   //Component ================
   return (
-    <div ref={closeCanvasRef} className={`fixed left-0 top-0 right-0 flex justify-center w-full  bg-[#1e293bde] backdrop-blur-sm border-b shadow-2xl border-slate-800 p-4 ${filtersModal?"h-[9.8rem] z-[999]":"hidden"} transition-all`}>
-      <div className="h-full flex justify-center w-[80%] 2xl:w-[72rem]">
-        <div className="w-[25rem] h-full grid grid-cols-2 gap-2">
+    <div ref={closeCanvasRef} className={`fixed left-0 top-0 bottom-0 flex justify-center h-full dark:bg-[#1e293bde] bg-slate-200 backdrop-blur-sm shadow-2xl pt-20 p-4 ${filtersModal?"z-[999]":"hidden z-[-999]"} transition-all`}>
+      <div className={`h-full flex flex-col items-center gap-2 w-full  ${filtersModal?"":"hidden"} transition-all`}>
           <Filters />
-        </div>
       </div>
     </div>
   );
