@@ -9,6 +9,7 @@ import SettingsComponent from "./components/Settings/SettingsComponents";
 import SupportHome from "./components/ClientSupport/SupportHome";
 import NewTicket from "./components/ClientSupport/NewTicket";
 import Account from "./components/Settings/Account"
+import Team from "./components/Settings/Team"
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="contacts" element={<ContactsComponent />} />
             <Route path="settings" element={<SettingsComponent />}>
               <Route path="account" element={<Account />} />
+              <Route path="team" element={<Team />} />
             </Route>
           </Route>
         </Routes>

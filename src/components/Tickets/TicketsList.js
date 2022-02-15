@@ -156,7 +156,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
           }`}
         >
-          <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-xl z-0 h-12 p-1">
+          <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-lg z-0 h-12 p-1">
             <Filters />
           </div>
           <div className="w-full h-full space-y-2 overflow-y-scroll border-t dark:border-slate-800 border-slate-300 pt-2 lg:no-scrollbar lg:no-scrollbar::-webkit-scrollbar scroll-snap pr-2 lg:pr-0">

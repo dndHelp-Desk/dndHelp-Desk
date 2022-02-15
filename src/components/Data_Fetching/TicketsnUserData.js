@@ -49,11 +49,13 @@ export const changePriority = (id, selected) => {
   });
 };
 
-// Change User Name ================
-export const changeName = (id, name) => {
+// Update User Details ================
+export const updateUserDetails = (id, name, dept, bio) => {
   let docRef = doc(db, "members", id);
   updateDoc(docRef, {
     name: name,
+    dept: dept,
+    bio: bio,
   });
 };
 

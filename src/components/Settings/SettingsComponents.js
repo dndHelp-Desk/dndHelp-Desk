@@ -6,7 +6,7 @@ import {
   BsFileTextFill,
   BsBookHalf,
 } from "react-icons/bs";
-import { Outlet,NavLink } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 
 const SettingsComponents = () => {
 
@@ -33,7 +33,10 @@ const SettingsComponents = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/settings/support-operations" className="settingsNav">
+              <NavLink
+                to="/settings/support-operations"
+                className="settingsNav"
+              >
                 <BsChatSquareDotsFill />
                 <span>Support Operations</span>
               </NavLink>

@@ -118,18 +118,15 @@ const Calendar = () => {
 
   //Map Through Days
   const days = getDatesInMonthDisplay(month, year).map((day, index) => {
-    return (
-      <div key={index} className="p-[0.3rem] flex w-full justify-center">
-        <abbr
-          title={
-            currentMonthTickets.filter(
+    const clientName = currentMonthTickets.filter(
               (data) => new Date(data.due_date).getDate() === day.getDate()
             ).length >= 1 &&
             currentMonthTickets.filter(
               (data) => new Date(data.due_date).getDate() === day.getDate()
             )[0].recipient_name
-          }
-        >
+    return (
+      <div key={index} className="p-[0.3rem] flex w-full justify-center">
+        <abbr title={`"${clientName}"`}>
           <p
             className={`${
               day.getDate() === new Date().getDate() &&
@@ -153,7 +150,7 @@ const Calendar = () => {
   //Component
   return (
     <>
-      <div className="w-full h-full">
+      <div className="w-full h-full px-4">
         <div className="px-2 rounded-xl">
           <div className="flex items-center justify-between">
             <HiChevronLeft

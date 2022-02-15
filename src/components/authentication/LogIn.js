@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +10,8 @@ import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
 import Background from "./images/welcome.jpg";
 import { login } from "../Data_Fetching/Firebase";
 import { isAuthenticated } from "../../store/UserSlice";
+import Alert from "../Others/Alert";
+import { updateAlert } from "../../store/NotificationsSlice";
 
 //Initialize Services ======
 const auth = getAuth();
@@ -211,7 +214,28 @@ const LogIn = () => {
               </button>
               <small className="mt-4 text-gray-400 flex justify-center">
                 Forgot password ?
-                <p className="text-blue-500 pl-1 outline-none focus:outline-none">
+                <p
+                  onClick={() => {
+                    sendPasswordResetEmail(auth, inputValues.email)
+                      .then(() => {
+                        dispatch(
+                          updateAlert({
+                            message: "Password reset email sent!",
+                            color: "bg-green-200",
+                          })
+                        );
+                      })
+                      .catch((error) => {
+                        dispatch(
+                          updateAlert({
+                            message: error.message,
+                            color: "bg-red-200",
+                          })
+                        );
+                      });
+                  }}
+                  className="text-blue-500 pl-1 cursor-pointer"
+                >
                   Reset
                 </p>
               </small>
@@ -219,6 +243,7 @@ const LogIn = () => {
           </div>
         </div>
       </div>
+      <Alert />
     </div>
   );
 };

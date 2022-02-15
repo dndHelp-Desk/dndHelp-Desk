@@ -103,7 +103,7 @@ const ToDo = () => {
             name="search"
             id="search"
             required
-            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent dark:border-slate-700 border-slate-300 placeholder:text-sm text-slate-400"
+            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent dark:border-slate-700 border-slate-300 placeholder:text-sm dark:text-slate-400 text-slate-500"
             placeholder="Type Your Task Here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}
