@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { BsPaperclip, BsFillTrashFill, BsEnvelope } from "react-icons/bs";
+import { BsPaperclip, BsEnvelope } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { deleteTicket } from "../Data_Fetching/TicketsnUserData";
 import { addClientReply } from "./DataFetching";
 
 const Chat = () => {
@@ -61,7 +60,6 @@ const Chat = () => {
                 <span className="text-xs text-slate-400 font-medium">
                   {`${new Date(message.date).toDateString()}`}
                 </span>
-                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
                 <span className="text-xs text-slate-400 font-medium">
                   {`${
                     Number(message.time.split(":")[0]) < 10
@@ -73,11 +71,6 @@ const Chat = () => {
                       : message.time.split(":")[1]
                   }`}
                 </span>
-                <hr className="w-[1px] h-4 inline-block bg-slate-400 border-0 rounded-xl" />
-                <BsFillTrashFill
-                  onClick={() => deleteTicket(message.id)}
-                  className="inline hover:text-red-500 cursor-pointer"
-                />
               </h4>
             </div>
             <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-900 text-slate-500">
