@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { BsCheck2All, BsFillTrashFill } from "react-icons/bs";
+import {
+  BsCheck2All,
+  BsFillTrashFill,
+  BsFillHandThumbsUpFill,
+} from "react-icons/bs";
 import { useSelector } from "react-redux"; //Firestore ===================
 import {
   getFirestore,
@@ -103,8 +107,8 @@ const ToDo = () => {
             name="search"
             id="search"
             required
-            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent dark:border-slate-700 border-slate-300 placeholder:text-sm dark:text-slate-400 text-slate-500"
-            placeholder="Type Your Task Here ..."
+            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent dark:border-slate-700 border-slate-300 placeholder:text-sm placeholder:italic dark:text-slate-400 text-slate-500"
+            placeholder="Type your task here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}
             value={taskName}
@@ -125,7 +129,18 @@ const ToDo = () => {
       {/**Task List ===================== */}
       <div className="h-[83%] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
         <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
-          {tasks}
+          {todoList.length >= 1 && tasks}
+          {todoList.length <= 0 && (
+            <>
+              <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans text-lg mt-[35%] rotate-[-10deg] flex space-x-2 items-center justify-center">
+                There's no pending task,
+              </h2>
+              <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans text-2xl rotate-[-10deg] flex space-x-2 items-center justify-center">
+                <span>You All Caught Up</span>{" "}
+                <BsFillHandThumbsUpFill className="inline text-yellow-400" />
+              </h2>
+            </>
+          )}
         </div>
       </div>
     </div>

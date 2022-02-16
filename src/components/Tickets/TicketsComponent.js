@@ -131,14 +131,14 @@ const TicketsComponent = () => {
       {activeUser[0].access === "admin" && (
         <div
           ref={contactRef}
-          className={`h-[15rem] w-[12rem] bg-[#0709247e] backdrop-blur-sm p-2 rounded-lg border border-slate-500 absolute left-32 top-8 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+          className={`h-[15rem] w-[12rem] bg-slate-700 shadow-2xl backdrop-blur-sm p-2 rounded-lg absolute left-32 top-8 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
             contactsPanel ? "" : "hidden"
           }`}
         >
-          <div className="flex sticky top-0 dark:bg-slate-400 bg-slate-300 rounded-lg h-10 items-center justify-center ">
-            <BsSearch className="absolute left-3 dark:text-slate-900 text-slate-500 font-semibold" />
+          <div className="flex sticky top-0 border-b border-slate-400 h-8 items-center justify-center ">
+            <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
             <input
-              className="w-full h-8 bg-transparent rounded-lg dark:text-slate-900 text-slate-500 text-sm md:px-10 z-[999] placeholder-slate-800 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
+              className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10 z-[999] placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
               type="search"
               placeholder="Search ..."
             />
