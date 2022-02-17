@@ -55,7 +55,7 @@ const Main = () => {
             <Calendar />
           </div>
           {/** Overdue Tickets ==================================*/}
-          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2">
+          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1">
             {overDue.length >= 1 && (
               <div className="flex flex-col gap-1 pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
                 <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center lg:text-left">
