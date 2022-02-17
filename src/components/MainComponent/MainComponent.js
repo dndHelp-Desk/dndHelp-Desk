@@ -3,7 +3,7 @@ import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import {
   BsBoxArrowRight,
   BsChatSquareText,
-  BsTextRight,
+  BsJustifyLeft,
   BsBrightnessHigh,
   BsGear,
   BsMoonStars,
@@ -78,7 +78,7 @@ const MainComponent = () => {
           <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl custom-shadow justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative">
             {/**Logo ==================== */}
             <svg
-              className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent"
+              className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent hidden md:flex"
               width="210"
               height="50"
               viewBox="0 0 200 50"
@@ -94,6 +94,14 @@ const MainComponent = () => {
                 </tspan>
               </text>
             </svg>
+
+            {/**Small Screen Menu Btn ================ */}
+            <button
+              onClick={() => setShowMenu(showMenu === false ? true : false)}
+              className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex lg:hidden"
+            >
+              <BsJustifyLeft className="text-2xl dark:text-gray-400 text-slate-600 flex cursor-pointer" />
+            </button>
 
             {/**Large Screens Menu Items===================== */}
             <div className="dark:text-gray-400 text-slate-600 hidden lg:flex space-x-5">
@@ -136,7 +144,7 @@ const MainComponent = () => {
             {/**Small Screens Menu ====================== */}
             <div
               ref={menuModalRef}
-              className={`flex lg:hidden fixed top-12 right-[26%] w-[8rem] z-[999] shadow-2xl rounded-lg backdrop-blur-lg bg-slate-100 dark:bg-slate-900 border border-slate-400 ${
+              className={`flex lg:hidden fixed top-14 left-0 w-[8rem] z-[999] shadow-2xl rounded-lg backdrop-blur-lg bg-slate-100 dark:bg-slate-900 border border-slate-400 ${
                 showMenu ? "h-[10rem]" : "h-0 opacity-0"
               } transition-scale duration-300 flex flex-col dark:text-gray-400 text-slate-600 space-y-2 p-4 justify-center overflow-hidden`}
             >
@@ -194,14 +202,6 @@ const MainComponent = () => {
 
             {/*Notifications & Controls ====================*/}
             <div className="flex space-x-2">
-              {/**Small Screen Menu Btn ================ */}
-              <button
-                onClick={() => setShowMenu(showMenu === false ? true : false)}
-                className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex lg:hidden"
-              >
-                <BsTextRight className="text-2xl dark:text-gray-400 text-slate-600 flex cursor-pointer" />
-              </button>
-
               {/**Change Theme =========================== */}
               <button
                 onClick={() => {
@@ -252,7 +252,7 @@ const MainComponent = () => {
             </div>
           </nav>
         </div>
-        <div className="w-full h-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center z-[-99]">
           <Main />
           <Outlet />
         </div>

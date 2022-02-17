@@ -151,7 +151,7 @@ const Calendar = () => {
   return (
     <>
       <div className="w-full h-full px-4">
-        <div className="px-2 rounded-xl">
+        <div className="px-2 h-full rounded-xl">
           <div className="flex items-center justify-between">
             <HiChevronLeft
               onClick={() => {

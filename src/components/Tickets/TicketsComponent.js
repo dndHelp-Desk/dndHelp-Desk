@@ -75,7 +75,7 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-transparent space-y-4 container w-[90%] sm:w-full 2xl:w-[72rem] mt-4 rounded-xl min-h-[40rem] 3xl:min-h-[80%] relative">
+    <div className="bg-transparent space-y-4 container w-[90%] md:w-full 2xl:w-[72rem] mt-4 rounded-xl min-h-[40rem] 3xl:min-h-[80%] relative z-[-9]">
       {/**Navbar or Control Bar  ====================== */}
       <nav className="h-[2.5rem] flex justify-between items-center w-full relative">
         {/**Search Bar ============================== */}
@@ -87,7 +87,7 @@ const TicketsComponent = () => {
           />
           <button
             onClick={() => setfiltersModal(filtersModal ? false : true)}
-            className="min-w-10 px-8 h-10 rounded-lg flex space-x-2 justify-between items-center relative dark:bg-slate-900 bg-slate-100 focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
+            className="min-w-10 px-8 h-10 rounded-lg flex space-x-2 justify-between items-center dark:bg-slate-900 bg-slate-100 focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
           >
             <BsSliders className="dark:text-slate-400 text-slate-500 font-bold" />
             <span className="hidden md:flex">Filters</span>
@@ -138,7 +138,7 @@ const TicketsComponent = () => {
           <div className="flex sticky top-0 border-b border-slate-400 h-8 items-center justify-center ">
             <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
             <input
-              className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10 z-[999] placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
+              className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
               type="search"
               placeholder="Search ..."
             />

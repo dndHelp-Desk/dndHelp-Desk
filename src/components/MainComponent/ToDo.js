@@ -96,7 +96,7 @@ const ToDo = () => {
 
   //Component =============================================
   return (
-    <div className="col-span-1 max-h-[26rem] rounded-xl flex flex-col justify-between space-y-2 relative">
+    <div className="col-span-1 h-[26rem] rounded-xl flex flex-col justify-between space-y-2 relative">
       <form
         className="h-[15%] p-2 dark:bg-slate-900  bg-slate-100 w-full rounded-xl gap-1 items-center place-content-center"
       >

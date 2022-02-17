@@ -47,21 +47,21 @@ const Main = () => {
     <div
       className={`${
         location.pathname === "/" ? "grid" : "hidden"
-      } dark:bg-slate-800 w-[90%] sm:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
+      } dark:bg-slate-800 w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
     >
-      <div className="h-[44rem] grid grid-rows-5 gap-4">
-        <div className="row-span-2 w-full dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-3 place-content-center overflow-hidden py-6 p-2 gap-1">
-          <div className="col-span-1 rounded-xl h-full w-full grid grid-rows-2 2xl:flex overflow-hidden ">
+      <div className="grid gap-4 place-content-center pb-4 h-fit">
+        <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 rounded-xl max-h-[13rem] w-full 2xl:flex overflow-hidden">
             <Calendar />
           </div>
           {/** Overdue Tickets ==================================*/}
-          <div className="col-span-1 hidden md:grid grid-rows-3 justify-between overflow-hidden px-2">
+          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2">
             {overDue.length >= 1 && (
-              <div className="row-span-2 flex flex-col gap-1 pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center md:text-left">
+              <div className="flex flex-col gap-1 pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center lg:text-left">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin text-slate-500 text-xs lg:text-sm text-center md:text-left">
+                <p className="text-thin text-slate-500 text-xs lg:text-sm text-center lg:text-left">
                   {overDue.length} tickets displayed below are overdue. To
                   resolve these issues please visit the tickets page and filter
                   by clients' name which can be seen if you hover on top of each
@@ -71,11 +71,11 @@ const Main = () => {
               </div>
             )}
             {overDue.length <= 0 && (
-              <div className="row-span-2 flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center md:text-left">
+              <div className="flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center lg:text-left">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin text-slate-500 text-sm text-center md:text-left">
+                <p className="text-thin text-slate-500 text-sm text-center lg:text-left">
                   You all catched up{" "}
                   <BsFillHandThumbsUpFill className="inline text-yellow-500" />
                   .You can check/hover on top of the highlighted dates on the
@@ -85,7 +85,7 @@ const Main = () => {
                 </p>
               </div>
             )}
-            <div className="row-span-1 flex justify-center md:justify-start items-center space-x-1">
+            <div className="flex justify-center lg:justify-start items-end space-x-1">
               {overDueTickets}
               {overDue.length <= 0 && (
                 <>
@@ -99,19 +99,19 @@ const Main = () => {
           {/**End Of Overdue Tickets ==================================*/}
 
           {/**Manage Contacts ==================================*/}
-          <div className="col-span-1 border-l dark:border-slate-700 border-slate-400 hidden md:grid grid-rows-3 px-4 justify-between overflow-hidden">
-            <div className="row-span-2 flex flex-col gap-2 pb-2 overflow-hidden">
-              <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize">
+          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1">
+            <div className="flex flex-col gap-2 pb-2 overflow-hidden">
+              <h2 className="text-base text-center lg:text-left font-bold dark:text-slate-400 text-slate-600 capitalize">
                 contacts
               </h2>
-              <p className="text-thin text-slate-500 text-sm">
+              <p className="text-thin text-slate-500 text-sm text-center lg:text-left">
                 Click below button to manage yours contacts. It is important to
                 keep them upto date as it will ensure no email is sent to the
                 wrong recipient. All tickets must be added/saved before opening
                 a new ticket.
               </p>
             </div>
-            <div className="row-span-1 flex items-center space-x-1">
+            <div className="flex items-center lg:justify-start justify-center space-x-1">
               <Link to="./contacts">
                 <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
                   Manage Contacts
@@ -125,9 +125,9 @@ const Main = () => {
         </div>
 
         {/**Bottom Half ================================ */}
-        <div className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <ToDo />
-          <div className="col-span-1 hidden md:grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
+          <div className="col-span-1 h-[26rem] grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4">
               <h2 className="dark:text-slate-400 text-slate-600 text-2xl font-bold capitalize">
                 Today's Sumary
@@ -220,7 +220,7 @@ const Main = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-1 dark:bg-slate-900 bg-slate-100 rounded-xl hidden xl:grid grid-rows-2 overflow-hidden place-items-center">
+          <div className="col-span-1 h-[26rem] hidden dark:bg-slate-900 bg-slate-100 rounded-xl lg:grid grid-rows-2 overflow-hidden place-items-center">
             <img
               className="h-full w-full object-cover object-center rounded-t-xl"
               src={Businnes}

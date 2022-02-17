@@ -108,7 +108,7 @@ const ContactsComponent = () => {
 
   //Component ======================================
   return (
-    <div className="dbg-transparent mt-4 min-h-[40rem] w-[90%] space-y-4 sm:w-full rounded-xl container 2xl:w-[72rem] overflow-hidden flex flex-col items-center pt-2">
+    <div className="dbg-transparent mt-4 min-h-[40rem] w-[90%] space-y-4 md:w-full rounded-xl container 2xl:w-[72rem] overflow-hidden flex flex-col items-center pt-2">
       {/**Search Menu ======================================== */}
       <div className="h-12 w-[70%] min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
         <input
