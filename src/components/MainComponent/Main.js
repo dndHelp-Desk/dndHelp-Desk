@@ -32,7 +32,7 @@ const Main = () => {
       return (
         <div
           key={ticket.id}
-          className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-300 flex cursor-pointer items-center justify-center relative uppercase text-lg dark:text-slate-300 text-slate-500 font-bold custom-shadow"
+          className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 flex cursor-pointer items-center justify-center relative uppercase text-lg dark:text-slate-300 text-slate-500 font-bold custom-shadow"
         >
           <abbr title={ticket.recipient_name}>
             {ticket.recipient_name.charAt(0)}
@@ -89,9 +89,9 @@ const Main = () => {
               {overDueTickets}
               {overDue.length <= 0 && (
                 <>
-                  <div className="h-10 w-10 border border-slate-600 rounded-xl dark:bg-slate-800 bg-slate-300 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
-                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-300 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
-                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-300 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
+                  <div className="h-10 w-10 border border-slate-600 rounded-xl dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
+                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
+                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
                 </>
               )}
             </div>
@@ -113,7 +113,7 @@ const Main = () => {
             </div>
             <div className="row-span-1 flex items-center space-x-1">
               <Link to="./contacts">
-                <button className="dark:bg-slate-800 bg-slate-300 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
+                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
                   Manage Contacts
                 </button>
               </Link>
@@ -140,7 +140,7 @@ const Main = () => {
             <div className="row-span-3 space-y-2 px-4 p-2">
               <div className="h-12 w-full flex justify-between">
                 <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-300 dark:text-slate-300 text-slate-500 flex justify-center items-center text-2xl">
+                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-500 flex justify-center items-center text-2xl">
                     <BsCheckAll />
                   </div>
                   <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
@@ -160,7 +160,7 @@ const Main = () => {
               </div>
               <div className="h-12 w-full flex justify-between">
                 <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-300 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
+                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
                     <BsDashSquare />
                   </div>
                   <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
@@ -180,7 +180,7 @@ const Main = () => {
               </div>
               <div className="h-12 w-full flex justify-between">
                 <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-300 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
+                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
                     <BsArrowRepeat />
                   </div>
                   <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
@@ -200,7 +200,7 @@ const Main = () => {
               </div>
               <div className="h-12 w-full flex justify-between">
                 <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-300 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
+                  <div className="custom-shadow h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
                     <BsEnvelopeOpen />
                   </div>
                   <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">

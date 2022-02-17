@@ -6,6 +6,7 @@ import {
   BsTextRight,
   BsBrightnessHigh,
   BsGear,
+  BsMoonStars,
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
@@ -84,7 +85,11 @@ const MainComponent = () => {
             >
               <text x="0" y="35">
                 <tspan className="stroke-[1.5px] fill-slate-500">dnd</tspan>
-                <tspan className="stroke-[.6px] dark:fill-slate-900 fill-slate-400" x="43" y="35">
+                <tspan
+                  className="stroke-[.6px] dark:fill-slate-900 fill-slate-400"
+                  x="43"
+                  y="35"
+                >
                   Help-Desk
                 </tspan>
               </text>
@@ -209,7 +214,8 @@ const MainComponent = () => {
                 className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
               >
                 <abbr title="theme">
-                  <BsBrightnessHigh />
+                  {theme === "dark" && <BsBrightnessHigh />}
+                  {theme !== "dark" && <BsMoonStars />}
                 </abbr>
               </button>
 

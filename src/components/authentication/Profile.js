@@ -10,7 +10,9 @@ const Profile = () => {
   const [change, setNewChange] = useState(true);
   const [showChange, setChange] = useState(false);
   const [showChangeIcon, setChangeIcon] = useState("scale-0");
-  const [photoURL, setPhotoURL] = useState("https://cutt.ly/qIBorLE");
+  const [photoURL, setPhotoURL] = useState(
+    "https://images.unsplash.com/photo-1613632749262-2fbd97f3a867?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+  );
   const dispatch = useDispatch();
 
   const handleChange = (e) => {

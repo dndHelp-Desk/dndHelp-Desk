@@ -58,7 +58,7 @@ const ToDo = () => {
       return (
         <div
           key={task.id}
-          className="h-14 w-full flex items-center justify-between space-x-2 rounded-xl dark:bg-slate-800 bg-slate-200 p-2 snap_childTwo custom-shadow"
+          className="h-14 w-full flex items-center justify-between space-x-2 rounded-xl dark:bg-slate-800 bg-slate-100 border dark:border-0 border-slate-300 p-2 snap_childTwo"
         >
           <button
             onClick={() => markToDo(task.id, task.status ? false : true)}
@@ -96,38 +96,34 @@ const ToDo = () => {
 
   //Component =============================================
   return (
-    <div className="col-span-1 rounded-xl flex flex-col justify-between space-y-2">
+    <div className="col-span-1 max-h-[26rem] rounded-xl flex flex-col justify-between space-y-2 relative">
       <form
-        onSubmit={(e) => addTask(e)}
-        className="h-[15%] p-1 px-3 dark:bg-slate-900  bg-slate-100 w-full rounded-xl grid grid-cols-10 gap-1 place-content-center"
+        className="h-[15%] p-2 dark:bg-slate-900  bg-slate-100 w-full rounded-xl gap-1 items-center place-content-center"
       >
-        <div className="h-10 w-full col-span-6 dark:bg-slate-800 bg-slate-200 rounded-lg relative overflow-hidden">
+        <div className="h-full flex items-center w-full col-span-8 dark:bg-slate-800 bg-slate-200 rounded-lg border dark:border-0 border-slate-300 overflow-hidden">
           <input
             type="text"
             name="search"
             id="search"
             required
-            className="w-full h-full rounded-lg outline-none focus:outline-none bg-transparent dark:border-slate-700 border-slate-300 placeholder:text-sm placeholder:italic dark:text-slate-400 text-slate-500"
+            className="w-full h-full outline-none focus:outline-none bg-transparent border-0 placeholder:text-sm placeholder:text-slate-500 dark:text-slate-400 text-slate-500"
             placeholder="Type your task here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}
             value={taskName}
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+               addTask(e);
+              }
+            }}
           />
-        </div>
-        <div className="col-span-2 h-10">
           <abbr title="Pick a date">
             <ToDODatePicker startDate={startDate} setStartDate={setStartDate} />
           </abbr>
         </div>
-        <button
-          type="submit"
-          className="h-10 col-span-2 bg-blue-700 rounded-lg flex justify-center items-center outline-none focus:outline-none hover:bg-blue-800 text-slate-300 font-sans font-bold capitalize text-sm transition-all"
-        >
-          Add
-        </button>
       </form>
       {/**Task List ===================== */}
-      <div className="h-[83%] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
+      <div className="h-[83%] max-h-[22rem] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
         <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
           {todoList.length >= 1 && tasks}
           {todoList.length <= 0 && (
