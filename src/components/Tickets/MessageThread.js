@@ -272,7 +272,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   threadMessage.filter(
                     (message) => message.message_position === 1
                   )[0].category}
-                {!threadId && "Nothing selected"}
+                {!threadId && "Nothing is selected"}
               </span>{" "}
               <small className="text-xs text-slate-500">
                 {clientName}

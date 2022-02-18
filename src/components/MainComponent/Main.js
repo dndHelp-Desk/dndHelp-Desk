@@ -130,7 +130,7 @@ const Main = () => {
           <div className="col-span-1 h-[26rem] grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4">
               <h2 className="dark:text-slate-400 text-slate-600 text-2xl font-bold capitalize">
-                Today's Sumary
+                Monthly Summary
               </h2>
               <p className="text-slate-500 text-center text-sm">
                 To see more analytics please visit the reports page and you can
