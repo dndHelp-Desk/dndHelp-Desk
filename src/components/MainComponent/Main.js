@@ -106,8 +106,8 @@ const Main = () => {
               </h2>
               <p className="text-thin text-slate-500 text-sm text-center lg:text-left">
                 Click below button to manage yours contacts. It is important to
-                keep them upto date as it will ensure no email is sent to the
-                wrong recipient. All tickets must be added/saved before opening
+                keep them up-to date as it will ensure no email is sent to the
+                wrong recipient. All contacts must be added/saved before opening
                 a new ticket.
               </p>
             </div>
