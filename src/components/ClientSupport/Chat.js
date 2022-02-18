@@ -7,7 +7,7 @@ const Chat = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
   const textFieldReadOnly = threadMessage.length >= 1 ? false : true;
-  const preloaderData = [1, 2, 3, 4, 5, 6];
+  const preloaderData = [1, 2, 3, 4, 5];
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({
@@ -119,7 +119,7 @@ const Chat = () => {
 
   //Component ===============================
   return (
-    <div className=" bg-slate-600 custom-shadow h-[35rem] w-full rounded-lg mt-6 p-4 flex flex-col">
+    <div className=" bg-slate-600 custom-shadow h-[30rem]  max-w-[45rem] w-full rounded-lg mt-6 p-4 flex flex-col">
       {threadMessage.length <= 0 && (
         <div className="w-full h-full space-y-4 flex flex-col justify-center">
           {preloader}
@@ -143,12 +143,12 @@ const Chat = () => {
             id="reply"
             placeholder="Reply Here ✉️ ..."
             autoComplete="off"
-            onChange={(e) =>{
+            onChange={(e) => {
               setReply({
                 ...reply,
                 message: e.target.value,
                 ticket_id: threadId,
-                message_position:threadMessage.length + 1
+                message_position: threadMessage.length + 1,
               });
             }}
             onKeyUp={(e) => {

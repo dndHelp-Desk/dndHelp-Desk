@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { BsEnvelope } from "react-icons/bs";
 import Filters from "./Filters";
 import {
   changePriority,
@@ -23,7 +22,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5.5rem]  ${
+          className={`w-full h-[5.7rem]  ${
             user[0].access === "agent" && ticket.agent_email === user[0].email
               ? ""
               : user[0].access === "admin"
@@ -72,11 +71,11 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             <h2 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans capitalize whitespace-nowrap">
               {ticket.category} {ticket.ticket_id}
             </h2>
-            <h5 className="dark:text-slate-400 text-slate-500 text-xs tracking-wide font-base font-sans flex flex-col flex-wrap justify-center capitalize">
-              <span className="">
-                <BsEnvelope className="inline" /> {ticket.recipient_name}
-              </span>{" "}
-              <span className="flex lg:hidden 2xl:flex">{`${ticket.branch_company}`}</span>
+            <h5 className="dark:text-slate-400 text-slate-500 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
+              <span className="flex">{`${ticket.branch_company}`}</span>
+              <span className="dark:text-slate-500 text-xs text-slate-400">
+                Due on {new Date(ticket.due_date).toDateString()}
+              </span>
             </h5>
           </div>
           <div className="col-span-5 float-right h-full w-[20rem] flex flex-col items-center justify-center space-y-1">
@@ -159,7 +158,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
           <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-lg z-0 h-12 p-1">
             <Filters />
           </div>
-          <div className="w-full h-full space-y-2 overflow-y-scroll border-t dark:border-slate-800 border-slate-300 pt-2 lg:no-scrollbar lg:no-scrollbar::-webkit-scrollbar scroll-snap pr-2 lg:pr-0">
+          <div className="w-full h-full space-y-2 overflow-y-scroll lg:border-t dark:border-slate-800 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
             {tickets}
           </div>
         </div>

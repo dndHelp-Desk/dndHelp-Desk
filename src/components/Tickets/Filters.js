@@ -87,7 +87,7 @@ const Filters = () => {
           onChange={(e) =>
             dispatch(filter({ ...filters, client: e.target.value }))
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-800 border-slate-300 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
+          className="h-full w-full bg-transparent outline-none focus:outline-none border-0 focus:ring-0 focus:border-0 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
           placeholder="Quick Serch By Store Name ..."
         />
       </div>

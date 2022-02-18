@@ -75,7 +75,7 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-transparent space-y-4 container w-[90%] md:w-full 2xl:w-[72rem] mt-4 rounded-xl min-h-[40rem] 3xl:min-h-[80%] relative z-[-9]">
+    <div className="bg-transparent space-y-4 container w-[90%] md:w-full 2xl:w-[72rem] mt-4 rounded-xl pb-4 relative z-[-9]">
       {/**Navbar or Control Bar  ====================== */}
       <nav className="h-[2.5rem] flex justify-between items-center w-full relative">
         {/**Search Bar ============================== */}

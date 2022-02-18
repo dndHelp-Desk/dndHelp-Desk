@@ -13,7 +13,7 @@ const ReportsComponent = () => {
 
   //Component =========================
   return (
-    <div className="bg-transparent min-h-[40rem] mt-4 container w-[90%] md:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col">
+    <div className="bg-transparent mt-4 container w-[90%] md:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col">
       {/**Filters or TopNav Small-Screens ================= */}
       <button
         onClick={() => setShowFilters(true)}

@@ -188,7 +188,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
         isChatOpen ? "flex" : "hidden"
       } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
         <div className="h-14 dark:bg-slate-800 bg-slate-200 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-900 border-slate-300">
           {/**Back To Main List  On Small Screens====================== */}
           <div
@@ -266,7 +266,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             )}
           </h2>
           <div className="flex space-x-2 dark:bg-slate-800 bg-slate-200">
-            <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-500 tracking-wide flex flex-col capitalize w-32 whitespace-nowrap overflow-hidden overflow-ellipsis">
+            <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-500 tracking-wide flex flex-col capitalize  whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span>
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
@@ -275,11 +275,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 {!threadId && "Nothing selected"}
               </span>{" "}
               <small className="text-xs text-slate-500">
-                {clientName}{" "}
-                {threadMessage.length >= 1 &&
-                  threadMessage.filter(
-                    (message) => message.message_position === 1
-                  )[0].branch_company}
+                {clientName}
                 {!threadId && "select any ticket"}
               </small>{" "}
             </h2>

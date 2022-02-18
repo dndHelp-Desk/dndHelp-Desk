@@ -8,6 +8,7 @@ import ContactsComponent from "./components/Contacts/ContactsComponent";
 import SettingsComponent from "./components/Settings/SettingsComponents";
 import SupportHome from "./components/ClientSupport/SupportHome";
 import NewTicket from "./components/ClientSupport/NewTicket";
+import KnowledgeBase from "./components/ClientSupport/KnowledgeBase"
 import Account from "./components/Settings/Account"
 import Team from "./components/Settings/Team"
 
@@ -19,6 +20,7 @@ const App = () => {
           <Route exact path="/logIn" element={<LogIn />} />
           <Route exact path="/support" element={<SupportHome />}>
             <Route path="new-ticket" element={<NewTicket />} />
+            <Route path="knowledge_base" element={<KnowledgeBase />} />
           </Route>
           <Route path="/" element={<MainComponent />}>
             <Route path="tickets" element={<TicketsComponent />} />
