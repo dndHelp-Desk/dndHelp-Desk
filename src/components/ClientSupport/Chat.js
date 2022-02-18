@@ -26,10 +26,6 @@ const Chat = () => {
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
       .recipient_name;
-  let clientEmail =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0]
-      .recipient_email;
 
   //Loop Through Each Message In a thread ====================
   const thread =
