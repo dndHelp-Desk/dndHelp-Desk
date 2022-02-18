@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  signOut,
   getAuth,
   sendEmailVerification,
   updatePassword,
@@ -9,12 +10,17 @@ import {
 } from "firebase/auth";
 import { updateAlert } from "../../store/NotificationsSlice";
 import {
+  changeLocation,
+  isAuthenticated,
+} from "../../store/UserSlice";
+import {
   BsEnvelope,
   BsFillPatchCheckFill,
   BsFillPatchExclamationFill,
   BsFillPersonFill,
   BsBuilding,
   BsFillKeyFill,
+  BsBoxArrowRight,
 } from "react-icons/bs";
 import { updateUserDetails } from "../Data_Fetching/TicketsnUserData";
 
@@ -36,6 +42,21 @@ const Account = () => {
     photoUrl = user.photoURL;
     emailStatus = user.emailVerified;
   }
+
+  //Sign Out User =================
+  const signOutUser = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("user signed out");
+        dispatch(isAuthenticated(false));
+        window.localStorage.clear();
+        dispatch(changeLocation("Dial n Dine Help-Desk"));
+        document.title = "Dial n Dine Help-Desk";
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   //Set New Password ===========================
   const newPassword = (e) => {
@@ -88,9 +109,9 @@ const Account = () => {
 
   //Component =========================
   return (
-    <div className="h-full w-full grid grid-cols-2 p-1">
+    <div className="h-full w-full grid grid-cols-1 lg:grid-cols-2 p-1">
       {/**Profile Datils ======================= */}
-      <div className="col-span-1 border-r dark:border-slate-800 border-slate-300 flex flex-col items-center p-6 space-y-2">
+      <div className="col-span-1 lg:border-r dark:border-slate-800 border-slate-300 flex flex-col items-center p-6 space-y-2">
         <div className="h-20 w-20 dark:bg-slate-700 bg-slate-200 border-2 border-slate-400 p-[2px] rounded-xl overflow-hidden">
           <img
             src={photoUrl}
@@ -161,6 +182,18 @@ const Account = () => {
             {member_details.length !== undefined && member_details[0].bio}
           </p>
         </div>
+        <button
+          onClick={() => {
+            signOutUser();
+          }}
+          className="bg-red-800 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center"
+        >
+          <BsBoxArrowRight /> <span>Sign Out</span>
+        </button>
+        <button
+          className="bg-red-800 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center"
+        ><span>Delete Account</span>
+        </button>
       </div>
 
       {/**Update Details =========================== */}

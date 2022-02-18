@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   BsSearch,
   BsFillTrashFill,
-  BsPinFill,
   BsFillTelephoneFill,
   BsFillPersonFill,
   BsFillEnvelopeFill,
+  BsThreeDotsVertical,
   BsPinMapFill,
 } from "react-icons/bs";
 import { deleteContact } from "../Data_Fetching/TicketsnUserData";
 import { newContact } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "./../../store/NotificationsSlice";
+import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const ContactsComponent = () => {
   const contacts = useSelector((state) => state.Tickets.contacts);
@@ -22,6 +23,15 @@ const ContactsComponent = () => {
     email: "",
     phoneNumber: "",
     company: "",
+  });
+
+  //Expand Options ========================================
+  const [openOptions, setOptions] = useState({
+    status: false,
+    id: "",
+  });
+  const optionsRef = useOnClickOutside(() => {
+    setOptions({ ...openOptions, status: false });
   });
 
   //Add new Contact  =======================
@@ -55,7 +65,7 @@ const ContactsComponent = () => {
         <div
           key={contact.id}
           autoComplete="off"
-          className={`h-[13rem] col-span-1 rounded-xl dark:bg-[#25396823] bg-slate-200 custom-shadow overflow-hidden relative w-full p-4 grid grid-rows-5 gap-2 items-center ${
+          className={`h-[5rem] col-span-1 rounded-lg dark:bg-slate-900 dark:border border-slate-800 bg-slate-200 custom-shadow overflow-hidden relative w-full p-2 grid grid-cols-5 gap-2 items-center ${
             contact.branch_company
               .toLowerCase()
               .replace(/\s/g, "")
@@ -66,38 +76,60 @@ const ContactsComponent = () => {
         >
           {/**Delete Button ============================ */}
           <button
-            onClick={() => {
-              deleteContact(contact.id);
-            }}
-            className={`h-8 w-8 dark:text-slate-500 text-slate-400 dark:hover:text-red-600 hover:text-red-600 rounded-lg flex items-center justify-center outline-none focus:outline-none absolute top-2 text-lg right-2`}
+            onClick={() =>
+              setOptions({
+                ...openOptions,
+                status: !openOptions.status ? true : false,
+                id: contact.id,
+              })
+            }
+            className={`h-8 w-8 dark:text-slate-500 text-slate-400 rounded-lg flex items-center justify-center outline-none focus:outline-none absolute top-6 text-lg right-2`}
           >
-            <BsFillTrashFill />
+            <BsThreeDotsVertical />
           </button>
+          <div
+            ref={optionsRef}
+            className={`w-[10rem] ${
+              openOptions.status === true && openOptions.id === contact.id
+                ? ""
+                : "hidden"
+            } z-[99] shadow-lg border border-slate-700 dark:bg-[#0f172a83] bg-slate-200 backdrop-blur-sm rounded-lg absolute right-10 top-4 p-4`}
+          >
+            <div className="text-slate-400 font-medium text-sm flex justify-between items-center">
+              <p>Delete</p>
+                <BsFillTrashFill
+                  onClick={() => {
+                    deleteContact(contact.id);
+                  }}
+                  className={`dark:text-slate-500 text-slate-400 dark:hover:text-red-600 hover:text-red-600 rounded-lg flex items-center justify-center outline-none focus:outline-none text-lg cursor-pointer`}
+                />
+            </div>
+          </div>
 
           {/**div Contents =========== */}
-          <div className="row-span-2 m-auto dark:bg-slate-900 bg-slate-300 h-16 w-16 rounded-full flex items-center justify-center uppercase tracking-wide dark:text-slate-500 text-slate-500 text-xl font-bold border-2 dark:border-slate-500 border-slate-400 custom-shadow">
+          <div className="col-span-1 m-auto dark:bg-slate-900 bg-slate-300 h-14 w-14 rounded-full flex items-center justify-center uppercase tracking-wide dark:text-slate-500 text-slate-500 text-xl font-bold border-2 dark:border-slate-700 border-slate-400 custom-shadow">
             {contact.name.split(" ")[0].split("")[0]}
             {contact.name.split(" ")[1].split("")[0]}
           </div>
-          <div className="row-span-2 flex flex-col space-y-1 items-center">
-            <p className="dark:text-slate-400 text-slate-500 text-sm capitalize w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center font-semibold">
+          <div className="col-span-3 md:col-span-2 flex flex-col space-y-1 px-2">
+            <p className="dark:text-slate-400 text-slate-500 text-sm capitalize w-full overflow-hidden overflow-ellipsis whitespace-nowrap font-semibold">
               {contact.name}
             </p>
-            <p className="text-slate-500 text-xs font-medium lowercase w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center italic">
+            <p className="text-slate-500 text-xs font-medium lowercase w-full overflow-hidden overflow-ellipsis whitespace-nowrap italic">
               {contact.email}
             </p>
-            <p className="text-slate-500 text-xs font-medium capitalize w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center">
+            <p className="text-slate-500 text-xs font-medium capitalize w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
               {contact.branch_company}
             </p>
           </div>
-          <div className="row-span-1 flex justify-center space-x-2 items-center">
-            <abbr title={contact.branch_company}>
-              <div className="h-9 w-9 dark:bg-slate-900 bg-slate-300 hover:text-blue-700 hover:border-blue-700 rounded-xl flex justify-center items-center text-slate-500 font-bold text-base custom-shadow cursor-pointer border border-slate-500">
-                <BsPinFill />
+          <div className="col-span-2 hidden md:flex justify-center space-x-2 items-center">
+            <abbr title={contact.email}>
+              <div className="h-9 w-9 dark:bg-slate-900 bg-slate-300 hover:text-blue-700 hover:border-blue-700 rounded-lg flex justify-center items-center text-slate-500 font-bold text-base custom-shadow cursor-pointer dark:border border-slate-800">
+                <BsFillEnvelopeFill />
               </div>
             </abbr>
             <abbr title={contact.phone}>
-              <div className="h-9 w-9 dark:bg-slate-900 bg-slate-300 hover:text-blue-700 hover:border-blue-700 rounded-xl flex justify-center items-center text-slate-500 font-bold text-base custom-shadow  cursor-pointer border border-slate-500">
+              <div className="h-9 w-9 dark:bg-slate-900 bg-slate-300 hover:text-blue-700 hover:border-blue-700 rounded-lg flex justify-center items-center text-slate-500 font-bold text-base custom-shadow  cursor-pointer dark:border border-slate-800">
                 <BsFillTelephoneFill />
               </div>
             </abbr>
@@ -127,19 +159,19 @@ const ContactsComponent = () => {
       {/**Conatct List ============= */}
       <div className="grid grid-cols-3 gap-4 w-full">
         {/**Contacts List ======================================== */}
-        <div className="col-span-2 overflow-hidden items-center flex flex-col gap-4 pt-1">
+        <div className="col-span-3 lg:col-span-2 overflow-hidden items-center flex flex-col gap-4 pt-1">
           {/**Contacts ======================================== */}
-          <div className="h-[38rem] dark:bg-slate-900 bg-slate-100 p-4 grid grid-cols-3 gap-4 w-full rounded-xl overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+          <div className="h-[38rem] bg-transparent p-2 space-y-2 w-full rounded-lg dark:bg-slate-900 bg-slate-100 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
             {contactList}
           </div>
         </div>
 
         {/**Add new Contact =========================================== */}
-        <div className="col-span-1 dark:bg-slate-900 bg-slate-100  rounded-xl p-6">
+        <div className="col-span-3 lg:col-span-1 dark:bg-slate-900 bg-slate-100  flex justify-center rounded-xl p-6">
           <form
             action=""
             onSubmit={(e) => handleNewContact(e)}
-            className="space-y-6 h-full w-full flex flex-col items-center justify-center mt-2 dark:autofill:bg-slate-900"
+            className="space-y-6 h-full w-full max-w-[23rem] flex flex-col items-center justify-center mt-2 dark:autofill:bg-slate-900"
           >
             <h3 className="text-lg text-center dark:text-slate-400 text-slate-500 capitalize font-bold font-sans">
               add new contact

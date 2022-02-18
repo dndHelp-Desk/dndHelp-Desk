@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import {
-  BsBoxArrowRight,
   BsChatSquareText,
   BsJustifyLeft,
   BsBrightnessHigh,
@@ -10,11 +9,9 @@ import {
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
-import { signOut, getAuth } from "firebase/auth";
 import {
   changeLocation,
   changeTheme,
-  isAuthenticated,
 } from "../../store/UserSlice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { NavLink, Outlet } from "react-router-dom";
@@ -29,28 +26,12 @@ const MainComponent = () => {
   const theme = useSelector((state) => state.UserInfo.theme);
   const location = useLocation();
   const dispatch = useDispatch();
-  const auth = getAuth();
 
   //Small Screen Menu ===================
   const [showMenu, setShowMenu] = useState(false);
   const menuModalRef = useOnClickOutside(() => {
     setShowMenu(false);
   });
-
-  //Sign Out User =================
-  const signOutUser = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("user signed out");
-        dispatch(isAuthenticated(false));
-        window.localStorage.clear();
-        dispatch(changeLocation("Dial n Dine Help-Desk"));
-        document.title = "Dial n Dine Help-Desk";
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
 
   useEffect(() => {
     window.localStorage.setItem("locationPath", routeLocation);
@@ -78,7 +59,7 @@ const MainComponent = () => {
           <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl custom-shadow justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative">
             {/**Logo ==================== */}
             <svg
-              className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent hidden md:flex"
+              className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent hidden lg:flex"
               width="210"
               height="50"
               viewBox="0 0 200 50"
@@ -233,18 +214,6 @@ const MainComponent = () => {
                     <BsGear />
                   </abbr>
                 </NavLink>
-              </button>
-
-              {/**Sign-Out ================================ */}
-              <button
-                onClick={() => {
-                  signOutUser();
-                }}
-                className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
-              >
-                <abbr className="relative" title="sign-out">
-                  <BsBoxArrowRight />
-                </abbr>
               </button>
 
               {/**Profile And User Settings =========================== */}

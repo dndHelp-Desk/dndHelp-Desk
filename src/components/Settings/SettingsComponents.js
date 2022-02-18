@@ -12,14 +12,14 @@ const SettingsComponents = () => {
 
   //Component ======================
   return (
-    <div className=" mt-4 min-h-[40rem] container w-[90%] md:w-full 2xl:w-[72rem] overflow-hidden grid grid-cols-11 gap-4">
+    <div className=" mt-4 min-h-[40rem] container w-[90%] md:w-full 2xl:w-[72rem] overflow-hidden grid grid-cols-9 lg:grid-cols-11 gap-4">
       {/** Sidenav ====================================== */}
-      <div className="col-span-2 overflow-hidden">
+      <div className="col-span-9 lg:col-span-2 overflow-hidden">
         <div className="dark:bg-slate-900 bg-slate-100 rounded-lg p-4 py-10">
           <h2 className="dark:text-slate-400 text-slate-600 text-xl font-bold border-b dark:border-slate-600 border-slate-400">
             Settings
           </h2>
-          <ul className="space-y-3 mt-10 sidenav">
+          <ul className="space-x-6 lg:space-x-0 justify-center lg:justify-start gap-4 lg:gap-0 lg:space-y-3 mt-10 sidenav flex flex-wrap lg:flex-col">
             <li>
               <NavLink to="/settings/account" className="settingsNav">
                 <BsSliders />
