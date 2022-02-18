@@ -55,7 +55,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             <div
               className={`h-8 w-8 lg:h-10 lg:w-10 rounded-xl ${(new Date(
                 ticket.due_date !== null && ticket.due_date
-              ).toISOString()) <= new Date().toISOString()?"border border-red-500":""} dark:bg-slate-700 bg-slate-500 hidden sm:flex lg:hidden xl:flex justify-center items-center`}
+              ).toISOString()) <= new Date().toISOString()?"border border-red-500":""} dark:bg-slate-700 bg-slate-500 flex lg:hidden xl:flex justify-center items-center`}
             >
               <abbr title={ticket.recipient_name}>
                 <h4 className="text-slate-300 font-semibold text-xl">{`${
@@ -82,7 +82,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               </span>
             </h5>
           </div>
-          <div className="col-span-5 float-right h-full w-[20rem] flex flex-col items-center justify-center space-y-1">
+          <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">
             <div className="w-[10rem] flex items-baseline justify-end">
               <span
                 className={`${

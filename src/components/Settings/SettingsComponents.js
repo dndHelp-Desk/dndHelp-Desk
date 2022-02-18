@@ -19,7 +19,7 @@ const SettingsComponents = () => {
           <h2 className="dark:text-slate-400 text-slate-600 text-xl font-bold border-b dark:border-slate-600 border-slate-400">
             Settings
           </h2>
-          <ul className="space-x-6 lg:space-x-0 justify-center lg:justify-start gap-4 lg:gap-0 lg:space-y-3 mt-10 sidenav flex flex-wrap lg:flex-col">
+          <ul className="md:space-x-6 lg:space-x-0 justify-center lg:justify-start gap-3 lg:gap-0 lg:space-y-3 mt-10 sidenav grid grid-cols-2 whitespace-nowrap md:flex flex-wrap lg:flex-col">
             <li>
               <NavLink to="/settings/account" className="settingsNav">
                 <BsSliders />
