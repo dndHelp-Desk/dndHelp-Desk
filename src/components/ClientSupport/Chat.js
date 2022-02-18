@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BsPaperclip, BsEnvelope } from "react-icons/bs";
+import { BsPaperclip } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { addClientReply } from "./DataFetching";
 
@@ -38,7 +38,7 @@ const Chat = () => {
       return (
         <div
           key={index}
-          className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex space-x-2"
+          className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex overflow-hidden space-x-2"
         >
           <div
             className={`h-[2.5rem] w-[5%] max-w-[2.5rem] min-w-[2.5rem] flex justify-center items-center rounded-xl uppercase text-2xl text-gray-300 ${
@@ -52,7 +52,7 @@ const Chat = () => {
             }`}
           </div>
           <div className="w-[95%] 2xl:w-full bg-slate-800 p-4 rounded-lg">
-            <div className="font-bold  text-slate-300 justify-between w-full flex">
+            <div className="font-bold  text-slate-300 justify-between w-full flex-col md:flex-row flex border-b border-slate-700">
               <span>{`${
                 message.from === "agent" ? agentName : clientName
               }`}</span>{" "}
@@ -73,16 +73,6 @@ const Chat = () => {
                 </span>
               </h4>
             </div>
-            <h5 className="text-[11px] border-b lfex space-x-2 items-center border-slate-900 text-slate-500">
-              <BsEnvelope className="inline" />
-              {""}
-              <i>
-                From :{" "}
-                {message.from === "agent"
-                  ? "support@helpdesk.co.za"
-                  : clientEmail}
-              </i>
-            </h5>
             <p className="mt-2">{message.message}</p>
           </div>
         </div>
@@ -128,7 +118,7 @@ const Chat = () => {
       {/**Messages Thread =========================== */}
       {threadMessage.length >= 1 && (
         <div className="w-full h-full overflow-y-scroll scroll-snap relative">
-          <div className="px-6 pt-4 space-y-3 z-0 h-full">{thread}</div>
+          <div className="px-2 md:px-4 pt-4 space-y-3 z-0 h-full">{thread}</div>
         </div>
       )}
       {/**New message // Reply =========================== */}

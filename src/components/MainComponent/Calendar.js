@@ -120,13 +120,13 @@ const Calendar = () => {
   const days = getDatesInMonthDisplay(month, year).map((day, index) => {
     const clientName = currentMonthTickets.filter(
               (data) => new Date(data.due_date).getDate() === day.getDate()
-            ).length >= 1 &&
+            ).length >= 1 ?
             currentMonthTickets.filter(
               (data) => new Date(data.due_date).getDate() === day.getDate()
-            )[0].recipient_name
+            )[0].recipient_name:""
     return (
       <div key={index} className="p-[0.3rem] flex w-full justify-center">
-        <abbr title={`"${clientName}"`}>
+        <abbr title={`${clientName}`}>
           <p
             className={`${
               day.getDate() === new Date().getDate() &&

@@ -57,7 +57,12 @@ export const TicketsSlice = createSlice({
       state.filters = action.payload;
     },
     updateFilteredTickets: (state, action) => {
-      state.filteredTickets = action.payload;
+      state.filteredTickets = (action.payload).sort((a, b) => {
+        return (
+          new Date(a.due_date !== null && a.due_date).getDate() -
+          new Date(b.due_date !== null && b.due_date).getDate()
+        );
+      });
     },
   },
 });

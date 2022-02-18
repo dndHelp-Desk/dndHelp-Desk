@@ -47,7 +47,7 @@ const TicketStatus = () => {
         </p>
         <form
           onSubmit={(e) => check(e)}
-          className="rounded-lg mt-[1rem] min-h-10 space-y-2 items-center flex flex-col space-x-4 justify-center w-full"
+          className="rounded-lg mt-[1rem] min-h-10 space-y-2 items-center flex flex-col md:flex-row md:space-y-0 space-x-4 justify-center w-full"
         >
           <input
             type="text"

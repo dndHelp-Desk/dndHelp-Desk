@@ -63,10 +63,10 @@ const Main = () => {
                 </h2>
                 <p className="text-thin text-slate-500 text-xs lg:text-sm text-center lg:text-left">
                   {overDue.length} tickets displayed below are overdue. To
-                  resolve these issues please visit the tickets page and filter
-                  by clients' name which can be seen if you hover on top of each
-                  letters below. Alternatively you can check/hover on top of the
-                  highlighted dates on the calendar to see upcoming deadline.
+                  resolve these issues please visit the tickets page check those
+                  highlighted with red border. To keep yourself up-to date the
+                  calender has highlighted all due dates, just hover on top to
+                  see clients name.
                 </p>
               </div>
             )}

@@ -52,7 +52,11 @@ const TicketsList = ({ setDelete, deleteArray }) => {
                   : setDelete(deleteArray.filter((data) => data !== ticket.id))
               }
             />
-            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl dark:bg-slate-700 bg-slate-500 hidden sm:flex lg:hidden xl:flex justify-center items-center">
+            <div
+              className={`h-8 w-8 lg:h-10 lg:w-10 rounded-xl ${(new Date(
+                ticket.due_date !== null && ticket.due_date
+              ).toISOString()) <= new Date().toISOString()?"border border-red-500":""} dark:bg-slate-700 bg-slate-500 hidden sm:flex lg:hidden xl:flex justify-center items-center`}
+            >
               <abbr title={ticket.recipient_name}>
                 <h4 className="text-slate-300 font-semibold text-xl">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
@@ -66,7 +70,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               window.localStorage.setItem("threadId", JSON.stringify(threadId));
               setChat(true);
             }}
-            className="col-span-5 flex flex-col justify-center h-full w-full border-l-2 dark:border-slate-600 border-slate-400 px-2 py-1 cursor-pointer"
+            className="col-span-5 flex flex-col justify-center h-full w-full px-1 py-1 cursor-pointer"
           >
             <h2 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans capitalize whitespace-nowrap">
               {ticket.category} {ticket.ticket_id}

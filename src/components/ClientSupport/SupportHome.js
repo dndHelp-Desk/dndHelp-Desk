@@ -47,7 +47,7 @@ const SupportHome = () => {
       <nav className="w-full h-[2.5rem] bg-slate-600 px-7 flex items-center space-x-4 whitespace-nowrap overflow-hidden overflow-x-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         <NavLink
           to="/support"
-          className={`text-sm font-[600] text-slate-400  font-sans h-full items-center flex ${
+          className={`text-sm font-[600] text-slate-300  font-sans h-full items-center flex ${
             location.pathname === "/support" ? "supportlinks" : ""
           }`}
         >
@@ -56,7 +56,7 @@ const SupportHome = () => {
         </NavLink>
         <NavLink
           to="/support/new-ticket"
-          className={`text-sm font-[600] text-slate-400 font-sans h-full space-x-1 items-center flex ${
+          className={`text-sm font-[600] text-slate-300 font-sans h-full space-x-1 items-center flex ${
             location.pathname === "/support/new-ticket" ? "supportlinks" : ""
           }`}
         >
@@ -65,7 +65,7 @@ const SupportHome = () => {
         </NavLink>
         <NavLink
           to="/support/knowledge_base"
-          className={`text-sm font-[600] text-slate-400 font-sans h-full space-x-1 items-center flex ${
+          className={`text-sm font-[600] text-slate-300 font-sans h-full space-x-1 items-center flex ${
             location.pathname === "/support/knowledge_base"
               ? "supportlinks"
               : ""
