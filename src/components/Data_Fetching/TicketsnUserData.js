@@ -59,7 +59,15 @@ export const updateUserDetails = (id, name, dept, bio) => {
   });
 };
 
-// Change Status ================
+// Update Agent Online Status ================
+export const updateUserStatus = (id, status) => {
+  let docRef = doc(db, "members", id);
+  updateDoc(docRef, {
+    status: status,
+  });
+};
+
+// Change Ticket Status ================
 export const changeStatus = (id, state) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {

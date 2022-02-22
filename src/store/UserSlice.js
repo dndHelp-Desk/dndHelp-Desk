@@ -17,8 +17,9 @@ const initialState = {
       access: "none",
       dept: "Unkown Dept",
       email: "example@gmail.com",
-      id: "A1w2FvwWbcGBECBUj",
+      id: false,
       name: "User Loader",
+      status:"offline"
     },
   ],
   authenticated: false,

@@ -186,13 +186,12 @@ const Account = () => {
           onClick={() => {
             signOutUser();
           }}
-          className="bg-red-800 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center"
+          className="dark:bg-red-800 bg-red-600 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center"
         >
           <BsBoxArrowRight /> <span>Sign Out</span>
         </button>
-        <button
-          className="bg-red-800 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center"
-        ><span>Delete Account</span>
+        <button className="dark:bg-red-800 bg-red-600 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center">
+          <span>Delete Account</span>
         </button>
       </div>
 

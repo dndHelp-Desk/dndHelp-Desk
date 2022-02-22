@@ -208,13 +208,13 @@ const MainComponent = () => {
               </button>
 
               {/**Settings ================================================ */}
-              <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
                 <NavLink to="/settings/account">
+              <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
                   <abbr title="Settings">
                     <BsGear />
                   </abbr>
-                </NavLink>
               </button>
+                </NavLink>
 
               {/**Profile And User Settings =========================== */}
               <Profile />

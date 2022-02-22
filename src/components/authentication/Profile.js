@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth, upload } from "./../Data_Fetching/Firebase";
 import { BsCameraFill, BsBoxArrowUp } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateAlert } from "../../store/NotificationsSlice";
+import { updateUserStatus } from "../Data_Fetching/TicketsnUserData";
 
 const Profile = () => {
   const currentUser = useAuth();
@@ -10,6 +11,7 @@ const Profile = () => {
   const [change, setNewChange] = useState(true);
   const [showChange, setChange] = useState(false);
   const [showChangeIcon, setChangeIcon] = useState("scale-0");
+  const member_details = useSelector((state) => state.UserInfo.member_details);
   const [photoURL, setPhotoURL] = useState(
     "https://images.unsplash.com/photo-1613632749262-2fbd97f3a867?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
   );
@@ -30,6 +32,24 @@ const Profile = () => {
     setChange(false);
   };
 
+  //Change Agent Online Stutus ============
+  const online = navigator.onLine;
+  useEffect(() => {
+    if (
+      member_details[0].name !== "User Loader" &&
+      member_details.length !== undefined &&
+      online
+    ) {
+      updateUserStatus(member_details[0].id, "online");
+    } else {
+      member_details.length !== undefined &&
+        currentUser &&
+        member_details[0].name !== "User Loader" &&
+        !online &&
+        updateUserStatus(member_details[0].id, "offline");
+    }
+  }, [member_details, currentUser, online]);
+
   //Apply Changes to the Profile =========
   change === false &&
     setTimeout(() => {
@@ -44,10 +64,13 @@ const Profile = () => {
     }, 3000);
 
   useEffect(() => {
-    if (currentUser?.photoURL) {
+    if (
+      member_details.length !== undefined &&
+      member_details[0].statuscurrentUser?.photoURL
+    ) {
       setPhotoURL(currentUser.photoURL);
     }
-  }, [currentUser]);
+  }, [currentUser, member_details]);
 
   return (
     <>
@@ -61,9 +84,9 @@ const Profile = () => {
           } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
           type="submit"
         >
-          <BsBoxArrowUp/>
+          <BsBoxArrowUp />
         </button>
-        <div className="h-10  flex justify-center relative">
+        <div className="h-10 flex justify-center relative">
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
@@ -88,6 +111,14 @@ const Profile = () => {
               />
             </label>
           </div>
+          <span
+            className={`absolute h-2.5 w-2.5 rounded-full border dark:border-slate-900 border-slate-100  ${
+              member_details.length !== undefined &&
+              member_details[0].status === "online"
+                ? "bg-green-500"
+                : "bg-red-500"
+            } right-[-2px] top-[-2px]`}
+          ></span>
         </div>
       </form>
     </>
