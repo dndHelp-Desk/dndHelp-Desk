@@ -32,12 +32,11 @@ const Main = () => {
       return (
         <div
           key={ticket.id}
-          className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 flex cursor-pointer items-center justify-center relative uppercase text-lg dark:text-slate-300 text-slate-500 font-bold custom-shadow"
+          className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 flex cursor-pointer items-center justify-center relative uppercase text-lg dark:text-slate-300 text-slate-500 font-bold custom-shadow border border-red-500"
         >
           <abbr title={ticket.recipient_name}>
             {ticket.recipient_name.charAt(0)}
           </abbr>
-          <span className="absolute top-[-.1rem] right-[-.1rem] h-[.6rem] w-[.6rem] rounded-full bg-red-500 border dark:border-slate-900 border-slate-100"></span>
         </div>
       );
     });
