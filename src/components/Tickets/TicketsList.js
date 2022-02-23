@@ -48,9 +48,9 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               : user[0].access === "admin"
               ? ""
               : "hidden"
-          } snap_childTwo rounded-lg dark:bg-slate-800  ${
+          } snap_childTwo custom-shadow rounded-lg dark:bg-slate-800  ${
             ticket.ticket_id === threadId
-              ? "border-2 dark:border-slate-600 border-slate-400"
+              ? "border-[1px] dark:border-slate-600 border-slate-400"
               : ""
           } bg-slate-200 p-2 space-x-2  flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||

@@ -71,10 +71,10 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-xl flex space-x-2 transition-all"
         >
           <div
-            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase text-lg dark:text-gray-400 text-slate-300 ${
+            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] hidden md:flex justify-center items-center rounded-lg uppercase text-lg dark:text-gray-400 text-slate-500 custom-shadow ${
               message.from === "agent" && clientName && agentName
-                ? "bg-blue-700"
-                : "bg-slate-500"
+                ? "dark:bg-slate-900 bg-slate-100"
+                : "dark:bg-slate-900 bg-slate-100"
             }`}
           >
             {`${
@@ -83,8 +83,8 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full p-2 bg-transparent dark:bg-[#192235] bg-slate-100 rounded-lg space-y-2 custom-shadow">
-            <div className="w-[95%] 2xl:w-full bg-transparent space-y-2 rounded-lg">
+          <div className="w-[95%] 2xl:w-full p-2 bg-transparent dark:bg-slate-900 bg-slate-100 rounded-lg space-y-2 custom-shadow">
+            <div className="w-full 2xl:w-full bg-transparent space-y-2 rounded-lg">
               <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col dark:py-1 md:flex-row border-b dark:border-slate-800 border-slate-200 relative">
                 <span>{`${
                   message.from === "agent" ? agentName : clientName
@@ -141,12 +141,20 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   </div>
                 </h4>
               </div>
-              <p className="mt-2 text-slate-500">{message.message}</p>
-              <div className={`mt-2 flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${message.from === "client"? "hidden":""}`}>
-                <p>{message.readStatus}{" "}</p>
+              <p className="mt-2 text-slate-500 text-center md:text-left">{message.message}</p>
+              <div
+                className={`mt-2 flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
+                  message.from === "client" ? "hidden" : ""
+                }`}
+              >
+                <p>{message.readStatus} </p>
                 <div className="flex font-bold space-x-[1px] text-sm">
-                  <HiCheck/>
-                  <HiCheck className={`${message.readStatus !== "read"?"text-slate-500":""}`} />
+                  <HiCheck />
+                  <HiCheck
+                    className={`${
+                      message.readStatus !== "read" ? "text-slate-500" : ""
+                    }`}
+                  />
                 </div>{" "}
               </div>
             </div>

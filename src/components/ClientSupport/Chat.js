@@ -30,11 +30,11 @@ const Chat = () => {
       return (
         <div
           key={index}
-          className="w-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-lg flex overflow-hidden space-x-2"
+          className="w-full snap_child text-slate-400 text-sm leading-6 p-2 rounded-lg flex overflow-hidden space-x-2"
         >
           <div
-            className={`h-[2.5rem] w-[5%] max-w-[2.5rem] min-w-[2.5rem] flex justify-center items-center rounded-xl uppercase text-2xl text-gray-300 ${
-              message.from === "agent" ? "bg-blue-500" : "bg-slate-500"
+            className={`h-[2.5rem] w-[5%] max-w-[2.5rem] min-w-[2.5rem] hidden sm:flex justify-center items-center rounded-xl uppercase text-2xl text-gray-300 ${
+              message.from === "agent" ? "bg-slate-800" : "bg-slate-900"
             }`}
           >
             {`${
@@ -43,7 +43,11 @@ const Chat = () => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full bg-slate-800 p-4 rounded-lg">
+          <div
+            className={`w-[95%] 2xl:w-full  ${
+              message.from === "agent" ? "bg-slate-800" : "bg-slate-900"
+            } p-4 rounded-lg`}
+          >
             <div className="font-bold  text-slate-300 justify-between w-full flex-col md:flex-row flex border-b border-slate-700">
               <span>{`${
                 message.from === "agent" ? agentName : clientName
@@ -116,7 +120,7 @@ const Chat = () => {
 
   //Component ===============================
   return (
-    <div className=" bg-slate-600 custom-shadow h-[30rem]  max-w-[45rem] w-full rounded-lg mt-4 p-4 flex flex-col">
+    <div className=" bg-slate-600 custom-shadow h-[30rem]  max-w-[45rem] w-full rounded-lg mt-4 p-2 md:p-4 flex flex-col">
       {threadMessage.length <= 0 && (
         <div className="w-full h-full space-y-4 flex flex-col justify-center">
           {preloader}
@@ -124,8 +128,8 @@ const Chat = () => {
       )}
       {/**Messages Thread =========================== */}
       {threadMessage.length >= 1 && (
-        <div className="w-full h-full overflow-y-scroll scroll-snap relative">
-          <div className="px-2 md:px-4 pt-4 space-y-3 z-0 h-full">{thread}</div>
+        <div className="w-full h-full overflow-x-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap relative">
+          <div className="md:px-4 pt-4 space-y-3 z-0 h-full">{thread}</div>
         </div>
       )}
       {/**New message // Reply =========================== */}
@@ -133,7 +137,7 @@ const Chat = () => {
         onSubmit={(e) => sendReply(e)}
         className="w-full backdrop-blur-md flex items-center space-x-2 bg-[#03002942] rounded-lg z-[9999] sticky bottom-0 p-2"
       >
-        <div className="w-full h-[2.5rem] bg-slate-800 rounded-lg flex space-x-1 justify-between">
+        <div className="w-full bg-slate-800 rounded-lg flex space-x-1 justify-between">
           <textarea
             type="text"
             name="reply"
@@ -157,11 +161,11 @@ const Chat = () => {
             value={reply.message}
             required
             readOnly={textFieldReadOnly}
-            className="bg-transparent w-full text-sm placeholder:text-sm rounded-lg bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none"
+            className="bg-transparent h-[2.5rem] fucus:h-auto max-h-[3.5rem] w-full text-sm placeholder:text-sm placeholder:whitespace-nowrap rounded-lg bg-slate-800 border-0 text-slate-400 focus:border-0 focus:ring-0 resize-none outline-none focus:outline-none overflow-x-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap "
           ></textarea>
           {/**Other Btns =========================== */}
           <label htmlFor="attachment">
-            <div className="h-[2.5rem] flex outline-none focus:outline-none items-center justify-center border-l border-slate-700 px-2 text-slate-400 font-bold text-base">
+            <div className="h-full flex outline-none focus:outline-none items-center justify-center border-l border-slate-700 px-2 text-slate-400 font-bold text-base">
               <BsPaperclip />
             </div>
             <input
