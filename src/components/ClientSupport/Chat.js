@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BsPaperclip } from "react-icons/bs";
+import { HiCheck } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { addClientReply } from "./DataFetching";
 
@@ -16,16 +17,11 @@ const Chat = () => {
     ticket_id: threadId,
   });
 
-
-
   //Get Name of Reciepent and Agent and email ===============
   let agentName =
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0].agent_name;
-  let clientName =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0]
-      .recipient_name;
+  let clientName = "You";
 
   //Loop Through Each Message In a thread ====================
   const thread =
@@ -70,6 +66,21 @@ const Chat = () => {
               </h4>
             </div>
             <p className="mt-2">{message.message}</p>
+            <div
+              className={`mt-2 flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
+                message.from === "agent" ? "hidden" : ""
+              }`}
+            >
+              <p>{message.readStatus} </p>
+              <div className="flex font-bold space-x-[1px] text-sm">
+                <HiCheck />
+                <HiCheck
+                  className={`${
+                    message.readStatus !== "read" ? "text-slate-500" : ""
+                  }`}
+                />
+              </div>{" "}
+            </div>
           </div>
         </div>
       );
@@ -105,7 +116,7 @@ const Chat = () => {
 
   //Component ===============================
   return (
-    <div className=" bg-slate-600 custom-shadow h-[30rem]  max-w-[45rem] w-full rounded-lg mt-6 p-4 flex flex-col">
+    <div className=" bg-slate-600 custom-shadow h-[30rem]  max-w-[45rem] w-full rounded-lg mt-4 p-4 flex flex-col">
       {threadMessage.length <= 0 && (
         <div className="w-full h-full space-y-4 flex flex-col justify-center">
           {preloader}

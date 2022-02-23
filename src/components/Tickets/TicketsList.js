@@ -4,6 +4,7 @@ import Filters from "./Filters";
 import {
   changePriority,
   changeStatus,
+  markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
 import { setThreadId } from "./../../store/TicketsSlice";
 import MessageThread from "./MessageThread";
@@ -11,6 +12,7 @@ import MessageThread from "./MessageThread";
 const TicketsList = ({ setDelete, deleteArray }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const user = useSelector((state) => state.UserInfo.member_details);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -19,10 +21,28 @@ const TicketsList = ({ setDelete, deleteArray }) => {
   const tickets =
     filteredTickets.length >= 1 &&
     filteredTickets.map((ticket) => {
+      /**Unread Meassages ================= */
+      let ticketReadStatus =
+        allTickets.length >= 1 &&
+        allTickets.filter(
+          (message) =>
+            message.ticket_id === ticket.ticket_id &&
+            message.readStatus !== "read" &&
+            message.from !== "agent"
+        );
+
+      /**Mark As read if thread is Active ========== */
+      threadId === ticket.ticket_id &&
+        ticketReadStatus.length >= 1 &&
+        ticketReadStatus.forEach((message) => {
+          markAsSeen(message.id, "read");
+        });
+      /**End ========== */
+
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5.7rem]  ${
+          className={`w-full h-[5.7rem] relative ${
             user[0].access === "agent" && ticket.agent_email === user[0].email
               ? ""
               : user[0].access === "admin"
@@ -32,13 +52,21 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             ticket.ticket_id === threadId
               ? "border-2 dark:border-slate-600 border-slate-400"
               : ""
-          } bg-slate-200 p-2 space-x-2 overflow-hidden flex ${
+          } bg-slate-200 p-2 space-x-2  flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
               ? "dark:opacity-60 opacity-70"
               : ""
           }`}
         >
+          {/**Indicate if it's new messsage */}
+          {ticketReadStatus.length >= 1 && (
+            <div className="absolute left-8 top-1 flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
+              <span>New : {ticketReadStatus.length}</span>
+            </div>
+          )}
+          {/**End Of Indicate if it's new messsage */}
+
           <div className="col-span-1 h-full xl:w-[7rem] flex justify-between space-x-2 items-center">
             <input
               type="checkbox"
@@ -53,9 +81,13 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               }
             />
             <div
-              className={`h-8 w-8 lg:h-10 lg:w-10 rounded-xl ${(new Date(
-                ticket.due_date !== null && ticket.due_date
-              ).toISOString()) <= new Date().toISOString()?"border border-red-500":""} dark:bg-slate-700 bg-slate-500 flex lg:hidden xl:flex justify-center items-center`}
+              className={`h-8 w-8 lg:h-10 lg:w-10 rounded-xl ${
+                new Date(
+                  ticket.due_date !== null && ticket.due_date
+                ).toISOString() <= new Date().toISOString()
+                  ? "border border-red-500"
+                  : ""
+              } dark:bg-slate-700 bg-slate-500 flex lg:hidden xl:flex justify-center items-center`}
             >
               <abbr title={ticket.recipient_name}>
                 <h4 className="text-slate-300 font-semibold text-xl">{`${
@@ -69,6 +101,10 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               dispatch(setThreadId(ticket.ticket_id));
               window.localStorage.setItem("threadId", JSON.stringify(threadId));
               setChat(true);
+              ticketReadStatus.length >= 1 &&
+                ticketReadStatus.forEach((message) => {
+                  markAsSeen(message.id, "read");
+                });
             }}
             className="col-span-5 flex flex-col justify-center h-full w-full px-1 py-1 cursor-pointer"
           >

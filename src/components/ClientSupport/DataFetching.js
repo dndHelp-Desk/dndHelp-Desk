@@ -7,6 +7,8 @@ import {
   collection,
   onSnapshot,
   addDoc,
+  doc,
+  updateDoc,
 } from "firebase/firestore";
 
 // init services for firestore =========================
@@ -28,6 +30,15 @@ export const addClientReply = (message, message_position, ticket_id) => {
     message_position: message_position,
     ticket_id: ticket_id,
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+    readStatus: "delivered",
+  });
+};
+
+//Mark Message as Seen ============
+export const markAsSeen = (id, readStatus) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    readStatus: readStatus,
   });
 };
 

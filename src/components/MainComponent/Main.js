@@ -54,13 +54,13 @@ const Main = () => {
             <Calendar />
           </div>
           {/** Overdue Tickets ==================================*/}
-          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1">
+          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1  lg:border-l dark:border-slate-800 border-slate-300">
             {overDue.length >= 1 && (
               <div className="flex flex-col gap-1 pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center lg:text-left">
+                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin text-slate-500 text-xs lg:text-sm text-center lg:text-left">
+                <p className="text-thin text-slate-500 text-xs lg:text-sm text-center">
                   {overDue.length} tickets displayed below are overdue. To
                   resolve these issues please visit the tickets page check those
                   highlighted with red border. To keep yourself up-to date the
@@ -71,10 +71,10 @@ const Main = () => {
             )}
             {overDue.length <= 0 && (
               <div className="flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center lg:text-left">
+                <h2 className="text-base font-bold dark:text-slate-400 text-slate-600 capitalize text-center">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin text-slate-500 text-sm text-center lg:text-left">
+                <p className="text-thin text-slate-500 text-sm text-center">
                   You all catched up{" "}
                   <BsFillHandThumbsUpFill className="inline text-yellow-500" />
                   .You can check/hover on top of the highlighted dates on the
@@ -84,7 +84,7 @@ const Main = () => {
                 </p>
               </div>
             )}
-            <div className="flex justify-center lg:justify-start items-end space-x-1">
+            <div className="flex justify-center items-end space-x-1">
               {overDueTickets}
               {overDue.length <= 0 && (
                 <>
@@ -98,19 +98,19 @@ const Main = () => {
           {/**End Of Overdue Tickets ==================================*/}
 
           {/**Manage Contacts ==================================*/}
-          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1">
+          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1 lg:border-l dark:border-slate-800 border-slate-300">
             <div className="flex flex-col gap-2 pb-2 overflow-hidden">
-              <h2 className="text-base text-center lg:text-left font-bold dark:text-slate-400 text-slate-600 capitalize">
+              <h2 className="text-base text-center font-bold dark:text-slate-400 text-slate-600 capitalize">
                 contacts
               </h2>
-              <p className="text-thin text-slate-500 text-sm text-center lg:text-left">
+              <p className="text-thin text-slate-500 text-sm text-center">
                 Click below button to manage yours contacts. It is important to
                 keep them up-to date as it will ensure no email is sent to the
                 wrong recipient. All contacts must be added/saved before opening
                 a new ticket.
               </p>
             </div>
-            <div className="flex items-center lg:justify-start justify-center space-x-1">
+            <div className="flex items-center justify-center space-x-1">
               <Link to="./contacts">
                 <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
                   Manage Contacts

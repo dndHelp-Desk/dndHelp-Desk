@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import {
-  BsChatSquareText,
+  BsBell,
   BsJustifyLeft,
   BsBrightnessHigh,
   BsGear,
@@ -9,23 +9,28 @@ import {
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
-import {
-  changeLocation,
-  changeTheme,
-} from "../../store/UserSlice";
+import { changeLocation, changeTheme } from "../../store/UserSlice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
 import Alert from "../Others/Alert";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 import Profile from "../authentication/Profile";
+import Notification from "./Notifications & Chat/Notification";
 
 const MainComponent = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const theme = useSelector((state) => state.UserInfo.theme);
+  const [openNotifications, setOpenNotification] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const newReplies =
+    allTickets.length >= 1 &&
+    allTickets.filter(
+      (ticket) => ticket.readStatus !== "read" && ticket.from !== "agent"
+    );
 
   //Small Screen Menu ===================
   const [showMenu, setShowMenu] = useState(false);
@@ -200,21 +205,35 @@ const MainComponent = () => {
                 </abbr>
               </button>
 
-              {/**Chat ================================================ */}
-              <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
-                <abbr title="Chat">
-                  <BsChatSquareText />
+              {/**Notifications ================================================ */}
+              <button
+                onClick={() => setOpenNotification(true)}
+                className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
+              >
+                <abbr title="Notifications">
+                  <BsBell />
                 </abbr>
+                {newReplies.length >= 1 && (
+                  <span className="flex h-2 w-2 absolute top-1 right-1">
+                    <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                  </span>
+                )}
               </button>
+              {/**Expanded Notification & Chat  =============================== */}
+              <Notification
+                openNotifications={openNotifications}
+                setOpenNotification={setOpenNotification}
+              />
 
               {/**Settings ================================================ */}
-                <NavLink to="/settings/account">
-              <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
+              <NavLink to="/settings/account">
+                <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
                   <abbr title="Settings">
                     <BsGear />
                   </abbr>
-              </button>
-                </NavLink>
+                </button>
+              </NavLink>
 
               {/**Profile And User Settings =========================== */}
               <Profile />

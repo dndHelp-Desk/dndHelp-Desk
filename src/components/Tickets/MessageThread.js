@@ -5,6 +5,7 @@ import {
   BsThreeDotsVertical,
   BsArrowLeft,
 } from "react-icons/bs";
+import { HiCheck } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import { setThreadMessage } from "../../store/TicketsSlice";
 import { addReply, deleteTicket } from "../Data_Fetching/TicketsnUserData";
@@ -50,9 +51,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   }, [dispatch, allTickets, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
-  let agentName =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0].agent_name;
+  let agentName = "You"
   let clientName =
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
@@ -143,6 +142,13 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 </h4>
               </div>
               <p className="mt-2 text-slate-500">{message.message}</p>
+              <div className={`mt-2 flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${message.from === "client"? "hidden":""}`}>
+                <p>{message.readStatus}{" "}</p>
+                <div className="flex font-bold space-x-[1px] text-sm">
+                  <HiCheck/>
+                  <HiCheck className={`${message.readStatus !== "read"?"text-slate-500":""}`} />
+                </div>{" "}
+              </div>
             </div>
           </div>
         </div>

@@ -26,7 +26,7 @@ const Alert = () => {
   //React Component ===========
   return (
     <div
-      className={`absolute h-screen w-screen z-[999] ${
+      className={`absolute overflow-hidden z-[999] ${
         flag ? "" : "hidden"
       }`}
     >
