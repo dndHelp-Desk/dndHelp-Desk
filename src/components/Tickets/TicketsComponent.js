@@ -19,6 +19,7 @@ const TicketsComponent = () => {
   const [deleteArray, setDelete] = useState([]);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const activeUser = useSelector((state) => state.UserInfo.member_details);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const [contactsPanel, setPanel] = useState(false);
   const dispatch = useDispatch();
 
@@ -30,7 +31,12 @@ const TicketsComponent = () => {
   //Delete Selected Ticlets/Ticket ==========
   const deleteSelected = () => {
     for (let i = 0; i < deleteArray.length; i++) {
-      deleteTicket(deleteArray[i]);
+      allTickets.length >= 1 &&
+        allTickets
+          .filter((ticket) => ticket.ticket_id === deleteArray[i])
+          .forEach((ticket) => {
+            deleteTicket(ticket.id);
+          });
     }
     setDelete([]);
     dispatch(

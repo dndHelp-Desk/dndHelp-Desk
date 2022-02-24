@@ -73,11 +73,11 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               className="rounded border-slate-300 text-blue-600 h-3 w-3 shadow-sm  focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
               name="mark"
               id="mark"
-              checked={deleteArray.includes(ticket.id) === true ? true : false}
+              checked={deleteArray.includes(ticket.ticket_id) === true ? true : false}
               onChange={(e) =>
                 e.target.checked === true
-                  ? setDelete([...deleteArray, ticket.id])
-                  : setDelete(deleteArray.filter((data) => data !== ticket.id))
+                  ? setDelete([...deleteArray, ticket.ticket_id])
+                  : setDelete(deleteArray.filter((data) => data !== ticket.ticket_id))
               }
             />
             <div
@@ -198,7 +198,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
           <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-lg z-0 h-12 p-1">
             <Filters />
           </div>
-          <div className="w-full h-full space-y-2 overflow-y-scroll lg:border-t dark:border-slate-800 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
+          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar lg:border-t dark:border-slate-800 border-slate-300 pt-3 scroll-snap">
             {tickets}
           </div>
         </div>

@@ -3,6 +3,7 @@ import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { useSelector, useDispatch } from "react-redux";
 import { addTicket } from "./../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "./../../store/NotificationsSlice";
+import useClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const NewTicket = ({ newTicketModal, setModal }) => {
   const closeModalRef = useOnClickOutside(() => {
@@ -10,37 +11,64 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   });
   const contacts = useSelector((state) => state.Tickets.contacts);
   const settings = useSelector((state) => state.Tickets.settings);
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const categories = settings.length >= 1 && settings[0].categories;
   const member_details = useSelector((state) => state.UserInfo.member_details);
+  const [recepient, setRecipient] = useState("");
+  const [searchResults, setResults] = useState(false);
   const dispatch = useDispatch();
+  const closeSuggestionsRef = useClickOutside(() => {
+    setResults(false);
+  });
 
   //Form Input Values =========================
   const [inputValue, setValues] = useState({
     recipient_name: "",
     recipient_email: "",
-    agent: member_details.length !== undefined && member_details[0].name,
+    agent: member_details.id !== false && member_details[0].name,
     priority: "",
     category: "",
     branch_company: "",
     message: "",
     state: "",
     date: "",
-    ticket_id: "",
+    ticket_id: "#0" + (filteredTickets.length + 1),
     agent_email: member_details.length !== undefined && member_details[0].email,
+    complainant_name: 0,
+    complainant_email: 0,
+    complainant_number: 0,
   });
 
+  //Reciepents or contacts list suggetions =================================
   const contactsList =
     contacts.length >= 1 &&
     contacts.map((contact, index) => {
+      let clientName = contact.name;
+      let clientEmail = contact.email;
+      let brand = contact.branch_company;
       return (
-        <option
-          value={`${contact.name},${contact.email},${contact.branch_company}`}
-          className="capitalize"
+        <li
           key={index}
+          onClick={() => {
+            setValues({
+              ...inputValue,
+              recipient_name: clientName,
+              recipient_email: clientEmail,
+              branch_company: brand,
+            });
+            setRecipient(brand);
+          }}
+          className={`${
+            contact.branch_company
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(recepient.toLowerCase().replace(/\s/g, "")) === true
+              ? ""
+              : "hidden"
+          } text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b border-slate-300 capitalize`}
         >
-          {contact.name}
-        </option>
+          <abbr title={contact.branch_company}>{contact.branch_company}</abbr>
+        </li>
       );
     });
 
@@ -87,7 +115,14 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         message: inputValue.message,
         priority: inputValue.priority,
         opened_by: inputValue.agent,
-        tickect_id: inputValue.ticket_id,
+        ticket_id: inputValue.ticket_id,
+        brand: inputValue.branch_company,
+        date: `${new Date(inputValue.date).toDateString()}, ${
+          new Date().getHours() + 1
+        }:${new Date().getMinutes() + 1} hrs`,
+        complainant_name: inputValue.complainant_name,
+        complainant_email: inputValue.complainant_email,
+        complainant_number: inputValue.complainant_number,
       }),
     });
     setModal(false);
@@ -108,7 +143,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     >
       <div
         ref={closeModalRef}
-        className="bg-slate-300 shadow-2xl w-3/5 max-w-[30rem] max-h-[36rem] rounded-lg relative py-4"
+        className="bg-slate-300 shadow-2xl w-3/5 max-w-[50rem] h-[47rem] rounded-md relative py-4 "
       >
         <h3 className="text-center slate-900 text-lg font-bold">New Ticket</h3>
 
@@ -116,14 +151,15 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         <form className="px-4" onSubmit={(e) => handleSubmit(e)}>
           <div className="py-6 space-y-4">
             <div className="flex justify-between space-x-4">
-              <label className="block w-[40%]">
+              {/**Reciepient Name  ======================================== */}
+              <label className="block w-[40%] relative focus:bg-red-500">
                 <span className="text-slate-700 text-sm font-bold">
                   Recipient / Contact
                 </span>
-                <select
+                <input
                   className="
                     block
-                    w-full
+                    w-full h-9
                     mt-1
 					text-slate-600
 					 text-sm
@@ -132,27 +168,23 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     shadow-sm
                     focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                   "
+                  type="text"
+                  value={recepient}
+                  placeholder="Brand Name ..."
                   required={true}
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      recipient_name: e.target.value.split(",")[0],
-                      recipient_email: e.target.value.split(",")[1],
-                      branch_company: e.target.value.split(",")[2],
-                      ticket_id:
-                        "#" +
-                        (allTickets.length + 1) +
-                        e.target.value.split(",")[0].charAt(0) +
-                        e.target.value.split(",")[2].charAt(0),
-                    })
-                  }
+                  onKeyPress={() => setResults(true)}
+                  onChange={(e) => setRecipient(e.target.value)}
+                />
+                <ul
+                  ref={closeSuggestionsRef}
+                  className={`${
+                    searchResults ? "" : "hidden"
+                  } absolute top-18 left-0 h-[10rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
                 >
-                  <option className="capitalize" value="">
-                    Contact ...
-                  </option>
                   {contactsList}
-                </select>
+                </ul>
               </label>
+              {/**End Of Reciepient Name  ======================================== */}
               <label className="block w-[40%]">
                 <span className="text-slate-700 text-sm font-bold">
                   Subject / Category
@@ -184,8 +216,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   {categoriesList}
                 </select>
               </label>
+              {/**End Of Subject  ======================================== */}
             </div>
             <div className="flex justify-between space-x-4">
+              {/**Priority And Status  ======================================== */}
               <label className="block w-[40%]">
                 <span className="text-slate-700 text-sm font-bold">
                   Priority
@@ -200,7 +234,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     rounded-md
                     border-slate-300
                     shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 
                   "
                   required={true}
                   onChange={(e) =>
@@ -250,7 +284,95 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   <option className="capitalize">Resolved</option>
                 </select>
               </label>
+              {/**End  Of Priority and Status  ======================================== */}
             </div>
+            {/**complainant Details ======================================== */}
+            <div className="flex justify-between space-x-4">
+              <label className="block w-[40%]">
+                <span className="text-slate-700 text-sm font-bold">
+                  Complainant Email
+                </span>
+                <input
+                  type="text"
+                  className="
+                    mt-1
+                    block
+                    w-full
+					text-slate-600
+					 text-sm
+                    rounded-md
+                    border-slate-300
+                    shadow-sm
+                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                  "
+                  autoComplete="nope"
+                  placeholder="email@example.com ..."
+                  required={true}
+                  onChange={(e) =>
+                    setValues({
+                      ...inputValue,
+                      complainant_email: e.target.value,
+                    })
+                  }
+                />
+              </label>
+              <label className="block w-[40%]">
+                <span className="text-slate-700 text-sm font-bold">
+                  Complainant Number
+                </span>
+                <input
+                  type="text"
+                  className="
+                    mt-1
+                    block
+                    w-full
+					text-slate-600
+					 text-sm
+                    rounded-md
+                    border-slate-300
+                    shadow-sm
+                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                  "
+                  autoComplete="off"
+                  placeholder="+27 5698 6258 ..."
+                  required={true}
+                  onChange={(e) =>
+                    setValues({
+                      ...inputValue,
+                      complainant_number: e.target.value,
+                    })
+                  }
+                />
+              </label>
+              {/**End of complainant Details ======================================== */}
+            </div>
+            <label className="block">
+              <span className="text-slate-700 text-sm font-bold">
+                Complainant Name
+              </span>
+              <input
+                type="text"
+                className="
+                    mt-1
+                    block
+                    w-full
+					text-slate-600
+					 text-sm
+                    rounded-md
+                    border-slate-300
+                    shadow-sm
+                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                  "
+                placeholder="Full Name ..."
+                required={true}
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    complainant_name: e.target.value,
+                  })
+                }
+              />
+            </label>
             <label className="block">
               <span className="text-slate-700 text-sm font-bold">Due Date</span>
               <input
@@ -277,7 +399,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             </label>
             <label className="block">
               <span className="text-slate-700 text-sm font-bold">
-                Message / Description
+                Message / Case Details
               </span>
               <textarea
                 className="
@@ -291,8 +413,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
 					h-[10rem]
                     border-slate-300
                     shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
                   "
+                placeholder="Type your message here ..."
                 required={true}
                 rows="5"
                 onChange={(e) =>
@@ -309,7 +432,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               type="submit"
               className="px-6 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-md font-bold uppercase text-sm"
             >
-              Send
+              Open
             </button>
           </div>
         </form>

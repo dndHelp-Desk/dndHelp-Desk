@@ -54,7 +54,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
             alt=""
             className="h-2/4 w-[70%] object-center overflow-hidden"
           />
-          <h2 className="text-xs text-center font-semibold dark:text-slate-800 text-slate-600">
+          <h2 className="text-xs text-center font-semibold dark:text-slate-300 text-slate-100">
             You Have No New Notifications
           </h2>
         </div>

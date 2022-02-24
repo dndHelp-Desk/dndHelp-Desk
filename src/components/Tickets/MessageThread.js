@@ -22,6 +22,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   //Reply State and value ==================================
   const [reply, setReply] = useState({
     message: "",
+    subject: "",
     message_position: threadMessage.length + 1,
     ticket_id: threadId,
   });
@@ -51,7 +52,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   }, [dispatch, allTickets, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
-  let agentName = "You"
+  let agentName = "You";
   let clientName =
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
@@ -60,6 +61,16 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
       .recipient_email;
+  let brand =
+    threadMessage.length >= 1 &&
+    threadMessage.filter((data) => data.message_position === 1)[0]
+      .branch_company;
+  let ticket_status =
+    threadMessage.length >= 1 &&
+    threadMessage.filter((data) => data.message_position === 1)[0].status;
+  let date =
+    threadMessage.length >= 1 &&
+    threadMessage.filter((data) => data.message_position === 1)[0].due_date;
 
   //Loop Through Each Message In a thread ====================
   const thread =
@@ -141,7 +152,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   </div>
                 </h4>
               </div>
-              <p className="mt-2 text-slate-500 text-center md:text-left">{message.message}</p>
+              <p className="mt-2 text-slate-500 text-center md:text-left">
+                {message.message}
+              </p>
               <div
                 className={`mt-2 flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
                   message.from === "client" ? "hidden" : ""
@@ -182,9 +195,12 @@ const MessageThread = ({ isChatOpen, setChat }) => {
       body: JSON.stringify({
         name: clientName,
         email: clientEmail,
-        message:
-          "You have a new response from Dial & Dine regarding your ticket.",
+        subject: reply.subject,
+        message: reply.message,
         ticket_id: threadId,
+        brand: brand,
+        ticket_status: ticket_status,
+        date: date,
       }),
     });
     dispatch(
@@ -358,6 +374,11 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                     threadMessage.filter(
                       (message) => message.message_position === 1
                     )[0].ticket_id,
+                  subject:
+                    threadMessage.length >= 1 &&
+                    threadMessage.filter(
+                      (msg) => msg.message_position === 1
+                    )[0]["category"],
                 });
               }}
               value={reply.message}
