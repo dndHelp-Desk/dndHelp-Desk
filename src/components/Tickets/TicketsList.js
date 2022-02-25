@@ -73,11 +73,15 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               className="rounded border-slate-300 text-blue-600 h-3 w-3 shadow-sm  focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
               name="mark"
               id="mark"
-              checked={deleteArray.includes(ticket.ticket_id) === true ? true : false}
+              checked={
+                deleteArray.includes(ticket.ticket_id) === true ? true : false
+              }
               onChange={(e) =>
                 e.target.checked === true
                   ? setDelete([...deleteArray, ticket.ticket_id])
-                  : setDelete(deleteArray.filter((data) => data !== ticket.ticket_id))
+                  : setDelete(
+                      deleteArray.filter((data) => data !== ticket.ticket_id)
+                    )
               }
             />
             <div
@@ -195,11 +199,16 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
           }`}
         >
-          <div className="w-full dark:bg-slate-800 bg-slate-200 rounded-lg z-0 h-12 p-1">
+          <div className="w-full dark:bg-slate-900 bg-slate-100 rounded-lg z-0 mt-3 h-12">
             <Filters />
           </div>
-          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar lg:border-t dark:border-slate-800 border-slate-300 pt-3 scroll-snap">
+          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-2 scroll-snap">
             {tickets}
+            {filteredTickets.length <= 0 && (
+              <h2 className="font-semibold text-center mt-10 text-lg dark:text-slate-400 text-slate-500 tracking-wide hidden lg:flex flex-col">
+                There are no tickets.
+              </h2>
+            )}
           </div>
         </div>
         <MessageThread isChatOpen={isChatOpen} setChat={setChat} />

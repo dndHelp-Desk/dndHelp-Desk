@@ -94,19 +94,19 @@ const TopCards = () => {
           : 0,
     },
     {
-      name: "pending",
+      name: "on hold",
       id: 4,
       count:
         filteredTickets.length >= 1
           ? filteredTickets.filter(
-              (data) => data.status.toLowerCase() === "pending"
+              (data) => data.status.toLowerCase() === "on hold"
             ).length
           : 0,
       compare:
         firstMessages.length >= 1
           ? firstMessages.filter(
               (data) =>
-                data.status.toLowerCase() === "pending" &&
+                data.status.toLowerCase() === "on hold" &&
                 new Date(data.date).toISOString() >=
                   new Date(filters.startDate).toISOString() &&
                 new Date(
@@ -134,7 +134,7 @@ const TopCards = () => {
           </h2>
           <div className="h-10 w-10 rounded-xl flex items-center justify-center font-bold text-lg text-slate-300 dark:text-slate-400 dark:bg-slate-700 bg-slate-500 custom-shadow">
             {data.name === "open" && <BsEnvelopeOpen />}
-            {data.name === "pending" && <BsArrowRepeat />}
+            {data.name === "on hold" && <BsArrowRepeat />}
             {data.name === "closed" && <BsDashSquare />}
             {data.name === "resolved" && <BsCheckAll />}
           </div>

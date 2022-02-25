@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { HiMailOpen, HiMail } from "react-icons/hi";
 import Chat from "./Chat";
 import { setThreadId, setThreadMessage} from "../../store/TicketsSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,19 +59,6 @@ const TicketStatus = () => {
         <p className="capitalize text-xs text-center mt-[.5rem] text-slate-500">
           Enter Your Tickect ID to access the chat
         </p>
-        {newMessages.length <= 0 &&
-          threadId &&(
-            <h4 className="font-semibold text-base text-slate-600 font-sans text-center mt-2 flex items-center justify-center">
-              <span>You All Caught Up ...</span>{" "}
-              <HiMailOpen className="text-blue-600 inline text-xl" />
-            </h4>
-          )}
-        {newMessages.length >= 1 && (
-          <h4 className="font-semibold text-base text-slate-600 font-sans text-center mt-2 flex items-center justify-center">
-            <span>You Have A New Message ...</span>{" "}
-            <HiMail className="text-blue-600 inline text-xl" />
-          </h4>
-        )}
         <form
           onSubmit={(e) => check(e)}
           className="rounded-lg mt-[1rem] min-h-10 space-y-2 items-center flex flex-col md:flex-row md:space-y-0 space-x-4 justify-center w-full"

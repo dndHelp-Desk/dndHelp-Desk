@@ -77,7 +77,7 @@ const Filters = () => {
   //Component ==============================
   return (
     <>
-      <div className="h-full dark:bg-slate-800 bg-slate-200 w-full lg:min-w-0 flex items-center rounded-lg relative">
+      <div className="h-full bg-transparent w-full lg:min-w-0 flex items-center border-b dark:border-slate-700 relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -87,8 +87,8 @@ const Filters = () => {
           onChange={(e) =>
             dispatch(filter({ ...filters, client: e.target.value }))
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none border-0 focus:ring-0 focus:border-0 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
-          placeholder="Quick Serch By Store Name ..."
+          className="h-full w-full bg-transparent outline-none focus:outline-none border-0 focus:ring-0 focus:border-0 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10 text-center"
+          placeholder="Serch By Store Name ..."
         />
       </div>
     </>

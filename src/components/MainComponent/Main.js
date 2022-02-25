@@ -183,7 +183,7 @@ const Main = () => {
                     <BsArrowRepeat />
                   </div>
                   <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
-                    Pending
+                    On-Hold
                   </h5>
                 </div>
                 <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
@@ -192,7 +192,7 @@ const Main = () => {
                       (data) =>
                         data.message_position === 1 &&
                         data.status &&
-                        data.status.toLowerCase() === "pending"
+                        data.status.toLowerCase() === "on hold"
                     ).length
                   }
                 </h5>

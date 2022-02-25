@@ -79,7 +79,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
       return (
         <div
           key={index}
-          className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-xl flex space-x-2 transition-all"
+          className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 p-2 rounded-md flex space-x-2 transition-all"
         >
           <div
             className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] hidden md:flex justify-center items-center rounded-lg uppercase text-lg dark:text-gray-400 text-slate-500 custom-shadow ${
@@ -94,7 +94,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 : clientName.charAt(0)
             }`}
           </div>
-          <div className="w-[95%] 2xl:w-full p-2 bg-transparent dark:bg-slate-900 bg-slate-100 rounded-lg space-y-2 custom-shadow">
+          <div className="w-[95%] 2xl:w-full p-2 bg-transparent dark:bg-slate-900 bg-slate-100 rounded-md space-y-2 custom-shadow">
             <div className="w-full 2xl:w-full bg-transparent space-y-2 rounded-lg">
               <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col dark:py-1 md:flex-row border-b dark:border-slate-800 border-slate-200 relative">
                 <span>{`${

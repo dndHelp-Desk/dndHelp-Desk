@@ -100,7 +100,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       inputValue.state,
       inputValue.date,
       inputValue.ticket_id,
-      inputValue.agent_email
+      inputValue.agent_email,
+      inputValue.complainant_name,
+      inputValue.complainant_email,
+      inputValue.complainant_number
     );
     fetch(sendMailAPI, {
       method: "POST",
@@ -279,7 +282,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     State ...
                   </option>
                   <option className="capitalize">Open</option>
-                  <option className="capitalize">Pending</option>
+                  <option className="capitalize">on hold</option>
                   <option className="capitalize">Closed</option>
                   <option className="capitalize">Resolved</option>
                 </select>

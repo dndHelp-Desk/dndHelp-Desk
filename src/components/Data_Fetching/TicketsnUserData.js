@@ -90,12 +90,12 @@ export const addReply = (message, message_position, ticket_id) => {
     message_position: message_position,
     ticket_id: ticket_id,
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-    readStatus:"delivered"
+    readStatus: "delivered",
   });
 };
 
 //Mark Message as Seen ============
-export const markAsSeen = (id,readStatus) => {
+export const markAsSeen = (id, readStatus) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {
     readStatus: readStatus,
@@ -114,7 +114,10 @@ export const addTicket = (
   state,
   date,
   ticket_id,
-  agent_email
+  agent_email,
+  c_name,
+  c_email,
+  c_number
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -132,7 +135,10 @@ export const addTicket = (
     due_date: new Date(date).toLocaleDateString(),
     from: "agent",
     agent_email: agent_email,
-    readStatus:"delivered"
+    readStatus: "delivered",
+    complainant_name: c_name,
+    complainant_email: c_email,
+    complainant_number: c_number,
   });
 };
 
@@ -145,7 +151,6 @@ export const newContact = (name, email, phone, company) => {
     branch_company: company,
   });
 };
-
 
 const TicketsnUserData = () => {
   const dispatch = useDispatch();
