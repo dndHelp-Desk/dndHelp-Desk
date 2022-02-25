@@ -9,10 +9,7 @@ import {
   EmailAuthProvider,
 } from "firebase/auth";
 import { updateAlert } from "../../store/NotificationsSlice";
-import {
-  changeLocation,
-  isAuthenticated,
-} from "../../store/UserSlice";
+import { changeLocation, isAuthenticated } from "../../store/UserSlice";
 import {
   BsEnvelope,
   BsFillPatchCheckFill,
@@ -22,9 +19,13 @@ import {
   BsFillKeyFill,
   BsBoxArrowRight,
 } from "react-icons/bs";
-import { updateUserDetails } from "../Data_Fetching/TicketsnUserData";
+import {
+  updateUserDetails,
+} from "../Data_Fetching/TicketsnUserData";
+import { useNavigate } from "react-router-dom";
 
 const Account = () => {
+  const navigate = useNavigate();
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
   const [inputValues, setValues] = useState({
@@ -52,6 +53,7 @@ const Account = () => {
         window.localStorage.clear();
         dispatch(changeLocation("Dial n Dine Help-Desk"));
         document.title = "Dial n Dine Help-Desk";
+        navigate("/logIn");
       })
       .catch((err) => {
         console.log(err.message);

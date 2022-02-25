@@ -19,13 +19,13 @@ const initialState = {
       email: "example@gmail.com",
       id: false,
       name: "User Loader",
-      status:"offline"
+      status: "offline",
     },
   ],
   authenticated: false,
   routeLocation: initialLocation(),
   toDo: [],
-  theme: initialTheme() === null ? "dark" : initialTheme(),
+  theme: initialTheme() === null ? "light" : initialTheme(),
 };
 
 export const UserSlice = createSlice({

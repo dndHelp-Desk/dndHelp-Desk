@@ -64,10 +64,7 @@ const Profile = () => {
     }, 3000);
 
   useEffect(() => {
-    if (
-      member_details.length !== undefined &&
-      member_details[0].statuscurrentUser?.photoURL
-    ) {
+    if (member_details[0].id !== false && currentUser) {
       setPhotoURL(currentUser.photoURL);
     }
   }, [currentUser, member_details]);
