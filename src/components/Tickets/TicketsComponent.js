@@ -103,7 +103,9 @@ const TicketsComponent = () => {
           <button
             onClick={() => deleteSelected()}
             className={`dark:bg-slate-900 bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-red-600  font-semibold ${
-              deleteArray.length >= 1 ? "flex" : "hidden"
+              deleteArray.length >= 1 && activeUser[0].access === "admin"
+                ? "flex"
+                : "hidden"
             } items-center justify-center text-lg`}
           >
             <abbr title="delete">
@@ -115,7 +117,9 @@ const TicketsComponent = () => {
           <button
             onClick={() => setPanel(true)}
             className={`dark:bg-slate-900 bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-blue-600  font-semibold ${
-              deleteArray.length >= 1 ? "flex" : "hidden"
+              deleteArray.length >= 1 && activeUser[0].access === "admin"
+                ? "flex"
+                : "hidden"
             } items-center justify-center text-lg`}
           >
             <abbr title="Assign">

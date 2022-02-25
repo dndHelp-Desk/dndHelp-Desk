@@ -333,7 +333,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
       <div className="h-[45%] lg:h-[40%] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
         <div className="h-full w-full p-2 rounded-lg dark:bg-slate-800 bg-slate-200 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-200 after:border-l-transparent overflow-hidden grid grid-rows-4">
           <div className="w-full row-span-1 h-full flex justify-between">
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 items-center">
               <div className="w-9 h-9 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
                 {user[0].name.charAt(0)}
               </div>
