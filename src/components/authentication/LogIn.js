@@ -3,12 +3,13 @@ import {
   getAuth,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
 import Background from "./images/welcome.jpg";
-import { login } from "../Data_Fetching/Firebase";
 import { isAuthenticated } from "../../store/UserSlice";
 import Alert from "../Others/Alert";
 import { updateAlert } from "../../store/NotificationsSlice";
@@ -31,7 +32,42 @@ const LogIn = () => {
   //Log in User =====================
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(inputValues.email, inputValues.password);
+    signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
+      .then((currentUser) => {
+        if (!currentUser.user.emailVerified) {
+          sendEmailVerification(auth.currentUser)
+            .then(() => {
+              dispatch(
+                updateAlert({
+                  message: "Check Your Email To Verify The Account.",
+                  color: "bg-green-200",
+                })
+              );
+            })
+            .catch((error) => {
+              dispatch(
+                updateAlert({
+                  message: error.message,
+                  color: "bg-red-200",
+                })
+              );
+            });
+        }
+        dispatch(
+          updateAlert({
+            message: "Logged In Succesfully",
+            color: "bg-green-200",
+          })
+        );
+      })
+      .catch((error) => {
+        dispatch(
+          updateAlert({
+            message: error.message,
+            color: "bg-red-200",
+          })
+        );
+      });
   };
 
   useEffect(() => {
@@ -212,6 +248,11 @@ const LogIn = () => {
               >
                 Sign In
               </button>
+              {/* {signInError && (
+                <small className="mt-2 text-xs text-center text-red-600">
+                  Wrong Password or Email
+                </small>
+              )} */}
               <small className="mt-4 text-gray-400 flex justify-center">
                 Forgot password ?
                 <p

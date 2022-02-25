@@ -19,9 +19,7 @@ import {
   BsFillKeyFill,
   BsBoxArrowRight,
 } from "react-icons/bs";
-import {
-  updateUserDetails,
-} from "../Data_Fetching/TicketsnUserData";
+import { updateUserDetails } from "../Data_Fetching/TicketsnUserData";
 import { useNavigate } from "react-router-dom";
 
 const Account = () => {
