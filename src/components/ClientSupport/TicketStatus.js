@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Chat from "./Chat";
+import {BsSearch} from "react-icons/bs"
 import { setThreadId, setThreadMessage} from "../../store/TicketsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {markAsSeen} from "./DataFetching"
@@ -57,11 +58,11 @@ const TicketStatus = () => {
           Welcome back!
         </h2>
         <p className="capitalize text-xs text-center mt-[.5rem] text-slate-500">
-          Enter Your Tickect ID to access the chat
+          Enter Your Tickect ID to join the conversation
         </p>
         <form
           onSubmit={(e) => check(e)}
-          className="rounded-lg mt-[1rem] min-h-10 space-y-2 items-center flex flex-col md:flex-row md:space-y-0 space-x-4 justify-center w-full"
+          className="rounded-lg mt-[1rem] min-h-10 items-center flex  md:space-y-0 space-x-4 sm:justify-center justify-between w-full"
         >
           <input
             type="text"
@@ -74,9 +75,9 @@ const TicketStatus = () => {
           />
           <button
             type="submit"
-            className="h-10 px-6 rounded-md bg-blue-700 text-slate-300 font-semibold uppercase text-sm w-[8rem] outline-none focus:outline-none focus:ring focus:border-400 transition-all duration-300 hover:bg-blue-800"
+            className="h-10 px-3 md:px-6 flex items-center justify-center space-x-2 rounded-md bg-blue-700 text-slate-300 font-semibold uppercase text-sm md:w-[8rem] outline-none focus:outline-none focus:ring focus:border-400 transition-all duration-300 hover:bg-blue-800"
           >
-            check
+            <BsSearch className="text-lg font-bold"/><span class="hidden sm:inline">join</span> 
           </button>
         </form>
         <Chat />

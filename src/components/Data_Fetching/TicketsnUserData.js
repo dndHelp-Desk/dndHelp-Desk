@@ -139,6 +139,7 @@ export const addTicket = (
     complainant_name: c_name,
     complainant_email: c_email,
     complainant_number: c_number,
+    closed_time: "00:00",
   });
 };
 

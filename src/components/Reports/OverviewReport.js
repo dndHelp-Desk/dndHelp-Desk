@@ -3,7 +3,6 @@ import ReactECharts from "echarts-for-react";
 import { useSelector } from "react-redux";
 
 const OverviewReport = () => {
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const overDue =
     filteredTickets &&
@@ -35,7 +34,7 @@ const OverviewReport = () => {
       <div className="h-full w-full p-4 pt-6 grid grid-rows-6 overflow-hidden">
         <div className="row-span-2">
           <h2 className="text-base dark:text-slate-400 text-slate-500 font-semibold tracking-normal">
-            Total Messages
+            Total Tickets
           </h2>
           <div className="mt-4 flex space-x-4 h-14 border-b dark:border-slate-800 border-slate-300">
             <div className="dark:text-slate-400 text-slate-500">
@@ -43,8 +42,8 @@ const OverviewReport = () => {
                 this month
               </h4>
               <h4 className="text-base font-bold text-center capitalize">
-                {allTickets.length >= 1 &&
-                  allTickets.filter(
+                {filteredTickets.length >= 1 &&
+                  filteredTickets.filter(
                     (data) =>
                       new Date(data.date).getMonth() === new Date().getMonth()
                   ).length}
@@ -55,8 +54,8 @@ const OverviewReport = () => {
                 last month
               </h4>
               <h4 className="text-base font-bold text-center capitalize">
-                {allTickets.length >= 1 &&
-                  allTickets.filter(
+                {filteredTickets.length >= 1 &&
+                  filteredTickets.filter(
                     (data) =>
                       new Date(data.date).getMonth() < new Date().getMonth()
                   ).length}
@@ -67,12 +66,12 @@ const OverviewReport = () => {
                 difference
               </h4>
               <h4 className="text-base font-bold text-center capitalize">
-                {allTickets.length >= 1 &&
-                  allTickets.filter(
+                {filteredTickets.length >= 1 &&
+                  filteredTickets.filter(
                     (data) =>
                       new Date(data.date).getMonth() < new Date().getMonth()
                   ).length -
-                    allTickets.filter(
+                    filteredTickets.filter(
                       (data) =>
                         new Date(data.date).getMonth() === new Date().getMonth()
                     ).length}

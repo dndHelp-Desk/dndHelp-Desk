@@ -48,11 +48,11 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               : user[0].access === "admin"
               ? ""
               : "hidden"
-          } snap_childTwo custom-shadow rounded-lg dark:bg-slate-800  ${
+          } snap_childTwo rounded-md dark:bg-slate-800  ${
             ticket.ticket_id === threadId
               ? "border-[1px] dark:border-slate-600 border-slate-400"
               : ""
-          } bg-slate-200 p-2 space-x-2  flex ${
+          } bg-slate-300 p-2 space-x-2  flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
               ? "dark:opacity-60 opacity-70"
@@ -112,12 +112,12 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             }}
             className="col-span-5 flex flex-col justify-center h-full w-full px-1 py-1 cursor-pointer"
           >
-            <h2 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans capitalize whitespace-nowrap">
-              {ticket.category} {ticket.ticket_id}
+            <h2 className="dark:text-slate-400 text-slate-600 text-base font-bold font-sans capitalize whitespace-nowrap">
+              {ticket.category} : {ticket.ticket_id}
             </h2>
-            <h5 className="dark:text-slate-400 text-slate-500 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
+            <h5 className="dark:text-slate-400 text-slate-600 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
               <span className="flex">{`${ticket.branch_company}`}</span>
-              <span className="dark:text-slate-500 text-xs text-slate-400">
+              <span className="dark:text-slate-500 text-xs text-slate-500">
                 Due on {new Date(ticket.due_date).toDateString()}
               </span>
             </h5>

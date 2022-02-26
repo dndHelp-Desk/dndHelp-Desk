@@ -54,14 +54,14 @@ const MainComponent = () => {
   //Component =================================
   return (
     <div className={theme}>
-      <div className="dark:bg-slate-800 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar relative flex flex-col items-center z-0">
+      <div className="dark:bg-slate-400 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar relative flex flex-col items-center z-0">
         {/**Data Fetching Components */}
         <TicketsnUserData />
         {/**NavBar ============== */}
         <div className="flex justify-center h-[4rem] w-full bg-transparent mt-4 relative">
           {/**Alert */}
           <Alert />
-          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl custom-shadow justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative">
+          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl  justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative">
             {/**Logo ==================== */}
             <svg
               className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent hidden lg:flex"

@@ -7,6 +7,7 @@ import {
 } from "react-icons/bs";
 import TicketStatus from "./TicketStatus";
 import DataFetching from "./DataFetching"
+import Help from "./Help";
 
 const SupportHome = () => {
   const location = useLocation();
@@ -76,6 +77,7 @@ const SupportHome = () => {
         </NavLink>
       </nav>
       <TicketStatus />
+      <Help/>
       <DataFetching />
       <Outlet />
     </div>

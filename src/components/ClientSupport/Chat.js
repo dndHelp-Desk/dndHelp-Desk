@@ -33,11 +33,11 @@ const Chat = () => {
       return (
         <div
           key={index}
-          className="w-full snap_child text-slate-400 text-sm leading-6 p-2 rounded-lg flex overflow-hidden space-x-2"
+          className="w-full snap_child text-slate-400 text-sm leading-6 p-2 rounded-lg flex overflow-hidden gap-2"
         >
           <div
-            className={`h-[2.5rem] w-[5%] max-w-[2.5rem] min-w-[2.5rem] hidden sm:flex justify-center items-center rounded-xl uppercase text-2xl text-gray-300 ${
-              message.from === "agent" ? "bg-slate-800" : "bg-blue-900"
+            className={`h-[2rem] w-[2rem] min-w-[2rem] hidden sm:flex justify-center items-center rounded-lg uppercase text-lg text-gray-300 bg-slate-800 ${
+              message.from === "agent" ? "order-first" : "order-last"
             }`}
           >
             {`${
@@ -46,7 +46,9 @@ const Chat = () => {
           </div>
           <div className={`w-[95%] 2xl:w-full  bg-slate-800 p-4 rounded-lg`}>
             <div className="font-bold  text-slate-300 justify-between w-full flex-col md:flex-row flex border-b border-slate-700">
-              <span>{`${message.from === "agent" ? agentName : "You"}`}</span>{" "}
+              <span
+                className={`${message.from === "agent" ? "" : "order-last"}`}
+              >{`${message.from === "agent" ? agentName : "You"}`}</span>{" "}
               <h4 className="flex space-x-4">
                 <span className="text-xs text-slate-400 font-medium">
                   {`${new Date(message.date).toDateString()}`}
@@ -64,9 +66,15 @@ const Chat = () => {
                 </span>
               </h4>
             </div>
-            <p className="mt-2">{message.message}</p>
+            <p
+              className={`${message.from === "agent" ? "" : "text-right"} mt-2`}
+            >
+              {message.message}
+            </p>
             <div
-              className={`mt-2 flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
+              className={`mt-2 flex ${
+                message.from === "agent" ? "justify-end" : ""
+              } space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
                 message.from === "agent" ? "hidden" : ""
               }`}
             >
@@ -178,7 +186,7 @@ const Chat = () => {
               type="submit"
               className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-sm right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
             >
-              Send Message
+              Send <span className="hidden sm:inline">Message</span>
             </button>
           </form>
         </div>

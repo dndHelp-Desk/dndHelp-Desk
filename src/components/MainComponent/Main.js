@@ -46,7 +46,7 @@ const Main = () => {
     <div
       className={`${
         location.pathname === "/" ? "grid" : "hidden"
-      } dark:bg-slate-800 w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
+      } dark:bg-slate-400 w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2">
