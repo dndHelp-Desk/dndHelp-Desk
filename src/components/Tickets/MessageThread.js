@@ -106,10 +106,10 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 }`}</span>{" "}
                 <div className="flex h-full items-center justify-between">
                   <span className="flex space-x-2">
-                    <span className="text-xs dark:text-slate-400 text-slate-500  font-medium">
+                    <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
                       {`${new Date(message.date).toDateString()}`}
                     </span>
-                    <span className="text-xs dark:text-slate-400 text-slate-500 font-medium">
+                    <span className="text-xs dark:text-slate-500 text-slate-500 font-medium">
                       {`${
                         Number(message.time.split(":")[0]) < 10
                           ? "0" + Number(message.time.split(":")[0])
@@ -130,7 +130,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                         threadId: message.ticket_id,
                       })
                     }
-                    className={`h-8 w-8 rounded-xl hover:bg-slate-400 flex items-center justify-center ${
+                    className={`h-8 w-8 rounded-xl hover:bg-slate-400 dark:text-slate-500 flex items-center justify-center ${
                       message.from === "agent" ? "order-first" : ""
                     }`}
                   >

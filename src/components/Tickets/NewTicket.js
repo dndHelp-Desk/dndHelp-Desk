@@ -142,303 +142,310 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     <div
       className={`fixed ${
         newTicketModal === true ? "fixed flex z-[999]" : "hidden"
-      } top-0 left-0 right-0 min-h-[45rem] h-screen w-screen bg-[#030d2769] justify-center pt-20`}
+      } top-[-3rem] left-0 right-0 h-[110%] w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar`}
     >
-      <div
-        ref={closeModalRef}
-        className="bg-slate-300 shadow-2xl w-3/5 max-w-[50rem] h-[47rem] rounded-md relative py-4 "
-      >
-        <h3 className="text-center slate-900 text-lg font-bold">New Ticket</h3>
-
-        {/**New Tickect Form ================================= */}
-        <form className="px-4" onSubmit={(e) => handleSubmit(e)}>
-          <div className="py-6 space-y-4">
-            <div className="flex justify-between space-x-4">
-              {/**Reciepient Name  ======================================== */}
-              <label className="block w-[40%] relative focus:bg-red-500">
+      <div className="h-full w-full justify-center p-14 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
+        <div
+          ref={closeModalRef}
+          className="bg-slate-300 shadow-2xl w-3/5 max-w-[50rem] h-[47rem] rounded-md relative py-4 "
+        >
+          <h3 className="text-center slate-900 text-lg font-bold">
+            New Ticket
+          </h3>
+          {/**New Tickect Form ================================= */}
+          <form className="px-4" onSubmit={(e) => handleSubmit(e)}>
+            <div className="py-6 space-y-4">
+              <div className="flex justify-between space-x-4">
+                {/**Reciepient Name  ======================================== */}
+                <label className="block w-[40%] relative focus:bg-red-500">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Recipient / Contact
+                  </span>
+                  <input
+                    className="
+                      block
+                      w-full h-9
+                      mt-1
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    "
+                    type="text"
+                    value={recepient}
+                    placeholder="Brand Name ..."
+                    required={true}
+                    onKeyPress={() => setResults(true)}
+                    onChange={(e) => setRecipient(e.target.value)}
+                  />
+                  <ul
+                    ref={closeSuggestionsRef}
+                    className={`${
+                      searchResults ? "" : "hidden"
+                    } absolute top-18 left-0 h-[10rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                  >
+                    {contactsList}
+                  </ul>
+                </label>
+                {/**End Of Reciepient Name  ======================================== */}
+                <label className="block w-[40%]">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Subject / Category
+                  </span>
+                  <select
+                    className="
+                      block
+                      w-full
+                      mt-1
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                  capitalize
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    "
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        category: e.target.value,
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      subject ...
+                    </option>
+                    {categoriesList}
+                  </select>
+                </label>
+                {/**End Of Subject  ======================================== */}
+              </div>
+              <div className="flex justify-between space-x-4">
+                {/**Priority And Status  ======================================== */}
+                <label className="block w-[40%]">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Priority
+                  </span>
+                  <select
+                    className="
+                      block
+                      w-full
+                      mt-1
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    "
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        priority: e.target.value,
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      Priority ...
+                    </option>
+                    <option className="capitalize">Low</option>
+                    <option className="capitalize">Medium</option>
+                    <option className="capitalize">High</option>
+                    <option className="capitalize">Urgent</option>
+                  </select>
+                </label>
+                <label className="block w-[40%]">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Status
+                  </span>
+                  <select
+                    className="
+                      block
+                      w-full
+                      mt-1
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    "
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        state: e.target.value,
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      State ...
+                    </option>
+                    <option className="capitalize">Open</option>
+                    <option className="capitalize">on hold</option>
+                    <option className="capitalize">Closed</option>
+                    <option className="capitalize">Resolved</option>
+                  </select>
+                </label>
+                {/**End  Of Priority and Status  ======================================== */}
+              </div>
+              {/**complainant Details ======================================== */}
+              <div className="flex justify-between space-x-4">
+                <label className="block w-[40%]">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Complainant Email
+                  </span>
+                  <input
+                    type="text"
+                    className="
+                      mt-1
+                      block
+                      w-full
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                    "
+                    autoComplete="nope"
+                    placeholder="email@example.com ..."
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        complainant_email: e.target.value,
+                      })
+                    }
+                  />
+                </label>
+                <label className="block w-[40%]">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Complainant Number
+                  </span>
+                  <input
+                    type="text"
+                    className="
+                      mt-1
+                      block
+                      w-full
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                    "
+                    autoComplete="off"
+                    placeholder="+27 5698 6258 ..."
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        complainant_number: e.target.value,
+                      })
+                    }
+                  />
+                </label>
+                {/**End of complainant Details ======================================== */}
+              </div>
+              <label className="block">
                 <span className="text-slate-700 text-sm font-bold">
-                  Recipient / Contact
+                  Complainant Name
                 </span>
                 <input
-                  className="
-                    block
-                    w-full h-9
-                    mt-1
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                  "
                   type="text"
-                  value={recepient}
-                  placeholder="Brand Name ..."
+                  className="
+                      mt-1
+                      block
+                      w-full
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                    "
+                  placeholder="Full Name ..."
                   required={true}
-                  onKeyPress={() => setResults(true)}
-                  onChange={(e) => setRecipient(e.target.value)}
+                  onChange={(e) =>
+                    setValues({
+                      ...inputValue,
+                      complainant_name: e.target.value,
+                    })
+                  }
                 />
-                <ul
-                  ref={closeSuggestionsRef}
-                  className={`${
-                    searchResults ? "" : "hidden"
-                  } absolute top-18 left-0 h-[10rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
-                >
-                  {contactsList}
-                </ul>
               </label>
-              {/**End Of Reciepient Name  ======================================== */}
-              <label className="block w-[40%]">
+              <label className="block">
                 <span className="text-slate-700 text-sm font-bold">
-                  Subject / Category
-                </span>
-                <select
-                  className="
-                    block
-                    w-full
-                    mt-1
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-					capitalize
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                  "
-                  required={true}
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      category: e.target.value,
-                    })
-                  }
-                >
-                  <option className="capitalize" value="">
-                    subject ...
-                  </option>
-                  {categoriesList}
-                </select>
-              </label>
-              {/**End Of Subject  ======================================== */}
-            </div>
-            <div className="flex justify-between space-x-4">
-              {/**Priority And Status  ======================================== */}
-              <label className="block w-[40%]">
-                <span className="text-slate-700 text-sm font-bold">
-                  Priority
-                </span>
-                <select
-                  className="
-                    block
-                    w-full
-                    mt-1
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 
-                  "
-                  required={true}
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      priority: e.target.value,
-                    })
-                  }
-                >
-                  <option className="capitalize" value="">
-                    Priority ...
-                  </option>
-                  <option className="capitalize">Low</option>
-                  <option className="capitalize">Medium</option>
-                  <option className="capitalize">High</option>
-                  <option className="capitalize">Urgent</option>
-                </select>
-              </label>
-              <label className="block w-[40%]">
-                <span className="text-slate-700 text-sm font-bold">Status</span>
-                <select
-                  className="
-                    block
-                    w-full
-                    mt-1
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                  "
-                  required={true}
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      state: e.target.value,
-                    })
-                  }
-                >
-                  <option className="capitalize" value="">
-                    State ...
-                  </option>
-                  <option className="capitalize">Open</option>
-                  <option className="capitalize">on hold</option>
-                  <option className="capitalize">Closed</option>
-                  <option className="capitalize">Resolved</option>
-                </select>
-              </label>
-              {/**End  Of Priority and Status  ======================================== */}
-            </div>
-            {/**complainant Details ======================================== */}
-            <div className="flex justify-between space-x-4">
-              <label className="block w-[40%]">
-                <span className="text-slate-700 text-sm font-bold">
-                  Complainant Email
+                  Due Date
                 </span>
                 <input
-                  type="text"
+                  type="date"
                   className="
-                    mt-1
-                    block
-                    w-full
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
-                  "
-                  autoComplete="nope"
-                  placeholder="email@example.com ..."
+                      mt-1
+                      block
+                      w-full
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    "
                   required={true}
                   onChange={(e) =>
                     setValues({
                       ...inputValue,
-                      complainant_email: e.target.value,
+                      date: e.target.value,
                     })
                   }
                 />
               </label>
-              <label className="block w-[40%]">
+              <label className="block">
                 <span className="text-slate-700 text-sm font-bold">
-                  Complainant Number
+                  Message / Case Details
                 </span>
-                <input
-                  type="text"
+                <textarea
                   className="
-                    mt-1
-                    block
-                    w-full
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
-                  "
-                  autoComplete="off"
-                  placeholder="+27 5698 6258 ..."
+                      mt-1
+                      block
+                      w-full
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                  resize-none
+                  h-[10rem]
+                      border-slate-300
+                      shadow-sm
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                    "
+                  placeholder="Type your message here ..."
                   required={true}
+                  rows="5"
                   onChange={(e) =>
                     setValues({
                       ...inputValue,
-                      complainant_number: e.target.value,
+                      message: e.target.value,
                     })
                   }
-                />
+                ></textarea>
               </label>
-              {/**End of complainant Details ======================================== */}
             </div>
-            <label className="block">
-              <span className="text-slate-700 text-sm font-bold">
-                Complainant Name
-              </span>
-              <input
-                type="text"
-                className="
-                    mt-1
-                    block
-                    w-full
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
-                  "
-                placeholder="Full Name ..."
-                required={true}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    complainant_name: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label className="block">
-              <span className="text-slate-700 text-sm font-bold">Due Date</span>
-              <input
-                type="date"
-                className="
-                    mt-1
-                    block
-                    w-full
-					text-slate-600
-					 text-sm
-                    rounded-md
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                  "
-                required={true}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    date: e.target.value,
-                  })
-                }
-              />
-            </label>
-            <label className="block">
-              <span className="text-slate-700 text-sm font-bold">
-                Message / Case Details
-              </span>
-              <textarea
-                className="
-                    mt-1
-                    block
-                    w-full
-					text-slate-600
-					 text-sm
-                    rounded-md
-					resize-none
-					h-[10rem]
-                    border-slate-300
-                    shadow-sm
-                    focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
-                  "
-                placeholder="Type your message here ..."
-                required={true}
-                rows="5"
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    message: e.target.value,
-                  })
-                }
-              ></textarea>
-            </label>
-          </div>
-          <div className="w-full flex justify-center">
-            <button
-              type="submit"
-              className="px-6 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-md font-bold uppercase text-sm"
-            >
-              Open
-            </button>
-          </div>
-        </form>
+            <div className="w-full flex justify-center">
+              <button
+                type="submit"
+                className="px-6 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-md font-bold uppercase text-sm"
+              >
+                Open
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -54,7 +54,7 @@ const MainComponent = () => {
   //Component =================================
   return (
     <div className={theme}>
-      <div className="dark:bg-slate-400 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar relative flex flex-col items-center z-0">
+      <div className="dark:bg-slate-400 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar relative flex flex-col items-center">
         {/**Data Fetching Components */}
         <TicketsnUserData />
         {/**NavBar ============== */}
@@ -240,7 +240,7 @@ const MainComponent = () => {
             </div>
           </nav>
         </div>
-        <div className="w-full flex flex-col items-center z-[-99]">
+        <div className="w-full flex flex-col items-center">
           <Main />
           <Outlet />
         </div>

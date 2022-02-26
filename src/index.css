@@ -33,15 +33,18 @@
     @apply border-t-2 border-blue-600;
   }
 
-  .settingsNav{
-    @apply dark:text-slate-500 text-slate-500 text-sm font-semibold flex items-center space-x-1 hover:text-blue-500 dark:hover:text-blue-500 border-b md:border-0 p-1 border-slate-500
+  .settingsNav {
+    @apply dark:text-slate-500 text-slate-500 text-sm font-semibold flex items-center space-x-1 hover:text-blue-500 dark:hover:text-blue-500 border-b md:border-0 p-1 border-slate-500;
   }
-  .sidenav .active{
-    @apply text-blue-500
+  .sidenav .active {
+    @apply text-blue-500;
   }
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+  .contacts-control {
+    @apply text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800;
   }
 
   /* Hide scrollbar for IE, Edge and Firefox */
@@ -95,4 +98,3 @@
     scroll-snap-align: start end;
   }
 }
-
