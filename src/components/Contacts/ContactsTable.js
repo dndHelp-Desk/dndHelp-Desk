@@ -5,8 +5,6 @@ import {
   HiOutlineCog,
   HiOutlineDuplicate,
   HiOutlineTrash,
-  HiOutlineChevronLeft,
-  HiOutlineChevronRight,
   HiOutlineSearch,
   HiPlus,
 } from "react-icons/hi";
