@@ -107,8 +107,8 @@ const Table = ({ setModal }) => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row items-start lg:items-center justify-end gap-2">
-          <div className="relative h-10 w-48">
+        <div className="flex flex-col md:flex-row items-center justify-end gap-4">
+          <div className="relative h-10 w-48  border-b dark:border-slate-700 border-slate-400">
             <input
               type="search"
               name="search"
@@ -117,27 +117,13 @@ const Table = ({ setModal }) => {
               onChange={(e) => setResults(e.target.value)}
               value={searchResults}
               placeholder="Quick Search ..."
-              className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-8 focus:ring-blue-700 text-slate-500"
+              className="bg-transparent w-full h-full border-0 focus:border-0 dark:border-slate-700 border-slate-400 outline-none focus:outline-none focus:ring-0 text-sm px-4 pl-8 focus:ring-blue-700 text-slate-500"
             />
             <HiOutlineSearch className="absolute text-slate-500 text-lg top-3 left-2" />
           </div>
-          <div className="flex items-center py-3 lg:py-0 lg:px-6">
-            <p
-              className="text-base text-slate-600 dark:text-gray-400"
-              id="page-view"
-            >
-              Viewing 1 - 20 of 60
-            </p>
-            <button className="text-slate-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded">
-              <HiOutlineChevronLeft />
-            </button>
-            <button className="text-slate-600 dark:text-gray-400 border-transparent border rounded focus:outline-none cursor-pointer">
-              <HiOutlineChevronRight />
-            </button>
-          </div>
           <button
             onClick={() => setModal(true)}
-            className="text-white cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 w-8 h-8 rounded flex items-center justify-center"
+            className="text-white cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 w-8 h-8 rounded flex items-center justify-center"
           >
             <HiPlus />
           </button>

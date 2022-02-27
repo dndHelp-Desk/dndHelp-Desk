@@ -109,14 +109,6 @@ const MainComponent = () => {
                 Tickets
               </NavLink>
               <NavLink
-                to="/reports"
-                className={`TabsLinks ${
-                  location.pathname === "/reports" ? "navlinks" : ""
-                }`}
-              >
-                Reports
-              </NavLink>
-              <NavLink
                 to="/contacts"
                 end={true}
                 className={`TabsLinks ${
@@ -124,6 +116,14 @@ const MainComponent = () => {
                 }`}
               >
                 Contacts
+              </NavLink>
+              <NavLink
+                to="/reports"
+                className={`TabsLinks ${
+                  location.pathname === "/reports" ? "navlinks" : ""
+                }`}
+              >
+                Reports
               </NavLink>
             </div>
 
@@ -160,18 +160,6 @@ const MainComponent = () => {
                 <span>Tickets</span>
               </NavLink>
               <NavLink
-                to="/reports"
-                className={`TabsLinks ${
-                  location.pathname === "/reports" ? "navlinks" : ""
-                }`}
-              >
-                <FaChartBar
-                  className="inline-block
-              "
-                />
-                <span>Reports</span>
-              </NavLink>
-              <NavLink
                 to="/contacts"
                 end={true}
                 className={`TabsLinks ${
@@ -183,6 +171,18 @@ const MainComponent = () => {
               "
                 />
                 <span>Contacts</span>
+              </NavLink>
+              <NavLink
+                to="/reports"
+                className={`TabsLinks ${
+                  location.pathname === "/reports" ? "navlinks" : ""
+                }`}
+              >
+                <FaChartBar
+                  className="inline-block
+              "
+                />
+                <span>Reports</span>
               </NavLink>
             </div>
 

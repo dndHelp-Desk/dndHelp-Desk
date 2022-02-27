@@ -233,7 +233,7 @@ const Main = () => {
                 Here are the eight key trends every company will have to tackle
                 in order to succeed.
               </p>
-              <button className="bg-blue-700 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 ring-blue-800 hover:opacity-90 transition-all  text-sm text-slate-300 font-semibold px-4 py-2 rounded-lg">
+              <button className="bg-blue-600 outline-none focus:outline-none focus:ring focus:ring-blue-700 hover:ring-1 ring-1 ring-blue-800 hover:opacity-90 transition-all  text-sm text-slate-300 font-semibold px-4 py-2 rounded-md">
                 Read more <BsArrowRightShort className="inline text-lg" />
               </button>
             </div>
