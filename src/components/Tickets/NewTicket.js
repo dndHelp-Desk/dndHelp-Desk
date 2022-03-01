@@ -187,7 +187,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     <div
       className={`fixed ${
         newTicketModal === true ? "fixed flex z-[999]" : "hidden"
-      } top-[-3rem] left-0 right-0 h-[110%] w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-28`}
+      } top-[-0.5rem] left-0 bottom-0 right-0 min-h-screen w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-10`}
     >
       <div className="h-full w-full justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
         <div

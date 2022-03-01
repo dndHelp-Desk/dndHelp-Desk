@@ -49,9 +49,9 @@ const NewContact = ({ contactModal, setModal }) => {
   //Component ==========
   return (
     <div
-      className={`bg-[#0813227e] fixed w-full top-[-1rem] z-[999] ${
+      className={`bg-[#0813227e] fixed w-full h-full z-[999] ${
         contactModal ? "flex" : "hidden"
-      }  justify-center pt-28 bottom-0 left-0 right-0`}
+      }  justify-center pt-28 top-[-0.5rem] bottom-0 left-0 right-0 min-h-screen w-screen`}
     >
       {/**Add new Contact =========================================== */}
       <div
