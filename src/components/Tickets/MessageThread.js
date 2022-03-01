@@ -319,7 +319,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 {!threadId && "select any ticket"}
               </small>{" "}
             </h2>
-            <div className="w-9 h-9 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
+            <div className="w-8 h-8 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
               {clientName && clientName.charAt(0)}
               {!threadId && "u"}
             </div>

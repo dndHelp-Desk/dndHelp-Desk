@@ -97,9 +97,7 @@ const ToDo = () => {
   //Component =============================================
   return (
     <div className="col-span-1 h-[26rem] rounded-xl flex flex-col justify-between space-y-2 relative">
-      <form
-        className="h-[15%] p-2 dark:bg-slate-900  bg-slate-100 w-full rounded-xl gap-1 items-center place-content-center"
-      >
+      <form className="h-[15%] p-2 dark:bg-slate-900  bg-slate-100 w-full rounded-xl gap-1 items-center place-content-center">
         <div className="h-full flex items-center w-full col-span-8 dark:bg-slate-800 bg-slate-200 rounded-lg border dark:border-0 border-slate-300 overflow-hidden">
           <input
             type="text"
@@ -107,19 +105,22 @@ const ToDo = () => {
             id="search"
             required
             className="w-full h-full outline-none focus:outline-none bg-transparent border-0 placeholder:text-sm placeholder:text-slate-500 dark:text-slate-400 text-slate-500"
-            placeholder="Type your task here ..."
+            placeholder="Type here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}
             value={taskName}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
-               addTask(e);
+                addTask(e);
               }
             }}
           />
           <abbr title="Pick a date">
             <ToDODatePicker startDate={startDate} setStartDate={setStartDate} />
           </abbr>
+          <button type="submit" className="px-[15px] h-full p-2 text-sm uppercase font-bold font-sans dark:text-slate-300 text-slate-500 outline-none focus:outline-none bg-transparent hover:opacity-90 transition-all">
+            Add
+          </button>
         </div>
       </form>
       {/**Task List ===================== */}

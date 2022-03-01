@@ -43,7 +43,7 @@ const MainComponent = () => {
     document.title =
       location.pathname === "/"
         ? "Dial n Dine Help-Desk"
-        : "Dial n Dine Help-Desk" + routeLocation;
+        : "Dial n Dine Help-Desk" + (routeLocation).split("/").join(" | ");
     dispatch(changeLocation(location.pathname));
   }, [routeLocation, dispatch, location]);
 

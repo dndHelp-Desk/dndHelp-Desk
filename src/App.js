@@ -8,9 +8,9 @@ import ContactsComponent from "./components/Contacts/ContactsComponent";
 import SettingsComponent from "./components/Settings/SettingsComponents";
 import SupportHome from "./components/ClientSupport/SupportHome";
 import NewTicket from "./components/ClientSupport/NewTicket";
-import KnowledgeBase from "./components/ClientSupport/KnowledgeBase"
-import Account from "./components/Settings/Account"
-import Team from "./components/Settings/Team"
+import KnowledgeBase from "./components/ClientSupport/KnowledgeBase";
+import Account from "./components/Settings/Account";
+import Team from "./components/Settings/Team";
 
 const App = () => {
   return (

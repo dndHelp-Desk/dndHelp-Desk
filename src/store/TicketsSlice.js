@@ -14,12 +14,12 @@ const initialState = {
   filters: {
     startDate: new Date(
       new Date().getFullYear(),
-      new Date().getMonth(),
+      new Date().getMonth()-1,
       1
     ).toLocaleDateString(),
     endDate: new Date(
       new Date().getFullYear(),
-      new Date().getMonth(),
+      new Date().getMonth()-1,
       30
     ).toLocaleDateString(),
     client: "",

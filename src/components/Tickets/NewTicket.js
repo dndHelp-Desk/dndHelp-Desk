@@ -105,6 +105,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       inputValue.complainant_email,
       inputValue.complainant_number
     );
+
+    //Send Mail Using App Script ======================
     fetch(sendMailAPI, {
       method: "POST",
       mode: "no-cors",
@@ -135,6 +137,50 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         color: "bg-green-200",
       })
     );
+
+    //Send Email Using Nodemailer ===================
+    fetch("http://localhost:3001/send", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: inputValue.recipient_name,
+        email: inputValue.recipient_email,
+        subject: inputValue.category,
+        message: inputValue.message,
+        priority: inputValue.priority,
+        opened_by: inputValue.agent,
+        ticket_id: inputValue.ticket_id,
+        brand: inputValue.branch_company,
+        date: `${new Date(inputValue.date).toDateString()}, ${
+          new Date().getHours() + 1
+        }:${new Date().getMinutes() + 1} hrs`,
+        complainant_name: inputValue.complainant_name,
+        complainant_email: inputValue.complainant_email,
+        complainant_number: inputValue.complainant_number,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const resData = data;
+        if (resData.status === "success") {
+          dispatch(
+            updateAlert({
+              message: "New Ticket Created Successfully",
+              color: "bg-green-200",
+            })
+          );
+          alert("Message Sent");
+        } else if (resData.status === "fail") {
+          dispatch(
+            updateAlert({
+              message: "Email Failed To Send",
+              color: "bg-red-200",
+            })
+          );
+        }
+      });
   };
 
   //Component ===========================
@@ -142,9 +188,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     <div
       className={`fixed ${
         newTicketModal === true ? "fixed flex z-[999]" : "hidden"
-      } top-[-3rem] left-0 right-0 h-[110%] w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar`}
+      } top-[-3rem] left-0 right-0 h-[110%] w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-28`}
     >
-      <div className="h-full w-full justify-center p-14 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
+      <div className="h-full w-full justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
         <div
           ref={closeModalRef}
           className="bg-slate-300 shadow-2xl w-3/5 max-w-[50rem] h-[47rem] rounded-md relative py-4 "
