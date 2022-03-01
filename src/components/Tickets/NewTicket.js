@@ -139,7 +139,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     );
 
     //Send Email Using Nodemailer ===================
-    fetch("http://localhost:3001/send", {
+    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -171,7 +171,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               color: "bg-green-200",
             })
           );
-          alert("Message Sent");
         } else if (resData.status === "fail") {
           dispatch(
             updateAlert({
