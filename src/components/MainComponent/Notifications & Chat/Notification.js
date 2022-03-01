@@ -30,7 +30,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
             {notif.notification}
           </h4>
           <p className="dark text-xs font-base text-slate-300">
-            {`There's a new response with ticket ID: ${notif.ticket_id}.`}
+            {`There's a new response from ticket with ticket ID: ${notif.ticket_id}.`}
           </p>
           <small className="dark text-xs font-semibold text-left dark:text-slate-400 text-slate-400">
             {new Date(notif.date).toDateString()} | {notif.time}

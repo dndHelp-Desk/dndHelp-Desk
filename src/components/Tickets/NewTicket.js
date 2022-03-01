@@ -145,20 +145,64 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        name: inputValue.recipient_name,
         email: inputValue.recipient_email,
         subject: inputValue.category,
-        message: inputValue.message,
-        priority: inputValue.priority,
-        opened_by: inputValue.agent,
         ticket_id: inputValue.ticket_id,
-        brand: inputValue.branch_company,
-        date: `${new Date(inputValue.date).toDateString()}, ${
-          new Date().getHours() + 1
-        }:${new Date().getMinutes() + 1} hrs`,
-        complainant_name: inputValue.complainant_name,
-        complainant_email: inputValue.complainant_email,
-        complainant_number: inputValue.complainant_number,
+        email_body: `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+        <b> Hi ${inputValue.recipient_name},</b>
+      </p>
+      <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+        <b> Dial & Dine has opened a new ticket regarding ${
+          inputValue.category
+        }. The case details are as follow:</b>
+      </p>
+      <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+        <b>Tickect Details:</b>
+      </p>
+      <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
+        <li><b>Brand:</b> ${inputValue.branch_company} </li>
+        <li><b>Tickect-ID:</b> ${inputValue.ticket_id} </li>
+        <li><b>Due Date:</b> ${
+          new Date(inputValue.date).toDateString() +
+          " " +
+          new Date().getHours() +
+          1 +
+          ":" +
+          new Date().getMinutes() +
+          1 +
+          "hrs"
+        } </li>
+        <li><b>Case Origin:</b> dndHelp-Desk </li>
+        <li><b>Priority:</b> ${inputValue.priority} </li>
+        <li><b>Opened By:</b> ${inputValue.agent} </li>
+        </ul>
+      <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+        <b>Customer's Details:</b>
+      </p>
+      <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;">
+        <li><b>Full Name:</b> ${inputValue.complainant_name}</li>
+        <li><b>Email Address:</b> ${inputValue.complainant_email} </li>
+        <li><b>Phone Number:</b> ${inputValue.complainant_number}</li>
+        </ul>
+      <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+        <b>Case Detail:</b>
+      </p>
+      <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+        ${inputValue.message}
+      </p>
+      <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+        <i>In order to update or respond to this issue please click the button below,</i>
+      </p>
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+       <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
+      </p>
+      <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
+<p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
+        <b>Disclaimer</b>
+      </p>
+  <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+        The information contained in this communication from the sender is confidential. It is intended solely for use by the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful. 
+      </p>`,
       }),
     })
       .then((res) => res.json())
@@ -223,7 +267,13 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     placeholder="Brand Name ..."
                     required={true}
                     onKeyPress={() => setResults(true)}
-                    onChange={(e) => setRecipient(e.target.value)}
+                    onChange={(e) => {
+                      setRecipient(e.target.value);
+                      setValues({
+                        ...inputValue,
+                        ticket_id: "#0" + (filteredTickets.length + 1),
+                      });
+                    }}
                   />
                   <ul
                     ref={closeSuggestionsRef}

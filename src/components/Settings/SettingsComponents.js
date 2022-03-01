@@ -21,20 +21,20 @@ const SettingsComponents = () => {
           </h2>
           <ul className="md:space-x-6 lg:space-x-0 justify-center lg:justify-start gap-3 lg:gap-0 lg:space-y-3 mt-10 sidenav grid grid-cols-2 whitespace-nowrap md:flex flex-wrap lg:flex-col">
             <li>
-              <NavLink to="/settings/account" className="settingsNav">
+              <NavLink to="/app/settings/account" className="settingsNav">
                 <BsSliders />
                 <span>Account</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/settings/team" className="settingsNav">
+              <NavLink to="/app/settings/team" className="settingsNav">
                 <BsPeopleFill />
                 <span>Team</span>
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/settings/support-operations"
+                to="/app/settings/support-operations"
                 className="settingsNav"
               >
                 <BsChatSquareDotsFill />
@@ -42,13 +42,16 @@ const SettingsComponents = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/settings/automated-reports" className="settingsNav">
+              <NavLink
+                to="/app/settings/automated-reports"
+                className="settingsNav"
+              >
                 <BsFileTextFill />
                 <span>Automated Reports</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/settings/solutions" className="settingsNav">
+              <NavLink to="/app/settings/solutions" className="settingsNav">
                 <BsBookHalf />
                 <span>Solutions</span>
               </NavLink>

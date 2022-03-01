@@ -93,7 +93,7 @@ const LogIn = () => {
         dispatch(isAuthenticated(true));
         //Rederect User If logged ==============
         routeLocation === "Dial n Dine Help-Desk"
-          ? navigate("/")
+          ? navigate("/app")
           : navigate(routeLocation);
       } else {
         dispatch(isAuthenticated(false));

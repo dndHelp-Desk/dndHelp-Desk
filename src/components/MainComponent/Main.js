@@ -45,7 +45,7 @@ const Main = () => {
   return (
     <div
       className={`${
-        location.pathname === "/" ? "grid" : "hidden"
+        location.pathname === "/app" ? "grid" : "hidden"
       } dark:bg-slate-400 w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">

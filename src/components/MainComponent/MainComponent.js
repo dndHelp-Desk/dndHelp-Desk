@@ -92,35 +92,35 @@ const MainComponent = () => {
             {/**Large Screens Menu Items===================== */}
             <div className="dark:text-gray-400 text-slate-600 hidden lg:flex space-x-5">
               <NavLink
-                to="/"
+                to="/app"
                 className={`TabsLinks ${
-                  location.pathname === "/" ? "navlinks" : ""
+                  location.pathname === "/app" ? "navlinks" : ""
                 }`}
               >
                 Home
               </NavLink>
               <NavLink
-                to="/tickets"
+                to="/app/tickets"
                 end={true}
                 className={`TabsLinks ${
-                  location.pathname === "/tickets" ? "navlinks" : ""
+                  location.pathname === "/app/tickets" ? "navlinks" : ""
                 }`}
               >
                 Tickets
               </NavLink>
               <NavLink
-                to="/contacts"
+                to="/app/contacts"
                 end={true}
                 className={`TabsLinks ${
-                  location.pathname === "/contacts" ? "navlinks" : ""
+                  location.pathname === "/app/contacts" ? "navlinks" : ""
                 }`}
               >
                 Contacts
               </NavLink>
               <NavLink
-                to="/reports"
+                to="/app/reports"
                 className={`TabsLinks ${
-                  location.pathname === "/reports" ? "navlinks" : ""
+                  location.pathname === "/app/reports" ? "navlinks" : ""
                 }`}
               >
                 Reports
@@ -135,9 +135,9 @@ const MainComponent = () => {
               } transition-scale duration-300 flex flex-col dark:text-gray-400 text-slate-600 space-y-2 p-4 justify-center overflow-hidden`}
             >
               <NavLink
-                to="/"
+                to="/app"
                 className={`TabsLinks ${
-                  location.pathname === "/" ? "navlinks" : ""
+                  location.pathname === "/app" ? "navlinks" : ""
                 }`}
               >
                 <FaHeadset
@@ -147,10 +147,10 @@ const MainComponent = () => {
                 <span>Home</span>
               </NavLink>
               <NavLink
-                to="/tickets"
+                to="/app/tickets"
                 end={true}
                 className={`TabsLinks ${
-                  location.pathname === "/tickets" ? "navlinks" : ""
+                  location.pathname === "/app/tickets" ? "navlinks" : ""
                 }`}
               >
                 <FaReceipt
@@ -160,10 +160,10 @@ const MainComponent = () => {
                 <span>Tickets</span>
               </NavLink>
               <NavLink
-                to="/contacts"
+                to="/app/contacts"
                 end={true}
                 className={`TabsLinks ${
-                  location.pathname === "/contacts" ? "navlinks" : ""
+                  location.pathname === "/app/contacts" ? "navlinks" : ""
                 }`}
               >
                 <FaUserTie
@@ -173,9 +173,9 @@ const MainComponent = () => {
                 <span>Contacts</span>
               </NavLink>
               <NavLink
-                to="/reports"
+                to="/app/reports"
                 className={`TabsLinks ${
-                  location.pathname === "/reports" ? "navlinks" : ""
+                  location.pathname === "/app/reports" ? "navlinks" : ""
                 }`}
               >
                 <FaChartBar
@@ -227,7 +227,7 @@ const MainComponent = () => {
               />
 
               {/**Settings ================================================ */}
-              <NavLink to="/settings/account">
+              <NavLink to="/app/settings/account">
                 <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
                   <abbr title="Settings">
                     <BsGear />

@@ -104,7 +104,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 >{`${
                   message.from === "agent" ? agentName : clientName
                 }`}</span>{" "}
-                <div className="flex h-full items-center justify-between">
+                <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
                   <span className="flex space-x-2">
                     <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
                       {`${new Date(message.date).toDateString()}`}
@@ -130,7 +130,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                         threadId: message.ticket_id,
                       })
                     }
-                    className={`h-8 w-8 rounded-xl hover:bg-slate-400 dark:text-slate-500 flex items-center justify-center ${
+                    className={`h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 dark:text-slate-500 flex items-center justify-center ${
                       message.from === "agent" ? "order-first" : ""
                     }`}
                   >
@@ -146,7 +146,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                       msgOptions.threadId === message.ticket_id
                         ? ""
                         : "hidden"
-                    } z-[99] shadow-lg border border-slate-700 dark:bg-[#0f172a83] bg-slate-200 backdrop-blur-sm rounded-lg absolute right-0 top-10 p-4`}
+                    } z-[99] shadow-lg border border-slate-700 dark:bg-[#0f172a83] bg-slate-200 backdrop-blur-sm rounded-lg absolute ${
+                      message.from !== "agent" ? "right-0" : "left-0"
+                    }  top-10 p-4`}
                   >
                     <h5 className="text-slate-400 font-medium text-sm flex justify-between items-center">
                       <span>Delete</span>
@@ -160,7 +162,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
               </div>
               <p
                 className={`mt-2 dark:text-slate-400 text-slate-500 ${
-                  message.from === "agent" ? "pl-3 text-right" : "pr-3 text-left"
+                  message.from === "agent"
+                    ? "pl-3 text-right"
+                    : "pr-3 text-left"
                 }`}
               >
                 {message.message}
@@ -213,12 +217,100 @@ const MessageThread = ({ isChatOpen, setChat }) => {
         date: date,
       }),
     });
-    dispatch(
-      updateAlert({
-        message: "Response Has Been Sent.",
-        color: "bg-green-200",
-      })
-    );
+
+    //Relpy Using Nodemailer ===================
+    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email: clientEmail,
+        subject: reply.subject,
+        ticket_id: threadId,
+        email_body: `<p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+    <b> Hi ${clientName},</b>
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+    <b> A ticket with ID: ${threadId} has been updated. In order to reply or update this issues please navigate to the link provided at the bottom, don't foget to grab your ticket-id.</b>
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Tickect Details:</b>
+  </p>
+  <ul
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
+    <li><b>Brand:</b>
+      ${brand}
+    </li>
+    <li><b>Tickect-ID:</b>
+      ${threadId}
+    </li>
+    <li><b>Due Date:</b>
+      ${
+        new Date(date).toDateString() +
+        " " +
+        new Date().getHours() +
+        1 +
+        ":" +
+        new Date().getMinutes() +
+        1 +
+        "hrs"
+      }
+    </li>
+    <li><b>Status:</b>
+      ${ticket_status}
+    </li>
+  </ul>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Feedback:</b>
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    ${reply.message}
+  </p>
+  <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i>In order to update or respond to this issue please click the button below,</i>
+  </p>
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
+  </p>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
+    <b>Disclaimer</b>
+  </p>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    The information contained in this communication from the sender is confidential. It is intended solely for use by
+    the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any
+    disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
+    prohibited and may be unlawful.
+  </p>`,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const resData = data;
+        if (resData.status === "success") {
+          dispatch(
+            updateAlert({
+              message: "Response Has Been Sent.",
+              color: "bg-green-200",
+            })
+          );
+        } else if (resData.status === "fail") {
+          dispatch(
+            updateAlert({
+              message: "Email Failed To Send",
+              color: "bg-red-200",
+            })
+          );
+        }
+      });
   };
 
   //Component ======================================
@@ -349,7 +441,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
               </div>
               <h2 className="font-semibold text-xs justify-center dark:text-slate-400 text-slate-500 tracking-wide flex flex-col">
                 <span>Reply As</span>{" "}
-                <small className="text-xs dark:text-slate-500 text-slate-600">{user[0].name}</small>{" "}
+                <small className="text-xs dark:text-slate-500 text-slate-600">
+                  {user[0].name}
+                </small>{" "}
               </h2>
             </div>
             <button className="h-9 w-9 rounded-lg dark:hover:bg-slate-900 hover:bg-slate-400 flex items-center justify-center dark:text-slate-400 text-slate-500 transition-all outline-none focus:outline-none text-base font-bold">
