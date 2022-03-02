@@ -1,161 +1,190 @@
 import React from "react";
-import {
-  HiOutlineQuestionMarkCircle,
-  HiOutlineLightBulb,
-  HiOutlineChatAlt2,
-  HiOutlineCursorClick,
-} from "react-icons/hi";
-import { NavLink } from "react-router-dom";
-import WallImg from "./images/wall.svg";
-import HeroImg from "./images/Hero.png";
+import { Link } from "react-router-dom";
+import Cloud from "./Cloud";
+import HeroImg from "./images/Hero.jpg";
+import ShowcaseOne from "./images/showcase2.png";
+import ShowcaseTwo from "./images/showcase11.png";
 
 const Landing = () => {
-  //Component =========================
   return (
-    <div>
-      <section>
-        <div
-          style={{ backgroundImage: `url(${WallImg})` }}
-          className="w-full min-h-screen bg-no-repeate bg-center bg-cover relative pb-10 px-6"
-        >
-          <nav
-            aria-label="Main"
-            className="hidden relative z-10 w-full md:flex justify-between items-center py-10 2xl:py-20"
+    <div className="bg-slate-50 py-2">
+      {/**Navigation ========================== */}
+      <nav className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-slate-50 2xl:w-[75rem] border-b border-slate-300 m-auto">
+        <div className="w-full h-[4rem] py-2 flex justify-between items-center">
+          {/**Logo ==================== */}
+          <svg
+            className="text-[1.5rem] font-sans fill-transparent hidden lg:flex"
+            width="210"
+            height="50"
+            viewBox="0 0 200 50"
           >
-            <div className="w-1/6">
-              {/**Logo ==================== */}
-              <svg
-                className="stroke-slate-800 text-[2rem] font-sans fill-transparent hidden lg:flex"
-                width="250"
-                height="50"
-                viewBox="0 0 200 50"
+            <text x="0" y="35">
+              <tspan className="stroke-[2.5px] stroke-slate-700 fill-slate-700">
+                dnd
+              </tspan>
+              <tspan
+                className="stroke-[2px] fill-slate-500 stroke-slate-500"
+                x="41"
+                y="35"
               >
-                <text x="0" y="35">
-                  <tspan className="stroke-[3.5px] fill-slate-500">dnd</tspan>
-                  <tspan
-                    className="stroke-[2px] stroke-slate-500  fill-slate-500"
-                    x="53"
-                    y="35"
-                  >
-                    Help-Desk
-                  </tspan>
-                </text>
-              </svg>
-            </div>
-            <div className="w-5/6">
-              <div className="flex items-center justify-end">
-                <ul className="text-gray-800 lg:space-x-8 flex items-center leading-none font-semibold">
-                  <li>
-                    <NavLink
-                      to=""
-                      className="hover:text-blue-500 text-lg focus:text-blue-500"
-                    >
-                      Services
-                    </NavLink>
-                  </li>
-                  <li className="ml-4 hover:text-blue-500 ">
-                    <NavLink to="" className="focus:text-blue-500 text-lg">
-                      Demo
-                    </NavLink>
-                  </li>
-                  <li className="ml-4 hover:text-blue-500 focus:text-blue-500">
-                    <NavLink to="" className="focus:text-blue-500 text-lg">
-                      Support
-                    </NavLink>
-                  </li>
-                  <li className="ml-4 hover:text-blue-500 focus:text-blue-500">
-                    <NavLink to="" className="focus:text-blue-500 text-lg">
-                      About
-                    </NavLink>
-                  </li>
-                </ul>
-                <div className="pl-40">
-                  <button
-                    aria-label="live chat"
-                    className="focus:bg-slate-600 focus:ring-2 focus:ring-offset-2 focus:ring-slate-700 bg-slate-900 hover:bg-slate-800 text-white px-6 py-2 font-semibold rounded focus:outline-none"
-                  >
-                    <NavLink to="/logIn">Log-In</NavLink>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </nav>
-          <div className="pt-14 xl:pt-32 lg:flex items-center relative z-10 container mx-auto lg:space-x-4 space-y-4 lg:space-y-0">
-            <div className="w-full max-h-[35rem] lg:w-1/2 h-full lg:pr-10 xl:pr-4 p-2 rounded-xl backdrop-blur-lg shadow-sm overflow-hidden border-2 border-[#0f172a09]">
-              <img
-                tabLanding="0"
-                aria-label="people smiling"
-                className="mx-auto rounded-xl h-[35rem] object-cover object-center"
-                src={HeroImg}
-                alt="people smiling"
-              />
-            </div>
-            <div className="w-full lg:w-1/2 h-full">
-              <p
-                tabLanding="0"
-                className="text-slate-800 uppercase text-2xl mb-4"
-              >
-                Focus on what matters.
-              </p>
-              <h1
-                tabLanding="0"
-                className="text-slate-900 text-4xl lg:text-6xl font-black mb-8"
-              >
-                All in one support system
-              </h1>
-              <p tabLanding="0" className="text-gray-900 font-semibold mb-8">
-                Simplifies processing billions of activities into a simple API
-                for input and output, with performance that would take our team
-                months, if not years to learn and optimize.
-              </p>
-              <div className="bg-slate-900 lg:mt-16 py-4 px-4 flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center shadow-lg rounded-lg">
-                <div className="sm:flex w-[80%] justify-between px-2 items-center py-2">
-                  <div className="flex items-center space-x-1">
-                    <HiOutlineQuestionMarkCircle className="text-blue-600 text-xl font-bold" />
-                    <p className="text-slate-300 text-base">How it works</p>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <HiOutlineLightBulb className="text-blue-600 text-xl font-bold" />
-                    <p className="text-slate-300 text-base">Learn</p>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <HiOutlineChatAlt2 className="text-blue-600 text-xl font-bold" />
-                    <p className="text-slate-300 text-base">Live Chat</p>
-                  </div>
-                </div>
-                <button
-                  aria-label="search"
-                  className="focus:bg-blue-700 focus:ring-blue-700 focus:ring-2 focus:ring-offset-2 text-white bg-blue-600 hover:bg-blue-700 mt-4 sm:mt-0 p-3 lg:-ml-8 rounded w-full sm:w-auto relative"
-                >
-                  <HiOutlineCursorClick classsName="text-slate-200 text-xl" />
-                </button>
-              </div>
+                Help-Desk
+              </tspan>
+            </text>
+          </svg>
+
+          {/**Menu Options ========================= */}
+          <div className="flex space-x-4">
+            <Link
+              to=""
+              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+            >
+              Solutions
+            </Link>
+            <Link
+              to=""
+              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+            >
+              Pricing
+            </Link>
+            <Link
+              to=""
+              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+            >
+              Partners
+            </Link>
+            <Link
+              to=""
+              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+            >
+              Company
+            </Link>
+          </div>
+
+          {/**Logiin button ================== */}
+          <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
+            Log-In
+          </button>
+        </div>
+      </nav>
+
+      {/** Hero Section ========================= */}
+      <section className="w-full bg-gradient-to-b from-slate-300 to-slate-50 p-6">
+        <div
+          style={{ backgroundImage: `url(${HeroImg})` }}
+          className="w-[90%] md:w-full container 2xl:w-[75rem]  m-auto h-[30rem] rounded-xl bg-slate-900 mt-[-15rem] bg-no-repeat bg-center bg-cover overflow-hidden"
+        >
+          <div className="w-full h-full bg-[#0e0c4ebe] p-10 px-36 flex flex-col justify-center items-center gap-4">
+            <h1 className="text-[4rem] leading-[4rem] text-slate-100 font-bold text-center">
+              <span className="">Take control of your</span>
+              <br />
+              <span className="text-slate-300">customer support</span>
+            </h1>
+            <p className="text-center text-slate-100 text-base font-semibold font-sans">
+              Customer service shouldn't just be a department, it should be the
+              entire company. dndHelp-Desk makes customer service better. With
+              our powerful simple to comprehend software, we make sure you focus
+              only on what matters with a short learning curve.
+            </p>
+            <div className="h-12 w-full flex justify-center gap-6">
+              <button className="bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-300">
+                Get started
+              </button>
+              <button className="bg-[#1d4fd8c7] h-10 w-[8rem] rounded-md text-slate-300 font-medium tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
+                Live demo
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      <style>
-        {`
-            /* Top menu */
-            .top-100 {
-                animation: slideDown 0.5s ease-in-out;
-            }
-            @keyframes slideDown {
-                0% {
-                    top: -50%;
-                }
-                100% {
-                    top: 0;
-                }
-            }
-            * {
-                outline: none !important;
-                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-                -webkit-tap-highlight-color: transparent;
-            }`}
-      </style>
+      {/**Cloud =================== */}
+      <Cloud />
+
+      {/**First Section ================================ */}
+      <section className="w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] grid grid-cols-2 gap-4 py-4">
+        <div className="col-span-1 flex flex-col justify-center p-4">
+          <div className="border-b border-slate-300 space-y-4 py-2">
+            <h2 className="text-slate-800 text-2xl font-bold tracking-tightest">
+              Stay on top of your customers
+            </h2>
+            <p className="text-slate-600">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem
+              assumenda est voluptates eligendi? Minus, dolore quo nesciunt
+              rerum dolor aspernatur officiis, veritatis repellat voluptatum
+              velit pariatur ullam facilis sapiente quidem!
+            </p>
+            <button className="bg-slate-800 text-base h-10 w-[8rem] rounded-md text-slate-300 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-700 hover:bg-slate-900">
+              Get started
+            </button>
+          </div>
+          <p className="text-slate-500 text-sm mt-4">
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem
+            assumenda est voluptates eligendi? Minus"
+          </p>
+          <div className="w-full flex items-center space-x-2">
+            <div className="h-10 w-10 mt-2 rounded-full bg-slate-800 text-slate-400 flex justify-center items-center"></div>
+            <p className="font-semibold text-sm text-slate-800">
+              Matt Johns, Digital Markket Manager
+            </p>
+          </div>
+        </div>
+        <div className="col-span-1 h-[30rem] flex items-center rounded-tr-md rounded-br-xl overflow-hidden">
+          {" "}
+          <img
+            src={ShowcaseOne}
+            alt=""
+            className="object-center object-cover shadow-xl"
+          />
+        </div>
+      </section>
+
+      {/**Second Section ================================ */}
+      <section className="w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] grid grid-cols-2 gap-4 py-4 px-2 overflow-hidden">
+        <div className="col-span-1  flex items-center rounded-tr-md rounded-br-xl overflow-hidden py-8">
+          {" "}
+          <img
+            src={ShowcaseTwo}
+            alt=""
+            className="object-center object-fit rounded-tr-xl rounded-br-xl shadow-xl w-[90%]"
+          />
+        </div>
+        <div className="col-span-1 flex flex-col justify-center p-4">
+          <div className="space-y-4 py-2">
+            <h2 className="text-slate-800 text-2xl font-bold tracking-tightest">
+              Better understand your customers
+            </h2>
+            <p className="text-slate-600">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem
+              assumenda est voluptates eligendi? Minus, dolore quo nesciunt
+              rerum dolor aspernatur officiis, veritatis repellat voluptatum
+              velit pariatur ullam facilis sapiente quidem!
+            </p>
+            <button className="bg-slate-800 text-base h-10 w-[8rem] rounded-md text-slate-300 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-700 hover:bg-slate-900">
+              Get started
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/**Third Section ============================== */}
+      <section className="w-[90%] md:w-full container mt-4 mb-2 m-auto 2xl:w-[75rem] h-[30rem] bg-slate-900 p-6 rounded-xl">
+        <h2 className="text-slate-200 text-2xl font-bold font-sans tracking-tightest">
+          Support Inbox built for sufficency
+        </h2>
+        <p className="text-slate-400 text-base mt-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit quibusdam fuga enim accusamus quisquam eveniet atque, dignissimos rem labore, numquam architecto aspernatur non error? Assumenda non minima eius quibusdam necessitatibus.</p>
+        <div className="grid grid-cols-4 gap-4 mt-4">
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+        </div>
+      </section>
     </div>
   );
 };
+
 export default Landing;
