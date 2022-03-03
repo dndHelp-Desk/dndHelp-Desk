@@ -22,9 +22,11 @@ const TicketsComponent = () => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const [contactsPanel, setPanel] = useState(false);
   const dispatch = useDispatch();
+  const [searchAsssignee, setSearch] = useState("");
+  const user = useSelector(state => state.UserInfo.member_details)
 
   //Close Contacts Modal on Click outside ===========
-  const contactRef = useClickOutside(() => {
+  const assigneeRef = useClickOutside(() => {
     setPanel(false);
   });
 
@@ -50,7 +52,12 @@ const TicketsComponent = () => {
   //Assign Tickect To an Agent =================
   const assgn = (name) => {
     for (let i = 0; i < deleteArray.length; i++) {
-      assignAgent(deleteArray[i], name);
+      allTickets.length >= 1 &&
+        allTickets
+          .filter((ticket) => ticket.ticket_id === deleteArray[i])
+          .forEach((ticket) => {
+            assignAgent(ticket.id, name);
+          });
     }
     setDelete([]);
     dispatch(
@@ -64,17 +71,25 @@ const TicketsComponent = () => {
   //Loop through each contact / available members List ====
   const membersList =
     allMembers.length >= 1 &&
-    allMembers.map((contact) => {
+    allMembers.map((member) => {
       return (
         <button
-          key={contact.id}
+          key={member.id}
           onClick={() => {
-            assgn(contact.name);
+            assgn(member.name);
             setPanel(false);
           }}
-          className="dark:bg-slate-400 bg-slate-300 w-full h-8 text-sm font-semibold dark:text-slate-800 text-slate-600 rounded-lg capitalize flex items-center p-2 space-x-2"
+          className={`dark:bg-slate-400 bg-slate-300 w-full h-8 text-sm font-semibold dark:text-slate-800 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
+            member.name
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(searchAsssignee.toLowerCase().replace(/\s/g, "")) ===
+            true
+              ? ""
+              : "hidden"
+          }`}
         >
-          <BsFillPersonPlusFill /> <span>{contact.name}</span>
+          <BsFillPersonPlusFill /> <span>{member.name}</span>
         </button>
       );
     });
@@ -85,7 +100,7 @@ const TicketsComponent = () => {
       {/**Navbar or Control Bar  ====================== */}
       <nav className="h-[2.5rem] flex justify-between items-center w-full relative">
         {/**Search Bar ============================== */}
-        <div className="flex h-full gap-4">
+        <div className="flex h-full gap-4 relative">
           {/**Filter Btn ============================== */}
           <OffCanvasMenu
             filtersModal={filtersModal}
@@ -126,36 +141,37 @@ const TicketsComponent = () => {
               <BsFillPersonPlusFill />
             </abbr>
           </button>
+
+          {/**Agent List to assign ============= */}
+          {activeUser[0].access === "admin" && (
+            <div
+              ref={assigneeRef}
+              className={`h-[15rem] w-[12rem] bg-slate-600 shadow-2xl backdrop-blur-sm p-2 rounded-lg absolute left-32 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+                contactsPanel ? "" : "hidden"
+              }`}
+            >
+              <div className="flex sticky top-0 border-b border-slate-400 h-8 items-center justify-center ">
+                <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
+                <input
+                  className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
+                  type="search"
+                  placeholder="Search ..."
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+              {membersList}
+            </div>
+          )}
         </div>
 
         {/*** New Ticket ======================== */}
         <button
-          onClick={() => setModal(true)}
+          onClick={() => setModal(user[0].name !== "User Loader"?true:false)}
           className="bg-blue-700  h-10 px-6 rounded-lg flex justify-center items-center text-slate-300  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
         >
           + New Ticket
         </button>
       </nav>
-
-      {/**Agent List to assign ============= */}
-      {activeUser[0].access === "admin" && (
-        <div
-          ref={contactRef}
-          className={`h-[15rem] w-[12rem] bg-slate-700 shadow-2xl backdrop-blur-sm p-2 rounded-lg absolute left-32 top-8 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
-            contactsPanel ? "" : "hidden"
-          }`}
-        >
-          <div className="flex sticky top-0 border-b border-slate-400 h-8 items-center justify-center ">
-            <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
-            <input
-              className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
-              type="search"
-              placeholder="Search ..."
-            />
-          </div>
-          {membersList}
-        </div>
-      )}
 
       {/**Tickects /Not Expanded=========== */}
       <TicketsList deleteArray={deleteArray} setDelete={setDelete} />

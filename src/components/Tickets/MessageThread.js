@@ -197,38 +197,39 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   //Send Reply Function ============================
   const sendReply = (e) => {
     e.preventDefault();
-    addReply(reply.message, reply.message_position, reply.ticket_id);
-    setReply({ ...reply, message: "" });
-    //Send Email =============
-    fetch(sendMailAPI, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name: clientName,
-        email: clientEmail,
-        subject: reply.subject,
-        message: reply.message,
-        ticket_id: threadId,
-        brand: brand,
-        ticket_status: ticket_status,
-        date: date,
-      }),
-    });
+    if (user[0].name !== "User Loader") {
+      addReply(reply.message, reply.message_position, reply.ticket_id);
+      setReply({ ...reply, message: "" });
+      //Send Email =============
+      fetch(sendMailAPI, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name: clientName,
+          email: clientEmail,
+          subject: reply.subject,
+          message: reply.message,
+          ticket_id: threadId,
+          brand: brand,
+          ticket_status: ticket_status,
+          date: date,
+        }),
+      });
 
-    //Relpy Using Nodemailer ===================
-    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email: clientEmail,
-        subject: reply.subject,
-        ticket_id: threadId,
-        email_body: `<p
+      //Relpy Using Nodemailer ===================
+      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: clientEmail,
+          subject: reply.subject,
+          ticket_id: threadId,
+          email_body: `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
     <b> Hi ${clientName},</b>
   </p>
@@ -290,27 +291,28 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
     prohibited and may be unlawful.
   </p>`,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const resData = data;
-        if (resData.status === "success") {
-          dispatch(
-            updateAlert({
-              message: "Response Has Been Sent.",
-              color: "bg-green-200",
-            })
-          );
-        } else if (resData.status === "fail") {
-          dispatch(
-            updateAlert({
-              message: "Email Failed To Send",
-              color: "bg-red-200",
-            })
-          );
-        }
-      });
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const resData = data;
+          if (resData.status === "success") {
+            dispatch(
+              updateAlert({
+                message: "Response Has Been Sent.",
+                color: "bg-green-200",
+              })
+            );
+          } else if (resData.status === "fail") {
+            dispatch(
+              updateAlert({
+                message: "Email Failed To Send",
+                color: "bg-red-200",
+              })
+            );
+          }
+        });
+    }
   };
 
   //Component ======================================

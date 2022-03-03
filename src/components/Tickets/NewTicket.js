@@ -11,7 +11,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   });
   const contacts = useSelector((state) => state.Tickets.contacts);
   const settings = useSelector((state) => state.Tickets.settings);
-  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = settings.length >= 1 && settings[0].categories;
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const [recepient, setRecipient] = useState("");
@@ -32,7 +32,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     message: "",
     state: "",
     date: "",
-    ticket_id: "#0" + (filteredTickets.length + 1),
+    ticket_id:
+      "#0" +
+      (allTickets.filter((ticket) => ticket.message_position === 1).length + 1),
     agent_email: member_details.length !== undefined && member_details[0].email,
     complainant_name: 0,
     complainant_email: 0,
@@ -271,7 +273,12 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       setRecipient(e.target.value);
                       setValues({
                         ...inputValue,
-                        ticket_id: "#0" + (filteredTickets.length + 1),
+                        ticket_id:
+                          "#0" +
+                          (allTickets.filter(
+                            (ticket) => ticket.message_position === 1
+                          ).length +
+                            1),
                       });
                     }}
                   />
@@ -307,6 +314,12 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       setValues({
                         ...inputValue,
                         category: e.target.value,
+                        ticket_id:
+                          "#0" +
+                          (allTickets.filter(
+                            (ticket) => ticket.message_position === 1
+                          ).length +
+                            1),
                       })
                     }
                   >
