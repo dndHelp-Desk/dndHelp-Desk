@@ -131,7 +131,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
                   ticket.status === "Open"
                     ? "bg-red-600"
                     : ticket.status === "on hold"
-                    ? "bg-yellow-500"
+                    ? "bg-yellow-600"
                     : ticket.status === "closed"
                     ? "bg-blue-600"
                     : "bg-green-500"

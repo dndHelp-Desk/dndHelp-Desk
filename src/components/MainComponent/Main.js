@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Businnes from "./images/businnes.jpg";
 import {
   BsArrowRightShort,
@@ -13,11 +13,16 @@ import {
 import ToDo from "./ToDo";
 import Filters from "../Reports/Filters";
 import Calendar from "./Calendar";
+import { markAsSeen } from "./../Data_Fetching/TicketsnUserData";
+import { setThreadId } from "./../../store/TicketsSlice";
 
 const Main = () => {
   const location = useLocation();
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const dispatch = useDispatch();
+  const [isChatOpen, setChat] = useState(false);
+  const threadId = useSelector((state) => state.Tickets.threadId);
   const overDue =
     filteredTickets &&
     filteredTickets.filter(
@@ -29,15 +34,42 @@ const Main = () => {
   const overDueTickets =
     overDue.length >= 1 &&
     overDue.map((ticket) => {
+      /**Unread Meassages ================= */
+      let ticketReadStatus =
+        overDue.length >= 1 &&
+        overDue.filter(
+          (message) =>
+            message.ticket_id === ticket.ticket_id &&
+            message.readStatus !== "read" &&
+            message.from !== "agent"
+        );
+
+      /**Mark As read if thread is Active ========== */
+      threadId === ticket.ticket_id &&
+        ticketReadStatus.length >= 1 &&
+        ticketReadStatus.forEach((message) => {
+          markAsSeen(message.id, "read");
+        });
+      /**End ========== */
       return (
-        <div
-          key={ticket.id}
-          className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 flex cursor-pointer items-center justify-center relative uppercase text-lg dark:text-slate-300 text-slate-500 font-bold custom-shadow border border-red-500"
-        >
-          <abbr title={ticket.recipient_name}>
-            {ticket.recipient_name.charAt(0)}
-          </abbr>
-        </div>
+        <Link to="/app/tickets" key={ticket.id}>
+          <div
+            onClick={() => {
+              dispatch(setThreadId(ticket.ticket_id));
+              window.localStorage.setItem("threadId", JSON.stringify(threadId));
+              setChat(!isChatOpen && true);
+              ticketReadStatus.length >= 1 &&
+                ticketReadStatus.forEach((message) => {
+                  markAsSeen(message.id, "read");
+                });
+            }}
+            className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 flex cursor-pointer items-center justify-center relative uppercase text-lg dark:text-slate-300 text-slate-500 font-bold custom-shadow border border-red-500"
+          >
+            <abbr title={ticket.recipient_name}>
+              {ticket.recipient_name.charAt(0)}
+            </abbr>
+          </div>
+        </Link>
       );
     });
 

@@ -14,12 +14,12 @@ const initialState = {
   filters: {
     startDate: new Date(
       new Date().getFullYear(),
-      new Date().getMonth()-1,
+      new Date().getMonth() - 1,
       1
     ).toLocaleDateString(),
     endDate: new Date(
       new Date().getFullYear(),
-      new Date().getMonth()-1,
+      new Date().getMonth() - 1,
       30
     ).toLocaleDateString(),
     client: "",
@@ -57,12 +57,10 @@ export const TicketsSlice = createSlice({
       state.filters = action.payload;
     },
     updateFilteredTickets: (state, action) => {
-      state.filteredTickets = (action.payload).sort((a, b) => {
-        return (
-          new Date(a.due_date !== null && a.due_date).getDate() -
-          new Date(b.due_date !== null && b.due_date).getDate()
-        );
-      });
+      state.filteredTickets = action.payload.sort(
+        (a, b) =>
+          new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
+      );
     },
   },
 });

@@ -91,7 +91,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             }`}
           </div>
           <div
-            className={`w-[95%] 2xl:w-full pb-2 px-2 bg-transparent space-y-2  border-b dark:border-[#33415591] border-[#94a3b863] ${
+            className={`w-[95%] 2xl:w-full pb-2 px-2 bg-transparent space-y-2  border-b dark:border-[#33415591] border-slate-300 ${
               message.from === "agent" ? "order-first" : "order-last"
             }`}
           >
