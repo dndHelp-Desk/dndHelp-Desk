@@ -93,7 +93,7 @@ const TicketsComponent = () => {
           />
           <button
             onClick={() => setfiltersModal(filtersModal ? false : true)}
-            className="min-w-10 px-8 h-10 rounded-lg flex space-x-2 justify-between items-center dark:bg-slate-900 bg-slate-100 focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
+            className="min-w-10 px-8 h-10 rounded-lg flex space-x-2 justify-between items-center dark:bg-slate-900 bg-white focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
           >
             <BsSliders className="dark:text-slate-400 text-slate-500 font-bold" />
             <span className="hidden md:flex">Filters</span>
@@ -102,7 +102,7 @@ const TicketsComponent = () => {
           {/**Delete Ticket ================================= */}
           <button
             onClick={() => deleteSelected()}
-            className={`dark:bg-slate-900 bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-red-600  font-semibold ${
+            className={`dark:bg-slate-900 bg-white dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-red-600  font-semibold ${
               deleteArray.length >= 1 && activeUser[0].access === "admin"
                 ? "flex"
                 : "hidden"
@@ -116,7 +116,7 @@ const TicketsComponent = () => {
           {/**Assign Agent ================================= */}
           <button
             onClick={() => setPanel(true)}
-            className={`dark:bg-slate-900 bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-blue-600  font-semibold ${
+            className={`dark:bg-slate-900 bg-white dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-blue-600  font-semibold ${
               deleteArray.length >= 1 && activeUser[0].access === "admin"
                 ? "flex"
                 : "hidden"

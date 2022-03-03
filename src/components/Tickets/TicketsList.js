@@ -52,7 +52,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             ticket.ticket_id === threadId
               ? "border-[1px] dark:border-slate-600 border-slate-400"
               : ""
-          } bg-slate-300 p-2 space-x-2  flex ${
+          } bg-slate-200 p-2 space-x-2  flex ${
             (ticket.status && ticket.status.toLowerCase() === "resolved") ||
             (ticket.status && ticket.status.toLowerCase() === "closed")
               ? "dark:opacity-60 opacity-70"
@@ -110,7 +110,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
                   markAsSeen(message.id, "read");
                 });
             }}
-            className="col-span-5 flex flex-col justify-center h-full w-full px-1 py-1 cursor-pointer"
+            className="col-span-5 flex flex-col justify-center relative h-full w-full px-1 py-1 cursor-pointer showTicketsDetails"
           >
             <h2 className="dark:text-slate-400 text-slate-600 text-base font-bold font-sans capitalize whitespace-nowrap">
               {ticket.category} : {ticket.ticket_id}
@@ -121,6 +121,29 @@ const TicketsList = ({ setDelete, deleteArray }) => {
                 Due on {new Date(ticket.due_date).toDateString()}
               </span>
             </h5>
+
+            {/**Ticket Details Tootip ==================== */}
+            <div
+              className={`absolute hidden hover:flex top-[5.3rem] z-[999] h-[10rem] w-[20rem] shadow-xl rounded dark:bg-slate-700 bg-slate-400  after:content-[''] after:absolute after:top-[-0.5rem] after:left-[1.5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-slate-400 after:border-l-transparent p-4`}
+            >
+              <div
+                className={`p-1 w-fit px-2 rounded-md text-slate-100 text-xs capitalize ${
+                  ticket.status === "Open"
+                    ? "bg-red-600"
+                    : ticket.status === "on hold"
+                    ? "bg-yellow-500"
+                    : ticket.status === "closed"
+                    ? "bg-blue-600"
+                    : "bg-green-500"
+                }`}
+              >
+                {ticket.status}
+              </div>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">Assignee : {ticket.agent_name}</p>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">To : {ticket.recipient_name}</p>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">Email : {ticket.recipient_email}</p>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">Open Date : {ticket.date}</p>
+            </div>
           </div>
           <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">
             <div className="w-[10rem] flex items-baseline justify-end">
@@ -193,13 +216,13 @@ const TicketsList = ({ setDelete, deleteArray }) => {
   return (
     <div className="relative">
       {/**Tickets ========================================== */}
-      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-slate-100 rounded-xl p-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
+      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-white rounded-xl p-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
         <div
           className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
           }`}
         >
-          <div className="w-full dark:bg-slate-900 bg-slate-100 rounded-lg z-0 mt-3 h-12 flex justify-between space-x-2">
+          <div className="w-full dark:bg-slate-900 bg-white rounded-lg z-0 mt-3 h-12 flex justify-between space-x-2">
             <Filters />
           </div>
           <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-2 scroll-snap">

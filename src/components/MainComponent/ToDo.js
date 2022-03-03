@@ -58,7 +58,7 @@ const ToDo = () => {
       return (
         <div
           key={task.id}
-          className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg dark:bg-slate-800 bg-slate-100 border dark:border-0 border-slate-300 p-2 snap_childTwo"
+          className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg dark:bg-slate-800 bg-white border dark:border-0 border-slate-300 p-2 snap_childTwo"
         >
           <button
             onClick={() => markToDo(task.id, task.status ? false : true)}
@@ -97,7 +97,7 @@ const ToDo = () => {
   //Component =============================================
   return (
     <div className="col-span-1 h-[26rem] rounded-xl flex flex-col justify-between space-y-2 relative">
-      <form className="h-[15%] p-2 dark:bg-slate-900  bg-slate-100 w-full rounded-xl gap-1 items-center place-content-center">
+      <form className="h-[15%] p-2 dark:bg-slate-900  bg-white w-full rounded-xl gap-1 items-center place-content-center">
         <div className="h-full flex items-center w-full col-span-8 dark:bg-slate-800 bg-slate-200 rounded-lg border dark:border-0 border-slate-300 overflow-hidden">
           <input
             type="text"
@@ -124,7 +124,7 @@ const ToDo = () => {
         </div>
       </form>
       {/**Task List ===================== */}
-      <div className="h-[83%] max-h-[22rem] w-full dark:bg-slate-900 bg-slate-100 rounded-xl p-4 overflow-hidden">
+      <div className="h-[83%] max-h-[22rem] w-full dark:bg-slate-900 bg-white rounded-xl p-4 overflow-hidden">
         <div className="h-full w-full p-1 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap flex flex-col space-y-2">
           {todoList.length >= 1 && tasks}
           {todoList.length <= 0 && (

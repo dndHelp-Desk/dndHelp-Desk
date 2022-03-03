@@ -125,7 +125,7 @@ const TopCards = () => {
     return (
       <div
         key={data.id}
-        className="dark:bg-slate-900 bg-slate-100 h-[10rem]  cols-span-1 rounded-xl
+        className="dark:bg-slate-900 bg-white h-[10rem]  cols-span-1 rounded-xl
 		 p-4 grid-rows-3"
       >
         <div className="flex justify-between items-center">

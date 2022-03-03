@@ -318,10 +318,10 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     <div
       className={`h-[35rem] lg:h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
+      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-white`}
     >
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-300 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
-        <div className="h-14 dark:bg-slate-800 bg-slate-300 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-700 border-slate-400">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
+        <div className="h-14 dark:bg-slate-800 bg-slate-200 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-700 border-slate-400">
           {/**Back To Main List  On Small Screens====================== */}
           <div
             onClick={() => setChat(false)}
@@ -397,7 +397,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
               <small className="text-xs text-slate-500">Click Any Ticket</small>
             )}
           </h2>
-          <div className="flex space-x-2 dark:bg-slate-800 bg-slate-300">
+          <div className="flex space-x-2 dark:bg-slate-800 bg-slate-200">
             <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-600 tracking-wide flex flex-col capitalize  whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span>
                 {threadMessage.length >= 1 &&
@@ -433,7 +433,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[45%] lg:h-[40%] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
-        <div className="h-full w-full p-2 rounded-lg dark:bg-slate-800 bg-slate-300 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-300 after:border-l-transparent overflow-hidden grid grid-rows-4">
+        <div className="h-full w-full p-2 rounded-lg dark:bg-slate-800 bg-slate-200 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-200 after:border-l-transparent overflow-hidden grid grid-rows-4">
           <div className="w-full row-span-1 h-full flex justify-between">
             <div className="flex space-x-2 items-center">
               <div className="w-9 h-9 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
@@ -486,7 +486,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 });
               }}
               value={reply.message}
-              className="h-full w-full dark:bg-slate-800 bg-slate-300 rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 border-0 focus:outline-none outline-none focus:border-0 transition-all dark:focus:ring-slate-700 focus:ring-slate-400 placeholder:text-slate-500 placeholder:text-sm"
+              className="h-full w-full dark:bg-slate-800 bg-slate-200 rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 border-0 focus:outline-none outline-none focus:border-0 transition-all dark:focus:ring-slate-700 focus:ring-slate-400 placeholder:text-slate-500 placeholder:text-sm"
             ></textarea>
             <button
               type="submit"

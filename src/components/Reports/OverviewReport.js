@@ -30,7 +30,7 @@ const OverviewReport = () => {
 
   //Component =============================
   return (
-    <div className="col-span-3 min-h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden">
+    <div className="col-span-3 min-h-[20rem] dark:bg-slate-900 bg-white rounded-xl overflow-hidden">
       <div className="h-full w-full p-4 pt-6 grid grid-rows-6 overflow-hidden">
         <div className="row-span-2">
           <h2 className="text-base dark:text-slate-400 text-slate-500 font-semibold tracking-normal">

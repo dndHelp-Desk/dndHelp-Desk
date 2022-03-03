@@ -54,26 +54,26 @@ const MainComponent = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="dark:bg-slate-400 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col items-center">
+      <div className="dark:bg-slate-700 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col items-center">
         {/**Data Fetching Components */}
         <TicketsnUserData />
         {/**NavBar ============== */}
         <div className="flex justify-center h-[4rem] w-full bg-transparent mt-4">
           {/**Alert */}
           <Alert />
-          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative z-[999]">
+          <nav className="dark:bg-slate-900 bg-white backdrop-blur-lg p-2 flex rounded-xl justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative z-[999]">
             {/**Logo ==================== */}
             <svg
-              className="dark:stroke-slate-400 stroke-slate-700 text-[1.5rem] font-sans fill-transparent hidden lg:flex"
+              className="text-[1.5rem] font-sans fill-transparent hidden lg:flex"
               width="210"
               height="50"
               viewBox="0 0 200 50"
             >
               <text x="0" y="35">
-                <tspan className="stroke-[1.5px] fill-slate-500">dnd</tspan>
+                <tspan className="stroke-[2.5px] dark:stroke-slate-500 dark:fill-slate-500 stroke-slate-600 fill-slate-600">dnd</tspan>
                 <tspan
-                  className="stroke-[.6px] dark:fill-slate-900 fill-slate-400"
-                  x="43"
+                  className="stroke-[.8px] dark:fill-slate-900 stroke-slate-500 fill-slate-500"
+                  x="41"
                   y="35"
                 >
                   Help-Desk
@@ -130,7 +130,7 @@ const MainComponent = () => {
             {/**Small Screens Menu ====================== */}
             <div
               ref={menuModalRef}
-              className={`flex lg:hidden fixed top-14 left-0 w-[8rem] z-[999] shadow-2xl rounded-lg backdrop-blur-lg bg-slate-100 dark:bg-slate-900 border border-slate-400 ${
+              className={`flex lg:hidden fixed top-14 left-0 w-[8rem] z-[999] shadow-2xl rounded-lg backdrop-blur-lg bg-white dark:bg-slate-900 border border-slate-400 ${
                 showMenu ? "h-[10rem]" : "h-0 opacity-0"
               } transition-scale duration-300 flex flex-col dark:text-gray-400 text-slate-600 space-y-2 p-4 justify-center overflow-hidden`}
             >

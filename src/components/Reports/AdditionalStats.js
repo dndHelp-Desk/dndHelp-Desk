@@ -46,7 +46,7 @@ const AdditionalStats = () => {
   //Component ==========================================
   return (
     <div className="col-span-3 lg:col-span-2 rounded-xl grid grid-rows-2 gap-4">
-      <div className="row-span-1 dark:bg-slate-900 bg-slate-100 rounded-xl space-y-2 p-4 pt-6">
+      <div className="row-span-1 dark:bg-slate-900 bg-white rounded-xl space-y-2 p-4 pt-6">
         <h2 className="text-base dark:text-slate-400 text-slate-500 font-sans font-semibold tracking-normal">
           Top 3 Categories
         </h2>
@@ -54,12 +54,12 @@ const AdditionalStats = () => {
           {category}
         </div>
       </div>
-      <div className="row-span-1 dark:bg-slate-900 bg-slate-100 rounded-xl space-y-2 p-4 pt-6 overflow-hidden">
+      <div className="row-span-1 dark:bg-slate-900 bg-white rounded-xl space-y-2 p-4 pt-6 overflow-hidden">
         <h2 className="text-base dark:text-slate-400 text-slate-500 font-sans font-semibold tracking-normal">
           Customer Satisfaction
         </h2>
         <div className="grid grid-cols-3 gap-2 xl:gap-4 w-full xl:px-2 2xl:px-4 overflow-hidden">
-          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
+          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-100 flex flex-col items-center justify-center p-2">
             <BsEmojiSmileFill className="text-3xl text-green-500" />
             <h5 className="dark:text-slate-400 text-slate-500 text-base font-sans font-bold">
               {" "}
@@ -70,7 +70,7 @@ const AdditionalStats = () => {
               Positive
             </h6>
           </div>
-          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
+          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-100 flex flex-col items-center justify-center p-2">
             <BsEmojiNeutralFill className="text-3xl text-yellow-500" />
             <h5 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans">
               {" "}
@@ -81,7 +81,7 @@ const AdditionalStats = () => {
               Neutral
             </h6>
           </div>
-          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-200 flex flex-col items-center justify-center p-2">
+          <div className="h-32 space-y-2 col-span-1 rounded-xl dark:bg-slate-800 bg-slate-100 flex flex-col items-center justify-center p-2">
             <BsEmojiFrownFill className="text-3xl text-red-500" />
             <h5 className="dark:text-slate-400 text-slate-500 text-base font-bold font-sans">
               {" "}

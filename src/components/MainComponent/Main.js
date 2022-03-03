@@ -46,10 +46,10 @@ const Main = () => {
     <div
       className={`${
         location.pathname === "/app" ? "grid" : "hidden"
-      } dark:bg-slate-400 w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
+      } dark:bg-transparent bg-transparent w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
-        <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2">
+        <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-white rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2">
           <div className="col-span-1 md:col-span-2 lg:col-span-1 rounded-xl max-h-[13rem] w-full 2xl:flex overflow-hidden">
             <Calendar />
           </div>
@@ -86,7 +86,7 @@ const Main = () => {
             )}
             <div className="flex justify-center items-end space-x-1">
               {overDueTickets}
-              {overDue.length <= 0 && (
+              {overDue.length <= 1 && (
                 <>
                   <div className="h-10 w-10 border border-slate-600 rounded-xl dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
                   <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
@@ -126,7 +126,7 @@ const Main = () => {
         {/**Bottom Half ================================ */}
         <div className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <ToDo />
-          <div className="col-span-1 h-[26rem] grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
+          <div className="col-span-1 h-[26rem] grid grid-rows-5 dark:bg-slate-900 bg-white rounded-xl px-2">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4">
               <h2 className="dark:text-slate-400 text-slate-600 text-2xl font-bold capitalize">
                 Monthly Summary
@@ -219,7 +219,7 @@ const Main = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-1 h-[26rem] hidden dark:bg-slate-900 bg-slate-100 rounded-xl lg:grid grid-rows-2 overflow-hidden place-items-center">
+          <div className="col-span-1 h-[26rem] hidden dark:bg-slate-900 bg-white rounded-xl lg:grid grid-rows-2 overflow-hidden place-items-center">
             <img
               className="h-full w-full object-cover object-center rounded-t-xl"
               src={Businnes}

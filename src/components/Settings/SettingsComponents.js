@@ -15,7 +15,7 @@ const SettingsComponents = () => {
     <div className=" mt-4 min-h-[40rem] container w-[90%] md:w-full 2xl:w-[72rem] overflow-hidden grid grid-cols-9 lg:grid-cols-11 gap-4">
       {/** Sidenav ====================================== */}
       <div className="col-span-9 lg:col-span-2 overflow-hidden">
-        <div className="dark:bg-slate-900 bg-slate-100 rounded-lg p-4 py-10">
+        <div className="dark:bg-slate-900 bg-white rounded-lg p-4 py-10">
           <h2 className="dark:text-slate-400 text-slate-600 text-xl font-bold border-b dark:border-slate-600 border-slate-400">
             Settings
           </h2>
@@ -61,7 +61,7 @@ const SettingsComponents = () => {
       </div>
 
       {/**Main Components ============================== */}
-      <div className="col-span-9  dark:bg-slate-900 bg-slate-100 rounded-lg p-4">
+      <div className="col-span-9  dark:bg-slate-900 bg-white rounded-lg p-4">
         <Outlet />
       </div>
     </div>
