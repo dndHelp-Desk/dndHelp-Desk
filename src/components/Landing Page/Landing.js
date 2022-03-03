@@ -4,66 +4,67 @@ import Cloud from "./Cloud";
 import HeroImg from "./images/Hero.jpg";
 import ShowcaseOne from "./images/showcase2.png";
 import ShowcaseTwo from "./images/showcase11.png";
+import Footer from "./Footer";
 
 const Landing = () => {
   return (
-    <div className="bg-slate-50 py-2">
+    <div className="bg-slate-50 pb-2">
       {/**Navigation ========================== */}
-      <nav className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-slate-50 2xl:w-[75rem] border-b border-slate-300 m-auto">
-        <div className="w-full h-[4rem] py-2 flex justify-between items-center">
-          {/**Logo ==================== */}
-          <svg
-            className="text-[1.5rem] font-sans fill-transparent hidden lg:flex"
-            width="210"
-            height="50"
-            viewBox="0 0 200 50"
-          >
-            <text x="0" y="35">
-              <tspan className="stroke-[2.5px] stroke-slate-700 fill-slate-700">
-                dnd
-              </tspan>
-              <tspan
-                className="stroke-[2px] fill-slate-500 stroke-slate-500"
-                x="41"
-                y="35"
+      <nav className="w-full bg-slate-200">
+        <div className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-transparent 2xl:w-[75rem] m-auto">
+          <div className="w-full h-[4rem] py-2 flex justify-between items-center border-b border-slate-400">
+            {/**Logo ==================== */}
+            <svg
+              className="text-[1.5rem] font-sans fill-transparent hidden lg:flex"
+              width="210"
+              height="50"
+              viewBox="0 0 200 50"
+            >
+              <text x="0" y="35">
+                <tspan className="stroke-[2.5px] stroke-slate-700 fill-slate-700">
+                  dnd
+                </tspan>
+                <tspan
+                  className="stroke-[2px] fill-slate-500 stroke-slate-500"
+                  x="41"
+                  y="35"
+                >
+                  Help-Desk
+                </tspan>
+              </text>
+            </svg>
+            {/**Menu Options ========================= */}
+            <div className="flex space-x-4">
+              <Link
+                to=""
+                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
               >
-                Help-Desk
-              </tspan>
-            </text>
-          </svg>
-
-          {/**Menu Options ========================= */}
-          <div className="flex space-x-4">
-            <Link
-              to=""
-              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
-            >
-              Solutions
-            </Link>
-            <Link
-              to=""
-              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
-            >
-              Pricing
-            </Link>
-            <Link
-              to=""
-              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
-            >
-              Partners
-            </Link>
-            <Link
-              to=""
-              className="text-slate-500 font-semibold text-base hover:text-blue-600 "
-            >
-              Company
-            </Link>
+                Solutions
+              </Link>
+              <Link
+                to=""
+                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+              >
+                Pricing
+              </Link>
+              <Link
+                to=""
+                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+              >
+                Partners
+              </Link>
+              <Link
+                to=""
+                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+              >
+                Company
+              </Link>
+            </div>
+            {/**Logiin button ================== */}
+            <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
+              Log-In
+            </button>
           </div>
-
-          {/**Logiin button ================== */}
-          <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
-            Log-In
-          </button>
         </div>
       </nav>
 
@@ -167,22 +168,23 @@ const Landing = () => {
       </section>
 
       {/**Third Section ============================== */}
-      <section className="w-[90%] md:w-full container mt-4 mb-2 m-auto 2xl:w-[75rem] h-[30rem] bg-slate-900 p-6 rounded-xl">
-        <h2 className="text-slate-200 text-2xl font-bold font-sans tracking-tightest">
+      <section className="w-[90%] md:w-full container mt-4 mb-2 m-auto 2xl:w-[75rem] h-[35rem] bg-slate-300 p-6 rounded-xl flex flex-col justify-center">
+        <h2 className="text-slate-700 text-2xl font-bold font-sans tracking-tightest">
           Support Inbox built for sufficency
         </h2>
-        <p className="text-slate-400 text-base mt-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit quibusdam fuga enim accusamus quisquam eveniet atque, dignissimos rem labore, numquam architecto aspernatur non error? Assumenda non minima eius quibusdam necessitatibus.</p>
+        <p className="text-slate-500 text-base mt-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit quibusdam fuga enim accusamus quisquam eveniet atque, dignissimos rem labore, numquam architecto aspernatur non error? Assumenda non minima eius quibusdam necessitatibus.</p>
         <div className="grid grid-cols-4 gap-4 mt-4">
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
-          <div className="bg-slate-800 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
+          <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };
