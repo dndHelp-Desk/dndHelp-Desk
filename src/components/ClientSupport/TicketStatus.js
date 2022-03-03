@@ -77,7 +77,7 @@ const TicketStatus = () => {
             type="submit"
             className="h-10 px-3 md:px-6 flex items-center justify-center space-x-2 rounded-md bg-blue-700 text-slate-300 font-semibold uppercase text-sm md:w-[8rem] outline-none focus:outline-none focus:ring focus:border-400 transition-all duration-300 hover:bg-blue-800"
           >
-            <BsSearch className="text-lg font-bold"/><span class="hidden sm:inline">join</span> 
+            <BsSearch className="text-lg font-bold"/><span className="hidden sm:inline">join</span> 
           </button>
         </form>
         <Chat />
