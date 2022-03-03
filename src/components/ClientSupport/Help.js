@@ -14,12 +14,12 @@ const Help = () => {
       ref={closeChatRef}
       className={`${
         chatStatus === true
-          ? "h-[20rem] w-[15rem]"
+          ? "h-[25rem] w-[20rem]"
           : "cursor-pointer hover:bg-slate-800 h-14 w-20"
       } transition-all hidden md:flex bg-slate-900 rounded-xl fixed left-6 bottom-6 justify-center items-center`}
     >
       <BsFillChatSquareTextFill
-        className={`text-2xl text-slate-300 animate-pulse ${
+        className={`text-2xl text-slate-300 ${
           chatStatus ? "hidden" : "flex"
         }`}
       />

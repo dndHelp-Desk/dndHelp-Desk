@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router";
+import Help from "./../ClientSupport/Help"
 
 const Landing = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
@@ -23,7 +24,7 @@ const Landing = () => {
 
   //Component =====================
   return (
-    <div className="bg-slate-50 pb-2">
+    <div className="bg-slate-50 pb-2 relative">
       {/**Navigation ========================== */}
       <nav className="w-full bg-slate-200">
         <div className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-transparent 2xl:w-[75rem] m-auto">
@@ -219,6 +220,7 @@ const Landing = () => {
         </div>
       </section>
       <Footer />
+      <Help/>
     </div>
   );
 };

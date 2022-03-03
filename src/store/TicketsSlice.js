@@ -60,7 +60,7 @@ export const TicketsSlice = createSlice({
       state.filteredTickets = action.payload.sort(
         (a, b) =>
           new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
-      );
+      )
     },
   },
 });

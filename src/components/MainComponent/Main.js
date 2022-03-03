@@ -18,7 +18,6 @@ import { setThreadId } from "./../../store/TicketsSlice";
 
 const Main = () => {
   const location = useLocation();
-  let allTickets = useSelector((state) => state.Tickets.allTickets);
   let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const dispatch = useDispatch();
   const [isChatOpen, setChat] = useState(false);
@@ -180,7 +179,7 @@ const Main = () => {
                 </div>
                 <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
                   {
-                    allTickets.filter(
+                    filteredTickets.filter(
                       (data) =>
                         data.message_position === 1 &&
                         data.status &&
@@ -200,7 +199,7 @@ const Main = () => {
                 </div>
                 <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
                   {
-                    allTickets.filter(
+                    filteredTickets.filter(
                       (data) =>
                         data.message_position === 1 &&
                         data.status &&
@@ -220,7 +219,7 @@ const Main = () => {
                 </div>
                 <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
                   {
-                    allTickets.filter(
+                    filteredTickets.filter(
                       (data) =>
                         data.message_position === 1 &&
                         data.status &&
@@ -240,7 +239,7 @@ const Main = () => {
                 </div>
                 <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
                   {
-                    allTickets.filter(
+                    filteredTickets.filter(
                       (data) =>
                         data.message_position === 1 &&
                         data.status &&

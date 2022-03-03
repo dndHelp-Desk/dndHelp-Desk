@@ -13,7 +13,6 @@ const TicketsList = ({ setDelete, deleteArray }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
-  const user = useSelector((state) => state.UserInfo.member_details);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
 
@@ -42,13 +41,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
       return (
         <div
           key={ticket.id}
-          className={`w-full h-[5.7rem] relative ${
-            user[0].access === "agent" && ticket.agent_email === user[0].email
-              ? ""
-              : user[0].access === "admin"
-              ? ""
-              : "hidden"
-          } snap_childTwo rounded-md dark:bg-slate-800  ${
+          className={`w-full h-[5.7rem] relative snap_childTwo rounded-md dark:bg-slate-800  ${
             ticket.ticket_id === threadId
               ? "border-[1px] dark:border-slate-600 border-slate-400"
               : ""
