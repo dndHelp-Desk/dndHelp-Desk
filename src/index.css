@@ -47,10 +47,25 @@
     @apply text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800;
   }
 
-  .showTicketsDetails:hover div{
-    display:block !important;
+  .showTicketsDetails:hover div {
+    display: block !important;
   }
 
+  .delayDisplay {
+    opacity: 0;
+    transtion: opacity 0.3s;
+    animation: animated linear 0.3s forwards;
+    animation-delay:1s
+  }
+
+  @keyframes animated {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */

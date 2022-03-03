@@ -124,7 +124,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
 
             {/**Ticket Details Tootip ==================== */}
             <div
-              className={`absolute hidden hover:flex top-[5.3rem] z-[999] h-[10rem] w-[20rem] shadow-xl rounded dark:bg-slate-700 bg-slate-400  after:content-[''] after:absolute after:top-[-0.5rem] after:left-[1.5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-slate-400 after:border-l-transparent p-4`}
+              className={`absolute hidden hover:flex top-[5.3rem] z-[999] h-[10rem] w-[20rem] shadow-xl rounded dark:bg-slate-700 bg-slate-400  after:content-[''] after:absolute after:top-[-0.5rem] after:left-[1.5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-slate-400 after:border-l-transparent p-4 delayDisplay`}
             >
               <div
                 className={`p-1 w-fit px-2 rounded-md text-slate-100 text-xs capitalize ${
@@ -139,10 +139,18 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               >
                 {ticket.status}
               </div>
-              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">Assignee : {ticket.agent_name}</p>
-              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">To : {ticket.recipient_name}</p>
-              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">Email : {ticket.recipient_email}</p>
-              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">Open Date : {ticket.date}</p>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">
+                Assignee : {ticket.agent_name}
+              </p>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">
+                To : {ticket.recipient_name}
+              </p>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">
+                Email : {ticket.recipient_email}
+              </p>
+              <p className="dark:text-slate-400 text-slate-100 text-xs font-semibold mt-2">
+                Open Date : {ticket.date}
+              </p>
             </div>
           </div>
           <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">

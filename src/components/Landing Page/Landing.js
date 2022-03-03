@@ -7,12 +7,19 @@ import ShowcaseOne from "./images/showcase2.png";
 import ShowcaseTwo from "./images/showcase11.png";
 import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router";
 
 const Landing = () => {
+  const logged = useSelector((state) => state.UserInfo.authenticated);
   const [menu, setMenu] = useState(false);
   const smallMenuRef = useOnClickOutside(() => {
     setMenu(false);
   });
+
+  if (logged === true) {
+    return <Navigate to="/app" />;
+  }
 
   //Component =====================
   return (
