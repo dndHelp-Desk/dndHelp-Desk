@@ -71,7 +71,7 @@ const Landing = () => {
 
             <div className="flex space-x-2 items-center relative">
               {/**Logiin button ================== */}
-              <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
+              <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
                 <Link to="/logIn">Log-In</Link>
               </button>
               {/**Small Menu Options =================== */}

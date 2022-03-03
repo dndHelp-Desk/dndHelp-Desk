@@ -15,19 +15,6 @@ const Cloud =()=>{
       <div className="flex items-center justify-center mt-4">
         <div className="flex justify-center items-center gap-6 w-full">
           <div className="md:w-48 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
-            <svg
-              className="stroke-slate-600 text-[1.5rem] font-sans fill-transparent hidden sm:flex"
-              width="84"
-              height="24"
-              viewBox="0 0 98 24"
-            >
-              <text x="0" y="35">
-                <tspan className="stroke-[1.5px] fill-slate-600">dnd</tspan>
-                <tspan className="dark:stroke-[.6px]" x="43" y="35">
-                  HUB
-                </tspan>
-              </text>
-            </svg>
           </div>
           <div className="md:w-48 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
             <svg
