@@ -50,13 +50,13 @@ const TicketsComponent = () => {
   };
 
   //Assign Tickect To an Agent =================
-  const assgn = (name) => {
+  const assgn = (name,email) => {
     for (let i = 0; i < deleteArray.length; i++) {
       allTickets.length >= 1 &&
         allTickets
           .filter((ticket) => ticket.ticket_id === deleteArray[i])
           .forEach((ticket) => {
-            assignAgent(ticket.id, name);
+            assignAgent(ticket.id, name,email);
           });
     }
     setDelete([]);
@@ -76,7 +76,7 @@ const TicketsComponent = () => {
         <button
           key={member.id}
           onClick={() => {
-            assgn(member.name);
+            assgn(member.name,member.email);
             setPanel(false);
           }}
           className={`dark:bg-slate-400 bg-slate-300 w-full h-8 text-sm font-semibold dark:text-slate-800 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${

@@ -34,10 +34,11 @@ export const deleteTicket = (id) => {
 };
 
 // Assign Different Agent ================
-export const assignAgent = (id, agent) => {
+export const assignAgent = (id, agent,email) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {
     agent_name: agent,
+    agent_email:email
   });
 };
 
