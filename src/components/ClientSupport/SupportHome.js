@@ -33,7 +33,7 @@ const SupportHome = () => {
 
         {/**Login if You are a Member ====================== */}
         <div className="flex space-x-4 items-center">
-          <NavLink to="/">
+          <NavLink to="/logIn">
             <button
               className="bg-blue-700 px-6 p-2 rounded-md text-slate-300 font-bold text-sm tracking-wide uppercase outline-none
 					 focus:outline-none hover:opacity-90 transition-all duration-300 focus:ring focus:ring-blue-600"

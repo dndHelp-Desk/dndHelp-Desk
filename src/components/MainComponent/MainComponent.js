@@ -97,7 +97,7 @@ const MainComponent = () => {
                   location.pathname === "/app" ? "navlinks" : ""
                 }`}
               >
-                Home
+                Dashboard
               </NavLink>
               <NavLink
                 to="/app/tickets"
@@ -144,7 +144,7 @@ const MainComponent = () => {
                   className="inline-block
               "
                 />
-                <span>Home</span>
+                <span>Dashboard</span>
               </NavLink>
               <NavLink
                 to="/app/tickets"

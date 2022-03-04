@@ -9,6 +9,8 @@ import {
   BsArrowRepeat,
   BsEnvelopeOpen,
   BsFillHandThumbsUpFill,
+  BsEnvelope,
+  BsAlarm,
 } from "react-icons/bs";
 import ToDo from "./ToDo";
 import Filters from "../Reports/Filters";
@@ -154,6 +156,54 @@ const Main = () => {
           <Filters />
         </div>
 
+        {/**Others  ====================================== */}
+        <div className="h-28 w-full rounded-xl dark:bg-slate-900 bg-white overflow-hidden p-4 space-x-4 grid grid-cols-3">
+          {/**Agents Queue ====================== */}
+          <div className="w-full h-full col-span-1 flex justify-center py-4">
+            <div className="h-full w-full flex flex-col justify-between space-y-2">
+              <div className="space-x-2 items-center h-full w-full grid grid-cols-3 px-2">
+                <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
+                  <p className="text-slate-500 text-lg font-bold">2</p>
+                  <p className="text-slate-500 text-xs font-semibold">Online</p>
+                </div>
+                <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
+                  <p className="text-slate-500 text-lg font-bold">2</p>
+                  <p className="text-slate-500 text-xs font-semibold">Busy</p>
+                </div>
+                <div className="col-span-1 h-full pr-6 flex flex-col justify-center items-center">
+                  <p className="text-slate-500 text-lg font-bold">2</p>
+                  <p className="text-slate-500 text-xs font-semibold">
+                    Offline
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/**Messages Reply Count ====================== */}
+          <div className="col-span-1 flex justify-center items-center">
+            <div className="h-14 w-[90%] flex items-center space-x-4 dark:bg-slate-800 bg-slate-100 rounded-lg p-2">
+              <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-600 dark:text-slate-400 flex justify-center items-center text-2xl rounded-md">
+                <BsEnvelope />
+              </div>
+              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide uppercase text-xs font-sans w-full flex justify-between">
+                <span>Inbox Replies</span>
+                <span>0</span>
+              </h2>
+            </div>
+          </div>
+          {/**Reminders  Count ====================== */}
+          <div className="col-span-1 flex justify-center items-center">
+            <div className="h-14 w-[90%] flex items-center space-x-4 dark:bg-slate-800 bg-slate-100 rounded-lg p-2">
+              <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-600 dark:text-slate-400 flex justify-center items-center text-2xl rounded-md">
+                <BsAlarm />
+              </div>
+              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide uppercase text-xs font-sans w-full flex justify-between">
+                <span>Pending Reminders</span>
+                <span>0</span>
+              </h2>
+            </div>
+          </div>
+        </div>
         {/**Bottom Half ================================ */}
         <div className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <ToDo />

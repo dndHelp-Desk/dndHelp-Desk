@@ -9,7 +9,7 @@ import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import Help from "./../ClientSupport/Help"
+import Help from "./../ClientSupport/Help";
 
 const Landing = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
@@ -79,9 +79,11 @@ const Landing = () => {
 
             <div className="flex space-x-2 items-center relative">
               {/**Logiin button ================== */}
-              <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
-                <Link to="/logIn">Log-In</Link>
-              </button>
+              <Link to="/logIn">
+                <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
+                  Log-In
+                </button>
+              </Link>
               {/**Small Menu Options =================== */}
               <button
                 onClick={() => setMenu(true)}
@@ -220,7 +222,7 @@ const Landing = () => {
         </div>
       </section>
       <Footer />
-      <Help/>
+      <Help />
     </div>
   );
 };
