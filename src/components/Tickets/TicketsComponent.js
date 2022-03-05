@@ -20,6 +20,7 @@ const TicketsComponent = () => {
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const activeUser = useSelector((state) => state.UserInfo.member_details);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const alerts = useSelector((state) => state.NotificationsData.alert);
   const [contactsPanel, setPanel] = useState(false);
   const dispatch = useDispatch();
   const [searchAsssignee, setSearch] = useState("");
@@ -42,10 +43,10 @@ const TicketsComponent = () => {
     }
     setDelete([]);
     dispatch(
-      updateAlert({
+      updateAlert([...alerts,{
         message: "Tickets Deleted Successfully",
         color: "bg-green-200",
-      })
+      }])
     );
   };
 
@@ -61,10 +62,10 @@ const TicketsComponent = () => {
     }
     setDelete([]);
     dispatch(
-      updateAlert({
+      updateAlert([...alerts,{
         message: `Tickets Assigned to ${name} Successfully`,
         color: "bg-green-200",
-      })
+      }])
     );
   };
 

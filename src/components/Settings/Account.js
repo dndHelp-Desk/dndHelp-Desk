@@ -28,6 +28,7 @@ import { useNavigate } from "react-router-dom";
 const Account = () => {
   const navigate = useNavigate();
   const member_details = useSelector((state) => state.UserInfo.member_details);
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const dispatch = useDispatch();
   const [inputValues, setValues] = useState({
     name: "",
@@ -71,27 +72,33 @@ const Account = () => {
         updatePassword(user, inputValues.password)
           .then(() => {
             dispatch(
-              updateAlert({
+              updateAlert([...alerts,{
                 message: "Password Update Successfully",
                 color: "bg-green-200",
-              })
+              }])
             );
           })
           .catch((error) => {
             dispatch(
-              updateAlert({
-                message: error.message,
-                color: "bg-red-200",
-              })
+              updateAlert([
+                ...alerts,
+                {
+                  message: error.message,
+                  color: "bg-red-200",
+                },
+              ])
             );
           });
       })
       .catch((error) => {
         dispatch(
-          updateAlert({
-            message: error.message,
-            color: "bg-red-200",
-          })
+          updateAlert([
+            ...alerts,
+            {
+              message: error.message,
+              color: "bg-red-200",
+            },
+          ])
         );
       });
     setValues({ ...inputValues, password: "", old_password: "" });

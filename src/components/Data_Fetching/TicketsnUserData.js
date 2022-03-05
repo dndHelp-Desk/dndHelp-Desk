@@ -7,6 +7,7 @@ import {
   setContacts,
   loadSettings,
 } from "../../store/TicketsSlice";
+
 //Firestore ===================
 import {
   getFirestore,
@@ -65,6 +66,14 @@ export const updateUserStatus = (id, status) => {
   let docRef = doc(db, "members", id);
   updateDoc(docRef, {
     status: status,
+  });
+};
+
+// Update Agent profileUrl on FireBase Doc ================
+export const updateProfileUrl = (id, photoUrl) => {
+  let docRef = doc(db, "members", id);
+  updateDoc(docRef, {
+    photoUrl: photoUrl,
   });
 };
 

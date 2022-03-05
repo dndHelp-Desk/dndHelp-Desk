@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { newContact } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "./../../store/NotificationsSlice";
 import {
@@ -12,6 +12,7 @@ import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const NewContact = ({ contactModal, setModal }) => {
   const dispatch = useDispatch();
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const contactRef = useOnClickOutside(() => {
     setModal(false);
   });
@@ -32,18 +33,24 @@ const NewContact = ({ contactModal, setModal }) => {
       newContactValue.company
     );
     dispatch(
-      updateAlert({
-        message: "New Contact Has Been Added Successfully",
-        color: "bg-green-200",
-      })
+      updateAlert([
+        ...alerts,
+        {
+          message: "New Contact Has Been Added Successfully",
+          color: "bg-green-200",
+        },
+      ])
     );
-    setValue({
-      name: "",
-      email: "",
-      phoneNumber: "",
-      company: "",
-    });
-	setModal(false);
+    setValue([
+      ...alerts,
+      {
+        name: "",
+        email: "",
+        phoneNumber: "",
+        company: "",
+      },
+    ]);
+    setModal(false);
   };
 
   //Component ==========

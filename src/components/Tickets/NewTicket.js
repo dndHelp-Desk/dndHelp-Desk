@@ -14,6 +14,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = settings.length >= 1 && settings[0].categories;
   const member_details = useSelector((state) => state.UserInfo.member_details);
+  const alerts = useSelector((state) => state.NotificationsData.alert);
   const [recepient, setRecipient] = useState("");
   const [searchResults, setResults] = useState(false);
   const dispatch = useDispatch();
@@ -213,17 +214,17 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         const resData = data;
         if (resData.status === "success") {
           dispatch(
-            updateAlert({
+            updateAlert([...alerts,{
               message: "New Ticket Created Successfully",
               color: "bg-green-200",
-            })
+            }])
           );
         } else if (resData.status === "fail") {
           dispatch(
-            updateAlert({
+            updateAlert([...alerts,{
               message: "Email Failed To Send",
               color: "bg-red-200",
-            })
+            }])
           );
         }
       });

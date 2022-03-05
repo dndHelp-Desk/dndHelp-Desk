@@ -58,7 +58,7 @@ const Table = ({ setModal }) => {
                   : select(selectedArray.filter((data) => data !== contact.id))
               }
               className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none"
-              onclick="tableInteract(this)"
+              onClick="tableInteract(this)"
             />
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
@@ -140,7 +140,7 @@ const Table = ({ setModal }) => {
                     e.target.checked === true ? markAll() : select([])
                   }
                   className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none"
-                  onclick="checkAll(this)"
+                  onClick="checkAll(this)"
                 />
               </th>
               <th className="text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">

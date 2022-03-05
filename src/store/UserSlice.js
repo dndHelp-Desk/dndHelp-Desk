@@ -20,6 +20,7 @@ const initialState = {
       id: false,
       name: "User Loader",
       status: "offline",
+      photoUrl:""
     },
   ],
   authenticated: false,

@@ -16,6 +16,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   let threadMessage = useSelector((state) => state.Tickets.threadMessage);
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
 
@@ -299,17 +300,17 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           const resData = data;
           if (resData.status === "success") {
             dispatch(
-              updateAlert({
+              updateAlert([...alerts,{
                 message: "Response Has Been Sent.",
                 color: "bg-green-200",
-              })
+              }])
             );
           } else if (resData.status === "fail") {
             dispatch(
-              updateAlert({
+              updateAlert([...alerts,{
                 message: "Email Failed To Send",
                 color: "bg-red-200",
-              })
+              }])
             );
           }
         });

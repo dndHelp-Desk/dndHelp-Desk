@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  alert: { message: "", color: "bg-green-200" },
-  messages:[]
+  alerts: [],
+  messages: [],
 };
 
 const NotificationsSlice = createSlice({
@@ -10,8 +10,7 @@ const NotificationsSlice = createSlice({
   initialState,
   reducers:{
     updateAlert:(state,action)=>{
-      state.alert.message = action.payload.message
-      state.alert.color = action.payload.color
+      state.alerts = action.payload
     },
     setMessages:(state,action)=>{
       state.messages = [...state.messages,action.payload]

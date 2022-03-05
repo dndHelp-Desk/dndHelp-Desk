@@ -43,6 +43,7 @@ const LogIn = () => {
   });
 
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const user = auth.currentUser;
 
   //Log in User =====================
@@ -54,34 +55,34 @@ const LogIn = () => {
           sendEmailVerification(auth.currentUser)
             .then(() => {
               dispatch(
-                updateAlert({
+                updateAlert([...alerts,{
                   message: "Check Your Email To Verify The Account.",
                   color: "bg-green-200",
-                })
+                }])
               );
             })
             .catch((error) => {
               dispatch(
-                updateAlert({
+                updateAlert([...alerts,{
                   message: error.message,
                   color: "bg-red-200",
-                })
+                }])
               );
             });
         }
         dispatch(
-          updateAlert({
+          updateAlert([...alerts,{
             message: "Logged In Succesfully",
             color: "bg-green-200",
-          })
+          }])
         );
       })
       .catch((error) => {
         dispatch(
-          updateAlert({
+          updateAlert([...alerts,{
             message: error.message,
             color: "bg-red-200",
-          })
+          }])
         );
       });
   };
@@ -276,18 +277,18 @@ const LogIn = () => {
                     sendPasswordResetEmail(auth, inputValues.email)
                       .then(() => {
                         dispatch(
-                          updateAlert({
+                          updateAlert([...alerts,{
                             message: "Password reset email sent!",
                             color: "bg-green-200",
-                          })
+                          }])
                         );
                       })
                       .catch((error) => {
                         dispatch(
-                          updateAlert({
+                          updateAlert([...alerts,{
                             message: error.message,
                             color: "bg-red-200",
-                          })
+                          }])
                         );
                       });
                   }}
