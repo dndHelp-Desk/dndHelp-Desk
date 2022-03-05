@@ -191,8 +191,8 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     });
 
   //Link Google Appscript API for sendind Emails To new Tickect ================
-  const sendMailAPI =
-    "https://script.google.com/macros/s/AKfycbzkiHwJbA0lXnz40HZ7mls-oNMUJdMjMbvyNTMlx513iXSADnSkLlaYfL1TUV0WPBOS3w/exec?action=addData";
+  /*const sendMailAPI =
+    "https://script.google.com/macros/s/AKfycbzkiHwJbA0lXnz40HZ7mls-oNMUJdMjMbvyNTMlx513iXSADnSkLlaYfL1TUV0WPBOS3w/exec?action=addData";*/
 
   //Send Reply Function ============================
   const sendReply = (e) => {
@@ -200,8 +200,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     if (user[0].name !== "User Loader") {
       addReply(reply.message, reply.message_position, reply.ticket_id);
       setReply({ ...reply, message: "" });
-      //Send Email =============
-      fetch(sendMailAPI, {
+
+      //Send Email Using App Script  =============
+      /*fetch(sendMailAPI, {
         method: "POST",
         mode: "no-cors",
         headers: {
@@ -217,7 +218,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           ticket_status: ticket_status,
           date: date,
         }),
-      });
+      });*/
 
       //Relpy Using Nodemailer ===================
       fetch("https://dndhelp-desk-first.herokuapp.com/send", {

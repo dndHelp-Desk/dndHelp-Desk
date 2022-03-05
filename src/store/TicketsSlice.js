@@ -14,16 +14,16 @@ const initialState = {
   filters: {
     startDate: new Date(
       new Date().getFullYear(),
-      new Date().getMonth() - 1,
-      1
+      new Date().getMonth(),
+      0
     ).toLocaleDateString(),
     endDate: new Date(
       new Date().getFullYear(),
-      new Date().getMonth() - 1,
-      30
+      new Date().getMonth(),
+      31
     ).toLocaleDateString(),
-    client: "",
-    status: "",
+    brand: "",
+    ticket_id: "",
     agent: "",
     category: "",
   },

@@ -13,13 +13,14 @@ import {
   BsAlarm,
 } from "react-icons/bs";
 import ToDo from "./ToDo";
-import Filters from "../Reports/Filters";
 import Calendar from "./Calendar";
 import { markAsSeen } from "./../Data_Fetching/TicketsnUserData";
 import { setThreadId } from "./../../store/TicketsSlice";
 
 const Main = () => {
   const location = useLocation();
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const todoList = useSelector((state) => state.UserInfo.toDo);
   let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const dispatch = useDispatch();
   const [isChatOpen, setChat] = useState(false);
@@ -30,6 +31,14 @@ const Main = () => {
       (firstMsg) =>
         new Date(firstMsg.due_date).toISOString() <= new Date().toISOString()
     );
+
+    //New Replies Array ========================
+    const newReplies =
+      (allTickets.length >= 1 &&
+        allTickets.filter(
+          (ticket) => ticket.readStatus !== "read" && ticket.from !== "agent"
+        )) ||
+      [];
 
   //Overdue Tickets =====================
   const overDueTickets =
@@ -152,14 +161,11 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className="hidden">
-          <Filters />
-        </div>
 
         {/**Others  ====================================== */}
-        <div className="h-28 w-full rounded-xl dark:bg-slate-900 bg-white overflow-hidden p-4 space-x-4 grid grid-cols-3">
+        <div className="w-full rounded-xl dark:bg-slate-900 bg-white overflow-hidden p-4 space-x-4 grid grid-cols-1 lg:grid-cols-3">
           {/**Agents Queue ====================== */}
-          <div className="w-full h-full col-span-1 flex justify-center py-4">
+          <div className="w-full h-20 col-span-1 flex justify-center py-4">
             <div className="h-full w-full flex flex-col justify-between space-y-2">
               <div className="space-x-2 items-center h-full w-full grid grid-cols-3 px-2">
                 <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
@@ -180,26 +186,28 @@ const Main = () => {
             </div>
           </div>
           {/**Messages Reply Count ====================== */}
-          <div className="col-span-1 flex justify-center items-center">
+          <div className="col-span-1 h-20 flex justify-center items-center">
             <div className="h-14 w-[90%] flex items-center space-x-4 dark:bg-slate-800 bg-slate-100 rounded-lg p-2">
               <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-600 dark:text-slate-400 flex justify-center items-center text-2xl rounded-md">
                 <BsEnvelope />
               </div>
-              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide uppercase text-xs font-sans w-full flex justify-between">
+              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide uppercase text-xs font-sans w-full flex justify-between items-center">
                 <span>Inbox Replies</span>
-                <span>0</span>
+                <span className="text-lg">{newReplies.length}</span>
               </h2>
             </div>
           </div>
           {/**Reminders  Count ====================== */}
-          <div className="col-span-1 flex justify-center items-center">
+          <div className="col-span-1 h-20 flex justify-center items-center">
             <div className="h-14 w-[90%] flex items-center space-x-4 dark:bg-slate-800 bg-slate-100 rounded-lg p-2">
               <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-600 dark:text-slate-400 flex justify-center items-center text-2xl rounded-md">
                 <BsAlarm />
               </div>
-              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide uppercase text-xs font-sans w-full flex justify-between">
+              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide uppercase text-xs font-sans w-full flex justify-between items-center">
                 <span>Pending Reminders</span>
-                <span>0</span>
+                <span className="text-lg">
+                  {todoList.filter(todo => todo.status === false).length}
+                </span>
               </h2>
             </div>
           </div>

@@ -10,6 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../store/UserSlice";
+import { updateFilteredTickets } from "../../store/TicketsSlice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
@@ -22,6 +23,7 @@ const MainComponent = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const theme = useSelector((state) => state.UserInfo.theme);
+  const user = useSelector((state) => state.UserInfo.member_details);
   const [openNotifications, setOpenNotification] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -43,9 +45,42 @@ const MainComponent = () => {
     document.title =
       location.pathname === "/"
         ? "Dial n Dine Help-Desk"
-        : "Dial n Dine Help-Desk" + (routeLocation).split("/").join(" | ");
+        : "Dial n Dine Help-Desk" + routeLocation.split("/").join(" | ");
     dispatch(changeLocation(location.pathname));
   }, [routeLocation, dispatch, location]);
+
+  //FilterTckets Based on user's access ========
+  useEffect(() => {
+    if (allTickets.length >= 1 && user[0].access !== "agent") {
+      dispatch(
+        updateFilteredTickets(
+          allTickets
+            .filter((ticket) => ticket.message_position === 1)
+            .sort((a, b) => {
+              return (
+                Number(a.ticket_id.charAt(1)) - Number(b.ticket_id.charAt(1))
+              );
+            })
+        )
+      );
+    } else if (allTickets.length >= 1 && user[0].access === "agent") {
+      dispatch(
+        updateFilteredTickets(
+          allTickets
+            .filter(
+              (ticket) =>
+                ticket.message_position === 1 &&
+                ticket.agent_email === user[0].email
+            )
+            .sort((a, b) => {
+              return (
+                Number(a.ticket_id.charAt(1)) - Number(b.ticket_id.charAt(1))
+              );
+            })
+        )
+      );
+    }
+  }, [allTickets, dispatch, user]);
 
   if (logged !== true) {
     return <Navigate to="/logIn" />;
@@ -70,7 +105,9 @@ const MainComponent = () => {
               viewBox="0 0 200 50"
             >
               <text x="0" y="35">
-                <tspan className="stroke-[2.5px] dark:stroke-slate-500 dark:fill-slate-500 stroke-slate-600 fill-slate-600">dnd</tspan>
+                <tspan className="stroke-[2.5px] dark:stroke-slate-500 dark:fill-slate-500 stroke-slate-600 fill-slate-600">
+                  dnd
+                </tspan>
                 <tspan
                   className="stroke-[.8px] dark:fill-slate-900 stroke-slate-500 fill-slate-500"
                   x="41"
@@ -189,37 +226,37 @@ const MainComponent = () => {
             {/*Notifications & Controls ====================*/}
             <div className="flex space-x-2">
               {/**Change Theme =========================== */}
-              <button
-                onClick={() => {
-                  dispatch(changeTheme(theme === "dark" ? "light" : "dark"));
-                  window.localStorage.setItem(
-                    "theme",
-                    JSON.stringify(theme === "dark" ? "light" : "dark")
-                  );
-                }}
-                className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
-              >
-                <abbr title="theme">
+              <abbr title="theme">
+                <button
+                  onClick={() => {
+                    dispatch(changeTheme(theme === "dark" ? "light" : "dark"));
+                    window.localStorage.setItem(
+                      "theme",
+                      JSON.stringify(theme === "dark" ? "light" : "dark")
+                    );
+                  }}
+                  className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
+                >
                   {theme === "dark" && <BsBrightnessHigh />}
                   {theme !== "dark" && <BsMoonStars />}
-                </abbr>
-              </button>
+                </button>
+              </abbr>
 
               {/**Notifications ================================================ */}
-              <button
-                onClick={() => setOpenNotification(true)}
-                className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
-              >
-                <abbr title="Notifications">
+              <abbr title="Notifications">
+                <button
+                  onClick={() => setOpenNotification(true)}
+                  className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
+                >
                   <BsBell />
-                </abbr>
-                {newReplies.length >= 1 && (
-                  <span className="flex h-2 w-2 absolute top-1 right-1">
-                    <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                  </span>
-                )}
-              </button>
+                  {newReplies.length >= 1 && (
+                    <span className="flex h-2 w-2 absolute top-1 right-1">
+                      <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                  )}
+                </button>
+              </abbr>
               {/**Expanded Notification & Chat  =============================== */}
               <Notification
                 openNotifications={openNotifications}
@@ -228,11 +265,11 @@ const MainComponent = () => {
 
               {/**Settings ================================================ */}
               <NavLink to="/app/settings/account">
-                <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
-                  <abbr title="Settings">
+                <abbr title="Settings">
+                  <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
                     <BsGear />
-                  </abbr>
-                </button>
+                  </button>
+                </abbr>
               </NavLink>
 
               {/**Profile And User Settings =========================== */}

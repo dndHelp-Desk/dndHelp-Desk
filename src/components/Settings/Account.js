@@ -19,7 +19,10 @@ import {
   BsFillKeyFill,
   BsBoxArrowRight,
 } from "react-icons/bs";
-import { updateUserDetails } from "../Data_Fetching/TicketsnUserData";
+import {
+  updateUserDetails,
+  updateUserStatus,
+} from "../Data_Fetching/TicketsnUserData";
 import { useNavigate } from "react-router-dom";
 
 const Account = () => {
@@ -44,18 +47,16 @@ const Account = () => {
 
   //Sign Out User =================
   const signOutUser = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("user signed out");
+    updateUserStatus(member_details[0].id, "unavailable");
+    setTimeout(() => {
+      signOut(auth).then(() => {
         dispatch(isAuthenticated(false));
         window.localStorage.clear();
         dispatch(changeLocation("Dial n Dine Help-Desk"));
         document.title = "Dial n Dine Help-Desk";
         navigate("/logIn");
-      })
-      .catch((err) => {
-        console.log(err.message);
       });
+    }, 1000);
   };
 
   //Set New Password ===========================

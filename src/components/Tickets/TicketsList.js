@@ -12,6 +12,7 @@ import MessageThread from "./MessageThread";
 const TicketsList = ({ setDelete, deleteArray }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const filters = useSelector((state) => state.Tickets.filters);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -39,6 +40,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
       /**End ========== */
 
       return (
+        //Filter Added Using Conditional Styling =============================
         <div
           key={ticket.id}
           className={`w-full h-[5.7rem] relative snap_childTwo rounded-md dark:bg-slate-800  ${
@@ -50,6 +52,56 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             (ticket.status && ticket.status.toLowerCase() === "closed")
               ? "dark:opacity-60 opacity-70"
               : ""
+          } ${
+            ticket.branch_company
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.brand.toLowerCase().replace(/\s/g, "")) === true
+              ? ""
+              : "hidden"
+          }
+           ${
+             ticket.ticket_id
+               .toLowerCase()
+               .replace(/\s/g, "")
+               .includes(filters.ticket_id.toLowerCase().replace(/\s/g, "")) ===
+             true
+               ? ""
+               : "hidden"
+           } 
+           ${
+             ticket.agent_name
+               .toLowerCase()
+               .replace(/\s/g, "")
+               .includes(filters.agent.toLowerCase().replace(/\s/g, "")) ===
+             true
+               ? ""
+               : "hidden"
+           } ${
+            ticket.category
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.category.toLowerCase().replace(/\s/g, "")) ===
+            true
+              ? ""
+              : "hidden"
+          }
+          
+          ${
+            new Date(
+              new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)
+            ).toISOString() >=
+              new Date(
+                filters.startDate !== null && filters.startDate
+              ).toISOString() &&
+            new Date(
+              new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)
+            ).toISOString() <=
+              new Date(
+                filters.endDate !== null && filters.endDate
+              ).toISOString()
+              ? ""
+              : "hidden"
           }`}
         >
           {/**Indicate if it's new messsage */}

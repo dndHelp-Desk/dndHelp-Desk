@@ -58,6 +58,10 @@
     animation-delay:1s
   }
 
+  #Profile_Details:hover .hoverProfile_Details{
+    display:flex;
+  }
+
   @keyframes animated {
     from {
       opacity: 0;

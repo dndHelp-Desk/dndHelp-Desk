@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth, upload } from "./Firebase";
-import { BsCameraFill, BsBoxArrowUp } from "react-icons/bs";
+import { BsCameraFill, BsBoxArrowUp, BsCheck } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAlert } from "../../store/NotificationsSlice";
 import { updateUserStatus } from "../Data_Fetching/TicketsnUserData";
@@ -32,24 +32,6 @@ const Profile = () => {
     setChange(false);
   };
 
-  //Change Agent Online Stutus ============
-  const online = navigator.onLine;
-  useEffect(() => {
-    if (
-      member_details[0].name !== "User Loader" &&
-      member_details.length !== undefined &&
-      online
-    ) {
-      updateUserStatus(member_details[0].id, "online");
-    } else {
-      member_details.length !== undefined &&
-        currentUser &&
-        member_details[0].name !== "User Loader" &&
-        !online &&
-        updateUserStatus(member_details[0].id, "offline");
-    }
-  }, [member_details, currentUser, online]);
-
   //Apply Changes to the Profile =========
   change === false &&
     setTimeout(() => {
@@ -72,6 +54,7 @@ const Profile = () => {
   return (
     <>
       <form
+        id="Profile_Details"
         className="flex flex-col relative"
         onSubmit={(e) => handleSubmit(e)}
       >
@@ -113,9 +96,65 @@ const Profile = () => {
               member_details.length !== undefined &&
               member_details[0].status === "online"
                 ? "bg-green-500"
+                : member_details[0].status === "busy"
+                ? "bg-yellow-500"
                 : "bg-red-500"
             } right-[-2px] top-[-2px]`}
           ></span>
+
+          {/** Change Agent Online Stutus ============*/}
+          <div className="hoverProfile_Details p-3 absolute w-[12rem] overflow-hidden dark:bg-slate-800 bg-slate-200 hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl top-14 after:content-[''] after:fixed after:top-[3.7rem] after:right-[1rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-200 after:border-l-transparent">
+            <div className="pb-2">
+              <small
+                className={`text-xs text-center capitalize font-semibold flex items-center justify-center ${
+                  member_details[0].status === "online"
+                    ? "text-green-500"
+                    : member_details[0].status === "unavailable"
+                    ? "text-red-500"
+                    : "text-yellow-500"
+                }`}
+              >
+                ◉ {member_details[0].status}
+              </small>
+              <h3 className="dark:text-slate-400 text-slate-500 text-sm text-center capitalize font-semibold">
+                {member_details[0].name}
+              </h3>
+              <h4 className="dark:text-slate-500 text-slate-400 text-xs text-center capitalize font-semibold">
+                {member_details[0].dept}
+              </h4>
+            </div>
+            <ul className="w-full">
+              <li
+                onClick={() => updateUserStatus(member_details[0].id, "online")}
+                className="h-8 border-b border-t hover:opacity-80 dark:border-slate-700 border-slate-300 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
+              >
+                <span>◉ Online</span>
+                {member_details[0].status === "online" && (
+                  <BsCheck className="text-lg" />
+                )}
+              </li>
+              <li
+                onClick={() => updateUserStatus(member_details[0].id, "busy")}
+                className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-300 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
+              >
+                <span>◉ Busy</span>
+                {member_details[0].status === "busy" && (
+                  <BsCheck className="text-lg" />
+                )}
+              </li>
+              <li
+                onClick={() =>
+                  updateUserStatus(member_details[0].id, "unavailable")
+                }
+                className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-300 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
+              >
+                <span>◉ Unavailable</span>
+                {member_details[0].status === "unavailable" && (
+                  <BsCheck className="text-lg" />
+                )}
+              </li>
+            </ul>
+          </div>
         </div>
       </form>
     </>

@@ -59,6 +59,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               branch_company: brand,
             });
             setRecipient(brand);
+            setResults(false);
           }}
           className={`${
             contact.branch_company
@@ -85,8 +86,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     });
 
   //Link Google Appscript API for sendind Emails Regarding new Ticket ================
-  const sendMailAPI =
-    "https://script.google.com/macros/s/AKfycbyAWRBiPB0UcqtL4a6qGySTScYj-VwecLpqOI_eQAJUUkPZMj--RNw-lY9uD_F7EXhg/exec?action=addData";
+  /*const sendMailAPI =
+    "https://script.google.com/macros/s/AKfycbyAWRBiPB0UcqtL4a6qGySTScYj-VwecLpqOI_eQAJUUkPZMj--RNw-lY9uD_F7EXhg/exec?action=addData";*/
 
   //Submit New Ticket ===============
   const handleSubmit = (e) => {
@@ -109,7 +110,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     );
 
     //Send Mail Using App Script ======================
-    fetch(sendMailAPI, {
+    /*fetch(sendMailAPI, {
       method: "POST",
       mode: "no-cors",
       headers: {
@@ -138,7 +139,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         message: "New Ticket Created Successfully",
         color: "bg-green-200",
       })
-    );
+    );*/
 
     //Send Email Using Nodemailer ===================
     fetch("https://dndhelp-desk-first.herokuapp.com/send", {

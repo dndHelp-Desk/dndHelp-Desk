@@ -11,9 +11,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
     (state) => state.NotificationsData.messages
   );
   const allTickets = useSelector((state) => state.Tickets.allTickets);
-  const newReplies =
-    allTickets.length >= 1 &&
-    allTickets.filter(
+  const newReplies = allTickets.filter(
       (ticket) => ticket.readStatus !== "read" && ticket.from !== "agent"
     );
 
@@ -43,7 +41,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
   return (
     <div
       ref={panelRef}
-      className={`h-[20rem] w-[15rem] dark:bg-slate-600 bg-slate-400 shadow-2xl rounded-lg p-4 absolute right-2 top-16 after:content-[''] after:fixed after:top-[3.5rem] after:right-[7rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-600 after:border-b-slate-400 after:border-l-transparent flex-col items-center space-y-2 overflow-x-hidden overflow-y-scroll lg:border-t dark:border-slate-800 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap ${
+      className={`h-[20rem] w-[15rem] dark:bg-slate-800 bg-slate-400 shadow-2xl rounded-lg p-4 absolute right-2 top-16 after:content-[''] after:fixed after:top-[3.5rem] after:right-[7rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-400 after:border-l-transparent flex-col items-center space-y-2 overflow-x-hidden overflow-y-scroll lg:border-t dark:border-slate-800 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap ${
         openNotifications === true ? "flex" : "hidden"
       }`}
     >
