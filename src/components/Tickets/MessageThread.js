@@ -4,6 +4,8 @@ import {
   BsFillTrashFill,
   BsThreeDotsVertical,
   BsArrowLeft,
+  BsReplyAllFill,
+  BsFillGridFill,
 } from "react-icons/bs";
 import { HiCheck } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
@@ -14,8 +16,9 @@ import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const MessageThread = ({ isChatOpen, setChat }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
-  let allTickets = useSelector((state) => state.Tickets.allTickets);
-  let threadMessage = useSelector((state) => state.Tickets.threadMessage);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const threadMessage = useSelector((state) => state.Tickets.threadMessage);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
@@ -53,7 +56,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   }, [dispatch, allTickets, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
-  let agentName = "You";
+  let agentName =
+    threadMessage.length >= 1 &&
+    threadMessage.filter((data) => data.message_position === 1)[0].agent_name;
   let clientName =
     threadMessage.length >= 1 &&
     threadMessage.filter((data) => data.message_position === 1)[0]
@@ -83,7 +88,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 py-4 p-2 flex gap-2 transition-all"
         >
           <div
-            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase font-bold text-lg dark:text-gray-400 text-slate-500 dark:bg-slate-900 border dark:border-slate-700 border-slate-400 bg-slate-100`}
+            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase font-bold text-lg dark:text-gray-400 text-slate-500 dark:bg-slate-900 bg-white border dark:border-slate-700 border-slate-400`}
           >
             {`${
               message.from === "agent" && clientName && agentName
@@ -92,7 +97,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             }`}
           </div>
           <div
-            className={`w-[95%] 2xl:w-full pb-2 px-2 bg-transparent space-y-2  border-b dark:border-[#33415591] border-slate-300 ${
+            className={`w-[95%] 2xl:w-full rounded-md dark:bg-slate-900 bg-white space-y-2 p-4 ${
               message.from === "agent" ? "order-first" : "order-last"
             }`}
           >
@@ -106,6 +111,21 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   message.from === "agent" ? agentName : clientName
                 }`}</span>{" "}
                 <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
+                  <button
+                    onClick={() =>
+                      setOptions({
+                        ...msgOptions,
+                        status: true,
+                        id: message.message_position,
+                        threadId: message.ticket_id,
+                      })
+                    }
+                    className={`h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 dark:text-slate-500 flex items-center justify-center ${
+                      message.from === "agent" ? "" : "hidden"
+                    }`}
+                  >
+                    <BsThreeDotsVertical className="inline  cursor-pointer" />
+                  </button>
                   <span className="flex space-x-2">
                     <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
                       {`${new Date(message.date).toDateString()}`}
@@ -122,21 +142,6 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                       }`}
                     </span>
                   </span>
-                  <button
-                    onClick={() =>
-                      setOptions({
-                        ...msgOptions,
-                        status: true,
-                        id: message.message_position,
-                        threadId: message.ticket_id,
-                      })
-                    }
-                    className={`h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 dark:text-slate-500 flex items-center justify-center ${
-                      message.from === "agent" ? "order-first" : ""
-                    }`}
-                  >
-                    <BsThreeDotsVertical className="inline  cursor-pointer" />
-                  </button>
 
                   {/**Message Options =========================== */}
                   <div
@@ -161,13 +166,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   </div>
                 </div>
               </div>
-              <p
-                className={`mt-2 dark:text-slate-400 text-slate-500 ${
-                  message.from === "agent"
-                    ? "pl-3 text-right"
-                    : "pr-3 text-left"
-                }`}
-              >
+              <p className="mt-2 dark:text-slate-400 text-slate-500">
                 {message.message}
               </p>
               <div
@@ -300,17 +299,23 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           const resData = data;
           if (resData.status === "success") {
             dispatch(
-              updateAlert([...alerts,{
-                message: "Response Has Been Sent.",
-                color: "bg-green-200",
-              }])
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Response Has Been Sent.",
+                  color: "bg-green-200",
+                },
+              ])
             );
           } else if (resData.status === "fail") {
             dispatch(
-              updateAlert([...alerts,{
-                message: "Email Failed To Send",
-                color: "bg-red-200",
-              }])
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Email Failed To Send",
+                  color: "bg-red-200",
+                },
+              ])
             );
           }
         });
@@ -324,8 +329,8 @@ const MessageThread = ({ isChatOpen, setChat }) => {
         isChatOpen ? "flex" : "hidden"
       } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-white`}
     >
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
-        <div className="h-14 dark:bg-slate-800 bg-slate-200 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-700 border-slate-400">
+      <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
+        <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
           {/**Back To Main List  On Small Screens====================== */}
           <div
             onClick={() => setChat(false)}
@@ -334,75 +339,132 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             <BsArrowLeft className="inline" />
             <span className="text-sm">Back</span>
           </div>
+          <div className="flex justify-between items-center w-full space-x-2 bg-transparent relative px-3">
+            {/**Opened Ticket Details ================================== */}
+            <button className="outline-none focus:outline-none hover:opacity-80 text-lg">
+              <BsFillGridFill className="dark:text-slate-400 text-slate-500" />
+            </button>
+            <div className="absolute rounded-md top-11 left-[-0.5rem] h-[28rem] w-[20rem] shadow-xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
+              <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
+                Ticket Details
+              </h2>
+              <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-2 capitalize">
+                <li className="text-xs">
+                  <b>FCR ⇒ </b>
+                  {filteredTickets.length >= 1 &&
+                    filteredTickets.filter(
+                      (ticket) => ticket.ticket_id === threadId
+                    ).length >= 1 &&
+                    filteredTickets.filter(
+                      (ticket) => ticket.ticket_id === threadId
+                    )[0].fcr}{" "}
+                </li>
+                <li className="text-xs">
+                  <b>Complainant Name ⇒ </b>
+                  {filteredTickets.length >= 1 &&
+                    filteredTickets.filter(
+                      (ticket) => ticket.ticket_id === threadId
+                    ).length >= 1 &&
+                    filteredTickets.filter(
+                      (ticket) => ticket.ticket_id === threadId
+                    )[0].complainant_name}{" "}
+                </li>
+                <li className="text-xs">
+                  <b>Complainant Number ⇒ </b>
+                  {filteredTickets.length >= 1 &&
+                    filteredTickets.filter(
+                      (ticket) => ticket.ticket_id === threadId
+                    ).length >= 1 &&
+                    filteredTickets.filter(
+                      (ticket) => ticket.ticket_id === threadId
+                    )[0].complainant_number}{" "}
+                </li>
+                <li className="text-xs">
+                  <b>Complainant Email ⇒ </b>
+                  <spn className="lowercase">
+                    {filteredTickets.length >= 1 &&
+                      filteredTickets.filter(
+                        (ticket) => ticket.ticket_id === threadId
+                      ).length >= 1 &&
+                      filteredTickets.filter(
+                        (ticket) => ticket.ticket_id === threadId
+                      )[0].complainant_email}{" "}
+                  </spn>
+                </li>
+              </ul>
+              <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                Case Details
+              </h2>
+              <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-2 h-[6rem] overflow-hidden overflow-y-scroll">
+                {filteredTickets.length >= 1 &&
+                  filteredTickets.filter(
+                    (ticket) => ticket.ticket_id === threadId
+                  ).length >= 1 &&
+                  filteredTickets.filter(
+                    (ticket) => ticket.ticket_id === threadId
+                  )[0].message}{" "}
+              </p>
+              <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                Solution
+              </h2>
+              <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-2 h-[4rem] overflow-hidden overflow-y-scroll rounded-md border dark:border-slate-800 border-slate-300">
+                {filteredTickets.length >= 1 &&
+                  filteredTickets.filter(
+                    (ticket) => ticket.ticket_id === threadId
+                  ).length >= 1 &&
+                  filteredTickets.filter(
+                    (ticket) => ticket.ticket_id === threadId
+                  )[0].solution}{" "}
+              </p>
+              <form
+                action=""
+                className="dark:bg-slate-800 bg-slate-200 w-full h-[4.5rem] overflow-hidden rounded-md mt-2 relative"
+              >
+                <textarea
+                  name="reply"
+                  id="reply"
+                  cols="30"
+                  rows="10"
+                  placeholder="Add solution ..."
+                  autoComplete="off"
+                  onKeyUp={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      sendReply(e);
+                    }
+                  }}
+                  required
+                  onChange={(e) => {
+                    setReply({
+                      ...reply,
+                      message: e.target.value,
+                      message_position: threadMessage.length + 1,
+                      ticket_id:
+                        threadMessage.length >= 1 &&
+                        threadMessage.filter(
+                          (message) => message.message_position === 1
+                        )[0].ticket_id,
+                      subject:
+                        threadMessage.length >= 1 &&
+                        threadMessage.filter(
+                          (msg) => msg.message_position === 1
+                        )[0]["category"],
+                    });
+                  }}
+                  value={reply.message}
+                  className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+                ></textarea>
+                <button
+                  type="submit"
+                  className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
+                >
+                  <BsReplyAllFill />
+                </button>
+              </form>
+            </div>
 
-          <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-600 tracking-wide hidden lg:flex flex-col">
-            <span>Opened On</span>{" "}
-            {threadId && (
-              <small className="text-xs text-slate-500">
-                {threadMessage.length >= 1 &&
-                  new Date(
-                    threadMessage.filter(
-                      (message) => message.message_position === 1
-                    )[0].date
-                  ).toDateString()}
-                , at{" "}
-                {`${
-                  (threadMessage.length >= 1 &&
-                    Number(
-                      threadMessage
-                        .filter((message) => message.message_position === 1)[0]
-                        .time.split(":")[0]
-                    )) < 10
-                    ? "0" +
-                      (threadMessage.length >= 1 &&
-                        Number(
-                          threadMessage
-                            .filter(
-                              (message) => message.message_position === 1
-                            )[0]
-                            .time.split(":")[0]
-                        ))
-                    : threadMessage.length >= 1 &&
-                      Number(
-                        threadMessage
-                          .filter(
-                            (message) => message.message_position === 1
-                          )[0]
-                          .time.split(":")[0]
-                      )
-                }:${
-                  (threadMessage.length >= 1 &&
-                    Number(
-                      threadMessage
-                        .filter((message) => message.message_position === 1)[0]
-                        .time.split(":")[1]
-                    )) < 10
-                    ? "0" +
-                      (threadMessage.length >= 1 &&
-                        Number(
-                          threadMessage
-                            .filter(
-                              (message) => message.message_position === 1
-                            )[0]
-                            .time.split(":")[1]
-                        ))
-                    : threadMessage.length >= 1 &&
-                      Number(
-                        threadMessage
-                          .filter(
-                            (message) => message.message_position === 1
-                          )[0]
-                          .time.split(":")[1]
-                      )
-                }`}
-              </small>
-            )}{" "}
-            {!threadId && (
-              <small className="text-xs text-slate-500">Click Any Ticket</small>
-            )}
-          </h2>
-          <div className="flex space-x-2 dark:bg-slate-800 bg-slate-200">
-            <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-600 tracking-wide flex flex-col capitalize  whitespace-nowrap overflow-hidden overflow-ellipsis">
+            {/**Other Details =========================== */}
+            <h2 className="font-semibold text-sm dark:text-slate-400 text-slate-500 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span>
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
@@ -410,15 +472,71 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   )[0].category}
                 {!threadId && "Nothing is selected"}
               </span>{" "}
-              <small className="text-xs text-slate-500">
-                {clientName}
-                {!threadId && "select any ticket"}
-              </small>{" "}
+              {threadId && (
+                <small className="text-xs text-slate-500">
+                  {threadMessage.length >= 1 &&
+                    new Date(
+                      threadMessage.filter(
+                        (message) => message.message_position === 1
+                      )[0].date
+                    ).toDateString()}
+                  , at{" "}
+                  {`${
+                    (threadMessage.length >= 1 &&
+                      Number(
+                        threadMessage
+                          .filter(
+                            (message) => message.message_position === 1
+                          )[0]
+                          .time.split(":")[0]
+                      )) < 10
+                      ? "0" +
+                        (threadMessage.length >= 1 &&
+                          Number(
+                            threadMessage
+                              .filter(
+                                (message) => message.message_position === 1
+                              )[0]
+                              .time.split(":")[0]
+                          ))
+                      : threadMessage.length >= 1 &&
+                        Number(
+                          threadMessage
+                            .filter(
+                              (message) => message.message_position === 1
+                            )[0]
+                            .time.split(":")[0]
+                        )
+                  }:${
+                    (threadMessage.length >= 1 &&
+                      Number(
+                        threadMessage
+                          .filter(
+                            (message) => message.message_position === 1
+                          )[0]
+                          .time.split(":")[1]
+                      )) < 10
+                      ? "0" +
+                        (threadMessage.length >= 1 &&
+                          Number(
+                            threadMessage
+                              .filter(
+                                (message) => message.message_position === 1
+                              )[0]
+                              .time.split(":")[1]
+                          ))
+                      : threadMessage.length >= 1 &&
+                        Number(
+                          threadMessage
+                            .filter(
+                              (message) => message.message_position === 1
+                            )[0]
+                            .time.split(":")[1]
+                        )
+                  }`}
+                </small>
+              )}
             </h2>
-            <div className="w-8 h-8 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
-              {clientName && clientName.charAt(0)}
-              {!threadId && "u"}
-            </div>
           </div>
         </div>
         <div className="h-[20rem] w-full p-2 overflow-y-scroll scroll-snap">
@@ -436,27 +554,11 @@ const MessageThread = ({ isChatOpen, setChat }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[45%] lg:h-[40%] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
-        <div className="h-full w-full p-2 rounded-lg dark:bg-slate-800 bg-slate-200 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-200 after:border-l-transparent overflow-hidden grid grid-rows-4">
-          <div className="w-full row-span-1 h-full flex justify-between">
-            <div className="flex space-x-2 items-center">
-              <div className="w-9 h-9 dark:bg-slate-900 bg-slate-500 rounded-lg border border-slate-500 flex justify-center items-center font-bold uppercase dark:text-slate-500 text-slate-300 text-lg">
-                {user[0].name.charAt(0)}
-              </div>
-              <h2 className="font-semibold text-xs justify-center dark:text-slate-400 text-slate-500 tracking-wide flex flex-col">
-                <span>Reply As</span>{" "}
-                <small className="text-xs dark:text-slate-500 text-slate-600">
-                  {user[0].name}
-                </small>{" "}
-              </h2>
-            </div>
-            <button className="h-9 w-9 rounded-lg dark:hover:bg-slate-900 hover:bg-slate-400 flex items-center justify-center dark:text-slate-400 text-slate-500 transition-all outline-none focus:outline-none text-base font-bold">
-              <BsThreeDotsVertical />
-            </button>
-          </div>
+      <div className="h-[8rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
+        <div className="h-full w-full p-2 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#1e293b9c] after:border-b-slate-200 after:border-l-transparent overflow-hidden">
           <form
             onSubmit={(e) => sendReply(e)}
-            className="row-span-3 h-full w-full bg-transparent rounded-lg relative"
+            className="h-full w-full bg-transparent rounded-lg relative"
           >
             <textarea
               name="reply"
@@ -490,13 +592,13 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 });
               }}
               value={reply.message}
-              className="h-full w-full dark:bg-slate-800 bg-slate-200 rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 border-0 focus:outline-none outline-none focus:border-0 transition-all dark:focus:ring-slate-700 focus:ring-slate-400 placeholder:text-slate-500 placeholder:text-sm"
+              className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
             ></textarea>
             <button
               type="submit"
-              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-sm right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
+              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
             >
-              Send Message
+              <BsReplyAllFill />
             </button>
           </form>
         </div>

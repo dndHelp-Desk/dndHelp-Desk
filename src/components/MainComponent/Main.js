@@ -92,7 +92,7 @@ const Main = () => {
           key={user.id}
           className="w-full snap_child h-16 rounded-lg custom-shadow dark:bg-[#1e293b9c] bg-slate-100 flex items-center space-x-4 p-2"
         >
-          <div className="h-10 w-10 rounded-xl border-2 dark:border-slate-600 relative overflow-hidden">
+          <div className="h-10 w-10 rounded-xl border-2 dark:border-slate-600 border-slate-400 relative overflow-hidden">
             <img
               src={user.photoUrl}
               alt="profile"

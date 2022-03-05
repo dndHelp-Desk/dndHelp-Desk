@@ -97,11 +97,11 @@ const TicketsComponent = () => {
 
   //Component ======================
   return (
-    <div className="bg-transparent space-y-1 container w-[90%] md:w-full 2xl:w-[72rem] mt-4 rounded-xl pb-4">
+    <div className="bg-transparent space-y-1 container w-[90%] md:w-full 2xl:w-[72rem] mt-4 rounded-lg pb-4 dark:bg-slate-900 bg-white p-2">
       {/**Navbar or Control Bar  ====================== */}
       <nav className="h-[2.5rem] flex justify-between items-center w-full relative">
         {/**Search Bar ============================== */}
-        <div className="flex h-full gap-4 relative">
+        <div className="flex h-full gap-2 relative">
           {/**Filter Btn ============================== */}
           <OffCanvasMenu
             filtersModal={filtersModal}
@@ -109,7 +109,7 @@ const TicketsComponent = () => {
           />
           <button
             onClick={() => setfiltersModal(filtersModal ? false : true)}
-            className="min-w-10 px-8 h-10 rounded-lg flex space-x-2 justify-between items-center dark:bg-slate-900 bg-white focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
+            className="min-w-10 px-8 h-10 rounded-md flex space-x-2 justify-between items-center dark:bg-slate-800 bg-slate-200 focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-sm  font-semibold"
           >
             <BsSliders className="dark:text-slate-400 text-slate-500 font-bold" />
             <span className="hidden md:flex">Filters</span>
@@ -118,7 +118,7 @@ const TicketsComponent = () => {
           {/**Delete Ticket ================================= */}
           <button
             onClick={() => deleteSelected()}
-            className={`dark:bg-slate-900 bg-white dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-red-600  font-semibold ${
+            className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-md text-red-600  font-semibold ${
               deleteArray.length >= 1 && activeUser[0].access === "admin"
                 ? "flex"
                 : "hidden"
@@ -132,7 +132,7 @@ const TicketsComponent = () => {
           {/**Assign Agent ================================= */}
           <button
             onClick={() => setPanel(true)}
-            className={`dark:bg-slate-900 bg-white dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-lg text-blue-600  font-semibold ${
+            className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-full w-12 rounded-md text-blue-600  font-semibold ${
               deleteArray.length >= 1 && activeUser[0].access === "admin"
                 ? "flex"
                 : "hidden"
@@ -167,8 +167,10 @@ const TicketsComponent = () => {
 
         {/*** New Ticket ======================== */}
         <button
-          onClick={() => setModal(user[0].name !== "User Loader"?true:false)}
-          className="bg-blue-700  h-10 px-6 rounded-lg flex justify-center items-center text-slate-300  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
+          onClick={() =>
+            setModal(user[0].name !== "User Loader" ? true : false)
+          }
+          className="bg-blue-700  h-10 px-6 rounded-md flex justify-center items-center text-slate-300  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
         >
           + New Ticket
         </button>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Filters from "./Filters";
 import {
   changePriority,
   changeStatus,
@@ -43,13 +42,12 @@ const TicketsList = ({ setDelete, deleteArray }) => {
         //Filter Added Using Conditional Styling =============================
         <div
           key={ticket.id}
-          className={`w-full h-[5.7rem] relative snap_childTwo rounded-md dark:bg-slate-800  ${
+          className={`w-full h-[5.7rem] relative snap_childTwo rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
             ticket.ticket_id === threadId
-              ? "border-[1px] dark:border-slate-600 border-slate-400"
+              ? "border-[1px] dark:border-slate-700 border-slate-400"
               : ""
           } bg-slate-200 p-2 space-x-2  flex ${
-            (ticket.status && ticket.status.toLowerCase() === "resolved") ||
-            (ticket.status && ticket.status.toLowerCase() === "closed")
+            (ticket.status && ticket.status.toLowerCase() === "solved")
               ? "dark:opacity-60 opacity-70"
               : ""
           } ${
@@ -136,10 +134,10 @@ const TicketsList = ({ setDelete, deleteArray }) => {
                 ).toISOString() <= new Date().toISOString()
                   ? "border border-red-500"
                   : ""
-              } dark:bg-slate-700 bg-slate-500 flex lg:hidden xl:flex justify-center items-center`}
+              } dark:bg-slate-700 bg-slate-400 flex lg:hidden xl:flex justify-center items-center`}
             >
               <abbr title={ticket.recipient_name}>
-                <h4 className="text-slate-300 font-semibold text-xl">{`${
+                <h4 className="dark:text-slate-300 text-slate-100 font-semibold text-xl">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
                 }`}</h4>
               </abbr>
@@ -157,14 +155,12 @@ const TicketsList = ({ setDelete, deleteArray }) => {
             }}
             className="col-span-5 flex flex-col justify-center relative h-full w-full px-1 py-1 cursor-pointer showTicketsDetails"
           >
-            <h2 className="dark:text-slate-400 text-slate-600 text-base font-bold font-sans capitalize whitespace-nowrap">
+            <h2 className="dark:text-slate-400 text-slate-600 text-xs font-semibold font-sans uppercase whitespace-nowrap">
               {ticket.category} : {ticket.ticket_id}
             </h2>
-            <h5 className="dark:text-slate-400 text-slate-600 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
+            <h5 className="dark:text-slate-500 text-xs text-slate-500 tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
               <span className="flex">{`${ticket.branch_company}`}</span>
-              <span className="dark:text-slate-500 text-xs text-slate-500">
-                Due on {new Date(ticket.due_date).toDateString()}
-              </span>
+              <span>Due on {new Date(ticket.due_date).toDateString()}</span>
             </h5>
 
             {/**Ticket Details Tootip ==================== */}
@@ -218,7 +214,7 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               </span>{" "}
               <select
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-slate-500 focus:outline-none outline-none capitalize"
+                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-500 text-xs text-slate-500 focus:outline-none outline-none capitalize"
               >
                 <option className="capitalize p-2" value="low">
                   {ticket.priority}
@@ -241,22 +237,19 @@ const TicketsList = ({ setDelete, deleteArray }) => {
               <span className="dark:text-slate-400 text-slate-500">↝</span>{" "}
               <select
                 onChange={(e) => changeStatus(ticket.id, e.target.value)}
-                className="text-xs w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-slate-500 focus:outline-none outline-none capitalize"
+                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-500 text-xs text-slate-500 focus:outline-none outline-none capitalize"
               >
                 <option className="capitalize p-2" value="resolved">
                   {ticket.status}
                 </option>
-                <option className="capitalize p-2" value="resolved">
-                  resolved
-                </option>
                 <option className="capitalize" value="open">
                   open
                 </option>
-                <option className="capitalize" value="closed">
-                  closed
+                <option className="capitalize" value="on hold">
+                  on hold
                 </option>
-                <option className="capitalize" value="pending">
-                  pending
+                <option className="capitalize p-2" value="reopened">
+                  reopened
                 </option>
               </select>
             </div>
@@ -269,16 +262,13 @@ const TicketsList = ({ setDelete, deleteArray }) => {
   return (
     <div className="relative">
       {/**Tickets ========================================== */}
-      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-white rounded-xl p-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
+      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-white rounded-xl py-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
         <div
           className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
           }`}
         >
-          <div className="w-full dark:bg-slate-900 bg-white rounded-lg z-0 mt-3 h-12 flex justify-between space-x-2">
-            <Filters />
-          </div>
-          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-2 scroll-snap">
+          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap">
             {tickets}
             {filteredTickets.length <= 0 && (
               <h2 className="font-semibold text-center mt-10 text-lg dark:text-slate-400 text-slate-500 tracking-wide hidden lg:flex flex-col">
