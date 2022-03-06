@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillTrashFill,
   BsThreeDotsVertical,
-  BsArrowLeft,
   BsLayoutSidebarInset,
 } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
@@ -54,7 +53,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   const msgOptionsRef = useOnClickOutside(() =>
     setOptions({ status: false, id: "", threadId: "" })
   );
-  console.log(msgOptions);
+
   //Filter Thread Messages =====================================
   useEffect(() => {
     allTickets.length >= 1 &&
