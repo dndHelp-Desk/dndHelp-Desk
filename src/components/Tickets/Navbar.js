@@ -83,7 +83,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
             assgn(member.name, member.email);
             setPanel(false);
           }}
-          className={`dark:bg-slate-400 bg-slate-300 w-full h-8 text-sm font-semibold dark:text-slate-800 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
+          className={`dark:bg-slate-600 bg-slate-100 w-full h-8 text-sm font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
             member.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -110,12 +110,27 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         />
         <button
           onClick={() => setfiltersModal(filtersModal ? false : true)}
-          className="h-10 w-11 rounded-lg flex space-x-2 justify-center items-center dark:bg-slate-800 bg-slate-200 focus:outline-none outline-none custom-shadow hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg dark:text-slate-400 text-slate-500 text-lg font-semibold"
+          className="h-10 w-11 rounded-lg flex space-x-2 justify-center items-center dark:bg-slate-800 bg-slate-200 focus:outline-none outline-none custom-shadow hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold"
         >
           <abbr title="filters" className="">
-            <BsFunnelFill className="dark:text-slate-400 text-slate-500 font-bold" />
+            <BsFunnelFill className="dark:text-slate-300 text-slate-800 font-bold" />
           </abbr>
         </button>
+
+        {/**Assign Agent ================================= */}
+        <button
+          onClick={() => setPanel(true)}
+          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-10 w-11 rounded-lg  dark:text-slate-300 text-slate-800  font-semibold custom-shadow ${
+            deleteArray.length >= 1 && activeUser[0].access === "admin"
+              ? "flex"
+              : "hidden"
+          } items-center justify-center text-lg`}
+        >
+          <abbr title="Assign">
+            <BsFillPersonPlusFill />
+          </abbr>
+        </button>
+
 
         {/**Delete Ticket ================================= */}
         <button
@@ -131,25 +146,11 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
           </abbr>
         </button>
 
-        {/**Assign Agent ================================= */}
-        <button
-          onClick={() => setPanel(true)}
-          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-10 w-11 rounded-lg  text-blue-600  font-semibold custom-shadow ${
-            deleteArray.length >= 1 && activeUser[0].access === "admin"
-              ? "flex"
-              : "hidden"
-          } items-center justify-center text-lg`}
-        >
-          <abbr title="Assign">
-            <BsFillPersonPlusFill />
-          </abbr>
-        </button>
-
         {/**Agent List to assign ============= */}
         {activeUser[0].access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15rem] w-[12rem] bg-slate-600 shadow-2xl backdrop-blur-sm p-2 rounded-lg absolute left-32 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            className={`h-[15rem] w-[12rem] dark:bg-slate-700 bg-white shadow-2xl backdrop-blur-sm p-2 rounded-lg absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >

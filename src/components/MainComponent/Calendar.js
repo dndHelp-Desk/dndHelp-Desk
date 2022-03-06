@@ -133,7 +133,7 @@ const Calendar = () => {
               day.getFullYear() === new Date().getFullYear() &&
               day.getMonth() === new Date().getMonth()
                 ? "text-blue-600 font-semibold"
-                : "dark:text-slate-400 text-slate-500 font-medium"
+                : "dark:text-slate-300 text-slate-600 font-medium"
             } ${
               currentMonthTickets.filter(
                 (data) => new Date(data.due_date).getDate() === day.getDate()
@@ -158,10 +158,10 @@ const Calendar = () => {
                 setMonth(month === 1 ? 12 : month - 1);
                 setYear(month === 1 ? year - 1 : year);
               }}
-              className="text-base cursor-pointer dark:text-slate-400 text-slate-600"
+              className="text-base cursor-pointer dark:text-slate-300 text-slate-700"
             />
             {/**Month Name & Year === */}
-            <h1 className="text-sm font-bold dark:text-slate-400 text-slate-600">
+            <h1 className="text-sm font-bold dark:text-slate-300 text-slate-700">
               {`${monthsWords[month]} ${year}`}
             </h1>
             <HiChevronRight
@@ -169,7 +169,7 @@ const Calendar = () => {
                 setMonth(month === 12 ? 1 : month + 1);
                 setYear(month === 12 ? year + 1 : year);
               }}
-              className="text-base cursor-pointer dark:text-slate-400 text-slate-600"
+              className="text-base cursor-pointer dark:text-slate-300 text-slate-700"
             />
           </div>
           <div className="w-full h-full flex flex-col">

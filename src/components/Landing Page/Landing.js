@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import Cloud from "./Cloud";
 import HeroImg from "./images/Hero.jpg";
 import ShowcaseOne from "./images/showcase2.png";
@@ -30,25 +31,13 @@ const Landing = () => {
         <div className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-transparent 2xl:w-[75rem] m-auto">
           <div className="w-full h-[4rem] py-2 flex justify-between items-center border-b border-slate-400">
             {/**Logo ==================== */}
-            <svg
-              className="text-[1.5rem] font-sans fill-transparent flex"
-              width="210"
-              height="50"
-              viewBox="0 0 200 50"
-            >
-              <text x="0" y="35">
-                <tspan className="stroke-[2.5px] stroke-slate-700 fill-slate-700">
-                  dnd
-                </tspan>
-                <tspan
-                  className="stroke-[2px] fill-slate-500 stroke-slate-500"
-                  x="41"
-                  y="35"
-                >
-                  Help-Desk
-                </tspan>
-              </text>
-            </svg>
+            <div className="h-full flex items-center justify-center overflow-hidden pt-1">
+              <img
+                src={darkLogo}
+                alt="logo"
+                className="object-cover object-center w-[14rem]"
+              />
+            </div>
             {/**Menu Options ========================= */}
             <div className="hidden lg:flex space-x-4">
               <Link

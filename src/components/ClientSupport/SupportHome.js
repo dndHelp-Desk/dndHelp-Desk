@@ -5,6 +5,7 @@ import {
   BsFillPlusSquareFill,
   BsBookHalf,
 } from "react-icons/bs";
+import lightLogo from "./images/dndHelp-Desk_Light.png";
 import TicketStatus from "./TicketStatus";
 import DataFetching from "./DataFetching"
 import Help from "./Help";
@@ -17,19 +18,13 @@ const SupportHome = () => {
     <div className="bg-slate-300 w-screen min-h-screen pb-6 overflow-hidden relative">
       <div className="w-full h-[5rem] bg-slate-900 px-6 flex items-center justify-between">
         {/**Logo ==================== */}
-        <svg
-          className="stroke-slate-400 text-[1.5rem] font-sans fill-transparent"
-          width="210"
-          height="50"
-          viewBox="0 0 200 50"
-        >
-          <text x="0" y="35">
-            <tspan className="stroke-[1.5px]">dnd</tspan>
-            <tspan className="stroke-[.6px]" x="43" y="35">
-              Help-Desk
-            </tspan>
-          </text>
-        </svg>
+        <div className="h-full flex items-center justify-center overflow-hidden pt-1">
+          <img
+            src={lightLogo}
+            alt="logo"
+            className="object-cover object-center w-[12rem]"
+          />
+        </div>
 
         {/**Login if You are a Member ====================== */}
         <div className="flex space-x-4 items-center">
@@ -77,7 +72,7 @@ const SupportHome = () => {
         </NavLink>
       </nav>
       <TicketStatus />
-      <Help/>
+      <Help />
       <DataFetching />
       <Outlet />
     </div>

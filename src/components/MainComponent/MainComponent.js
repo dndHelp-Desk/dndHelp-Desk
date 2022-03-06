@@ -7,6 +7,8 @@ import {
   BsGear,
   BsCloudMoon,
 } from "react-icons/bs";
+import darkLogo from "./logos/dndHelp-Desk_Dark.png";
+import lightLogo from "./logos/dndHelp-Desk_Light.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../store/UserSlice";
@@ -96,38 +98,27 @@ const MainComponent = () => {
         <div className="flex justify-center h-[4rem] w-full bg-transparent mt-4">
           {/**Alert */}
           <Alert />
-          <nav className="dark:bg-slate-900 bg-white backdrop-blur-lg p-2 flex rounded-xl justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative z-[999]">
+          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative z-[999]">
             {/**Logo ==================== */}
-            <svg
-              className="text-[1.5rem] font-sans fill-transparent hidden lg:flex"
-              width="210"
-              height="50"
-              viewBox="0 0 200 50"
-            >
-              <text x="0" y="35">
-                <tspan className="stroke-[2.5px] dark:stroke-slate-500 dark:fill-slate-500 stroke-slate-600 fill-slate-600">
-                  dnd
-                </tspan>
-                <tspan
-                  className="stroke-[.8px] dark:fill-slate-900 stroke-slate-500 fill-slate-500"
-                  x="41"
-                  y="35"
-                >
-                  Help-Desk
-                </tspan>
-              </text>
-            </svg>
-
-            {/**Small Screen Menu Btn ================ */}
-            <button
-              onClick={() => setShowMenu(showMenu === false ? true : false)}
-              className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex lg:hidden"
-            >
-              <BsJustifyLeft className="text-2xl dark:text-gray-400 text-slate-600 flex cursor-pointer" />
-            </button>
+            <div className="h-full flex items-center justify-center overflow-hidden pt-1">
+              {theme !== "dark" && (
+                <img
+                  src={darkLogo}
+                  alt="logo"
+                  className="object-cover object-center w-[10rem]"
+                />
+              )}
+              {theme === "dark" && (
+                <img
+                  src={lightLogo}
+                  alt="logo"
+                  className="object-cover object-center w-[10rem]"
+                />
+              )}
+            </div>
 
             {/**Large Screens Menu Items===================== */}
-            <div className="dark:text-gray-400 text-slate-600 hidden lg:flex space-x-5">
+            <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-5">
               <NavLink
                 to="/app"
                 className={`TabsLinks ${
@@ -225,6 +216,13 @@ const MainComponent = () => {
 
             {/*Notifications & Controls ====================*/}
             <div className="flex space-x-2">
+            {/**Small Screen Menu Btn ================ */}
+            <button
+              onClick={() => setShowMenu(showMenu === false ? true : false)}
+              className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex lg:hidden"
+            >
+              <BsJustifyLeft className="text-2xl dark:text-gray-200 text-slate-600 flex cursor-pointer" />
+            </button>
               {/**Change Theme =========================== */}
               <abbr title="theme">
                 <button
@@ -235,7 +233,7 @@ const MainComponent = () => {
                       JSON.stringify(theme === "dark" ? "light" : "dark")
                     );
                   }}
-                  className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
                 >
                   {theme === "dark" && <BsBrightnessHigh />}
                   {theme !== "dark" && <BsCloudMoon />}
@@ -246,7 +244,7 @@ const MainComponent = () => {
               <abbr title="Notifications">
                 <button
                   onClick={() => setOpenNotification(true)}
-                  className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
                 >
                   <BsBell />
                   {newReplies.length >= 1 && (
@@ -266,7 +264,7 @@ const MainComponent = () => {
               {/**Settings ================================================ */}
               <NavLink to="/app/settings/account">
                 <abbr title="Settings">
-                  <button className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
+                  <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
                     <BsGear />
                   </button>
                 </abbr>

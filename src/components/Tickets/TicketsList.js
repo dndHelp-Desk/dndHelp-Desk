@@ -51,9 +51,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5.6rem] relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
+          className={`w-full h-[5.6rem]  border dark:border-slate-800 border-slate-300 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
             ticket.ticket_id === threadId
-              ? "border-r-2 dark:border-slate-600 border-slate-400"
+              ? "border-r-2 dark:border-r-slate-500 border-r-slate-500"
               : ""
           } bg-slate-200 p-2 space-x-2  flex ${
             ticket.branch_company
@@ -117,7 +117,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
             new Date().toISOString() &&
             ticket.status &&
             ticket.status.toLowerCase() !== "solved" && (
-              <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-slate-500" />
+              <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
             )}
 
           {/**Indicate The ticket that is  overdue ================*/}
@@ -140,7 +140,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
           <div className="col-span-1 h-full xl:w-[7rem] flex justify-between space-x-2 items-center">
             <input
               type="checkbox"
-              className="rounded border-slate-300 text-blue-600 h-3 w-3 shadow-sm  focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
+              className="rounded  text-blue-600 h-3 w-3 shadow-sm dark:border-slate-700 border-slate-500 dark:bg-slate-400 bg-slate-100 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
               name="mark"
               id="mark"
               checked={
@@ -154,9 +154,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
                     )
               }
             />
-            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl dark:bg-slate-800 bg-slate-300 flex lg:hidden xl:flex justify-center items-center border-2 dark:border-slate-700 border-slate-400">
+            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl dark:bg-slate-800 bg-slate-300 flex lg:hidden xl:flex justify-center items-center border-2 dark:border-slate-600 border-slate-400">
               <abbr title={ticket.recipient_name}>
-                <h4 className="dark:text-slate-400 text-slate-500 font-semibold text-xl">{`${
+                <h4 className="dark:text-slate-300 text-slate-500 font-semibold text-xl">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
                 }`}</h4>
               </abbr>
@@ -174,15 +174,17 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
                   markAsSeen(message.id, "read");
                 });
             }}
-            className="col-span-5 flex flex-col justify-center relative h-full w-full px-1 py-1 cursor-pointer"
+            className="col-span-5 flex flex-col justify-center relative h-full w-full space-y-1 px-1 py-1 cursor-pointer"
           >
-            <h2 className="dark:text-slate-400 text-slate-600 text-xs font-semibold font-sans uppercase whitespace-nowrap">
+            <h2 className="dark:text-slate-300  text-slate-600 text-xs dark:font-semibold font-bold font-sans uppercase whitespace-nowrap">
               {ticket.category} : {ticket.ticket_id}
             </h2>
-            <h5 className="dark:text-slate-500 text-xs text-slate-500 tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
+            <h5 className="dark:text-slate-400 text-slate-500 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
               <span className="flex">{`${ticket.branch_company}`}</span>
-              <span>Due on {new Date(ticket.due_date).toDateString()}</span>
             </h5>
+            <small className="dark:text-slate-400 text-slate-500 text-xs">
+              Due on {new Date(ticket.due_date).toDateString()}
+            </small>
           </div>
           <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">
             {/**Ticket Priority ========================================== */}
@@ -190,7 +192,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
               {/**Change Ticket Priority ========================================== */}
               <select
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-500 text-xs text-slate-500 focus:outline-none outline-none capitalize"
+                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-xs text-slate-500 focus:outline-none outline-none capitalize"
               >
                 <option className="capitalize p-2" value="low">
                   {ticket.priority}
@@ -227,7 +229,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
                     ? reOpenTicket(ticket.id, e.target.value, true)
                     : changeStatus(ticket.id, e.target.value)
                 }
-                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-500 text-xs text-slate-500 focus:outline-none outline-none capitalize"
+                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-xs text-slate-500 focus:outline-none outline-none capitalize"
               >
                 <option className="capitalize p-2" value="resolved">
                   {ticket.status}
@@ -255,7 +257,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
   return (
     <div className="relative">
       {/**Tickets ========================================== */}
-      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-white rounded-xl py-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
+      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-slate-100 rounded-xl py-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
         <div
           className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 pt-1 ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""

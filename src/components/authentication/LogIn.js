@@ -8,6 +8,7 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import lightLogo from "./images/dndHelp-Desk_Light.png"
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
@@ -110,19 +111,13 @@ const LogIn = () => {
       {/**Top Nav ================= */}
       <nav className="absolute bg-[#11182780] w-[75%] h-[4rem] backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center">
         {/**Logo ==================== */}
-        <svg
-          className="stroke-slate-300 text-[1.5rem] font-sans fill-transparent"
-          width="210"
-          height="50"
-          viewBox="0 0 200 50"
-        >
-          <text x="0" y="35">
-            <tspan className="stroke-[1.5px] fill-slate-300">dnd</tspan>
-            <tspan className="stroke-[.6px]" x="43" y="35">
-              Help-Desk
-            </tspan>
-          </text>
-        </svg>
+        <div className="h-full flex items-center justify-center overflow-hidden pt-1">
+            <img
+              src={lightLogo}
+              alt="logo"
+              className="object-cover object-center w-[12rem]"
+            />
+        </div>
 
         {/**Small Screen Menu ================ */}
         <FaAlignRight
@@ -277,18 +272,24 @@ const LogIn = () => {
                     sendPasswordResetEmail(auth, inputValues.email)
                       .then(() => {
                         dispatch(
-                          updateAlert([...alerts,{
-                            message: "Password reset email sent!",
-                            color: "bg-green-200",
-                          }])
+                          updateAlert([
+                            ...alerts,
+                            {
+                              message: "Password reset email sent!",
+                              color: "bg-green-200",
+                            },
+                          ])
                         );
                       })
                       .catch((error) => {
                         dispatch(
-                          updateAlert([...alerts,{
-                            message: error.message,
-                            color: "bg-red-200",
-                          }])
+                          updateAlert([
+                            ...alerts,
+                            {
+                              message: error.message,
+                              color: "bg-red-200",
+                            },
+                          ])
                         );
                       });
                   }}
