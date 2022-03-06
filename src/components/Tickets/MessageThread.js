@@ -4,13 +4,17 @@ import {
   BsFillTrashFill,
   BsThreeDotsVertical,
   BsArrowLeft,
-  BsReplyAllFill,
-  BsFillGridFill,
+  BsLayoutSidebarInset,
 } from "react-icons/bs";
+import { BiPaperPlane } from "react-icons/bi";
 import { HiCheck } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import { setThreadMessage } from "../../store/TicketsSlice";
-import { addReply, deleteTicket } from "../Data_Fetching/TicketsnUserData";
+import {
+  addReply,
+  deleteTicket,
+  resolveTicket,
+} from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
@@ -23,6 +27,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
 
+  //Solution =========================
+  const [solution, setSolution] = useState("");
+
   //Reply State and value ==================================
   const [reply, setReply] = useState({
     message: "",
@@ -30,6 +37,13 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     message_position: threadMessage.length + 1,
     ticket_id: threadId,
   });
+
+  //Thread First Message =====================
+  const firstMessage =
+    filteredTickets.length >= 1 &&
+    filteredTickets.filter((ticket) => ticket.ticket_id === threadId).length >=
+      1 &&
+    filteredTickets.filter((ticket) => ticket.ticket_id === threadId);
 
   //Message options ========================================
   const [msgOptions, setOptions] = useState({
@@ -56,27 +70,12 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   }, [dispatch, allTickets, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
-  let agentName =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0].agent_name;
-  let clientName =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0]
-      .recipient_name;
-  let clientEmail =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0]
-      .recipient_email;
-  let brand =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0]
-      .branch_company;
-  let ticket_status =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0].status;
-  let date =
-    threadMessage.length >= 1 &&
-    threadMessage.filter((data) => data.message_position === 1)[0].due_date;
+  let agentName = firstMessage.length >= 1 && firstMessage[0].agent_name;
+  let clientName = firstMessage.length >= 1 && firstMessage[0].recipient_name;
+  let clientEmail = firstMessage.length >= 1 && firstMessage[0].recipient_email;
+  let brand = firstMessage.length >= 1 && firstMessage[0].branch_company;
+  let ticket_status = firstMessage.length >= 1 && firstMessage[0].status;
+  let date = firstMessage.length >= 1 && firstMessage[0].due_date;
 
   //Loop Through Each Message In a thread ====================
   const thread =
@@ -232,11 +231,11 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           ticket_id: threadId,
           email_body: `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-    <b> Hi ${clientName},</b>
+    Hi ${clientName},
   </p>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-    <b> A ticket with ID: ${threadId} has been updated. In order to reply or update this issues please navigate to the link provided at the bottom, don't foget to grab your ticket-id.</b>
+    A ticket with ID: ${threadId} has been updated. In order to reply or update this issues please navigate to the link provided at the bottom, don't foget to grab your ticket-id.
   </p>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
@@ -322,6 +321,106 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     }
   };
 
+  //Send Solution send Solution ====================
+  const sendSolution = (e) => {
+    e.preventDefault();
+    resolveTicket(firstMessage.length >= 1 && firstMessage[0].id, solution);
+    //Relpy Using Nodemailer ===================
+    let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
+      new Date().getMinutes() + 1
+    } hrs`;
+    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email: clientEmail,
+        subject: firstMessage.length >= 1 && firstMessage[0].category,
+        ticket_id: threadId,
+        email_body: `<p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+     Hi ${clientName},
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+    A ticket with ID: ${threadId} has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Tickect Details:</b>
+  </p>
+  <ul
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
+    <li><b>Brand:</b>
+      ${brand}
+    </li>
+    <li><b>Tickect-ID:</b>
+      ${threadId}
+    </li>
+    <li><b>Closed On:</b>
+      ${closingTime}
+    </li>
+    <li><b>Status:</b>
+      Resolved
+    </li>
+  </ul>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Resolution:</b>
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    ${solution}
+  </p>
+  <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i>In order to update or respond to this issue please click the button below,</i>
+  </p>
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
+  </p>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
+    <b>Disclaimer</b>
+  </p>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    The information contained in this communication from the sender is confidential. It is intended solely for use by
+    the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any
+    disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
+    prohibited and may be unlawful.
+  </p>`,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const resData = data;
+        if (resData.status === "success") {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Ticket has been resolved",
+                color: "bg-green-200",
+              },
+            ])
+          );
+        } else if (resData.status === "fail") {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Ticket Failed To Resolve",
+                color: "bg-red-200",
+              },
+            ])
+          );
+        }
+      });
+    setSolution("");
+  };
+
   //Component ======================================
   return (
     <div
@@ -339,128 +438,86 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             <BsArrowLeft className="inline" />
             <span className="text-sm">Back</span>
           </div>
-          <div className="flex justify-between items-center w-full space-x-2 bg-transparent relative px-3">
+
+          <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             {/**Opened Ticket Details ================================== */}
-            <button className="outline-none focus:outline-none hover:opacity-80 text-lg">
-              <BsFillGridFill className="dark:text-slate-400 text-slate-500" />
-            </button>
-            <div className="absolute rounded-md top-11 left-[-0.5rem] h-[28rem] w-[20rem] shadow-xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
-              <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
-                Ticket Details
-              </h2>
-              <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-2 capitalize">
-                <li className="text-xs">
-                  <b>FCR ⇒ </b>
-                  {filteredTickets.length >= 1 &&
-                    filteredTickets.filter(
-                      (ticket) => ticket.ticket_id === threadId
-                    ).length >= 1 &&
-                    filteredTickets.filter(
-                      (ticket) => ticket.ticket_id === threadId
-                    )[0].fcr}{" "}
-                </li>
-                <li className="text-xs">
-                  <b>Complainant Name ⇒ </b>
-                  {filteredTickets.length >= 1 &&
-                    filteredTickets.filter(
-                      (ticket) => ticket.ticket_id === threadId
-                    ).length >= 1 &&
-                    filteredTickets.filter(
-                      (ticket) => ticket.ticket_id === threadId
-                    )[0].complainant_name}{" "}
-                </li>
-                <li className="text-xs">
-                  <b>Complainant Number ⇒ </b>
-                  {filteredTickets.length >= 1 &&
-                    filteredTickets.filter(
-                      (ticket) => ticket.ticket_id === threadId
-                    ).length >= 1 &&
-                    filteredTickets.filter(
-                      (ticket) => ticket.ticket_id === threadId
-                    )[0].complainant_number}{" "}
-                </li>
-                <li className="text-xs">
-                  <b>Complainant Email ⇒ </b>
-                  <spn className="lowercase">
-                    {filteredTickets.length >= 1 &&
-                      filteredTickets.filter(
-                        (ticket) => ticket.ticket_id === threadId
-                      ).length >= 1 &&
-                      filteredTickets.filter(
-                        (ticket) => ticket.ticket_id === threadId
-                      )[0].complainant_email}{" "}
-                  </spn>
-                </li>
-              </ul>
-              <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
-                Case Details
-              </h2>
-              <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-2 h-[6rem] overflow-hidden overflow-y-scroll">
-                {filteredTickets.length >= 1 &&
-                  filteredTickets.filter(
-                    (ticket) => ticket.ticket_id === threadId
-                  ).length >= 1 &&
-                  filteredTickets.filter(
-                    (ticket) => ticket.ticket_id === threadId
-                  )[0].message}{" "}
-              </p>
-              <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
-                Solution
-              </h2>
-              <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-2 h-[4rem] overflow-hidden overflow-y-scroll rounded-md border dark:border-slate-800 border-slate-300">
-                {filteredTickets.length >= 1 &&
-                  filteredTickets.filter(
-                    (ticket) => ticket.ticket_id === threadId
-                  ).length >= 1 &&
-                  filteredTickets.filter(
-                    (ticket) => ticket.ticket_id === threadId
-                  )[0].solution}{" "}
-              </p>
-              <form
-                action=""
-                className="dark:bg-slate-800 bg-slate-200 w-full h-[4.5rem] overflow-hidden rounded-md mt-2 relative"
-              >
-                <textarea
-                  name="reply"
-                  id="reply"
-                  cols="30"
-                  rows="10"
-                  placeholder="Add solution ..."
-                  autoComplete="off"
-                  onKeyUp={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      sendReply(e);
-                    }
-                  }}
-                  required
-                  onChange={(e) => {
-                    setReply({
-                      ...reply,
-                      message: e.target.value,
-                      message_position: threadMessage.length + 1,
-                      ticket_id:
-                        threadMessage.length >= 1 &&
-                        threadMessage.filter(
-                          (message) => message.message_position === 1
-                        )[0].ticket_id,
-                      subject:
-                        threadMessage.length >= 1 &&
-                        threadMessage.filter(
-                          (msg) => msg.message_position === 1
-                        )[0]["category"],
-                    });
-                  }}
-                  value={reply.message}
-                  className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
-                ></textarea>
-                <button
-                  type="submit"
-                  className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
-                >
-                  <BsReplyAllFill />
-                </button>
-              </form>
+            <div id="ticketResolvedDetails" className="relative">
+              <BsLayoutSidebarInset className="dark:text-slate-400 text-slate-500 hover:opacity-80 text-lg cursor-pointer" />
+              <div className="absolute hidden flex-col rounded-md top-8 left-[-0.8rem] h-[28rem] w-[20rem] shadow-xl dark:bg-[#3341559f] dark:backdrop-blur-sm bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#3341559f] after:border-b-white after:border-l-transparent">
+                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
+                  Ticket Details
+                </h2>
+                <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-2 capitalize">
+                  <li className="text-xs">
+                    <b>FCR ⇒ </b>
+                    {firstMessage.length >= 1 && firstMessage[0].fcr}{" "}
+                  </li>
+                  <li className="text-xs">
+                    <b>Complainant Name ⇒ </b>
+                    {firstMessage.length >= 1 &&
+                      firstMessage[0].complainant_name}{" "}
+                  </li>
+                  <li className="text-xs">
+                    <b>Complainant Number ⇒ </b>
+                    {firstMessage.length >= 1 &&
+                      firstMessage[0].complainant_number}{" "}
+                  </li>
+                  <li className="text-xs">
+                    <b>Complainant Email ⇒ </b>
+                    <span className="lowercase">
+                      {firstMessage.length >= 1 &&
+                        firstMessage[0].complainant_email}{" "}
+                    </span>
+                  </li>
+                </ul>
+                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                  Case Details
+                </h2>
+                <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[6rem] overflow-hidden overflow-y-scroll">
+                  {firstMessage.length >= 1 && firstMessage[0].message}{" "}
+                </p>
+                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                  Solution :{" "}
+                  {firstMessage.length >= 1 && firstMessage[0].closed_time[1]
+                    ? new Date(firstMessage[0].closed_time[1]).toDateString() +
+                      " , "
+                    : ""}
+                  {firstMessage.length >= 1 && firstMessage[0].closed_time[0]}
+                </h2>
+                <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[4rem] overflow-hidden overflow-y-scroll rounded-md">
+                  {firstMessage.length >= 1 && firstMessage[0].solution}{" "}
+                </p>
+
+                {/**Add Solution ======================== */}
+                {firstMessage.length >= 1 &&
+                  firstMessage[0].status !== "solved" && (
+                    <form
+                      className="dark:bg-slate-800 bg-slate-200 w-full h-[4.5rem] overflow-hidden rounded-md mt-2 relative"
+                      onSubmit={(e) => sendSolution(e)}
+                    >
+                      <textarea
+                        name="reply"
+                        id="reply"
+                        cols="30"
+                        rows="10"
+                        placeholder="Add solution ..."
+                        autoComplete="off"
+                        required
+                        onChange={(e) => {
+                          setSolution(e.target.value);
+                        }}
+                        value={solution}
+                        className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+                      ></textarea>
+                      <button
+                        type="submit"
+                        className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
+                      >
+                        <BiPaperPlane />
+                      </button>
+                    </form>
+                  )}
+              </div>
             </div>
 
             {/**Other Details =========================== */}
@@ -539,15 +596,21 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             </h2>
           </div>
         </div>
-        <div className="h-[20rem] w-full p-2 overflow-y-scroll scroll-snap">
-          {/**Messages ============================ */}
+        <div className="h-full w-full p-2 overflow-y-scroll scroll-snap">
+          {/**Thread Messages ============================ */}
           {thread}
+          {/**Placeholders ======================== */}
           {!threadId && (
-            <img
-              src={noChatImg}
-              alt="No Ticket"
-              className="w-full h-[10rem] object-contain object-center"
-            />
+            <>
+              <h2 className="text-slate-500 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold">
+                select any ticket to start the conversation
+              </h2>
+              <img
+                src={noChatImg}
+                alt="No Ticket"
+                className="w-full h-[15rem] mt-10 object-contain object-center"
+              />
+            </>
           )}
           {/**End of Messages ============================ */}
         </div>
@@ -592,13 +655,13 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 });
               }}
               value={reply.message}
-              className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+              className="h-full w-full dark:bg-slate-800 bg-[#cbd5e183] rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border-0 dark:placeholder:text-slate-600 placeholder:text-slate-400 placeholder:text-sm"
             ></textarea>
             <button
               type="submit"
               className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
             >
-              <BsReplyAllFill />
+              <BiPaperPlane />
             </button>
           </form>
         </div>

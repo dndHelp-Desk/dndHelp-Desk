@@ -143,22 +143,31 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     );*/
 
     //Send Email Using Nodemailer ===================
-    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email: inputValue.recipient_email,
-        subject: inputValue.category,
-        ticket_id: inputValue.ticket_id,
-        email_body: `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-        <b> Hi ${inputValue.recipient_name},</b>
+    let dueDate = `${new Date(
+      inputValue.date
+    ).toDateString()}, ${new Date().getHours()}:${
+      new Date().getMinutes() + 1
+    } hrs`;
+    let openDate = `${new Date().toDateString()}, ${new Date().getHours()}:${
+      new Date().getMinutes() + 1
+    } hrs`;
+    if (member_details.id !== false) {
+      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: inputValue.recipient_email,
+          subject: inputValue.category,
+          ticket_id: inputValue.ticket_id,
+          email_body:
+            inputValue.state !== "solved"
+              ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+        Hi ${inputValue.recipient_name},
       </p>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-        <b> Dial & Dine has opened a new ticket regarding ${
-          inputValue.category
-        }. The case details are as follow:</b>
+        Dial & Dine has opened a new ticket regarding ${inputValue.category}. The case details are as follow:
       </p>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
         <b>Tickect Details:</b>
@@ -166,16 +175,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
         <li><b>Brand:</b> ${inputValue.branch_company} </li>
         <li><b>Tickect-ID:</b> ${inputValue.ticket_id} </li>
-        <li><b>Due Date:</b> ${
-          new Date(inputValue.date).toDateString() +
-          " " +
-          new Date().getHours() +
-          1 +
-          ":" +
-          new Date().getMinutes() +
-          1 +
-          "hrs"
-        } </li>
+        <li><b>Due Date:</b> ${dueDate} </li>
         <li><b>Case Origin:</b> dndHelp-Desk </li>
         <li><b>Priority:</b> ${inputValue.priority} </li>
         <li><b>Opened By:</b> ${inputValue.agent} </li>
@@ -206,28 +206,119 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       </p>
   <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
         The information contained in this communication from the sender is confidential. It is intended solely for use by the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful. 
-      </p>`,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const resData = data;
-        if (resData.status === "success") {
-          dispatch(
-            updateAlert([...alerts,{
-              message: "New Ticket Created Successfully",
-              color: "bg-green-200",
-            }])
-          );
-        } else if (resData.status === "fail") {
-          dispatch(
-            updateAlert([...alerts,{
-              message: "Email Failed To Send",
-              color: "bg-red-200",
-            }])
-          );
-        }
+      </p>`
+              : `<p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+     Hi ${inputValue.recipient_name},
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+    Dial & Dine has opened a new ticket with ID: ${inputValue.ticket_id} which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Tickect Details:</b>
+  </p>
+  <ul
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
+    <li><b>Brand:</b>
+      ${inputValue.branch_company}
+    </li>
+    <li><b>Tickect-ID:</b>
+      ${inputValue.ticket_id}
+    </li>
+    <li><b>Closed On:</b>
+      ${openDate}
+    </li>
+    <li><b>Status:</b>
+      Resolved
+    </li>
+  </ul>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Resolution:</b>
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    ${inputValue.message}
+  </p>
+  <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i>In order to update or respond to this issue please click the button below,</i>
+  </p>
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
+  </p>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
+    <b>Disclaimer</b>
+  </p>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    The information contained in this communication from the sender is confidential. It is intended solely for use by
+    the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any
+    disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
+    prohibited and may be unlawful.
+  </p>`,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const resData = data;
+          if (resData.status === "success") {
+            dispatch(
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Email sent Successfully",
+                  color: "bg-green-200",
+                },
+              ])
+            );
+          } else if (resData.status === "fail") {
+            dispatch(
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Email Failed To Send",
+                  color: "bg-red-200",
+                },
+              ])
+            );
+          }
+        });
+      setValues({
+        recipient_name: "",
+        recipient_email: "",
+        agent: member_details.id !== false && member_details[0].name,
+        priority: "",
+        category: "",
+        branch_company: "",
+        message: "",
+        state: "",
+        date: "",
+        ticket_id:
+          "#0" +
+          (allTickets.filter((ticket) => ticket.message_position === 1).length +
+            1),
+        agent_email:
+          member_details.length !== undefined && member_details[0].email,
+        complainant_name: 0,
+        complainant_email: 0,
+        complainant_number: 0,
       });
+      setModal(false);
+
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "New Ticket Created Successfully",
+            color: "bg-green-200",
+          },
+        ])
+      );
+    }
   };
 
   //Component ===========================
@@ -240,7 +331,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       <div className="h-full w-full justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
         <div
           ref={closeModalRef}
-          className="bg-slate-300 shadow-2xl w-3/5 max-w-[50rem] h-[47rem] rounded-md relative py-4 "
+          className="bg-slate-300 shadow-2xl w-[95%] lg:w-[50rem] h-[47rem] rounded-md relative py-4 "
         >
           <h3 className="text-center slate-900 text-lg font-bold">
             New Ticket
@@ -250,7 +341,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             <div className="py-6 space-y-4">
               <div className="flex justify-between space-x-4">
                 {/**Reciepient Name  ======================================== */}
-                <label className="block w-[40%] relative focus:bg-red-500">
+                <label className="block w-[50%] relative focus:bg-red-500">
                   <span className="text-slate-700 text-sm font-bold">
                     Recipient / Contact
                   </span>
@@ -294,7 +385,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   </ul>
                 </label>
                 {/**End Of Reciepient Name  ======================================== */}
-                <label className="block w-[40%]">
+                <label className="block w-[50%]">
                   <span className="text-slate-700 text-sm font-bold">
                     Subject / Category
                   </span>
@@ -335,7 +426,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               </div>
               <div className="flex justify-between space-x-4">
                 {/**Priority And Status  ======================================== */}
-                <label className="block w-[40%]">
+                <label className="block w-[50%]">
                   <span className="text-slate-700 text-sm font-bold">
                     Priority
                   </span>
@@ -368,7 +459,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     <option className="capitalize">Urgent</option>
                   </select>
                 </label>
-                <label className="block w-[40%]">
+                <label className="block w-[50%]">
                   <span className="text-slate-700 text-sm font-bold">
                     Status
                   </span>
@@ -395,17 +486,16 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     <option className="capitalize" value="">
                       State ...
                     </option>
-                    <option className="capitalize">Open</option>
+                    <option className="capitalize">open</option>
                     <option className="capitalize">on hold</option>
-                    <option className="capitalize">Closed</option>
-                    <option className="capitalize">Resolved</option>
+                    <option className="capitalize">solved</option>
                   </select>
                 </label>
                 {/**End  Of Priority and Status  ======================================== */}
               </div>
               {/**complainant Details ======================================== */}
               <div className="flex justify-between space-x-4">
-                <label className="block w-[40%]">
+                <label className="block w-[50%]">
                   <span className="text-slate-700 text-sm font-bold">
                     Complainant Email
                   </span>
@@ -424,7 +514,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     "
                     autoComplete="nope"
                     placeholder="email@example.com ..."
-                    required={true}
                     onChange={(e) =>
                       setValues({
                         ...inputValue,
@@ -433,7 +522,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     }
                   />
                 </label>
-                <label className="block w-[40%]">
+                <label className="block w-[50%]">
                   <span className="text-slate-700 text-sm font-bold">
                     Complainant Number
                   </span>
@@ -451,8 +540,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
                     "
                     autoComplete="off"
-                    placeholder="+27 5698 6258 ..."
+                    placeholder="07 5698 6258 ..."
                     required={true}
+                    pattern="^[0-9]{10}$"
                     onChange={(e) =>
                       setValues({
                         ...inputValue,
@@ -461,15 +551,15 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     }
                   />
                 </label>
-                {/**End of complainant Details ======================================== */}
               </div>
-              <label className="block">
-                <span className="text-slate-700 text-sm font-bold">
-                  Complainant Name
-                </span>
-                <input
-                  type="text"
-                  className="
+              <div className="flex justify-between space-x-4">
+                <label className="block w-[50%]">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Complainant Name
+                  </span>
+                  <input
+                    type="text"
+                    className="
                       mt-1
                       block
                       w-full
@@ -480,16 +570,62 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       shadow-sm
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
                     "
-                  placeholder="Full Name ..."
-                  required={true}
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      complainant_name: e.target.value,
-                    })
-                  }
-                />
-              </label>
+                    placeholder="Full Name ..."
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        complainant_name: e.target.value,
+                      })
+                    }
+                  />
+                </label>
+
+                {/**Action =================== */}
+                <label className="block w-[50%]">
+                  <span className="text-slate-700 text-sm font-bold">
+                    Action
+                  </span>
+                  <select
+                    className="
+                      block
+                      w-full
+                      mt-1
+                  text-slate-600
+                   text-sm
+                      rounded-md
+                      border-slate-300
+                      shadow-sm
+                  capitalize
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    "
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        action: e.target.value,
+                        ticket_id:
+                          "#0" +
+                          (allTickets.filter(
+                            (ticket) => ticket.message_position === 1
+                          ).length +
+                            1),
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      Call back...
+                    </option>
+                    <option className="capitalize" value="">
+                      No Call Back
+                    </option>
+                    <option className="capitalize" value="5">
+                      Call in 5 mins
+                    </option>
+                  </select>
+                </label>
+              </div>
+              {/**End of complainant Details ======================================== */}
               <label className="block">
                 <span className="text-slate-700 text-sm font-bold">
                   Due Date

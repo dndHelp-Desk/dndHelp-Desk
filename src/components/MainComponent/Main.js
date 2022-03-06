@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import noUsers from "./images/no-userss.svg";
 import {
-  BsDashSquare,
+  BsDashCircleDotted,
   BsCheckAll,
   BsArrowRepeat,
   BsEnvelopeOpen,
@@ -13,8 +13,6 @@ import {
 } from "react-icons/bs";
 import ToDo from "./ToDo";
 import Calendar from "./Calendar";
-import { markAsSeen } from "./../Data_Fetching/TicketsnUserData";
-import { setThreadId } from "./../../store/TicketsSlice";
 
 const Main = () => {
   const location = useLocation();
@@ -22,9 +20,6 @@ const Main = () => {
   const todoList = useSelector((state) => state.UserInfo.toDo);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const dispatch = useDispatch();
-  const [isChatOpen, setChat] = useState(false);
-  const threadId = useSelector((state) => state.Tickets.threadId);
   const overDue =
     filteredTickets &&
     filteredTickets.filter(
@@ -39,49 +34,6 @@ const Main = () => {
         (ticket) => ticket.readStatus !== "read" && ticket.from !== "agent"
       )) ||
     [];
-
-  //Overdue Tickets =====================
-  const overDueTickets =
-    overDue.length >= 1 &&
-    overDue.map((ticket) => {
-      /**Unread Meassages ================= */
-      let ticketReadStatus =
-        overDue.length >= 1 &&
-        overDue.filter(
-          (message) =>
-            message.ticket_id === ticket.ticket_id &&
-            message.readStatus !== "read" &&
-            message.from !== "agent"
-        );
-
-      /**Mark As read if thread is Active ========== */
-      threadId === ticket.ticket_id &&
-        ticketReadStatus.length >= 1 &&
-        ticketReadStatus.forEach((message) => {
-          markAsSeen(message.id, "read");
-        });
-      /**End ========== */
-      return (
-        <Link to="/app/tickets" key={ticket.id}>
-          <div
-            onClick={() => {
-              dispatch(setThreadId(ticket.ticket_id));
-              window.localStorage.setItem("threadId", JSON.stringify(threadId));
-              setChat(!isChatOpen && true);
-              ticketReadStatus.length >= 1 &&
-                ticketReadStatus.forEach((message) => {
-                  markAsSeen(message.id, "read");
-                });
-            }}
-            className="h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 flex cursor-pointer items-center justify-center relative uppercase text-lg dark:text-slate-300 text-slate-500 font-bold custom-shadow border border-red-500"
-          >
-            <abbr title={ticket.recipient_name}>
-              {ticket.recipient_name.charAt(0)}
-            </abbr>
-          </div>
-        </Link>
-      );
-    });
 
   //Loop Through All Users ================
   const users =
@@ -108,7 +60,7 @@ const Main = () => {
           </h3>
           <h3
             className={`text-xs ${
-              user.status === "online"
+              user.status === "available"
                 ? "text-green-500"
                 : user.status === "unavailable"
                 ? "text-red-500"
@@ -141,11 +93,11 @@ const Main = () => {
                   Overdue Tickets
                 </h2>
                 <p className="text-thin text-slate-500 text-xs lg:text-sm text-center">
-                  {overDue.length} tickets displayed below are overdue. To
-                  resolve these issues please visit the tickets page check those
-                  highlighted with red border. To keep yourself up-to date the
-                  calender has highlighted all due dates, just hover on top to
-                  see clients name.
+                  {overDue.length} ticket/s that are highlighted with blue on
+                  the calendar have been overdue the resolve-by date. To keep
+                  yourself up-to date the calender has highlighted all due
+                  dates, just hover on top to see clients name which can be used
+                  to search.
                 </p>
               </div>
             )}
@@ -164,15 +116,12 @@ const Main = () => {
                 </p>
               </div>
             )}
-            <div className="flex justify-center items-end space-x-1">
-              {overDueTickets}
-              {overDue.length <= 1 && (
-                <>
-                  <div className="h-10 w-10 border border-slate-600 rounded-xl dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
-                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
-                  <div className="h-10 w-10 rounded-xl border border-slate-600 dark:bg-slate-800 bg-slate-200 custom-shadow flex cursor-pointer items-center justify-center relative uppercase animate-pulse text-lg dark:text-slate-300 text-slate-500 font-bold"></div>
-                </>
-              )}
+            <div className="flex items-center justify-center space-x-1">
+              <Link to="./tickets">
+                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-red-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-red-600 hover:ring-red-600 text-xs font-bold h-10 px-5 transition-all duration-300">
+                  Resolve Tickets
+                </button>
+              </Link>
             </div>
           </div>
           {/**End Of Overdue Tickets ==================================*/}
@@ -231,15 +180,17 @@ const Main = () => {
           {/**Agents Queue ====================== */}
           <div className="w-full h-20 col-span-1 flex justify-center py-4">
             <div className="h-full w-full flex flex-col justify-between space-y-2">
-              <div className="space-x-2 items-center h-full w-full grid grid-cols-3 px-2">
+              <div className="space-x-2 items-center h-full w-full grid grid-cols-3 px-2 capitalize">
                 <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
                   <p className="text-slate-500 text-lg font-bold">
                     {
-                      allMembers.filter((user) => user.status === "online")
+                      allMembers.filter((user) => user.status === "available")
                         .length
                     }
                   </p>
-                  <p className="text-slate-500 text-xs font-semibold">Online</p>
+                  <p className="text-slate-500 text-xs font-semibold">
+                    available
+                  </p>
                 </div>
                 <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
                   <p className="text-slate-500 text-lg font-bold">
@@ -285,7 +236,7 @@ const Main = () => {
                     <BsCheckAll />
                   </div>
                   <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
-                    Resolved
+                    Solved
                   </h5>
                 </div>
                 <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
@@ -294,27 +245,7 @@ const Main = () => {
                       (data) =>
                         data.message_position === 1 &&
                         data.status &&
-                        data.status.toLowerCase() === "resolved"
-                    ).length
-                  }
-                </h5>
-              </div>
-              <div className="h-12 w-full flex justify-between">
-                <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
-                    <BsDashSquare />
-                  </div>
-                  <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
-                    Closed
-                  </h5>
-                </div>
-                <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
-                  {
-                    filteredTickets.filter(
-                      (data) =>
-                        data.message_position === 1 &&
-                        data.status &&
-                        data.status.toLowerCase() === "closed"
+                        data.status.toLowerCase() === "solved"
                     ).length
                   }
                 </h5>
@@ -323,6 +254,26 @@ const Main = () => {
                 <div className="flex space-x-2 items-center w-[70%]">
                   <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
                     <BsArrowRepeat />
+                  </div>
+                  <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
+                    Re-Opened
+                  </h5>
+                </div>
+                <h5 className="dark:text-slate-400 text-slate-500 text-xl font-semibold flex items-center">
+                  {
+                    filteredTickets.filter(
+                      (data) =>
+                        data.message_position === 1 &&
+                        data.status &&
+                        data.status.toLowerCase() === "reopened"
+                    ).length
+                  }
+                </h5>
+              </div>
+              <div className="h-12 w-full flex justify-between">
+                <div className="flex space-x-2 items-center w-[70%]">
+                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-500 flex justify-center items-center text-xl">
+                    <BsDashCircleDotted />
                   </div>
                   <h5 className="dark:text-slate-400 text-slate-500 text-sm font-bold">
                     On-Hold

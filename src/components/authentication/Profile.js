@@ -99,7 +99,7 @@ const Profile = () => {
           <span
             className={`absolute h-2.5 w-2.5 rounded-full border dark:border-slate-900 border-slate-100  ${
               member_details.length !== undefined &&
-              member_details[0].status === "online"
+              member_details[0].status === "available"
                 ? "bg-green-500"
                 : member_details[0].status === "busy"
                 ? "bg-yellow-500"
@@ -112,7 +112,7 @@ const Profile = () => {
             <div className="pb-2">
               <small
                 className={`text-xs text-center capitalize font-semibold flex items-center justify-center ${
-                  member_details[0].status === "online"
+                  member_details[0].status === "available"
                     ? "text-green-500"
                     : member_details[0].status === "unavailable"
                     ? "text-red-500"
@@ -128,13 +128,15 @@ const Profile = () => {
                 {member_details[0].dept}
               </h4>
             </div>
-            <ul className="w-full">
+            <ul className="w-full capitalize">
               <li
-                onClick={() => updateUserStatus(member_details[0].id, "online")}
+                onClick={() =>
+                  updateUserStatus(member_details[0].id, "available")
+                }
                 className="h-8 border-b border-t hover:opacity-80 dark:border-slate-500 border-slate-400 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
               >
-                <span>◉ Online</span>
-                {member_details[0].status === "online" && (
+                <span>◉ available</span>
+                {member_details[0].status === "available" && (
                   <BsCheck className="text-lg" />
                 )}
               </li>

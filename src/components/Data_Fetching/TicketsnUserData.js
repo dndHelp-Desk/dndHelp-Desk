@@ -35,11 +35,11 @@ export const deleteTicket = (id) => {
 };
 
 // Assign Different Agent ================
-export const assignAgent = (id, agent,email) => {
+export const assignAgent = (id, agent, email) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {
     agent_name: agent,
-    agent_email:email
+    agent_email: email,
   });
 };
 
@@ -74,6 +74,28 @@ export const updateProfileUrl = (id, photoUrl) => {
   let docRef = doc(db, "members", id);
   updateDoc(docRef, {
     photoUrl: photoUrl,
+  });
+};
+
+// Resolve Ticket Ticket  ================
+export const resolveTicket = (id, solution) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    status: "solved",
+    solution: solution,
+    closed_time: [
+      `${new Date().getHours()}:${new Date().getMinutes() + 1}`,
+      `${new Date().toLocaleDateString()}`,
+    ],
+  });
+};
+
+// Change Ticket Status ================
+export const reOpenTicket = (id) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    status: "reopened",
+    reopened: true,
   });
 };
 
@@ -139,7 +161,7 @@ export const addTicket = (
     category: category,
     branch_company: branch_company,
     message: message,
-    time: `${new Date().getHours() + 1}:${new Date().getMinutes() + 1}`,
+    time: `${new Date().getHours()}:${new Date().getMinutes() + 1}`,
     ticket_id: ticket_id,
     status: state,
     due_date: new Date(date).toLocaleDateString(),
@@ -149,7 +171,16 @@ export const addTicket = (
     complainant_name: c_name,
     complainant_email: c_email,
     complainant_number: c_number,
-    closed_time: "00:00",
+    closed_time:
+      state === "solved"
+        ? [
+            `${new Date().getHours() }:${new Date().getMinutes() + 1}`,
+            `${new Date().toLocaleDateString()}`,
+          ]
+        : [],
+    fcr: state === "solved" ? "yes" : "no",
+    solution: state === "solved" ? message : "",
+    reopened: false,
   });
 };
 

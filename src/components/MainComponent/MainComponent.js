@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getAuth } from "firebase/auth";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import {
   BsBell,
   BsJustifyLeft,
   BsBrightnessHigh,
   BsGear,
-  BsMoonStars,
+  BsCloudMoon,
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
@@ -16,16 +15,13 @@ import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
 import Alert from "../Others/Alert";
-import TicketsnUserData, {
-  updateUserStatus,
-} from "../Data_Fetching/TicketsnUserData";
+import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 import Profile from "../authentication/Profile";
 import Notification from "./Notifications & Chat/Notification";
 
 const MainComponent = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
-  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const theme = useSelector((state) => state.UserInfo.theme);
   const user = useSelector((state) => state.UserInfo.member_details);
   const [openNotifications, setOpenNotification] = useState(false);
@@ -37,17 +33,6 @@ const MainComponent = () => {
     allTickets.filter(
       (ticket) => ticket.readStatus !== "read" && ticket.from !== "agent"
     );
-
-  //Update Online Status if useris logged
-  if (
-    navigator.onLine &&
-    alerts.filter((alert) => alert.message === "Logged In Succesfully")
-      .length >= 1 &&
-    user[0].id !== false &&
-    getAuth().currentUser
-  ) {
-    updateUserStatus(user[0].id, "online");
-  }
 
   //Small Screen Menu ===================
   const [showMenu, setShowMenu] = useState(false);
@@ -253,7 +238,7 @@ const MainComponent = () => {
                   className="dark:text-gray-400 text-slate-600 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
                 >
                   {theme === "dark" && <BsBrightnessHigh />}
-                  {theme !== "dark" && <BsMoonStars />}
+                  {theme !== "dark" && <BsCloudMoon />}
                 </button>
               </abbr>
 
