@@ -18,7 +18,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
   const [contactsPanel, setPanel] = useState(false);
   const user = useSelector((state) => state.UserInfo.member_details);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
-  const alerts = useSelector((state) => state.NotificationsData.alert);
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const dispatch = useDispatch();
   const [searchAsssignee, setSearch] = useState("");
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
