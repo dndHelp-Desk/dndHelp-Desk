@@ -57,7 +57,7 @@ const Table = ({ setModal }) => {
                   ? select([...selectedArray, contact.id])
                   : select(selectedArray.filter((data) => data !== contact.id))
               }
-              className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none"
+              className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 outline-none"
             />
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
@@ -72,16 +72,13 @@ const Table = ({ setModal }) => {
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
             {contact.branch_company}
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
-            03
-          </td>
         </tr>
       );
     });
 
   //Component  =============================
   return (
-    <div className="mx-auto container bg-white dark:bg-slate-900 shadow rounded-xl p-2 h-[40rem] overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+    <div className="mx-auto container bg-slate-100 dark:bg-slate-900 shadow rounded-xl p-2 h-[40rem] overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
       <div className="flex flex-col md:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0">
         <div className="flex flex-col md:flex-row items-start lg:items-center">
           <div className="flex items-center gap-2">
@@ -127,7 +124,7 @@ const Table = ({ setModal }) => {
         </div>
       </div>
       <div className="w-full overflow-x-scroll xl:overflow-x-hidden">
-        <table className="min-w-full bg-white dark:bg-slate-900">
+        <table className="min-w-full bg-slate-100 dark:bg-slate-900">
           <thead>
             <tr className="w-full h-16 border-gray-300 dark:border-slate-700 border-b py-8">
               <th className="pl-8 text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
@@ -138,23 +135,20 @@ const Table = ({ setModal }) => {
                   onChange={(e) =>
                     e.target.checked === true ? markAll() : select([])
                   }
-                  className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none"
+                  className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 outline-none"
                 />
               </th>
-              <th className="text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                 Full Name
               </th>
-              <th className="text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                 Email
               </th>
-              <th className="text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                 Phone Number
               </th>
-              <th className="text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                 Company Name
-              </th>
-              <th className="text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                Tickets
               </th>
             </tr>
           </thead>

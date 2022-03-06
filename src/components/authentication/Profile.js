@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAuth, upload } from "./Firebase";
-import { BsCameraFill, BsBoxArrowUp, BsCheck } from "react-icons/bs";
+import {
+  BsCameraFill,
+  BsBoxArrowUp,
+  BsCheck,
+  BsStopFill,
+} from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAlert } from "../../store/NotificationsSlice";
 import {
@@ -111,7 +116,7 @@ const Profile = () => {
           <div className="hoverProfile_Details p-3 absolute w-[12rem] overflow-hidden dark:bg-slate-600 bg-slate-500 hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.5rem] after:content-[''] after:fixed after:top-[3.7rem] after:right-[1rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-600 after:border-b-slate-500 after:border-l-transparent">
             <div className="pb-2">
               <small
-                className={`text-xs text-center capitalize font-semibold flex items-center justify-center ${
+                className={`text-xs text-center capitalize font-semibold flex items-center space-x-1 justify-center ${
                   member_details[0].status === "available"
                     ? "text-green-500"
                     : member_details[0].status === "unavailable"
@@ -119,7 +124,8 @@ const Profile = () => {
                     : "text-yellow-500"
                 }`}
               >
-                ◉ {member_details[0].status}
+                <BsStopFill />
+                <span> {member_details[0].status}</span>
               </small>
               <h3 className="dark:text-slate-300 text-slate-200 text-sm text-center capitalize font-semibold">
                 {member_details[0].name}
@@ -135,7 +141,9 @@ const Profile = () => {
                 }
                 className="h-8 border-b border-t hover:opacity-80 dark:border-slate-500 border-slate-400 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
               >
-                <span>◉ available</span>
+                <span className="flex items-center space-x-1">
+                  <BsStopFill /> <span>available</span>
+                </span>
                 {member_details[0].status === "available" && (
                   <BsCheck className="text-lg" />
                 )}
@@ -144,7 +152,9 @@ const Profile = () => {
                 onClick={() => updateUserStatus(member_details[0].id, "busy")}
                 className="h-8 border-b hover:opacity-80 dark:border-slate-500 border-slate-400 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
               >
-                <span>◉ Busy</span>
+                <span className="flex items-center space-x-1">
+                  <BsStopFill /> <span>Busy</span>
+                </span>
                 {member_details[0].status === "busy" && (
                   <BsCheck className="text-lg" />
                 )}
@@ -155,7 +165,9 @@ const Profile = () => {
                 }
                 className="h-8 border-b hover:opacity-80 dark:border-slate-500 border-slate-400 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
               >
-                <span>◉ Unavailable</span>
+                <span className="flex items-center space-x-1">
+                  <BsStopFill /> <span>Unavailable</span>
+                </span>
                 {member_details[0].status === "unavailable" && (
                   <BsCheck className="text-lg" />
                 )}

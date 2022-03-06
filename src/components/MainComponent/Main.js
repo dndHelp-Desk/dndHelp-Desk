@@ -10,6 +10,7 @@ import {
   BsFillHandThumbsUpFill,
   BsEnvelope,
   BsAlarm,
+  BsStopFill,
 } from "react-icons/bs";
 import ToDo from "./ToDo";
 import Calendar from "./Calendar";
@@ -59,7 +60,7 @@ const Main = () => {
             </small>
           </h3>
           <h3
-            className={`text-xs ${
+            className={`text-xs flex items-center space-x-1 ${
               user.status === "available"
                 ? "text-green-600"
                 : user.status === "unavailable"
@@ -67,7 +68,7 @@ const Main = () => {
                 : "text-yellow-600"
             } capitalize`}
           >
-            ◉ {user.status}
+           <BsStopFill/> <span>{user.status}</span>
           </h3>
         </div>
       );

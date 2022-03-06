@@ -362,6 +362,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     placeholder="Brand Name ..."
                     required={true}
                     onKeyPress={() => setResults(true)}
+                    onKeyDown={() => setResults(true)}
+                    onFocus={() => setResults(true)}
                     onChange={(e) => {
                       setRecipient(e.target.value);
                       setValues({
@@ -379,7 +381,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     ref={closeSuggestionsRef}
                     className={`${
                       searchResults ? "" : "hidden"
-                    } absolute top-18 left-0 h-[10rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                    } absolute top-19 left-0 h-[10rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
                   >
                     {contactsList}
                   </ul>

@@ -1,5 +1,5 @@
 import React from "react";
-import Filters from "../Reports/Filters";
+import Filters from "../Tickets/Filters";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef"
 
 const OffCanvasMenu = ({ filtersModal, setfiltersModal }) => {

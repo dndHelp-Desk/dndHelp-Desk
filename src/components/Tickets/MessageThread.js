@@ -440,7 +440,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
               >
                 <span className="text-sm">Back</span>
               </div>
-              <div className="absolute hidden flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[20rem] shadow-xl dark:bg-[#334155da] dark:backdrop-blur-sm bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#334155bb] after:border-b-white after:border-l-transparent">
+              <div id="solution" className="absolute hidden flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[20rem] shadow-xl dark:bg-[#334155da] dark:backdrop-blur-sm bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#334155bb] after:border-b-white after:border-l-transparent">
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
                   Ticket Details
                 </h2>
