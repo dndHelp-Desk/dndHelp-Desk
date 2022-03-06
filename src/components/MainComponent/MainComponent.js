@@ -100,7 +100,7 @@ const MainComponent = () => {
           <Alert />
           <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative z-[999]">
             {/**Logo ==================== */}
-            <div className="h-full flex items-center justify-center overflow-hidden pt-1">
+            <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
               {theme !== "dark" && (
                 <img
                   src={darkLogo}
@@ -117,6 +117,13 @@ const MainComponent = () => {
               )}
             </div>
 
+            {/**Small Screen Menu Btn ================ */}
+            <button
+              onClick={() => setShowMenu(showMenu === false ? true : false)}
+              className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex lg:hidden"
+            >
+              <BsJustifyLeft className="text-2xl dark:text-gray-200 text-slate-600 flex cursor-pointer" />
+            </button>
             {/**Large Screens Menu Items===================== */}
             <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-5">
               <NavLink
@@ -216,13 +223,6 @@ const MainComponent = () => {
 
             {/*Notifications & Controls ====================*/}
             <div className="flex space-x-2">
-            {/**Small Screen Menu Btn ================ */}
-            <button
-              onClick={() => setShowMenu(showMenu === false ? true : false)}
-              className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex lg:hidden"
-            >
-              <BsJustifyLeft className="text-2xl dark:text-gray-200 text-slate-600 flex cursor-pointer" />
-            </button>
               {/**Change Theme =========================== */}
               <abbr title="theme">
                 <button

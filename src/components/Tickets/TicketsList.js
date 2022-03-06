@@ -131,7 +131,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
 
           {/**Indicate if it's new messsage ================*/}
           {ticketReadStatus.length >= 1 && (
-            <div className="absolute left-8 top-1 flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
+            <div className="absolute left-7 top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
               <span>New : {ticketReadStatus.length}</span>
             </div>
           )}

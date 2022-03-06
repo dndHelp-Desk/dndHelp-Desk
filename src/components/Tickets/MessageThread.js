@@ -52,9 +52,9 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     threadId: "",
   });
   const msgOptionsRef = useOnClickOutside(() =>
-    setOptions({ ...msgOptions, status: false, id: "", threadId: "" })
+    setOptions({ status: false, id: "", threadId: "" })
   );
-
+  console.log(msgOptions);
   //Filter Thread Messages =====================================
   useEffect(() => {
     allTickets.length >= 1 &&
@@ -86,6 +86,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           key={index}
           className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 py-4 p-2 flex gap-2 transition-all"
         >
+          {/**Avatar ====================== */}
           <div
             className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase font-bold text-lg dark:text-gray-300 text-slate-600 dark:bg-slate-700 bg-slate-100 border dark:border-slate-600 border-slate-400`}
           >
@@ -95,6 +96,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 : clientName.charAt(0)
             }`}
           </div>
+          {/**Message ====================== */}
           <div
             className={`w-[95%] 2xl:w-full rounded-md dark:bg-slate-800 bg-slate-100 border dark:border-slate-700 border-slate-300 space-y-2 px-4 pb-4 ${
               message.from === "agent" ? "order-first pt-1" : "order-last pt-2"
@@ -102,9 +104,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           >
             <div className="w-full bg-transparent space-y-2 rounded-lg">
               <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-                <span
-                  className="hidden md:flex dark:text-slate-300 text-slate-600"
-                >{`${
+                <span className="hidden md:flex dark:text-slate-300 text-slate-600">{`${
                   message.from === "agent" ? agentName : clientName
                 }`}</span>{" "}
                 <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
@@ -127,13 +127,12 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   <button
                     onClick={() =>
                       setOptions({
-                        ...msgOptions,
                         status: true,
                         id: message.message_position,
                         threadId: message.ticket_id,
                       })
                     }
-                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 dark:text-slate-500 flex items-center justify-center"
+                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 flex items-center justify-center"
                   >
                     <BsThreeDotsVertical className="inline  cursor-pointer" />
                   </button>
@@ -147,14 +146,19 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                       msgOptions.threadId === message.ticket_id
                         ? ""
                         : "hidden"
-                    } z-[99] shadow-lg border border-slate-700 dark:bg-[#0f172a83] bg-slate-200 backdrop-blur-sm rounded-lg absolute ${
-                      message.from !== "agent" ? "right-0" : "left-0"
-                    }  top-10 p-4`}
+                    } z-[99] shadow-lg border dark:border-slate-800 border-slate-100 dark:bg-slate-700 bg-white backdrop-blur-sm rounded-lg absolute right-0 top-8 p-4`}
                   >
-                    <h5 className="text-slate-400 font-medium text-sm flex justify-between items-center">
+                    <h5 className="dark:text-slate-300 text-slate-500 font-semibold text-sm flex justify-between items-center">
                       <span>Delete</span>
                       <BsFillTrashFill
-                        onClick={() => deleteTicket(message.id)}
+                        onClick={() => {
+                          deleteTicket(message.id);
+                          setOptions({
+                            status: false,
+                            id: "",
+                            threadId: "",
+                          });
+                        }}
                         className="hover:text-red-500 cursor-pointer"
                       />
                     </h5>
@@ -420,25 +424,23 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   //Component ======================================
   return (
     <div
-      className={`h-[35rem] lg:h-[40rem] ${
+      className={`h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
       } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
       <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
-          {/**Back To Main List  On Small Screens====================== */}
-          <div
-            onClick={() => setChat(false)}
-            className="dark:text-slate-400 text-slate-600 font-bold py-1 h-full w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer"
-          >
-            <BsArrowLeft className="inline" />
-            <span className="text-sm">Back</span>
-          </div>
-
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             {/**Opened Ticket Details ================================== */}
-            <div id="ticketResolvedDetails" className="relative">
+            <div id="ticketResolvedDetails" className="relative flex items-center space-x-2">
               <BsLayoutSidebarInset className="dark:text-slate-400 text-slate-500 hover:opacity-80 text-2xl cursor-pointer" />
+              {/**Back To Main List  On Small Screens====================== */}
+              <div
+                onClick={() => setChat(false)}
+                className="dark:text-slate-400 text-slate-600 font-bold py-1 h-full w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer"
+              >
+                <span className="text-sm">Back</span>
+              </div>
               <div className="absolute hidden flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[20rem] shadow-xl dark:bg-[#334155da] dark:backdrop-blur-sm bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#334155bb] after:border-b-white after:border-l-transparent">
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
                   Ticket Details
@@ -533,7 +535,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                         (message) => message.message_position === 1
                       )[0].date
                     ).toDateString()}
-                   {"  "}
+                  {"  "}
                   {`${
                     (threadMessage.length >= 1 &&
                       Number(

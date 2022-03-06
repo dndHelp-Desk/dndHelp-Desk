@@ -22,15 +22,15 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
       return (
         <div
           key={index}
-          className="w-full rounded-xl dark:bg-slate-600 bg-slate-500 p-2 border border-slate-400"
+          className="w-full rounded-xl dark:bg-slate-700 bg-slate-200 p-2 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-600"
         >
-          <h4 className="dark text-sm font-semibold text-center dark:text-slate-400 text-slate-600">
+          <h4 className="dark text-sm font-semibold text-center">
             {notif.notification}
           </h4>
-          <p className="dark text-xs font-base text-slate-300">
+          <p className="dark text-xs font-base">
             {`There's a new response from ticket with ticket ID: ${notif.ticket_id}.`}
           </p>
-          <small className="dark text-xs font-semibold text-left dark:text-slate-400 text-slate-400">
+          <small className="dark text-xs font-semibold text-left dark:text-slate-400 text-slate-500">
             {new Date(notif.date).toDateString()} | {notif.time}
           </small>
         </div>
@@ -41,7 +41,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
   return (
     <div
       ref={panelRef}
-      className={`h-[20rem] w-[15rem] dark:bg-slate-800 bg-slate-400 shadow-2xl rounded-lg p-4 absolute right-2 top-16 after:content-[''] after:fixed after:top-[3.5rem] after:right-[7rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-400 after:border-l-transparent flex-col items-center space-y-2 overflow-x-hidden overflow-y-scroll lg:border-t dark:border-slate-800 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap ${
+      className={`h-[20rem] w-[15rem] dark:bg-slate-800 bg-white shadow-2xl rounded-lg p-4 absolute right-2 top-16 after:content-[''] after:fixed after:top-[3.5rem] after:right-[7rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-white after:border-l-transparent flex-col items-center space-y-2 overflow-x-hidden overflow-y-scroll lg:border-t dark:border-slate-800 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap ${
         openNotifications === true ? "flex" : "hidden"
       }`}
     >
