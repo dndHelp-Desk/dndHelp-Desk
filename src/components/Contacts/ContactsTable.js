@@ -8,13 +8,13 @@ import {
   HiOutlineSearch,
   HiPlus,
 } from "react-icons/hi";
-import { deleteContact } from "../Data_Fetching/TicketsnUserData";
+import { deleteContact} from "../Data_Fetching/TicketsnUserData";
 
 const Table = ({ setModal }) => {
   const contacts = useSelector((state) => state.Tickets.contacts);
   const [searchResults, setResults] = useState("");
   const [selectedArray, select] = useState([]);
-  
+
   const deleteCont = () => {
     selectedArray.length >= 1 &&
       selectedArray.forEach((id) => deleteContact(id));
