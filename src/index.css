@@ -47,7 +47,7 @@
     @apply text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800;
   }
 
-  #ticketResolvedDetails:hover #solution{
+  div button:hover + #reportsFilters, #ticketResolvedDetails:hover #solution{
     display:flex;
   }
 
@@ -121,3 +121,4 @@
     scroll-snap-align: start end;
   }
 }
+

@@ -326,25 +326,22 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     <div
       className={`fixed ${
         newTicketModal === true ? "fixed flex z-[999]" : "hidden"
-      } top-[-0.5rem] left-0 bottom-0 right-0 min-h-screen w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-10`}
+      } top-[-0.5rem] left-0 bottom-0 right-0 min-h-screen w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-14`}
     >
       <div className="h-full w-full justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
         <div
           ref={closeModalRef}
-          className="bg-slate-300 shadow-2xl w-[95%] lg:w-[50rem] h-[47rem] rounded-md relative py-4 "
+          className="bg-slate-400 shadow-2xl w-[95%] sm:w-[35rem] h-fit rounded-md relative py-4 "
         >
-          <h3 className="text-center slate-900 text-lg font-bold">
-            New Ticket
+          <h3 className="text-center text-slate-900 text-sm font-bold uppercase mt-2">
+            Create A New Ticket
           </h3>
           {/**New Tickect Form ================================= */}
           <form className="px-4" onSubmit={(e) => handleSubmit(e)}>
             <div className="py-6 space-y-4">
               <div className="flex justify-between space-x-4">
                 {/**Reciepient Name  ======================================== */}
-                <label className="block w-[50%] relative focus:bg-red-500">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Recipient / Contact
-                  </span>
+                <label className="w-[50%] relative">
                   <input
                     className="
                       block
@@ -352,6 +349,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
+                   placeholder:text-slate-500
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -359,7 +358,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     "
                     type="text"
                     value={recepient}
-                    placeholder="Brand Name ..."
+                    placeholder="Restuarant ..."
                     required={true}
                     onKeyPress={() => setResults(true)}
                     onKeyDown={() => setResults(true)}
@@ -388,9 +387,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 </label>
                 {/**End Of Reciepient Name  ======================================== */}
                 <label className="block w-[50%]">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Subject / Category
-                  </span>
                   <select
                     className="
                       block
@@ -398,6 +394,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -429,19 +426,17 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               <div className="flex justify-between space-x-4">
                 {/**Priority And Status  ======================================== */}
                 <label className="block w-[50%]">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Priority
-                  </span>
                   <select
-                    className="
-                      block
+                    className="block
                       w-full
                       mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
+                  capitalize
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
                     required={true}
@@ -462,19 +457,17 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   </select>
                 </label>
                 <label className="block w-[50%]">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Status
-                  </span>
                   <select
                     className="
-                      block
-                      w-full
+                     w-full
                       mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
+                  capitalize
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
                     required={true}
@@ -498,24 +491,22 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               {/**complainant Details ======================================== */}
               <div className="flex justify-between space-x-4">
                 <label className="block w-[50%]">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Complainant Email
-                  </span>
                   <input
                     type="text"
                     className="
-                      mt-1
-                      block
                       w-full
+                      mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                  capitalize
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
                     autoComplete="nope"
-                    placeholder="email@example.com ..."
+                    placeholder="Complainant Email"
                     onChange={(e) =>
                       setValues({
                         ...inputValue,
@@ -525,24 +516,22 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   />
                 </label>
                 <label className="block w-[50%]">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Complainant Number
-                  </span>
                   <input
                     type="text"
                     className="
-                      mt-1
-                      block
                       w-full
+                      mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                  capitalize
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
                     autoComplete="off"
-                    placeholder="07 5698 6258 ..."
+                    placeholder="Number ... 07 5698 6258"
                     required={true}
                     pattern="^[0-9]{10}$"
                     onChange={(e) =>
@@ -556,23 +545,22 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               </div>
               <div className="flex justify-between space-x-4">
                 <label className="block w-[50%]">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Complainant Name
-                  </span>
+                  <span className="text-slate-700 text-sm font-bold"></span>
                   <input
                     type="text"
                     className="
-                      mt-1
-                      block
                       w-full
+                      mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
+                  capitalize
+                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
-                    placeholder="Full Name ..."
+                    placeholder="Complainant Name ..."
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -585,16 +573,13 @@ const NewTicket = ({ newTicketModal, setModal }) => {
 
                 {/**Action =================== */}
                 <label className="block w-[50%]">
-                  <span className="text-slate-700 text-sm font-bold">
-                    Action
-                  </span>
                   <select
                     className="
-                      block
                       w-full
                       mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -629,17 +614,14 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               </div>
               {/**End of complainant Details ======================================== */}
               <label className="block">
-                <span className="text-slate-700 text-sm font-bold">
-                  Due Date
-                </span>
                 <input
                   type="date"
                   className="
-                      mt-1
-                      block
                       w-full
+                      mt-1
                   text-slate-600
                    text-sm
+                   bg-slate-300
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -655,39 +637,35 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 />
               </label>
               <label className="block">
-                <span className="text-slate-700 text-sm font-bold">
-                  Message / Case Details
-                </span>
-                <textarea
-                  className="
-                      mt-1
-                      block
-                      w-full
-                  text-slate-600
-                   text-sm
-                      rounded-md
-                  resize-none
-                  h-[10rem]
-                      border-slate-300
-                      shadow-sm
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 placeholder:text-slate-400 placeholder:text-xs
-                    "
-                  placeholder="Type your message here ..."
-                  required={true}
-                  rows="5"
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      message: e.target.value,
-                    })
-                  }
-                ></textarea>
+                  <textarea
+                    className="resize-none
+                        w-full h-full
+                        mt-1
+                    text-slate-600
+                     text-sm
+                     bg-slate-300
+                        rounded-md
+                        border-slate-300
+                        shadow-sm
+                    capitalize
+                        focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                      "
+                    placeholder="Type your message here ..."
+                    required={true}
+                    rows="5"
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        message: e.target.value,
+                      })
+                    }
+                  ></textarea>
               </label>
             </div>
-            <div className="w-full flex justify-center">
+            <div className="w-full h-10 flex justify-center">
               <button
                 type="submit"
-                className="px-6 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-md font-bold uppercase text-sm"
+                className="px-14 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-md font-bold uppercase text-sm"
               >
                 Open
               </button>

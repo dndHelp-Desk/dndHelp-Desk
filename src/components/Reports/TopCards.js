@@ -1,4 +1,5 @@
 import React from "react";
+import { HiCursorClick } from "react-icons/hi";
 import {
   BsDashCircleDotted,
   BsCheckAll,
@@ -7,158 +8,124 @@ import {
   BsStopwatch,
   BsPatchCheck,
 } from "react-icons/bs";
-import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
-import { useSelector } from "react-redux";
+import Filters from "./Filters";
 
-const TopCards = () => {
-  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const filters = useSelector((state) => state.Tickets.filters);
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
-  const firstMessages =
-    allTickets.length >= 1 &&
-    allTickets.filter((ticket) => ticket.message_position === 1);
-
+const TopCards = ({ data ,setFilters,filters}) => {
   //Component ==================================
   return (
     <div className="w-full rounded-xl grid grid-cols-1 lg:grid-cols-3 gap-4 overflow-hidden">
       {/**First Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-900 bg-slate-100 shadow grid grid-cols-2 p-4 pr-0">
-        <div className="col-span-1 border-r dark:border-slate-700 border-slate-300 grid grid-cols-5">
-          <div className="col-span-3 flex flex-col justify-center space-y-4">
-            <h2 className="dark:text-slate-400 text-slate-500 font-medium font-sans text-xs uppercase">
-              Resolved
-            </h2>
-            <h3 className="dark:text-slate-300 text-slate-600 font-bold font-sans leading-3 text-[1.7rem]">
-              20
+      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-900 bg-slate-100 shadow grid grid-cols-2 p-4 relative">
+        <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
+            <h3 className="dark:text-slate-500  flex space-x-4 text-slate-600 font-bold font-sans leading-1 text-[1.7rem]">
+              {data.length >= 1
+                ? data.filter((data) => data.status === "solved").length
+                : 0}
             </h3>
-            <h5
-              className={`text-green-600 flex space-x-1 items-center font-bold font-sans text-xs`}
-            >
-              <span>5</span> <HiTrendingDown />
-              <small>Decrease</small>
-            </h5>
-          </div>
-          <div className="col-span-2 flex justify-center pt-0 p-0 sm:p-4">
-            <div className="h-8 w-8 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center text-green-600 font-bold text-xl border border-slate-300 dark:border-slate-800">
-              <BsCheckAll />
-            </div>
+            <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
+              <span>Resolved</span>
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+                <BsCheckAll />
+              </span>
+            </h2>
           </div>
         </div>
         {/**Second half Kpi ============================== */}
-        <div className="grid grid-cols-5 pl-3 col-span-1">
-          <div className="col-span-3 flex flex-col justify-center space-y-4">
-            <h2 className="dark:text-slate-400 text-slate-500 font-medium font-sans text-xs uppercase">
-              FCR
-            </h2>
-            <h3 className="dark:text-slate-300 text-slate-600 font-bold font-sans leading-3 text-[1.7rem]">
-              53
+        <div className="col-span-1">
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
+            <h3 className="dark:text-slate-500  flex space-x-4 text-slate-600 font-bold font-sans leading-1 text-[1.7rem]">
+              {data.length >= 1
+                ? data.filter((data) => data.fcr === "yes").length
+                : 0}
             </h3>
-            <h5
-              className={`text-green-600 flex space-x-1 items-center font-bold font-sans text-xs`}
-            >
-              <span>7</span> <HiTrendingDown />
-              <small>Decrease</small>
-            </h5>
+            <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
+              <span>First-CR</span>
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+                <BsPatchCheck />
+              </span>
+            </h2>
           </div>
-          <div className="col-span-2 flex justify-center pt-0 p-0 sm:p-4 pr-3">
-            <div className="h-8 w-8 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center text-yellow-600 font-bold text-xl border border-slate-300 dark:border-slate-800">
-              <BsPatchCheck />
-            </div>
-          </div>
+        </div>
+        {/**Filters ============= */}
+        <button className="absolute top-2 left-2 h-6 w-6 rounded-md text-lg bg-transparent dark:text-slate-600 text-slate-500 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2 font-semibold hover:opacity-80">
+          <HiCursorClick />
+        </button>
+        <div id="reportsFilters" className="fixed z-[999] w-[15rem] h-[25rem] shadow-xl top-[8rem] hidden flex-col dark:bg-slate-800 bg-white rounded-xl p-4 space-y-4">
+          <Filters setFilters={setFilters} filters={filters} />
         </div>
       </div>
 
       {/**Second Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-900 bg-slate-100 shadow grid grid-cols-2 p-4 pr-0">
-        <div className="col-span-1 border-r dark:border-slate-700 border-slate-300 grid grid-cols-5">
-          <div className="col-span-3 flex flex-col justify-center space-y-4">
-            <h2 className="dark:text-slate-400 text-slate-500 font-medium font-sans text-xs uppercase">
-              Overdue
-            </h2>
-            <h3 className="dark:text-slate-300 text-slate-600 font-bold font-sans leading-3 text-[1.7rem]">
-              8
+      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-900 bg-slate-100 shadow grid grid-cols-2 p-4">
+        <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
+            <h3 className="dark:text-slate-500  flex space-x-4 text-slate-600 font-bold font-sans leading-1 text-[1.7rem]">
+              {data.length >= 1
+                ? data.filter(
+                    (data) =>
+                      new Date(data.due_date).toISOString() >=
+                        new Date().toISOString() && data.status !== "solved"
+                  ).length
+                : 0}
             </h3>
-            <h5
-              className={`text-green-600 flex space-x-1 items-center font-bold font-sans text-xs`}
-            >
-              <span>9</span> <HiTrendingDown />
-              <small>Decrease</small>
-            </h5>
-          </div>
-          <div className="col-span-2 flex justify-center pt-0 p-0 sm:p-4">
-            <div className="h-8 w-8 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center text-red-600 font-bold text-xl border border-slate-300 dark:border-slate-800">
-              <BsStopwatch />
-            </div>
+            <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
+              <span>Overdue</span>
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+                <BsStopwatch />
+              </span>
+            </h2>
           </div>
         </div>
         {/**Second half Kpi ============================== */}
-        <div className="grid grid-cols-5 pl-3 col-span-1">
-          <div className="col-span-3 flex flex-col justify-center space-y-4">
-            <h2 className="dark:text-slate-400 text-slate-500 font-medium font-sans text-xs uppercase">
-              Re-opened
-            </h2>
-            <h3 className="dark:text-slate-300 text-slate-600 font-bold font-sans leading-3 text-[1.7rem]">
-              12
+        <div className="col-span-1">
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
+            <h3 className="dark:text-slate-500  flex space-x-4 text-slate-600 font-bold font-sans leading-1 text-[1.7rem]">
+              {data.length >= 1
+                ? data.filter((data) => data.reopened === true).length
+                : 0}
             </h3>
-            <h5
-              className={`text-green-600 flex space-x-1 items-center font-bold font-sans text-xs`}
-            >
-              <span>7</span> <HiTrendingDown />
-              <small>Decrease</small>
-            </h5>
-          </div>
-          <div className="col-span-2 flex justify-center pt-0 p-0 sm:p-4 pr-3">
-            <div className="h-8 w-8 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center text-red-600 font-bold text-xl border border-slate-300 dark:border-slate-800">
-              <BsArrowClockwise />
-            </div>
+            <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
+              <span>re-opened</span>
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+                <BsArrowClockwise />
+              </span>
+            </h2>
           </div>
         </div>
       </div>
 
       {/**Third Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-900 bg-slate-100 shadow grid grid-cols-2 p-4 pr-0">
-        <div className="col-span-1 border-r dark:border-slate-700 border-slate-300 grid grid-cols-5">
-          <div className="col-span-3 flex flex-col justify-center space-y-4">
-            <h2 className="dark:text-slate-400 text-slate-500 font-medium font-sans text-xs uppercase">
-              Open
-            </h2>
-            <h3 className="dark:text-slate-300 text-slate-600 font-bold font-sans leading-3 text-[1.7rem]">
-              19
+      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-900 bg-slate-100 shadow grid grid-cols-2 p-4">
+        <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
+            <h3 className="dark:text-slate-500  flex space-x-4 text-slate-600 font-bold font-sans leading-1 text-[1.7rem]">
+              {data.length >= 1
+                ? data.filter((data) => data.status === "open").length
+                : 0}
             </h3>
-            <h5
-              className={`text-green-600 flex space-x-1 items-center font-bold font-sans text-xs`}
-            >
-              <span>2</span> <HiTrendingDown />
-              <small>Decrease</small>
-            </h5>
-          </div>
-          <div className="col-span-2 flex justify-center pt-0 p-0 sm:p-4">
-            <div className="h-8 w-8 rounded-xl custom-shadow dark:bg-slate-800 bg-slate-300 flex items-center justify-center text-blue-600 font-bold text-xl border border-slate-300 dark:border-slate-800">
-              <BsEnvelopeOpen />
-            </div>
+            <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
+              <span>Open</span>
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+                <BsEnvelopeOpen />
+              </span>
+            </h2>
           </div>
         </div>
-
         {/**Second half Kpi ============================== */}
-        <div className="grid grid-cols-5 pl-3 col-span-1">
-          <div className="col-span-3 flex flex-col justify-center space-y-4">
-            <h2 className="dark:text-slate-400 text-slate-500 font-medium font-sans text-xs uppercase">
-              on hold
-            </h2>
-            <h3 className="dark:text-slate-300 text-slate-600 font-bold font-sans leading-3 text-[1.7rem]">
-              3
+        <div className="col-span-1">
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
+            <h3 className="dark:text-slate-500  flex space-x-4 text-slate-600 font-bold font-sans leading-1 text-[1.7rem]">
+              {data.length >= 1
+                ? data.filter((data) => data.status === "on hold").length
+                : 0}
             </h3>
-            <h5
-              className={`text-green-600 flex space-x-1 items-center font-bold font-sans text-xs`}
-            >
-              <span>0</span> <HiTrendingDown />
-              <small>Decrease</small>
-            </h5>
-          </div>
-          <div className="col-span-2 flex justify-center pt-0 p-0 sm:p-4 pr-3">
-            <div className="h-8 w-8 rounded-xl custom-shadow dark:bg-slate-800 bg-slate-300 flex items-center justify-center text-blue-600 font-bold text-xl border border-slate-300 dark:border-slate-800">
-              <BsDashCircleDotted />
-            </div>
+            <h2 className="dark:text-slate-400 text-slate-500 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
+              <span>on hold</span>
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+                <BsDashCircleDotted />
+              </span>
+            </h2>
           </div>
         </div>
       </div>

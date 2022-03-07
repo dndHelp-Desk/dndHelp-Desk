@@ -87,7 +87,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
         >
           {/**Avatar ====================== */}
           <div
-            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase font-bold text-lg dark:text-gray-300 text-slate-600 dark:bg-slate-700 bg-slate-100 border dark:border-slate-600 border-slate-400`}
+            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase font-bold text-lg dark:text-gray-300 text-slate-900 dark:bg-slate-700 bg-slate-100 border dark:border-slate-600 border-slate-400`}
           >
             {`${
               message.from === "agent" && clientName && agentName
@@ -103,15 +103,15 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           >
             <div className="w-full bg-transparent space-y-2 rounded-lg">
               <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-                <span className="hidden md:flex dark:text-slate-300 text-slate-600">{`${
+                <span className="hidden md:flex dark:text-slate-300 text-slate-900">{`${
                   message.from === "agent" ? agentName : clientName
                 }`}</span>{" "}
                 <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
                   <span className="flex space-x-2">
-                    <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
+                    <span className="text-xs dark:text-slate-500 text-slate-700  font-medium">
                       {`${new Date(message.date).toDateString()}`}
                     </span>
-                    <span className="text-xs dark:text-slate-500 text-slate-500 font-medium">
+                    <span className="text-xs dark:text-slate-500 text-slate-600 font-medium">
                       {`${
                         Number(message.time.split(":")[0]) < 10
                           ? "0" + Number(message.time.split(":")[0])
@@ -131,7 +131,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                         threadId: message.ticket_id,
                       })
                     }
-                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 flex items-center justify-center"
+                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 text-slate-700 flex items-center justify-center"
                   >
                     <BsThreeDotsVertical className="inline  cursor-pointer" />
                   </button>
@@ -164,7 +164,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   </div>
                 </div>
               </div>
-              <p className="mt-2 dark:text-slate-400 text-slate-500">
+              <p className="mt-2 dark:text-slate-400 text-slate-700">
                 {message.message}
               </p>
               <div
@@ -432,11 +432,11 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             {/**Opened Ticket Details ================================== */}
             <div id="ticketResolvedDetails" className="relative flex items-center space-x-2">
-              <BsLayoutSidebarInset className="dark:text-slate-400 text-slate-500 hover:opacity-80 text-2xl cursor-pointer" />
+              <BsLayoutSidebarInset className="dark:text-slate-400 text-slate-600 hover:opacity-80 text-2xl cursor-pointer" />
               {/**Back To Main List  On Small Screens====================== */}
               <div
                 onClick={() => setChat(false)}
-                className="dark:text-slate-400 text-slate-600 font-bold py-1 h-full w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer"
+                className="dark:text-slate-600 text-slate-600 font-bold py-1 h-full w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer"
               >
                 <span className="text-sm">Back</span>
               </div>
@@ -518,7 +518,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
             </div>
 
             {/**Other Details =========================== */}
-            <h2 className="font-semibold text-sm dark:text-slate-300 text-slate-600 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
+            <h2 className="font-semibold text-sm dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span>
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
@@ -652,7 +652,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                 });
               }}
               value={reply.message}
-              className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border-0 dark:placeholder:text-slate-500 placeholder:text-slate-500 placeholder:text-sm"
+              className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border-0 dark:placeholder:text-slate-500 placeholder:text-slate-700 placeholder:text-sm"
             ></textarea>
             <button
               type="submit"

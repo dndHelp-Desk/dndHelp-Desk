@@ -6,11 +6,7 @@ import {
   reOpenTicket,
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
-import {
-  BsBookmarkCheck,
-  BsBookmarkX,
-  BsBookmark,
-} from "react-icons/bs";
+import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
 import { setThreadId } from "./../../store/TicketsSlice";
 import MessageThread from "./MessageThread";
 import { updateAlert } from "../../store/NotificationsSlice";
@@ -154,9 +150,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
                     )
               }
             />
-            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl dark:bg-slate-800 bg-slate-300 flex lg:hidden xl:flex justify-center items-center border-2 dark:border-slate-600 border-slate-400">
+            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl dark:bg-slate-800 bg-slate-300 flex lg:hidden xl:flex justify-center items-center border-2 dark:border-slate-600 border-slate-500">
               <abbr title={ticket.recipient_name}>
-                <h4 className="dark:text-slate-300 text-slate-500 font-semibold text-xl">{`${
+                <h4 className="dark:text-slate-300 text-slate-700 font-semibold text-xl">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
                 }`}</h4>
               </abbr>
@@ -176,10 +172,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
             }}
             className="col-span-5 flex flex-col justify-center relative h-full w-full space-y-1 px-1 py-1 cursor-pointer"
           >
-            <h2 className="dark:text-slate-300  text-slate-600 text-xs dark:font-semibold font-bold font-sans uppercase whitespace-nowrap">
+            <h2 className="dark:text-slate-300  text-slate-900 text-xs dark:font-semibold font-bold font-sans uppercase whitespace-nowrap">
               {ticket.category} : {ticket.ticket_id}
             </h2>
-            <h5 className="dark:text-slate-400 text-slate-500 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
+            <h5 className="dark:text-slate-400 text-slate-700 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
               <span className="flex">{`${ticket.branch_company}`}</span>
             </h5>
             <small className="dark:text-slate-400 text-slate-500 text-xs">
@@ -192,7 +188,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
               {/**Change Ticket Priority ========================================== */}
               <select
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-xs text-slate-500 focus:outline-none outline-none capitalize"
+                className="h-8 w-28 rounded-md text-xs p-2 dark:bg-[#192235] bg-slate-200 dark:text-slate-500 text-slate-700 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 capitalize"
               >
                 <option className="capitalize p-2" value="low">
                   {ticket.priority}
@@ -220,7 +216,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
                         updateAlert([
                           ...alerts,
                           {
-                            message: "Ticket couldn't resolve.",
+                            message: "Please Add the Resolution.",
                             color: "bg-yellow-200",
                           },
                         ])
@@ -229,7 +225,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
                     ? reOpenTicket(ticket.id, e.target.value, true)
                     : changeStatus(ticket.id, e.target.value)
                 }
-                className="w-4/5 px-1 text-left bg-transparent border-0 focus:border-0 focus:ring-0 justify-between items-center flex dark:text-slate-400 text-xs text-slate-500 focus:outline-none outline-none capitalize"
+                className="h-8 w-28 rounded-md text-xs p-2 dark:bg-[#192235] bg-slate-200 dark:text-slate-500 text-slate-700 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 capitalize"
               >
                 <option className="capitalize p-2" value="resolved">
                   {ticket.status}

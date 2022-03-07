@@ -44,7 +44,7 @@ const Table = ({ setModal }) => {
               : "hidden"
           }`}
         >
-          <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-slate-600 dark:text-gray-400 tracking-normal leading-4">
+          <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-slate-700 dark:text-gray-400 tracking-normal leading-4">
             <input
               type="checkbox"
               name="mark"
@@ -60,16 +60,16 @@ const Table = ({ setModal }) => {
               className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 outline-none"
             />
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
+          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
             {contact.name}
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
+          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
             {contact.email}
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
+          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
             {contact.phone}
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-600 dark:text-slate-400 tracking-normal leading-4">
+          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
             {contact.branch_company}
           </td>
         </tr>
@@ -127,7 +127,7 @@ const Table = ({ setModal }) => {
         <table className="min-w-full bg-slate-100 dark:bg-slate-900">
           <thead>
             <tr className="w-full h-16 border-gray-300 dark:border-slate-700 border-b py-8">
-              <th className="pl-8 text-slate-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="pl-8 text-slate-900 dark:text-gray-400 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 <input
                   type="checkbox"
                   name="selectAll"
@@ -138,16 +138,16 @@ const Table = ({ setModal }) => {
                   className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 outline-none"
                 />
               </th>
-              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 Full Name
               </th>
-              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 Email
               </th>
-              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 Phone Number
               </th>
-              <th className="text-slate-600 dark:text-gray-300 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+              <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 Company Name
               </th>
             </tr>

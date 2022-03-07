@@ -112,7 +112,7 @@ const MainComponent = () => {
                 <img
                   src={lightLogo}
                   alt="logo"
-                  className="object-cover object-center w-[10rem]"
+                  className="object-cover object-center w-[10rem] relative after:absolute after:h-full after:w-full after:bg-slate-400"
                 />
               )}
             </div>
