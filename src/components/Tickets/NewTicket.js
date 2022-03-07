@@ -6,9 +6,6 @@ import { updateAlert } from "./../../store/NotificationsSlice";
 import useClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const NewTicket = ({ newTicketModal, setModal }) => {
-  const closeModalRef = useOnClickOutside(() => {
-    setModal(false);
-  });
   const contacts = useSelector((state) => state.Tickets.contacts);
   const settings = useSelector((state) => state.Tickets.settings);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
@@ -18,6 +15,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const [recepient, setRecipient] = useState("");
   const [searchResults, setResults] = useState(false);
   const dispatch = useDispatch();
+  const closeModalRef = useOnClickOutside(() => {
+    setModal(false);
+  });
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
   });
@@ -39,7 +39,37 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     agent_email: member_details.length !== undefined && member_details[0].email,
     complainant_name: 0,
     complainant_email: 0,
-    complainant_number: 0,
+    complainant_number: " ",
+  });
+
+  //Check If Ticket Exists ===================
+  const numbersArray =
+    allTickets.length >= 1 ?
+    allTickets.filter(
+      (ticket) =>
+        ticket.message_position === 1 &&
+        ticket.complainant_number.includes(inputValue.complainant_number) ===
+          true
+    ):[];
+  const exist = numbersArray.length >= 1 && numbersArray.map((data, index) => {
+    return (
+      <li
+        key={index}
+        className={`text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b border-slate-400 capitalize leading-5`}
+      >
+        <span>
+          {data.branch_company} : {data.ticket_id}
+        </span>
+        <br />
+        <span>
+          {new Date(data.date).toDateString()}, {data.due_date.split("T")[1]}
+        </span>
+        <br />
+        <span>Agent Name : {data.agent_name}</span>
+        <br />
+        <span>Status : {data.status}</span>
+      </li>
+    );
   });
 
   //Reciepents or contacts list suggetions =================================
@@ -331,9 +361,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       <div className="h-full w-full justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
         <div
           ref={closeModalRef}
-          className="bg-slate-400 shadow-2xl w-[95%] sm:w-[35rem] h-fit rounded-md relative py-4 "
+          className="bg-slate-400 border border-slate-600 shadow-2xl w-[95%] sm:w-[35rem] h-fit rounded-md relative py-4 "
         >
-          <h3 className="text-center text-slate-900 text-sm font-bold uppercase mt-2">
+          <h3 className="text-center text-slate-900 text-base font-extrabold uppercase mt-2">
             Create A New Ticket
           </h3>
           {/**New Tickect Form ================================= */}
@@ -349,7 +379,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                    placeholder:text-slate-500
                       rounded-md
                       border-slate-300
@@ -380,7 +410,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     ref={closeSuggestionsRef}
                     className={`${
                       searchResults ? "" : "hidden"
-                    } absolute top-19 left-0 h-[10rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                    } absolute top-12 left-0 h-[11rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
                   >
                     {contactsList}
                   </ul>
@@ -394,7 +424,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -432,7 +462,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -463,7 +493,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -498,7 +528,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -515,7 +545,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     }
                   />
                 </label>
-                <label className="block w-[50%]">
+                <label className="block w-[50%] relative">
                   <input
                     type="text"
                     className="
@@ -523,7 +553,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -531,20 +561,27 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
                     autoComplete="off"
-                    placeholder="Number ... 07 5698 6258"
+                    placeholder="073 5698 625"
                     required={true}
                     pattern="^[0-9]{10}$"
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setValues({
                         ...inputValue,
                         complainant_number: e.target.value,
-                      })
-                    }
+                      });
+                    }}
                   />
+                  <ul
+                    className={`${
+                      numbersArray.length >= 1 ? "" : "hidden"
+                    } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                  >
+                    {exist}
+                  </ul>
                 </label>
               </div>
               <div className="flex justify-between space-x-4">
-                <label className="block w-[50%]">
+                <label className="block w-full">
                   <span className="text-slate-700 text-sm font-bold"></span>
                   <input
                     type="text"
@@ -553,7 +590,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -570,58 +607,17 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     }
                   />
                 </label>
-
-                {/**Action =================== */}
-                <label className="block w-[50%]">
-                  <select
-                    className="
-                      w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-300
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                  capitalize
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        action: e.target.value,
-                        ticket_id:
-                          "#0" +
-                          (allTickets.filter(
-                            (ticket) => ticket.message_position === 1
-                          ).length +
-                            1),
-                      })
-                    }
-                  >
-                    <option className="capitalize" value="">
-                      Call back...
-                    </option>
-                    <option className="capitalize" value="">
-                      No Call Back
-                    </option>
-                    <option className="capitalize" value="5">
-                      Call in 5 mins
-                    </option>
-                  </select>
-                </label>
               </div>
               {/**End of complainant Details ======================================== */}
               <label className="block">
                 <input
-                  type="date"
+                  type="datetime-local"
                   className="
                       w-full
                       mt-1
                   text-slate-600
                    text-sm
-                   bg-slate-300
+                   bg-slate-200
                       rounded-md
                       border-slate-300
                       shadow-sm
@@ -637,29 +633,29 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 />
               </label>
               <label className="block">
-                  <textarea
-                    className="resize-none
+                <textarea
+                  className="resize-none
                         w-full h-full
                         mt-1
                     text-slate-600
                      text-sm
-                     bg-slate-300
+                     bg-slate-200
                         rounded-md
                         border-slate-300
                         shadow-sm
                     capitalize
                         focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                       "
-                    placeholder="Type your message here ..."
-                    required={true}
-                    rows="5"
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        message: e.target.value,
-                      })
-                    }
-                  ></textarea>
+                  placeholder="Type your message here ..."
+                  required={true}
+                  rows="5"
+                  onChange={(e) =>
+                    setValues({
+                      ...inputValue,
+                      message: e.target.value,
+                    })
+                  }
+                ></textarea>
               </label>
             </div>
             <div className="w-full h-10 flex justify-center">

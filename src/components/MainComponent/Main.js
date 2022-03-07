@@ -25,7 +25,8 @@ const Main = () => {
     filteredTickets &&
     filteredTickets.filter(
       (firstMsg) =>
-        new Date(firstMsg.due_date).toISOString() <= new Date().toISOString()
+        new Date(firstMsg.due_date !== null && firstMsg.due_date).getTime() <=
+        new Date().getTime()
     );
 
   //New Replies Array ========================
@@ -154,7 +155,7 @@ const Main = () => {
         <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden p-4 gap-4 grid grid-cols-1 lg:grid-cols-3">
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 h-20 flex justify-center items-center">
-            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b9c] bg-slate-200 rounded-lg p-2">
+            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b9c] bg-slate-300 rounded-lg p-2">
               <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-700 dark:text-slate-400 flex justify-center items-center text-2xl rounded-md">
                 <BsEnvelope />
               </div>
@@ -166,7 +167,7 @@ const Main = () => {
           </div>
           {/**Reminders  Count ====================== */}
           <div className="col-span-1 h-20 flex justify-center items-center">
-            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b9c] bg-slate-200 rounded-lg p-2">
+            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b9c] bg-slate-300 rounded-lg p-2">
               <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-700 dark:text-slate-300 flex justify-center items-center text-2xl rounded-md">
                 <BsAlarm />
               </div>

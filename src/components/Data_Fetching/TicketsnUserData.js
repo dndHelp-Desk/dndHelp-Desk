@@ -164,7 +164,7 @@ export const addTicket = (
     time: `${new Date().getHours()}:${new Date().getMinutes() + 1}`,
     ticket_id: ticket_id,
     status: state,
-    due_date: new Date(date).toLocaleDateString(),
+    due_date: date,
     from: "agent",
     agent_email: agent_email,
     readStatus: "delivered",

@@ -11,6 +11,7 @@ import { setThreadId } from "./../../store/TicketsSlice";
 import MessageThread from "./MessageThread";
 import { updateAlert } from "../../store/NotificationsSlice";
 import Navbar from "./Navbar";
+import noTickets from "./images/no-userss.svg";
 
 const TicketsList = ({ setDelete, deleteArray, setModal }) => {
   const dispatch = useDispatch();
@@ -109,17 +110,16 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
           )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
-          {new Date(ticket.due_date !== null && ticket.due_date).toISOString() >
-            new Date().toISOString() &&
+          {new Date(ticket.due_date !== null && ticket.due_date).getTime() >
+            new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() !== "solved" && (
               <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
             )}
 
           {/**Indicate The ticket that is  overdue ================*/}
-          {new Date(
-            ticket.due_date !== null && ticket.due_date
-          ).toISOString() <= new Date().toISOString() &&
+          {new Date(ticket.due_date !== null && ticket.due_date).getTime() <=
+            new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() !== "solved" && (
               <BsBookmarkX className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
@@ -179,7 +179,8 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
               <span className="flex">{`${ticket.branch_company}`}</span>
             </h5>
             <small className="dark:text-slate-400 text-slate-500 text-xs">
-              Due on {new Date(ticket.due_date).toDateString()}
+              Due on {new Date(ticket.due_date).toDateString()}{" "}
+              {ticket.due_date.split("T")[1]}
             </small>
           </div>
           <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">
@@ -267,9 +268,16 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
           <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-2 border-t border-slate-200 dark:border-slate-800">
             {tickets}
             {filteredTickets.length <= 0 && (
-              <h2 className="font-semibold text-center mt-10 text-lg dark:text-slate-400 text-slate-500 tracking-wide hidden lg:flex flex-col">
-                There are no tickets.
-              </h2>
+              <>
+                <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold mb-20">
+                  There are no tickets
+                </h2>
+                <img
+                  src={noTickets}
+                  alt="No Ticket"
+                  className="w-full h-[10rem] object-contain object-center"
+                />
+              </>
             )}
           </div>
         </div>
