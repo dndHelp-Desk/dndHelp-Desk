@@ -31,7 +31,7 @@ const Tables = ({ data }) => {
     return (
       <tr
         key={index}
-        className="w-full h-8 text-center items-left grid grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize"
+        className="w-full h-10 text-center items-left grid grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize"
       >
         <td className="px-2 flex items-center">{index + 1}</td>
         <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
@@ -74,9 +74,9 @@ const Tables = ({ data }) => {
 
   //Component ==========================================
   return (
-    <div className="col-span-3 h-[32rem] lg:col-span-2 rounded-xl flex flex-col gap-4">
-      <section className="h-full min-h-[25rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden">
-        <div className="h-14 flex justify-between items-center px-4 dark:bg-slate-900 bg-slate-100">
+    <div className="col-span-3 h-[32rem] lg:col-span-2 rounded-xl flex flex-col gap-2">
+      <section className="h-full min-h-[25rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden p-1">
+        <div className="h-12 flex justify-between items-center px-4 dark:bg-slate-900 bg-slate-100">
           <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
             {option === "agent_name" ? "Agents" : "Restuarants"}
           </h2>
@@ -101,9 +101,9 @@ const Tables = ({ data }) => {
             </button>
           </div>
         </div>
-        <table className="w-full h-full flex flex-col px-4">
-          <thead className="h-8 w-full flex items-center  dark:bg-[#1e293b9c] bg-slate-200 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
-            <tr className="w-full grid grid-cols-7 text-left px-2">
+        <table className="w-full h-[28rem] flex flex-col px-4">
+          <thead className="w-full flex items-center  dark:bg-[#1e293b9c] bg-slate-200 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
+            <tr className="w-full h-10  grid grid-cols-7 text-left px-2">
               <th className="flex space-x-1 items-center px-1">index</th>
               <th className="flex col-span-3 space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 Name

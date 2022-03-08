@@ -12,6 +12,7 @@ import NewTicket from "./components/ClientSupport/NewTicket";
 import KnowledgeBase from "./components/ClientSupport/KnowledgeBase";
 import Account from "./components/Settings/Account";
 import Team from "./components/Settings/Team";
+import SupportOperations from "./components/Settings/SupportOperations";
 
 const App = () => {
   return (
@@ -31,6 +32,10 @@ const App = () => {
             <Route path="settings" element={<SettingsComponent />}>
               <Route path="account" element={<Account />} />
               <Route path="team" element={<Team />} />
+              <Route
+                path="support-operations"
+                element={<SupportOperations />}
+              />
             </Route>
           </Route>
         </Routes>

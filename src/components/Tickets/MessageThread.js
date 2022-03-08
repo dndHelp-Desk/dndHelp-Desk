@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillTrashFill,
   BsThreeDotsVertical,
-  BsLayoutSidebarInset,
+  BsInfoSquare,
 } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
 import { HiCheck } from "react-icons/hi";
@@ -433,7 +433,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             {/**Opened Ticket Details ================================== */}
             <div id="ticketResolvedDetails" className="relative flex items-center space-x-2">
-              <BsLayoutSidebarInset className="dark:text-slate-400 text-slate-600 hover:opacity-80 text-2xl cursor-pointer" />
+              <BsInfoSquare className="dark:text-slate-300 text-slate-900 hover:opacity-80 text-2xl cursor-pointer" />
               {/**Back To Main List  On Small Screens====================== */}
               <div
                 onClick={() => setChat(false)}
@@ -507,12 +507,14 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                         value={solution}
                         className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
                       ></textarea>
-                      <button
-                        type="submit"
-                        className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
-                      >
-                        <BiPaperPlane />
-                      </button>
+                      <div className="absolute right-2 bottom-2 sendSolution h-8 w-12">
+                        <button
+                          type="submit"
+                          className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold hidden text-slate-300 bg-blue-700 z-[99]"
+                        >
+                          <BiPaperPlane />
+                        </button>
+                      </div>
                     </form>
                   )}
               </div>

@@ -4,7 +4,6 @@ import {
   BsFunnelFill,
   BsFillTrashFill,
   BsFillPersonPlusFill,
-  BsPlusLg,
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
@@ -131,7 +130,6 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
           </abbr>
         </button>
 
-
         {/**Delete Ticket ================================= */}
         <button
           onClick={() => deleteSelected()}
@@ -150,11 +148,11 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         {activeUser[0].access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15rem] w-[12rem] dark:bg-slate-700 bg-white shadow-2xl backdrop-blur-sm p-2 rounded-lg absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            className={`h-[15rem] w-[12rem] dark:bg-slate-700 bg-white shadow-2xl backdrop-blur-sm p-2 pt-0 border border-slate-400 dark:border-slate-700 rounded-lg absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
-            <div className="flex sticky top-0 border-b border-slate-400 h-8 items-center justify-center ">
+            <div className="flex sticky top-0 border-b border-slate-400 dark:bg-slate-700 bg-white shadow-2xl h-8 items-center justify-center ">
               <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
               <input
                 className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
@@ -169,14 +167,16 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
       </div>
 
       {/*** New Ticket ======================== */}
-      <button
-        onClick={() => setModal(user[0].name !== "User Loader" ? true : false)}
-        className="border-[#2564ebea] border text-[#2564ebe8] h-10 dark:bg-[#1e293b9c] bg-slate-200 w-10 rounded-lg flex justify-center items-center  text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold custom-shadow"
-      >
-        <abbr title="New Ticket">
-          <BsPlusLg />
-        </abbr>
-      </button>
+      <abbr title="New Ticket">
+        <button
+          onClick={() =>
+            setModal(user[0].name !== "User Loader" ? true : false)
+          }
+          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-200 px-4 space-x-2 rounded-lg flex justify-center items-center  text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold custom-shadow"
+        >
+          <span>NEW</span>
+        </button>
+      </abbr>
     </nav>
   );
 };

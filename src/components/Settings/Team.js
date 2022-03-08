@@ -64,7 +64,7 @@ const Team = () => {
             <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
               <img
                 src={
-                  user.photoUrl !== null
+                  user.photoUrl !== null && user.photoUrl !== ""
                     ? user.photoUrl
                     : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
                 }

@@ -651,7 +651,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                         rounded-md
                         border-slate-300
                         shadow-sm
-                    capitalize
                         focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                       "
                   placeholder="Type your message here ..."
