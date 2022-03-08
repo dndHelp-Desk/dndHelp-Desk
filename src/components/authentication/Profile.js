@@ -57,7 +57,8 @@ const Profile = () => {
     if (member_details[0].id !== false && currentUser) {
       currentUser.photoURL !== null && setPhotoURL(currentUser.photoURL);
       currentUser.photoURL !== member_details[0].photoUrl &&
-        currentUser.photoURL !== null && updateProfileUrl(member_details[0].id, currentUser.photoURL);
+        currentUser.photoURL !== null &&
+        updateProfileUrl(member_details[0].id, currentUser.photoURL);
     }
   }, [currentUser, member_details]);
 
@@ -103,7 +104,6 @@ const Profile = () => {
           </div>
           <span
             className={`absolute h-2.5 w-2.5 rounded-full border dark:border-slate-900 border-slate-100  ${
-              member_details.length !== undefined &&
               member_details[0].status === "available"
                 ? "bg-green-500"
                 : member_details[0].status === "busy"

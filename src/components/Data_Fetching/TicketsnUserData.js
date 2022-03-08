@@ -208,6 +208,20 @@ export const newContact = (name, email, phone, company) => {
   });
 };
 
+// New User =================================
+export const createUser = (name, dept, email, access, bio, active) => {
+  addDoc(membersRef, {
+    name: name,
+    dept: dept,
+    email: email,
+    access: access,
+    bio: bio,
+    active: active,
+    status: "unavailable",
+    photoUrl: "",
+  });
+};
+
 const TicketsnUserData = () => {
   const dispatch = useDispatch();
   const currentUser = getAuth().currentUser;

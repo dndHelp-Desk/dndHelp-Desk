@@ -58,11 +58,6 @@ const MainComponent = () => {
         updateFilteredTickets(
           allTickets
             .filter((ticket) => ticket.message_position === 1)
-            .sort((a, b) => {
-              return (
-                Number(a.ticket_id.charAt(1)) - Number(b.ticket_id.charAt(1))
-              );
-            })
         )
       );
     } else if (allTickets.length >= 1 && user[0].access === "agent") {
@@ -74,11 +69,6 @@ const MainComponent = () => {
                 ticket.message_position === 1 &&
                 ticket.agent_email === user[0].email
             )
-            .sort((a, b) => {
-              return (
-                Number(a.ticket_id.charAt(1)) - Number(b.ticket_id.charAt(1))
-              );
-            })
         )
       );
     }

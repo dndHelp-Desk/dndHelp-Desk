@@ -29,20 +29,21 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   //Solution =========================
   const [solution, setSolution] = useState("");
 
-  //Reply State and value ==================================
-  const [reply, setReply] = useState({
-    message: "",
-    subject: "",
-    message_position: threadMessage.length + 1,
-    ticket_id: threadId,
-  });
-
   //Thread First Message =====================
   const firstMessage =
     filteredTickets.length >= 1 &&
     filteredTickets.filter((ticket) => ticket.ticket_id === threadId).length >=
       1 &&
     filteredTickets.filter((ticket) => ticket.ticket_id === threadId);
+
+  //Reply State and value ==================================
+  const [reply, setReply] = useState({
+    message: "",
+    subject: "",
+    message_position: threadMessage.length + 1,
+    ticket_id: firstMessage.length >= 1?firstMessage.ticket_id:"none",
+  });
+
 
   //Message options ========================================
   const [msgOptions, setOptions] = useState({
@@ -125,7 +126,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   </span>
                   <button
                     onClick={() =>
-                      setOptions({
+                     user[0].access === "admin" && setOptions({
                         status: true,
                         id: message.message_position,
                         threadId: message.ticket_id,
@@ -195,7 +196,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
   //Send Reply Function ============================
   const sendReply = (e) => {
     e.preventDefault();
-    if (user[0].name !== "User Loader") {
+    if (user[0].name !== "User Loader" && reply.ticket_id !== "none") {
       addReply(reply.message, reply.message_position, reply.ticket_id);
       setReply({ ...reply, message: "" });
 

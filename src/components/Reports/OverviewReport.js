@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const OverviewReport = ({ data }) => {
   const settings = useSelector((state) => state.Tickets.settings);
   const categories = settings.length >= 1 && settings[0].categories;
-  const [option, setOption] = useState("day");
+  const [option, setOption] = useState("hour");
   const dataArray = [];
   categories.length >= 1 &&
     categories.forEach((element) => {
@@ -58,6 +58,8 @@ const OverviewReport = ({ data }) => {
     });
 
   //Preping daily count  Data==============
+  let toolTip = option === "day"?"Day":"Time"
+  let toolTipEtxra = option === "day"?"":":00Hrs"
   const chartData = [
     ...new Set(
       data.map((data) =>
@@ -76,7 +78,7 @@ const OverviewReport = ({ data }) => {
 
   //Sort data =========
   chartData.sort((a, b) => {
-    return a.day - b.day;
+    return Number(a.name) - Number(b.name);
   });
 
   //Component =============================
@@ -143,14 +145,14 @@ const OverviewReport = ({ data }) => {
         <div className="h-full w-full overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
-              Daily Traffic
+              Traffic
             </h2>
             <select
               onChange={(e) => setOption(e.target.value)}
               className="h-8 w-20 rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
-              <option value="day">Daily</option>
               <option value="hour">Hourly</option>
+              <option value="day">Daily</option>
             </select>
           </div>
           <ReactECharts
@@ -168,7 +170,6 @@ const OverviewReport = ({ data }) => {
                   show: true,
                   lineStyle: { color: "#64748b" },
                 },
-                min: 1,
               },
               yAxis: {
                 show: true,
@@ -195,7 +196,7 @@ const OverviewReport = ({ data }) => {
               ],
               tooltip: {
                 trigger: "axis",
-                formatter: `${option}-{b0} : {c0} Tickets`,
+                formatter: `${toolTip} {b0}${toolTipEtxra} : {c0} Tickets`,
                 backgroundColor: "#94a3b8",
                 borderColor: "#94a3b8",
                 textStyle: {

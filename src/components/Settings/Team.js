@@ -1,32 +1,53 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import noUsers from "./../MainComponent/images/no-userss.svg";
-import { deleteUser, activateUser } from "../Data_Fetching/TicketsnUserData";
+import {
+  deleteUser,
+  activateUser,
+  createUser,
+} from "../Data_Fetching/TicketsnUserData";
 import {
   BsFillTrashFill,
   BsFillPersonFill,
   BsFillEnvelopeFill,
   BsBuilding,
-  BsLockFill,
+  BsPersonLinesFill,
 } from "react-icons/bs";
+import { updateAlert } from "../../store/NotificationsSlice";
 
 const Team = () => {
+  const dispatch = useDispatch()
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [inputValues, setValues] = useState({
     name: "",
     dept: "",
     email: "",
-    password: "",
     access: "",
     bio: "",
     active: true,
-    status: "unavailable",
-    photoUrl: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setValues({ ...inputValues, name: "", dept: "", bio: "" });
+    createUser(
+      inputValues.name,
+      inputValues.dept,
+      inputValues.email,
+      inputValues.access,
+      inputValues.bio,
+      inputValues.active
+    );
+    dispatch(
+      updateAlert([
+        ...alerts,
+        {
+          message: "New User Has Been Created Successfully",
+          color: "bg-green-200",
+        },
+      ])
+    );
   };
 
   //Loop Through All Users ================
@@ -95,7 +116,7 @@ const Team = () => {
   return (
     <div className="h-full w-full grid grid-cols-2 gap-2">
       <div className="col-span-1 p-1 py-2">
-        <h6 className="dark:text-slate-300 text-slate-800 text-center text-base font-bold tracking-wide">
+        <h6 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
           All Members
         </h6>
         <section className="col-span-1 h-[35rem] dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
@@ -124,15 +145,16 @@ const Team = () => {
           )}
         </section>
       </div>
+
       {/**Add New User ==================== */}
-      <div className="col-span-1 lg:border-l dark:border-slate-800 border-slate-300 p-4">
-        <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+      <div className="col-span-1 flex flex-col items-center justify-center lg:border-l dark:border-slate-800 border-slate-300 p-4">
+        <h2 className="dark:text-slate-300 text-slate-800 text-base font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
           Add New User
         </h2>
         <form
           action=""
           onSubmit={(e) => handleSubmit(e)}
-          className="mt-2 space-y-3 pb-5 border-b dark:border-slate-800 border-slate-300"
+          className="mt-2 space-y-3 pb-5 w-[90%] flex flex-col items-center"
         >
           <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
             <input
@@ -153,34 +175,40 @@ const Team = () => {
           <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="email"
-              name="name"
-              id="name"
+              name="email"
+              id="email"
               autoComplete="nope"
               placeholder="Email ..."
               required
               onChange={(e) =>
                 setValues({ ...inputValues, email: e.target.value })
               }
-              value={inputValues.name}
+              value={inputValues.email}
               className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="password"
-              name="name"
-              id="name"
-              autoComplete="nope"
-              placeholder="Password ..."
-              required
+            <select
               onChange={(e) =>
-                setValues({ ...inputValues, name: e.target.value })
+                setValues({ ...inputValues, access: e.target.value })
               }
-              value={inputValues.name}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
-            />
-            <BsLockFill className="absolute text-slate-500 text-lg top-3 left-4" />
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow"
+            >
+              <option className="capitalize p-2" value="">
+                Access
+              </option>
+              <option className="capitalize p-2" value="agent">
+                Agent
+              </option>
+              <option className="capitalize p-2" value="admin">
+                Admin
+              </option>
+              <option className="capitalize p-2" value="client">
+                Client
+              </option>
+            </select>
+            <BsPersonLinesFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
             <input
@@ -197,21 +225,6 @@ const Team = () => {
               className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-20 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
-            <textarea
-              type="text"
-              name="bio"
-              id="bio"
-              autoComplete="nope"
-              placeholder="About / Bio ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, bio: e.target.value })
-              }
-              value={inputValues.bio}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow resize-none"
-            />
           </div>
           <button
             type="submit"
