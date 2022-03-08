@@ -33,7 +33,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     message: "",
     state: "",
     date: "",
-    ticket_id:"",
+    ticket_id: "",
     agent_email: "",
     complainant_name: "",
     complainant_email: "",
@@ -42,33 +42,37 @@ const NewTicket = ({ newTicketModal, setModal }) => {
 
   //Check If Ticket Exists ===================
   const numbersArray =
-    allTickets.length >= 1 ?
-    allTickets.filter(
-      (ticket) =>
-        ticket.message_position === 1 &&
-        ticket.complainant_number.includes(inputValue.complainant_number) ===
-          true
-    ):[];
-  const exist = numbersArray.length >= 1 && numbersArray.map((data, index) => {
-    return (
-      <li
-        key={index}
-        className={`text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b border-slate-400 capitalize leading-5`}
-      >
-        <span>
-          {data.branch_company} : {data.ticket_id}
-        </span>
-        <br />
-        <span>
-          {new Date(data.date).toDateString()}, {data.due_date.split("T")[1]}
-        </span>
-        <br />
-        <span>Agent Name : {data.agent_name}</span>
-        <br />
-        <span>Status : {data.status}</span>
-      </li>
-    );
-  });
+    allTickets.length >= 1 && inputValue.complainant_number !== ""
+      ? allTickets.filter(
+          (ticket) =>
+            ticket.message_position === 1 &&
+            ticket.complainant_number.includes(
+              inputValue.complainant_number
+            ) === true
+        )
+      : [];
+  const exist =
+    numbersArray.length >= 1 &&
+    numbersArray.map((data, index) => {
+      return (
+        <li
+          key={index}
+          className={`text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b border-slate-400 capitalize leading-5`}
+        >
+          <span>
+            {data.branch_company} : {data.ticket_id}
+          </span>
+          <br />
+          <span>
+            {new Date(data.date).toDateString()}, {data.due_date.split("T")[1]}
+          </span>
+          <br />
+          <span>Agent Name : {data.agent_name}</span>
+          <br />
+          <span>Status : {data.status}</span>
+        </li>
+      );
+    });
 
   //Reciepents or contacts list suggetions =================================
   const contactsList =
@@ -315,6 +319,23 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             );
           }
         });
+      setValues({
+        recipient_name: "",
+        recipient_email: "",
+        agent: "",
+        priority: "",
+        category: "",
+        branch_company: "",
+        message: "",
+        state: "",
+        date: "",
+        ticket_id: "",
+        agent_email: "",
+        complainant_name: "",
+        complainant_email: "",
+        complainant_number: "",
+      });
+      setRecipient("");
       setModal(false);
       dispatch(
         updateAlert([
@@ -325,25 +346,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
           },
         ])
       );
-  };
-    setValues({
-      recipient_name: "",
-      recipient_email: "",
-      agent: member_details.id !== false && member_details[0].name,
-      priority: "",
-      category: "",
-      branch_company: "",
-      message: "",
-      state: "",
-      date: "",
-      ticket_id: "",
-      agent_email:
-        member_details.length !== undefined && member_details[0].email,
-      complainant_name: "",
-      complainant_email: "",
-      complainant_number: "",
-    });
     }
+  };
 
   //Component ===========================
   return (
@@ -381,9 +385,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
                     type="text"
-                    value={recepient}
                     placeholder="Restuarant ..."
                     required={true}
+                    value={recepient}
                     onKeyPress={() => setResults(true)}
                     onKeyDown={() => setResults(true)}
                     onFocus={() => setResults(true)}
@@ -493,9 +497,15 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     <option className="capitalize" value="">
                       State ...
                     </option>
-                    <option className="capitalize">open</option>
-                    <option className="capitalize">on hold</option>
-                    <option className="capitalize">solved</option>
+                    <option className="capitalize" value="open">
+                      open
+                    </option>
+                    <option className="capitalize" value="on hold">
+                      on hold
+                    </option>
+                    <option className="capitalize" value="solved">
+                      first Contact Resolution
+                    </option>
                   </select>
                 </label>
                 {/**End  Of Priority and Status  ======================================== */}
@@ -620,6 +630,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       shadow-sm
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
+                  value={inputValue.date}
                   required={true}
                   onChange={(e) =>
                     setValues({
