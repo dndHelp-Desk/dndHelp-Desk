@@ -79,7 +79,7 @@ const Table = ({ setModal }) => {
   //Component  =============================
   return (
     <div className="mx-auto container bg-slate-100 dark:bg-slate-900 shadow rounded-xl p-2 h-[40rem] overflow-hidden relative">
-      <div className="flex flex-col md:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[999] bg-slate-100 dark:bg-slate-900">
+      <div className="flex flex-col md:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99] bg-slate-100 dark:bg-slate-900">
         <div className="flex flex-col md:flex-row items-start lg:items-center">
           <div className="flex items-center gap-2">
             <button className="contacts-control">
@@ -125,7 +125,7 @@ const Table = ({ setModal }) => {
       </div>
       <div className="w-full h-full  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         <table className="min-w-full bg-slate-100 dark:bg-slate-900  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-          <thead className="sticky top-0 z-[999] bg-slate-100 dark:bg-slate-900">
+          <thead className="sticky top-0 z-[99] bg-slate-100 dark:bg-slate-900">
             <tr className="w-full h-16 border-gray-300 dark:border-slate-700 border-b py-8">
               <th className="pl-8 text-slate-900 dark:text-gray-400 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 <input

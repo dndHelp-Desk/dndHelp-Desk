@@ -21,7 +21,7 @@ const Profile = () => {
   const [showChangeIcon, setChangeIcon] = useState("scale-0");
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const [photoURL, setPhotoURL] = useState(
-    "https://images.unsplash.com/photo-1613632749262-2fbd97f3a867?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+    "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
   );
   const dispatch = useDispatch();
 
@@ -55,9 +55,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (member_details[0].id !== false && currentUser) {
-      setPhotoURL(currentUser.photoURL);
+      currentUser.photoURL !== null && setPhotoURL(currentUser.photoURL);
       currentUser.photoURL !== member_details[0].photoUrl &&
-        updateProfileUrl(member_details[0].id, currentUser.photoURL);
+        currentUser.photoURL !== null && updateProfileUrl(member_details[0].id, currentUser.photoURL);
     }
   }, [currentUser, member_details]);
 
@@ -80,10 +80,10 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-10 w-10 rounded-xl flex justify-center items-center cursor-pointer"
+            className="h-10 w-10 border-2 p-[2px] dark:border-slate-300 border-slate-900 rounded-xl flex justify-center items-center cursor-pointer"
           >
             <img
-              className="rounded-xl bg-slate-500 h-full w-full object-cover object-center"
+              className="rounded-lg bg-slate-500 h-full w-full object-cover object-center"
               src={photoURL}
               alt="profile"
             />
@@ -109,11 +109,11 @@ const Profile = () => {
                 : member_details[0].status === "busy"
                 ? "bg-yellow-500"
                 : "bg-red-500"
-            } right-[-2px] top-[-2px]`}
+            } right-[-1px] top-[-2px]`}
           ></span>
 
           {/** Change Agent Online Stutus ============*/}
-          <div className="hoverProfile_Details p-3 absolute w-[12rem] overflow-hidden dark:bg-slate-600 bg-slate-500 hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.5rem] after:content-[''] after:fixed after:top-[3.7rem] after:right-[1rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-600 after:border-b-slate-500 after:border-l-transparent">
+          <div className="hoverProfile_Details p-4 absolute w-[12rem] overflow-hidden dark:bg-slate-800 bg-white hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.5rem] after:content-[''] after:fixed after:top-[3.7rem] after:right-[1rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-white after:border-l-transparent">
             <div className="pb-2">
               <small
                 className={`text-xs text-center capitalize font-semibold flex items-center space-x-1 justify-center ${
@@ -127,10 +127,10 @@ const Profile = () => {
                 <BsStopFill />
                 <span> {member_details[0].status}</span>
               </small>
-              <h3 className="dark:text-slate-300 text-slate-200 text-sm text-center capitalize font-semibold">
+              <h3 className="dark:text-slate-300 text-slate-900 text-sm text-center capitalize font-semibold">
                 {member_details[0].name}
               </h3>
-              <h4 className="dark:text-slate-400 text-slate-300 text-xs text-center capitalize font-semibold">
+              <h4 className="dark:text-slate-400 text-slate-700 text-xs text-center capitalize font-semibold">
                 {member_details[0].dept}
               </h4>
             </div>
@@ -139,7 +139,7 @@ const Profile = () => {
                 onClick={() =>
                   updateUserStatus(member_details[0].id, "available")
                 }
-                className="h-8 border-b border-t hover:opacity-80 dark:border-slate-500 border-slate-400 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
+                className="h-8 border-b border-t hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
                   <BsStopFill /> <span>available</span>
@@ -150,7 +150,7 @@ const Profile = () => {
               </li>
               <li
                 onClick={() => updateUserStatus(member_details[0].id, "busy")}
-                className="h-8 border-b hover:opacity-80 dark:border-slate-500 border-slate-400 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
+                className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
                   <BsStopFill /> <span>Busy</span>
@@ -163,7 +163,7 @@ const Profile = () => {
                 onClick={() =>
                   updateUserStatus(member_details[0].id, "unavailable")
                 }
-                className="h-8 border-b hover:opacity-80 dark:border-slate-500 border-slate-400 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
+                className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
                   <BsStopFill /> <span>Unavailable</span>

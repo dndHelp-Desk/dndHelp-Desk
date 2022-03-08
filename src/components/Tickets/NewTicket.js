@@ -33,13 +33,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     message: "",
     state: "",
     date: "",
-    ticket_id:
-      "#0" +
-      (allTickets.filter((ticket) => ticket.message_position === 1).length + 1),
+    ticket_id:"",
     agent_email: member_details.length !== undefined && member_details[0].email,
-    complainant_name: 0,
-    complainant_email: 0,
-    complainant_number: " ",
+    complainant_name: "",
+    complainant_email: "",
+    complainant_number: "",
   });
 
   //Check If Ticket Exists ===================
@@ -317,28 +315,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             );
           }
         });
-      setValues({
-        recipient_name: "",
-        recipient_email: "",
-        agent: member_details.id !== false && member_details[0].name,
-        priority: "",
-        category: "",
-        branch_company: "",
-        message: "",
-        state: "",
-        date: "",
-        ticket_id:
-          "#0" +
-          (allTickets.filter((ticket) => ticket.message_position === 1).length +
-            1),
-        agent_email:
-          member_details.length !== undefined && member_details[0].email,
-        complainant_name: 0,
-        complainant_email: 0,
-        complainant_number: 0,
-      });
       setModal(false);
-
       dispatch(
         updateAlert([
           ...alerts,
@@ -348,8 +325,25 @@ const NewTicket = ({ newTicketModal, setModal }) => {
           },
         ])
       );
-    }
   };
+    setValues({
+      recipient_name: "",
+      recipient_email: "",
+      agent: member_details.id !== false && member_details[0].name,
+      priority: "",
+      category: "",
+      branch_company: "",
+      message: "",
+      state: "",
+      date: "",
+      ticket_id: "",
+      agent_email:
+        member_details.length !== undefined && member_details[0].email,
+      complainant_name: "",
+      complainant_email: "",
+      complainant_number: "",
+    });
+    }
 
   //Component ===========================
   return (
@@ -395,15 +389,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     onFocus={() => setResults(true)}
                     onChange={(e) => {
                       setRecipient(e.target.value);
-                      setValues({
-                        ...inputValue,
-                        ticket_id:
-                          "#0" +
-                          (allTickets.filter(
-                            (ticket) => ticket.message_position === 1
-                          ).length +
-                            1),
-                      });
                     }}
                   />
                   <ul
@@ -431,17 +416,12 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   capitalize
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
+                    value={inputValue.category}
                     required={true}
                     onChange={(e) =>
                       setValues({
                         ...inputValue,
                         category: e.target.value,
-                        ticket_id:
-                          "#0" +
-                          (allTickets.filter(
-                            (ticket) => ticket.message_position === 1
-                          ).length +
-                            1),
                       })
                     }
                   >
@@ -469,6 +449,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   capitalize
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
+                    value={inputValue.priority}
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -500,6 +481,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   capitalize
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
+                    value={inputValue.state}
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -535,6 +517,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   capitalize
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
+                    value={inputValue.complainant_email}
                     autoComplete="nope"
                     placeholder="Complainant Email"
                     onChange={(e) =>
@@ -564,10 +547,12 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     placeholder="073 5698 625"
                     required={true}
                     pattern="^[0-9]{10}$"
+                    value={inputValue.complainant_number}
                     onChange={(e) => {
                       setValues({
                         ...inputValue,
                         complainant_number: e.target.value,
+                        ticket_id: `#${(new Date().getSeconds() +(new Date().getTime()+ e.target.value.split("").splice(3, 5).join(""))).split("").slice(9,14).join("")}`,
                       });
                     }}
                   />
@@ -598,6 +583,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     "
                     placeholder="Complainant Name ..."
+                    value={inputValue.complainant_name}
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -649,6 +635,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   placeholder="Type your message here ..."
                   required={true}
                   rows="5"
+                  value={inputValue.message}
                   onChange={(e) =>
                     setValues({
                       ...inputValue,

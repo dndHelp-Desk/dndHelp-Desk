@@ -101,7 +101,7 @@ const ToDo = () => {
         onSubmit={(e) => addTask(e)}
         className="h-[18%] px-5 pt-4 dark:bg-transparent bg-slate-100 w-full rounded-xl gap-1 items-center place-content-center"
       >
-        <div className="h-full flex items-center w-full col-span-8 dark:bg-transparent bg-slate-100 rounded-lg border dark:border-slate-800 border-slate-300 overflow-hidden">
+        <div className="h-full flex items-center w-full col-span-8 dark:bg-transparent bg-slate-100 rounded-lg border dark:border-slate-800 border-slate-400 overflow-hidden">
           <input
             type="text"
             name="search"
@@ -135,7 +135,7 @@ const ToDo = () => {
           {todoList.length >= 1 && tasks}
           {todoList.length <= 0 && (
             <>
-              <div className="h-full w-full rounded-lg dark:bg-slate-900 bg-slate-100 border dark:border-slate-800 border-slate-300 p-6">
+              <div className="h-full w-full rounded-lg dark:bg-slate-900 bg-slate-100 border dark:border-slate-800 border-slate-400 p-6">
                 <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
                   you have no reminders
                 </h2>

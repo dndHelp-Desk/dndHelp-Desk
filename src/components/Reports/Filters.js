@@ -17,7 +17,7 @@ const Filters = ({ filters, setFilters }) => {
         <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsSearch className="text-slate-500 absolute h-10 left-3" />
         <input
           type="search"
@@ -29,7 +29,7 @@ const Filters = ({ filters, setFilters }) => {
           placeholder="Category ..."
         />
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -41,7 +41,7 @@ const Filters = ({ filters, setFilters }) => {
           placeholder="Agent Name ..."
         />
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"

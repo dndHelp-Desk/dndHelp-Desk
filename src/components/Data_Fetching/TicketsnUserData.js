@@ -157,7 +157,7 @@ export const addTicket = (
     message_position: 1,
     priority: priority,
     agent_name: agent,
-    date: new Date().toLocaleDateString(),
+    date: new Date().toISOString(),
     category: category,
     branch_company: branch_company,
     message: message,

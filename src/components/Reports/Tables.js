@@ -3,7 +3,7 @@ import { HiOutlineSwitchVertical } from "react-icons/hi";
 import { BsDownload } from "react-icons/bs";
 
 const Tables = ({ data }) => {
-  const [option, setOption] = useState("agent_name");
+  const [option, setOption] = useState("branch_company");
   const tableData = [...new Set(data.map((data) => data[option]))].map(
     (elem) => ({
       name: elem,
@@ -77,8 +77,8 @@ const Tables = ({ data }) => {
     <div className="col-span-3 h-[32rem] lg:col-span-2 rounded-xl flex flex-col gap-4">
       <section className="h-full min-h-[25rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden">
         <div className="h-14 flex justify-between items-center px-4 dark:bg-slate-900 bg-slate-100">
-          <h2 className="text-sm dark:text-slate-300 text-slate-900 font-sans font-semibold tracking-normal">
-            {option === "agent_name" ? "Agents" : "Brands"} Report
+          <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
+            {option === "agent_name" ? "Agents" : "Restuarants"}
           </h2>
           <div className="flex space-x-2">
             {/**Select Report ================= */}
@@ -86,8 +86,8 @@ const Tables = ({ data }) => {
               onChange={(e) => setOption(e.target.value)}
               className="h-8 w-40 rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
+              <option value="branch_company">Restuarants</option>
               <option value="agent_name">Agents</option>
-              <option value="branch_company">Brands</option>
             </select>
             <button
               onClick={() => {

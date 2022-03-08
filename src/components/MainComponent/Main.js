@@ -48,7 +48,11 @@ const Main = () => {
         >
           <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
             <img
-              src={user.photoUrl}
+              src={
+                user.photoUrl !== null
+                  ? user.photoUrl
+                  : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
+              }
               alt="profile"
               className="object-cover w-full h-full object-center rounded-lg"
             />
@@ -69,7 +73,7 @@ const Main = () => {
                 : "text-yellow-600"
             } capitalize`}
           >
-           <BsStopFill/> <span>{user.status}</span>
+            <BsStopFill /> <span>{user.status}</span>
           </h3>
         </div>
       );
@@ -91,10 +95,10 @@ const Main = () => {
           <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1  lg:border-l dark:border-slate-800 border-slate-300">
             {overDue.length >= 1 && (
               <div className="flex flex-col gap-1 pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-300 text-slate-700 capitalize text-center">
+                <h2 className="text-base font-bold dark:text-slate-300 text-slate-900 capitalize text-center">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin dark:text-slate-400 text-slate-600 text-xs lg:text-sm text-center">
+                <p className="text-thin dark:text-slate-400 text-slate-700 text-xs lg:text-sm text-center">
                   {overDue.length} ticket/s that are highlighted with blue on
                   the calendar have been overdue the resolve-by date. To keep
                   yourself up-to date the calender has highlighted all due
@@ -105,10 +109,10 @@ const Main = () => {
             )}
             {overDue.length <= 0 && (
               <div className="flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-300 text-slate-700 capitalize text-center">
+                <h2 className="text-base font-bold dark:text-slate-300 text-slate-900 capitalize text-center">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin dark:text-slate-400 text-slate-600 text-sm text-center">
+                <p className="text-thin dark:text-slate-400 text-slate-700 text-sm text-center">
                   You all catched up{" "}
                   <BsFillHandThumbsUpFill className="inline text-yellow-500" />
                   .You can check/hover on top of the highlighted dates on the
@@ -120,7 +124,7 @@ const Main = () => {
             )}
             <div className="flex items-center justify-center space-x-1">
               <Link to="./tickets">
-                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-red-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-red-600 hover:ring-red-600 text-xs font-bold h-10 px-5 transition-all duration-300">
+                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-700 outline-none focus:outline-none focus:ring focus:ring-red-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-red-600 hover:ring-red-600 text-xs font-bold h-10 px-5 transition-all duration-300">
                   Resolve Tickets
                 </button>
               </Link>
@@ -131,10 +135,10 @@ const Main = () => {
           {/**Manage Contacts ==================================*/}
           <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1 lg:border-l dark:border-slate-800 border-slate-300">
             <div className="flex flex-col gap-2 pb-2 overflow-hidden">
-              <h2 className="text-base text-center font-bold dark:text-slate-300 text-slate-700 capitalize">
+              <h2 className="text-base text-center font-bold dark:text-slate-300 text-slate-900 capitalize">
                 contacts
               </h2>
-              <p className="text-thin dark:text-slate-400 text-slate-600 text-sm text-center">
+              <p className="text-thin dark:text-slate-400 text-slate-700 text-sm text-center">
                 Click below button to manage yours contacts. It is important to
                 keep them up-to date as it will ensure no email is sent to the
                 wrong recipient. All contacts must be added/saved before opening
@@ -143,7 +147,7 @@ const Main = () => {
             </div>
             <div className="flex items-center justify-center space-x-1">
               <Link to="./contacts">
-                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-400 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
+                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-700 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
                   Manage Contacts
                 </button>
               </Link>
@@ -184,7 +188,7 @@ const Main = () => {
             <div className="h-full w-full flex flex-col justify-between space-y-2">
               <div className="space-x-2 items-center h-full w-full grid grid-cols-3 px-2 capitalize">
                 <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
-                  <p className="dark:text-slate-300 text-slate-500 text-lg font-bold">
+                  <p className="dark:text-slate-300 text-slate-700 text-lg font-bold">
                     {
                       allMembers.filter((user) => user.status === "available")
                         .length
@@ -195,7 +199,7 @@ const Main = () => {
                   </p>
                 </div>
                 <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
-                  <p className="dark:text-slate-300 text-slate-500  text-lg font-bold">
+                  <p className="dark:text-slate-300 text-slate-700  text-lg font-bold">
                     {allMembers.filter((user) => user.status === "busy").length}
                   </p>
                   <p className="dark:text-slate-500 text-slate-600 text-xs font-semibold">
@@ -203,7 +207,7 @@ const Main = () => {
                   </p>
                 </div>
                 <div className="col-span-1 h-full pr-6 flex flex-col justify-center items-center">
-                  <p className="dark:text-slate-300 text-slate-500  text-lg font-bold">
+                  <p className="dark:text-slate-300 text-slate-700  text-lg font-bold">
                     {
                       allMembers.filter((user) => user.status === "unavailable")
                         .length
@@ -225,10 +229,10 @@ const Main = () => {
           {/**Monthly Summary ================================ */}
           <section className="col-span-1 h-[26rem] hidden lg:grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4">
-              <h2 className="dark:text-slate-300 text-slate-700 text-2xl font-bold capitalize">
+              <h2 className="dark:text-slate-300 text-slate-900 text-2xl font-bold capitalize">
                 Monthly Summary
               </h2>
-              <p className="dark:text-slate-400 text-slate-600 text-center text-sm">
+              <p className="dark:text-slate-400 text-slate-700 text-center text-sm">
                 To see more analytics please visit the reports page and you can
                 also check the current progress or your tickets in tickets page.
               </p>
