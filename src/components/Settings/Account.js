@@ -132,24 +132,24 @@ const Account = () => {
         </div>
         {/**User Name & Time ================= */}
         <div className="mt-[.3rem] space-y-1">
-          <h2 className="dark:text-slate-400 text-slate-500 text-center text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+          <h2 className="dark:text-slate-300 text-slate-800 text-center text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].name}
           </h2>
-          <h3 className="dark:text-slate-400 text-slate-500 text-center text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+          <h3 className="dark:text-slate-400 text-slate-700 text-center text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].dept}
           </h3>
-          <h4 className="dark:text-slate-400 text-slate-500 text-center text-xs lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+          <h4 className="dark:text-slate-400 text-slate-700 text-center text-xs lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             <BsEnvelope className="inline" />{" "}
             {member_details.length !== undefined && member_details[0].email}
           </h4>
           {emailStatus && (
-            <h5 className="dark:text-slate-400 text-slate-500 text-center text-xs capitalize font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
+            <h5 className="dark:text-slate-400 text-slate-700 text-center text-xs capitalize font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
               <BsFillPatchCheckFill className="inline text-green-600" />{" "}
               <span>Your email is verified.</span>
             </h5>
           )}
           {!emailStatus && (
-            <h5 className="dark:text-slate-400 text-slate-500 text-center text-xs font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
+            <h5 className="dark:text-slate-400 text-slate-700 text-center text-xs font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
               <BsFillPatchExclamationFill className="inline text-red-600" />{" "}
               <span>
                 Please verify your email,{" "}
@@ -185,11 +185,11 @@ const Account = () => {
           )}
         </div>
         {/**Bio ====================== */}
-        <div className=" mt-[5rem] dark:bg-[#25396823] bg-slate-200 p-4 rounded-lg">
-          <h6 className="dark:text-slate-400 text-slate-500 text-center text-base font-bold tracking-wide">
+        <div className=" mt-[5rem] dark:bg-[#25396823] bg-slate-200 p-4 w-full min-h-36 rounded-lg">
+          <h6 className="dark:text-slate-300 text-slate-800 text-center text-base font-bold tracking-wide">
             About Me
           </h6>
-          <p className="dark:text-slate-400 text-slate-500 text-center text-xs capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden mt-2">
+          <p className="dark:text-slate-400 text-slate-700 text-center text-xs capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden mt-2">
             {member_details.length !== undefined && member_details[0].bio}
           </p>
         </div>
@@ -201,14 +201,11 @@ const Account = () => {
         >
           <BsBoxArrowRight /> <span>Sign Out</span>
         </button>
-        <button className="dark:bg-red-800 bg-red-600 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center">
-          <span>Delete Account</span>
-        </button>
       </div>
 
       {/**Update Details =========================== */}
       <div className="col-span-1 p-6">
-        <h2 className="dark:text-slate-400 text-slate-500 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+        <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
           Edit Information
         </h2>
         <form
@@ -272,7 +269,7 @@ const Account = () => {
         </form>
 
         {/**Change password =============================== */}
-        <h2 className="dark:text-slate-400 mt-5 text-slate-500 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+        <h2 className="dark:text-slate-300 mt-5 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
           Change Password
         </h2>
         <form
@@ -318,6 +315,9 @@ const Account = () => {
             Change Password
           </button>
         </form>
+        <button className="dark:bg-red-800 bg-red-600 px-4 w-[9rem] mt-4 p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center">
+          <span>Delete Account</span>
+        </button>
       </div>
     </div>
   );

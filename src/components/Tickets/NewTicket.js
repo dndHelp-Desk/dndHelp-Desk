@@ -26,7 +26,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const [inputValue, setValues] = useState({
     recipient_name: "",
     recipient_email: "",
-    agent: member_details.id !== false && member_details[0].name,
+    agent: "",
     priority: "",
     category: "",
     branch_company: "",
@@ -34,7 +34,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     state: "",
     date: "",
     ticket_id:"",
-    agent_email: member_details.length !== undefined && member_details[0].email,
+    agent_email: "",
     complainant_name: "",
     complainant_email: "",
     complainant_number: "",
@@ -552,7 +552,16 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       setValues({
                         ...inputValue,
                         complainant_number: e.target.value,
-                        ticket_id: `#${(new Date().getSeconds() +(new Date().getTime()+ e.target.value.split("").splice(3, 5).join(""))).split("").slice(9,14).join("")}`,
+                        ticket_id: `#${(
+                          new Date().getSeconds() +
+                          (new Date().getTime() +
+                            e.target.value.split("").splice(3, 5).join(""))
+                        )
+                          .split("")
+                          .slice(9, 14)
+                          .join("")}`,
+                        agent: member_details[0].name,
+                        agent_email: member_details[0].email,
                       });
                     }}
                   />
@@ -589,6 +598,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       setValues({
                         ...inputValue,
                         complainant_name: e.target.value,
+                        agent: member_details[0].name,
+                        agent_email: member_details[0].email,
                       })
                     }
                   />

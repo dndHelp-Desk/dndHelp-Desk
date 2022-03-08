@@ -113,6 +113,20 @@ export const deleteContact = (id) => {
   deleteDoc(docRef);
 };
 
+// Delete User ================
+export const deleteUser = (id) => {
+  let docRef = doc(db, "members", id);
+  deleteDoc(docRef);
+};
+
+// change user active status ================
+export const activateUser = (id, state) => {
+  let docRef = doc(db, "members", id);
+  updateDoc(docRef, {
+    active: state,
+  });
+};
+
 //Add Reply or Send Reply ============
 export const addReply = (message, message_position, ticket_id) => {
   addDoc(ticketsRef, {
