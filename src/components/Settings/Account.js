@@ -72,10 +72,13 @@ const Account = () => {
         updatePassword(user, inputValues.password)
           .then(() => {
             dispatch(
-              updateAlert([...alerts,{
-                message: "Password Update Successfully",
-                color: "bg-green-200",
-              }])
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Password Update Successfully",
+                  color: "bg-green-200",
+                },
+              ])
             );
           })
           .catch((error) => {
