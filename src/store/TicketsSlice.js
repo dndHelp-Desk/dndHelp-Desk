@@ -26,6 +26,8 @@ const initialState = {
     ticket_id: "",
     agent: "",
     category: "",
+    complainant_number: "",
+    status: "",
   },
   filteredTickets: [],
   frequentlyAsked: [],

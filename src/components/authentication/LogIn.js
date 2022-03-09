@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -7,6 +6,8 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence
 } from "firebase/auth";
 import lightLogo from "./images/dndHelp-Desk_Light.png"
 import { useNavigate, Link } from "react-router-dom";
@@ -50,42 +51,56 @@ const LogIn = () => {
   //Log in User =====================
   const handleSubmit = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
-      .then((currentUser) => {
-        if (!currentUser.user.emailVerified) {
-          sendEmailVerification(auth.currentUser)
-            .then(() => {
-              dispatch(
-                updateAlert([...alerts,{
-                  message: "Check Your Email To Verify The Account.",
-                  color: "bg-green-200",
-                }])
-              );
-            })
-            .catch((error) => {
-              dispatch(
-                updateAlert([...alerts,{
-                  message: error.message,
-                  color: "bg-red-200",
-                }])
-              );
-            });
-        }
-        dispatch(
-          updateAlert([...alerts,{
-            message: "Logged In Succesfully",
-            color: "bg-green-200",
-          }])
-        );
-      })
-      .catch((error) => {
-        dispatch(
-          updateAlert([...alerts,{
-            message: error.message,
-            color: "bg-red-200",
-          }])
-        );
-      });
+    setPersistence(auth, browserLocalPersistence).then(() => {
+      signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
+        .then((currentUser) => {
+          if (!currentUser.user.emailVerified) {
+            sendEmailVerification(auth.currentUser)
+              .then(() => {
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: "Check Your Email To Verify The Account.",
+                      color: "bg-green-200",
+                    },
+                  ])
+                );
+              })
+              .catch((error) => {
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: error.message,
+                      color: "bg-red-200",
+                    },
+                  ])
+                );
+              });
+          }
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Logged In Succesfully",
+                color: "bg-green-200",
+              },
+            ])
+          );
+        })
+        .catch((error) => {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: error.message,
+                color: "bg-red-200",
+              },
+            ])
+          );
+        });
+    });
   };
 
   useEffect(() => {

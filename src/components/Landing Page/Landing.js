@@ -4,8 +4,8 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import Cloud from "./Cloud";
 import HeroImg from "./images/Hero.jpg";
-import ShowcaseOne from "./images/showcase2.png";
-import ShowcaseTwo from "./images/showcase11.png";
+import ShowcaseOne from "./images/chatDark.png";
+import ShowcaseTwo from "./images/chatLight.png";
 import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { useSelector } from "react-redux";
@@ -28,7 +28,7 @@ const Landing = () => {
     <div className="bg-slate-50 pb-2 relative">
       {/**Navigation ========================== */}
       <nav className="w-full bg-slate-200">
-        <div className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-transparent 2xl:w-[75rem] m-auto">
+        <div className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-transparent 2xl:px-12 m-auto">
           <div className="w-full h-[4rem] py-2 flex justify-between items-center border-b border-slate-400">
             {/**Logo ==================== */}
             <div className="h-full flex items-center justify-center overflow-hidden pt-1">
@@ -69,10 +69,11 @@ const Landing = () => {
             <div className="flex space-x-2 items-center relative">
               {/**Logiin button ================== */}
               <Link to="/logIn">
-                <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
-                  Log-In
+                <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
+                  Log In
                 </button>
               </Link>
+              {/**Small Menu Options =================== */}
               {/**Small Menu Options =================== */}
               <button
                 onClick={() => setMenu(true)}
@@ -155,7 +156,7 @@ const Landing = () => {
           <img
             src={ShowcaseOne}
             alt=""
-            className="object-center object-cover shadow-xl"
+            className="object-center object-cover"
           />
         </div>
       </section>

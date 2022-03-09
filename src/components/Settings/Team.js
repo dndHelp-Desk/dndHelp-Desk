@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import noUsers from "./../MainComponent/images/no-userss.svg";
 import {
   deleteUser,
@@ -12,11 +12,12 @@ import {
   BsFillEnvelopeFill,
   BsBuilding,
   BsPersonLinesFill,
+  BsLockFill,
 } from "react-icons/bs";
 import { updateAlert } from "../../store/NotificationsSlice";
 
 const Team = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [inputValues, setValues] = useState({
@@ -26,11 +27,47 @@ const Team = () => {
     access: "",
     bio: "",
     active: true,
+    password: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setValues({ ...inputValues, name: "", dept: "", bio: "" });
+    fetch("https://dndhelp-desk-first.herokuapp.com/create", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email: inputValues.email,
+        password: inputValues.password,
+        displayName: inputValues.name,
+      }),
+    })
+      .then((req) => {
+        req.json();
+      })
+      .then(() => {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "New User Has Been Created Successfully",
+              color: "bg-green-200",
+            },
+          ])
+        );
+      })
+      .catch((error) => {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Failed To Create New User" + error,
+              color: "bg-red-200",
+            },
+          ])
+        );
+      });
     createUser(
       inputValues.name,
       inputValues.dept,
@@ -39,15 +76,7 @@ const Team = () => {
       inputValues.bio,
       inputValues.active
     );
-    dispatch(
-      updateAlert([
-        ...alerts,
-        {
-          message: "New User Has Been Created Successfully",
-          color: "bg-green-200",
-        },
-      ])
-    );
+    setValues({ ...inputValues, name: "", dept: "", bio: "",email:"",password:"" });
   };
 
   //Loop Through All Users ================
@@ -114,7 +143,7 @@ const Team = () => {
 
   //Component ==================
   return (
-    <div className="h-full w-full grid grid-cols-2 gap-2">
+    <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 gap-2">
       <div className="col-span-1 p-1 py-2">
         <h6 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
           All Members
@@ -187,6 +216,22 @@ const Team = () => {
               className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 text-lg top-3 left-4" />
+          </div>
+          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              autoComplete="nope"
+              placeholder="Password ..."
+              required
+              onChange={(e) =>
+                setValues({ ...inputValues, password: e.target.value })
+              }
+              value={inputValues.password}
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+            />
+            <BsLockFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
             <select
