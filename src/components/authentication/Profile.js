@@ -11,6 +11,7 @@ import { updateAlert } from "../../store/NotificationsSlice";
 import {
   updateUserStatus,
   updateProfileUrl,
+  updateUID,
 } from "../Data_Fetching/TicketsnUserData";
 
 const Profile = () => {
@@ -59,6 +60,7 @@ const Profile = () => {
       currentUser.photoURL !== member_details[0].photoUrl &&
         currentUser.photoURL !== null &&
         updateProfileUrl(member_details[0].id, currentUser.photoURL);
+         !member_details[0].uid && updateUID(member_details[0].id, currentUser.uid);
     }
   }, [currentUser, member_details]);
 

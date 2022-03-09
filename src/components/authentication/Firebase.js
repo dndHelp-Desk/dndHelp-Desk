@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
@@ -12,10 +11,6 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const auth = getAuth();
 const storage = getStorage();
-
-export function signup(email, password) {
-  return createUserWithEmailAndPassword(auth, email, password);
-}
 
 // Custom Hook / React Component ====================
 export function useAuth() {

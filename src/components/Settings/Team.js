@@ -76,7 +76,53 @@ const Team = () => {
       inputValues.bio,
       inputValues.active
     );
-    setValues({ ...inputValues, name: "", dept: "", bio: "",email:"",password:"" });
+    setValues({
+      ...inputValues,
+      name: "",
+      dept: "",
+      bio: "",
+      email: "",
+      password: "",
+    });
+  };
+
+  //Delete User ================
+  const deleteMember = (id, uid) => {
+    fetch("https://dndhelp-desk-first.herokuapp.com/delete", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        uid:uid
+      }),
+    })
+      .then((req) => {
+        req.json();
+      })
+      .then(() => {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Delete User Successfully",
+              color: "bg-green-200",
+            },
+          ])
+        );
+      })
+      .catch((error) => {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: error.status,
+              color: "bg-red-200",
+            },
+          ])
+        );
+      });
+    deleteUser(id);
   };
 
   //Loop Through All Users ================
@@ -130,7 +176,7 @@ const Team = () => {
             </div>
             <abbr title="Delete Account">
               <button
-                onClick={() => deleteUser(user.id)}
+                onClick={() => deleteMember(user.id, user.uid)}
                 className="h-8 w-8 rounded-xl outline-none focus:outline-none flex items-center justify-center dark:bg-slate-800 bg-slate-300 hover:opacity-80"
               >
                 <BsFillTrashFill className="text-red-500 cursor-pointer text-base" />

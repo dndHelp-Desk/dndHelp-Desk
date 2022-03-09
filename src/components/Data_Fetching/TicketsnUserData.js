@@ -77,6 +77,14 @@ export const updateProfileUrl = (id, photoUrl) => {
   });
 };
 
+// Update User Uid ================
+export const updateUID = (id, uid) => {
+  let docRef = doc(db, "members", id);
+  updateDoc(docRef, {
+    uid: uid,
+  });
+};
+
 // Resolve Ticket Ticket  ================
 export const resolveTicket = (id, solution) => {
   let docRef = doc(db, "tickects", id);
