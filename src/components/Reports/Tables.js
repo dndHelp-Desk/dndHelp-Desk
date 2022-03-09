@@ -4,8 +4,9 @@ import { BsDownload } from "react-icons/bs";
 
 const Tables = ({ data }) => {
   const [option, setOption] = useState("branch_company");
-  const tableData = [...new Set(data.map((data) => data[option]))].map(
-    (elem) => ({
+  const [sortBy, setSort] = useState(["total", 1]);
+  const tableData = [...new Set(data.map((data) => data[option]))]
+    .map((elem) => ({
       name: elem,
       open:
         data.length >= 1
@@ -23,27 +24,31 @@ const Tables = ({ data }) => {
         data.length >= 1
           ? data.filter((data) => data[option] === elem).length
           : 0,
-    })
-  );
+    }))
+    .sort((a, b) => {
+      return sortBy[1] === 1
+        ? b[sortBy[0]] - a[sortBy[0]]
+        : a[sortBy[0]] - b[sortBy[0]];
+    });
 
   //Loop through each ticket and return a row of consolidated data
   const rows = tableData.map((elem, index) => {
     return (
       <tr
         key={index}
-        className="w-full h-10 text-center items-left grid grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize"
+        className="w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize"
       >
         <td className="px-2 flex items-center">{index + 1}</td>
         <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.name}
         </td>
-        <td className="px-2 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
+        <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.open}
         </td>
-        <td className="px-2 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
+        <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.solved}
         </td>
-        <td className="px-2 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
+        <td className="px-2 flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.total}
         </td>
       </tr>
@@ -103,22 +108,73 @@ const Tables = ({ data }) => {
         </div>
         <table className="w-full h-[28rem] flex flex-col px-4">
           <thead className="w-full flex items-center  dark:bg-[#1e293b9c] bg-slate-200 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
-            <tr className="w-full h-10  grid grid-cols-7 text-left px-2">
+            <tr className="w-full h-10 grid grid-cols-5 md:grid-cols-7 text-left px-2">
               <th className="flex space-x-1 items-center px-1">index</th>
               <th className="flex col-span-3 space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 Name
               </th>
-              <th className="flex space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
+              <th className="hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
                 <span>Open</span>
-                <HiOutlineSwitchVertical className="text-sm cursor-pointer hover:opacity-80" />
+                <label htmlFor="open">
+                  <input
+                    type="checkbox"
+                    name="open"
+                    id="open"
+                    className="hidden"
+                    onChange={(e) =>
+                      e.target.checked
+                        ? setSort(["open", 1])
+                        : setSort(["open", 2])
+                    }
+                  />
+                  <HiOutlineSwitchVertical
+                    className={`text-sm cursor-pointer hover:opacity-80 ${
+                      sortBy[0] === "open" && "text-blue-600"
+                    }`}
+                  />
+                </label>
               </th>
-              <th className="flex space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
-                <span>Resolved</span>
-                <HiOutlineSwitchVertical className="text-sm cursor-pointer hover:opacity-80" />
+              <th className="hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
+                <span>Solved</span>
+                <label htmlFor="solved">
+                  <input
+                    type="checkbox"
+                    name="solved"
+                    id="solved"
+                    className="hidden"
+                    onChange={(e) =>
+                      e.target.checked
+                        ? setSort(["solved", 1])
+                        : setSort(["solved", 2])
+                    }
+                  />
+                  <HiOutlineSwitchVertical
+                    className={`text-sm cursor-pointer hover:opacity-80 ${
+                      sortBy[0] === "solved" && "text-blue-600"
+                    }`}
+                  />
+                </label>
               </th>
-              <th className="flex space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
-                <span>Tickets</span>
-                <HiOutlineSwitchVertical className="text-sm cursor-pointer hover:opacity-80" />
+              <th className="flex space-x-1 items-center justify-between px-3 overflow-hidden text-ellipsis whitespace-nowrap">
+                <span>Total</span>
+                <label htmlFor="total">
+                  <input
+                    type="checkbox"
+                    name="total"
+                    id="total"
+                    className="hidden"
+                    onChange={(e) =>
+                      e.target.checked
+                        ? setSort(["total", 1])
+                        : setSort(["total", 2])
+                    }
+                  />
+                  <HiOutlineSwitchVertical
+                    className={`text-sm cursor-pointer hover:opacity-80 ${
+                      sortBy[0] === "total" && "text-blue-600"
+                    }`}
+                  />
+                </label>
               </th>
             </tr>
           </thead>

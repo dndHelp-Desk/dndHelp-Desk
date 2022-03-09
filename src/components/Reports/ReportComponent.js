@@ -4,16 +4,16 @@ import OverviewReport from "./OverviewReport";
 import TopCards from "./TopCards";
 import { useSelector } from "react-redux";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef"
+import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import Filters from "./Filters";
 
 const ReportsComponent = () => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const [data, setData] = useState([]);
-  const [openFilters,setOpenFilters] = useState(false)
-  const filtersRef = useOnClickOutside(()=>{
-    setOpenFilters(false)
-  })
+  const [openFilters, setOpenFilters] = useState(false);
+  const filtersRef = useOnClickOutside(() => {
+    setOpenFilters(false);
+  });
 
   //Filters =====================
   const [filters, setFilters] = useState({
@@ -31,7 +31,7 @@ const ReportsComponent = () => {
     ticket_id: "",
     agent: "",
     category: "",
-    status:""
+    status: "",
   });
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const ReportsComponent = () => {
       >
         <Filters setFilters={setFilters} filters={filters} />
         <h2 className="dark:text-slate-400 text-slate-600 text-center tracking-wider uppercase text-xs font-sans font-bold mt-20">
-         Other Filters
+          Other Filters
         </h2>
       </div>
 
