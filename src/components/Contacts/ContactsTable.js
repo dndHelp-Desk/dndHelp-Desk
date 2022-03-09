@@ -9,9 +9,11 @@ import {
   HiPlus,
 } from "react-icons/hi";
 import { deleteContact} from "../Data_Fetching/TicketsnUserData";
+import EditContact from "./EditContact";
 
 const Table = ({ setModal }) => {
   const contacts = useSelector((state) => state.Tickets.contacts);
+  const [edit,setEdit] = useState(false)
   const [searchResults, setResults] = useState("");
   const [selectedArray, select] = useState([]);
 
@@ -79,10 +81,14 @@ const Table = ({ setModal }) => {
   //Component  =============================
   return (
     <div className="mx-auto container bg-slate-100 dark:bg-slate-900 shadow rounded-xl p-2 h-[40rem] overflow-hidden relative">
+      {/**Edit Contact ============ */}
+      <EditContact edit={edit} setEdit={setEdit} selectedArray={selectedArray}/>
+      {/**================== Tables */}
+      
       <div className="flex flex-col md:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99] bg-slate-100 dark:bg-slate-900">
         <div className="flex flex-col md:flex-row items-start lg:items-center">
           <div className="flex items-center gap-2">
-            <button className="contacts-control">
+            <button onClick={()=>setEdit(true)} className="contacts-control">
               <HiOutlinePencilAlt />
             </button>
             <button className="contacts-control">

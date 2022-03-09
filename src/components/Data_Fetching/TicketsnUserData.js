@@ -216,6 +216,15 @@ export const newContact = (name, email, phone, company) => {
   });
 };
 
+//Edit Contact ========================
+export const editContact = (id, name, phone) => {
+  let docRef = doc(db, "contacts", id);
+  updateDoc(docRef, {
+    name: name,
+    phone: phone,
+  });
+};
+
 // New User =================================
 export const createUser = (name, dept, email, access, bio, active) => {
   addDoc(membersRef, {
