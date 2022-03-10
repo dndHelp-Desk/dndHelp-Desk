@@ -20,6 +20,12 @@ const Tables = ({ data }) => {
               (data) => data[option] === elem && data.status === "solved"
             ).length
           : 0,
+      reopened:
+        data.length >= 1
+          ? data.filter(
+              (data) => data[option] === elem && data.reopened === true
+            ).length
+          : 0,
       total:
         data.length >= 1
           ? data.filter((data) => data[option] === elem).length
@@ -38,12 +44,14 @@ const Tables = ({ data }) => {
         key={index}
         className="w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize"
       >
-        <td className="px-2 flex items-center">{index + 1}</td>
         <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
-          {elem.name}
+          {index +1}. {elem.name}
         </td>
         <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.open}
+        </td>
+        <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+          {elem.reopened}
         </td>
         <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.solved}
@@ -57,10 +65,14 @@ const Tables = ({ data }) => {
 
   //Download Csv Fuctions ======================
   const convertToCsv = (arr) => {
-    const keys = Object.keys(arr[0]);
-    const replacer = (value) => (value === null ? "" : value);
+    const keys = Object.keys(arr[0]).sort((a, b) => (a < b ? -1 : 1));
+    const replacer = (value) => {
+      return value;
+    };
     const processRow = (row) =>
-      keys.map((key) => JSON.stringify(row[key], replacer(row[key]))).join(",");
+      keys
+        .map((key) => JSON.stringify(row[key], replacer(row[key])))
+        .join(",");
     return [keys.join(","), ...arr.map(processRow)].join("\r\n");
   };
 
@@ -109,7 +121,6 @@ const Tables = ({ data }) => {
         <table className="w-full h-[28rem] flex flex-col px-4">
           <thead className="w-full flex items-center  dark:bg-[#1e293b9c] bg-slate-200 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
             <tr className="w-full h-10 grid grid-cols-5 md:grid-cols-7 text-left px-2">
-              <th className="flex space-x-1 items-center px-1">index</th>
               <th className="flex col-span-3 space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 Name
               </th>
@@ -130,6 +141,27 @@ const Tables = ({ data }) => {
                   <HiOutlineSwitchVertical
                     className={`text-sm cursor-pointer hover:opacity-80 ${
                       sortBy[0] === "open" && "text-blue-600"
+                    }`}
+                  />
+                </label>
+              </th>
+              <th className="hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
+                <span>Reopened</span>
+                <label htmlFor="reopened">
+                  <input
+                    type="checkbox"
+                    name="reopened"
+                    id="reopened"
+                    className="hidden"
+                    onChange={(e) =>
+                      e.target.checked
+                        ? setSort(["reopened", 1])
+                        : setSort(["reopened", 2])
+                    }
+                  />
+                  <HiOutlineSwitchVertical
+                    className={`text-sm cursor-pointer hover:opacity-80 ${
+                      sortBy[0] === "reopened" && "text-blue-600"
                     }`}
                   />
                 </label>

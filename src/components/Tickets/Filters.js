@@ -6,6 +6,7 @@ import {
   BsReceiptCutoff,
   BsCalendar2Week,
   BsCheckSquare,
+  BsInfoSquare,
 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import DateFilter from "./DatePicker";
@@ -58,6 +59,19 @@ const Filters = () => {
           <option value="open">Open</option>
           <option value="on hold">On Hold</option>
           <option value="solved">Resolved</option>
+        </select>
+      </div>
+      <div className="col-span-1 h-12 dark:bg-slate-900 bg-white w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+        <BsInfoSquare className="text-slate-500 text-lg absolute h-10 left-3" />
+        <select
+          onChange={(e) =>
+            dispatch(filter({ ...filters, others: e.target.value }))
+          }
+          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-white dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+        >
+          <option value={true}>Others</option>
+          <option value="yes">First Contact Resolution</option>
+          <option value="overdue">Overdue</option>
           <option value="reopened">Re-Opened</option>
         </select>
       </div>
@@ -129,47 +143,6 @@ const Filters = () => {
           className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-800 border-slate-400 rounded-lg duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
           placeholder="Customer's Number ..."
         />
-      </div>
-      <div className="col-span-1 h-12 bg-tranpsarent w-full min-w-[15rem] lg:min-w-0 flex items-center justify-between rounded-lg relative p-2">
-        <label className="dark:text-slate-300 text-slate-600 text-xs space-x-1" htmlFor="fcr">
-          <input
-            type="checkbox"
-            name="fcr"
-            id="fcr"
-            onChange={(e) =>
-              dispatch(filter({ ...filters, fcr: e.target.value }))
-            }
-            className="h-4 w-4 rounded duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm"
-            placeholder="Customer's Number ..."
-          />
-          <span>FCR</span>
-        </label>
-        <label className="dark:text-slate-300 text-slate-600 text-xs space-x-1" htmlFor="fcr">
-          <input
-            type="checkbox"
-            name="fcr"
-            id="fcr"
-            onChange={(e) =>
-              dispatch(filter({ ...filters, fcr: e.target.value }))
-            }
-            className="h-4 w-4 rounded duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm"
-            placeholder="Customer's Number ..."
-          />
-          <span>Reopened</span>
-        </label>
-        <label className="dark:text-slate-300 text-slate-600 text-xs space-x-1" htmlFor="fcr">
-          <input
-            type="checkbox"
-            name="fcr"
-            id="fcr"
-            onChange={(e) =>
-              dispatch(filter({ ...filters, fcr: e.target.value }))
-            }
-            className="h-4 w-4 rounded duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm"
-            placeholder="Customer's Number ..."
-          />
-          <span>Overdue</span>
-        </label>
       </div>
     </>
   );

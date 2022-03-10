@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  BsFillTrashFill,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
+import { BsFillTrashFill, BsThreeDotsVertical } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
 import { HiCheck } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
@@ -471,11 +468,10 @@ const MessageThread = ({ isChatOpen }) => {
                 </p>
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
                   Solution :{" "}
-                  {firstMessage.length >= 1 && firstMessage[0].closed_time[1]
-                    ? new Date(firstMessage[0].closed_time[1]).toDateString() +
-                      " , "
+                  {firstMessage.length >= 1 &&
+                  firstMessage[0].closed_time !== ""
+                    ? new Date(firstMessage[0].closed_time).toLocaleDateString()
                     : ""}
-                  {firstMessage.length >= 1 && firstMessage[0].closed_time[0]}
                 </h2>
                 <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[4rem] overflow-hidden overflow-y-scroll rounded-md">
                   {firstMessage.length >= 1 && firstMessage[0].solution}{" "}

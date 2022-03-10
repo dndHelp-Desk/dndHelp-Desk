@@ -68,7 +68,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
              true
                ? ""
                : "hidden"
-           } 
+           }
            ${
              ticket.status
                .toLowerCase()

@@ -211,10 +211,14 @@ const Team = () => {
               id="searchUser"
               autoComplete="off"
               value={search}
-              onChange={(e)=>setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
               className="h-10 w-10 focus:w-[12rem] transition-all bg-transparent rounded-lg border dark:border-slate-700 border-slate-500 focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 text-slate-600 dark:text-slate-400 z-[999]"
             />
-            <BsSearch className={`absolute top-3 left-3 text-slate-600 dark:text-slate-400 text-sm ${search !== " "&&"hidden"}`} />
+            <BsSearch
+              className={`absolute top-3 left-3 text-slate-600 dark:text-slate-400 text-sm ${
+                search !== " " && "hidden"
+              }`}
+            />
           </label>
         </div>
         <section className="col-span-1 h-[35rem] dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
@@ -294,6 +298,7 @@ const Team = () => {
               autoComplete="nope"
               placeholder="Password ..."
               required
+              minlength="6"
               onChange={(e) =>
                 setValues({ ...inputValues, password: e.target.value })
               }

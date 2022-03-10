@@ -28,6 +28,7 @@ const initialState = {
     category: "",
     complainant_number: "",
     status: "",
+    others:""
   },
   filteredTickets: [],
   frequentlyAsked: [],

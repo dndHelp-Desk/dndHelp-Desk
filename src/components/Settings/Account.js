@@ -159,7 +159,8 @@ const Account = () => {
                       sendEmailVerification(auth.currentUser)
                         .then(() => {
                           dispatch(
-                            updateAlert({...alerts,
+                            updateAlert({
+                              ...alerts,
                               message:
                                 "Check Your Email To Verify The Account.",
                               color: "bg-green-200",
@@ -168,7 +169,8 @@ const Account = () => {
                         })
                         .catch((error) => {
                           dispatch(
-                            updateAlert({...alerts,
+                            updateAlert({
+                              ...alerts,
                               message: error.message,
                               color: "bg-red-200",
                             })
@@ -300,6 +302,7 @@ const Account = () => {
               autoComplete="off"
               placeholder="New Password ..."
               required
+              minlength="6"
               onChange={(e) =>
                 setValues({ ...inputValues, password: e.target.value })
               }

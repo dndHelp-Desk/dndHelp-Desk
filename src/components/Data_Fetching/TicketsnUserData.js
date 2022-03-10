@@ -91,14 +91,11 @@ export const resolveTicket = (id, solution) => {
   updateDoc(docRef, {
     status: "solved",
     solution: solution,
-    closed_time: [
-      `${new Date().getHours()}:${new Date().getMinutes() + 1}`,
-      `${new Date().toLocaleDateString()}`,
-    ],
+    closed_time: new Date().toLocaleString(),
   });
 };
 
-// Change Ticket Status ================
+// Change Reopen Ticket ================
 export const reOpenTicket = (id) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {
@@ -193,13 +190,7 @@ export const addTicket = (
     complainant_name: c_name,
     complainant_email: c_email,
     complainant_number: c_number,
-    closed_time:
-      state === "solved"
-        ? [
-            `${new Date().getHours()}:${new Date().getMinutes()}`,
-            `${new Date().toLocaleDateString()}`,
-          ]
-        : [],
+    closed_time: state === "solved" ? new Date().toLocaleString() : "",
     fcr: state === "solved" ? "yes" : "no",
     solution: state === "solved" ? message : "",
     reopened: false,
