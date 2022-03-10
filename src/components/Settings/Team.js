@@ -13,6 +13,7 @@ import {
   BsBuilding,
   BsPersonLinesFill,
   BsLockFill,
+  BsSearch,
 } from "react-icons/bs";
 import { updateAlert } from "../../store/NotificationsSlice";
 
@@ -20,6 +21,7 @@ const Team = () => {
   const dispatch = useDispatch();
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
+  const [search , setSearch] = useState(" ")
   const [inputValues, setValues] = useState({
     name: "",
     dept: "",
@@ -133,7 +135,14 @@ const Team = () => {
       return (
         <div
           key={id}
-          className="w-full snap_child h-16 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 grid grid-cols-5 space-x-4 p-2 border dark:border-slate-800 border-slate-300"
+          className={`w-full snap_child h-16 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 grid grid-cols-5 space-x-4 p-2 border dark:border-slate-800 border-slate-300 ${
+            user.name
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(search.toLowerCase().replace(/\s/g, "")) === true
+              ? ""
+              : "hidden"
+          }`}
         >
           <div className="col-span-3 space-x-1 items-center flex">
             <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
@@ -147,8 +156,8 @@ const Team = () => {
                 className="object-cover w-full h-full object-center rounded-lg"
               />
             </div>
-            <h3 className="text-sm font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
-              {user.name}
+            <h3 className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
+              <abbr title={user.name}>{user.name}</abbr>
               <br />
               <small className="capitalize col-span-1 dark:text-slate-500 text-slate-500 w-40">
                 {user.dept}
@@ -191,9 +200,23 @@ const Team = () => {
   return (
     <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 gap-2">
       <div className="col-span-1 p-1 py-2">
-        <h6 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
-          All Members
-        </h6>
+        <div className="flex items-center justify-between">
+          <h6 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
+            All Members
+          </h6>
+          <label className="relative" htmlFor="searchUser">
+            <input
+              type="search"
+              name="searchUser"
+              id="searchUser"
+              autoComplete="off"
+              value={search}
+              onChange={(e)=>setSearch(e.target.value)}
+              className="h-10 w-10 focus:w-[12rem] transition-all bg-transparent rounded-lg border dark:border-slate-700 border-slate-500 focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 text-slate-600 dark:text-slate-400 z-[999]"
+            />
+            <BsSearch className={`absolute top-3 left-3 text-slate-600 dark:text-slate-400 text-sm ${search !== " "&&"hidden"}`} />
+          </label>
+        </div>
         <section className="col-span-1 h-[35rem] dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
           {allMembers.length >= 1 && (
             <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">

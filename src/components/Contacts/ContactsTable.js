@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   HiOutlinePencilAlt,
-  HiOutlineCog,
-  HiOutlineDuplicate,
   HiOutlineTrash,
   HiOutlineSearch,
   HiPlus,
@@ -85,30 +83,28 @@ const Table = ({ setModal }) => {
       <EditContact edit={edit} setEdit={setEdit} selectedArray={selectedArray}/>
       {/**================== Tables */}
       
-      <div className="flex flex-col md:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99] bg-slate-100 dark:bg-slate-900">
+      <div className="flex flex-col md:flex-row p-4 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99] bg-slate-100 dark:bg-slate-900">
         <div className="flex flex-col md:flex-row items-start lg:items-center">
           <div className="flex items-center gap-2">
-            <button onClick={()=>setEdit(true)} className="contacts-control">
-              <HiOutlinePencilAlt />
-            </button>
-            <button className="contacts-control">
-              <HiOutlineCog />
-            </button>
-            <button className="contacts-control">
-              <HiOutlineDuplicate />
-            </button>
-            <button
-              onClick={() => {
-                deleteCont();
-              }}
-              className="text-red-500 p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
-            >
-              <HiOutlineTrash />
-            </button>
+            <abbr title="Edit">
+              <button onClick={()=>setEdit(true)} className="contacts-control">
+                <HiOutlinePencilAlt />
+              </button>
+            </abbr>
+            <abbr title="Delete">
+              <button
+                onClick={() => {
+                  deleteCont();
+                }}
+                className="text-red-500 p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
+              >
+                <HiOutlineTrash />
+              </button>
+            </abbr>
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-end gap-4">
-          <div className="relative h-10 w-48  border-b dark:border-slate-700 border-slate-400">
+          <div className="relative h-8 w-48  border-b dark:border-slate-700 border-slate-400">
             <input
               type="search"
               name="search"
@@ -119,7 +115,7 @@ const Table = ({ setModal }) => {
               placeholder="Quick Search ..."
               className="bg-transparent w-full h-full border-0 focus:border-0 dark:border-slate-700 border-slate-400 outline-none focus:outline-none focus:ring-0 text-sm px-4 pl-8 focus:ring-blue-700 text-slate-500"
             />
-            <HiOutlineSearch className="absolute text-slate-500 text-lg top-3 left-2" />
+            <HiOutlineSearch className="absolute text-slate-500 text-lg top-2 left-2" />
           </div>
           <button
             onClick={() => setModal(true)}
@@ -129,7 +125,7 @@ const Table = ({ setModal }) => {
           </button>
         </div>
       </div>
-      <div className="w-full h-full  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="w-full h-[31rem]  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         <table className="min-w-full bg-slate-100 dark:bg-slate-900  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
           <thead className="sticky top-0 z-[99] bg-slate-100 dark:bg-slate-900">
             <tr className="w-full h-16 border-gray-300 dark:border-slate-700 border-b py-8">

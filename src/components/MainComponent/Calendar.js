@@ -136,7 +136,7 @@ const Calendar = () => {
                 : "dark:text-slate-300 text-slate-600 font-medium"
             } ${
               currentMonthTickets.filter(
-                (data) => new Date(data.due_date).getDate() === day.getDate()
+                (data) => new Date(data.due_date).getDate() === day.getDate() && data.status !== "solved"
               ).length >= 1
                 ? "border-b border-blue-600"
                 : ""

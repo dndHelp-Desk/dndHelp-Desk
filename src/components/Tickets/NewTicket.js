@@ -11,9 +11,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = settings.length >= 1 && settings[0].categories;
   const member_details = useSelector((state) => state.UserInfo.member_details);
-  const alerts = useSelector((state) => state.NotificationsData.alert);
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recepient, setRecipient] = useState("");
   const [searchResults, setResults] = useState(false);
+  const [showOpenedTickets,setShowOpen]= useState(true)
   const dispatch = useDispatch();
   const closeModalRef = useOnClickOutside(() => {
     setModal(false);
@@ -125,22 +126,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   //Submit New Ticket ===============
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTicket(
-      inputValue.recipient_name,
-      inputValue.recipient_email,
-      inputValue.agent,
-      inputValue.priority,
-      inputValue.category,
-      inputValue.branch_company,
-      inputValue.message,
-      inputValue.state,
-      inputValue.date,
-      inputValue.ticket_id,
-      inputValue.agent_email,
-      inputValue.complainant_name,
-      inputValue.complainant_email,
-      inputValue.complainant_number
-    );
 
     //Send Mail Using App Script ======================
     /*fetch(sendMailAPI, {
@@ -174,7 +159,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       })
     );*/
 
-    //Send Email Using Nodemailer ===================
     let dueDate = `${new Date(
       inputValue.date
     ).toDateString()}, ${new Date().getHours()}:${
@@ -183,7 +167,31 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     let openDate = `${new Date().toDateString()}, ${new Date().getHours()}:${
       new Date().getMinutes() + 1
     } hrs`;
-    if (member_details.id !== false) {
+    if (
+      member_details.id !== false &&
+      allTickets.length >= 1 &&
+      allTickets.filter((ticket) => ticket.ticket_id === inputValue.ticket_id)
+        .length <= 0
+    ) {
+      //Open New Ticket ========================
+      addTicket(
+        inputValue.recipient_name,
+        inputValue.recipient_email,
+        inputValue.agent,
+        inputValue.priority,
+        inputValue.category,
+        inputValue.branch_company,
+        inputValue.message,
+        inputValue.state,
+        inputValue.date,
+        inputValue.ticket_id,
+        inputValue.agent_email,
+        inputValue.complainant_name,
+        inputValue.complainant_email,
+        inputValue.complainant_number
+      );
+
+      //Send Email Using Nodemailer ===================
       fetch("https://dndhelp-desk-first.herokuapp.com/send", {
         method: "POST",
         headers: {
@@ -335,6 +343,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         complainant_email: "",
         complainant_number: "",
       });
+      setShowOpen(true);
       setRecipient("");
       setModal(false);
       dispatch(
@@ -495,7 +504,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     }
                   >
                     <option className="capitalize" value="">
-                      State ...
+                      Status ...
                     </option>
                     <option className="capitalize" value="open">
                       open
@@ -562,14 +571,47 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       setValues({
                         ...inputValue,
                         complainant_number: e.target.value,
-                        ticket_id: `#${(
-                          new Date().getSeconds() +
-                          (new Date().getTime() +
-                            e.target.value.split("").splice(3, 5).join(""))
-                        )
-                          .split("")
-                          .slice(9, 14)
-                          .join("")}`,
+                        ticket_id:
+                          allTickets.length >= 1 &&
+                          allTickets.filter(
+                            (ticket) =>
+                              ticket.ticket_id ===
+                              `#${(
+                                new Date().getSeconds() +
+                                (new Date().getTime() +
+                                  e.target.value
+                                    .split("")
+                                    .splice(3, 5)
+                                    .join(""))
+                              )
+                                .split("")
+                                .slice(9, 14)
+                                .join("")}`
+                          ).length <= 0
+                            ? `#${(
+                                new Date().getSeconds() +
+                                (new Date().getTime() +
+                                  e.target.value
+                                    .split("")
+                                    .splice(3, 5)
+                                    .join(""))
+                              )
+                                .split("")
+                                .slice(9, 14)
+                                .join("")}`
+                            : `#${
+                                (
+                                  new Date().getSeconds() +
+                                  (new Date().getTime() +
+                                    e.target.value
+                                      .split("")
+                                      .splice(3, 5)
+                                      .join(""))
+                                )
+                                  .split("")
+                                  .slice(9, 14)
+                                  .join("") + 1
+                              }`,
                         agent: member_details[0].name,
                         agent_email: member_details[0].email,
                       });
@@ -577,10 +619,24 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   />
                   <ul
                     className={`${
-                      numbersArray.length >= 1 ? "" : "hidden"
-                    } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                      numbersArray.length >= 1 && showOpenedTickets
+                        ? ""
+                        : "hidden"
+                    } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
                   >
                     {exist}
+                    <label
+                      className="absolute bg-transparent top-[-0.5rem] right-2 outline-none focus:outline-none hover:opacity-80"
+                      htmlFor="suggestion"
+                    >
+                      <input
+                        type="checkbox"
+                        name="suggestion"
+                        id="suggestion"
+                        onChange={()=>setShowOpen(false)}
+                        className="rounded checked:bg-slate-700"
+                      />
+                    </label>
                   </ul>
                 </label>
               </div>
@@ -675,6 +731,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               </button>
             </div>
           </form>
+
+          {/** Hints ================ */}
+          <div className="bg-slate-600 shadow-xl w-[95%] h-[14.5rem] rounded-md absolute left-[2.5%] top-[7.5rem] p-4 hidden"></div>
         </div>
       </div>
     </div>

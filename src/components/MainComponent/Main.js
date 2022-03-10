@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import noUsers from "./images/no-userss.svg";
 import {
   BsDashCircleDotted,
@@ -26,7 +26,7 @@ const Main = () => {
     filteredTickets.filter(
       (firstMsg) =>
         new Date(firstMsg.due_date !== null && firstMsg.due_date).getTime() <=
-        new Date().getTime()
+          new Date().getTime() && firstMsg.status !== "solved"
     );
 
   //New Replies Array ========================
@@ -40,11 +40,11 @@ const Main = () => {
   //Loop Through All Users ================
   const users =
     allMembers.length >= 1 &&
-    allMembers.map((user) => {
+    allMembers.filter(user=>user.access === "agent").map((user) => {
       return (
         <div
           key={user.id}
-          className="w-full snap_child h-16 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 flex items-center space-x-4 p-2 border dark:border-slate-800 border-slate-300"
+          className="w-full snap_child h-16 rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] flex items-center space-x-4 p-2 border dark:border-slate-800 border-slate-300"
         >
           <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
             <img
@@ -57,8 +57,8 @@ const Main = () => {
               className="object-cover w-full h-full object-center rounded-lg"
             />
           </div>
-          <h3 className="text-sm font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
-            {user.name}
+          <h3 className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
+            <abbr title={user.name}>{user.name}</abbr>
             <br />
             <small className="capitalize dark:text-slate-500 text-slate-500 w-40">
               {user.dept}
@@ -159,11 +159,11 @@ const Main = () => {
         <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden p-4 gap-4 grid grid-cols-1 lg:grid-cols-3">
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 h-20 flex justify-center items-center">
-            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b9c] bg-slate-300 rounded-lg p-2">
+            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
               <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-700 dark:text-slate-400 flex justify-center items-center text-2xl rounded-md">
                 <BsEnvelope />
               </div>
-              <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans w-full pr-2 flex justify-between items-center">
+              <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
                 <span>Inbox Replies</span>
                 <span>{newReplies.length}</span>
               </h2>
@@ -171,11 +171,11 @@ const Main = () => {
           </div>
           {/**Reminders  Count ====================== */}
           <div className="col-span-1 h-20 flex justify-center items-center">
-            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b9c] bg-slate-300 rounded-lg p-2">
+            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
               <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-700 dark:text-slate-300 flex justify-center items-center text-2xl rounded-md">
                 <BsAlarm />
               </div>
-              <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans w-full pr-2 flex justify-between items-center">
+              <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
                 <span>Pending Reminders</span>
                 <span>
                   {todoList.filter((todo) => todo.status === false).length}
@@ -190,8 +190,9 @@ const Main = () => {
                 <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
                   <p className="dark:text-slate-300 text-slate-700 text-lg font-bold">
                     {
-                      allMembers.filter((user) => user.status === "available")
-                        .length
+                      allMembers
+                        .filter((user) => user.access === "agent")
+                        .filter((user) => user.status === "available").length
                     }
                   </p>
                   <p className="dark:text-slate-500 text-slate-600 text-xs font-semibold">
@@ -200,7 +201,11 @@ const Main = () => {
                 </div>
                 <div className="col-span-1 h-full border-r dark:border-slate-800 border-slate-300 pr-6 flex flex-col justify-center items-center">
                   <p className="dark:text-slate-300 text-slate-700  text-lg font-bold">
-                    {allMembers.filter((user) => user.status === "busy").length}
+                    {
+                      allMembers
+                        .filter((user) => user.access === "agent")
+                        .filter((user) => user.status === "busy").length
+                    }
                   </p>
                   <p className="dark:text-slate-500 text-slate-600 text-xs font-semibold">
                     Busy
@@ -209,8 +214,9 @@ const Main = () => {
                 <div className="col-span-1 h-full pr-6 flex flex-col justify-center items-center">
                   <p className="dark:text-slate-300 text-slate-700  text-lg font-bold">
                     {
-                      allMembers.filter((user) => user.status === "unavailable")
-                        .length
+                      allMembers
+                        .filter((user) => user.access === "agent")
+                        .filter((user) => user.status === "unavailable").length
                     }
                   </p>
                   <p className="dark:text-slate-500 text-slate-600 text-xs font-semibold">
@@ -233,8 +239,12 @@ const Main = () => {
                 Monthly Summary
               </h2>
               <p className="dark:text-slate-400 text-slate-700 text-center text-sm">
-                To see more analytics please visit the reports page and you can
-                also check the current progress or your tickets in tickets page.
+                You have{" "}
+                <span className="dark:text-slate-300 text-slate800 font-semibold">
+                  {filteredTickets.length}
+                </span>{" "}
+                tickets in total, to see more analytics please visit the reports
+                page. Make use of filters to get more insight.
               </p>
             </div>
             <div className="row-span-3 space-y-2 px-4 p-2">
@@ -324,10 +334,14 @@ const Main = () => {
           <section className="col-span-1 h-[26rem] dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
             {allMembers.length >= 1 && (
               <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                <h2 className="w-full h-6 text-xs sticky top-0 z-[99] dark:bg-slate-900 bg-slate-100 flex items-center space-x-4 font-semibold uppercase dark:text-slate-300 text-slate-700 px-3">
-                  <span className="w-10"></span>
-                  <span className="w-40">User-Name</span>
-                  <span>Status</span>
+                <h2 className="w-full h-6 text-xs sticky top-0 z-[99] flex justify-between items-center tracking-wide dark:bg-slate-900 bg-slate-100 font-semibold uppercase dark:text-slate-300 text-slate-700">
+                  <span>Agents</span>{" "}
+                  <span>
+                    {
+                      allMembers.filter((user) => user.access === "agent")
+                        .length
+                    }
+                  </span>
                 </h2>
                 {users}
               </div>

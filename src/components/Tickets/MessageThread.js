@@ -426,7 +426,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     <div
       className={`h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-xl lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
+      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
       <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">

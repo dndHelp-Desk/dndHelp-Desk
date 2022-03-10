@@ -48,7 +48,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5.6rem]  border dark:border-slate-800 border-slate-300 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
+          className={`w-full h-[5rem]  border dark:border-slate-800 border-slate-300 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-slate-500 border-r-slate-500"
               : ""
@@ -194,8 +194,8 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
             <h2 className="dark:text-slate-300  text-slate-900 text-xs dark:font-semibold font-bold font-sans uppercase whitespace-nowrap">
               {ticket.category} : {ticket.ticket_id}
             </h2>
-            <h5 className="dark:text-slate-400 text-slate-700 text-xs tracking-wide font-base font-sans flex flex-col space-y-1 flex-wrap justify-center capitalize">
-              <span className="flex">{`${ticket.branch_company}`}</span>
+            <h5 className="dark:text-slate-400 max-w-[10rem] text-slate-700 text-xs tracking-wide font-base capitalize overflow-hidden whitespace-nowrap overflow-ellipsis">
+              <abbr title={ticket.branch_company}>{ticket.branch_company}</abbr>
             </h5>
             <small className="dark:text-slate-400 text-slate-500 text-xs">
               Due on {new Date(ticket.due_date).toDateString()}{" "}
@@ -284,8 +284,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
             setDelete={setDelete}
             setModal={setModal}
           />
-          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-2 relative border-t border-slate-200 dark:border-slate-800">
             {tickets}
+            {filteredTickets.length >= 1 && (
+              <div className="sticky h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center"></div>
+            )}
             {filteredTickets.length <= 0 && (
               <>
                 <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold mb-20">
