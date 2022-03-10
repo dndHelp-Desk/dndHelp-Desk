@@ -55,7 +55,7 @@
   #ticketResolvedDetails:hover #solution {
     display: flex;
   }
-  
+
   .delayDisplay {
     opacity: 0;
     transtion: opacity 0.3s;
@@ -91,7 +91,7 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply dark:bg-slate-900 bg-slate-400 rounded-[1vh];
+    @apply dark:bg-slate-700 bg-slate-400 rounded-[1vh];
   }
 
   .custom-shadow {

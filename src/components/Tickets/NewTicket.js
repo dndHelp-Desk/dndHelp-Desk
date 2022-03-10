@@ -126,7 +126,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   //Submit New Ticket ===============
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     //Send Mail Using App Script ======================
     /*fetch(sendMailAPI, {
       method: "POST",
@@ -164,7 +164,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     ).toDateString()}, ${new Date().getHours()}:${
       new Date().getMinutes() + 1
     } hrs`;
-    let openDate = `${new Date().toDateString()}, ${new Date().getHours()}:${
+    let openDate = `${new Date().toLocaleDateString()}, ${new Date().getHours()}:${
       new Date().getMinutes() + 1
     } hrs`;
     if (

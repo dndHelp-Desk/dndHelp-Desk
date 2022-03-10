@@ -178,7 +178,7 @@ const Tables = ({ data }) => {
               </th>
             </tr>
           </thead>
-          <tbody className="w-full pt-1 capitalize text-xs font-medium dark:text-slate-400 text-slate-600 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+          <tbody className="w-full pt-1 capitalize text-xs font-medium dark:text-slate-400 text-slate-600 overflow-hidden overflow-y-scroll px-1">
             {rows}
           </tbody>
         </table>

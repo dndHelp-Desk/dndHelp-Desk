@@ -31,7 +31,7 @@ const Table = ({ setModal }) => {
   //Loop Through Each Contact =========================
   const contactList =
     contacts.length >= 1 &&
-    contacts.map((contact) => {
+    contacts.map((contact,index) => {
       return (
         <tr
           key={contact.id}
@@ -61,7 +61,7 @@ const Table = ({ setModal }) => {
             />
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
-            {contact.name}
+           {index+1}{".  "} {contact.name}
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
             {contact.email}
@@ -125,7 +125,7 @@ const Table = ({ setModal }) => {
           </button>
         </div>
       </div>
-      <div className="w-full h-[31rem]  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="w-full h-[31rem] px-2 overflow-hidden overflow-y-scroll">
         <table className="min-w-full bg-slate-100 dark:bg-slate-900  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
           <thead className="sticky top-0 z-[99] bg-slate-100 dark:bg-slate-900">
             <tr className="w-full h-16 border-gray-300 dark:border-slate-700 border-b py-8">

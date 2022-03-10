@@ -29,7 +29,11 @@ const Filters = ({ filters, setFilters }) => {
           <option value="">Category/Subject</option>
           {categories.length >= 1 &&
             categories.map((category, index) => (
-              <option key={index} className="capitalize" value={(category).split(" ").join("")}>
+              <option
+                key={index}
+                className="capitalize"
+                value={category.split(" ").join("")}
+              >
                 {category}
               </option>
             ))}
@@ -69,7 +73,6 @@ const Filters = ({ filters, setFilters }) => {
           <option value="open">Open</option>
           <option value="on hold">On Hold</option>
           <option value="solved">Resolved</option>
-          <option value="reopened">Re-Opened</option>
         </select>
       </div>
     </>

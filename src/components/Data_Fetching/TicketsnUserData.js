@@ -138,7 +138,7 @@ export const activateUser = (id, state) => {
 //Add Reply or Send Reply ============
 export const addReply = (message, message_position, ticket_id) => {
   addDoc(ticketsRef, {
-    date: new Date().toLocaleDateString(),
+    date: new Date().toLocaleString(),
     from: "agent",
     message: message,
     message_position: message_position,
@@ -179,11 +179,11 @@ export const addTicket = (
     message_position: 1,
     priority: priority,
     agent_name: agent,
-    date: new Date().toISOString(),
+    date: new Date().toLocaleString(),
     category: category,
     branch_company: branch_company,
     message: message,
-    time: `${new Date().getHours()}:${new Date().getMinutes() + 1}`,
+    time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     ticket_id: ticket_id,
     status: state,
     due_date: date,
@@ -196,7 +196,7 @@ export const addTicket = (
     closed_time:
       state === "solved"
         ? [
-            `${new Date().getHours() }:${new Date().getMinutes() + 1}`,
+            `${new Date().getHours()}:${new Date().getMinutes()}`,
             `${new Date().toLocaleDateString()}`,
           ]
         : [],
@@ -239,6 +239,8 @@ export const createUser = (name, dept, email, access, bio, active) => {
   });
 };
 
+
+//Component ==================================
 const TicketsnUserData = () => {
   const dispatch = useDispatch();
   const currentUser = getAuth().currentUser;

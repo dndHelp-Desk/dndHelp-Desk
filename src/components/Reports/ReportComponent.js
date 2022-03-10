@@ -90,10 +90,10 @@ const ReportsComponent = () => {
           openFilters ? "flex" : "hidden"
         } border dark:border-slate-600 border-slate-400 flex-col dark:bg-slate-800 bg-white rounded-xl p-4 space-y-4`}
       >
-        <Filters setFilters={setFilters} filters={filters} />
-        <h2 className="dark:text-slate-400 text-slate-600 text-center tracking-wider uppercase text-xs font-sans font-bold mt-20">
-          Other Filters
+        <h2 className="dark:text-slate-400 text-slate-600 text-center tracking-wider uppercase text-xs font-sans font-bold">
+          Filters
         </h2>
+        <Filters setFilters={setFilters} filters={filters} />
       </div>
 
       {/**Stats ==================================== */}

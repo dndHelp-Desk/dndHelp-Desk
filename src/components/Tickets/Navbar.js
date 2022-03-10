@@ -99,7 +99,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
 
   //Component ======================
   return (
-    <nav className="h-[2.4rem] flex justify-between items-center w-full relative">
+    <nav className="flex pb-1.5 justify-between items-center w-full relative border-b  border-slate-200 dark:border-slate-800">
       {/**Search Bar ============================== */}
       <div className="flex h-full gap-2 relative">
         {/**Filter Btn ============================== */}

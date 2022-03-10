@@ -284,7 +284,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
             setDelete={setDelete}
             setModal={setModal}
           />
-          <div className="w-full h-full space-y-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-2 relative border-t border-slate-200 dark:border-slate-800">
+          <div className="w-full h-full space-y-2 overflow-y-scroll pr-1 relative">
             {tickets}
             {filteredTickets.length >= 1 && (
               <div className="sticky h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center"></div>
