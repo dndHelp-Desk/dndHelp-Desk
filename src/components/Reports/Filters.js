@@ -11,22 +11,23 @@ import { useSelector } from "react-redux";
 
 const Filters = ({ filters, setFilters }) => {
   const settings = useSelector((state) => state.Tickets.settings);
+  const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const categories = settings.length >= 1 && settings[0].categories;
 
   //Component ==============================
   return (
     <>
-      <div className="col-span-1 h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
+      <div className="md:max-w-[14rem] h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
         <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsSearch className="text-slate-500 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-200 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
-          <option value="">Category/Subject</option>
+          <option value="">Category</option>
           {categories.length >= 1 &&
             categories.map((category, index) => (
               <option
@@ -39,19 +40,30 @@ const Filters = ({ filters, setFilters }) => {
             ))}
         </select>
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
-        <input
-          type="search"
-          autoComplete="off"
-          name="agent"
-          id="agent"
+        <select
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
-          className="h-full w-full bg-transparent outline-none focus:outline-none border-0 rounded-md duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
-          placeholder="Agent Name ..."
-        />
+          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+        >
+          <option value="">Agent Name</option>
+          {allMembers.length >= 1 &&
+            allMembers
+              .map((agent) => agent.access === "agent" && agent.name)
+              .filter(Boolean)
+              .sort((a, b) => (a < b ? -1 : 1))
+              .map((agent, index) => (
+                <option
+                  key={index}
+                  className="capitalize"
+                  value={agent.split(" ").join("")}
+                >
+                  {agent}
+                </option>
+              ))}
+        </select>
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -63,11 +75,11 @@ const Filters = ({ filters, setFilters }) => {
           placeholder="Brand ..."
         />
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsCheckSquare className="text-slate-500 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-200 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
           <option value="">Status</option>
           <option value="open">Open</option>

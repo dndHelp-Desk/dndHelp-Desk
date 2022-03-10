@@ -3,18 +3,11 @@ import Tables from "./Tables";
 import OverviewReport from "./OverviewReport";
 import TopCards from "./TopCards";
 import { useSelector } from "react-redux";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import Filters from "./Filters";
 
 const ReportsComponent = () => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const [data, setData] = useState([]);
-  const [openFilters, setOpenFilters] = useState(false);
-  const filtersRef = useOnClickOutside(() => {
-    setOpenFilters(false);
-  });
-
   //Filters =====================
   const [filters, setFilters] = useState({
     startDate: new Date(
@@ -78,21 +71,7 @@ const ReportsComponent = () => {
   return (
     <div className="bg-transparent mt-4 container w-[90%] md:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col tracking-wider relative">
       {/**Filters ============= */}
-      <button
-        onClick={() => setOpenFilters(true)}
-        className="absolute top-2 left-2 h-6 w-6 rounded-md text-lg bg-transparent dark:text-slate-600 text-slate-500 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2 font-semibold hover:opacity-80"
-      >
-        <HiOutlineDotsVertical />
-      </button>
-      <div
-        ref={filtersRef}
-        className={`absolute z-[999] w-[15rem] h-[20rem] shadow-xl top-9 left-2 ${
-          openFilters ? "flex" : "hidden"
-        } border dark:border-slate-600 border-slate-400 flex-col dark:bg-slate-800 bg-white rounded-xl p-4 space-y-4`}
-      >
-        <h2 className="dark:text-slate-400 text-slate-600 text-center tracking-wider uppercase text-xs font-sans font-bold">
-          Filters
-        </h2>
+      <div className="w-full bg-transparent flex flex-wrap lg:flex-nowrap justify-between gap-4">
         <Filters setFilters={setFilters} filters={filters} />
       </div>
 

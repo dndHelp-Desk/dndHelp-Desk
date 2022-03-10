@@ -13,7 +13,7 @@ const DateFilter = ({ filters, setFilters }) => {
       startDate={startDate}
       endDate={endDate}
       placeholderText="Pick A Date"
-      className="dark:bg-slate-900 bg-slate-200 w-full h-10 z-[999] border-0 rounded-md text-xs pl-10 text-slate-500 cursor-pointer"
+      className="dark:bg-slate-900 bg-slate-100 w-full h-10 z-[999] border-0 rounded-md text-xs pl-10 text-slate-500 cursor-pointer"
       onChange={(update) => {
         setDateRange(update);
         setFilters({
