@@ -159,7 +159,7 @@ const Account = () => {
                       sendEmailVerification(auth.currentUser)
                         .then(() => {
                           dispatch(
-                            updateAlert({
+                            updateAlert({...alerts,
                               message:
                                 "Check Your Email To Verify The Account.",
                               color: "bg-green-200",
@@ -168,7 +168,7 @@ const Account = () => {
                         })
                         .catch((error) => {
                           dispatch(
-                            updateAlert({
+                            updateAlert({...alerts,
                               message: error.message,
                               color: "bg-red-200",
                             })
