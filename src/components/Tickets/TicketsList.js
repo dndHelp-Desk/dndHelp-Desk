@@ -48,7 +48,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem]  border dark:border-slate-800 border-slate-300 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
+          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-300 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-slate-500 border-r-slate-500"
               : ""
@@ -273,7 +273,22 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
   return (
     <div className="relative">
       {/**Tickets ========================================== */}
-      <div className="flex flex-col lg:flex-row dark:bg-slate-900 bg-slate-100 rounded-xl py-2 space-y-4 lg:space-y-0 lg:space-x-2 space-x-0 ralative">
+      <div
+        className={`flex flex-col lg:flex-row dark:bg-slate-900 bg-slate-100 rounded-xl py-2  ${
+          isChatOpen && "space-y-4"
+        } lg:space-y-0 lg:space-x-2 space-x-0 ralative`}
+      >
+        {/**Back To Main List  On Small Screens====================== */}
+        <div
+          onClick={() => setChat(false)}
+          className={`dark:text-slate-400 text-slate-600 font-bold py-1 h-2 w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer ${
+            !isChatOpen && "hidden"
+          } md:hidden`}
+        >
+          <span className="text-sm">Back</span>
+        </div>
+
+        {/**Components ============================== */}
         <div
           className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 pt-1 ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
@@ -303,7 +318,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
             )}
           </div>
         </div>
-        <MessageThread isChatOpen={isChatOpen} setChat={setChat} />
+        <MessageThread isChatOpen={isChatOpen} />
       </div>
     </div>
   );

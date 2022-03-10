@@ -74,6 +74,12 @@ const OverviewReport = ({ data }) => {
       option === "day"
         ? data.filter((data) => new Date(data.date).getDate() === elem).length
         : data.filter((data) => new Date(data.date).getHours() === elem).length,
+    avg_handleTime:
+      option === "day"
+       //Daily Average handle time Calculation ===============
+        ? data.filter((data) => new Date(data.date).getDate() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime())?0:(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime())).length >= 1 ?(((data.filter((data) => new Date(data.date).getDate() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime())?0:(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime()))).reduce((acc,value) => acc + value,0)/data.filter((data) => new Date(data.date).getDate() === elem).length)/60000).toFixed(0):0
+        //Hourly Average handle time Calculation ===============
+        : data.filter((data) => new Date(data.date).getHours() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime())?0:(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime())).length >= 1?(((data.filter((data) => new Date(data.date).getHours() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime())?0:(new Date(`${data.closed_time[1]},${data.closed_time[0]}`).getTime() - new Date(data.date).getTime()))).reduce((acc,value) => acc + value,0)/data.filter((data) => new Date(data.date).getHours() === elem).length)/60000).toFixed(0):0
   }));
 
   //Sort data =========
@@ -89,8 +95,8 @@ const OverviewReport = ({ data }) => {
           Tickets Statistics
         </h2>
         <div className="mt-4 flex space-x-4 px-2 h-14 w-full justify-between">
-          <div className="dark:text-slate-400 text-slate-500">
-            <h4 className="text-base font-bold text-center uppercase">
+          <div className="dark:text-slate-300 text-slate-700">
+            <h4 className="text-base font-semibold text-center uppercase">
               {
                 data.filter(
                   (data) =>
@@ -98,35 +104,62 @@ const OverviewReport = ({ data }) => {
                 ).length
               }
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 font-medium uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
               current
             </h4>
           </div>
           <div className="dark:text-slate-400 text-slate-500">
-            <h4 className="text-base font-bold text-center uppercase">
-              {
-                data.filter(
-                  (data) =>
-                    new Date(data.date).getMonth() < new Date().getMonth()
-                ).length
-              }
-            </h4>
-            <h4 className="text-[0.6rem] space-y-2 font-medium uppercase">
-              previous
-            </h4>
-          </div>
-          <div className="dark:text-slate-400 text-slate-500">
-            <h4 className="text-base font-bold text-center capitalize">
-              {data.filter(
-                (data) => new Date(data.date).getMonth() < new Date().getMonth()
-              ).length -
+            <h4
+              className={`text-base font-semibold text-center capitalize ${
                 data.filter(
                   (data) =>
                     new Date(data.date).getMonth() === new Date().getMonth()
+                ).length -
+                  data.filter(
+                    (data) =>
+                      new Date(data.date).getMonth() < new Date().getMonth()
+                  ).length >=
+                0
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              {data.filter(
+                (data) =>
+                  new Date(data.date).getMonth() === new Date().getMonth()
+              ).length -
+                data.filter(
+                  (data) =>
+                    new Date(data.date).getMonth() < new Date().getMonth()
                 ).length}
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 font-medium uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
               difference
+            </h4>
+          </div>
+          <div className="dark:text-slate-300 text-slate-700">
+            <h4 className="text-base font-semibold text-center">
+              {`${Number(
+                (
+                  chartData
+                    .map((data) => data.avg_handleTime)
+                    .reduce((acc, value) => acc + Number(value), 0) /
+                  chartData.length
+                ).toFixed(0) / 60
+              ).toFixed(0)}`}
+              <span className="text-xs">hrs</span>{" "}
+              {`${Number(
+                (
+                  chartData
+                    .map((data) => data.avg_handleTime)
+                    .reduce((acc, value) => acc + Number(value), 0) /
+                  chartData.length
+                ).toFixed(0) % 60
+              )}`}
+              <span className="text-xs">mins</span>
+            </h4>
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
+              AV Age of Query
             </h4>
           </div>
         </div>

@@ -40,51 +40,53 @@ const Main = () => {
   //Loop Through All Users ================
   const users =
     allMembers.length >= 1 &&
-    allMembers.filter(user=>user.access === "agent").map((user) => {
-      return (
-        <div
-          key={user.id}
-          className="w-full snap_child h-16 rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] flex items-center space-x-4 p-2 border dark:border-slate-800 border-slate-300"
-        >
-          <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
-            <img
-              src={
-                user.photoUrl !== null && user.photoUrl !== ""
-                  ? user.photoUrl
-                  : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
-              }
-              alt="profile"
-              className="object-cover w-full h-full object-center rounded-lg"
-            />
-          </div>
-          <h3 className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
-            <abbr title={user.name}>{user.name}</abbr>
-            <br />
-            <small className="capitalize dark:text-slate-500 text-slate-500 w-40">
-              {user.dept}
-            </small>
-          </h3>
-          <h3
-            className={`text-xs flex items-center space-x-1 ${
-              user.status === "available"
-                ? "text-green-600"
-                : user.status === "unavailable"
-                ? "text-red-600"
-                : "text-yellow-600"
-            } capitalize`}
+    allMembers
+      .filter((user) => user.access === "agent")
+      .map((user) => {
+        return (
+          <div
+            key={user.id}
+            className="w-full snap_child h-16 rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] flex items-center space-x-4 p-2 border dark:border-slate-800 border-slate-300"
           >
-            <BsStopFill /> <span>{user.status}</span>
-          </h3>
-        </div>
-      );
-    });
+            <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
+              <img
+                src={
+                  user.photoUrl !== null && user.photoUrl !== ""
+                    ? user.photoUrl
+                    : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
+                }
+                alt="profile"
+                className="object-cover w-full h-full object-center rounded-lg"
+              />
+            </div>
+            <h3 className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
+              <abbr title={user.name}>{user.name}</abbr>
+              <br />
+              <small className="capitalize dark:text-slate-500 text-slate-500 w-40">
+                {user.dept}
+              </small>
+            </h3>
+            <h3
+              className={`text-xs flex items-center space-x-1 ${
+                user.status === "available"
+                  ? "text-green-600"
+                  : user.status === "unavailable"
+                  ? "text-red-600"
+                  : "text-yellow-600"
+              } capitalize`}
+            >
+              <BsStopFill /> <span>{user.status}</span>
+            </h3>
+          </div>
+        );
+      });
 
   //Component ========================
   return (
     <div
       className={`${
         location.pathname === "/app" ? "grid" : "hidden"
-      } dark:bg-transparent bg-transparent w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden`}
+      } dark:bg-transparent bg-transparent w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2">
@@ -234,14 +236,30 @@ const Main = () => {
           <ToDo />
           {/**Monthly Summary ================================ */}
           <section className="col-span-1 h-[26rem] hidden lg:grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
-            <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4">
-              <h2 className="dark:text-slate-300 text-slate-900 text-2xl font-bold capitalize">
+            <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4 space-y-4">
+              <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold capitalize">
                 Monthly Summary
               </h2>
               <p className="dark:text-slate-400 text-slate-700 text-center text-sm">
                 You have{" "}
                 <span className="dark:text-slate-300 text-slate800 font-semibold">
-                  {filteredTickets.length}
+                  {
+                    filteredTickets.filter(
+                      (data) =>
+                        new Date(data.date).getTime() >=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            1
+                          ).getTime() &&
+                        new Date(data.date).getTime() <=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            30
+                          ).getTime()
+                    ).length
+                  }
                 </span>{" "}
                 tickets in total, to see more analytics please visit the reports
                 page. Make use of filters to get more insight.
@@ -257,12 +275,22 @@ const Main = () => {
                     Solved
                   </h5>
                 </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-xl font-semibold flex items-center">
+                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
                   {
                     filteredTickets.filter(
                       (data) =>
-                        data.message_position === 1 &&
-                        data.status &&
+                        new Date(data.date).getTime() >=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            1
+                          ).getTime() &&
+                        new Date(data.date).getTime() <=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            30
+                          ).getTime() &&
                         data.status.toLowerCase() === "solved"
                     ).length
                   }
@@ -277,12 +305,22 @@ const Main = () => {
                     Re-Opened
                   </h5>
                 </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-xl font-semibold flex items-center">
+                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
                   {
                     filteredTickets.filter(
                       (data) =>
-                        data.message_position === 1 &&
-                        data.status &&
+                        new Date(data.date).getTime() >=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            1
+                          ).getTime() &&
+                        new Date(data.date).getTime() <=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            30
+                          ).getTime() &&
                         data.status.toLowerCase() === "reopened"
                     ).length
                   }
@@ -297,12 +335,22 @@ const Main = () => {
                     On-Hold
                   </h5>
                 </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-xl font-semibold flex items-center">
+                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
                   {
                     filteredTickets.filter(
                       (data) =>
-                        data.message_position === 1 &&
-                        data.status &&
+                        new Date(data.date).getTime() >=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            1
+                          ).getTime() &&
+                        new Date(data.date).getTime() <=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            30
+                          ).getTime() &&
                         data.status.toLowerCase() === "on hold"
                     ).length
                   }
@@ -317,7 +365,7 @@ const Main = () => {
                     Open
                   </h5>
                 </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-xl font-semibold flex items-center">
+                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
                   {
                     filteredTickets.filter(
                       (data) =>

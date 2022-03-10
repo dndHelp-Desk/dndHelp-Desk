@@ -116,14 +116,26 @@ const Calendar = () => {
     );
   });
 
-  //Map Through Days
+  //Map Through Days =======================
   const days = getDatesInMonthDisplay(month, year).map((day, index) => {
-    const clientName = currentMonthTickets.filter(
-              (data) => new Date(data.due_date).getDate() === day.getDate()
-            ).length >= 1 ?
-            currentMonthTickets.filter(
-              (data) => new Date(data.due_date).getDate() === day.getDate()
-            )[0].recipient_name:""
+    const clientName =
+      currentMonthTickets.filter(
+        (data) =>
+          new Date(data.due_date).getDate() === day.getDate() &&
+          new Date(data.due_date).getFullYear() === day.getFullYear() &&
+          data.status !== "solved" &&
+          data.status !== "on hold"
+      ).length >= 1
+        ? currentMonthTickets
+            .filter(
+              (data) =>
+                new Date(data.due_date).getDate() === day.getDate() &&
+                new Date(data.due_date).getFullYear() === day.getFullYear() &&
+                data.status !== "solved" &&
+                data.status !== "on hold"
+            )
+            .map((data) => data.recipient_name)
+        : "";
     return (
       <div key={index} className="p-[0.3rem] flex w-full justify-center">
         <abbr title={`${clientName}`}>
@@ -136,7 +148,11 @@ const Calendar = () => {
                 : "dark:text-slate-300 text-slate-600 font-medium"
             } ${
               currentMonthTickets.filter(
-                (data) => new Date(data.due_date).getDate() === day.getDate() && data.status !== "solved"
+                (data) =>
+                  new Date(data.due_date).getDate() === day.getDate() &&
+                  new Date(data.due_date).getFullYear() === day.getFullYear() &&
+                  data.status !== "solved" &&
+                  data.status !== "on hold"
               ).length >= 1
                 ? "border-b border-blue-600"
                 : ""
@@ -150,7 +166,7 @@ const Calendar = () => {
   //Component
   return (
     <>
-      <div className="w-full h-full px-4">
+      <div className="w-full h-full px-4 select-none">
         <div className="px-2 h-full rounded-xl">
           <div className="flex items-center justify-between">
             <HiChevronLeft

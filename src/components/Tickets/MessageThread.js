@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillTrashFill,
   BsThreeDotsVertical,
-  BsInfoSquare,
 } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
 import { HiCheck } from "react-icons/hi";
@@ -17,7 +16,7 @@ import {
 import { updateAlert } from "../../store/NotificationsSlice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
-const MessageThread = ({ isChatOpen, setChat }) => {
+const MessageThread = ({ isChatOpen }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
@@ -41,9 +40,8 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     message: "",
     subject: "",
     message_position: threadMessage.length + 1,
-    ticket_id: firstMessage.length >= 1?firstMessage.ticket_id:"none",
+    ticket_id: firstMessage.length >= 1 ? firstMessage.ticket_id : "none",
   });
-
 
   //Message options ========================================
   const [msgOptions, setOptions] = useState({
@@ -126,7 +124,8 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                   </span>
                   <button
                     onClick={() =>
-                     user[0].access === "admin" && setOptions({
+                      user[0].access === "admin" &&
+                      setOptions({
                         status: true,
                         id: message.message_position,
                         threadId: message.ticket_id,
@@ -430,18 +429,14 @@ const MessageThread = ({ isChatOpen, setChat }) => {
     >
       <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
+          {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
-            {/**Opened Ticket Details ================================== */}
-            <div id="ticketResolvedDetails" className="relative flex items-center space-x-2">
-              <BsInfoSquare className="dark:text-slate-300 text-slate-900 hover:opacity-80 text-2xl cursor-pointer" />
-              {/**Back To Main List  On Small Screens====================== */}
-              <div
-                onClick={() => setChat(false)}
-                className="dark:text-slate-600 text-slate-600 font-bold py-1 h-full w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer"
-              >
-                <span className="text-sm">Back</span>
-              </div>
-              <div id="solution" className="absolute hidden flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[20rem] shadow-xl dark:bg-[#334155da] dark:backdrop-blur-sm bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#334155bb] after:border-b-white after:border-l-transparent">
+            <details className="relative flex items-center space-x-2">
+              <summary className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer">
+                Details
+              </summary>
+
+              <div className="absolute flex flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[20rem] shadow-xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
                   Ticket Details
                 </h2>
@@ -518,7 +513,7 @@ const MessageThread = ({ isChatOpen, setChat }) => {
                     </form>
                   )}
               </div>
-            </div>
+            </details>
 
             {/**Other Details =========================== */}
             <h2 className="font-semibold text-sm dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
