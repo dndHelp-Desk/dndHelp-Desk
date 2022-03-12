@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import NewTicket from "./NewTicket";
 import TicketsList from "./TicketsList";
 
 const TicketsComponent = () => {
@@ -13,8 +12,9 @@ const TicketsComponent = () => {
       <TicketsList
         deleteArray={deleteArray}
         setDelete={setDelete}
-        setModal={setModal} />
-      <NewTicket newTicketModal={newTicketModal} setModal={setModal} />
+        setModal={setModal}
+        newTicketModal={newTicketModal}
+      />
     </div>
   );
 };

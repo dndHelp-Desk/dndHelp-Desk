@@ -109,7 +109,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         />
         <button
           onClick={() => setfiltersModal(filtersModal ? false : true)}
-          className="h-10 w-11 rounded-lg flex space-x-2 justify-center items-center dark:bg-slate-800 bg-slate-200 focus:outline-none outline-none custom-shadow hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold"
+          className="h-9 w-11 rounded-md flex space-x-2 justify-center items-center dark:bg-slate-800 bg-slate-200 focus:outline-none outline-none custom-shadow hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold"
         >
           <abbr title="filters" className="">
             <BsFunnelFill className="dark:text-slate-300 text-slate-800 font-bold" />
@@ -119,7 +119,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         {/**Assign Agent ================================= */}
         <button
           onClick={() => setPanel(true)}
-          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-10 w-11 rounded-lg  dark:text-slate-300 text-slate-800  font-semibold custom-shadow ${
+          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  dark:text-slate-300 text-slate-800  font-semibold custom-shadow ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
@@ -133,7 +133,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         {/**Delete Ticket ================================= */}
         <button
           onClick={() => deleteSelected()}
-          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-10 w-11 rounded-lg  text-red-600  font-semibold custom-shadow ${
+          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  text-red-600  font-semibold custom-shadow ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
@@ -172,7 +172,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
           onClick={() =>
             setModal(user[0].name !== "User Loader" ? true : false)
           }
-          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-200 px-4 space-x-2 rounded-lg flex justify-center items-center  text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold custom-shadow"
+          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-200 px-4 space-x-2 rounded-md flex justify-center items-center  text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold custom-shadow"
         >
           <span>NEW</span>
         </button>

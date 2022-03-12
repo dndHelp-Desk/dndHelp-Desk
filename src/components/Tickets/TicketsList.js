@@ -7,13 +7,14 @@ import {
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
 import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
-import { setThreadId } from "./../../store/TicketsSlice";
+import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
 import { updateAlert } from "../../store/NotificationsSlice";
 import Navbar from "./Navbar";
 import noTickets from "./images/no-userss.svg";
+import NewTicket from "./NewTicket";
 
-const TicketsList = ({ setDelete, deleteArray, setModal }) => {
+const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const filters = useSelector((state) => state.Tickets.filters);
@@ -48,9 +49,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-300 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
+          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-400 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
             ticket.ticket_id === threadId
-              ? "border-r-2 dark:border-r-slate-500 border-r-slate-500"
+              ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
           } bg-slate-200 p-2 space-x-2  flex ${
             ticket.branch_company
@@ -169,9 +170,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
                     )
               }
             />
-            <div className="h-8 w-8 lg:h-10 lg:w-10 rounded-xl dark:bg-slate-800 bg-slate-300 flex lg:hidden xl:flex justify-center items-center border-2 dark:border-slate-600 border-slate-500">
+            <div className="h-8 w-8 rounded-md dark:bg-slate-800 bg-slate-200 flex lg:hidden xl:flex justify-center items-center border-2 dark:border-slate-600 border-slate-500 capitalize">
               <abbr title={ticket.recipient_name}>
-                <h4 className="dark:text-slate-300 text-slate-700 font-semibold text-xl">{`${
+                <h4 className="dark:text-slate-300 text-slate-700 font-semibold text-base">{`${
                   ticket.recipient_name && ticket.recipient_name.charAt(0)
                 }`}</h4>
               </abbr>
@@ -272,6 +273,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal }) => {
   //Component ======================================
   return (
     <div className="relative">
+      <NewTicket setModal={setModal} newTicketModal={newTicketModal} />
       {/**Tickets ========================================== */}
       <div
         className={`flex flex-col lg:flex-row dark:bg-slate-900 bg-slate-100 rounded-xl py-2  ${

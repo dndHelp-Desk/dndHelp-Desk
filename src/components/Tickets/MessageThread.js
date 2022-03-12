@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { BsFillTrashFill, BsThreeDotsVertical } from "react-icons/bs";
+import {
+  BsFillTrashFill,
+  BsThreeDotsVertical,
+  BsChatRight,
+} from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
 import { HiCheck } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
-import { setThreadMessage } from "../../store/TicketsSlice";
+import { setThreadMessage } from "../../store/Tickets_n_Settings_Slice";
 import {
   addReply,
   deleteTicket,
@@ -79,35 +83,41 @@ const MessageThread = ({ isChatOpen }) => {
       return (
         <div
           key={index}
-          className="w-fullw-full snap_childTwo text-slate-400 text-sm leading-6 py-4 p-2 flex gap-2 transition-all"
+          className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all"
         >
-          {/**Avatar ====================== */}
-          <div
-            className={`h-[2rem] w-[5%] max-w-[2rem] min-w-[2rem] flex justify-center items-center rounded-lg uppercase font-bold text-lg dark:text-gray-300 text-slate-900 dark:bg-slate-700 bg-slate-100 border dark:border-slate-600 border-slate-400`}
-          >
-            {`${
-              message.from === "agent" && clientName && agentName
-                ? agentName.charAt(0)
-                : clientName.charAt(0)
-            }`}
-          </div>
           {/**Message ====================== */}
-          <div
-            className={`w-[95%] 2xl:w-full rounded-md dark:bg-slate-800 bg-slate-100 border dark:border-slate-700 border-slate-300 space-y-2 px-4 pb-4 ${
-              message.from === "agent" ? "order-first pt-1" : "order-last pt-2"
-            }`}
-          >
-            <div className="w-full bg-transparent space-y-2 rounded-lg">
+          <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-2 relative">
+            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b9c] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center capitalize font-bold text-sm">
+              <BsChatRight />
+            </div>
+            {/**Contents ======================= */}
+            <div className="w-full bg-transparent rounded-lg">
               <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-                <span className="hidden md:flex dark:text-slate-300 text-slate-900">{`${
-                  message.from === "agent" ? agentName : clientName
-                }`}</span>{" "}
+                <div className="flex items-center dark:text-slate-300 text-slate-900">
+                  <span>
+                    {`${message.from === "agent" ? agentName : clientName}`}
+                  </span>
+                  <span
+                    className={`flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
+                      message.from === "client" ? "hidden" : ""
+                    }`}
+                  >
+                    <span className="flex font-bold space-x-[1px] text-sm">
+                      <HiCheck />
+                      <HiCheck
+                        className={`${
+                          message.readStatus !== "read" ? "text-slate-500" : ""
+                        }`}
+                      />
+                    </span>{" "}
+                  </span>
+                </div>{" "}
                 <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
                   <span className="flex space-x-2">
-                    <span className="text-xs dark:text-slate-500 text-slate-700  font-medium">
+                    <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
                       {`${new Date(message.date).toDateString()}`}
                     </span>
-                    <span className="text-xs dark:text-slate-500 text-slate-600 font-medium">
+                    <span className="text-xs dark:text-slate-500 text-slate-500 font-medium">
                       {`${
                         Number(message.time.split(":")[0]) < 10
                           ? "0" + Number(message.time.split(":")[0])
@@ -128,7 +138,7 @@ const MessageThread = ({ isChatOpen }) => {
                         threadId: message.ticket_id,
                       })
                     }
-                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 text-slate-700 flex items-center justify-center"
+                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 text-slate-500 flex items-center justify-center"
                   >
                     <BsThreeDotsVertical className="inline  cursor-pointer" />
                   </button>
@@ -164,21 +174,6 @@ const MessageThread = ({ isChatOpen }) => {
               <p className="mt-2 dark:text-slate-400 text-slate-700">
                 {message.message}
               </p>
-              <div
-                className={`mt-2 flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
-                  message.from === "client" ? "hidden" : ""
-                }`}
-              >
-                <p>{message.readStatus} </p>
-                <div className="flex font-bold space-x-[1px] text-sm">
-                  <HiCheck />
-                  <HiCheck
-                    className={`${
-                      message.readStatus !== "read" ? "text-slate-500" : ""
-                    }`}
-                  />
-                </div>{" "}
-              </div>
             </div>
           </div>
         </div>
@@ -433,7 +428,7 @@ const MessageThread = ({ isChatOpen }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[25rem] shadow-xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
+              <div className="absolute flex flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[25rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
                   Ticket Details
                 </h2>
@@ -513,7 +508,7 @@ const MessageThread = ({ isChatOpen }) => {
 
             {/**Other Details =========================== */}
             <h2 className="font-semibold text-sm dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
-              <span>
+              <span className="uppercase text-xs">
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
                     (message) => message.message_position === 1
@@ -587,7 +582,7 @@ const MessageThread = ({ isChatOpen }) => {
             </h2>
           </div>
         </div>
-        <div className="h-full w-full p-2 overflow-y-scroll scroll-snap">
+        <div className="h-full w-full p-6 overflow-y-scroll scroll-snap">
           {/**Thread Messages ============================ */}
           {thread}
           {/**Placeholders ======================== */}

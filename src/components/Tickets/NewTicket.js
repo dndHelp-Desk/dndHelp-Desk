@@ -1,45 +1,59 @@
 import React, { useState } from "react";
-import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import DueDate from "./DueDate";
 import { useSelector, useDispatch } from "react-redux";
 import { addTicket } from "./../Data_Fetching/TicketsnUserData";
-import { updateAlert } from "./../../store/NotificationsSlice";
+import { updateAlert } from "../../store/NotificationsSlice";
 import useClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import {
+  BiTrash,
+  BiCalendar,
+  BiFile,
+  BiPaperclip,
+  BiX,
+  BiMinus,
+} from "react-icons/bi";
 
 const NewTicket = ({ newTicketModal, setModal }) => {
   const contacts = useSelector((state) => state.Tickets.contacts);
   const settings = useSelector((state) => state.Tickets.settings);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = settings.length >= 1 && settings[0].categories;
+  const templates = useSelector((state) => state.Tickets.email_templates);
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recepient, setRecipient] = useState("");
   const [searchResults, setResults] = useState(false);
-  const [showOpenedTickets,setShowOpen]= useState(true)
+  const [showOpenedTickets, setShowOpen] = useState(true);
   const dispatch = useDispatch();
-  const closeModalRef = useOnClickOutside(() => {
-    setModal(false);
-  });
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
   });
 
+  //Get Draft Message From the Local Storage ==============
+  const initialDraft = () => {
+    const draft = localStorage.getItem("draftMsg");
+    return (
+      JSON.parse(draft) || {
+        recipient_name: "",
+        recipient_email: "",
+        agent: "",
+        priority: "",
+        category: "",
+        branch_company: "",
+        message: "",
+        state: "",
+        date: "",
+        ticket_id: "",
+        agent_email: "",
+        complainant_name: "",
+        complainant_email: "",
+        complainant_number: "",
+      }
+    );
+  };
+
   //Form Input Values =========================
-  const [inputValue, setValues] = useState({
-    recipient_name: "",
-    recipient_email: "",
-    agent: "",
-    priority: "",
-    category: "",
-    branch_company: "",
-    message: "",
-    state: "",
-    date: "",
-    ticket_id: "",
-    agent_email: "",
-    complainant_name: "",
-    complainant_email: "",
-    complainant_number: "",
-  });
+  const [inputValue, setValues] = useState(initialDraft);
 
   //Check If Ticket Exists ===================
   const numbersArray =
@@ -58,7 +72,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       return (
         <li
           key={index}
-          className={`text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b border-slate-400 capitalize leading-5`}
+          className={`text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b dark:border-slate-700 border-slate-300 capitalize leading-5`}
         >
           <span>
             {data.branch_company} : {data.ticket_id}
@@ -102,7 +116,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               .includes(recepient.toLowerCase().replace(/\s/g, "")) === true
               ? ""
               : "hidden"
-          } text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b border-slate-300 capitalize`}
+          } text-xs dark:text-slate-400 text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b  dark:border-slate-600 border-slate-300 capitalize`}
         >
           <abbr title={contact.branch_company}>{contact.branch_company}</abbr>
         </li>
@@ -113,51 +127,19 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     categories &&
     categories.map((catagory, index) => {
       return (
-        <option className="capitalize" value={catagory} key={index}>
+        <option
+          className="capitalize hover:opacity-80"
+          value={catagory}
+          key={index}
+        >
           {catagory}
         </option>
       );
     });
 
-  //Link Google Appscript API for sendind Emails Regarding new Ticket ================
-  /*const sendMailAPI =
-    "https://script.google.com/macros/s/AKfycbyAWRBiPB0UcqtL4a6qGySTScYj-VwecLpqOI_eQAJUUkPZMj--RNw-lY9uD_F7EXhg/exec?action=addData";*/
-
   //Submit New Ticket ===============
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    //Send Mail Using App Script ======================
-    /*fetch(sendMailAPI, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name: inputValue.recipient_name,
-        email: inputValue.recipient_email,
-        subject: inputValue.category,
-        message: inputValue.message,
-        priority: inputValue.priority,
-        opened_by: inputValue.agent,
-        ticket_id: inputValue.ticket_id,
-        brand: inputValue.branch_company,
-        date: `${new Date(inputValue.date).toDateString()}, ${
-          new Date().getHours() + 1
-        }:${new Date().getMinutes() + 1} hrs`,
-        complainant_name: inputValue.complainant_name,
-        complainant_email: inputValue.complainant_email,
-        complainant_number: inputValue.complainant_number,
-      }),
-    });
-    setModal(false);
-    dispatch(
-      updateAlert({
-        message: "New Ticket Created Successfully",
-        color: "bg-green-200",
-      })
-    );*/
 
     let dueDate = `${new Date(
       inputValue.date
@@ -168,6 +150,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       new Date().getMinutes() + 1
     } hrs`;
     if (
+      inputValue.date !== "" &&
+      inputValue.branch_company !== "" &&
       member_details.id !== false &&
       allTickets.length >= 1 &&
       allTickets.filter((ticket) => ticket.ticket_id === inputValue.ticket_id)
@@ -358,384 +342,444 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     }
   };
 
-  //Component ===========================
+  //Component =====================================
   return (
     <div
-      className={`fixed ${
-        newTicketModal === true ? "fixed flex z-[999]" : "hidden"
-      } top-[-0.5rem] left-0 bottom-0 right-0 min-h-screen w-screen bg-[#030d2769] justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar pt-14`}
+      className={`absolute top-[-0.5rem] left-[-0.5rem] bottom-[-0.5rem] right-[-0.5rem] bg-[#030d2769] rounded-lg ${
+        newTicketModal === true ? "flex z-[999]" : "hidden"
+      }`}
     >
-      <div className="h-full w-full justify-center overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  flex">
-        <div
-          ref={closeModalRef}
-          className="bg-slate-400 border border-slate-600 shadow-2xl w-[95%] sm:w-[35rem] h-fit rounded-md relative py-4 "
-        >
-          <h3 className="text-center text-slate-900 text-base font-extrabold uppercase mt-2">
-            Create A New Ticket
-          </h3>
-          {/**New Tickect Form ================================= */}
-          <form className="px-4" onSubmit={(e) => handleSubmit(e)}>
-            <div className="py-6 space-y-4">
-              <div className="flex justify-between space-x-4">
-                {/**Reciepient Name  ======================================== */}
-                <label className="w-[50%] relative">
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className={`w-full lg:w-[56.5%] lg:h-[39rem] h-[30rem] lg:top-[1rem] top-[4rem] lg:right-[1%] dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
+          newTicketModal === true ? "absolute flex" : "hidden"
+        } flex-col justify-between space-y-1`}
+      >
+        {/**Close Modal or Minimuze and save window ============= */}
+        <div className="absolute right-1 top-1 flex space-x-1 items-center z-[999]">
+          {/**Minimize and save */}
+          <abbr title="minimize and save">
+            <span
+              onClick={() => {
+                setModal(false);
+                window.localStorage.setItem(
+                  "draftMsg",
+                  JSON.stringify(inputValue)
+                );
+              }}
+              className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all cursor-pointer"
+            >
+              <BiMinus className="dark:text-slate-300 text-slate-500 text-lg" />
+            </span>
+          </abbr>
+          {/**Close and Clear  */}
+          <abbr title="Close">
+            <span
+              onClick={() => {
+                setModal(false);
+                window.localStorage.setItem(
+                  "draftMsg",
+                  JSON.stringify({
+                    recipient_name: "",
+                    recipient_email: "",
+                    agent: "",
+                    priority: "",
+                    category: "",
+                    branch_company: "",
+                    message: "",
+                    state: "",
+                    date: "",
+                    ticket_id: "",
+                    agent_email: "",
+                    complainant_name: "",
+                    complainant_email: "",
+                    complainant_number: "",
+                  })
+                );
+              }}
+              className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all cursor-pointer"
+            >
+              <BiX className="dark:text-slate-300 text-slate-500 text-lg" />
+            </span>
+          </abbr>
+        </div>
+
+        {/**Top Section ============================= */}
+        <div className="w-full h-[90%] p-4">
+          <div className="w-full h-10 flex justify-between items-center">
+            {/**Recipient Name ============================= */}
+            <label
+              htmlFor="to"
+              autoComplete="off"
+              className="w-[48%] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>To : </span>
+              <input
+                type="text"
+                id="to"
+                name="to"
+                placeholder="Restuarant ..."
+                required={true}
+                autoComplete="off"
+                value={recepient}
+                onKeyPress={() => setResults(true)}
+                onKeyDown={() => setResults(true)}
+                onFocus={() => setResults(true)}
+                onChange={(e) => {
+                  setRecipient(e.target.value);
+                }}
+                className="h-8 w-[85%]  bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-500 focus:ring-0 focus:border-0 text-sm"
+              />
+              <ul
+                ref={closeSuggestionsRef}
+                className={`${
+                  searchResults ? "" : "hidden"
+                } absolute top-8 h-[11rem] w-full shadow-2xl dark:bg-slate-700 bg-slate-200 border rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+              >
+                {contactsList}
+              </ul>{" "}
+            </label>
+            {/**Subject ============================= */}
+            <label
+              htmlFor="subject"
+              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>Subject :</span>
+              <select
+                className="h-8 w-[73%] p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                id="subject"
+                name="subject"
+                value={inputValue.category}
+                required={true}
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    category: e.target.value,
+                  })
+                }
+              >
+                <option className="capitalize" value="">
+                  Subject ...
+                </option>
+                {categoriesList}
+              </select>
+            </label>
+          </div>
+          {/**Priority & Status ============================= */}
+          <div className="w-full h-10 flex justify-between items-center">
+            {/**Priority  ======================================== */}
+            <label
+              htmlFor="priority"
+              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>Priority :</span>
+              <select
+                className="h-8 w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                id="priority"
+                name="priority"
+                value={inputValue.priority}
+                required={true}
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    priority: e.target.value,
+                  })
+                }
+              >
+                <option className="capitalize" value="">
+                  Priority ...
+                </option>
+                <option className="capitalize">Low</option>
+                <option className="capitalize">Medium</option>
+                <option className="capitalize">High</option>
+                <option className="capitalize">Urgent</option>
+              </select>
+            </label>
+            {/**Status  ======================================== */}
+            <label
+              htmlFor="status"
+              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>Status :</span>
+              <select
+                className="h-8 w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                id="status"
+                name="status"
+                value={inputValue.state}
+                required={true}
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    state: e.target.value,
+                  })
+                }
+              >
+                <option className="capitalize" value="">
+                  Status ...
+                </option>
+                <option className="capitalize" value="open">
+                  open
+                </option>
+                <option className="capitalize" value="on hold">
+                  on hold
+                </option>
+                <option className="capitalize" value="solved">
+                  first Contact Resolution
+                </option>
+              </select>
+            </label>
+          </div>
+          {/**Complaintant Details ============================= */}
+          <div className="w-full h-10 flex justify-between items-center">
+            {/**Complainat Email  ======================================== */}
+            <label
+              htmlFor="email"
+              autoComplete="off"
+              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>Email :</span>
+              <input
+                className="h-8 w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                type="email"
+                id="email"
+                name="email"
+                value={inputValue.complainant_email}
+                autoComplete="nope"
+                placeholder="Complainant Email"
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    complainant_email: e.target.value,
+                  })
+                }
+              />
+            </label>
+            {/**Complainant Number  ======================================== */}
+            <label
+              htmlFor="numbers"
+              autoComplete="off"
+              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>Phone :</span>
+              <input
+                className="h-8 w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                id="numbers"
+                name="numbers"
+                type="text"
+                autoComplete="nope"
+                placeholder="073 5698 625"
+                required={true}
+                pattern="^[0-9]{10}$"
+                value={inputValue.complainant_number}
+                onChange={(e) => {
+                  setValues({
+                    ...inputValue,
+                    complainant_number: e.target.value,
+                    ticket_id:
+                      allTickets.length >= 1 &&
+                      allTickets.filter(
+                        (ticket) =>
+                          ticket.ticket_id ===
+                          `#${(
+                            new Date().getSeconds() +
+                            (new Date().getTime() +
+                              e.target.value.split("").splice(3, 5).join(""))
+                          )
+                            .split("")
+                            .slice(9, 14)
+                            .join("")}`
+                      ).length <= 0
+                        ? `#${(
+                            new Date().getSeconds() +
+                            (new Date().getTime() +
+                              e.target.value.split("").splice(3, 5).join(""))
+                          )
+                            .split("")
+                            .slice(9, 14)
+                            .join("")}`
+                        : `#${
+                            (
+                              new Date().getSeconds() +
+                              (new Date().getTime() +
+                                e.target.value.split("").splice(3, 5).join(""))
+                            )
+                              .split("")
+                              .slice(9, 14)
+                              .join("") + 1
+                          }`,
+                    agent: member_details[0].name,
+                    agent_email: member_details[0].email,
+                  });
+                }}
+              />
+              <ul
+                className={`${
+                  numbersArray.length >= 1 && showOpenedTickets ? "" : "hidden"
+                } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
+              >
+                {exist}
+                <label
+                  className="absolute bg-transparent top-[-0.5rem] right-2 outline-none focus:outline-none hover:opacity-80"
+                  htmlFor="suggestion"
+                >
                   <input
-                    className="
-                      block
-                      w-full h-9
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                   placeholder:text-slate-500
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    type="text"
-                    placeholder="Restuarant ..."
-                    required={true}
-                    value={recepient}
-                    onKeyPress={() => setResults(true)}
-                    onKeyDown={() => setResults(true)}
-                    onFocus={() => setResults(true)}
-                    onChange={(e) => {
-                      setRecipient(e.target.value);
-                    }}
-                  />
-                  <ul
-                    ref={closeSuggestionsRef}
-                    className={`${
-                      searchResults ? "" : "hidden"
-                    } absolute top-12 left-0 h-[11rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
-                  >
-                    {contactsList}
-                  </ul>
-                </label>
-                {/**End Of Reciepient Name  ======================================== */}
-                <label className="block w-[50%]">
-                  <select
-                    className="
-                      block
-                      w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                  capitalize
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    value={inputValue.category}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        category: e.target.value,
-                      })
-                    }
-                  >
-                    <option className="capitalize" value="">
-                      subject ...
-                    </option>
-                    {categoriesList}
-                  </select>
-                </label>
-                {/**End Of Subject  ======================================== */}
-              </div>
-              <div className="flex justify-between space-x-4">
-                {/**Priority And Status  ======================================== */}
-                <label className="block w-[50%]">
-                  <select
-                    className="block
-                      w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                  capitalize
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    value={inputValue.priority}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        priority: e.target.value,
-                      })
-                    }
-                  >
-                    <option className="capitalize" value="">
-                      Priority ...
-                    </option>
-                    <option className="capitalize">Low</option>
-                    <option className="capitalize">Medium</option>
-                    <option className="capitalize">High</option>
-                    <option className="capitalize">Urgent</option>
-                  </select>
-                </label>
-                <label className="block w-[50%]">
-                  <select
-                    className="
-                     w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                  capitalize
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    value={inputValue.state}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        state: e.target.value,
-                      })
-                    }
-                  >
-                    <option className="capitalize" value="">
-                      Status ...
-                    </option>
-                    <option className="capitalize" value="open">
-                      open
-                    </option>
-                    <option className="capitalize" value="on hold">
-                      on hold
-                    </option>
-                    <option className="capitalize" value="solved">
-                      first Contact Resolution
-                    </option>
-                  </select>
-                </label>
-                {/**End  Of Priority and Status  ======================================== */}
-              </div>
-              {/**complainant Details ======================================== */}
-              <div className="flex justify-between space-x-4">
-                <label className="block w-[50%]">
-                  <input
-                    type="text"
-                    className="
-                      w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                  capitalize
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    value={inputValue.complainant_email}
-                    autoComplete="nope"
-                    placeholder="Complainant Email"
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        complainant_email: e.target.value,
-                      })
-                    }
-                  />
-                </label>
-                <label className="block w-[50%] relative">
-                  <input
-                    type="text"
-                    className="
-                      w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                  capitalize
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    autoComplete="off"
-                    placeholder="073 5698 625"
-                    required={true}
-                    pattern="^[0-9]{10}$"
-                    value={inputValue.complainant_number}
-                    onChange={(e) => {
-                      setValues({
-                        ...inputValue,
-                        complainant_number: e.target.value,
-                        ticket_id:
-                          allTickets.length >= 1 &&
-                          allTickets.filter(
-                            (ticket) =>
-                              ticket.ticket_id ===
-                              `#${(
-                                new Date().getSeconds() +
-                                (new Date().getTime() +
-                                  e.target.value
-                                    .split("")
-                                    .splice(3, 5)
-                                    .join(""))
-                              )
-                                .split("")
-                                .slice(9, 14)
-                                .join("")}`
-                          ).length <= 0
-                            ? `#${(
-                                new Date().getSeconds() +
-                                (new Date().getTime() +
-                                  e.target.value
-                                    .split("")
-                                    .splice(3, 5)
-                                    .join(""))
-                              )
-                                .split("")
-                                .slice(9, 14)
-                                .join("")}`
-                            : `#${
-                                (
-                                  new Date().getSeconds() +
-                                  (new Date().getTime() +
-                                    e.target.value
-                                      .split("")
-                                      .splice(3, 5)
-                                      .join(""))
-                                )
-                                  .split("")
-                                  .slice(9, 14)
-                                  .join("") + 1
-                              }`,
-                        agent: member_details[0].name,
-                        agent_email: member_details[0].email,
-                      });
-                    }}
-                  />
-                  <ul
-                    className={`${
-                      numbersArray.length >= 1 && showOpenedTickets
-                        ? ""
-                        : "hidden"
-                    } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border border-slate-400 rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
-                  >
-                    {exist}
-                    <label
-                      className="absolute bg-transparent top-[-0.5rem] right-2 outline-none focus:outline-none hover:opacity-80"
-                      htmlFor="suggestion"
-                    >
-                      <input
-                        type="checkbox"
-                        name="suggestion"
-                        id="suggestion"
-                        onChange={()=>setShowOpen(false)}
-                        className="rounded checked:bg-slate-700"
-                      />
-                    </label>
-                  </ul>
-                </label>
-              </div>
-              <div className="flex justify-between space-x-4">
-                <label className="block w-full">
-                  <span className="text-slate-700 text-sm font-bold"></span>
-                  <input
-                    type="text"
-                    className="
-                      w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                  capitalize
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                    placeholder="Complainant Name ..."
-                    value={inputValue.complainant_name}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        complainant_name: e.target.value,
-                        agent: member_details[0].name,
-                        agent_email: member_details[0].email,
-                      })
-                    }
+                    type="checkbox"
+                    name="suggestion"
+                    id="suggestion"
+                    onChange={() => setShowOpen(false)}
+                    className="rounded checked:bg-slate-700"
                   />
                 </label>
-              </div>
-              {/**End of complainant Details ======================================== */}
-              <label className="block">
+              </ul>
+            </label>
+          </div>
+          {/**Recipient Name ============================= */}
+          <label
+            htmlFor="email"
+            className="w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+          >
+            <span>Name :</span>
+            <input
+              className="h-8 w-[88%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Complainant Name ..."
+              value={inputValue.complainant_name}
+              required={true}
+              onChange={(e) =>
+                setValues({
+                  ...inputValue,
+                  complainant_name: e.target.value,
+                  agent: member_details[0].name,
+                  agent_email: member_details[0].email,
+                })
+              }
+            />
+          </label>
+          {/**Message ====================================== */}
+          <div className="w-full h-[70%] mt-4 rounded-xl">
+            <label htmlFor="message" className="w-full h-full">
+              <textarea
+                className="resize-none w-full h-full bg-transparent rounded-xl  text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 border dark:border-slate-700 border-slate-300 overflow-hidden dark:text-slate-300 text-slate-700 focus:ring-0 focus:border-slate-300 outline-none focus:outline-none"
+                placeholder="Type your message here ..."
+                id="message"
+                name="message"
+                required={true}
+                rows="5"
+                value={inputValue.message}
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    message: e.target.value,
+                  })
+                }
+              ></textarea>
+            </label>
+          </div>
+        </div>
+
+        {/**Bottom Controls ========================================= */}
+        <div className="dark:bg-slate-700 bg-slate-200 h-[8%] w-full p-2 px-4 flex justify-between items-center overflow-hidden select-none">
+          <div className="flex justify-center items-center">
+            {/**Reset Input ========================================= */}
+            <abbr title="Clear Inputs">
+              <span
+                onClick={() => {
+                  setValues({
+                    recipient_name: "",
+                    recipient_email: "",
+                    agent: "",
+                    priority: "",
+                    category: "",
+                    branch_company: "",
+                    message: "",
+                    state: "",
+                    date: "",
+                    ticket_id: "",
+                    agent_email: "",
+                    complainant_name: "",
+                    complainant_email: "",
+                    complainant_number: "",
+                  });
+                }}
+                className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400 cursor-pointer"
+              >
+                <BiTrash />
+              </span>
+            </abbr>
+            {/**Attach A file ========================================= */}
+            <abbr title="Attachment">
+              <label
+                htmlFor="attachment"
+                className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400"
+              >
+                <BiPaperclip />
                 <input
-                  type="datetime-local"
-                  className="
-                      w-full
-                      mt-1
-                  text-slate-600
-                   text-sm
-                   bg-slate-200
-                      rounded-md
-                      border-slate-300
-                      shadow-sm
-                      focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                    "
-                  value={inputValue.date}
-                  required={true}
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      date: e.target.value,
-                    })
-                  }
+                  type="file"
+                  name="attachment"
+                  id="attachment"
+                  className="hidden"
                 />
               </label>
-              <label className="block">
-                <textarea
-                  className="resize-none
-                        w-full h-full
-                        mt-1
-                    text-slate-600
-                     text-sm
-                     bg-slate-200
-                        rounded-md
-                        border-slate-300
-                        shadow-sm
-                        focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
-                      "
-                  placeholder="Type your message here ..."
-                  required={true}
-                  rows="5"
-                  value={inputValue.message}
-                  onChange={(e) =>
-                    setValues({
-                      ...inputValue,
-                      message: e.target.value,
-                    })
-                  }
-                ></textarea>
-              </label>
+            </abbr>
+          </div>
+          <div className="flex items-center space-x-2">
+            {/**Templates ========================================= */}
+            <div
+              id="email"
+              className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded-xl border dark:border-slate-600 border-slate-300"
+            >
+              <abbr title="Templates">
+                <BiFile />
+              </abbr>
+              <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded-xl shadow-md dark:bg-slate-500 bg-slate-300 dark:border-slate-700 border-slate-300 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-500 after:border-slate-300">
+                <ul className="h-full w-full flex flex-col justify-center space-y-2 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-sm px-1">
+                  {categories &&
+                    categories.map((category, index) => {
+                      return (
+                        <li
+                          onClick={() =>
+                            setValues({
+                              ...inputValue,
+                              message:
+                                templates.length >= 1
+                                  ? templates.filter(
+                                      (template) => template.name === category
+                                    )[0].message
+                                  : "",
+                            })
+                          }
+                          className="capitalize hover:opacity-80"
+                          value={category}
+                          key={index}
+                        >
+                          {category}
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
             </div>
-            <div className="w-full h-10 flex justify-center">
+            {/**Due date ========================================= */}
+            <abbr title="Due Time">
+              <div className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-400 border dark:border-slate-600 border-slate-300">
+                <BiCalendar className="absolute" />
+                <DueDate setValues={setValues} inputValue={inputValue} />
+              </div>
+            </abbr>
+            {/**Send ========================================= */}
+            <abbr title="Open Ticket">
               <button
                 type="submit"
-                className="px-14 p-2 bg-slate-900 hover:bg-slate-800 outline-none focus:outline-none focus:ring focus:ring-slate-600 text-slate-300 rounded-md font-bold uppercase text-sm"
+                className="h-8 w-28 flex justify-center items-center outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded-md text-slate-100 dark:text-slate-100 font-medium text-sm font-sans transition-all"
               >
-                Open
+                Submit now
               </button>
-            </div>
-          </form>
-
-          {/** Hints ================ */}
-          <div className="bg-slate-600 shadow-xl w-[95%] h-[14.5rem] rounded-md absolute left-[2.5%] top-[7.5rem] p-4 hidden"></div>
+            </abbr>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

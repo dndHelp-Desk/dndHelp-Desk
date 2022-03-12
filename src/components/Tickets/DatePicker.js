@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
-import { filter } from "../../store/TicketsSlice";
+import { filter } from "../../store/Tickets_n_Settings_Slice";
 
 const DateFilter = () => {
   const dispatch = useDispatch();

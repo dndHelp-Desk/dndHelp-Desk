@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addAllTickets, loadFrequentlyAsked } from "../../store/TicketsSlice";
+import {
+  addAllTickets,
+  loadFrequentlyAsked,
+} from "../../store/Tickets_n_Settings_Slice";
 //Firestore ===================
 import {
   getFirestore,

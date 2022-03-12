@@ -10,6 +10,7 @@ const initialState = {
   threadMessage: [],
   threadId: initialId(),
   contacts: [],
+  email_templates: [],
   settings: [],
   filters: {
     startDate: new Date(
@@ -28,7 +29,7 @@ const initialState = {
     category: "",
     complainant_number: "",
     status: "",
-    others:""
+    others: "",
   },
   filteredTickets: [],
   frequentlyAsked: [],
@@ -56,13 +57,15 @@ export const TicketsSlice = createSlice({
     loadFrequentlyAsked: (state, action) => {
       state.frequentlyAsked = action.payload;
     },
+    loadTemplates: (state, action) => {
+      state.email_templates = action.payload;
+    },
     filter: (state, action) => {
       state.filters = action.payload;
     },
     updateFilteredTickets: (state, action) => {
       state.filteredTickets = action.payload.sort(
-        (a, b) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
       );
     },
   },
@@ -75,6 +78,7 @@ export const {
   setThreadMessage,
   setThreadId,
   loadFrequentlyAsked,
+  loadTemplates,
   filter,
   updateFilteredTickets,
 } = TicketsSlice.actions;

@@ -6,7 +6,8 @@ import {
   addAllTickets,
   setContacts,
   loadSettings,
-} from "../../store/TicketsSlice";
+  loadTemplates,
+} from "../../store/Tickets_n_Settings_Slice";
 
 //Firestore ===================
 import {
@@ -27,6 +28,11 @@ let membersRef = collection(db, "members");
 let ticketsRef = collection(db, "tickects");
 let contactsRef = collection(db, "contacts");
 let settingsRef = collection(db, "settings");
+let email_TemplatesRef = collection(
+  db,
+  "settings/gz4ykLUf7KIrFhqYXYUF/email_templates"
+);
+
 
 // deleting Tickets
 export const deleteTicket = (id) => {
@@ -237,7 +243,7 @@ const TicketsnUserData = () => {
   const currentUser = getAuth().currentUser;
   const member_details = useSelector((state) => state.UserInfo.member_details);
 
-  //User/Members Data =====================================
+  //Data Loading =====================================
   useEffect(() => {
     return (
       //Members Data Fetching
@@ -282,6 +288,14 @@ const TicketsnUserData = () => {
       onSnapshot(settingsRef, (snapshot) => {
         dispatch(
           loadSettings(
+            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+          )
+        );
+      }),
+      //Email Tenplates Data Fetching ======================
+      onSnapshot(email_TemplatesRef, (snapshot) => {
+        dispatch(
+          loadTemplates(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
           )
         );

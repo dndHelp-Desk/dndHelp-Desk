@@ -12,7 +12,7 @@ import lightLogo from "./logos/dndHelp-Desk_Light.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../store/UserSlice";
-import { updateFilteredTickets } from "../../store/TicketsSlice";
+import { updateFilteredTickets } from "../../store/Tickets_n_Settings_Slice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";

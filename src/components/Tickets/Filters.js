@@ -10,7 +10,7 @@ import {
 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import DateFilter from "./DatePicker";
-import { filter } from "../../store/TicketsSlice";
+import { filter } from "../../store/Tickets_n_Settings_Slice";
 
 const Filters = () => {
   const dispatch = useDispatch();
