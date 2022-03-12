@@ -15,6 +15,7 @@ import {
   resolveTicket,
 } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
+import {addRecording} from "./../authentication/Firebase"
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const MessageThread = ({ isChatOpen }) => {
@@ -23,6 +24,7 @@ const MessageThread = ({ isChatOpen }) => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const threadMessage = useSelector((state) => state.Tickets.threadMessage);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
+  const [recordingFile,setFile] = useState(false)
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
 
@@ -316,6 +318,10 @@ const MessageThread = ({ isChatOpen }) => {
   const sendSolution = (e) => {
     e.preventDefault();
     resolveTicket(firstMessage.length >= 1 && firstMessage[0].id, solution);
+
+    // Upload Recordings
+    recordingFile && addRecording(recordingFile, `/dial_n_dine/${threadId}`);
+
     //Relpy Using Nodemailer ===================
     let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
       new Date().getMinutes() + 1
@@ -428,7 +434,7 @@ const MessageThread = ({ isChatOpen }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[25rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
+              <div className="absolute flex flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
                   Ticket Details
                 </h2>
@@ -461,47 +467,76 @@ const MessageThread = ({ isChatOpen }) => {
                 <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[6rem] overflow-hidden overflow-y-scroll">
                   {firstMessage.length >= 1 && firstMessage[0].message}{" "}
                 </p>
-                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
-                  Solution :{" "}
-                  {firstMessage.length >= 1 &&
-                  firstMessage[0].closed_time !== ""
-                    ? new Date(firstMessage[0].closed_time).toLocaleDateString()
-                    : ""}
-                </h2>
-                <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[4rem] overflow-hidden overflow-y-scroll rounded-md">
-                  {firstMessage.length >= 1 && firstMessage[0].solution}{" "}
-                </p>
+
+                {/***Solution ============================= */}
+                {firstMessage.length >= 1 &&
+                  firstMessage[0].status === "solved" && (
+                    <>
+                      <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                        Solution :{" "}
+                        {firstMessage.length >= 1 &&
+                        firstMessage[0].closed_time !== ""
+                          ? `${new Date(
+                              firstMessage[0].closed_time
+                            ).toDateString()},${new Date(
+                              firstMessage[0].closed_time
+                            ).getHours()}:${new Date(
+                              firstMessage[0].closed_time
+                            ).getMinutes()}`
+                          : ""}
+                      </h2>
+                      <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[8rem] overflow-hidden overflow-y-scroll rounded-md">
+                        {firstMessage.length >= 1 && firstMessage[0].solution}{" "}
+                      </p>
+                    </>
+                  )}
 
                 {/**Add Solution ======================== */}
                 {firstMessage.length >= 1 &&
                   firstMessage[0].status !== "solved" && (
-                    <form
-                      className="dark:bg-slate-800 bg-slate-200 w-full h-[4.5rem] overflow-hidden rounded-md mt-2 relative"
-                      onSubmit={(e) => sendSolution(e)}
-                    >
-                      <textarea
-                        name="reply"
-                        id="reply"
-                        cols="30"
-                        rows="10"
-                        placeholder="Add solution ..."
-                        autoComplete="off"
-                        required
-                        onChange={(e) => {
-                          setSolution(e.target.value);
-                        }}
-                        value={solution}
-                        className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
-                      ></textarea>
-                      <div className="absolute right-2 bottom-2 sendSolution h-8 w-12">
-                        <button
-                          type="submit"
-                          className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold hidden text-slate-300 bg-blue-700 z-[99]"
-                        >
-                          <BiPaperPlane />
-                        </button>
-                      </div>
-                    </form>
+                    <>
+                      <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                        Add Solutions
+                      </h2>
+                      <form
+                        className="dark:bg-slate-800 bg-slate-200 w-full h-fit overflow-hidden rounded-md mt-2 p-1 relative"
+                        onSubmit={(e) => sendSolution(e)}
+                      >
+                        <textarea
+                          name="reply"
+                          id="reply"
+                          cols="30"
+                          rows="10"
+                          placeholder="Add solution ..."
+                          autoComplete="off"
+                          required
+                          onChange={(e) => {
+                            setSolution(e.target.value);
+                          }}
+                          value={solution}
+                          className=" h-[5.5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+                        ></textarea>
+                        <div className="w-full flex justify-between h-[2rem]">
+                          <label htmlFor="recording" class="block">
+                            <span className="sr-only">Choose recording</span>
+                            <input
+                              type="file"
+                              id="recording"
+                              name="recording"
+                              onChange={(e) => setFile(e.target.files[0])}
+                              required
+                              className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
+                            />
+                          </label>
+                          <button
+                            type="submit"
+                            className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold text-slate-300 bg-blue-700 z-[99]"
+                          >
+                            <BiPaperPlane />
+                          </button>
+                        </div>
+                      </form>
+                    </>
                   )}
               </div>
             </details>

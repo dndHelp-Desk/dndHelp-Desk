@@ -198,9 +198,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             <h5 className="dark:text-slate-400 max-w-[10rem] text-slate-700 text-xs tracking-wide font-base capitalize overflow-hidden whitespace-nowrap overflow-ellipsis">
               <abbr title={ticket.branch_company}>{ticket.branch_company}</abbr>
             </h5>
-            <small className="dark:text-slate-400 text-slate-500 text-xs">
+            <small className="dark:text-slate-400 text-slate-500 text-xs whitespace-nowrap">
               Due on {new Date(ticket.due_date).toDateString()}{" "}
-              {ticket.due_date.split("T")[1]}
+              {`${new Date(ticket.due_date).getHours()}:${new Date(
+                ticket.due_date
+              ).getMinutes()}`}
             </small>
           </div>
           <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">

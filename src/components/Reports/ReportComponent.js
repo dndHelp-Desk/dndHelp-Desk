@@ -26,7 +26,7 @@ const ReportsComponent = () => {
     category: "",
     status: "",
   });
-
+  
   useEffect(() => {
     setData(
       filteredTickets.length >= 1
@@ -34,18 +34,28 @@ const ReportsComponent = () => {
             (ticket) =>
               ticket.status
                 .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
                 .match(new RegExp(filters.status, "gi")) &&
               ticket.category
                 .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
                 .match(new RegExp(filters.category, "gi")) &&
               ticket.agent_name
                 .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
                 .match(new RegExp(filters.agent, "gi")) &&
               ticket.branch_company
                 .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
                 .match(new RegExp(filters.brand, "gi")) &&
               ticket.status
                 .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
                 .match(new RegExp(filters.status, "gi")) &&
               new Date(ticket.date).getTime() >=
                 new Date(

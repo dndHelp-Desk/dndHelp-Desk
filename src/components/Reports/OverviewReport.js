@@ -146,7 +146,15 @@ const OverviewReport = ({ data }) => {
                     .reduce((acc, value) => acc + Number(value), 0) /
                   chartData.length
                 ).toFixed(0) / 60
-              ).toFixed(0)}`}
+              ).toFixed(0) >
+              1?Number(
+                (
+                  chartData
+                    .map((data) => data.avg_handleTime)
+                    .reduce((acc, value) => acc + Number(value), 0) /
+                  chartData.length
+                ).toFixed(0) / 60
+              ).toFixed(0):0}`}
               <span className="text-xs">hrs</span>{" "}
               {`${Number(
                 (
@@ -155,7 +163,14 @@ const OverviewReport = ({ data }) => {
                     .reduce((acc, value) => acc + Number(value), 0) /
                   chartData.length
                 ).toFixed(0) % 60
-              )}`}
+              ) > 1?Number(
+                (
+                  chartData
+                    .map((data) => data.avg_handleTime)
+                    .reduce((acc, value) => acc + Number(value), 0) /
+                  chartData.length
+                ).toFixed(0) % 60
+              ):0}`}
               <span className="text-xs">mins</span>
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">

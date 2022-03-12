@@ -33,7 +33,11 @@ const Filters = ({ filters, setFilters }) => {
               <option
                 key={index}
                 className="capitalize"
-                value={category.split(" ").join("")}
+                value={category
+                  .split(" ")
+                  .join("")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")}
               >
                 {category}
               </option>
