@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 import {
   BsSearch,
   BsFunnelFill,
@@ -17,24 +18,61 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
   const [contactsPanel, setPanel] = useState(false);
   const user = useSelector((state) => state.UserInfo.member_details);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const dispatch = useDispatch();
   const [searchAsssignee, setSearch] = useState("");
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
 
-  //Close Contacts Modal on Click outside ===========
+  //Close Agents List on Click outside ===========
   const assigneeRef = useClickOutside(() => {
     setPanel(false);
   });
 
+  //MarkAll ==========================================
+  const markAll = () => {
+    setDelete([]);
+    let arr = [];
+    filteredTickets.length >= 1 &&
+      filteredTickets.forEach((ticket) => arr.push(ticket.ticket_id));
+    setDelete(arr);
+  };
+
   //Delete Selected Ticlets/Ticket ==========
   const deleteSelected = () => {
+    // Create a reference to the file to delete
+    const storage = getStorage();
     for (let i = 0; i < deleteArray.length; i++) {
       allTickets.length >= 1 &&
         allTickets
           .filter((ticket) => ticket.ticket_id === deleteArray[i])
           .forEach((ticket) => {
             deleteTicket(ticket.id);
+            let recRef = ref(storage, `/dial_n_dine/${ticket.ticket_id}.wav`);
+            // Delete the file
+            deleteObject(recRef)
+              .then(() => {
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: "Recording Deleted Successfully",
+                      color: "bg-green-200",
+                    },
+                  ])
+                );
+              })
+              .catch((error) => {
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: error.message,
+                      color: "bg-red-200",
+                    },
+                  ])
+                );
+              });
           });
     }
     setDelete([]);
@@ -101,7 +139,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
   return (
     <nav className="flex pb-1.5 justify-between items-center w-full relative border-b mt-[0.30rem] border-slate-200 dark:border-slate-800">
       {/**Search Bar ============================== */}
-      <div className="flex h-full gap-2 relative">
+      <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}
         <OffCanvasMenu
           filtersModal={filtersModal}
@@ -143,6 +181,27 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
             <BsFillTrashFill />
           </abbr>
         </button>
+
+        {/**Mark All ================================= */}
+        <label
+          htmlFor="selectAll"
+          className={`text-xs dark:text-slate-300 text-slate-800 flex items-center space-x-1 cursor-pointer ${
+            deleteArray.length >= 1 && activeUser[0].access === "admin"
+              ? "flex"
+              : "hidden"
+          }`}
+        >
+          <input
+            onChange={(e) =>
+              e.target.checked === true ? markAll() : setDelete([])
+            }
+            className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-md  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg`}
+            type="checkbox"
+            name="selectAll"
+            id="selectAll"
+          />
+          <span>Mark All</span>
+        </label>
 
         {/**Agent List to assign ============= */}
         {activeUser[0].access === "admin" && (

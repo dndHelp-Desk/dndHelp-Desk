@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addTicket } from "./../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
 import useClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import { addRecording } from "./../authentication/Firebase";
 import {
   BiTrash,
   BiCalendar,
@@ -24,6 +25,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const [recepient, setRecipient] = useState("");
   const [searchResults, setResults] = useState(false);
   const [showOpenedTickets, setShowOpen] = useState(true);
+  const [recordingFile, setFile] = useState(false);
   const dispatch = useDispatch();
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
@@ -141,6 +143,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Upload Recordings
+    recordingFile &&
+      inputValue.state === "solved" &&
+      addRecording(recordingFile, `/dial_n_dine/${inputValue.ticket_id}`);
+
     let dueDate = `${new Date(
       inputValue.date
     ).toDateString()}, ${new Date().getHours()}:${
@@ -149,7 +156,31 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     let openDate = `${new Date().toLocaleDateString()}, ${new Date().getHours()}:${
       new Date().getMinutes() + 1
     } hrs`;
-    if (
+
+    //Alert if Due Date is Empty =============
+    inputValue.date === "" &&
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Add The Due Date to Proceed",
+            color: "bg-yellow-200",
+          },
+        ])
+      );
+
+    //Send Mail and Open Ticket If values are not empty
+    if(!recordingFile && inputValue.state === "solved"){
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Please Upload The Recording To Proceed",
+            color: "bg-yellow-200",
+          },
+        ])
+      );
+    }else if (
       inputValue.date !== "" &&
       inputValue.branch_company !== "" &&
       member_details.id !== false &&
@@ -327,6 +358,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         complainant_email: "",
         complainant_number: "",
       });
+      setFile("");
       setShowOpen(true);
       setRecipient("");
       setModal(false);
@@ -396,6 +428,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     complainant_number: "",
                   })
                 );
+                setFile(false);
               }}
               className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all cursor-pointer"
             >
@@ -702,6 +735,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     complainant_email: "",
                     complainant_number: "",
                   });
+                  setFile(false);
                 }}
                 className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400 cursor-pointer"
               >
@@ -724,6 +758,22 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               </label>
             </abbr>
           </div>
+          {/**First Call resolution Recording Upload ================== */}
+          <label htmlFor="recording" className="block">
+            <span className="sr-only">Choose recording</span>
+            <input
+              type="file"
+              id="recording"
+              name="recording"
+              accept=".wav"
+              value={recordingFile ? recordingFile.filename : ""}
+              title="Upload Recording"
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+              }}
+              className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-600 rounded-lg outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-slate-100 dark:file:bg-[#1f283b] file:text-blue-600 hover:file:opacity-80"
+            />
+          </label>
           <div className="flex items-center space-x-2">
             {/**Templates ========================================= */}
             <div
@@ -745,7 +795,19 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                               message:
                                 templates.length >= 1
                                   ? templates.filter(
-                                      (template) => template.name === category
+                                      (template) =>
+                                        template.name
+                                          .split(" ")
+                                          .join("")
+                                          .replace(/\(/g, "")
+                                          .replace(/\)/g, "")
+                                          .toLowerCase() ===
+                                        category
+                                          .split(" ")
+                                          .join("")
+                                          .replace(/\(/g, "")
+                                          .replace(/\)/g, "")
+                                          .toLowerCase()
                                     )[0].message
                                   : "",
                             })

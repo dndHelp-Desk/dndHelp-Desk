@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   BsFillTrashFill,
   BsThreeDotsVertical,
@@ -24,7 +25,8 @@ const MessageThread = ({ isChatOpen }) => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const threadMessage = useSelector((state) => state.Tickets.threadMessage);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
-  const [recordingFile,setFile] = useState(false)
+  const [recordingFile, setFile] = useState(false);
+  const [audio,audioUrl]= useState("")
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
 
@@ -418,6 +420,7 @@ const MessageThread = ({ isChatOpen }) => {
     setSolution("");
   };
 
+
   //Component ======================================
   return (
     <div
@@ -485,9 +488,28 @@ const MessageThread = ({ isChatOpen }) => {
                             ).getMinutes()}`
                           : ""}
                       </h2>
-                      <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[8rem] overflow-hidden overflow-y-scroll rounded-md">
+                      <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[6rem] overflow-hidden overflow-y-scroll rounded-md">
                         {firstMessage.length >= 1 && firstMessage[0].solution}{" "}
                       </p>
+                      {/**Play Recording ================================ */}
+                      <audio
+                        id="rec"
+                        controls
+                        onPlay={()=>{
+                          const storage = getStorage();
+                          const recordingRef = ref(
+                            storage,
+                            `/dial_n_dine/${threadId}.wav`
+                          );
+                          getDownloadURL(recordingRef).then((url) => {
+                            audioUrl(url);
+                          });
+                        }}
+                       src="horse.mp3" type="audio/mpeg"
+                        className="h-[2rem] border bg-slate-50 w-full mt-2 rounded-md"
+                      >
+                        <source src={audio} type="audio/wav" />
+                      </audio>
                     </>
                   )}
 
@@ -496,7 +518,7 @@ const MessageThread = ({ isChatOpen }) => {
                   firstMessage[0].status !== "solved" && (
                     <>
                       <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
-                        Add Solutions
+                        Add Solution
                       </h2>
                       <form
                         className="dark:bg-slate-800 bg-slate-200 w-full h-fit overflow-hidden rounded-md mt-2 p-1 relative"
@@ -517,13 +539,17 @@ const MessageThread = ({ isChatOpen }) => {
                           className=" h-[5.5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
                         ></textarea>
                         <div className="w-full flex justify-between h-[2rem]">
-                          <label htmlFor="recording" class="block">
+                          <label htmlFor="recording" className="block">
                             <span className="sr-only">Choose recording</span>
                             <input
                               type="file"
                               id="recording"
+                              accept=".wav"
                               name="recording"
-                              onChange={(e) => setFile(e.target.files[0])}
+                              title="Upload Recording"
+                              onChange={(e) => {
+                                setFile(e.target.files[0]);
+                              }}
                               required
                               className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
                             />

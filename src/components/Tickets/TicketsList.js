@@ -156,7 +156,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           <div className="col-span-1 h-full xl:w-[7rem] flex justify-between space-x-2 items-center">
             <input
               type="checkbox"
-              className="rounded  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-700 border-slate-300 dark:bg-slate-400 bg-slate-100 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
+              className="rounded  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-700 border-slate-500 dark:bg-slate-400 dark:checked:bg-blue-600 bg-slate-100 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
               name="mark"
               id="mark"
               checked={
