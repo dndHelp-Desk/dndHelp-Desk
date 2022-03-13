@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector} from "react-redux";
 import noDataImg from "./../images/no-notifications.svg";
 import useClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
-import { setMessages } from "../../../store/NotificationsSlice";
+//import { setMessages } from "../../../store/NotificationsSlice";
 
 const Notification = ({ openNotifications, setOpenNotification }) => {
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
-  const user = useSelector((state) => state.UserInfo.member_details);
-  const dispatch = useDispatch();
+  //const allTickets = useSelector((state) => state.Tickets.allTickets);
+  //const user = useSelector((state) => state.UserInfo.member_details);
+  //const dispatch = useDispatch();
   const panelRef = useClickOutside(() => {
     setOpenNotification(false);
   });
