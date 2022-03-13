@@ -55,8 +55,8 @@ const TopCards = ({ data ,setFilters,filters}) => {
               {data.length >= 1
                 ? data.filter(
                     (data) =>
-                      new Date(data.due_date).toISOString() >=
-                        new Date().toISOString() && data.status !== "solved"
+                      new Date(data.due_date).getTime() >=
+                        new Date().getTime() && data.status !== "solved"
                   ).length
                 : 0}
             </h3>

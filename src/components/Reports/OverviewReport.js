@@ -28,11 +28,19 @@ const OverviewReport = ({ data }) => {
   });
 
   //Top 5 categories Bar ==================
-  const colorPalettes = ["#1e40af", "#6366f1", "#2563eb", "#3b82f6", "#60a5fa"];
-  const topFive = dataArray.length >= 5 ? dataArray.slice(0, 5) : dataArray;
+  const colorPalettes = [
+    "#1e40af",
+    "#6366f1",
+    "#2563eb",
+    "#3b82f6",
+    "#60a5fa",
+    "#082032",
+    "#2C394B",
+    "#444444",
+  ];
   const category =
-    topFive.length >= 1 &&
-    topFive.map((element, index) => {
+    dataArray.length >= 1 &&
+    dataArray.map((element, index) => {
       return (
         <div
           key={index}
@@ -180,7 +188,7 @@ const OverviewReport = ({ data }) => {
         </div>
         <div className="flex flex-col h-16 space-y-2 w-full justify-center">
           <small className="text-xs space-y-2 font-semibold tracking-normal capitalize dark:text-slate-300 text-slate-900">
-            Top 5 categories
+            Tickets Per Categories
           </small>
           <div className="h-2.5 w-full rounded-full dark:bg-slate-700 bg-slate-200 flex overflow-hidden border dark:border-slate-800 border-slate-400">
             {category}

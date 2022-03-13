@@ -252,7 +252,10 @@ const MainComponent = () => {
               />
 
               {/**Settings ================================================ */}
-              <NavLink to="/app/settings/account">
+              <NavLink
+                to="/app/settings/account"
+                className="outline-none focus:outline-none"
+              >
                 <abbr title="Settings">
                   <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
                     <BsGear />

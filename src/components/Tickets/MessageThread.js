@@ -142,7 +142,7 @@ const MessageThread = ({ isChatOpen }) => {
                         threadId: message.ticket_id,
                       })
                     }
-                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 text-slate-500 flex items-center justify-center"
+                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 text-slate-500 flex items-center justify-center outline-none focus:outline-none"
                   >
                     <BsThreeDotsVertical className="inline  cursor-pointer" />
                   </button>
@@ -437,7 +437,7 @@ const MessageThread = ({ isChatOpen }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col rounded-md top-10 left-[-0.8rem] h-[28rem] w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
+              <div className="absolute flex flex-col rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
                   Ticket Details
                 </h2>
@@ -495,7 +495,7 @@ const MessageThread = ({ isChatOpen }) => {
                       <audio
                         id="rec"
                         controls
-                        onPlay={()=>{
+                        onPlay={() => {
                           const storage = getStorage();
                           const recordingRef = ref(
                             storage,
@@ -505,8 +505,9 @@ const MessageThread = ({ isChatOpen }) => {
                             audioUrl(url);
                           });
                         }}
-                       src="horse.mp3" type="audio/mpeg"
-                        className="h-[2rem] border bg-slate-50 w-full mt-2 rounded-md"
+                        src="horse.mp3"
+                        type="audio/mpeg"
+                        className="h-[2rem] border bg-[#f1f2f5] w-full mt-2 rounded-md"
                       >
                         <source src={audio} type="audio/wav" />
                       </audio>
@@ -665,7 +666,7 @@ const MessageThread = ({ isChatOpen }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[8rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
-        <div className="h-full w-full p-2 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 border border-slate-300 dark:border-slate-800 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#1e293b9c] after:border-b-slate-200 after:border-l-transparent overflow-hidden">
+        <div className="h-full w-full p-2 shadow-sm rounded-lg dark:bg-[#1e293b9c] bg-slate-200 border border-slate-300 dark:border-slate-800 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#1e293b9c] after:border-b-slate-200 after:border-l-transparent overflow-hidden">
           <form
             onSubmit={(e) => sendReply(e)}
             className="h-full w-full bg-transparent rounded-lg relative"

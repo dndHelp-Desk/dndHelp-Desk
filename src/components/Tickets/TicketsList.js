@@ -49,7 +49,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-400 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c]  ${
+          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-400 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c] shadow-sm  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -110,16 +110,16 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           ${
             new Date(
               new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)
-            ).toISOString() >=
+            ).getTime() >=
               new Date(
                 filters.startDate !== null && filters.startDate
-              ).toISOString() &&
+              ).getTime() &&
             new Date(
               new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)
-            ).toISOString() <=
+            ).getTime() <=
               new Date(
                 filters.endDate !== null && filters.endDate
-              ).toISOString()
+              ).getTime()
               ? ""
               : "hidden"
           }`}
@@ -294,7 +294,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
 
         {/**Components ============================== */}
         <div
-          className={`w-full lg:w-[40%] h-[34rem] lg:h-[40rem] flex flex-col gap-2.5 pt-1 ${
+          className={`w-full lg:w-[40%] h-[38rem] lg:h-[40rem] flex flex-col gap-2.5 pt-1 ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
           }`}
         >
@@ -306,7 +306,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           <div className="w-full h-full space-y-2 overflow-y-scroll pr-1 relative">
             {tickets}
             {filteredTickets.length >= 1 && (
-              <div className="sticky h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center"></div>
+              <div className="sticky h-[1.5rem] md:h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center"></div>
             )}
             {filteredTickets.length <= 0 && (
               <>

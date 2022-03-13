@@ -125,7 +125,7 @@ const Main = () => {
               </div>
             )}
             <div className="flex items-center justify-center space-x-1">
-              <Link to="./tickets">
+              <Link to="./tickets" className="outline-none focus:outline-none">
                 <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-700 outline-none focus:outline-none focus:ring focus:ring-red-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-red-600 hover:ring-red-600 text-xs font-bold h-10 px-5 transition-all duration-300">
                   Resolve Tickets
                 </button>
@@ -148,7 +148,7 @@ const Main = () => {
               </p>
             </div>
             <div className="flex items-center justify-center space-x-1">
-              <Link to="./contacts">
+              <Link to="./contacts" className="outline-none focus:outline-none">
                 <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-700 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
                   Manage Contacts
                 </button>

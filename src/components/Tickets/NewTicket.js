@@ -383,7 +383,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     >
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className={`w-full lg:w-[56.5%] lg:h-[39rem] h-[30rem] lg:top-[1rem] top-[4rem] lg:right-[1%] dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
+        className={`w-[98%] lg:w-[56.5%] lg:h-[39rem] h-[30rem] lg:top-[1rem] top-[4rem] right-[1%] lg:right-[1%] dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
           newTicketModal === true ? "absolute flex" : "hidden"
         } flex-col justify-between space-y-1`}
       >
@@ -439,12 +439,12 @@ const NewTicket = ({ newTicketModal, setModal }) => {
 
         {/**Top Section ============================= */}
         <div className="w-full h-[90%] p-4">
-          <div className="w-full h-10 flex justify-between items-center">
+          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
             {/**Recipient Name ============================= */}
             <label
               htmlFor="to"
               autoComplete="off"
-              className="w-[48%] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+              className="md:w-[48%] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
             >
               <span>To : </span>
               <input
@@ -461,7 +461,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 onChange={(e) => {
                   setRecipient(e.target.value);
                 }}
-                className="h-8 w-[85%]  bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-500 focus:ring-0 focus:border-0 text-sm"
+                className="h-8 w-[80%] md:w-[85%]  bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-500 focus:ring-0 focus:border-0 text-sm"
               />
               <ul
                 ref={closeSuggestionsRef}
@@ -475,11 +475,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             {/**Subject ============================= */}
             <label
               htmlFor="subject"
-              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
             >
               <span>Subject :</span>
               <select
-                className="h-8 w-[73%] p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                className="h-8 w-[80%] md:w-[73%] p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
                 id="subject"
                 name="subject"
                 value={inputValue.category}
@@ -499,15 +499,15 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             </label>
           </div>
           {/**Priority & Status ============================= */}
-          <div className="w-full h-10 flex justify-between items-center">
+          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
             {/**Priority  ======================================== */}
             <label
               htmlFor="priority"
-              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
             >
               <span>Priority :</span>
               <select
-                className="h-8 w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
                 id="priority"
                 name="priority"
                 value={inputValue.priority}
@@ -531,11 +531,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             {/**Status  ======================================== */}
             <label
               htmlFor="status"
-              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
             >
               <span>Status :</span>
               <select
-                className="h-8 w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
                 id="status"
                 name="status"
                 value={inputValue.state}
@@ -563,16 +563,16 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             </label>
           </div>
           {/**Complaintant Details ============================= */}
-          <div className="w-full h-10 flex justify-between items-center">
+          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
             {/**Complainat Email  ======================================== */}
             <label
               htmlFor="email"
               autoComplete="off"
-              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
             >
               <span>Email :</span>
               <input
-                className="h-8 w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
                 type="email"
                 id="email"
                 name="email"
@@ -591,11 +591,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             <label
               htmlFor="numbers"
               autoComplete="off"
-              className="w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
             >
               <span>Phone :</span>
               <input
-                className="h-8 w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
                 id="numbers"
                 name="numbers"
                 type="text"
@@ -673,7 +673,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
           >
             <span>Name :</span>
             <input
-              className="h-8 w-[88%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
+              className="h-8 w-[80%] md:w-[88%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
               id="name"
               name="name"
               type="text"
@@ -691,7 +691,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             />
           </label>
           {/**Message ====================================== */}
-          <div className="w-full h-[70%] mt-4 rounded-xl">
+          <div className="w-full h-[40%] md:h-[70%] mt-4 rounded-xl">
             <label htmlFor="message" className="w-full h-full">
               <textarea
                 className="resize-none w-full h-full bg-transparent rounded-xl  text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 border dark:border-slate-700 border-slate-300 overflow-hidden dark:text-slate-300 text-slate-700 focus:ring-0 focus:border-slate-300 outline-none focus:outline-none"
@@ -713,7 +713,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         </div>
 
         {/**Bottom Controls ========================================= */}
-        <div className="dark:bg-slate-700 bg-slate-200 h-[8%] w-full p-2 px-4 flex justify-between items-center overflow-hidden select-none">
+        <div className="dark:bg-slate-700 bg-slate-200 h-[9%] md:h-[8%] w-full p-2 px-4 flex justify-between items-center overflow-hidden select-none">
           <div className="flex justify-center items-center">
             {/**Reset Input ========================================= */}
             <abbr title="Clear Inputs">
@@ -771,7 +771,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               onChange={(e) => {
                 setFile(e.target.files[0]);
               }}
-              className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-600 rounded-lg outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-slate-100 dark:file:bg-[#1f283b] file:text-blue-600 hover:file:opacity-80"
+              className="block w-[7rem] md:w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-600 rounded-lg outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-slate-100 dark:file:bg-[#1f283b] file:text-blue-600 hover:file:opacity-80"
             />
           </label>
           <div className="flex items-center space-x-2">

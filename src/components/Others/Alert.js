@@ -34,7 +34,7 @@ const Alert = () => {
       return (
         <div
           key={index}
-          className={`transition duration-150 max-w-[35rem] ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow rounded overflow-hidden ${alert.color}`}
+          className={`transition duration-150 max-w-[35rem] ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow-2xl rounded overflow-hidden ${alert.color}`}
         >
           <div className="sm:flex sm:items-start lg:items-center">
             <div className="flex items-center space-x-2 justify-between px-2 border-r border-slate-900">
@@ -79,7 +79,7 @@ const Alert = () => {
 
   //React Component ===========
   return (
-    <div className={`absolute overflow-hidden z-[999] ${flag ? "" : "hidden"}`}>
+    <div className={`absolute overflow-hidden z-[9999] ${flag ? "" : "hidden"}`}>
       {/* Code block starts */}
       <div className="fixed bottom-24 right-8 flex flex-col space-y-2">
         {alert}

@@ -21,6 +21,7 @@ const Profile = () => {
   const [showChange, setChange] = useState(false);
   const [showChangeIcon, setChangeIcon] = useState("scale-0");
   const member_details = useSelector((state) => state.UserInfo.member_details);
+  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [photoURL, setPhotoURL] = useState(
     "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
   );
@@ -47,10 +48,13 @@ const Profile = () => {
       setPhotoURL(currentUser.photoURL);
       setNewChange(true);
       dispatch(
-        updateAlert({
-          message: "Profile Changed Successfully",
-          color: "bg-green-200",
-        })
+        updateAlert([
+          ...alerts,
+          {
+            message: "Profile Changed Successfully",
+            color: "bg-green-200",
+          },
+        ])
       );
     }, 3000);
 
@@ -60,7 +64,8 @@ const Profile = () => {
       currentUser.photoURL !== member_details[0].photoUrl &&
         currentUser.photoURL !== null &&
         updateProfileUrl(member_details[0].id, currentUser.photoURL);
-         !member_details[0].uid && updateUID(member_details[0].id, currentUser.uid);
+      !member_details[0].uid &&
+        updateUID(member_details[0].id, currentUser.uid);
     }
   }, [currentUser, member_details]);
 
@@ -138,9 +143,20 @@ const Profile = () => {
             </div>
             <ul className="w-full capitalize">
               <li
-                onClick={() =>
-                  updateUserStatus(member_details[0].id, "available")
-                }
+                onClick={() => {
+                  updateUserStatus(member_details[0].id, "available");
+                  setTimeout(() => {
+                    dispatch(
+                      updateAlert([
+                        ...alerts,
+                        {
+                          message: "Status Changed",
+                          color: "bg-green-200",
+                        },
+                      ])
+                    );
+                  }, 3000);
+                }}
                 className="h-8 border-b border-t hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
@@ -151,7 +167,20 @@ const Profile = () => {
                 )}
               </li>
               <li
-                onClick={() => updateUserStatus(member_details[0].id, "busy")}
+                onClick={() => {
+                  updateUserStatus(member_details[0].id, "busy");
+                  setTimeout(() => {
+                    dispatch(
+                      updateAlert([
+                        ...alerts,
+                        {
+                          message: "Status Changed",
+                          color: "bg-green-200",
+                        },
+                      ])
+                    );
+                  }, 3000);;
+                }}
                 className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
@@ -162,9 +191,20 @@ const Profile = () => {
                 )}
               </li>
               <li
-                onClick={() =>
-                  updateUserStatus(member_details[0].id, "unavailable")
-                }
+                onClick={() => {
+                  updateUserStatus(member_details[0].id, "unavailable");
+                  setTimeout(() => {
+                    dispatch(
+                      updateAlert([
+                        ...alerts,
+                        {
+                          message: "Status Changed",
+                          color: "bg-green-200",
+                        },
+                      ])
+                    );
+                  },3000);
+                }}
                 className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">

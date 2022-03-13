@@ -18,6 +18,7 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  query,orderBy
 } from "firebase/firestore";
 
 // init services for firestore =========================
@@ -25,7 +26,7 @@ const db = getFirestore();
 
 // collection ref
 let membersRef = collection(db, "members");
-let ticketsRef = collection(db, "tickects");
+let ticketsRef = query(collection(db, "tickects"),orderBy("date"))
 let contactsRef = collection(db, "contacts");
 let settingsRef = collection(db, "settings");
 let email_TemplatesRef = collection(
