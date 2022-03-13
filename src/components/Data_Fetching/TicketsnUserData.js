@@ -18,7 +18,6 @@ import {
   doc,
   deleteDoc,
   updateDoc,
-  query,orderBy
 } from "firebase/firestore";
 
 // init services for firestore =========================
@@ -26,29 +25,13 @@ const db = getFirestore();
 
 // collection ref
 let membersRef = collection(db, "members");
-let ticketsRef = query(collection(db, "tickects"),orderBy("date"))
+let ticketsRef = collection(db, "tickects");
 let contactsRef = collection(db, "contacts");
 let settingsRef = collection(db, "settings");
 let email_TemplatesRef = collection(
   db,
   "settings/gz4ykLUf7KIrFhqYXYUF/email_templates"
 );
-
-
-// deleting Tickets
-export const deleteTicket = (id) => {
-  const docRef = doc(db, "tickects", id);
-  deleteDoc(docRef);
-};
-
-// Assign Different Agent ================
-export const assignAgent = (id, agent, email) => {
-  let docRef = doc(db, "tickects", id);
-  updateDoc(docRef, {
-    agent_name: agent,
-    agent_email: email,
-  });
-};
 
 // Change Priority ================
 export const changePriority = (id, selected) => {
@@ -139,11 +122,32 @@ export const activateUser = (id, state) => {
   });
 };
 
+// deleting Tickets
+export const deleteTicket = (id) => {
+  const docRef = doc(db, "tickects", id);
+  deleteDoc(docRef);
+};
+
+// Assign Different Agent ================
+export const assignAgent = (id, agent, email, assigner) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    agent_name: agent,
+    agent_email: email,
+    assigned: true,
+    assignee: agent,
+    assigner: assigner,
+    assignee_ReadStatus: "not read",
+  });
+};
+
 //Add Reply or Send Reply ============
-export const addReply = (message, message_position, ticket_id) => {
+export const addReply = (message, message_position, ticket_id, user, email) => {
   addDoc(ticketsRef, {
     date: new Date().toLocaleString(),
     from: "agent",
+    user: user,
+    user_email: email,
     message: message,
     message_position: message_position,
     ticket_id: ticket_id,
@@ -201,6 +205,10 @@ export const addTicket = (
     fcr: state === "solved" ? "yes" : "no",
     solution: state === "solved" ? message : "",
     reopened: false,
+    assigned: false,
+    assignee: "",
+    assigner: "",
+    assignee_ReadStatus: "",
   });
 };
 
@@ -236,7 +244,6 @@ export const createUser = (name, dept, email, access, bio, active) => {
     photoUrl: "",
   });
 };
-
 
 //Component ==================================
 const TicketsnUserData = () => {

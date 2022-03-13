@@ -192,7 +192,7 @@ const MessageThread = ({ isChatOpen }) => {
   const sendReply = (e) => {
     e.preventDefault();
     if (user[0].name !== "User Loader" && reply.ticket_id !== "none") {
-      addReply(reply.message, reply.message_position, reply.ticket_id);
+      addReply(reply.message, reply.message_position, reply.ticket_id, user[0].name,user[0].email);
       setReply({ ...reply, message: "" });
 
       //Send Email Using App Script  =============
@@ -433,7 +433,19 @@ const MessageThread = ({ isChatOpen }) => {
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <details className="relative flex items-center space-x-2">
-              <summary className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer">
+              <summary
+                onClick={() => {
+                  const storage = getStorage();
+                  const recordingRef = ref(
+                    storage,
+                    `/dial_n_dine/${threadId}.wav`
+                  );
+                  getDownloadURL(recordingRef).then((url) => {
+                    audioUrl(url);
+                  });
+                }}
+                className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer"
+              >
                 Details
               </summary>
 
@@ -495,18 +507,6 @@ const MessageThread = ({ isChatOpen }) => {
                       <audio
                         id="rec"
                         controls
-                        onPlay={() => {
-                          const storage = getStorage();
-                          const recordingRef = ref(
-                            storage,
-                            `/dial_n_dine/${threadId}.wav`
-                          );
-                          getDownloadURL(recordingRef).then((url) => {
-                            audioUrl(url);
-                          });
-                        }}
-                        src="horse.mp3"
-                        type="audio/mpeg"
                         className="h-[2rem] border bg-[#f1f2f5] w-full mt-2 rounded-md"
                       >
                         <source src={audio} type="audio/wav" />

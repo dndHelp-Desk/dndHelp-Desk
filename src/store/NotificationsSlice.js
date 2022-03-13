@@ -13,7 +13,7 @@ const NotificationsSlice = createSlice({
       state.alerts = action.payload
     },
     setMessages:(state,action)=>{
-      state.messages = [...state.messages,action.payload]
+      state.messages = action.payload
     }
   }
 })

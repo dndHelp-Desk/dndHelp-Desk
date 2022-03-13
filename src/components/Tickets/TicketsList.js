@@ -108,15 +108,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           }
           
           ${
-            new Date(
-              new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)
-            ).getTime() >=
+            new Date(ticket.date).getTime() >=
               new Date(
                 filters.startDate !== null && filters.startDate
               ).getTime() &&
-            new Date(
-              new Date(ticket.date).setDate(new Date(ticket.date).getDate() - 1)
-            ).getTime() <=
+            new Date(ticket.date).getTime() <=
               new Date(
                 filters.endDate !== null && filters.endDate
               ).getTime()

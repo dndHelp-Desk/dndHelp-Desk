@@ -5,7 +5,7 @@ let useClickOutside = (handler) => {
 
   useEffect(() => {
     let maybeHandler = (event) => {
-      if (!dropDownRef.current.contains(event.target)) {
+      if (event.target && !dropDownRef.current.contains(event.target)) {
         handler();
       }
     };

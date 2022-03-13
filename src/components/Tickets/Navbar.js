@@ -94,7 +94,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         allTickets
           .filter((ticket) => ticket.ticket_id === deleteArray[i])
           .forEach((ticket) => {
-            assignAgent(ticket.id, name, email);
+            assignAgent(ticket.id, name, email, user[0].name);
           });
     }
     setDelete([]);
