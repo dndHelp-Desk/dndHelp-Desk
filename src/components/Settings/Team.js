@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import noUsers from "./../MainComponent/images/no-userss.svg";
+import { Navigate } from "react-router";
 import {
   deleteUser,
   activateUser,
@@ -21,7 +22,8 @@ const Team = () => {
   const dispatch = useDispatch();
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
-  const [search , setSearch] = useState(" ")
+  const member_details = useSelector((state) => state.UserInfo.member_details);
+  const [search, setSearch] = useState(" ");
   const [inputValues, setValues] = useState({
     name: "",
     dept: "",
@@ -96,7 +98,7 @@ const Team = () => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        uid:uid
+        uid: uid,
       }),
     })
       .then((req) => {
@@ -195,6 +197,11 @@ const Team = () => {
         </div>
       );
     });
+
+    //Allow Admin Only ==========================
+  if (member_details[0].access !== "admin") {
+    return <Navigate to="/app" />;
+  }
 
   //Component ==================
   return (

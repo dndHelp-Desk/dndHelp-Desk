@@ -16,7 +16,7 @@ import {
   resolveTicket,
 } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
-import {addRecording} from "./../authentication/Firebase"
+import { addRecording } from "./../authentication/Firebase";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 
 const MessageThread = ({ isChatOpen }) => {
@@ -26,7 +26,7 @@ const MessageThread = ({ isChatOpen }) => {
   const threadMessage = useSelector((state) => state.Tickets.threadMessage);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recordingFile, setFile] = useState(false);
-  const [audio,audioUrl]= useState("")
+  const [audio, audioUrl] = useState("");
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
 
@@ -73,9 +73,14 @@ const MessageThread = ({ isChatOpen }) => {
   }, [dispatch, allTickets, threadId]);
 
   //Get Name of Reciepent and Agent and email ===============
-  let agentName = firstMessage.length >= 1 && firstMessage[0].agent_name;
-  let clientName = firstMessage.length >= 1 && firstMessage[0].recipient_name;
-  let clientEmail = firstMessage.length >= 1 && firstMessage[0].recipient_email;
+  let clientName =
+    user[0].access === "client"
+      ? firstMessage.length >= 1 && firstMessage[0].agent_name
+      : firstMessage.length >= 1 && firstMessage[0].recipient_name;
+  let clientEmail =
+    user[0].access === "client"
+      ? firstMessage.length >= 1 && firstMessage[0].agent_email
+      : firstMessage.length >= 1 && firstMessage[0].recipient_email;
   let brand = firstMessage.length >= 1 && firstMessage[0].branch_company;
   let ticket_status = firstMessage.length >= 1 && firstMessage[0].status;
   let date = firstMessage.length >= 1 && firstMessage[0].due_date;
@@ -91,7 +96,7 @@ const MessageThread = ({ isChatOpen }) => {
         >
           {/**Message ====================== */}
           <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-2 relative">
-            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b9c] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center capitalize font-bold text-sm">
+            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center capitalize font-bold text-sm">
               <BsChatRight />
             </div>
             {/**Contents ======================= */}
@@ -99,11 +104,15 @@ const MessageThread = ({ isChatOpen }) => {
               <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
                 <div className="flex items-center dark:text-slate-300 text-slate-900">
                   <span>
-                    {`${message.from === "agent" ? agentName : clientName}`}
+                    {message.agent_name}
+                    {message.user}
                   </span>
                   <span
                     className={`flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
-                      message.from === "client" ? "hidden" : ""
+                      message.user_email === user[0].email ||
+                      message.agent_email === user[0].email
+                        ? ""
+                        : "hidden"
                     }`}
                   >
                     <span className="flex font-bold space-x-[1px] text-sm">
@@ -119,18 +128,7 @@ const MessageThread = ({ isChatOpen }) => {
                 <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
                   <span className="flex space-x-2">
                     <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
-                      {`${new Date(message.date).toDateString()}`}
-                    </span>
-                    <span className="text-xs dark:text-slate-500 text-slate-500 font-medium">
-                      {`${
-                        Number(message.time.split(":")[0]) < 10
-                          ? "0" + Number(message.time.split(":")[0])
-                          : message.time.split(":")[0]
-                      }:${
-                        Number(message.time.split(":")[1]) < 10
-                          ? "0" + Number(message.time.split(":")[1])
-                          : message.time.split(":")[1]
-                      }`}
+                      {`${new Date(message.date).toLocaleString()}`}
                     </span>
                   </span>
                   <button
@@ -192,7 +190,16 @@ const MessageThread = ({ isChatOpen }) => {
   const sendReply = (e) => {
     e.preventDefault();
     if (user[0].name !== "User Loader" && reply.ticket_id !== "none") {
-      addReply(reply.message, reply.message_position, reply.ticket_id, user[0].name,user[0].email);
+      addReply(
+        reply.message,
+        reply.message_position,
+        reply.ticket_id,
+        user[0].name,
+        user[0].email,
+        user[0].access,
+        clientName,
+        clientEmail
+      );
       setReply({ ...reply, message: "" });
 
       //Send Email Using App Script  =============
@@ -420,7 +427,6 @@ const MessageThread = ({ isChatOpen }) => {
     setSolution("");
   };
 
-
   //Component ======================================
   return (
     <div
@@ -493,11 +499,7 @@ const MessageThread = ({ isChatOpen }) => {
                         firstMessage[0].closed_time !== ""
                           ? `${new Date(
                               firstMessage[0].closed_time
-                            ).toDateString()},${new Date(
-                              firstMessage[0].closed_time
-                            ).getHours()}:${new Date(
-                              firstMessage[0].closed_time
-                            ).getMinutes()}`
+                            ).toLocaleString()}`
                           : ""}
                       </h2>
                       <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[6rem] overflow-hidden overflow-y-scroll rounded-md">
@@ -574,6 +576,9 @@ const MessageThread = ({ isChatOpen }) => {
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
                     (message) => message.message_position === 1
+                  )[0].category &&
+                  threadMessage.filter(
+                    (message) => message.message_position === 1
                   )[0].category}
                 {!threadId && "Nothing is selected"}
               </span>{" "}
@@ -584,61 +589,7 @@ const MessageThread = ({ isChatOpen }) => {
                       threadMessage.filter(
                         (message) => message.message_position === 1
                       )[0].date
-                    ).toDateString()}
-                  {"  "}
-                  {`${
-                    (threadMessage.length >= 1 &&
-                      Number(
-                        threadMessage
-                          .filter(
-                            (message) => message.message_position === 1
-                          )[0]
-                          .time.split(":")[0]
-                      )) < 10
-                      ? "0" +
-                        (threadMessage.length >= 1 &&
-                          Number(
-                            threadMessage
-                              .filter(
-                                (message) => message.message_position === 1
-                              )[0]
-                              .time.split(":")[0]
-                          ))
-                      : threadMessage.length >= 1 &&
-                        Number(
-                          threadMessage
-                            .filter(
-                              (message) => message.message_position === 1
-                            )[0]
-                            .time.split(":")[0]
-                        )
-                  }:${
-                    (threadMessage.length >= 1 &&
-                      Number(
-                        threadMessage
-                          .filter(
-                            (message) => message.message_position === 1
-                          )[0]
-                          .time.split(":")[1]
-                      )) < 10
-                      ? "0" +
-                        (threadMessage.length >= 1 &&
-                          Number(
-                            threadMessage
-                              .filter(
-                                (message) => message.message_position === 1
-                              )[0]
-                              .time.split(":")[1]
-                          ))
-                      : threadMessage.length >= 1 &&
-                        Number(
-                          threadMessage
-                            .filter(
-                              (message) => message.message_position === 1
-                            )[0]
-                            .time.split(":")[1]
-                        )
-                  }`}
+                    ).toLocaleString()}
                 </small>
               )}
             </h2>

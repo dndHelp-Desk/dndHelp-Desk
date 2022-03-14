@@ -30,6 +30,9 @@ const MainComponent = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const notificationMsgs = useSelector(
+    (state) => state.NotificationsData.messages
+  );
   const newReplies =
     allTickets.length >= 1 &&
     allTickets.filter(
@@ -53,22 +56,30 @@ const MainComponent = () => {
 
   //FilterTckets Based on user's access ========
   useEffect(() => {
-    if (allTickets.length >= 1 && user[0].access !== "agent") {
+    if (allTickets.length >= 1 && user[0].access === "admin") {
       dispatch(
         updateFilteredTickets(
-          allTickets
-            .filter((ticket) => ticket.message_position === 1)
+          allTickets.filter((ticket) => ticket.message_position === 1)
         )
       );
     } else if (allTickets.length >= 1 && user[0].access === "agent") {
       dispatch(
         updateFilteredTickets(
-          allTickets
-            .filter(
-              (ticket) =>
-                ticket.message_position === 1 &&
-                ticket.agent_email === user[0].email
-            )
+          allTickets.filter(
+            (ticket) =>
+              ticket.message_position === 1 &&
+              ticket.agent_email === user[0].email
+          )
+        )
+      );
+    } else if (allTickets.length >= 1 && user[0].access === "client") {
+      dispatch(
+        updateFilteredTickets(
+          allTickets.filter(
+            (ticket) =>
+              ticket.message_position === 1 &&
+              ticket.recipient_email === user[0].email
+          )
         )
       );
     }
@@ -118,9 +129,7 @@ const MainComponent = () => {
             <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-5">
               <NavLink
                 to="/app"
-                className={`TabsLinks ${
-                  location.pathname === "/app" ? "navlinks" : ""
-                }`}
+                className={`TabsLinks  ${location.pathname === "/app" ? "navlinks" : ""}`}
               >
                 Dashboard
               </NavLink>
@@ -137,8 +146,8 @@ const MainComponent = () => {
                 to="/app/contacts"
                 end={true}
                 className={`TabsLinks ${
-                  location.pathname === "/app/contacts" ? "navlinks" : ""
-                }`}
+                  user[0].access === "client" && "hidden"
+                } ${location.pathname === "/app/contacts" ? "navlinks" : ""}`}
               >
                 Contacts
               </NavLink>
@@ -161,9 +170,7 @@ const MainComponent = () => {
             >
               <NavLink
                 to="/app"
-                className={`TabsLinks ${
-                  location.pathname === "/app" ? "navlinks" : ""
-                }`}
+                className={`TabsLinks ${location.pathname === "/app" ? "navlinks" : ""}`}
               >
                 <FaHeadset
                   className="inline-block
@@ -188,8 +195,8 @@ const MainComponent = () => {
                 to="/app/contacts"
                 end={true}
                 className={`TabsLinks ${
-                  location.pathname === "/app/contacts" ? "navlinks" : ""
-                }`}
+                  user[0].access === "client" && "hidden"
+                } ${location.pathname === "/app/contacts" ? "navlinks" : ""}`}
               >
                 <FaUserTie
                   className="inline-block
@@ -237,12 +244,13 @@ const MainComponent = () => {
                   className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
                 >
                   <BsBell />
-                  {newReplies.length >= 1 && (
-                    <span className="flex h-2 w-2 absolute top-1 right-1">
-                      <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                    </span>
-                  )}
+                  {newReplies.length >= 1 ||
+                    (notificationMsgs.length >= 1 && (
+                      <span className="flex h-2 w-2 absolute top-1 right-1">
+                        <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                      </span>
+                    ))}
                 </button>
               </abbr>
               {/**Expanded Notification & Chat  =============================== */}

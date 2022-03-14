@@ -428,6 +428,22 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     complainant_number: "",
                   })
                 );
+                setValues({
+                  recipient_name: "",
+                  recipient_email: "",
+                  agent: "",
+                  priority: "",
+                  category: "",
+                  branch_company: "",
+                  message: "",
+                  state: "",
+                  date: "",
+                  ticket_id: "",
+                  agent_email: "",
+                  complainant_name: "",
+                  complainant_email: "",
+                  complainant_number: "",
+                });
                 setFile(false);
               }}
               className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all cursor-pointer"
@@ -648,7 +664,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               <ul
                 className={`${
                   numbersArray.length >= 1 && showOpenedTickets ? "" : "hidden"
-                } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
+                } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border z-[999] rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
               >
                 {exist}
                 <label

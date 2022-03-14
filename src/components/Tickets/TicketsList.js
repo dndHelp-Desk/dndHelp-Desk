@@ -20,36 +20,37 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const filters = useSelector((state) => state.Tickets.filters);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
+  const user = useSelector((state) => state.UserInfo.member_details);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
+
+  //Unread Meassages =================
+  let unread =
+    allTickets.length >= 1 &&
+    allTickets.filter(
+      (ticket) =>
+        ticket.readStatus !== "read" && ticket.recipient_email === user[0].email
+    );
 
   //Loop Through Each Tickects =================
   const tickets =
     filteredTickets.length >= 1 &&
     filteredTickets.map((ticket) => {
-      /**Unread Meassages ================= */
-      let ticketReadStatus =
-        allTickets.length >= 1 &&
-        allTickets.filter(
-          (message) =>
-            message.ticket_id === ticket.ticket_id &&
-            message.readStatus !== "read" &&
-            message.from !== "agent"
-        );
-
       /**Mark As read if thread is Active ========== */
       threadId === ticket.ticket_id &&
-        ticketReadStatus.length >= 1 &&
-        ticketReadStatus.forEach((message) => {
-          markAsSeen(message.id, "read");
-        });
+        unread.length >= 1 &&
+        unread
+          .filter((data) => data.ticket_id === ticket.ticket_id)
+          .forEach((message) => {
+            markAsSeen(message.id, "read");
+          });
       /**End ========== */
 
       return (
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-400 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c] shadow-sm  ${
+          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-400 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -113,9 +114,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                 filters.startDate !== null && filters.startDate
               ).getTime() &&
             new Date(ticket.date).getTime() <=
-              new Date(
-                filters.endDate !== null && filters.endDate
-              ).getTime()
+              new Date(filters.endDate !== null && filters.endDate).getTime()
               ? ""
               : "hidden"
           }`}
@@ -142,9 +141,16 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             )}
 
           {/**Indicate if it's new messsage ================*/}
-          {ticketReadStatus.length >= 1 && (
+          {unread.filter((data) => data.ticket_id === ticket.ticket_id)
+            .length >= 1 && (
             <div className="absolute left-7 top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
-              <span>New : {ticketReadStatus.length}</span>
+              <span>
+                New :{" "}
+                {
+                  unread.filter((data) => data.ticket_id === ticket.ticket_id)
+                    .length
+                }
+              </span>
             </div>
           )}
 
@@ -181,10 +187,12 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               dispatch(setThreadId(ticket.ticket_id));
               window.localStorage.setItem("threadId", JSON.stringify(threadId));
               setChat(true);
-              ticketReadStatus.length >= 1 &&
-                ticketReadStatus.forEach((message) => {
-                  markAsSeen(message.id, "read");
-                });
+              unread.length >= 1 &&
+                unread
+                  .filter((data) => data.ticket_id === ticket.ticket_id)
+                  .forEach((message) => {
+                    markAsSeen(message.id, "read");
+                  });
             }}
             className="col-span-5 flex flex-col justify-center relative h-full w-full space-y-1 px-1 py-1 cursor-pointer"
           >
@@ -195,10 +203,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               <abbr title={ticket.branch_company}>{ticket.branch_company}</abbr>
             </h5>
             <small className="dark:text-slate-400 text-slate-500 text-xs whitespace-nowrap">
-              Due on {new Date(ticket.due_date).toDateString()}{" "}
-              {`${new Date(ticket.due_date).getHours()}:${new Date(
-                ticket.due_date
-              ).getMinutes()}`}
+              Due on {new Date(ticket.due_date).toLocaleString()}
             </small>
           </div>
           <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">
@@ -271,6 +276,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   //Component ======================================
   return (
     <div className="relative">
+      {/**New Ticket Form ====================================== */}
       <NewTicket setModal={setModal} newTicketModal={newTicketModal} />
       {/**Tickets ========================================== */}
       <div
@@ -278,7 +284,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           isChatOpen && "space-y-4"
         } lg:space-y-0 lg:space-x-2 space-x-0 ralative`}
       >
-        {/**Back To Main List  On Small Screens====================== */}
+        {/**Back To Main List On Small Screens ====================== */}
         <div
           onClick={() => setChat(false)}
           className={`dark:text-slate-400 text-slate-600 font-bold py-1 h-2 w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer ${
@@ -288,7 +294,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           <span className="text-sm">Back</span>
         </div>
 
-        {/**Components ============================== */}
+        {/**Components ================================== */}
         <div
           className={`w-full lg:w-[40%] h-[38rem] lg:h-[40rem] flex flex-col gap-2.5 pt-1 ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
@@ -299,7 +305,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             setDelete={setDelete}
             setModal={setModal}
           />
-          <div className="w-full h-full space-y-2 overflow-y-scroll pr-1 relative">
+          <div className="w-full h-full space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1 relative">
             {tickets}
             {filteredTickets.length >= 1 && (
               <div className="sticky h-[1.5rem] md:h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center"></div>

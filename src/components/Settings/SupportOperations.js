@@ -1,6 +1,15 @@
 import React from 'react'
+import { Navigate } from "react-router";
+import { useSelector } from 'react-redux';
 
 const SupportOperations = () => {
+  const member_details = useSelector((state) => state.UserInfo.member_details);
+  //Allow Admin Only ==========================
+  if (member_details[0].access !== "admin") {
+    return <Navigate to="/app" />;
+  }
+
+  //Component =================
   return (
     <div>
       <div className="max-w-lg mx-auto p-8">

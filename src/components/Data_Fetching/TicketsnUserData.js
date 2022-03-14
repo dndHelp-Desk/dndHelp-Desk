@@ -8,6 +8,7 @@ import {
   loadSettings,
   loadTemplates,
 } from "../../store/Tickets_n_Settings_Slice";
+import { setMessages } from "../../store/NotificationsSlice";
 
 //Firestore ===================
 import {
@@ -114,6 +115,22 @@ export const deleteUser = (id) => {
   deleteDoc(docRef);
 };
 
+// Add Notifications =================================
+export const addNotification = (id, title, message) => {
+  addDoc(collection(db, `members/${id}/notifications`), {
+    title: title,
+    message: message,
+    date: new Date().toLocaleString(),
+  });
+};
+
+//Delete notification ============================
+export const deleteNotification = (id,user_id) => {
+  let docRef = doc(db, `members/${user_id}/notifications`, id);
+  deleteDoc(docRef);
+};
+
+
 // change user active status ================
 export const activateUser = (id, state) => {
   let docRef = doc(db, "members", id);
@@ -137,17 +154,27 @@ export const assignAgent = (id, agent, email, assigner) => {
     assigned: true,
     assignee: agent,
     assigner: assigner,
-    assignee_ReadStatus: "not read",
   });
 };
 
 //Add Reply or Send Reply ============
-export const addReply = (message, message_position, ticket_id, user, email) => {
+export const addReply = (
+  message,
+  message_position,
+  ticket_id,
+  user,
+  email,
+  from,
+  r_name,
+  r_email
+) => {
   addDoc(ticketsRef, {
     date: new Date().toLocaleString(),
-    from: "agent",
+    from: from,
     user: user,
     user_email: email,
+    recipient_name: r_name,
+    recipient_email: r_email,
     message: message,
     message_position: message_position,
     ticket_id: ticket_id,
@@ -208,7 +235,6 @@ export const addTicket = (
     assigned: false,
     assignee: "",
     assigner: "",
-    assignee_ReadStatus: "",
   });
 };
 
@@ -311,15 +337,29 @@ const TicketsnUserData = () => {
     );
   }, [dispatch, currentUser.email]);
 
-  //Todo CollectionRef ====================
+  //Todo CollectionRef and Notifications ====================
   useEffect(() => {
     let toDoRef = collection(db, `members/${member_details[0].id}/to-do`);
-    return onSnapshot(toDoRef, (snapshot) => {
-      member_details[0].id &&
-        dispatch(
-          setToDo(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-        );
-    });
+    let notificationsRef = collection(
+      db,
+      `members/${member_details[0].id}/notifications`
+    );
+    return (
+      onSnapshot(toDoRef, (snapshot) => {
+        member_details[0].id &&
+          dispatch(
+            setToDo(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+          );
+      }),
+      onSnapshot(notificationsRef, (snapshot) => {
+        member_details[0].id &&
+          dispatch(
+            setMessages(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            )
+          );
+      })
+    );
   }, [dispatch, member_details]);
   return <></>;
 };

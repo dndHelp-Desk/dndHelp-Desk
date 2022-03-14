@@ -1,104 +1,40 @@
 import React from "react";
 import { useSelector} from "react-redux";
 import noDataImg from "./../images/no-notifications.svg";
+import {HiOutlineX} from "react-icons/hi"
 import useClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
-//import { setMessages } from "../../../store/NotificationsSlice";
+import { deleteNotification } from "../../Data_Fetching/TicketsnUserData";
 
 const Notification = ({ openNotifications, setOpenNotification }) => {
-  //const allTickets = useSelector((state) => state.Tickets.allTickets);
-  //const user = useSelector((state) => state.UserInfo.member_details);
-  //const dispatch = useDispatch();
   const panelRef = useClickOutside(() => {
     setOpenNotification(false);
   });
   const notificationMsgs = useSelector(
     (state) => state.NotificationsData.messages
   );
-
-  //Check For New Response ==============================
-
-/* useEffect(() => {
-    //Check For New Responses =============================
-    allTickets
-      .filter(
-        (ticket) =>
-          ticket.readStatus !== "read" &&
-          ticket.from !== "agent" &&
-          ticket.agent_name === user[0].email &&
-          user[0].access === "agent"
-      )
-      ?.forEach((element) => {
-        dispatch(
-          setMessages([
-            ...notificationMsgs,
-            {
-              title: "New Response",
-              message: `There is a new repsonse from ${element.user} regarding case with ticket-Id: ${element.ticket_id}`,
-              date: `${element.date}`,
-            },
-          ])
-        );
-      });
-
-    //Check For New Responses =============================
-    allTickets
-      .filter(
-        (ticket) =>
-          ticket.readStatus !== "read" &&
-          ticket.from !== "client" &&
-          ticket.recipient_email === user[0].email &&
-          user[0].access === "client"
-      )
-      ?.forEach((element) => {
-        dispatch(
-          setMessages([
-            ...notificationMsgs,
-            {
-              title: "New Response",
-              message: `There is a new repsonse from ${element.user} regarding case with ticket-Id: ${element.ticket_id}`,
-              date: `${element.date}`,
-            },
-          ])
-        );
-      });
-
-    //Check For Assigned Tickets ==============================
-    allTickets
-      .filter(
-        (ticket) =>
-          ticket.assigned === true &&
-          ticket.assignee_ReadStatus === "not read" &&
-        ticket.agent_email === user[0].email
-      )?.forEach((element) => {
-        dispatch(
-          setMessages([
-            ...notificationMsgs,
-            {
-              title: `You've got a new Ticket`,
-              message: `You've been sssigned a ticket with id: ${element.ticket_id} by:${element.assigner}`,
-              date: `${element.date}`,
-            },
-          ])
-        );
-      });
-  });*/
+  const user = useSelector((state) => state.UserInfo.member_details);
 
   //loop through Notications List =============================
   const notificationList =
     notificationMsgs.length >= 1 &&
-    notificationMsgs.map((notif, index) => {
+    notificationMsgs.map((notif) => {
       return (
         <div
-          key={index}
-          className="w-full rounded-xl dark:bg-slate-700 bg-slate-200 p-2 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800"
+          key={notif.id}
+          className="w-full rounded-xl dark:bg-slate-700 bg-slate-200 p-2 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 relative"
         >
-          <h4 className="dark text-sm font-semibold text-center">
-            {notif.title}
-          </h4>
+          <h4 className="dark text-sm font-semibold">{notif.title}</h4>
           <p className="dark text-xs font-base">{notif.message}.</p>
           <small className="dark text-xs font-semibold text-left dark:text-slate-400 text-slate-700">
-            {new Date(notif.date).toDateString()}
+            {new Date(notif.date).toLocaleString()}
           </small>
+          {/**Delete Notification */}
+          <button
+            onClick={() => deleteNotification(notif.id,user[0].id)}
+            className="absolute top-1 right-1 h-4 w-4 rounded-full dark:bg-slate-800 bg-slate-400 dark:text-slate-300 text-slate-800 text-xs font-bold flex items-center justify-center hover:opacity-75 outline-none focus:outline-none"
+          >
+            <HiOutlineX />
+          </button>
         </div>
       );
     });

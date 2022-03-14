@@ -8,7 +8,11 @@ import {
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
-import { deleteTicket, assignAgent } from "./../Data_Fetching/TicketsnUserData";
+import {
+  deleteTicket,
+  assignAgent,
+  addNotification,
+} from "./../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
 import OffCanvasMenu from "../Others/OffCanvasMenu";
 
@@ -88,13 +92,18 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
   };
 
   //Assign Tickect To an Agent =================
-  const assgn = (name, email) => {
+  const assgn = (name, email,id) => {
     for (let i = 0; i < deleteArray.length; i++) {
       allTickets.length >= 1 &&
         allTickets
           .filter((ticket) => ticket.ticket_id === deleteArray[i])
           .forEach((ticket) => {
             assignAgent(ticket.id, name, email, user[0].name);
+            addNotification(
+              id,
+              "You've got a new Ticket",
+              `You've been sssigned a ticket with id: ${ticket.ticket_id} by:${user[0].name}`
+            );
           });
     }
     setDelete([]);
@@ -117,7 +126,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         <button
           key={member.id}
           onClick={() => {
-            assgn(member.name, member.email);
+            assgn(member.name, member.email,member.id);
             setPanel(false);
           }}
           className={`dark:bg-slate-600 bg-slate-100 w-full h-8 text-sm font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
