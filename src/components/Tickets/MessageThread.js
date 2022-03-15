@@ -16,7 +16,8 @@ import {
 import { updateAlert } from "../../store/NotificationsSlice";
 import { addRecording } from "./../authentication/Firebase";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
-const MessageThread = ({ isChatOpen,audio }) => {
+
+const MessageThread = ({ isChatOpen, audio }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
@@ -509,7 +510,7 @@ const MessageThread = ({ isChatOpen,audio }) => {
                         id="rec"
                         controls
                         className="h-[2rem] border bg-[#f1f2f5] w-full mt-2 rounded-md"
-                        src={audio}
+                        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
                         type="audio/wav"
                       >
                         Your browser does not support the
