@@ -16,8 +16,6 @@ import {
 import { updateAlert } from "../../store/NotificationsSlice";
 import { addRecording } from "./../authentication/Firebase";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
-import Test from "./test.WAV"
-
 const MessageThread = ({ isChatOpen,audio }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
