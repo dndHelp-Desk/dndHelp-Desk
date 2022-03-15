@@ -510,7 +510,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         id="rec"
                         controls
                         className="h-[2rem] border bg-[#f1f2f5] w-full mt-2 rounded-md"
-                        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+                        src={audio}
                         type="audio/wav"
                       >
                         Your browser does not support the

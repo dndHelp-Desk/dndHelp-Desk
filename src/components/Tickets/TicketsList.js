@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -17,32 +17,13 @@ import NewTicket from "./NewTicket";
 
 const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const filters = useSelector((state) => state.Tickets.filters);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
-  const user = useSelector((state) => state.UserInfo.member_details);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
   const [audio, audioUrl] = useState("");
   const unread = useSelector((state) => state.Tickets.unread);
-
-  const filteredTickets = useMemo(() =>
-    allTickets.length >= 1 && user[0].access === "admin"
-      ? allTickets.filter((ticket) => ticket.message_position === 1)
-      : allTickets.length >= 1 && user[0].access === "agent"
-      ? allTickets.filter(
-          (ticket) =>
-            ticket.message_position === 1 &&
-            ticket.agent_email === user[0].email
-        )
-      : allTickets.length >= 1 && user[0].access === "client"
-      ? allTickets.filter(
-          (ticket) =>
-            ticket.message_position === 1 &&
-            ticket.recipient_email === user[0].email
-        )
-      : []
- ,[allTickets,user] );
 
   //Loop Through Each Tickects =================
   const tickets =
@@ -122,11 +103,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           
           ${
             new Date(ticket.date).getTime() >=
-              new Date(
-                filters.startDate !== null && filters.startDate
-              ).getTime() &&
+              (filters.startDate !== null && new Date(
+                filters.startDate
+              ).getTime()) &&
             new Date(ticket.date).getTime() <=
-              new Date(filters.endDate !== null && filters.endDate).getTime()
+              (filters.endDate !== null && new Date(filters.endDate).getTime())
               ? ""
               : "hidden"
           }`}
@@ -148,7 +129,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           {new Date(ticket.due_date !== null && ticket.due_date).getTime() <=
             new Date().getTime() &&
             ticket.status &&
-            ticket.status.toLowerCase() === "open" && (
+            ticket.status.toLowerCase() === "open" &&(
               <BsBookmarkX className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
             )}
 
@@ -205,17 +186,17 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   .forEach((message) => {
                     markAsSeen(message.id, "read");
                   });
-              /**Get The Recording ================== */
-              if (ticket.status === "solved") {
-                const storage = getStorage();
-                const recordingRef = ref(
-                  storage,
-                  `/dial_n_dine/${ticket.ticket_id}.wav`
-                );
-                getDownloadURL(recordingRef).then((url) => {
-                  audioUrl(url);
-                });
-              }
+                  /**Get The Recording ================== */
+                  if(ticket.status === "solved"){
+                    const storage = getStorage();
+                  const recordingRef = ref(
+                    storage,
+                    `/dial_n_dine/${ticket.ticket_id}.wav`
+                  );
+                  getDownloadURL(recordingRef).then((url) => {
+                    audioUrl(url);
+                  });
+                  }
             }}
             className="col-span-5 flex flex-col justify-center relative h-full w-full space-y-1 px-1 py-1 cursor-pointer"
           >

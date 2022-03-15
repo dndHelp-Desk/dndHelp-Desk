@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiCheck } from "react-icons/hi";
 import { useSelector } from "react-redux";
@@ -6,9 +6,18 @@ import { addClientReply } from "./DataFetching";
 
 const Chat = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
-  let threadMessage = useSelector((state) => state.Tickets.threadMessage);
-  const textFieldReadOnly = threadMessage.length >= 1 ? false : true;
+  let allTickets = useSelector((state) => state.Tickets.allTickets);
   const preloaderData = [1, 2, 3, 4];
+
+  //Filter Thread Messages =====================================
+  const threadMessage = useMemo(() => {
+    return allTickets
+      .filter((ticket) => ticket.ticket_id === threadId)
+      .sort((a, b) => {
+        return Number(a.message_position) - Number(b.message_position);
+      });
+  }, [allTickets, threadId]);
+  const textFieldReadOnly = threadMessage.length >= 1 ? false : true;
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({

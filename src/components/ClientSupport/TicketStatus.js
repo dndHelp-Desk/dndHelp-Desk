@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useLocation } from "react-router-dom";
 import Chat from "./Chat";
 import {BsSearch} from "react-icons/bs"
 import {
   setThreadId,
-  setThreadMessage,
 } from "../../store/Tickets_n_Settings_Slice";
 import { useDispatch, useSelector } from "react-redux";
 import {markAsSeen} from "./DataFetching"
@@ -35,20 +34,6 @@ const TicketStatus = () => {
     }
 
 
-  useEffect(() => {
-    //Filter Thread Messages =====================================
-    allTickets.length >= 1 &&
-      dispatch(
-        setThreadMessage(
-          allTickets
-            .filter((ticket) => ticket.ticket_id === threadId)
-            .sort((a, b) => {
-              return Number(a.message_position) - Number(b.message_position);
-            })
-        )
-      );
-  }, [dispatch, threadId, allTickets]);
-
   //Components ==========================================
   return (
     <div
@@ -73,6 +58,7 @@ const TicketStatus = () => {
             id="tickect_id"
             placeholder="Enter Your Ticket ID  Here ..."
             autoComplete="off"
+            readOnly={true}
             className="rounded-md h-10 bg-slate-300 outline-none focus:outline-none focus:border-0 border-2 focus:ring-slate-600 text-slate-700 placeholder:text-sm lg:w-[20rem]"
             onChange={(e) => setValue(e.target.value)}
           />
