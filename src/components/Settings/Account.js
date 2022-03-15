@@ -302,7 +302,7 @@ const Account = () => {
               autoComplete="off"
               placeholder="New Password ..."
               required
-              minlength="6"
+              minLength="6"
               onChange={(e) =>
                 setValues({ ...inputValues, password: e.target.value })
               }

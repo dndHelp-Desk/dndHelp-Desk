@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   BsFillTrashFill,
   BsThreeDotsVertical,
   BsChatRight,
 } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
-import { HiCheck } from "react-icons/hi";
+import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
-import { setThreadMessage } from "../../store/Tickets_n_Settings_Slice";
 import {
   addReply,
   deleteTicket,
@@ -18,27 +16,40 @@ import {
 import { updateAlert } from "../../store/NotificationsSlice";
 import { addRecording } from "./../authentication/Firebase";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import Test from "./test.WAV"
 
-const MessageThread = ({ isChatOpen }) => {
+const MessageThread = ({ isChatOpen,audio }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const threadMessage = useSelector((state) => state.Tickets.threadMessage);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recordingFile, setFile] = useState(false);
-  const [audio, audioUrl] = useState("");
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
+  const scrollToLastMessage = useRef();
+  const scrollToNone = useRef();
+
+  //Filter Thread Messages =====================================
+  const threadMessage = useMemo(() => {
+    return allTickets
+      .filter((ticket) => ticket.ticket_id === threadId)
+      .sort((a, b) => {
+        return Number(a.message_position) - Number(b.message_position);
+      });
+  }, [allTickets, threadId]);
 
   //Solution =========================
   const [solution, setSolution] = useState("");
 
   //Thread First Message =====================
-  const firstMessage =
-    filteredTickets.length >= 1 &&
-    filteredTickets.filter((ticket) => ticket.ticket_id === threadId).length >=
-      1 &&
-    filteredTickets.filter((ticket) => ticket.ticket_id === threadId);
+  const firstMessage = useMemo(() => {
+    return (
+      filteredTickets.length >= 1 &&
+      filteredTickets.filter((ticket) => ticket.ticket_id === threadId)
+        .length >= 1 &&
+      filteredTickets.filter((ticket) => ticket.ticket_id === threadId)
+    );
+  }, [filteredTickets, threadId]);
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({
@@ -58,20 +69,6 @@ const MessageThread = ({ isChatOpen }) => {
     setOptions({ status: false, id: "", threadId: "" })
   );
 
-  //Filter Thread Messages =====================================
-  useEffect(() => {
-    allTickets.length >= 1 &&
-      dispatch(
-        setThreadMessage(
-          allTickets
-            .filter((ticket) => ticket.ticket_id === threadId)
-            .sort((a, b) => {
-              return Number(a.message_position) - Number(b.message_position);
-            })
-        )
-      );
-  }, [dispatch, allTickets, threadId]);
-
   //Get Name of Reciepent and Agent and email ===============
   let clientName =
     user[0].access === "client"
@@ -85,12 +82,23 @@ const MessageThread = ({ isChatOpen }) => {
   let ticket_status = firstMessage.length >= 1 && firstMessage[0].status;
   let date = firstMessage.length >= 1 && firstMessage[0].due_date;
 
+  //Scroll to last message Function
+  const LastMessage = () => {
+    scrollToLastMessage.current &&
+      scrollToLastMessage.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   //Loop Through Each Message In a thread ====================
   const thread =
     threadMessage.length >= 1 &&
     threadMessage.map((message, index) => {
       return (
         <div
+          ref={
+            threadMessage.length - 1 === index
+              ? scrollToLastMessage
+              : scrollToNone
+          }
           key={index}
           className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all"
         >
@@ -439,19 +447,7 @@ const MessageThread = ({ isChatOpen }) => {
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <details className="relative flex items-center space-x-2">
-              <summary
-                onClick={() => {
-                  const storage = getStorage();
-                  const recordingRef = ref(
-                    storage,
-                    `/dial_n_dine/${threadId}.wav`
-                  );
-                  getDownloadURL(recordingRef).then((url) => {
-                    audioUrl(url);
-                  });
-                }}
-                className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer"
-              >
+              <summary className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer">
                 Details
               </summary>
 
@@ -460,6 +456,11 @@ const MessageThread = ({ isChatOpen }) => {
                   Ticket Details
                 </h2>
                 <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-2 capitalize">
+                  <li className="text-xs">
+                    <b>Open Date ⇒ </b>
+                    {firstMessage.length >= 1 &&
+                      new Date(firstMessage[0].date).toLocaleString()}{" "}
+                  </li>
                   <li className="text-xs">
                     <b>FCR ⇒ </b>
                     {firstMessage.length >= 1 && firstMessage[0].fcr}{" "}
@@ -485,7 +486,7 @@ const MessageThread = ({ isChatOpen }) => {
                 <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
                   Case Details
                 </h2>
-                <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[6rem] overflow-hidden overflow-y-scroll">
+                <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll">
                   {firstMessage.length >= 1 && firstMessage[0].message}{" "}
                 </p>
 
@@ -502,7 +503,7 @@ const MessageThread = ({ isChatOpen }) => {
                             ).toLocaleString()}`
                           : ""}
                       </h2>
-                      <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[6rem] overflow-hidden overflow-y-scroll rounded-md">
+                      <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll rounded-md">
                         {firstMessage.length >= 1 && firstMessage[0].solution}{" "}
                       </p>
                       {/**Play Recording ================================ */}
@@ -510,8 +511,11 @@ const MessageThread = ({ isChatOpen }) => {
                         id="rec"
                         controls
                         className="h-[2rem] border bg-[#f1f2f5] w-full mt-2 rounded-md"
+                        src={audio}
+                        type="audio/wav"
                       >
-                        <source src={audio} type="audio/wav" />
+                        Your browser does not support the
+                        <code>audio</code> element.
                       </audio>
                     </>
                   )}
@@ -539,7 +543,7 @@ const MessageThread = ({ isChatOpen }) => {
                             setSolution(e.target.value);
                           }}
                           value={solution}
-                          className=" h-[5.5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+                          className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
                         ></textarea>
                         <div className="w-full flex justify-between h-[2rem]">
                           <label htmlFor="recording" className="block">
@@ -570,8 +574,8 @@ const MessageThread = ({ isChatOpen }) => {
               </div>
             </details>
 
-            {/**Other Details =========================== */}
-            <h2 className="font-semibold text-sm dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
+            {/**Subject And Scroll To Last Message Details =========================== */}
+            <div className="font-semibold text-sm dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span className="uppercase text-xs">
                 {threadMessage.length >= 1 &&
                   threadMessage.filter(
@@ -582,17 +586,15 @@ const MessageThread = ({ isChatOpen }) => {
                   )[0].category}
                 {!threadId && "Nothing is selected"}
               </span>{" "}
-              {threadId && (
-                <small className="text-0.6rem dark:text-slate-400 text-slate-500">
-                  {threadMessage.length >= 1 &&
-                    new Date(
-                      threadMessage.filter(
-                        (message) => message.message_position === 1
-                      )[0].date
-                    ).toLocaleString()}
-                </small>
-              )}
-            </h2>
+              {/**Scroll to Last Message ================== */}
+              <button
+                onClick={() => LastMessage()}
+                className="outline-none focus:outline-none text-lg dark:text-slate-400 text-slate-700 capitalize flex items-center justify-end space-x-1"
+              >
+                <HiOutlineArrowSmDown />
+                <span className="text-xs">Last Message</span>
+              </button>
+            </div>
           </div>
         </div>
         <div className="h-full w-full p-6 overflow-y-scroll scroll-snap">
@@ -633,6 +635,7 @@ const MessageThread = ({ isChatOpen }) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
                   sendReply(e);
+                  LastMessage();
                 }
               }}
               required
@@ -657,6 +660,7 @@ const MessageThread = ({ isChatOpen }) => {
               className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border-0 dark:placeholder:text-slate-500 placeholder:text-slate-700 placeholder:text-sm"
             ></textarea>
             <button
+              onClick={() => LastMessage()}
               type="submit"
               className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
             >

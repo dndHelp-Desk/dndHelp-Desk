@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import lightLogo from "./images/dndHelp-Desk_Light.png"
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
 import Background from "./images/welcome.jpg";
 import { isAuthenticated } from "../../store/UserSlice";

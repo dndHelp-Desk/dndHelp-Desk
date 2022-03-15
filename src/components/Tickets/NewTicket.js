@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import DueDate from "./DueDate";
 import { useSelector, useDispatch } from "react-redux";
 import { addTicket } from "./../Data_Fetching/TicketsnUserData";
@@ -12,6 +12,7 @@ import {
   BiPaperclip,
   BiX,
   BiMinus,
+  BiMicrophone,
 } from "react-icons/bi";
 
 const NewTicket = ({ newTicketModal, setModal }) => {
@@ -58,8 +59,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const [inputValue, setValues] = useState(initialDraft);
 
   //Check If Ticket Exists ===================
-  const numbersArray =
-    allTickets.length >= 1 && inputValue.complainant_number !== ""
+  const numbersArray = useMemo(()=>{
+    return(
+      allTickets.length >= 1 && inputValue.complainant_number !== ""
       ? allTickets.filter(
           (ticket) =>
             ticket.message_position === 1 &&
@@ -67,7 +69,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               inputValue.complainant_number
             ) === true
         )
-      : [];
+      : []
+    )
+  },[allTickets,inputValue.complainant_number])
+    
   const exist =
     numbersArray.length >= 1 &&
     numbersArray.map((data, index) => {
@@ -774,22 +779,6 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               </label>
             </abbr>
           </div>
-          {/**First Call resolution Recording Upload ================== */}
-          <label htmlFor="recording" className="block">
-            <span className="sr-only">Choose recording</span>
-            <input
-              type="file"
-              id="recording"
-              name="recording"
-              accept=".wav"
-              value={recordingFile ? recordingFile.filename : ""}
-              title="Upload Recording"
-              onChange={(e) => {
-                setFile(e.target.files[0]);
-              }}
-              className="block w-[7rem] md:w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-600 rounded-lg outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-slate-100 dark:file:bg-[#1f283b] file:text-blue-600 hover:file:opacity-80"
-            />
-          </label>
           <div className="flex items-center space-x-2">
             {/**Templates ========================================= */}
             <div
@@ -839,6 +828,29 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 </ul>
               </div>
             </div>
+            {/**Upload Recordings ========================================= */}
+            <abbr title="Upload Your Recording">
+              <div className="w-8 h-8 border border-slate-300 dark:border-slate-600 rounded-xl flex justify-center items-center">
+                <label
+                  htmlFor="recording"
+                  className="w-full h-full flex justify-center items-center text-base text-slate-600 dark:text-slate-400 cursor-pointer"
+                >
+                  <BiMicrophone className="text-lg" />
+                  <input
+                    type="file"
+                    id="recording"
+                    name="recording"
+                    accept=".wav"
+                    value={recordingFile ? recordingFile.filename : ""}
+                    title="Upload Recording"
+                    onChange={(e) => {
+                      setFile(e.target.files[0]);
+                    }}
+                    className="outline-none focus:outline-none hidden"
+                  />
+                </label>
+              </div>
+            </abbr>
             {/**Due date ========================================= */}
             <abbr title="Due Time">
               <div className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-400 border dark:border-slate-600 border-slate-300">

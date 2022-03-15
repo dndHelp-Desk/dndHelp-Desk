@@ -12,7 +12,10 @@ import lightLogo from "./logos/dndHelp-Desk_Light.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../store/UserSlice";
-import { updateFilteredTickets } from "../../store/Tickets_n_Settings_Slice";
+import {
+  updateFilteredTickets,
+  setUnread,
+} from "../../store/Tickets_n_Settings_Slice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
@@ -30,14 +33,23 @@ const MainComponent = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const allTickets = useSelector((state) => state.Tickets.allTickets);
+  const unread = useSelector((state) => state.Tickets.unread);
   const notificationMsgs = useSelector(
     (state) => state.NotificationsData.messages
   );
-  const newReplies =
-    allTickets.length >= 1 &&
-    allTickets.filter(
-      (ticket) => ticket.readStatus !== "read" && ticket.from !== "agent"
+
+  useEffect(() => {
+    dispatch(
+      setUnread(
+        allTickets.length >= 1 &&
+          allTickets.filter(
+            (ticket) =>
+              ticket.readStatus !== "read" &&
+              ticket.recipient_email === user[0].email
+          )
+      )
     );
+  }, [allTickets, dispatch, user]);
 
   //Small Screen Menu ===================
   const [showMenu, setShowMenu] = useState(false);
@@ -129,7 +141,9 @@ const MainComponent = () => {
             <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-5">
               <NavLink
                 to="/app"
-                className={`TabsLinks  ${location.pathname === "/app" ? "navlinks" : ""}`}
+                className={`TabsLinks  ${
+                  location.pathname === "/app" ? "navlinks" : ""
+                }`}
               >
                 Dashboard
               </NavLink>
@@ -170,7 +184,9 @@ const MainComponent = () => {
             >
               <NavLink
                 to="/app"
-                className={`TabsLinks ${location.pathname === "/app" ? "navlinks" : ""}`}
+                className={`TabsLinks ${
+                  location.pathname === "/app" ? "navlinks" : ""
+                }`}
               >
                 <FaHeadset
                   className="inline-block
@@ -244,7 +260,7 @@ const MainComponent = () => {
                   className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
                 >
                   <BsBell />
-                  {newReplies.length >= 1 ||
+                  {unread.length >= 1 ||
                     (notificationMsgs.length >= 1 && (
                       <span className="flex h-2 w-2 absolute top-1 right-1">
                         <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>

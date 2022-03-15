@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import noUsers from "./images/no-userss.svg";
@@ -17,25 +17,20 @@ import Calendar from "./Calendar";
 
 const Main = () => {
   const location = useLocation();
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const todoList = useSelector((state) => state.UserInfo.toDo);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
+  const unread = useSelector((state) => state.Tickets.unread);
   let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const overDue =
-    filteredTickets &&
-    filteredTickets.filter(
-      (firstMsg) =>
-        new Date(firstMsg.due_date !== null && firstMsg.due_date).getTime() <=
-          new Date().getTime() && firstMsg.status !== "solved"
+  const overDue = useMemo(() => {
+    return (
+      filteredTickets &&
+      filteredTickets.filter(
+        (firstMsg) =>
+          new Date(firstMsg.due_date !== null && firstMsg.due_date).getTime() <=
+            new Date().getTime() && firstMsg.status === "open"
+      )
     );
-
-  //New Replies Array ========================
-  const newReplies =
-    (allTickets.length >= 1 &&
-      allTickets.filter(
-        (ticket) => ticket.readStatus !== "read" && ticket.from !== "agent"
-      )) ||
-    [];
+  }, [filteredTickets]);
 
   //Loop Through All Users ================
   const users =
@@ -158,7 +153,7 @@ const Main = () => {
         </div>
 
         {/**Others  ====================================== */}
-        <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden p-4 gap-4 grid grid-cols-1 lg:grid-cols-3">
+        <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden p-1 gap-4 grid grid-cols-1 lg:grid-cols-3">
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 h-20 flex justify-center items-center">
             <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
@@ -167,7 +162,7 @@ const Main = () => {
               </div>
               <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
                 <span>Inbox Replies</span>
-                <span>{newReplies.length}</span>
+                <span>{unread.length}</span>
               </h2>
             </div>
           </div>
@@ -321,7 +316,7 @@ const Main = () => {
                             new Date().getMonth(),
                             30
                           ).getTime() &&
-                        data.status.toLowerCase() === "reopened"
+                        data.reopened === true
                     ).length
                   }
                 </h5>
@@ -382,8 +377,8 @@ const Main = () => {
           <section className="col-span-1 h-[26rem] dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
             {allMembers.length >= 1 && (
               <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                <h2 className="w-full h-6 text-xs sticky top-0 z-[99] flex justify-between items-center tracking-wide dark:bg-slate-900 bg-slate-100 font-semibold uppercase dark:text-slate-300 text-slate-700">
-                  <span>Agents</span>{" "}
+                <h2 className="w-full h-6 text-xs sticky top-0 z-[99] flex justify-between items-center tracking-normal dark:bg-slate-900 bg-slate-100 font-bold uppercase dark:text-slate-300 text-slate-900">
+                  <span>Active Agents</span>{" "}
                   <span>
                     {
                       allMembers.filter((user) => user.access === "agent")

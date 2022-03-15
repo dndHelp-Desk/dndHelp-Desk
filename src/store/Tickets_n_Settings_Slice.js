@@ -7,11 +7,11 @@ const initialId = () => {
 
 const initialState = {
   allTickets: [],
-  threadMessage: [],
   threadId: initialId(),
   contacts: [],
   email_templates: [],
   settings: [],
+  unread:[],
   filters: {
     startDate: new Date(
       new Date().getFullYear(),
@@ -48,9 +48,6 @@ export const TicketsSlice = createSlice({
     loadSettings: (state, action) => {
       state.settings = action.payload;
     },
-    setThreadMessage: (state, action) => {
-      state.threadMessage = action.payload;
-    },
     setThreadId: (state, action) => {
       state.threadId = action.payload;
     },
@@ -62,6 +59,9 @@ export const TicketsSlice = createSlice({
     },
     filter: (state, action) => {
       state.filters = action.payload;
+    },
+    setUnread: (state, action) => {
+      state.unread = action.payload;
     },
     updateFilteredTickets: (state, action) => {
       state.filteredTickets = action.payload.sort(
@@ -81,6 +81,7 @@ export const {
   loadTemplates,
   filter,
   updateFilteredTickets,
+  setUnread,
 } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;

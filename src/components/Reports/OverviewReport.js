@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import { useSelector } from "react-redux";
 
@@ -6,10 +6,11 @@ const OverviewReport = ({ data }) => {
   const settings = useSelector((state) => state.Tickets.settings);
   const categories = settings.length >= 1 && settings[0].categories;
   const [option, setOption] = useState("hour");
-  const dataArray = [];
-  categories.length >= 1 &&
-    categories.forEach((element) => {
-      dataArray.push({
+  const dataArray = useMemo(()=>{
+    return(
+      categories.length >= 1 &&
+    categories.map((element) => {
+      return({
         name: element,
         value: (
           ((data.length >= 1 &&
@@ -21,7 +22,11 @@ const OverviewReport = ({ data }) => {
           100
         ).toFixed(1),
       });
-    });
+    })
+    )
+  },[categories,data]);
+
+  
 
   dataArray.sort((a, b) => {
     return Number(b.value) - Number(a.value);
@@ -34,9 +39,9 @@ const OverviewReport = ({ data }) => {
     "#2563eb",
     "#3b82f6",
     "#60a5fa",
-    "#082032",
-    "#2C394B",
-    "#444444",
+    "#1e40af",
+    "#6366f1",
+    "#2563eb",
   ];
   const category =
     dataArray.length >= 1 &&

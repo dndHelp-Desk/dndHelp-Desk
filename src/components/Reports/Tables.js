@@ -1,41 +1,45 @@
-import React, { useState } from "react";
+import React, { useState,useMemo } from "react";
 import { HiOutlineSwitchVertical } from "react-icons/hi";
 import { BsDownload } from "react-icons/bs";
 
 const Tables = ({ data }) => {
   const [option, setOption] = useState("branch_company");
   const [sortBy, setSort] = useState(["total", 1]);
-  const tableData = [...new Set(data.map((data) => data[option]))]
-    .map((elem) => ({
-      name: elem,
-      open:
-        data.length >= 1
-          ? data.filter(
-              (data) => data[option] === elem && data.status === "open"
-            ).length
-          : 0,
-      solved:
-        data.length >= 1
-          ? data.filter(
-              (data) => data[option] === elem && data.status === "solved"
-            ).length
-          : 0,
-      reopened:
-        data.length >= 1
-          ? data.filter(
-              (data) => data[option] === elem && data.reopened === true
-            ).length
-          : 0,
-      total:
-        data.length >= 1
-          ? data.filter((data) => data[option] === elem).length
-          : 0,
-    }))
-    .sort((a, b) => {
-      return sortBy[1] === 1
-        ? b[sortBy[0]] - a[sortBy[0]]
-        : a[sortBy[0]] - b[sortBy[0]];
-    });
+  const tableData = useMemo(
+    () =>
+      [...new Set(data.map((data) => data[option]))]
+        .map((elem) => ({
+          name: elem,
+          open:
+            data.length >= 1
+              ? data.filter(
+                  (data) => data[option] === elem && data.status === "open"
+                ).length
+              : 0,
+          solved:
+            data.length >= 1
+              ? data.filter(
+                  (data) => data[option] === elem && data.status === "solved"
+                ).length
+              : 0,
+          reopened:
+            data.length >= 1
+              ? data.filter(
+                  (data) => data[option] === elem && data.reopened === true
+                ).length
+              : 0,
+          total:
+            data.length >= 1
+              ? data.filter((data) => data[option] === elem).length
+              : 0,
+        }))
+        .sort((a, b) => {
+          return sortBy[1] === 1
+            ? b[sortBy[0]] - a[sortBy[0]]
+            : a[sortBy[0]] - b[sortBy[0]];
+        }),
+    [data, option, sortBy]
+  );
 
   //Loop through each ticket and return a row of consolidated data
   const rows = tableData.map((elem, index) => {

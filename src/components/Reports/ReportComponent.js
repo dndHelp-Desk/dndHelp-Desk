@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Tables from "./Tables";
 import OverviewReport from "./OverviewReport";
 import TopCards from "./TopCards";
@@ -7,7 +7,6 @@ import Filters from "./Filters";
 
 const ReportsComponent = () => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const [data, setData] = useState([]);
   //Filters =====================
   const [filters, setFilters] = useState({
     startDate: new Date(
@@ -26,51 +25,48 @@ const ReportsComponent = () => {
     category: "",
     status: "",
   });
-  
-  useEffect(() => {
-    setData(
-      filteredTickets.length >= 1
-        ? filteredTickets.filter(
-            (ticket) =>
-              ticket.status
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
-                .match(new RegExp(filters.status, "gi")) &&
-              ticket.category
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
-                .match(new RegExp(filters.category, "gi")) &&
-              ticket.agent_name
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
-                .match(new RegExp(filters.agent, "gi")) &&
-              ticket.branch_company
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
-                .match(new RegExp(filters.brand, "gi")) &&
-              ticket.status
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
-                .match(new RegExp(filters.status, "gi")) &&
-              new Date(ticket.date).getTime() >=
-                new Date(
-                  filters.startDate !== null && filters.startDate
-                ).getTime() &&
-              new Date(ticket.date).getTime() <=
-                new Date(filters.endDate !== null && filters.endDate).getTime()
-          )
-        : []
-    );
+
+  const data = useMemo(() => {
+    return filteredTickets.length >= 1
+      ? filteredTickets.filter(
+          (ticket) =>
+            ticket.status
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.status, "gi")) &&
+            ticket.category
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.category, "gi")) &&
+            ticket.agent_name
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.agent, "gi")) &&
+            ticket.branch_company
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.brand, "gi")) &&
+            ticket.status
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.status, "gi")) &&
+            new Date(ticket.date).getTime() >=
+              new Date(
+                filters.startDate !== null && filters.startDate
+              ).getTime() &&
+            new Date(ticket.date).getTime() <=
+              new Date(filters.endDate !== null && filters.endDate).getTime()
+        )
+      : [];
   }, [
     filteredTickets,
     filters.agent,
     filters.category,
-    filters.client,
     filters.endDate,
     filters.startDate,
     filters.status,

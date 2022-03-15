@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   changePriority,
   changeStatus,
@@ -18,19 +19,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const filters = useSelector((state) => state.Tickets.filters);
-  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
-  const user = useSelector((state) => state.UserInfo.member_details);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
-
-  //Unread Meassages =================
-  let unread =
-    allTickets.length >= 1 &&
-    allTickets.filter(
-      (ticket) =>
-        ticket.readStatus !== "read" && ticket.recipient_email === user[0].email
-    );
+  const [audio, audioUrl] = useState("");
+  const unread = useSelector((state) => state.Tickets.unread);
 
   //Loop Through Each Tickects =================
   const tickets =
@@ -136,7 +129,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           {new Date(ticket.due_date !== null && ticket.due_date).getTime() <=
             new Date().getTime() &&
             ticket.status &&
-            ticket.status.toLowerCase() !== "solved" && (
+            ticket.status.toLowerCase() === "open" &&(
               <BsBookmarkX className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
             )}
 
@@ -193,6 +186,17 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   .forEach((message) => {
                     markAsSeen(message.id, "read");
                   });
+                  /**Get The Recording ================== */
+                  if(ticket.status === "solved"){
+                    const storage = getStorage();
+                  const recordingRef = ref(
+                    storage,
+                    `/dial_n_dine/${ticket.ticket_id}.wav`
+                  );
+                  getDownloadURL(recordingRef).then((url) => {
+                    audioUrl(url);
+                  });
+                  }
             }}
             className="col-span-5 flex flex-col justify-center relative h-full w-full space-y-1 px-1 py-1 cursor-pointer"
           >
@@ -324,7 +328,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             )}
           </div>
         </div>
-        <MessageThread isChatOpen={isChatOpen} />
+        <MessageThread isChatOpen={isChatOpen} audio={audio} />
       </div>
     </div>
   );

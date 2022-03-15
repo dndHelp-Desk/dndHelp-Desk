@@ -8,7 +8,7 @@ import {
   BsPatchCheck,
 } from "react-icons/bs";
 
-const TopCards = ({ data ,setFilters,filters}) => {
+const TopCards = ({ data }) => {
   //Component ==================================
   return (
     <div className="w-full rounded-xl grid grid-cols-1 lg:grid-cols-3 gap-4 overflow-hidden">
@@ -56,7 +56,7 @@ const TopCards = ({ data ,setFilters,filters}) => {
                 ? data.filter(
                     (data) =>
                       new Date(data.due_date).getTime() >=
-                        new Date().getTime() && data.status !== "solved"
+                        new Date().getTime() && data.status === "open"
                   ).length
                 : 0}
             </h3>

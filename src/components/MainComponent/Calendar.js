@@ -131,8 +131,7 @@ const Calendar = () => {
               (data) =>
                 new Date(data.due_date).getDate() === day.getDate() &&
                 new Date(data.due_date).getFullYear() === day.getFullYear() &&
-                data.status !== "solved" &&
-                data.status !== "on hold"
+                data.status === "open"
             )
             .map((data) => data.recipient_name)
         : "";
