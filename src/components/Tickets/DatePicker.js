@@ -23,8 +23,8 @@ const DateFilter = () => {
         dispatch(
           filter({
             ...filters,
-            startDate: update[0] && update[0].toLocaleString(),
-            endDate: update[1] && update[1].toLocaleString(),
+            startDate: update[0] && update[0],
+            endDate: update[1] && update[1],
           })
         );
       }}

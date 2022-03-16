@@ -300,11 +300,22 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             setDelete={setDelete}
             setModal={setModal}
           />
-          <div className="w-full h-full space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1 relative">
-            {tickets}
-            {filteredTickets.length >= 1 && (
-              /**Pagination ================================ */
-              <div className="absolute h-[1.5rem] md:h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center">
+          <div className="w-full h-full flex flex-col overflow-hidden">
+            <div className="w-full h-[90%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1">{tickets}
+            {filteredTickets.length <= 0 && (
+              <>
+                <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold mb-20">
+                  There are no tickets
+                </h2>
+                <img
+                  src={noTickets}
+                  alt="No Ticket"
+                  className="w-full h-[10rem] object-contain object-center"
+                />
+              </>
+            )}</div>
+              {/**Pagination ================================ */}
+              <div className="h-[10%] md:h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center">
                 <div className="h-8 w-40 rounded-md grid grid-cols-4 gap-1">
                   <button
                     onClick={() => {
@@ -329,19 +340,6 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   </button>
                 </div>
               </div>
-            )}
-            {filteredTickets.length <= 0 && (
-              <>
-                <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold mb-20">
-                  There are no tickets
-                </h2>
-                <img
-                  src={noTickets}
-                  alt="No Ticket"
-                  className="w-full h-[10rem] object-contain object-center"
-                />
-              </>
-            )}
           </div>
         </div>
         <MessageThread isChatOpen={isChatOpen} audio={audio} />
