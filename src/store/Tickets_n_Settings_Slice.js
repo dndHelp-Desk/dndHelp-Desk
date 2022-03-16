@@ -17,12 +17,12 @@ const initialState = {
       new Date().getFullYear(),
       new Date().getMonth(),
       0
-    ).toLocaleString(),
+    ),
     endDate: new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
       31
-    ).toLocaleString(),
+    ),
     brand: "",
     ticket_id: "",
     agent: "",

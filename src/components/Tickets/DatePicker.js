@@ -27,6 +27,7 @@ const DateFilter = () => {
             endDate: update[1] && update[1],
           })
         );
+            console.log(update[1])
       }}
     />
   );
