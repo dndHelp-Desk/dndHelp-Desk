@@ -79,10 +79,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               .replace(/\s/g, "")
               .includes(filters.category.toLowerCase().replace(/\s/g, "")) ===
               true &&
-            new Date(ticket.date).toISOString() >=
-              new Date(filters.startDate).toISOString() &&
-            new Date(ticket.date).toISOString() <=
-              new Date(filters.endDate).toISOString()
+            new Date(ticket.date).toLocaleString() >=
+              new Date(filters.startDate).toLocaleString() &&
+            new Date(ticket.date).toLocaleString() <=
+              new Date(filters.endDate).toLocaleString()
               ? ""
               : "hidden"
           }`}
