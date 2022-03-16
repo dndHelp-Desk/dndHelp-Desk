@@ -58,17 +58,17 @@ const ToDo = () => {
       return (
         <div
           key={task.id}
-          className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg dark:bg-slate-800 bg-white border dark:border-0 border-slate-300 p-2 snap_childTwo"
+          className="h-14 w-full flex items-center justify-between space-x-2 rounded-lg dark:bg-slate-800 bg-slate-200 border dark:border-0 border-slate-300 p-2 snap_childTwo"
         >
           <button
             onClick={() => markToDo(task.id, task.status ? false : true)}
             className={`h-8 w-8 rounded-full border border-dashed transition-all duration-500 flex items-center justify-center focus:outline-none outline-none hover:border-blue-600 ${
-              task.status === true ? "border-blue-600" : "border-slate-400"
+              task.status === true ? "border-blue-600" : "border-slate-300"
             } `}
           >
             <div
               className={`h-6 w-6 rounded-full transition-all duration-500 border flex items-center justify-center overflow-hidden ${
-                task.status === true ? "border-blue-600" : "border-slate-400"
+                task.status === true ? "border-blue-600" : "border-slate-300"
               }`}
             >
               <BsCheck2All
@@ -79,16 +79,16 @@ const ToDo = () => {
             </div>
           </button>
           <div className="h-full overflow-hidden">
-            <p className="dark:text-slate-400 text-slate-500 w-[12rem] lg:w-[11rem] 2xl:w-[12rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+            <p className="dark:text-slate-300 text-slate-800 w-[12rem] lg:w-[11rem] 2xl:w-[12rem] text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
               <abbr title={task.task}>{task.task}</abbr>
             </p>
-            <small className="text-slate-500 text-xs font-semibold">
-              {`${new Date(task.date).toDateString()}`}
+            <small className="text-slate-800 dark:text-slate-400 text-xs font-semibold">
+              {`${new Date(task.date).toLocaleString()}`}
             </small>
           </div>
           <BsFillTrashFill
             onClick={() => deleteTask(task.id)}
-            className="dark:text-slate-400 text-slate-400 dark:hover:text-red-500 hover:text-red-500 cursor-pointer transition-all duration-300"
+            className="dark:text-slate-400 text-slate-700 dark:hover:text-red-500 hover:text-red-500 cursor-pointer transition-all duration-300"
           />
         </div>
       );
@@ -104,10 +104,10 @@ const ToDo = () => {
         <div className="h-full flex items-center w-full col-span-8 dark:bg-transparent bg-slate-100 rounded-lg border dark:border-slate-800 border-slate-400 overflow-hidden">
           <input
             type="text"
-            name="search"
-            id="search"
+            name="text"
+            id="text"
             required
-            className="w-full h-full outline-none focus:outline-none bg-transparent border-0 placeholder:text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 dark:text-slate-400 text-slate-500"
+            className="w-full h-full outline-none focus:outline-none bg-transparent border-0 placeholder:text-sm dark:placeholder:text-slate-400 placeholder:text-slate-700 dark:text-slate-400 text-slate-800"
             placeholder="Type here ..."
             autoComplete="off"
             onChange={(e) => setTask(e.target.value)}

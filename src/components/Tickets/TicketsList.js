@@ -48,64 +48,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
           } bg-slate-200 p-2 space-x-2  flex ${
-            ticket.branch_company
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.brand.toLowerCase().replace(/\s/g, "")) === true
-              ? ""
-              : "hidden"
-          }
-           ${
-             ticket.ticket_id
-               .toLowerCase()
-               .replace(/\s/g, "")
-               .includes(filters.ticket_id.toLowerCase().replace(/\s/g, "")) ===
-             true
-               ? ""
-               : "hidden"
-           }
-           ${
-             ticket.status
-               .toLowerCase()
-               .replace(/\s/g, "")
-               .includes(filters.status.toLowerCase().replace(/\s/g, "")) ===
-             true
-               ? ""
-               : "hidden"
-           } 
-           ${
-             ticket.complainant_number
-               .toLowerCase()
-               .replace(/\s/g, "")
-               .includes(
-                 filters.complainant_number.toLowerCase().replace(/\s/g, "")
-               ) === true
-               ? ""
-               : "hidden"
-           } 
-           ${
-             ticket.agent_name
-               .toLowerCase()
-               .replace(/\s/g, "")
-               .includes(filters.agent.toLowerCase().replace(/\s/g, "")) ===
-             true
-               ? ""
-               : "hidden"
-           } ${
-            ticket.category
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.category.toLowerCase().replace(/\s/g, "")) ===
-            true
-              ? ""
-              : "hidden"
-          }
-          
-          ${
             new Date(ticket.date).getTime() >=
-              (new Date(filters.startDate).getTime()) &&
+              new Date(filters.startDate).getTime() &&
             new Date(ticket.date).getTime() <=
-              (new Date(filters.endDate).getTime())
+              new Date(filters.endDate).getTime()
               ? ""
               : "hidden"
           }`}
@@ -116,7 +62,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
-          {new Date(ticket.due_date).getTime() >
+          {new Date(ticket.due_date !== null && ticket.due_date).getTime() >
             new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() !== "solved" && (
@@ -124,7 +70,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             )}
 
           {/**Indicate The ticket that is  overdue ================*/}
-          {new Date(ticket.due_date).getTime() <=
+          {new Date(ticket.due_date !== null && ticket.due_date).getTime() <=
             new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() === "open" && (
