@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -8,6 +8,7 @@ import {
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
 import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
+import { BiListPlus, BiListMinus } from "react-icons/bi";
 import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
 import { updateAlert } from "../../store/NotificationsSlice";
@@ -17,18 +18,31 @@ import NewTicket from "./NewTicket";
 
 const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
-  const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const fetchedTickets = useSelector((state) => state.Tickets.filteredTickets);
   const filters = useSelector((state) => state.Tickets.filters);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
   const [audio, audioUrl] = useState("");
+  const [loadMore, setLimit] = useState(50);
   const unread = useSelector((state) => state.Tickets.unread);
+  const filteredTickets = useMemo(() => {
+    return (
+      fetchedTickets.length >= 1 &&
+      fetchedTickets.filter(
+        (ticket) =>
+          Number(new Date(ticket.date).getTime()) >=
+            Number(new Date(filters.startDate).getTime()) &&
+          Number(new Date(ticket.date).getTime()) <=
+            Number(new Date(filters.endDate).getTime())
+      )
+    );
+  }, [fetchedTickets, filters.endDate, filters.startDate]);
 
   //Loop Through Each Tickects =================
   const tickets =
     filteredTickets.length >= 1 &&
-    filteredTickets.map((ticket) => {
+    filteredTickets.slice(loadMore - 50, loadMore).map((ticket) => {
       /**Mark As read if thread is Active ========== */
       threadId === ticket.ticket_id &&
         unread.length >= 1 &&
@@ -43,7 +57,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] border dark:border-slate-800 border-slate-400 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-slate-400 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -78,11 +92,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               .toLowerCase()
               .replace(/\s/g, "")
               .includes(filters.category.toLowerCase().replace(/\s/g, "")) ===
-              true &&
-            Number(new Date(ticket.date).getTime()) >=
-              Number(new Date(filters.startDate).getTime()) &&
-            Number(new Date(ticket.date).getTime()) <=
-              Number(new Date(filters.endDate).getTime())
+              true
               ? ""
               : "hidden"
           }`}
@@ -96,10 +106,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           {new Date(ticket.due_date).getTime() >= new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() !== "solved" &&
-            ticket.status.toLowerCase() !==
-              "on hold" &&(
-                <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
-              )}
+            ticket.status.toLowerCase() !== "on hold" && (
+              <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
+            )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
           {ticket.status.toLowerCase() === "on hold" && (
@@ -114,18 +123,18 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             )}
 
           {/**Indicate if it's new messsage ================*/}
-          {unread.filter((data) => data.ticket_id === ticket.ticket_id)
-            .length >= 1 && (
-            <div className="absolute left-7 top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
-              <span>
-                New :{" "}
-                {
-                  unread.filter((data) => data.ticket_id === ticket.ticket_id)
-                    .length
-                }
-              </span>
-            </div>
-          )}
+          {unread.length >= 1 &&
+            unread.filter((data) => data.ticket_id === ticket.ticket_id)
+              .length >= 1 && (
+              <div className="absolute left-7 top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
+                <span>
+                  New :{" "}
+                  {unread.length >= 1 &&
+                    unread.filter((data) => data.ticket_id === ticket.ticket_id)
+                      .length}
+                </span>
+              </div>
+            )}
 
           {/**Mark or Unmark Ticket ========================================== */}
           <div className="col-span-1 h-full xl:w-[7rem] flex justify-between space-x-2 items-center">
@@ -294,7 +303,32 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           <div className="w-full h-full space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1 relative">
             {tickets}
             {filteredTickets.length >= 1 && (
-              <div className="sticky h-[1.5rem] md:h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center"></div>
+              /**Pagination ================================ */
+              <div className="absolute h-[1.5rem] md:h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center">
+                <div className="h-8 w-40 rounded-md grid grid-cols-4 gap-1">
+                  <button
+                    onClick={() => {
+                      setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
+                    }}
+                    className="col-span-1 custom-shadow dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-400 text-slate-600 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+                  >
+                    <BiListMinus />
+                  </button>
+                  <div className="col-span-2 custom-shadow dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-400 text-slate-600 font-bold text-sm tracking-wider flex items-center justify-center">
+                    {loadMore - 50 === 0 ? 1 : loadMore - 50} - {loadMore}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setLimit(
+                        fetchedTickets.length > loadMore ? loadMore + 50 : 50
+                      );
+                    }}
+                    className="col-span-1 custom-shadow dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-400 text-slate-600 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+                  >
+                    <BiListPlus />
+                  </button>
+                </div>
+              </div>
             )}
             {filteredTickets.length <= 0 && (
               <>
