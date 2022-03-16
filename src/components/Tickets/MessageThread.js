@@ -512,6 +512,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         className="h-[2rem] border bg-[#f1f2f5] w-full mt-2 rounded-md"
                         src={audio}
                         type="audio/wav"
+                        preload="metadata"
                       >
                         <source src={audio} type="audio/ogg" />
                         <source src={audio} type="audio/mpeg" />

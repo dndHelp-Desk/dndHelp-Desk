@@ -19,7 +19,7 @@ const DateFilter = ({ filters, setFilters }) => {
         setFilters({
           ...filters,
           startDate: update[0] && update[0].toLocaleString(),
-          endDate: update[1] && update[1].toLocaleString(),
+          endDate: update[1] && update[1].toLocaleDateString(),
         });
       }}
     />
