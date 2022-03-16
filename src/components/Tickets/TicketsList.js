@@ -78,7 +78,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               .toLowerCase()
               .replace(/\s/g, "")
               .includes(filters.category.toLowerCase().replace(/\s/g, "")) ===
-              true
+              true &&
+            new Date(ticket.date).getTime() >=
+              new Date(filters.startDate).getTime() &&
+            new Date(ticket.date).getTime() <=
+              new Date(filters.endDate).getTime()
               ? ""
               : "hidden"
           }`}
@@ -89,16 +93,21 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
-          {new Date(ticket.due_date !== null && ticket.due_date).getTime() >
-            new Date().getTime() &&
+          {new Date(ticket.due_date).getTime() >= new Date().getTime() &&
             ticket.status &&
-            ticket.status.toLowerCase() !== "solved" && (
-              <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
-            )}
+            ticket.status.toLowerCase() !== "solved" &&
+            ticket.status.toLowerCase() !==
+              "on hold" &&(
+                <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
+              )}
+
+          {/**Indicate The ticket that is not solved or  overdue ================*/}
+          {ticket.status.toLowerCase() === "on hold" && (
+            <BsBookmark className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
+          )}
 
           {/**Indicate The ticket that is  overdue ================*/}
-          {new Date(ticket.due_date !== null && ticket.due_date).getTime() <=
-            new Date().getTime() &&
+          {new Date(ticket.due_date).getTime() <= new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() === "open" && (
               <BsBookmarkX className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />

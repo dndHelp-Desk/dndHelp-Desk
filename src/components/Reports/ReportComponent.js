@@ -13,12 +13,12 @@ const ReportsComponent = () => {
       new Date().getFullYear(),
       new Date().getMonth(),
       0
-    ).toLocaleDateString(),
+    ).toLocaleString(),
     endDate: new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
       31
-    ).toLocaleDateString(),
+    ).toLocaleString(),
     brand: "",
     ticket_id: "",
     agent: "",

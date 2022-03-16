@@ -18,8 +18,8 @@ const DateFilter = ({ filters, setFilters }) => {
         setDateRange(update);
         setFilters({
           ...filters,
-          startDate: update[0] && update[0].toLocaleDateString(),
-          endDate: update[1] && update[1].toLocaleDateString(),
+          startDate: update[0] && update[0].toLocaleString(),
+          endDate: update[1] && update[1].toLocaleString(),
         });
       }}
     />
