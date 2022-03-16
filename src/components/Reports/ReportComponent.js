@@ -55,10 +55,10 @@ const ReportsComponent = () => {
               .replace(/\(/g, "")
               .replace(/\)/g, "")
               .match(new RegExp(filters.status, "gi")) &&
-            new Date(ticket.date).getTime() >=
-              new Date(filters.startDate).getTime() &&
-            new Date(ticket.date).getTime() <=
-              new Date(filters.endDate).getTime()
+            new Date(ticket.date).toISOString() >=
+              new Date(filters.startDate).toISOString() &&
+            new Date(ticket.date).toISOString() <=
+              new Date(filters.endDate).toISOString()
         )
       : [];
   }, [
