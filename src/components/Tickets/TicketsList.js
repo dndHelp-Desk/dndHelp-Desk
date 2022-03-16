@@ -48,10 +48,37 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
           } bg-slate-200 p-2 space-x-2  flex ${
-            new Date(ticket.date).getTime() >=
-              new Date(filters.startDate).getTime() &&
-            new Date(ticket.date).getTime() <=
-              new Date(filters.endDate).getTime()
+            ticket.branch_company
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.brand.toLowerCase().replace(/\s/g, "")) ===
+              true &&
+            ticket.ticket_id
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.ticket_id.toLowerCase().replace(/\s/g, "")) ===
+              true &&
+            ticket.status
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.status.toLowerCase().replace(/\s/g, "")) ===
+              true &&
+            ticket.complainant_number
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(
+                filters.complainant_number.toLowerCase().replace(/\s/g, "")
+              ) === true &&
+            ticket.agent_name
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.agent.toLowerCase().replace(/\s/g, "")) ===
+              true &&
+            ticket.category
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.category.toLowerCase().replace(/\s/g, "")) ===
+              true
               ? ""
               : "hidden"
           }`}
