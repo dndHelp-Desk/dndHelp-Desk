@@ -27,50 +27,9 @@ const ReportsComponent = () => {
   });
 
   const data = useMemo(() => {
-    return filteredTickets.length >= 1
-      ? filteredTickets.filter(
-          (ticket) =>
-            ticket.status
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.status, "gi")) &&
-            ticket.category
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.category, "gi")) &&
-            ticket.agent_name
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.agent, "gi")) &&
-            ticket.branch_company
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.brand, "gi")) &&
-            ticket.status
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.status, "gi")) &&
-            new Date(ticket.date).getTime() >=
-              new Date(
-                filters.startDate !== null && filters.startDate
-              ).getTime() &&
-            new Date(ticket.date).getTime() <=
-              new Date(filters.endDate !== null && filters.endDate).getTime()
-        )
-      : [];
+    return filteredTickets;
   }, [
-    filteredTickets,
-    filters.agent,
-    filters.category,
-    filters.endDate,
-    filters.startDate,
-    filters.status,
-    filters.brand,
+    filteredTickets
   ]);
 
   //Component =========================

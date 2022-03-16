@@ -18,7 +18,7 @@ import NewTicket from "./NewTicket";
 const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const filters = useSelector((state) => state.Tickets.filters);
+  //const filters = useSelector((state) => state.Tickets.filters);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
