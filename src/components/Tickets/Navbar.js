@@ -92,7 +92,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
   };
 
   //Assign Tickect To an Agent =================
-  const assgn = (name, email,id) => {
+  const assgn = (name, email, id) => {
     for (let i = 0; i < deleteArray.length; i++) {
       allTickets.length >= 1 &&
         allTickets
@@ -126,7 +126,7 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         <button
           key={member.id}
           onClick={() => {
-            assgn(member.name, member.email,member.id);
+            assgn(member.name, member.email, member.id);
             setPanel(false);
           }}
           className={`dark:bg-slate-600 bg-slate-100 w-full h-8 text-sm font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
@@ -179,7 +179,10 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
 
         {/**Delete Ticket ================================= */}
         <button
-          onClick={() => deleteSelected()}
+          onClick={() => {
+            let code = prompt("Enter Pin To Perform Action");
+            code === "0001" ? deleteSelected() : alert("Wrong Pin");
+          }}
           className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  text-red-600  font-semibold custom-shadow ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"

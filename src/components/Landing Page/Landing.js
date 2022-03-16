@@ -28,16 +28,32 @@ const Landing = () => {
     <div className="bg-slate-50 pb-2 relative">
       {/**Navigation ========================== */}
       <nav className="w-full bg-slate-200">
-        <div className="h-[20rem] p-6 xl:p-0 py-6 w-[90%] md:w-full container bg-transparent 2xl:px-12 m-auto">
+        <div className="h-[20rem] py-6 w-full bg-transparent m-auto">
           <div className="w-full h-[4rem] py-2 flex justify-between items-center border-b border-slate-400">
             {/**Logo ==================== */}
-            <div className="h-full flex items-center justify-center overflow-hidden pt-1">
+            <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
               <img
                 src={darkLogo}
                 alt="logo"
                 className="object-cover object-center w-[14rem]"
               />
             </div>
+
+            {/**Small Menu Options =================== */}
+            <button
+              onClick={() => setMenu(true)}
+              className="focus:outline-none outline-none flex justify-center ml-4 items-center h-10 w-10 rounded-lg bg-slate-300 hover:bg-slate-400 transition-all lg:hidden"
+            >
+              <HiOutlineMenuAlt3 className="text-3xl cursor-pointer hover:opacity-70" />
+            </button>
+            <div
+              ref={smallMenuRef}
+              className={`absolute h-[15rem] w-[12rem] shadow-2xl lg:hidden bg-slate-800 rounded-xl top-[5rem] left-4  ${
+                menu ? "" : "hidden"
+              }`}
+            ></div>
+            {/**Small Menu Options =================== */}
+
             {/**Menu Options ========================= */}
             <div className="hidden lg:flex space-x-4">
               <Link
@@ -66,27 +82,13 @@ const Landing = () => {
               </Link>
             </div>
 
-            <div className="flex space-x-2 items-center relative">
+            <div className="flex space-x-2 items-center relative px-4">
               {/**Logiin button ================== */}
               <Link to="/logIn">
                 <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
                   Log In
                 </button>
               </Link>
-              {/**Small Menu Options =================== */}
-              {/**Small Menu Options =================== */}
-              <button
-                onClick={() => setMenu(true)}
-                className="focus:outline-none outline-none flex justify-center items-center h-10 w-10 rounded-lg bg-slate-300 hover:bg-slate-400 transition-all lg:hidden"
-              >
-                <HiOutlineMenuAlt3 className="text-3xl cursor-pointer hover:opacity-70" />
-              </button>
-              <div
-                ref={smallMenuRef}
-                className={`absolute h-[15rem] w-[12rem] shadow-2xl lg:hidden bg-slate-800 rounded-xl top-[3rem]  ${
-                  menu ? "" : "hidden"
-                }`}
-              ></div>
             </div>
           </div>
         </div>
@@ -99,7 +101,7 @@ const Landing = () => {
           className="w-[90%] md:w-full container 2xl:w-[75rem]  m-auto h-[30rem] rounded-xl bg-slate-900 mt-[-15rem] bg-no-repeat bg-center bg-cover overflow-hidden"
         >
           <div className="w-full h-full bg-[#0e0c4ebe] p-10 px-6 lg:px-36 flex flex-col justify-center items-center gap-4">
-            <h1 className="text-[2.3rem] md:text-[4rem] leading-[2rem] md:leading-[4rem] text-slate-100 font-bold text-center">
+            <h1 className="text-2xl sm:text-[2.3rem] md:text-[4rem] sm:leading-[2rem] md:leading-[4rem] text-slate-100 font-bold text-center">
               <span className="">Take control of your</span>
               <br />
               <span className="text-slate-300">customer support</span>
@@ -111,7 +113,7 @@ const Landing = () => {
               only on what matters with a short learning curve.
             </p>
             <div className="h-12 w-full flex justify-center gap-6">
-              <button className="bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-300">
+              <button className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-300">
                 Get started
               </button>
               <button className="bg-[#1d4fd8c7] h-10 w-[8rem] rounded-md text-slate-300 font-medium tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
@@ -190,7 +192,7 @@ const Landing = () => {
       </section>
 
       {/**Third Section ============================== */}
-      <section className="w-[90%] md:w-full container mt-4 mb-2 m-auto 2xl:w-[75rem] h-[35rem] bg-slate-300 p-6 rounded-xl flex flex-col justify-center">
+      <section className="w-[90%] md:w-full container mt-4 mb-2 m-auto 2xl:w-[75rem] bg-slate-300 p-6 rounded-xl flex flex-col justify-center">
         <h2 className="text-slate-700 text-2xl font-bold font-sans tracking-tightest">
           Support Inbox built for sufficency
         </h2>
@@ -200,7 +202,7 @@ const Landing = () => {
           labore, numquam architecto aspernatur non error? Assumenda non minima
           eius quibusdam necessitatibus.
         </p>
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
           <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
           <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>
           <div className="bg-slate-400 col-span-1 h-[10rem] rounded-xl"></div>

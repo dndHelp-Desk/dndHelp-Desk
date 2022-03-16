@@ -113,7 +113,8 @@ const Tables = ({ data }) => {
             <button
               onClick={() => {
                 let csv = convertToCsv(data);
-                downloadFile("Tickects Report.csv", csv);
+                let  code = prompt("Enter Admin Pin")
+                code === "0001"?downloadFile("Tickects Report.csv", csv):alert("Wrong Pin")
               }}
               className="h-8 w-20 rounded-md text-xs p-2 bg-blue-600  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >

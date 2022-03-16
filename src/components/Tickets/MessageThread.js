@@ -445,8 +445,8 @@ const MessageThread = ({ isChatOpen, audio }) => {
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
-            <details className="relative flex items-center space-x-2">
-              <summary className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer">
+            <details className="relative flex items-center space-x-2 outline-none focus:outline-none">
+              <summary className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer outline-none focus:outline-none">
                 Details
               </summary>
 
@@ -513,6 +513,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         src={audio}
                         type="audio/wav"
                       >
+                        <source src={audio} type="audio/ogg" />
+                        <source src={audio} type="audio/mpeg" />
+                        <source src={audio} type="audio/wav" />
+                        <source src={audio} type="audio/x-wav" />
                         Your browser does not support the
                         <code>audio</code> element.
                       </audio>

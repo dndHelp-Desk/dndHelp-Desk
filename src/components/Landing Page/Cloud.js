@@ -13,13 +13,13 @@ const Cloud =()=>{
         </p>
       </div>
       <div className="flex items-center justify-center mt-4">
-        <div className="flex justify-center items-center gap-6 w-full">
-          <div className="md:w-48 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center"></div>
-          <div className="md:w-48 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center items-center w-full">
+          <div className="col-span-1 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center"></div>
+          <div className="col-span-1 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
           </div>
-          <div className="md:w-48 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
+          <div className="col-span-1 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
           </div>
-          <div className="md:w-48 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
+          <div className="col-span-1 w-full h-32 bg-slate-200 rounded-xl flex items-center justify-center">
           </div>
         </div>
       </div>

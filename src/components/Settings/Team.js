@@ -174,7 +174,7 @@ const Team = () => {
                   type="checkbox"
                   name="toggle"
                   id="toggle1"
-                  checked={user.active}
+                  checked={Boolean(user.active)}
                   className={`focus:outline-none checkbox w-4 h-4 rounded-full bg-white absolute shadow-sm appearance-none cursor-pointer border border-transparent top-0 bottom-0 m-auto ${
                     user.active && "right-0"
                   }`}
@@ -187,7 +187,12 @@ const Team = () => {
             </div>
             <abbr title="Delete Account">
               <button
-                onClick={() => deleteMember(user.id, user.uid)}
+                onClick={() => {
+                  let code = prompt("Enter Pin To Perform Action");
+                  code === "0001"
+                    ? deleteMember(user.id, user.uid)
+                    : alert("Wrong Pin");
+                }}
                 className="h-8 w-8 rounded-xl outline-none focus:outline-none flex items-center justify-center dark:bg-slate-800 bg-slate-300 hover:opacity-80"
               >
                 <BsFillTrashFill className="text-red-500 cursor-pointer text-base" />
@@ -198,7 +203,7 @@ const Team = () => {
       );
     });
 
-    //Allow Admin Only ==========================
+  //Allow Admin Only ==========================
   if (member_details[0].access !== "admin") {
     return <Navigate to="/app" />;
   }
