@@ -75,7 +75,7 @@ const Calendar = () => {
       return (
         <div key={index} className="p-[0.3rem] flex w-full justify-center">
           <p
-            className={`dark:text-slate-400 opacity-50 text-slate-500 font-medium text-sm h-4 w-4 flex items-center justify-center rounded-full`}
+            className={`dark:text-slate-400 opacity-50 text-slate-500 font-medium text-xs h-4 w-4 flex items-center justify-center rounded-full`}
           >
             {day}
           </p>
@@ -99,7 +99,7 @@ const Calendar = () => {
       return (
         <div key={index} className="p-[0.3rem] flex w-full justify-center">
           <p
-            className={`dark:text-slate-400 opacity-50 text-slate-500 font-medium text-sm h-4 w-4 flex items-center justify-center rounded-full`}
+            className={`dark:text-slate-400 opacity-50 text-slate-500 font-medium text-xs h-4 w-4 flex items-center justify-center rounded-full`}
           >
             {day}
           </p>
@@ -133,7 +133,7 @@ const Calendar = () => {
                 new Date(data.due_date).getFullYear() === day.getFullYear() &&
                 data.status === "open"
             )
-            .map((data) => data.recipient_name)
+            .map((data) => data.branch_company)
         : "";
     return (
       <div key={index} className="p-[0.3rem] flex w-full justify-center">
@@ -144,7 +144,7 @@ const Calendar = () => {
               day.getFullYear() === new Date().getFullYear() &&
               day.getMonth() === new Date().getMonth()
                 ? "text-blue-600 font-semibold"
-                : "dark:text-slate-300 text-slate-600 font-medium"
+                : "dark:text-slate-300 text-slate-800 font-medium"
             } ${
               currentMonthTickets.filter(
                 (data) =>
@@ -155,7 +155,7 @@ const Calendar = () => {
               ).length >= 1
                 ? "border-b border-blue-600"
                 : ""
-            } text-sm h-4 w-4 flex items-center justify-center cursor-pointer`}
+            } text-xs h-4 w-4 flex items-center justify-center cursor-pointer`}
           >{`${day.getDate()}`}</p>
         </abbr>
       </div>

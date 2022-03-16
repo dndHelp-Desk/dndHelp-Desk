@@ -103,9 +103,8 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           
           ${
             new Date(ticket.date).getTime() >=
-              (filters.startDate !== null && new Date(
-                filters.startDate
-              ).getTime()) &&
+              (filters.startDate !== null &&
+                new Date(filters.startDate).getTime()) &&
             new Date(ticket.date).getTime() <=
               (filters.endDate !== null && new Date(filters.endDate).getTime())
               ? ""
@@ -129,7 +128,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           {new Date(ticket.due_date !== null && ticket.due_date).getTime() <=
             new Date().getTime() &&
             ticket.status &&
-            ticket.status.toLowerCase() === "open" &&(
+            ticket.status.toLowerCase() === "open" && (
               <BsBookmarkX className="absolute left-4 top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
             )}
 
@@ -186,27 +185,29 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   .forEach((message) => {
                     markAsSeen(message.id, "read");
                   });
-                  /**Get The Recording ================== */
-                  if(ticket.status === "solved"){
-                    const storage = getStorage();
-                  const recordingRef = ref(
-                    storage,
-                    `/dial_n_dine/${ticket.ticket_id}.wav`
-                  );
-                  getDownloadURL(recordingRef).then((url) => {
-                    audioUrl(url);
-                  });
-                  }
+              /**Get The Recording ================== */
+              if (ticket.status === "solved") {
+                const storage = getStorage();
+                const recordingRef = ref(
+                  storage,
+                  `/dial_n_dine/${ticket.ticket_id}.wav`
+                );
+                getDownloadURL(recordingRef).then((url) => {
+                  audioUrl(url);
+                });
+              }
             }}
-            className="col-span-5 flex flex-col justify-center relative h-full w-full space-y-1 px-1 py-1 cursor-pointer"
+            className="col-span-5 flex flex-col justify-center relative h-full w-full space-y-1 px-1 py-1 cursor-pointer overflow-hidden"
           >
-            <h2 className="dark:text-slate-300  text-slate-900 text-xs dark:font-semibold font-bold font-sans uppercase whitespace-nowrap">
-              {ticket.category} : {ticket.ticket_id}
-            </h2>
+            <abbr title={ticket.ticket_id}>
+              <h2 className="dark:text-slate-300  text-slate-900 text-xs dark:font-semibold font-bold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
+                {ticket.category} : {ticket.ticket_id}
+              </h2>
+            </abbr>
             <h5 className="dark:text-slate-400 max-w-[10rem] text-slate-700 text-xs tracking-wide font-base capitalize overflow-hidden whitespace-nowrap overflow-ellipsis">
               <abbr title={ticket.branch_company}>{ticket.branch_company}</abbr>
             </h5>
-            <small className="dark:text-slate-400 text-slate-500 text-xs whitespace-nowrap">
+            <small className="dark:text-slate-400 text-slate-500 text-[0.6rem] whitespace-nowrap">
               Due on {new Date(ticket.due_date).toLocaleString()}
             </small>
           </div>

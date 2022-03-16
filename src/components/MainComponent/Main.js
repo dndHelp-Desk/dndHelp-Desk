@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { getAuth } from "firebase/auth";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import noUsers from "./images/no-userss.svg";
@@ -19,6 +20,7 @@ const Main = () => {
   const location = useLocation();
   const todoList = useSelector((state) => state.UserInfo.toDo);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
+  const user = useSelector((state) => state.UserInfo.member_details);
   const unread = useSelector((state) => state.Tickets.unread);
   let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const overDue = useMemo(() => {
@@ -84,9 +86,26 @@ const Main = () => {
       } dark:bg-transparent bg-transparent w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
-        <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2">
-          <div className="col-span-1 py-2 lg:py-0 h-[15rem] border-b lg:border-0 dark:border-slate-800 border-slate-300 md:col-span-2 lg:col-span-1 lg:max-h-[13rem] w-full 2xl:flex overflow-hidden">
-            <Calendar />
+        <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2 py-6">
+          {/**User Details  ============== */}
+          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-center space-y-2 items-center overflow-hidden px-2">
+            <div className="w-24 h-24 rounded-full overflow-hidden p-[2px] border-2 dark:border-slate-400 border-slate-800">
+              <img
+                src={getAuth().currentUser && getAuth().currentUser.photoURL}
+                alt="avatar"
+                className="w-full h-full rounded-full object-fit object-cover object-center"
+              />
+            </div>
+            <h2 className="text-lg font-bold dark:text-slate-300 text-slate-900 capitalize text-center border-b-2 dark:border-slate-300 border-slate-800">
+              Welcome back, {user[0].name.split(" ")[0]}.<br />
+              <span className="text-sm font-medium dark:text-slate-400 text-slate-700">
+                You currently have{" "}
+                {filteredTickets.length >= 1 &&
+                  filteredTickets.filter((ticket) => ticket.status === "open")
+                    .length}{" "}
+                open tickets.
+              </span>
+            </h2>
           </div>
           {/** Overdue Tickets ==================================*/}
           <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1  lg:border-l dark:border-slate-800 border-slate-300">
@@ -95,7 +114,7 @@ const Main = () => {
                 <h2 className="text-base font-bold dark:text-slate-300 text-slate-900 capitalize text-center">
                   Overdue Tickets
                 </h2>
-                <p className="text-thin dark:text-slate-400 text-slate-700 text-xs lg:text-sm text-center">
+                <p className="text-thin dark:text-slate-400 text-slate-700 px-4 text-xs lg:text-sm text-center">
                   {overDue.length} ticket/s that are highlighted with blue on
                   the calendar have been overdue the resolve-by date. To keep
                   yourself up-to date the calender has highlighted all due
@@ -128,27 +147,8 @@ const Main = () => {
             </div>
           </div>
           {/**End Of Overdue Tickets ==================================*/}
-
-          {/**Manage Contacts ==================================*/}
-          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1 lg:border-l dark:border-slate-800 border-slate-300">
-            <div className="flex flex-col gap-2 pb-2 overflow-hidden">
-              <h2 className="text-base text-center font-bold dark:text-slate-300 text-slate-900 capitalize">
-                contacts
-              </h2>
-              <p className="text-thin dark:text-slate-400 text-slate-700 text-sm text-center">
-                Click below button to manage yours contacts. It is important to
-                keep them up-to date as it will ensure no email is sent to the
-                wrong recipient. All contacts must be added/saved before opening
-                a new ticket.
-              </p>
-            </div>
-            <div className="flex items-center justify-center space-x-1">
-              <Link to="./contacts" className="outline-none focus:outline-none">
-                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-600 outline-none focus:outline-none focus:ring focus:ring-blue-700 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-4 transition-all duration-300">
-                  Manage Contacts
-                </button>
-              </Link>
-            </div>
+          <div className="col-span-1 hidden lg:flex py-2 lg:py-0 h-[15rem] lg:border-l dark:border-slate-800 border-slate-300 md:col-span-2 lg:col-span-1 lg:max-h-[13rem] w-full 2xl:flex overflow-hidden">
+            <Calendar />
           </div>
         </div>
 
