@@ -439,7 +439,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
     <div
       className={`h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-xl rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
+      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
       <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
@@ -450,11 +450,11 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-white border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
-                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold underline">
+              <div className="absolute flex flex-col rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-slate-100 border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-slate-100 after:border-l-transparent">
+                <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold underline">
                   Ticket Details
                 </h2>
-                <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-2 capitalize">
+                <ul className="dark:text-slate-400 text-slate-700 mt-2 space-y-2 capitalize">
                   <li className="text-xs">
                     <b>Open Date ⇒ </b>
                     {firstMessage.length >= 1 &&
@@ -482,10 +482,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
                     </span>
                   </li>
                 </ul>
-                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2 underline">
                   Case Details
                 </h2>
-                <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll">
+                <p className="dark:text-slate-400 text-slate-700 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll">
                   {firstMessage.length >= 1 && firstMessage[0].message}{" "}
                 </p>
 
@@ -493,7 +493,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 {firstMessage.length >= 1 &&
                   firstMessage[0].status === "solved" && (
                     <>
-                      <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                      <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2 underline">
                         Solution :{" "}
                         {firstMessage.length >= 1 &&
                         firstMessage[0].closed_time !== ""
@@ -502,7 +502,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                             ).toLocaleString()}`
                           : ""}
                       </h2>
-                      <p className="dark:text-slate-400 text-slate-500 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll rounded-md">
+                      <p className="dark:text-slate-400 text-slate-700 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll rounded-md">
                         {firstMessage.length >= 1 && firstMessage[0].solution}{" "}
                       </p>
                       {/**Play Recording ================================ */}

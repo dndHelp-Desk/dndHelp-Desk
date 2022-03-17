@@ -5,6 +5,7 @@ import {
   BsFunnelFill,
   BsFillTrashFill,
   BsFillPersonPlusFill,
+  BsCheck2Square,
 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
@@ -14,9 +15,9 @@ import {
   addNotification,
 } from "./../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
-import OffCanvasMenu from "../Others/OffCanvasMenu";
+import OffFilters from "./OffFilters";
 
-const Navbar = ({ deleteArray, setDelete, setModal }) => {
+const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
   const [filtersModal, setfiltersModal] = useState(false);
   const activeUser = useSelector((state) => state.UserInfo.member_details);
   const [contactsPanel, setPanel] = useState(false);
@@ -150,9 +151,11 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
       {/**Search Bar ============================== */}
       <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}
-        <OffCanvasMenu
+        <OffFilters
           filtersModal={filtersModal}
           setfiltersModal={setfiltersModal}
+          filters={filters}
+          setFilters={setFilters}
         />
         <button
           onClick={() => setfiltersModal(filtersModal ? false : true)}
@@ -195,25 +198,29 @@ const Navbar = ({ deleteArray, setDelete, setModal }) => {
         </button>
 
         {/**Mark All ================================= */}
-        <label
-          htmlFor="selectAll"
-          className={`text-xs dark:text-slate-300 text-slate-800 flex items-center space-x-1 cursor-pointer ${
+        <button
+          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  flex items-center justify-center  ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
           }`}
         >
-          <input
-            onChange={(e) =>
-              e.target.checked === true ? markAll() : setDelete([])
-            }
-            className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-md  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg`}
-            type="checkbox"
-            name="selectAll"
-            id="selectAll"
-          />
-          <span>Mark All</span>
-        </label>
+          <label
+            htmlFor="selectAll"
+            className="text-lg dark:text-slate-300 text-slate-800space-x-1 cursor-pointer"
+          >
+            <input
+              onChange={(e) =>
+                e.target.checked === true ? markAll() : setDelete([])
+              }
+              className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-md  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
+              type="checkbox"
+              name="selectAll"
+              id="selectAll"
+            />
+            <BsCheck2Square />
+          </label>
+        </button>
 
         {/**Agent List to assign ============= */}
         {activeUser[0].access === "admin" && (

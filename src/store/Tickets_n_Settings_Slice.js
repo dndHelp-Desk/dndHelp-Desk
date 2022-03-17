@@ -12,25 +12,6 @@ const initialState = {
   email_templates: [],
   settings: [],
   unread:[],
-  filters: {
-    startDate: new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      0
-    ),
-    endDate: new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      31
-    ),
-    brand: "",
-    ticket_id: "",
-    agent: "",
-    category: "",
-    complainant_number: "",
-    status: "",
-    others: "",
-  },
   filteredTickets: [],
   frequentlyAsked: [],
 };
@@ -57,9 +38,6 @@ export const TicketsSlice = createSlice({
     loadTemplates: (state, action) => {
       state.email_templates = action.payload;
     },
-    filter: (state, action) => {
-      state.filters = action.payload;
-    },
     setUnread: (state, action) => {
       state.unread = action.payload;
     },
@@ -79,7 +57,6 @@ export const {
   setThreadId,
   loadFrequentlyAsked,
   loadTemplates,
-  filter,
   updateFilteredTickets,
   setUnread,
 } = TicketsSlice.actions;

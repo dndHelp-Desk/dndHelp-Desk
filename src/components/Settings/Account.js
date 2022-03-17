@@ -122,34 +122,55 @@ const Account = () => {
   return (
     <div className="h-full w-full grid grid-cols-1 lg:grid-cols-2 p-1">
       {/**Profile Datils ======================= */}
-      <div className="col-span-1 lg:border-r dark:border-slate-800 border-slate-300 flex flex-col items-center p-6 space-y-2">
-        <div className="h-20 w-20 dark:bg-slate-700 bg-slate-200 border-2 border-slate-400 p-[2px] rounded-xl overflow-hidden">
-          <img
-            src={photoUrl}
-            alt="profile"
-            className="object-cover object-center rounded-lg h-full w-full"
-          />
+      <div className="col-span-1 lg:border-r dark:border-slate-800 border-slate-300 flex flex-col p-6 space-y-2">
+        <div
+          style={{
+            backgroundImage: `url(
+              "https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+            )`,
+          }}
+          className="w-full h-[10rem] rounded-xl bg-slate-800 pl-10 bg-no-repeat bg-center  backdrop-hue-rotate-60"
+        >
+          <div className="h-20 w-20 mt-[8rem] dark:bg-slate-700 bg-slate-200 border-2 border-slate-400 p-[2px] rounded-xl overflow-hidden">
+            <img
+              src={photoUrl}
+              alt="profile"
+              className="object-cover object-center rounded-lg h-full w-full"
+            />
+          </div>
         </div>
         {/**User Name & Time ================= */}
-        <div className="mt-[.3rem] space-y-1">
-          <h2 className="dark:text-slate-300 text-slate-800 text-center text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+        <div className="mt-[.25rem] w-full pr-10">
+          <h2 className="dark:text-slate-300 text-slate-800 text-right text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].name}
           </h2>
-          <h3 className="dark:text-slate-400 text-slate-700 text-center text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+          <h3 className="dark:text-slate-400 text-slate-700 text-right text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].dept}
           </h3>
-          <h4 className="dark:text-slate-400 text-slate-700 text-center text-xs lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+        </div>
+        {/**Bio ====================== */}
+        <div className=" mt-[5rem] dark:bg-[#25396823] bg-slate-200 p-4 w-full min-h-36 rounded-lg leading-12">
+          <h6 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide">
+            About Me
+          </h6>
+          <p className="dark:text-slate-400 text-slate-700 text-xs capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden mt-2">
+            {member_details.length !== undefined && member_details[0].bio}
+          </p>
+          <h6 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide mt-4">
+            Contact Info
+          </h6>
+          <h4 className="dark:text-slate-400 text-slate-700 text-xs lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             <BsEnvelope className="inline" />{" "}
             {member_details.length !== undefined && member_details[0].email}
           </h4>
           {emailStatus && (
-            <h5 className="dark:text-slate-400 text-slate-700 text-center text-xs capitalize font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
+            <h5 className="dark:text-slate-400 text-slate-700 text-xs capitalize font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden">
               <BsFillPatchCheckFill className="inline text-green-600" />{" "}
               <span>Your email is verified.</span>
             </h5>
           )}
           {!emailStatus && (
-            <h5 className="dark:text-slate-400 text-slate-700 text-center text-xs font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
+            <h5 className="dark:text-slate-400 text-slate-700 text-xs font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
               <BsFillPatchExclamationFill className="inline text-red-600" />{" "}
               <span>
                 Please verify your email,{" "}
@@ -185,15 +206,6 @@ const Account = () => {
               </span>
             </h5>
           )}
-        </div>
-        {/**Bio ====================== */}
-        <div className=" mt-[5rem] dark:bg-[#25396823] bg-slate-200 p-4 w-full min-h-36 rounded-lg">
-          <h6 className="dark:text-slate-300 text-slate-800 text-center text-base font-bold tracking-wide">
-            About Me
-          </h6>
-          <p className="dark:text-slate-400 text-slate-700 text-center text-xs capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden mt-2">
-            {member_details.length !== undefined && member_details[0].bio}
-          </p>
         </div>
         <button
           onClick={() => {
