@@ -8,7 +8,7 @@ import {
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
 import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
-import { BiListPlus, BiListMinus } from "react-icons/bi";
+import { BiListPlus, BiListMinus, BiArrowBack } from "react-icons/bi";
 import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
 import { updateAlert } from "../../store/NotificationsSlice";
@@ -25,7 +25,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const [audio, audioUrl] = useState("");
   const [loadMore, setLimit] = useState(50);
   const unread = useSelector((state) => state.Tickets.unread);
-  
+
   //Filters =====================
   const [filters, setFilters] = useState({
     startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 0),
@@ -50,7 +50,6 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
       )
     );
   }, [fetchedTickets, filters.endDate, filters.startDate]);
-
 
   //Loop Through Each Tickects =================
   const tickets =
@@ -294,11 +293,12 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         {/**Back To Main List On Small Screens ====================== */}
         <div
           onClick={() => setChat(false)}
-          className={`dark:text-slate-400 text-slate-600 font-bold py-1 h-2 w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer ${
+          className={`dark:text-slate-400 text-slate-800 font-bold mt-2 py-1 h-2 w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer ${
             !isChatOpen && "hidden"
           } md:hidden`}
         >
-          <span className="text-sm">Back</span>
+          <BiArrowBack />
+          <span className="text-xs">Back</span>
         </div>
 
         {/**Components ================================== */}
@@ -311,7 +311,8 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             deleteArray={deleteArray}
             setDelete={setDelete}
             setModal={setModal}
-            filters={filters} setFilters={setFilters}
+            filters={filters}
+            setFilters={setFilters}
           />
           <div className="w-full h-full flex flex-col overflow-hidden">
             <div className="w-full h-[90%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1">

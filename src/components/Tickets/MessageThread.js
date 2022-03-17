@@ -561,7 +561,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
                               onChange={(e) => {
                                 setFile(e.target.files[0]);
                               }}
-                              required
                               className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
                             />
                           </label>

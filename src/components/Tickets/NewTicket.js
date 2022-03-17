@@ -59,9 +59,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const [inputValue, setValues] = useState(initialDraft);
 
   //Check If Ticket Exists ===================
-  const numbersArray = useMemo(()=>{
-    return(
-      allTickets.length >= 1 && inputValue.complainant_number !== ""
+  const numbersArray = useMemo(() => {
+    return allTickets.length >= 1 && inputValue.complainant_number !== ""
       ? allTickets.filter(
           (ticket) =>
             ticket.message_position === 1 &&
@@ -69,10 +68,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               inputValue.complainant_number
             ) === true
         )
-      : []
-    )
-  },[allTickets,inputValue.complainant_number])
-    
+      : [];
+  }, [allTickets, inputValue.complainant_number]);
+
   const exist =
     numbersArray.length >= 1 &&
     numbersArray.map((data, index) => {
@@ -151,6 +149,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     // Upload Recordings
     recordingFile &&
       inputValue.state === "solved" &&
+      recordingFile &&
       addRecording(recordingFile, `/dial_n_dine/${inputValue.ticket_id}`);
 
     let dueDate = `${new Date(
@@ -175,7 +174,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       );
 
     //Send Mail and Open Ticket If values are not empty
-    if(!recordingFile && inputValue.state === "solved"){
+    /*if (!recordingFile && inputValue.state === "solved") {
       dispatch(
         updateAlert([
           ...alerts,
@@ -185,7 +184,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
           },
         ])
       );
-    }else if (
+    } */
+    if (
       inputValue.date !== "" &&
       inputValue.branch_company !== "" &&
       member_details.id !== false &&
