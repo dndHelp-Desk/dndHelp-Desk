@@ -246,7 +246,7 @@ const Main = () => {
               </div>
             </div>
             {/**Progress ============================== */}
-            <article className="col-span-2 h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 space-y-4 flex flex-col justify-between">
+            <article className="col-span-2 h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 flex flex-col space-y-5">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
                 Progress
               </h3>
@@ -291,8 +291,7 @@ const Main = () => {
                 {filteredTickets.length >= 1 &&
                   filteredTickets.filter((ticket) => ticket.status === "open")
                     .length}{" "}
-                open tickets, and {overDue.length} overdue tickets.You can click
-                the button below to resolve more tickets.
+                open tickets, and {overDue.length} overdue tickets.
               </p>
               <div className="w-full h-2 rounded-full overflow-hidden dark:bg-slate-700 bg-slate-300">
                 <div
@@ -334,16 +333,6 @@ const Main = () => {
                   }}
                   className="h-full bg-blue-600 rounded-full"
                 ></div>
-              </div>
-              <div>
-                <Link
-                  to="./tickets"
-                  className="outline-none focus:outline-none"
-                >
-                  <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-700 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-5 transition-all duration-300">
-                    Resolve Tickets
-                  </button>
-                </Link>
               </div>
             </article>
           </div>
