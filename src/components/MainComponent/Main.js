@@ -3,18 +3,9 @@ import { getAuth } from "firebase/auth";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import noUsers from "./images/no-userss.svg";
-import {
-  BsDashCircleDotted,
-  BsCheckAll,
-  BsArrowRepeat,
-  BsEnvelopeOpen,
-  BsFillHandThumbsUpFill,
-  BsEnvelope,
-  BsAlarm,
-  BsStopFill,
-} from "react-icons/bs";
-import ToDo from "./ToDo";
+import { BsEnvelope, BsAlarm, BsStopFill } from "react-icons/bs";
 import Calendar from "./Calendar";
+import SummaryPie from "./SummaryPie";
 
 const Main = () => {
   const location = useLocation();
@@ -43,7 +34,7 @@ const Main = () => {
         return (
           <div
             key={user.id}
-            className="w-full snap_child h-16 rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] flex items-center space-x-4 p-2 border dark:border-slate-800 border-slate-300"
+            className="w-full snap_child h-13 rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] flex items-center space-x-4 p-2 border dark:border-slate-800 border-slate-400"
           >
             <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
               <img
@@ -56,15 +47,11 @@ const Main = () => {
                 className="object-cover w-full h-full object-center rounded-lg"
               />
             </div>
-            <h3 className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
+            <h3 className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-800 w-36">
               <abbr title={user.name}>{user.name}</abbr>
-              <br />
-              <small className="capitalize dark:text-slate-500 text-slate-500 w-40">
-                {user.dept}
-              </small>
             </h3>
             <h3
-              className={`text-xs flex items-center space-x-1 ${
+              className={`text-[0.68rem] flex items-center space-x-1 ${
                 user.status === "available"
                   ? "text-green-600"
                   : user.status === "unavailable"
@@ -86,78 +73,83 @@ const Main = () => {
       } dark:bg-transparent bg-transparent w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
-        <div className="row-span-2 w-full h-fit dark:bg-slate-900 bg-slate-100 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center overflow-hidden p-4 gap-5 lg:h-[16rem] items-center lg:gap-2 py-6">
+        <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**User Details  ============== */}
-          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-center space-y-2 items-center overflow-hidden px-2">
-            <div className="w-24 h-24 rounded-full overflow-hidden p-[2px] border-2 dark:border-slate-400 border-slate-800">
-              <img
-                src={getAuth().currentUser && getAuth().currentUser.photoURL}
-                alt="avatar"
-                className="w-full h-full rounded-full object-fit object-cover object-center"
-              />
-            </div>
-            <h2 className="text-lg font-bold dark:text-slate-300 text-slate-900 capitalize text-center border-b-2 dark:border-slate-300 border-slate-800">
-              Welcome back, {user[0].name.split(" ")[0]}.<br />
-              <span className="text-sm font-medium dark:text-slate-400 text-slate-700">
-                You currently have{" "}
-                {filteredTickets.length >= 1 &&
-                  filteredTickets.filter((ticket) => ticket.status === "open")
-                    .length}{" "}
-                open tickets.
-              </span>
-            </h2>
-          </div>
-          {/** Overdue Tickets ==================================*/}
-          <div className="col-span-1 lg:max-h-[13rem] flex flex-col h-full justify-between overflow-hidden px-2 py-1  lg:border-l dark:border-slate-800 border-slate-300">
-            {overDue.length >= 1 && (
-              <div className="flex flex-col gap-1 pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-300 text-slate-900 capitalize text-center">
-                  Overdue Tickets
-                </h2>
-                <p className="text-thin dark:text-slate-400 text-slate-700 px-4 text-xs lg:text-sm text-center">
-                  {overDue.length} ticket/s that are highlighted with blue on
-                  the calendar have been overdue the resolve-by date. To keep
-                  yourself up-to date the calender has highlighted all due
-                  dates, just hover on top to see clients name which can be used
-                  to search.
-                </p>
+          <div className="col-span-1 h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden p-2">
+            <div className="flex flex-col h-full w-full justify-center space-y-6 items-center overflow-hidden dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300  rounded-lg">
+              <div className="w-24 h-24 rounded-full overflow-hidden p-[2px] border-2 dark:border-slate-400 border-slate-800">
+                <img
+                  src={getAuth().currentUser && getAuth().currentUser.photoURL}
+                  alt="avatar"
+                  className="w-full h-full rounded-full object-fit object-cover object-center"
+                />
               </div>
-            )}
-            {overDue.length <= 0 && (
-              <div className="flex flex-col justify-between pb-2 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-                <h2 className="text-base font-bold dark:text-slate-300 text-slate-900 capitalize text-center">
-                  Overdue Tickets
-                </h2>
-                <p className="text-thin dark:text-slate-400 text-slate-700 text-sm text-center">
-                  You all catched up{" "}
-                  <BsFillHandThumbsUpFill className="inline text-yellow-500" />
-                  .You can check/hover on top of the highlighted dates on the
-                  calendar to see upcoming deadline. . Don’t dwell on what went
-                  wrong. Instead, focus on what to do next. Spend your energies
-                  on moving forward toward finding the answer.
-                </p>
-              </div>
-            )}
-            <div className="flex items-center justify-center space-x-1">
-              <Link to="./tickets" className="outline-none focus:outline-none">
-                <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-700 outline-none focus:outline-none focus:ring focus:ring-red-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-red-600 hover:ring-red-600 text-xs font-bold h-10 px-5 transition-all duration-300">
-                  Resolve Tickets
-                </button>
-              </Link>
+              <article className="text-lg font-bold dark:text-slate-300 text-slate-900 capitalize text-center px-8 leading-5">
+                <h2>Welcome back, {user[0].name.split(" ")[0]}.</h2>
+                <q className="text-xs dark:text-slate-400 text-slate-700">
+                  Remeber Our greatest asset is the customer! Treat each
+                  customer as if they are the only one!
+                </q>
+              </article>
             </div>
           </div>
-          {/**End Of Overdue Tickets ==================================*/}
-          <div className="col-span-1 hidden lg:flex py-2 lg:py-0 h-[15rem] lg:border-l dark:border-slate-800 border-slate-300 md:col-span-2 lg:col-span-1 lg:max-h-[13rem] w-full 2xl:flex overflow-hidden">
+          {/**Todo List ================================ */}
+          {/* <ToDo />*/}
+          {/**Monthly Summary ================================ */}
+          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-4">
+            <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4 space-y-4">
+              <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold capitalize">
+                Monthly Summary
+              </h2>
+              <p className="dark:text-slate-400 text-slate-700 text-center text-sm">
+                You have{" "}
+                <span className="dark:text-slate-300 text-slate800 font-semibold">
+                  {
+                    filteredTickets.filter(
+                      (data) =>
+                        new Date(data.date).getTime() >=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            1
+                          ).getTime() &&
+                        new Date(data.date).getTime() <=
+                          new Date(
+                            new Date().getFullYear(),
+                            new Date().getMonth(),
+                            30
+                          ).getTime()
+                    ).length
+                  }
+                </span>{" "}
+                tickets in total, to see more analytics please visit the reports
+                page. Make use of filters to get more insight.
+              </p>
+            </div>
+            <div className="row-span-3 space-y-2 px-4 p-2">
+              <SummaryPie />
+            </div>
+          </div>
+          {/**Calendar ================================= */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl p-4 pt-3 pb-4 flex flex-col justify-between items-center">
+            <article className="text-center">
+              <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
+                Due Dates
+              </h2>
+              <p className="text-sm font-medium dark:text-slate-400 text-slate-700">
+                Hover on top of each date to see the details.
+              </p>
+            </article>
             <Calendar />
           </div>
-        </div>
+        </section>
 
         {/**Others  ====================================== */}
         <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden p-1 gap-4 grid grid-cols-1 lg:grid-cols-3">
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 h-20 flex justify-center items-center">
             <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
-              <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-700 dark:text-slate-400 flex justify-center items-center text-2xl rounded-md">
+              <div className="h-10 w-12 bg-blue-600 text-slate-100 dark:text-slate-300 flex justify-center items-center text-2xl rounded-md">
                 <BsEnvelope />
               </div>
               <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
@@ -169,7 +161,7 @@ const Main = () => {
           {/**Reminders  Count ====================== */}
           <div className="col-span-1 h-20 flex justify-center items-center">
             <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
-              <div className="h-10 w-12 dark:bg-[#2564eb7a] bg-[#2564eb54] text-slate-700 dark:text-slate-300 flex justify-center items-center text-2xl rounded-md">
+              <div className="h-10 w-12 bg-blue-600 text-slate-100 dark:text-slate-300 flex justify-center items-center text-2xl rounded-md">
                 <BsAlarm />
               </div>
               <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
@@ -226,19 +218,57 @@ const Main = () => {
         </div>
 
         {/**Bottom Half ================================ */}
-        <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/**Todo List ================================ */}
-          <ToDo />
-          {/**Monthly Summary ================================ */}
-          <section className="col-span-1 h-[26rem] hidden lg:grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-2">
-            <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4 space-y-4">
-              <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold capitalize">
-                Monthly Summary
-              </h2>
-              <p className="dark:text-slate-400 text-slate-700 text-center text-sm">
-                You have{" "}
-                <span className="dark:text-slate-300 text-slate800 font-semibold">
-                  {
+        <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden items-center space-y-4 lg:space-y-0 lg:gap-4">
+          <div className="col-span-2 h-[16rem] w-full rounded-xl grid grid-cols-2 md:grid-cols-7 gap-4">
+            {/**Quotes ==================================== */}
+            <div className="col-span-5 h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 overflow-hidden relative">
+              <img
+                src="https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
+                alt="background"
+                className="rounded-xl h-full w-full object-center object-cover"
+              />
+              <div className="absolute top-4 left-4 right-4 bottom-4 rounded-xl bg-[#0f172ac9]">
+                <article className="h-full w-full p-6 flex flex-col justify-between">
+                  <h2 className="text-slate-100 text-2xl font-bold">
+                    Customer Service Tip
+                  </h2>
+                  <p className="text-slate-100 text-sm font-medium">
+                    Excellence in anything increases your potential in
+                    everything. There are few positions for which this applies
+                    more than support — clarity in communication is paramount
+                    because it affects everything you do. Styling affects
+                    communication. Tone affects communication. Common mistakes
+                    include using passive-aggressive language (“Actually…”) or
+                    confusing customers with slang, colloquialisms, or technical
+                    jargon.
+                  </p>
+                </article>
+              </div>
+            </div>
+            {/**Progress ============================== */}
+            <article className="col-span-2 h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 space-y-4 flex flex-col justify-between">
+              <h3 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
+                Progress
+              </h3>
+              <p className="text-xs dark:text-slate-400 text-slate-700">
+                You managed to get{" "}
+                {(
+                  (filteredTickets.filter(
+                    (data) =>
+                      new Date(data.date).getTime() >=
+                        new Date(
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
+                          1
+                        ).getTime() &&
+                      new Date(data.date).getTime() <=
+                        new Date(
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
+                          30
+                        ).getTime() &&
+                      data.status.toLowerCase() === "solved"
+                  ).length /
                     filteredTickets.filter(
                       (data) =>
                         new Date(data.date).getTime() >=
@@ -253,157 +283,103 @@ const Main = () => {
                             new Date().getMonth(),
                             30
                           ).getTime()
-                    ).length
-                  }
-                </span>{" "}
-                tickets in total, to see more analytics please visit the reports
-                page. Make use of filters to get more insight.
+                    ).length) *
+                  100
+                ).toFixed(1)}
+                % of your tickets resolved.
+                <br /> Currently you have{" "}
+                {filteredTickets.length >= 1 &&
+                  filteredTickets.filter((ticket) => ticket.status === "open")
+                    .length}{" "}
+                open tickets, and {overDue.length} overdue tickets.You can click
+                the button below to resolve more tickets.
               </p>
-            </div>
-            <div className="row-span-3 space-y-2 px-4 p-2">
-              <div className="h-12 w-full flex justify-between">
-                <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-600 flex justify-center items-center text-2xl">
-                    <BsCheckAll />
-                  </div>
-                  <h5 className="dark:text-slate-400 text-slate-600 text-sm font-bold">
-                    Solved
-                  </h5>
-                </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
-                  {
-                    filteredTickets.filter(
-                      (data) =>
-                        new Date(data.date).getTime() >=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            1
-                          ).getTime() &&
-                        new Date(data.date).getTime() <=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            30
-                          ).getTime() &&
-                        data.status.toLowerCase() === "solved"
-                    ).length
-                  }
-                </h5>
+              <div className="w-full h-2 rounded-full overflow-hidden dark:bg-slate-700 bg-slate-300">
+                <div
+                  style={{
+                    width: `${(
+                      (filteredTickets.filter(
+                        (data) =>
+                          new Date(data.date).getTime() >=
+                            new Date(
+                              new Date().getFullYear(),
+                              new Date().getMonth(),
+                              1
+                            ).getTime() &&
+                          new Date(data.date).getTime() <=
+                            new Date(
+                              new Date().getFullYear(),
+                              new Date().getMonth(),
+                              30
+                            ).getTime() &&
+                          data.status.toLowerCase() === "solved"
+                      ).length /
+                        filteredTickets.filter(
+                          (data) =>
+                            new Date(data.date).getTime() >=
+                              new Date(
+                                new Date().getFullYear(),
+                                new Date().getMonth(),
+                                1
+                              ).getTime() &&
+                            new Date(data.date).getTime() <=
+                              new Date(
+                                new Date().getFullYear(),
+                                new Date().getMonth(),
+                                30
+                              ).getTime()
+                        ).length) *
+                      100
+                    ).toFixed(1)}%`,
+                  }}
+                  className="h-full bg-blue-600 rounded-full"
+                ></div>
               </div>
-              <div className="h-12 w-full flex justify-between">
-                <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-600 flex justify-center items-center text-xl">
-                    <BsArrowRepeat />
-                  </div>
-                  <h5 className="dark:text-slate-400 text-slate-600 text-sm font-bold">
-                    Re-Opened
-                  </h5>
-                </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
-                  {
-                    filteredTickets.filter(
-                      (data) =>
-                        new Date(data.date).getTime() >=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            1
-                          ).getTime() &&
-                        new Date(data.date).getTime() <=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            30
-                          ).getTime() &&
-                        data.reopened === true
-                    ).length
-                  }
-                </h5>
+              <div>
+                <Link
+                  to="./tickets"
+                  className="outline-none focus:outline-none"
+                >
+                  <button className="dark:bg-slate-800 bg-slate-200 rounded-lg dark:text-slate-400 text-slate-700 outline-none focus:outline-none focus:ring focus:ring-blue-600 hover:ring-1 ring-1 dark:ring-slate-600 ring-slate-500 dark:hover:ring-blue-600 hover:ring-blue-600 text-xs font-bold h-10 px-5 transition-all duration-300">
+                    Resolve Tickets
+                  </button>
+                </Link>
               </div>
-              <div className="h-12 w-full flex justify-between">
-                <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl  dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-600 flex justify-center items-center text-xl">
-                    <BsDashCircleDotted />
-                  </div>
-                  <h5 className="dark:text-slate-400 text-slate-600 text-sm font-bold">
-                    On-Hold
-                  </h5>
-                </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
-                  {
-                    filteredTickets.filter(
-                      (data) =>
-                        new Date(data.date).getTime() >=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            1
-                          ).getTime() &&
-                        new Date(data.date).getTime() <=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            30
-                          ).getTime() &&
-                        data.status.toLowerCase() === "on hold"
-                    ).length
-                  }
-                </h5>
-              </div>
-              <div className="h-12 w-full flex justify-between">
-                <div className="flex space-x-2 items-center w-[70%]">
-                  <div className="custom-shadow h-10 w-10 rounded-xl dark:bg-slate-800 bg-slate-200 dark:text-slate-300 text-slate-600 flex justify-center items-center text-xl">
-                    <BsEnvelopeOpen />
-                  </div>
-                  <h5 className="dark:text-slate-400 text-slate-600 text-sm font-bold">
-                    Open
-                  </h5>
-                </div>
-                <h5 className="dark:text-slate-400 text-slate-600 text-base font-semibold flex items-center">
-                  {
-                    filteredTickets.filter(
-                      (data) =>
-                        data.message_position === 1 &&
-                        data.status &&
-                        data.status.toLowerCase() === "open"
-                    ).length
-                  }
-                </h5>
-              </div>
-            </div>
-          </section>
+            </article>
+          </div>
           {/**Online Users ================================ */}
-          <section className="col-span-1 h-[26rem] dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
-            {allMembers.length >= 1 && (
-              <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                <h2 className="w-full h-6 text-xs sticky top-0 z-[99] flex justify-between items-center tracking-normal dark:bg-slate-900 bg-slate-100 font-bold uppercase dark:text-slate-300 text-slate-900">
-                  <span>Active Agents</span>{" "}
-                  <span>
-                    {
-                      allMembers.filter((user) => user.access === "agent")
-                        .length
-                    }
-                  </span>
-                </h2>
-                {users}
-              </div>
-            )}
-            {!allMembers.length >= 1 && (
-              <div className="h-full w-full">
-                <div className="h-full w-full rounded-lg dark:bg-slate-900 bg-slate-100 border dark:border-slate-800 border-slate-300 p-6">
-                  <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
-                    add your team members
-                  </h2>
-                  <img
-                    src={noUsers}
-                    alt="no-users"
-                    className="object-center object-fit w-full h-full"
-                  />
+          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-xl dark:bg-slate-900 bg-slate-100 p-2">
+            <div className="h-full w-full dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
+              {allMembers.length >= 1 && (
+                <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
+                  <h3 className="dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">
+                    <span>All Agents</span>
+                    <span>
+                      {
+                        allMembers.filter((user) => user.access === "agent")
+                          .length
+                      }
+                    </span>
+                  </h3>
+                  {users}
                 </div>
-              </div>
-            )}
-          </section>
+              )}
+              {!allMembers.length >= 1 && (
+                <div className="h-full w-full">
+                  <div className="h-full w-full rounded-lg dark:bg-slate-900 bg-slate-100 border dark:border-slate-800 border-slate-300 p-6">
+                    <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
+                      add your team members
+                    </h2>
+                    <img
+                      src={noUsers}
+                      alt="no-users"
+                      className="object-center object-fit w-full h-full"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </section>
       </div>
     </div>

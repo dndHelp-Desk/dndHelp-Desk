@@ -118,7 +118,7 @@ const Calendar = () => {
 
   //Map Through Days =======================
   const days = getDatesInMonthDisplay(month, year).map((day, index) => {
-    const clientName =
+    const ticket_id =
       currentMonthTickets.filter(
         (data) =>
           new Date(data.due_date).getDate() === day.getDate() &&
@@ -133,11 +133,11 @@ const Calendar = () => {
                 new Date(data.due_date).getFullYear() === day.getFullYear() &&
                 data.status === "open"
             )
-            .map((data) => data.branch_company)
+            .map((data) => data.ticket_id)
         : "";
     return (
       <div key={index} className="p-[0.3rem] flex w-full justify-center">
-        <abbr title={`${clientName}`}>
+        <abbr title={`${ticket_id}`}>
           <p
             className={`${
               day.getDate() === new Date().getDate() &&
@@ -165,8 +165,8 @@ const Calendar = () => {
   //Component
   return (
     <>
-      <div className="w-full h-full px-4 select-none">
-        <div className="px-2 h-full rounded-xl">
+      <div className="w-full py-2 flex flex-col justify-center px-4 select-none rounded-xl border dark:border-slate-800 border-slate-300">
+        <div className="px-2 rounded-xl">
           <div className="flex items-center justify-between">
             <HiChevronLeft
               onClick={() => {
@@ -187,7 +187,7 @@ const Calendar = () => {
               className="text-base cursor-pointer dark:text-slate-300 text-slate-700"
             />
           </div>
-          <div className="w-full h-full flex flex-col">
+          <div className="w-full flex flex-col justify-center items-center">
             <div className="w-full h-[2.5rem] grid grid-cols-7 gap-2 pt-3">
               {weekdays}
             </div>
