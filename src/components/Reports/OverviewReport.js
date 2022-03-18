@@ -2,8 +2,9 @@ import React, { useState,useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import { useSelector } from "react-redux";
 
-const OverviewReport = ({ data }) => {
+const OverviewReport = ({ data,filters }) => {
   const settings = useSelector((state) => state.Tickets.settings);
+  const filteredTickets = useSelector(state => state.Tickets.filteredTickets)
   const categories = settings.length >= 1 && settings[0].categories;
   const [option, setOption] = useState("hour");
   const dataArray = useMemo(()=>{
@@ -26,9 +27,10 @@ const OverviewReport = ({ data }) => {
     )
   },[categories,data]);
 
-  
+  const difference =
+    new Date(filters.endDate).getTime() - new Date(filters.startDate).getTime();
 
-  dataArray.sort((a, b) => {
+  dataArray && dataArray.sort((a, b) => {
     return Number(b.value) - Number(a.value);
   });
 
@@ -124,26 +126,36 @@ const OverviewReport = ({ data }) => {
           <div className="dark:text-slate-400 text-slate-500">
             <h4
               className={`text-base font-semibold text-center capitalize ${
-                data.filter(
-                  (data) =>
-                    new Date(data.date).getMonth() === new Date().getMonth()
-                ).length -
-                  data.filter(
+                data.length -
+                  filteredTickets.filter(
                     (data) =>
-                      new Date(data.date).getMonth() < new Date().getMonth()
+                      new Date(data.date).getTime() >=
+                        new Date(
+                          new Date(filters.startDate).getTime() -
+                            (difference + 86400000)
+                        ).getTime() &&
+                      new Date(data.date).getTime() <=
+                        new Date(
+                          new Date(filters.startDate).getTime() - 86400000
+                        ).getTime()
                   ).length >=
                 0
                   ? "text-green-600"
                   : "text-red-600"
               }`}
             >
-              {data.filter(
-                (data) =>
-                  new Date(data.date).getMonth() === new Date().getMonth()
-              ).length -
-                data.filter(
+              {data.length -
+                filteredTickets.filter(
                   (data) =>
-                    new Date(data.date).getMonth() < new Date().getMonth()
+                    new Date(data.date).getTime() >=
+                      new Date(
+                        new Date(filters.startDate).getTime() -
+                          (difference + 86400000)
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
+                        new Date(filters.startDate).getTime() - 86400000
+                      ).getTime()
                 ).length}
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
@@ -152,38 +164,45 @@ const OverviewReport = ({ data }) => {
           </div>
           <div className="dark:text-slate-300 text-slate-700">
             <h4 className="text-base font-semibold text-center">
-              {`${Number(
-                (
-                  chartData
-                    .map((data) => data.avg_handleTime)
-                    .reduce((acc, value) => acc + Number(value), 0) /
-                  chartData.length
-                ).toFixed(0) / 60
-              ).toFixed(0) >
-              1?Number(
-                (
-                  chartData
-                    .map((data) => data.avg_handleTime)
-                    .reduce((acc, value) => acc + Number(value), 0) /
-                  chartData.length
-                ).toFixed(0) / 60
-              ).toFixed(0):0}`}
+              {`${
+                Number(
+                  (
+                    chartData
+                      .map((data) => data.avg_handleTime)
+                      .reduce((acc, value) => acc + Number(value), 0) /
+                    chartData.length
+                  ).toFixed(0) / 60
+                ).toFixed(0) > 1
+                  ? Number(
+                      (
+                        chartData
+                          .map((data) => data.avg_handleTime)
+                          .reduce((acc, value) => acc + Number(value), 0) /
+                        chartData.length
+                      ).toFixed(0) / 60
+                    ).toFixed(0)
+                  : 0
+              }`}
               <span className="text-xs">hrs</span>{" "}
-              {`${Number(
-                (
-                  chartData
-                    .map((data) => data.avg_handleTime)
-                    .reduce((acc, value) => acc + Number(value), 0) /
-                  chartData.length
-                ).toFixed(0) % 60
-              ) > 1?Number(
-                (
-                  chartData
-                    .map((data) => data.avg_handleTime)
-                    .reduce((acc, value) => acc + Number(value), 0) /
-                  chartData.length
-                ).toFixed(0) % 60
-              ):0}`}
+              {`${
+                Number(
+                  (
+                    chartData
+                      .map((data) => data.avg_handleTime)
+                      .reduce((acc, value) => acc + Number(value), 0) /
+                    chartData.length
+                  ).toFixed(0) % 60
+                ) > 1
+                  ? Number(
+                      (
+                        chartData
+                          .map((data) => data.avg_handleTime)
+                          .reduce((acc, value) => acc + Number(value), 0) /
+                        chartData.length
+                      ).toFixed(0) % 60
+                    )
+                  : 0
+              }`}
               <span className="text-xs">mins</span>
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
