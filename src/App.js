@@ -12,7 +12,7 @@ import NewTicket from "./components/ClientSupport/NewTicket";
 import KnowledgeBase from "./components/ClientSupport/KnowledgeBase";
 import Account from "./components/Settings/Account";
 import Team from "./components/Settings/Team";
-import SupportOperations from "./components/Settings/SupportOperations";
+import SupportOperations from "./components/Settings/Support Operations/SupportOperations";
 
 const App = () => {
   return (
