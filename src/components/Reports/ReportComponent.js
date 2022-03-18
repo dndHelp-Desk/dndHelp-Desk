@@ -58,7 +58,11 @@ const ReportsComponent = () => {
             Number(new Date(ticket.date).getTime()) >=
               Number(new Date(filters.startDate).getTime()) &&
             Number(new Date(ticket.date).getTime()) <=
-              Number(new Date(filters.endDate).getTime())
+              new Date(
+                new Date(filters.endDate).setDate(
+                  new Date(filters.endDate).getDate() + 1
+                )
+              ).getTime()
         )
       : [];
   }, [
