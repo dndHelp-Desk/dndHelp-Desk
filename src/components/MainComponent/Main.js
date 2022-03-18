@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import noUsers from "./images/no-userss.svg";
-import { BsEnvelope, BsAlarm, BsStopFill } from "react-icons/bs";
+import { BsEnvelope, BsAlarm, BsStopFill, BsArrowRight } from "react-icons/bs";
 import Calendar from "./Calendar";
 import SummaryPie from "./SummaryPie";
 
@@ -145,11 +145,11 @@ const Main = () => {
         </section>
 
         {/**Others  ====================================== */}
-        <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden p-1 gap-4 grid grid-cols-1 lg:grid-cols-3">
+        <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3">
           {/**Messages Reply Count ====================== */}
-          <div className="col-span-1 h-20 flex justify-center items-center">
-            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
-              <div className="h-10 w-12 bg-blue-600 text-slate-100 dark:text-slate-300 flex justify-center items-center text-2xl rounded-md">
+          <div className="col-span-1 flex justify-center items-center">
+            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
+              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
                 <BsEnvelope />
               </div>
               <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
@@ -159,9 +159,9 @@ const Main = () => {
             </div>
           </div>
           {/**Reminders  Count ====================== */}
-          <div className="col-span-1 h-20 flex justify-center items-center">
-            <div className="h-14 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
-              <div className="h-10 w-12 bg-blue-600 text-slate-100 dark:text-slate-300 flex justify-center items-center text-2xl rounded-md">
+          <div className="col-span-1 flex justify-center items-center">
+            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
+              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
                 <BsAlarm />
               </div>
               <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
@@ -219,9 +219,9 @@ const Main = () => {
 
         {/**Bottom Half ================================ */}
         <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden items-center space-y-4 lg:space-y-0 lg:gap-4">
-          <div className="col-span-2 h-[16rem] w-full rounded-xl grid grid-cols-2 md:grid-cols-7 gap-4">
+          <div className="col-span-2 w-full rounded-xl grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Quotes ==================================== */}
-            <div className="col-span-5 h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 overflow-hidden relative">
+            <div className="col-span-5 h-[16rem] rounded-xl dark:bg-slate-900 bg-slate-100 p-4 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
                 alt="background"
@@ -246,7 +246,7 @@ const Main = () => {
               </div>
             </div>
             {/**Progress ============================== */}
-            <article className="col-span-2 h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 flex flex-col space-y-5">
+            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 flex flex-col space-y-5">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
                 Progress
               </h3>
@@ -334,6 +334,13 @@ const Main = () => {
                   className="h-full bg-blue-600 rounded-full"
                 ></div>
               </div>
+              <Link
+                to="/app/tickets"
+                className="text-blue-600 text-sm font-medium flex items-center space-x-2"
+              >
+                <span>View all Your Tickets</span>
+                <BsArrowRight />
+              </Link>
             </article>
           </div>
           {/**Online Users ================================ */}
