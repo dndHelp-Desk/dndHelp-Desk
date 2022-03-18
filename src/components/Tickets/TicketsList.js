@@ -39,17 +39,62 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
     others: "",
   });
   const filteredTickets = useMemo(() => {
-    return (
-      fetchedTickets.length >= 1 &&
-      fetchedTickets.filter(
-        (ticket) =>
-          Number(new Date(ticket.date).getTime()) >=
-            Number(new Date(filters.startDate).getTime()) &&
-          Number(new Date(ticket.date).getTime()) <=
-            Number(new Date(filters.endDate).getTime())
-      )
-    );
-  }, [fetchedTickets, filters.endDate, filters.startDate]);
+    return fetchedTickets.length >= 1
+      ? fetchedTickets.filter(
+          (ticket) =>
+            ticket.status
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.status, "gi")) &&
+            ticket.category
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.category, "gi")) &&
+            ticket.agent_name
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.agent, "gi")) &&
+            ticket.branch_company
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.brand, "gi")) &&
+            ticket.status
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.status, "gi")) &&
+            Number(new Date(ticket.date).getTime()) >=
+              Number(new Date(filters.startDate).getTime()) &&
+            Number(new Date(ticket.date).getTime()) <=
+              Number(new Date(filters.endDate).getTime()) &&
+            ticket.complainant_number
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(
+                filters.complainant_number.toLowerCase().replace(/\s/g, "")
+              ) === true &&
+            ticket.ticket_id
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.ticket_id.toLowerCase().replace(/\s/g, "")) ===
+              true
+        )
+      : [];
+  }, [
+    fetchedTickets,
+    filters.agent,
+    filters.category,
+    filters.endDate,
+    filters.startDate,
+    filters.status,
+    filters.brand,
+    filters.complainant_number,
+    filters.ticket_id,
+  ]);
 
   //Loop Through Each Tickects =================
   const tickets =
@@ -73,41 +118,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
-          } bg-slate-200 p-2 space-x-2  flex ${
-            ticket.branch_company
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.brand.toLowerCase().replace(/\s/g, "")) ===
-              true &&
-            ticket.ticket_id
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.ticket_id.toLowerCase().replace(/\s/g, "")) ===
-              true &&
-            ticket.status
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.status.toLowerCase().replace(/\s/g, "")) ===
-              true &&
-            ticket.complainant_number
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(
-                filters.complainant_number.toLowerCase().replace(/\s/g, "")
-              ) === true &&
-            ticket.agent_name
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.agent.toLowerCase().replace(/\s/g, "")) ===
-              true &&
-            ticket.category
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.category.toLowerCase().replace(/\s/g, "")) ===
-              true
-              ? ""
-              : "hidden"
-          }`}
+          } bg-slate-200 p-2 space-x-2 flex`}
         >
           {/**Indicate The ticket is resolved ================*/}
           {ticket.status && ticket.status.toLowerCase() === "solved" && (
