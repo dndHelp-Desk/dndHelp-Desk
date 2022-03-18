@@ -75,7 +75,7 @@ const Main = () => {
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**User Details  ============== */}
-          <div className="col-span-1 h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden p-2">
+          <div className="col-span-1 h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden p-4">
             <div className="flex flex-col h-full w-full justify-center space-y-6 items-center overflow-hidden dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300  rounded-lg">
               <div className="w-24 h-24 rounded-full overflow-hidden p-[2px] border-2 dark:border-slate-400 border-slate-800">
                 <img
