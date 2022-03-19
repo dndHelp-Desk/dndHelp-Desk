@@ -186,13 +186,12 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         ])
       );
     } */
+
     //Sending Account =============================
     let sendingAccount = email_accounts.filter(
       (account) =>
         account.name.toLowerCase() === inputValue.send_as.toLowerCase()
     )[0];
-
-    console.log(sendingAccount);
 
     if (
       inputValue.date !== "" &&
@@ -223,7 +222,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       );
 
       //Send Email Using Nodemailer ===================
-      fetch("http://localhost:3001/send", {
+      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -754,15 +753,18 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 <option className="capitalize" value="">
                   Send As ...
                 </option>
-                <option className="capitalize" value="support">
-                  Support
-                </option>
-                <option className="capitalize" value="inquiries">
-                  Inquiries
-                </option>
-                <option className="capitalize" value="test">
-                  tesd
-                </option>
+                {email_accounts.length >= 1 &&
+                  email_accounts.map((team) => {
+                    return (
+                      <option
+                        key={team.id}
+                        className="capitalize"
+                        value={team.name}
+                      >
+                        {team.name}
+                      </option>
+                    );
+                  })}
               </select>
             </label>
           </div>
