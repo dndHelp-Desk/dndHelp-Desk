@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router";
 import { useSelector } from "react-redux";
+import EmailAccounts from "./EmailAccounts";
 
 const SupportOperations = () => {
   const member_details = useSelector((state) => state.UserInfo.member_details);
-  const [menuItems,setTab] = useState([
+  const [menuItems, setTab] = useState([
     {
-      id:1,
+      id: 1,
       name: "Email Accounts",
       active: true,
     },
     {
-      id:2,
+      id: 2,
       name: "Templates",
       active: false,
     },
     {
-      id:3,
+      id: 3,
       name: "Others",
       active: false,
     },
@@ -27,7 +28,7 @@ const SupportOperations = () => {
     return <Navigate to="/app" />;
   }
   //Tabs ========================
-  const tabsMenu = menuItems.map((item)=>{
+  const tabsMenu = menuItems.map((item) => {
     return (
       <button
         key={item.id}
@@ -49,14 +50,19 @@ const SupportOperations = () => {
         {item.name}
       </button>
     );
-  })
+  });
 
   //Component =================
   return (
-    <section className="dark:bg-slate-900 bg-slate-100 w-full h-full flex flex-col">
-      <nav className="h-[8%] w-full flex justify-center">
+    <section className="dark:bg-slate-900 bg-slate-100 w-full h-full grid grid-rows-9 overflow-hidden">
+      <nav className="row-span-1 w-full flex justify-center">
         <ul className="h-full flex items-center justify-center">{tabsMenu}</ul>
       </nav>
+      <div className="row-span-8 w-full h-[36rem]">
+        {menuItems.filter(
+          (item) => item.name === "Email Accounts" && item.active === true
+        ).length >= 1 && <EmailAccounts />}
+      </div>
     </section>
   );
 };

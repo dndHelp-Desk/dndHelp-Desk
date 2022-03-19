@@ -6,6 +6,7 @@ import {
   changeStatus,
   reOpenTicket,
   markAsSeen,
+  addTeam,
 } from "./../Data_Fetching/TicketsnUserData";
 import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
 import { BiListPlus, BiListMinus, BiArrowBack } from "react-icons/bi";
@@ -19,6 +20,7 @@ import NewTicket from "./NewTicket";
 const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
   const fetchedTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -356,7 +358,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                 >
                   <BiListMinus />
                 </button>
-                <div className="col-span-2 border dark:border-slate-800 border-slate-300 dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-300 text-slate-800 font-bold text-sm tracking-wider flex items-center justify-center">
+                <div onClick={()=>{
+                  allTickets.forEach((item)=>{
+                    addTeam(item.id,"support")
+                  })
+                }} className="col-span-2 border dark:border-slate-800 border-slate-300 dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-300 text-slate-800 font-bold text-sm tracking-wider flex items-center justify-center">
                   {loadMore - 50 === 0 ? 1 : loadMore - 50} - {loadMore}
                 </div>
                 <button

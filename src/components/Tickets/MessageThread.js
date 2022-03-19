@@ -21,6 +21,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+  const email_accounts = useSelector((state) => state.Tickets.email_accounts);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recordingFile, setFile] = useState(false);
   const user = useSelector((state) => state.UserInfo.member_details);
@@ -205,9 +206,18 @@ const MessageThread = ({ isChatOpen, audio }) => {
         user[0].email,
         user[0].access,
         clientName,
-        clientEmail
+        clientEmail,
+        firstMessage.length >= 1 && firstMessage[0].team
       );
       setReply({ ...reply, message: "" });
+
+      //Sending Account =============================
+      let sendingAccount =
+        firstMessage.length >= 1 &&
+        email_accounts.filter(
+          (account) =>
+            account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
+        )[0];
 
       //Send Email Using App Script  =============
       /*fetch(sendMailAPI, {
@@ -235,6 +245,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
+          from: sendingAccount.email,
+          password: sendingAccount.password,
+          host: sendingAccount.host,
+          port: sendingAccount.port,
           email: clientEmail,
           subject: reply.subject,
           ticket_id: threadId,
@@ -338,6 +352,14 @@ const MessageThread = ({ isChatOpen, audio }) => {
     // Upload Recordings
     recordingFile && addRecording(recordingFile, `/dial_n_dine/${threadId}`);
 
+    //Sending Account =============================
+    let sendingAccount =
+      firstMessage.length >= 1 &&
+      email_accounts.filter(
+        (account) =>
+          account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
+      )[0];
+
     //Relpy Using Nodemailer ===================
     let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
       new Date().getMinutes() + 1
@@ -348,6 +370,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
+        from: sendingAccount.email,
+        password: sendingAccount.password,
+        host: sendingAccount.host,
+        port: sendingAccount.port,
         email: clientEmail,
         subject: firstMessage.length >= 1 && firstMessage[0].category,
         ticket_id: threadId,

@@ -41,15 +41,13 @@ const NewContact = ({ contactModal, setModal }) => {
         },
       ])
     );
-    setValue([
-      ...alerts,
-      {
+    setValue({
         name: "",
         email: "",
         phoneNumber: "",
         company: "",
       },
-    ]);
+    );
     setModal(false);
   };
 

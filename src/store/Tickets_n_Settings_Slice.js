@@ -9,7 +9,9 @@ const initialState = {
   allTickets: [],
   threadId: initialId(),
   contacts: [],
+  email_accounts:[],
   email_templates: [],
+  categories: [],
   settings: [],
   unread:[],
   filteredTickets: [],
@@ -35,11 +37,17 @@ export const TicketsSlice = createSlice({
     loadFrequentlyAsked: (state, action) => {
       state.frequentlyAsked = action.payload;
     },
+    loadAccounts: (state, action) => {
+      state.email_accounts = action.payload;
+    },
     loadTemplates: (state, action) => {
       state.email_templates = action.payload;
     },
     setUnread: (state, action) => {
       state.unread = action.payload;
+    },
+    setCategories:(state,action)=>{
+      state.categories = action.payload
     },
     updateFilteredTickets: (state, action) => {
       state.filteredTickets = action.payload.sort(
@@ -59,6 +67,8 @@ export const {
   loadTemplates,
   updateFilteredTickets,
   setUnread,
+  loadAccounts,
+  setCategories,
 } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;

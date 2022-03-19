@@ -7,6 +7,8 @@ import {
   setContacts,
   loadSettings,
   loadTemplates,
+  loadAccounts,
+  setCategories,
 } from "../../store/Tickets_n_Settings_Slice";
 import { setMessages } from "../../store/NotificationsSlice";
 
@@ -29,19 +31,17 @@ let membersRef = collection(db, "members");
 let ticketsRef = collection(db, "tickects");
 let contactsRef = collection(db, "contacts");
 let settingsRef = collection(db, "settings");
+let emailAccountsRef = collection(db, "email_accounts");
 let email_TemplatesRef = collection(
   db,
-  "settings/gz4ykLUf7KIrFhqYXYUF/email_templates"
+  "settings/all_settings/email_templates"
+);
+let categoriesRef = collection(
+  db,
+  "settings/all_settings/categories"
 );
 
-// Change Priority ================
-export const changePriority = (id, selected) => {
-  let docRef = doc(db, "tickects", id);
-  updateDoc(docRef, {
-    priority: selected,
-  });
-};
-
+//===================================USER===========================================
 // Update User Details ================
 export const updateUserDetails = (id, name, dept, bio) => {
   let docRef = doc(db, "members", id);
@@ -76,6 +76,117 @@ export const updateUID = (id, uid) => {
   });
 };
 
+// change user active status ================
+export const activateUser = (id, state) => {
+  let docRef = doc(db, "members", id);
+  updateDoc(docRef, {
+    active: state,
+  });
+};
+
+// Delete User ================
+export const deleteUser = (id) => {
+  let docRef = doc(db, "members", id);
+  deleteDoc(docRef);
+};
+
+// New User =================================
+export const createUser = (name, dept, email, access, bio, active) => {
+  addDoc(membersRef, {
+    name: name,
+    dept: dept,
+    email: email,
+    access: access,
+    bio: bio,
+    active: active,
+    status: "unavailable",
+    photoUrl: "",
+  });
+};
+
+
+//===================================NOTIFICATIONS===========================================
+// Add Notifications =================================
+export const addNotification = (id, title, message) => {
+  addDoc(collection(db, `members/${id}/notifications`), {
+    title: title,
+    message: message,
+    date: new Date().toLocaleString(),
+  });
+};
+
+//Delete notification ============================
+export const deleteNotification = (id, user_id) => {
+  let docRef = doc(db, `members/${user_id}/notifications`, id);
+  deleteDoc(docRef);
+};
+
+
+//===================================CONTACTS MANAGEMENT===========================================
+// New Contact =================================
+export const newContact = (name, email, phone, company) => {
+  addDoc(contactsRef, {
+    name: name,
+    email: email,
+    phone: phone,
+    branch_company: company,
+  });
+};
+
+//Edit Contact ========================
+export const editContact = (id, name, phone) => {
+  let docRef = doc(db, "contacts", id);
+  updateDoc(docRef, {
+    name: name,
+    phone: phone,
+  });
+};
+
+// Delete Contact ================
+export const deleteContact = (id) => {
+  let docRef = doc(db, "contacts", id);
+  deleteDoc(docRef);
+};
+
+
+//===================================EMAIL ACCOUNTS MANAGEMENT===========================================
+// Update Email Account =================================
+export const updateEmailAccount = (id, email, password, host, port) => {
+  let docRef = doc(db, "email_accounts", id);
+  updateDoc(docRef, {
+    email: email,
+    password: password,
+    host: host,
+    port: port,
+  });
+};
+
+//New Account ==========================
+export const newEmailAccount = (name, email, password, host, port) => {
+  addDoc(emailAccountsRef, {
+    name: name,
+    email: email,
+    password: password,
+    host: host,
+    port: port,
+  });
+};
+
+// Delete Contact ================
+export const deleteEmailAccount = (id) => {
+  let docRef = doc(db, "email_accounts", id);
+  deleteDoc(docRef);
+};
+
+
+//===================================TICKETS===========================================
+// Change Ticket Priority ================
+export const changePriority = (id, selected) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    priority: selected,
+  });
+};
 // Resolve Ticket Ticket  ================
 export const resolveTicket = (id, solution) => {
   let docRef = doc(db, "tickects", id);
@@ -100,42 +211,6 @@ export const changeStatus = (id, state) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {
     status: state,
-  });
-};
-
-// Delete Contact ================
-export const deleteContact = (id) => {
-  let docRef = doc(db, "contacts", id);
-  deleteDoc(docRef);
-};
-
-// Delete User ================
-export const deleteUser = (id) => {
-  let docRef = doc(db, "members", id);
-  deleteDoc(docRef);
-};
-
-// Add Notifications =================================
-export const addNotification = (id, title, message) => {
-  addDoc(collection(db, `members/${id}/notifications`), {
-    title: title,
-    message: message,
-    date: new Date().toLocaleString(),
-  });
-};
-
-//Delete notification ============================
-export const deleteNotification = (id,user_id) => {
-  let docRef = doc(db, `members/${user_id}/notifications`, id);
-  deleteDoc(docRef);
-};
-
-
-// change user active status ================
-export const activateUser = (id, state) => {
-  let docRef = doc(db, "members", id);
-  updateDoc(docRef, {
-    active: state,
   });
 };
 
@@ -166,7 +241,8 @@ export const addReply = (
   email,
   from,
   r_name,
-  r_email
+  r_email,
+  team
 ) => {
   addDoc(ticketsRef, {
     date: new Date().toLocaleString(),
@@ -180,6 +256,7 @@ export const addReply = (
     ticket_id: ticket_id,
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     readStatus: "delivered",
+    team: team,
   });
 };
 
@@ -188,6 +265,14 @@ export const markAsSeen = (id, readStatus) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {
     readStatus: readStatus,
+  });
+};
+
+//Mark Message as Seen ============
+export const addTeam = (id, team) => {
+  let docRef = doc(db, "tickects", id);
+  updateDoc(docRef, {
+    team: team,
   });
 };
 
@@ -206,7 +291,8 @@ export const addTicket = (
   agent_email,
   c_name,
   c_email,
-  c_number
+  c_number,
+  team
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -235,41 +321,10 @@ export const addTicket = (
     assigned: false,
     assignee: "",
     assigner: "",
+    team: team,
   });
 };
 
-// New Contact =================================
-export const newContact = (name, email, phone, company) => {
-  addDoc(contactsRef, {
-    name: name,
-    email: email,
-    phone: phone,
-    branch_company: company,
-  });
-};
-
-//Edit Contact ========================
-export const editContact = (id, name, phone) => {
-  let docRef = doc(db, "contacts", id);
-  updateDoc(docRef, {
-    name: name,
-    phone: phone,
-  });
-};
-
-// New User =================================
-export const createUser = (name, dept, email, access, bio, active) => {
-  addDoc(membersRef, {
-    name: name,
-    dept: dept,
-    email: email,
-    access: access,
-    bio: bio,
-    active: active,
-    status: "unavailable",
-    photoUrl: "",
-  });
-};
 
 //Component ==================================
 const TicketsnUserData = () => {
@@ -318,7 +373,7 @@ const TicketsnUserData = () => {
           )
         );
       }),
-      //Tickets Settings Data Fetching ======================
+      //Settings Data Fetching ======================
       onSnapshot(settingsRef, (snapshot) => {
         dispatch(
           loadSettings(
@@ -333,9 +388,29 @@ const TicketsnUserData = () => {
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
           )
         );
+      }),
+      //Categories Data Fetching ======================
+      onSnapshot(categoriesRef, (snapshot) => {
+        dispatch(
+          setCategories(
+            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0].categories
+          )
+        );
       })
     );
   }, [dispatch, currentUser.email]);
+
+  //Load Email_Accounts ====================
+  useEffect(() => {
+    return onSnapshot(emailAccountsRef, (snapshot) => {
+      member_details[0].id &&
+        dispatch(
+          loadAccounts(
+            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+          )
+        );
+    });
+  }, [dispatch, member_details]);
 
   //Todo CollectionRef and Notifications ====================
   useEffect(() => {

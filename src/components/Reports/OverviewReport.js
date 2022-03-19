@@ -3,9 +3,8 @@ import ReactECharts from "echarts-for-react";
 import { useSelector } from "react-redux";
 
 const OverviewReport = ({ data,filters }) => {
-  const settings = useSelector((state) => state.Tickets.settings);
   const filteredTickets = useSelector(state => state.Tickets.filteredTickets)
-  const categories = settings.length >= 1 && settings[0].categories;
+  const categories = useSelector((state) => state.Tickets.categories);
   const [option, setOption] = useState("hour");
   const dataArray = useMemo(()=>{
     return(

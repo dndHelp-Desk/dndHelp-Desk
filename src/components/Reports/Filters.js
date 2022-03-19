@@ -10,9 +10,8 @@ import DateFilter from "./DatePicker";
 import { useSelector } from "react-redux";
 
 const Filters = ({ filters, setFilters }) => {
-  const settings = useSelector((state) => state.Tickets.settings);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
-  const categories = settings.length >= 1 && settings[0].categories;
+  const categories = useSelector((state) => state.Tickets.categories);
 
   //Component ==============================
   return (

@@ -12,7 +12,6 @@ const SummaryPie = () => {
       style={{
         height: "100%",
         width: "100%",
-        "border-radius": "0.75rem",
       }}
       option={{
         backgroundColor: theme === "dark" ? "#0f172a" : "#f8fafc",

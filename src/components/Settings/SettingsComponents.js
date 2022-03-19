@@ -14,7 +14,7 @@ const SettingsComponents = () => {
 
   //Component ======================
   return (
-    <div className=" mt-4 min-h-[40rem] container w-[90%] md:w-full 2xl:w-[72rem] overflow-hidden grid grid-cols-9 lg:grid-cols-11 gap-4">
+    <div className=" mt-4 h-[40rem]  container w-[90%] md:w-full 2xl:w-[72rem] overflow-hidden grid grid-cols-9 lg:grid-cols-11 gap-4">
       {/** Sidenav ====================================== */}
       <div className="col-span-9 lg:col-span-2 overflow-hidden">
         <div className="dark:bg-slate-900 bg-slate-100 rounded-lg p-4 py-6">

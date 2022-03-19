@@ -17,9 +17,9 @@ import {
 
 const NewTicket = ({ newTicketModal, setModal }) => {
   const contacts = useSelector((state) => state.Tickets.contacts);
-  const settings = useSelector((state) => state.Tickets.settings);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
-  const categories = settings.length >= 1 && settings[0].categories;
+  const email_accounts = useSelector((state) => state.Tickets.email_accounts);
+  const categories = useSelector((state) => state.Tickets.categories);
   const templates = useSelector((state) => state.Tickets.email_templates);
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
@@ -51,6 +51,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         complainant_name: "",
         complainant_email: "",
         complainant_number: "",
+        send_as: "",
       }
     );
   };
@@ -66,11 +67,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             ticket.message_position === 1 &&
             ticket.complainant_number.includes(
               inputValue.complainant_number
-            ) === true
+            ) === true &&
+            ticket.status !== "solved"
         )
       : [];
   }, [allTickets, inputValue.complainant_number]);
-
   const exist =
     numbersArray.length >= 1 &&
     numbersArray.map((data, index) => {
@@ -185,8 +186,17 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         ])
       );
     } */
+    //Sending Account =============================
+    let sendingAccount = email_accounts.filter(
+      (account) =>
+        account.name.toLowerCase() === inputValue.send_as.toLowerCase()
+    )[0];
+
+    console.log(sendingAccount);
+
     if (
       inputValue.date !== "" &&
+      sendingAccount !== undefined &&
       inputValue.branch_company !== "" &&
       member_details.id !== false &&
       allTickets.length >= 1 &&
@@ -208,16 +218,21 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         inputValue.agent_email,
         inputValue.complainant_name,
         inputValue.complainant_email,
-        inputValue.complainant_number
+        inputValue.complainant_number,
+        inputValue.send_as
       );
 
       //Send Email Using Nodemailer ===================
-      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+      fetch("http://localhost:3001/send", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
+          from: sendingAccount.email,
+          password: sendingAccount.password,
+          host: sendingAccount.host,
+          port: sendingAccount.port,
           email: inputValue.recipient_email,
           subject: inputValue.category,
           ticket_id: inputValue.ticket_id,
@@ -362,6 +377,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         complainant_name: "",
         complainant_email: "",
         complainant_number: "",
+        send_as: "",
       });
       setFile("");
       setShowOpen(true);
@@ -388,7 +404,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     >
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className={`w-[98%] lg:w-[56.5%] lg:h-[39rem] h-[30rem] lg:top-[1rem] top-[4rem] right-[1%] lg:right-[1%] dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
+        className={`w-[98%] lg:w-[56.5%] h-[35rem] lg:h-[39rem] lg:top-[1rem] top-[4rem] right-[1%] lg:right-[1%] dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
           newTicketModal === true ? "absolute flex" : "hidden"
         } flex-col justify-between space-y-1`}
       >
@@ -431,6 +447,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     complainant_name: "",
                     complainant_email: "",
                     complainant_number: "",
+                    send_as: "",
                   })
                 );
                 setValues({
@@ -448,6 +465,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   complainant_name: "",
                   complainant_email: "",
                   complainant_number: "",
+                  send_as: "",
                 });
                 setFile(false);
               }}
@@ -687,32 +705,69 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               </ul>
             </label>
           </div>
-          {/**Recipient Name ============================= */}
-          <label
-            htmlFor="email"
-            className="w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-          >
-            <span>Name :</span>
-            <input
-              className="h-8 w-[80%] md:w-[88%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Complainant Name ..."
-              value={inputValue.complainant_name}
-              required={true}
-              onChange={(e) =>
-                setValues({
-                  ...inputValue,
-                  complainant_name: e.target.value,
-                  agent: member_details[0].name,
-                  agent_email: member_details[0].email,
-                })
-              }
-            />
-          </label>
+          {/**Complainant Name And Send As ============================= */}
+          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
+            {/**Complainant Name =========================================== */}
+            <label
+              htmlFor="email"
+              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>Name :</span>
+              <input
+                className="h-8 w-[80%] md:w-[80%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Complainant Name ..."
+                value={inputValue.complainant_name}
+                required={true}
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    complainant_name: e.target.value,
+                    agent: member_details[0].name,
+                    agent_email: member_details[0].email,
+                  })
+                }
+              />
+            </label>
+            {/**Select Team */}
+            {/**Send AS  ======================================== */}
+            <label
+              htmlFor="priority"
+              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+            >
+              <span>Send As :</span>
+              <select
+                className="h-8 w-[80%] md:w-[72%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                id="priority"
+                name="priority"
+                value={inputValue.send_as}
+                required={true}
+                onChange={(e) =>
+                  setValues({
+                    ...inputValue,
+                    send_as: e.target.value,
+                  })
+                }
+              >
+                <option className="capitalize" value="">
+                  Send As ...
+                </option>
+                <option className="capitalize" value="support">
+                  Support
+                </option>
+                <option className="capitalize" value="inquiries">
+                  Inquiries
+                </option>
+                <option className="capitalize" value="test">
+                  tesd
+                </option>
+              </select>
+            </label>
+          </div>
           {/**Message ====================================== */}
-          <div className="w-full h-[40%] md:h-[70%] mt-4 rounded-xl">
+          <div className="w-full h-[40%] md:h-[65%] lg:h-[70%] mt-4 rounded-xl">
             <label htmlFor="message" className="w-full h-full">
               <textarea
                 className="resize-none w-full h-full bg-transparent rounded-xl  text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 border dark:border-slate-700 border-slate-300 overflow-hidden dark:text-slate-300 text-slate-700 focus:ring-0 focus:border-slate-300 outline-none focus:outline-none"
@@ -755,6 +810,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     complainant_name: "",
                     complainant_email: "",
                     complainant_number: "",
+                    send_as: "",
                   });
                   setFile(false);
                 }}
