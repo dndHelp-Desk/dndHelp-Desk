@@ -65,7 +65,7 @@ const EmailAccounts = () => {
 
   //Componet  =======================
   return (
-    <section className="w-full h-full p-2 grid grid-cols-2 gap-2 overflow-hidden">
+    <section className="w-full h-full p-2 grid gricols-1 lg:grid-cols-2 gap-2 overflow-hidden">
       {/**Accounts List ======================================= */}
       <div className="col-span-1 h-[35rem] overflow-hidden overflow-y-scroll px-4 space-y-4">
         {email_accounts.length >= 1 &&
@@ -97,7 +97,7 @@ const EmailAccounts = () => {
               >
                 <fieldset className="border dark:border-slate-700 border-slate-500 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-[#25396823] bg-slate-200">
                   {" "}
-                  <legend className="text-slate-800 dark:text-slate-300 font-semibold uppercase text-sm">
+                  <legend className="text-slate-800 dark:text-slate-400 font-semibold uppercase text-sm">
                     {account.name}
                   </legend>
                   <label
@@ -120,7 +120,7 @@ const EmailAccounts = () => {
                       onChange={(e) =>
                         setValues({ ...updatedValues, email: e.target.value })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-600"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
                     />
                   </label>
                   <label
@@ -143,7 +143,7 @@ const EmailAccounts = () => {
                       onChange={(e) =>
                         setValues({ ...updatedValues, host: e.target.value })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-600"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
                     />
                   </label>
                   <label
@@ -166,7 +166,7 @@ const EmailAccounts = () => {
                       onChange={(e) =>
                         setValues({ ...updatedValues, port: e.target.value })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-600"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
                     />
                   </label>
                   <label
@@ -192,7 +192,7 @@ const EmailAccounts = () => {
                           password: e.target.value,
                         })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-600"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
                     />
                   </label>
                   <div className="flex justify-center items-center py-2">

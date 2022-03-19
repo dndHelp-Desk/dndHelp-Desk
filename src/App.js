@@ -13,6 +13,8 @@ import KnowledgeBase from "./components/ClientSupport/KnowledgeBase";
 import Account from "./components/Settings/Account";
 import Team from "./components/Settings/Team";
 import SupportOperations from "./components/Settings/Support Operations/SupportOperations";
+import AutomatedReports from "./components/Settings/AutomatedReports";
+import Solutions from "./components/Settings/Solutions";
 
 const App = () => {
   return (
@@ -36,6 +38,8 @@ const App = () => {
                 path="support-operations"
                 element={<SupportOperations />}
               />
+              <Route path="automated-reports" element={<AutomatedReports />} />
+              <Route path="solutions" element={<Solutions />} />
             </Route>
           </Route>
         </Routes>

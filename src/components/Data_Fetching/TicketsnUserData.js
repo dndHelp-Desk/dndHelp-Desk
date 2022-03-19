@@ -36,10 +36,7 @@ let email_TemplatesRef = collection(
   db,
   "settings/all_settings/email_templates"
 );
-let categoriesRef = collection(
-  db,
-  "settings/all_settings/categories"
-);
+let categoriesRef = collection(db, "settings/all_settings/categories");
 
 //===================================USER===========================================
 // Update User Details ================
@@ -104,7 +101,6 @@ export const createUser = (name, dept, email, access, bio, active) => {
   });
 };
 
-
 //===================================NOTIFICATIONS===========================================
 // Add Notifications =================================
 export const addNotification = (id, title, message) => {
@@ -120,7 +116,6 @@ export const deleteNotification = (id, user_id) => {
   let docRef = doc(db, `members/${user_id}/notifications`, id);
   deleteDoc(docRef);
 };
-
 
 //===================================CONTACTS MANAGEMENT===========================================
 // New Contact =================================
@@ -147,7 +142,6 @@ export const deleteContact = (id) => {
   let docRef = doc(db, "contacts", id);
   deleteDoc(docRef);
 };
-
 
 //===================================EMAIL ACCOUNTS MANAGEMENT===========================================
 // Update Email Account =================================
@@ -177,7 +171,6 @@ export const deleteEmailAccount = (id) => {
   let docRef = doc(db, "email_accounts", id);
   deleteDoc(docRef);
 };
-
 
 //===================================TICKETS===========================================
 // Change Ticket Priority ================
@@ -268,14 +261,6 @@ export const markAsSeen = (id, readStatus) => {
   });
 };
 
-//Mark Message as Seen ============
-export const addTeam = (id, team) => {
-  let docRef = doc(db, "tickects", id);
-  updateDoc(docRef, {
-    team: team,
-  });
-};
-
 // New Tickects ==============================
 export const addTicket = (
   recipient_name,
@@ -324,7 +309,6 @@ export const addTicket = (
     team: team,
   });
 };
-
 
 //Component ==================================
 const TicketsnUserData = () => {
@@ -393,7 +377,8 @@ const TicketsnUserData = () => {
       onSnapshot(categoriesRef, (snapshot) => {
         dispatch(
           setCategories(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0].categories
+            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
+              .categories
           )
         );
       })

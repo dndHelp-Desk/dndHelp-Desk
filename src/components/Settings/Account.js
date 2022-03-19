@@ -149,7 +149,7 @@ const Account = () => {
           </h3>
         </div>
         {/**Bio ====================== */}
-        <div className=" mt-[5rem] dark:bg-[#25396823] bg-slate-200 p-4 w-full min-h-36 rounded-lg leading-12">
+        <div className=" mt-[5rem] border border-slate-300 dark:border-slate-800 p-4 w-full min-h-36 rounded-lg leading-12">
           <h6 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide">
             About Me
           </h6>
