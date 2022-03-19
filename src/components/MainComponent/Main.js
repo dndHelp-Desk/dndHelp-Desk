@@ -79,7 +79,14 @@ const Main = () => {
             <div className="flex flex-col h-full w-full justify-center space-y-6 items-center overflow-hidden dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300  rounded-lg">
               <div className="w-24 h-24 rounded-full overflow-hidden p-[2px] border-2 dark:border-slate-400 border-slate-800">
                 <img
-                  src={getAuth().currentUser && getAuth().currentUser.photoURL}
+                  src={
+                    getAuth().currentUser &&
+                    getAuth().currentUser.photoURL !== null &&
+                    getAuth().currentUser &&
+                    getAuth().currentUser.photoURL !== ""
+                      ? getAuth().currentUser && getAuth().currentUser.photoURL
+                      : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
+                  }
                   alt="avatar"
                   className="w-full h-full rounded-full object-fit object-cover object-center"
                 />
