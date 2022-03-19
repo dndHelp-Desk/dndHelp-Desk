@@ -9,6 +9,7 @@ import {
   loadTemplates,
   loadAccounts,
   setCategories,
+  setCompanyDetails,
 } from "../../store/Tickets_n_Settings_Slice";
 import { setMessages } from "../../store/NotificationsSlice";
 
@@ -37,6 +38,7 @@ let email_TemplatesRef = collection(
   "settings/all_settings/email_templates"
 );
 let categoriesRef = collection(db, "settings/all_settings/categories");
+let companyDetailsRef = collection(db, "settings/all_settings/company_details");
 
 //===================================USER===========================================
 // Update User Details ================
@@ -379,6 +381,14 @@ const TicketsnUserData = () => {
           setCategories(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
               .categories
+          )
+        );
+      }),
+      //Company Details Data Fetching ======================
+      onSnapshot(companyDetailsRef, (snapshot) => {
+        dispatch(
+          setCompanyDetails(
+            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
           )
         );
       })

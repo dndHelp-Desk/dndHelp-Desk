@@ -95,9 +95,9 @@ const EmailAccounts = () => {
                 }}
                 className=""
               >
-                <fieldset className="border dark:border-slate-700 border-slate-500 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-[#25396823] bg-slate-200">
+                <fieldset className="border dark:border-slate-800 border-slate-300 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-[#25396823] bg-slate-200">
                   {" "}
-                  <legend className="text-slate-800 dark:text-slate-400 font-semibold uppercase text-sm">
+                  <legend className="text-slate-600 dark:text-slate-400 font-semibold uppercase text-sm">
                     {account.name}
                   </legend>
                   <label

@@ -22,6 +22,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
   const email_accounts = useSelector((state) => state.Tickets.email_accounts);
+  const company_details = useSelector((state) => state.Tickets.company_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recordingFile, setFile] = useState(false);
   const user = useSelector((state) => state.UserInfo.member_details);
@@ -245,7 +246,8 @@ const MessageThread = ({ isChatOpen, audio }) => {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          from: sendingAccount.email,
+          from: `${sendingAccount.email}`,
+          company: `${company_details.name} ${sendingAccount.name}`,
           password: sendingAccount.password,
           host: sendingAccount.host,
           port: sendingAccount.port,
@@ -370,7 +372,8 @@ const MessageThread = ({ isChatOpen, audio }) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        from: sendingAccount.email,
+        from: `${sendingAccount.email}`,
+        company: `${company_details.name} ${sendingAccount.name}`,
         password: sendingAccount.password,
         host: sendingAccount.host,
         port: sendingAccount.port,

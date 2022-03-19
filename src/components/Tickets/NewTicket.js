@@ -19,6 +19,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const contacts = useSelector((state) => state.Tickets.contacts);
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const email_accounts = useSelector((state) => state.Tickets.email_accounts);
+  const company_details = useSelector((state) => state.Tickets.company_details);
   const categories = useSelector((state) => state.Tickets.categories);
   const templates = useSelector((state) => state.Tickets.email_templates);
   const member_details = useSelector((state) => state.UserInfo.member_details);
@@ -228,7 +229,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          from: sendingAccount.email,
+          from: `${sendingAccount.email}`,
+          company: `${company_details.name} ${sendingAccount.name}`,
           password: sendingAccount.password,
           host: sendingAccount.host,
           port: sendingAccount.port,

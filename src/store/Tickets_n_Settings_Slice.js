@@ -11,6 +11,7 @@ const initialState = {
   contacts: [],
   email_accounts:[],
   email_templates: [],
+  company_details:[],
   categories: [],
   settings: [],
   unread:[],
@@ -49,6 +50,9 @@ export const TicketsSlice = createSlice({
     setCategories:(state,action)=>{
       state.categories = action.payload
     },
+    setCompanyDetails:(state,action)=>{
+      state.company_details = action.payload;
+    },
     updateFilteredTickets: (state, action) => {
       state.filteredTickets = action.payload.sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -69,6 +73,7 @@ export const {
   setUnread,
   loadAccounts,
   setCategories,
+  setCompanyDetails,
 } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;
