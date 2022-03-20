@@ -91,81 +91,66 @@ const OverviewReport = ({ data }) => {
   //Preping daily count  Data==============
   let toolTip = option === "day" ? "Day" : "Time";
   let toolTipEtxra = option === "day" ? "" : ":00Hrs";
-  const chartData = [
-    ...new Set(
-      data.map((data) =>
+  const chartData = useMemo(() => {
+    return [
+      ...new Set(
+        data.map((data) =>
+          option === "day"
+            ? new Date(data.date).getDate()
+            : new Date(data.date).getHours() + 1
+        )
+      ),
+    ].map((elem) => ({
+      name: elem,
+      value:
         option === "day"
-          ? new Date(data.date).getDate()
-          : new Date(data.date).getHours() + 1
-      )
-    ),
-  ].map((elem) => ({
-    name: elem,
-    value:
-      option === "day"
-        ? data.filter((data) => new Date(data.date).getDate() === elem).length
-        : data.filter((data) => new Date(data.date).getHours() === elem).length,
-    avg_handleTime:
-      option === "day"
-        ? //Daily Average handle time Calculation ===============
-          data
-            .filter(
-              (data) =>
-                new Date(data.date).getDate() === elem &&
-                data.status === "solved" &&
-                data.fcr !== "yes"
-            )
-            .map((data) =>
-              !(
-                new Date(data.closed_time).getTime() -
-                new Date(data.date).getTime()
-              )
-                ? 0
-                : new Date(data.closed_time).getTime() -
-                  new Date(data.date).getTime()
-            ).length >= 1
-          ? (
-              data
-                .filter(
-                  (data) =>
-                    new Date(data.date).getDate() === elem &&
-                    data.status === "solved" &&
-                    data.fcr !== "yes"
-                )
-                .map((data) =>
-                  !(
-                    new Date(data.closed_time).getTime() -
-                    new Date(data.date).getTime()
-                  )
-                    ? 0
-                    : new Date(data.closed_time).getTime() -
-                      new Date(data.date).getTime()
-                )
-                .reduce((acc, value) => acc + value, 0) /
-              data.filter((data) => new Date(data.date).getDate() === elem)
-                .length /
-              60000
-            ).toFixed(0)
-          : 0
-        : //Hourly Average handle time Calculation ===============
-        data
-            .filter(
-              (data) =>
-                new Date(data.date).getHours() === elem &&
-                data.status === "solved" &&
-                data.fcr !== "yes"
-            )
-            .map((data) =>
-              !(
-                new Date(data.closed_time).getTime() -
-                new Date(data.date).getTime()
-              )
-                ? 0
-                : new Date(data.closed_time).getTime() -
-                  new Date(data.date).getTime()
-            ).length >= 1
-        ? (
+          ? data.filter((data) => new Date(data.date).getDate() === elem).length
+          : data.filter((data) => new Date(data.date).getHours() === elem)
+              .length,
+      avg_handleTime:
+        option === "day"
+          ? //Daily Average handle time Calculation ===============
             data
+              .filter(
+                (data) =>
+                  new Date(data.date).getDate() === elem &&
+                  data.status === "solved" &&
+                  data.fcr !== "yes"
+              )
+              .map((data) =>
+                !(
+                  new Date(data.closed_time).getTime() -
+                  new Date(data.date).getTime()
+                )
+                  ? 0
+                  : new Date(data.closed_time).getTime() -
+                    new Date(data.date).getTime()
+              ).length >= 1
+            ? (
+                data
+                  .filter(
+                    (data) =>
+                      new Date(data.date).getDate() === elem &&
+                      data.status === "solved" &&
+                      data.fcr !== "yes"
+                  )
+                  .map((data) =>
+                    !(
+                      new Date(data.closed_time).getTime() -
+                      new Date(data.date).getTime()
+                    )
+                      ? 0
+                      : new Date(data.closed_time).getTime() -
+                        new Date(data.date).getTime()
+                  )
+                  .reduce((acc, value) => acc + value, 0) /
+                data.filter((data) => new Date(data.date).getDate() === elem)
+                  .length /
+                60000
+              ).toFixed(0)
+            : 0
+          : //Hourly Average handle time Calculation ===============
+          data
               .filter(
                 (data) =>
                   new Date(data.date).getHours() === elem &&
@@ -180,14 +165,32 @@ const OverviewReport = ({ data }) => {
                   ? 0
                   : new Date(data.closed_time).getTime() -
                     new Date(data.date).getTime()
-              )
-              .reduce((acc, value) => acc + value, 0) /
-            data.filter((data) => new Date(data.date).getHours() === elem)
-              .length /
-            60000
-          ).toFixed(0)
-        : 0,
-  }));
+              ).length >= 1
+          ? (
+              data
+                .filter(
+                  (data) =>
+                    new Date(data.date).getHours() === elem &&
+                    data.status === "solved" &&
+                    data.fcr !== "yes"
+                )
+                .map((data) =>
+                  !(
+                    new Date(data.closed_time).getTime() -
+                    new Date(data.date).getTime()
+                  )
+                    ? 0
+                    : new Date(data.closed_time).getTime() -
+                      new Date(data.date).getTime()
+                )
+                .reduce((acc, value) => acc + value, 0) /
+              data.filter((data) => new Date(data.date).getHours() === elem)
+                .length /
+              60000
+            ).toFixed(0)
+          : 0,
+    }));
+  },[data,option]);
 
   //Sort data =========
   chartData.sort((a, b) => {
@@ -322,7 +325,7 @@ const OverviewReport = ({ data }) => {
               },
               series: [
                 {
-                  data: chartData.map((data) => data.value),
+                  data: chartData.map((data) => (data.value / chartData.length).toFixed(0)),
                   type: "line",
                   smooth: true,
                   showSymbol: false,
