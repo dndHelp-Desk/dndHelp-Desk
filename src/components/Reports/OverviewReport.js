@@ -40,13 +40,15 @@ const OverviewReport = ({ data }) => {
         count += allTickets.filter(
           (msg) => msg.ticket_id === ticket.ticket_id
         ).length;
+        count += allTickets.filter(
+          (msg) =>
+            msg.status === "solved" &&
+            msg.fcr === "no" &&
+            msg.ticket_id === ticket.ticket_id
+        ).length;
       });
-    return (count +=
-      allTickets.length >= 1 &&
-      allTickets.filter(
-        (ticket) => ticket.status === "solved" && ticket.fcr !== "yes"
-      ).length);
-  },[allTickets,data]);
+    return count;
+  }, [allTickets, data]);
 
   //Top 5 categories Bar ==================
   const colorPalettes = [
