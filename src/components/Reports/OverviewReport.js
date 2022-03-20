@@ -46,7 +46,7 @@ const OverviewReport = ({ data }) => {
       allTickets.filter(
         (ticket) => ticket.status === "solved" && ticket.fcr !== "yes"
       ).length);
-  });
+  },[allTickets,data]);
 
   //Top 5 categories Bar ==================
   const colorPalettes = [
