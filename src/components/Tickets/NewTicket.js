@@ -230,10 +230,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         },
         body: JSON.stringify({
           from: `${sendingAccount.email}`,
-          company:
-            company_details.length >= 1
-              ? `${company_details.name} ${sendingAccount.name}`
-              : `${sendingAccount.name}`,
+          company:`${company_details.name} ${sendingAccount.name}`,
           password: sendingAccount.password,
           host: sendingAccount.host,
           port: sendingAccount.port,

@@ -569,13 +569,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
             {/**Subject And Scroll To Last Message Details =========================== */}
             <div className="font-semibold text-sm dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span className="uppercase text-xs">
-                {threadMessage.length >= 1 &&
-                  threadMessage.filter(
-                    (message) => message.message_position === 1
-                  )[0].category &&
-                  threadMessage.filter(
-                    (message) => message.message_position === 1
-                  )[0].category}
+                {firstMessage.length >= 1 && firstMessage[0].category}
                 {!threadId && "Nothing is selected"}
               </span>{" "}
               {/**Scroll to Last Message ================== */}
