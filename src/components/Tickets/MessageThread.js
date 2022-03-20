@@ -518,91 +518,51 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   {firstMessage.length >= 1 && firstMessage[0].message}{" "}
                 </p>
 
-                {/***Solution ============================= */}
-                {firstMessage.length >= 1 &&
-                  firstMessage[0].status === "solved" && (
-                    <>
-                      <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2 underline">
-                        Solution :{" "}
-                        {firstMessage.length >= 1 &&
-                        firstMessage[0].closed_time !== ""
-                          ? `${new Date(
-                              firstMessage[0].closed_time
-                            ).toLocaleString()}`
-                          : ""}
-                      </h2>
-                      <p className="dark:text-slate-400 text-slate-700 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll rounded-md">
-                        {firstMessage.length >= 1 && firstMessage[0].solution}{" "}
-                      </p>
-                      {/**Play Recording ================================ */}
-                      <audio
-                        id="rec"
-                        controls
-                        className="h-[2rem] border bg-[#f1f2f5] w-full mt-2 rounded-md"
-                        src={audio}
-                        type="audio/wav"
-                        preload="metadata"
-                      >
-                        <source src={audio} type="audio/ogg" />
-                        <source src={audio} type="audio/mpeg" />
-                        <source src={audio} type="audio/wav" />
-                        <source src={audio} type="audio/x-wav" />
-                        Your browser does not support the
-                        <code>audio</code> element.
-                      </audio>
-                    </>
-                  )}
-
-                {/**Add Solution ======================== */}
-                {firstMessage.length >= 1 &&
-                  firstMessage[0].status !== "solved" && (
-                    <>
-                      <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
-                        Add Solution
-                      </h2>
-                      <form
-                        className="dark:bg-slate-800 bg-slate-200 w-full h-fit overflow-hidden rounded-md mt-2 p-1 relative"
-                        onSubmit={(e) => sendSolution(e)}
-                      >
-                        <textarea
-                          name="reply"
-                          id="reply"
-                          cols="30"
-                          rows="10"
-                          placeholder="Add solution ..."
-                          autoComplete="off"
-                          required
-                          onChange={(e) => {
-                            setSolution(e.target.value);
-                          }}
-                          value={solution}
-                          className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
-                        ></textarea>
-                        <div className="w-full flex justify-between h-[2rem]">
-                          <label htmlFor="recording" className="block">
-                            <span className="sr-only">Choose recording</span>
-                            <input
-                              type="file"
-                              id="recording"
-                              accept=".wav"
-                              name="recording"
-                              title="Upload Recording"
-                              onChange={(e) => {
-                                setFile(e.target.files[0]);
-                              }}
-                              className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
-                            />
-                          </label>
-                          <button
-                            type="submit"
-                            className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold text-slate-300 bg-blue-700 z-[99]"
-                          >
-                            <BiPaperPlane />
-                          </button>
-                        </div>
-                      </form>
-                    </>
-                  )}
+                {/***Add Solution ============================================= */}
+                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                  Add Solution
+                </h2>
+                <form
+                  className="dark:bg-slate-800 bg-slate-200 w-full h-fit overflow-hidden rounded-md mt-2 p-1 relative"
+                  onSubmit={(e) => sendSolution(e)}
+                >
+                  <textarea
+                    name="reply"
+                    id="reply"
+                    cols="30"
+                    rows="10"
+                    placeholder="Add solution ..."
+                    autoComplete="off"
+                    required
+                    onChange={(e) => {
+                      setSolution(e.target.value);
+                    }}
+                    value={solution}
+                    className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+                  ></textarea>
+                  <div className="w-full flex justify-between h-[2rem]">
+                    <label htmlFor="recording" className="block">
+                      <span className="sr-only">Choose recording</span>
+                      <input
+                        type="file"
+                        id="recording"
+                        accept=".wav"
+                        name="recording"
+                        title="Upload Recording"
+                        onChange={(e) => {
+                          setFile(e.target.files[0]);
+                        }}
+                        className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
+                      />
+                    </label>
+                    <button
+                      type="submit"
+                      className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold text-slate-300 bg-blue-700 z-[99]"
+                    >
+                      <BiPaperPlane />
+                    </button>
+                  </div>
+                </form>
               </div>
             </details>
 
@@ -632,6 +592,53 @@ const MessageThread = ({ isChatOpen, audio }) => {
         <div className="h-full w-full p-6 overflow-y-scroll scroll-snap">
           {/**Thread Messages ============================ */}
           {thread}
+          {
+            //Final Solution If there is one =====================
+            firstMessage.length >= 1 && firstMessage[0].status === "solved" && (
+              <div className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all">
+                {/**Message ====================== */}
+                <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-2 relative">
+                  <div className="absolute left-[-1rem] top-0 h-[2rem] px-2 rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center capitalize font-semibold text-xs">
+                    Solution
+                  </div>
+                  {/**Contents ======================= */}
+                  <div className="w-full bg-transparent rounded-lg">
+                    <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
+                      <div className="flex w-full h-full items-center justify-end pr-10 pt-2">
+                        <span className="flex space-x-2">
+                          <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
+                            {`${new Date(
+                              firstMessage.length >= 1 &&
+                                firstMessage[0].closed_time
+                            ).toLocaleString()}`}
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <p className="mt-2 pt-4 dark:text-slate-400 text-slate-700 capitalize">
+                      {firstMessage.length >= 1 && firstMessage[0].solution}
+                    </p>
+                    {/**Play Recording ================================ */}
+                    <audio
+                      id="rec"
+                      controls
+                      className="h-[2rem] dark:border-0 border bg-[#f1f2f5] w-full max-w-[18rem] border- border-slate-500 mt-2 rounded-md"
+                      src={audio}
+                      type="audio/wav"
+                      preload="metadata"
+                    >
+                      <source src={audio} type="audio/ogg" />
+                      <source src={audio} type="audio/mpeg" />
+                      <source src={audio} type="audio/wav" />
+                      <source src={audio} type="audio/x-wav" />
+                      Your browser does not support the
+                      <code>audio</code> element.
+                    </audio>
+                  </div>
+                </div>
+              </div>
+            )
+          }
           {/**Placeholders ======================== */}
           {!threadId && (
             <>

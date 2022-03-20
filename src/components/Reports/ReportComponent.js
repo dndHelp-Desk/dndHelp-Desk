@@ -87,7 +87,7 @@ const ReportsComponent = () => {
       <TopCards data={data} setFilters={setFilters} filters={filters} />
       {/** Overview Report ============================ */}
       <div className="w-full rounded-xl bg-transparent grid grid-cols-3 lg:grid-cols-3 gap-4">
-        <OverviewReport data={data} filters={filters} />
+        <OverviewReport data={data} />
         <Tables data={data} />
       </div>
     </div>

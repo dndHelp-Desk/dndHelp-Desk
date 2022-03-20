@@ -69,7 +69,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
             ticket.complainant_number.includes(
               inputValue.complainant_number
             ) === true &&
-            ticket.status !== "solved"
+            inputValue.complainant_number.split("").length >= 9
         )
       : [];
   }, [allTickets, inputValue.complainant_number]);
@@ -230,7 +230,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         },
         body: JSON.stringify({
           from: `${sendingAccount.email}`,
-          company: `${company_details.name} ${sendingAccount.name}`,
+          company:
+            company_details.length >= 1
+              ? `${company_details.name} ${sendingAccount.name}`
+              : `${sendingAccount.name}`,
           password: sendingAccount.password,
           host: sendingAccount.host,
           port: sendingAccount.port,

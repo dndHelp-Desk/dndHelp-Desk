@@ -1,36 +1,51 @@
-import React, { useState,useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import { useSelector } from "react-redux";
 
-const OverviewReport = ({ data,filters }) => {
-  const filteredTickets = useSelector(state => state.Tickets.filteredTickets)
+const OverviewReport = ({ data }) => {
+  const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = useSelector((state) => state.Tickets.categories);
   const [option, setOption] = useState("hour");
-  const dataArray = useMemo(()=>{
-    return(
+  const dataArray = useMemo(() => {
+    return (
       categories.length >= 1 &&
-    categories.map((element) => {
-      return({
-        name: element,
-        value: (
-          ((data.length >= 1 &&
-            data.filter(
-              (ticket) =>
-                ticket.category.toLowerCase() === element.toLowerCase()
-            ).length) /
-            data.length) *
-          100
-        ).toFixed(1),
+      categories.map((element) => {
+        return {
+          name: element,
+          value: (
+            ((data.length >= 1 &&
+              data.filter(
+                (ticket) =>
+                  ticket.category.toLowerCase() === element.toLowerCase()
+              ).length) /
+              data.length) *
+            100
+          ).toFixed(1),
+        };
+      })
+    );
+  }, [categories, data]);
+
+  dataArray &&
+    dataArray.sort((a, b) => {
+      return Number(b.value) - Number(a.value);
+    });
+
+  //Total Calls Incoming or Outgoing ===========================
+  const totalCalls = useMemo(() => {
+    let count = 0;
+    data.length >= 1 &&
+      allTickets.length >= 1 &&
+      data.forEach((ticket) => {
+        count += allTickets.filter(
+          (msg) => msg.ticket_id === ticket.ticket_id
+        ).length;
       });
-    })
-    )
-  },[categories,data]);
-
-  const difference =
-    new Date(filters.endDate).getTime() - new Date(filters.startDate).getTime();
-
-  dataArray && dataArray.sort((a, b) => {
-    return Number(b.value) - Number(a.value);
+    return (count +=
+      allTickets.length >= 1 &&
+      allTickets.filter(
+        (ticket) => ticket.status === "solved" && ticket.fcr !== "yes"
+      ).length);
   });
 
   //Top 5 categories Bar ==================
@@ -72,8 +87,8 @@ const OverviewReport = ({ data,filters }) => {
     });
 
   //Preping daily count  Data==============
-  let toolTip = option === "day"?"Day":"Time"
-  let toolTipEtxra = option === "day"?"":":00Hrs"
+  let toolTip = option === "day" ? "Day" : "Time";
+  let toolTipEtxra = option === "day" ? "" : ":00Hrs";
   const chartData = [
     ...new Set(
       data.map((data) =>
@@ -90,10 +105,86 @@ const OverviewReport = ({ data,filters }) => {
         : data.filter((data) => new Date(data.date).getHours() === elem).length,
     avg_handleTime:
       option === "day"
-       //Daily Average handle time Calculation ===============
-        ? data.filter((data) => new Date(data.date).getDate() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(data.closed_time).getTime() - new Date(data.date).getTime())?0:(new Date(data.closed_time).getTime() - new Date(data.date).getTime())).length >= 1 ?(((data.filter((data) => new Date(data.date).getDate() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(data.closed_time).getTime() - new Date(data.date).getTime())?0:(new Date(data.closed_time).getTime() - new Date(data.date).getTime()))).reduce((acc,value) => acc + value,0)/data.filter((data) => new Date(data.date).getDate() === elem).length)/60000).toFixed(0):0
-        //Hourly Average handle time Calculation ===============
-        : data.filter((data) => new Date(data.date).getHours() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(data.closed_time).getTime() - new Date(data.date).getTime())?0:(new Date(data.closed_time).getTime() - new Date(data.date).getTime())).length >= 1?(((data.filter((data) => new Date(data.date).getHours() === elem && data.status === "solved" && data.fcr !== "yes").map(data => !(new Date(data.closed_time).getTime() - new Date(data.date).getTime())?0:(new Date(data.closed_time).getTime() - new Date(data.date).getTime()))).reduce((acc,value) => acc + value,0)/data.filter((data) => new Date(data.date).getHours() === elem).length)/60000).toFixed(0):0
+        ? //Daily Average handle time Calculation ===============
+          data
+            .filter(
+              (data) =>
+                new Date(data.date).getDate() === elem &&
+                data.status === "solved" &&
+                data.fcr !== "yes"
+            )
+            .map((data) =>
+              !(
+                new Date(data.closed_time).getTime() -
+                new Date(data.date).getTime()
+              )
+                ? 0
+                : new Date(data.closed_time).getTime() -
+                  new Date(data.date).getTime()
+            ).length >= 1
+          ? (
+              data
+                .filter(
+                  (data) =>
+                    new Date(data.date).getDate() === elem &&
+                    data.status === "solved" &&
+                    data.fcr !== "yes"
+                )
+                .map((data) =>
+                  !(
+                    new Date(data.closed_time).getTime() -
+                    new Date(data.date).getTime()
+                  )
+                    ? 0
+                    : new Date(data.closed_time).getTime() -
+                      new Date(data.date).getTime()
+                )
+                .reduce((acc, value) => acc + value, 0) /
+              data.filter((data) => new Date(data.date).getDate() === elem)
+                .length /
+              60000
+            ).toFixed(0)
+          : 0
+        : //Hourly Average handle time Calculation ===============
+        data
+            .filter(
+              (data) =>
+                new Date(data.date).getHours() === elem &&
+                data.status === "solved" &&
+                data.fcr !== "yes"
+            )
+            .map((data) =>
+              !(
+                new Date(data.closed_time).getTime() -
+                new Date(data.date).getTime()
+              )
+                ? 0
+                : new Date(data.closed_time).getTime() -
+                  new Date(data.date).getTime()
+            ).length >= 1
+        ? (
+            data
+              .filter(
+                (data) =>
+                  new Date(data.date).getHours() === elem &&
+                  data.status === "solved" &&
+                  data.fcr !== "yes"
+              )
+              .map((data) =>
+                !(
+                  new Date(data.closed_time).getTime() -
+                  new Date(data.date).getTime()
+                )
+                  ? 0
+                  : new Date(data.closed_time).getTime() -
+                    new Date(data.date).getTime()
+              )
+              .reduce((acc, value) => acc + value, 0) /
+            data.filter((data) => new Date(data.date).getHours() === elem)
+              .length /
+            60000
+          ).toFixed(0)
+        : 0,
   }));
 
   //Sort data =========
@@ -111,54 +202,18 @@ const OverviewReport = ({ data,filters }) => {
         <div className="mt-4 flex space-x-4 px-2 h-14 w-full justify-between">
           <div className="dark:text-slate-300 text-slate-700">
             <h4 className="text-base font-semibold text-center uppercase">
-              {
-                data.filter(
-                  (data) =>
-                    new Date(data.date).getMonth() === new Date().getMonth()
-                ).length
-              }
+              {data.length}
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
-              current
+              Total Tickets
             </h4>
           </div>
-          <div className="dark:text-slate-400 text-slate-500">
-            <h4
-              className={`text-base font-semibold text-center capitalize ${
-                data.length -
-                  filteredTickets.filter(
-                    (data) =>
-                      new Date(data.date).getTime() >=
-                        new Date(
-                          new Date(filters.startDate).getTime() -
-                            (difference + 86400000)
-                        ).getTime() &&
-                      new Date(data.date).getTime() <=
-                        new Date(
-                          new Date(filters.startDate).getTime() - 86400000
-                        ).getTime()
-                  ).length >=
-                0
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {data.length -
-                filteredTickets.filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      new Date(
-                        new Date(filters.startDate).getTime() -
-                          (difference + 86400000)
-                      ).getTime() &&
-                    new Date(data.date).getTime() <=
-                      new Date(
-                        new Date(filters.startDate).getTime() - 86400000
-                      ).getTime()
-                ).length}
+          <div className="dark:text-slate-300 text-slate-500">
+            <h4 className="text-base font-semibold text-center uppercase">
+              {totalCalls}
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
-              difference
+              Aggregate
             </h4>
           </div>
           <div className="dark:text-slate-300 text-slate-700">
