@@ -16,6 +16,7 @@ import {
 import { updateAlert } from "../../store/NotificationsSlice";
 import { addRecording } from "./../authentication/Firebase";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import { convertRecording } from "./Convert";
 
 const MessageThread = ({ isChatOpen, audio }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -182,7 +183,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   </div>
                 </div>
               </div>
-              <p className="mt-2 dark:text-slate-400 text-slate-700">
+              <p className="mt-2 py-2 dark:text-slate-400 text-slate-700">
                 {message.message}
               </p>
             </div>
@@ -475,11 +476,22 @@ const MessageThread = ({ isChatOpen, audio }) => {
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <details className="relative flex items-center space-x-2 outline-none focus:outline-none">
-              <summary className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer outline-none focus:outline-none">
+              <summary
+                onClick={() => {
+                  /*function downloadAudio(convertedAudioDataObj) {
+                    let a = document.createElement("a");
+                    a.href = convertedAudioDataObj;
+                    a.download = "file.mp3";
+                    a.click();
+                  }
+                  downloadAudio(audio);*/
+                }}
+                className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer outline-none focus:outline-none"
+              >
                 Details
               </summary>
 
-              <div className="absolute flex flex-col rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-slate-100 border dark:border-slate-800 border-slate-300 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-slate-100 after:border-l-transparent">
+              <div className="absolute flex flex-col rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-200 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-200 after:border-l-transparent">
                 <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold underline">
                   Ticket Details
                 </h2>
@@ -519,7 +531,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 </p>
 
                 {/***Add Solution ============================================= */}
-                <h2 className="dark:text-slate-300 text-slate-500 text-sm font-semibold mt-2 underline">
+                <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2 underline">
                   Add Solution
                 </h2>
                 <form
@@ -538,7 +550,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       setSolution(e.target.value);
                     }}
                     value={solution}
-                    className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-800 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+                    className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-700 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
                   ></textarea>
                   <div className="w-full flex justify-between h-[2rem]">
                     <label htmlFor="recording" className="block">
@@ -551,6 +563,12 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         title="Upload Recording"
                         onChange={(e) => {
                           setFile(e.target.files[0]);
+                          console.log(
+                            convertRecording(e.target.files[0], "mp3").then(
+                              (data) => console.table(data)
+                            )
+                          );
+                          console.log(e.target.files[0]);
                         }}
                         className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
                       />
@@ -609,14 +627,14 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         </span>
                       </div>
                     </div>
-                    <p className="mt-2 pt-4 dark:text-slate-400 text-slate-700 capitalize">
+                    <p className="mt-2 pt-6 dark:text-slate-400 text-slate-700 capitalize">
                       {firstMessage.length >= 1 && firstMessage[0].solution}
                     </p>
                     {/**Play Recording ================================ */}
                     <audio
                       id="rec"
                       controls
-                      className="h-[2rem] dark:border-0 border bg-[#f1f2f5] w-full max-w-[18rem] border- border-slate-500 mt-2 rounded-md"
+                      className="h-[2rem] w-full max-w-[18rem] mt-2 "
                       src={audio}
                       type="audio/wav"
                       preload="metadata"
@@ -624,7 +642,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       <source src={audio} type="audio/ogg" />
                       <source src={audio} type="audio/mpeg" />
                       <source src={audio} type="audio/wav" />
-                      <source src={audio} type="audio/x-wav" />
+                      <source src={audio} type="audio/mp3" />
                       Your browser does not support the
                       <code>audio</code> element.
                     </audio>

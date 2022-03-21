@@ -507,7 +507,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 ref={closeSuggestionsRef}
                 className={`${
                   searchResults ? "" : "hidden"
-                } absolute top-8 h-[11rem] w-full shadow-2xl dark:bg-slate-700 bg-slate-200 border rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                } absolute top-8 h-[11rem] w-full shadow-2xl dark:bg-slate-700 bg-slate-200 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
               >
                 {contactsList}
               </ul>{" "}
@@ -848,7 +848,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               <abbr title="Templates">
                 <BiFile />
               </abbr>
-              <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded-xl shadow-md dark:bg-slate-500 bg-slate-300 dark:border-slate-700 border-slate-300 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-500 after:border-slate-300">
+              <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded-xl shadow-md dark:bg-slate-700 bg-slate-200 dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-700 after:border-slate-200">
                 <ul className="h-full w-full flex flex-col justify-center space-y-2 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-sm px-1">
                   {categories &&
                     categories.map((category, index) => {

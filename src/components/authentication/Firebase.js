@@ -37,7 +37,7 @@ export async function upload(file, currentUser) {
 }
 
 export async function addRecording(file, ticket_id) {
-  const fileRef = ref(storage, ticket_id + ".wav");
+  const fileRef = ref(storage, ticket_id + ".mp3");
   await uploadBytes(fileRef, file);
   return true;
 }

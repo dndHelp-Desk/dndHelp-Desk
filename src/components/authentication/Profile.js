@@ -76,7 +76,7 @@ const Profile = () => {
         className="flex flex-col relative"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <button
+        <button aria-label="Upload Profile"
           className={`text-xs ${
             showChange ? "" : "hidden"
           } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}

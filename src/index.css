@@ -38,7 +38,7 @@
   .sidenav .active {
     @apply text-blue-500;
   }
-  
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -47,15 +47,19 @@
     @apply text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800;
   }
 
-  .delayDisplay {
+  #Profile_Details:hover .hoverProfile_Details {
+    display: flex;
+  }
+  /* Audio/ Recording player styling =====================================*/
+  audio::-webkit-media-controls-panel {
+    @apply dark:bg-slate-400 bg-slate-300;
+  }
+    
+    .delayDisplay {
     opacity: 0;
     transtion: opacity 0.3s;
     animation: animated linear 0.3s forwards;
     animation-delay: 1s;
-  }
-
-  #Profile_Details:hover .hoverProfile_Details {
-    display: flex;
   }
 
   @keyframes animated {
