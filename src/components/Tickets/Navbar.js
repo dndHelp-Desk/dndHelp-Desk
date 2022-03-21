@@ -158,7 +158,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
           setFilters={setFilters}
         />
         <button
-          onClick={() => setfiltersModal(filtersModal ? false : true)}
+          onClick={() => setfiltersModal(true)}
           className="h-9 w-11 rounded-md flex space-x-2 justify-center items-center dark:bg-slate-800 bg-slate-200 focus:outline-none outline-none custom-shadow hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold"
         >
           <abbr title="filters" className="">

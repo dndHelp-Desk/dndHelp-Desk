@@ -118,7 +118,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-slate-300 relative rounded-l-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-[#94a3b885] relative rounded-l-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -236,21 +236,21 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               {/**Change Ticket Priority ========================================== */}
               <select
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="h-8 w-28 rounded-md text-xs p-2 dark:bg-[#192235] bg-slate-200 dark:text-slate-500 text-slate-700 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 capitalize"
+                className="h-8 w-28 rounded-md p-2 dark:bg-[#192235] bg-slate-200 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700"
               >
-                <option className="capitalize p-2" value="low">
+                <option className="p-2" value="low">
                   {ticket.priority}
                 </option>
-                <option className="capitalize p-2" value="low">
+                <option className="p-2" value="low">
                   Low
                 </option>
-                <option className="capitalize" value="medium">
+                <option className="p-2" value="medium">
                   Medium
                 </option>
-                <option className="capitalize" value="high">
+                <option className="p-2" value="high">
                   High
                 </option>
-                <option className="capitalize" value="urgent">
+                <option className="p-2" value="urgent">
                   Urgent
                 </option>
               </select>
@@ -273,21 +273,21 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                     ? reOpenTicket(ticket.id, e.target.value, true)
                     : changeStatus(ticket.id, e.target.value)
                 }
-                className="h-8 w-28 rounded-md text-xs p-2 dark:bg-[#192235] bg-slate-200 dark:text-slate-500 text-slate-700 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 capitalize"
+                className="h-8 w-28 rounded-md p-2 dark:bg-[#192235] bg-slate-200 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700"
               >
-                <option className="capitalize p-2" value="resolved">
+                <option className="p-2" value="resolved">
                   {ticket.status}
                 </option>
-                <option className="capitalize" value="open">
+                <option className="p-2" value="open">
                   open
                 </option>
-                <option className="capitalize" value="on hold">
+                <option className="p-2" value="on hold">
                   on hold
                 </option>
-                <option className="capitalize p-2" value="solved">
+                <option className="p-2" value="solved">
                   solved
                 </option>
-                <option className="capitalize p-2" value="reopened">
+                <option className="p-2" value="reopened">
                   reopened
                 </option>
               </select>

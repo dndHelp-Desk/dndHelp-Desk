@@ -600,7 +600,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
               <div className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all">
                 {/**Message ====================== */}
                 <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-2 relative">
-                  <div className="absolute left-[-1rem] top-0 h-[2rem] px-2 rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center capitalize font-semibold text-xs">
+                  <div className="absolute left-[-1rem] top-0 h-[2rem] px-2 rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center font-medium tracking-widest uppercase text-[0.6rem]">
                     Solution
                   </div>
                   {/**Contents ======================= */}
