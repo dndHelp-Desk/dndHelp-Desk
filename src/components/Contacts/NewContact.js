@@ -88,11 +88,11 @@ const NewContact = ({ contactModal, setModal }) => {
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
               autoComplete="nope"
-              placeholder="Valid Email ..."
+              placeholder="One email or multiple seperated by commas ..."
               onChange={(e) =>
                 setValue({ ...newContactValue, email: e.target.value })
               }

@@ -183,12 +183,13 @@ export const changePriority = (id, selected) => {
   });
 };
 // Resolve Ticket Ticket  ================
-export const resolveTicket = (id, solution) => {
+export const resolveTicket = (id, solution, hasRecording) => {
   let docRef = doc(db, "tickects", id);
   updateDoc(docRef, {
     status: "solved",
     solution: solution,
     closed_time: new Date().toLocaleString(),
+    hasRecording: hasRecording,
   });
 };
 
@@ -279,7 +280,7 @@ export const addTicket = (
   c_name,
   c_email,
   c_number,
-  team
+  team,hasRecording
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -303,6 +304,7 @@ export const addTicket = (
     complainant_number: c_number,
     closed_time: state === "solved" ? new Date().toLocaleString() : "",
     fcr: state === "solved" ? "yes" : "no",
+    hasRecording: hasRecording,
     solution: state === "solved" ? message : "",
     reopened: false,
     assigned: false,

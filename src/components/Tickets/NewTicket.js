@@ -219,7 +219,8 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         inputValue.complainant_name,
         inputValue.complainant_email,
         inputValue.complainant_number,
-        inputValue.send_as
+        inputValue.send_as,
+        `${recordingFile && inputValue.state === "solved"?true:false}`
       );
 
       //Send Email Using Nodemailer ===================

@@ -16,7 +16,6 @@ import {
 import { updateAlert } from "../../store/NotificationsSlice";
 import { addRecording } from "./../authentication/Firebase";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
-import { convertRecording } from "./Convert";
 
 const MessageThread = ({ isChatOpen, audio }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -40,9 +39,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
       });
   }, [allTickets, threadId]);
 
-  //Solution =========================
-  const [solution, setSolution] = useState("");
-
   //Thread First Message =====================
   const firstMessage = useMemo(() => {
     return (
@@ -52,6 +48,11 @@ const MessageThread = ({ isChatOpen, audio }) => {
       filteredTickets.filter((ticket) => ticket.ticket_id === threadId)
     );
   }, [filteredTickets, threadId]);
+
+  //Solution =========================
+  const [solution, setSolution] = useState(
+    firstMessage.length >= 1 && firstMessage[0].solution
+  );
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({
@@ -350,10 +351,16 @@ const MessageThread = ({ isChatOpen, audio }) => {
   //Send Solution send Solution ====================
   const sendSolution = (e) => {
     e.preventDefault();
-    resolveTicket(firstMessage.length >= 1 && firstMessage[0].id, solution);
-
     // Upload Recordings
-    recordingFile && addRecording(recordingFile, `/dial_n_dine/${threadId}`);
+    recordingFile !== false &&
+      addRecording(recordingFile, `/dial_n_dine/${threadId}`);
+
+    //Add ticket on firebase storage =============================
+    resolveTicket(
+      firstMessage.length >= 1 && firstMessage[0].id,
+      solution,
+      `${recordingFile && recordingFile !== false ? true : false}`
+    );
 
     //Sending Account =============================
     let sendingAccount =
@@ -476,18 +483,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <details className="relative flex items-center space-x-2 outline-none focus:outline-none">
-              <summary
-                onClick={() => {
-                  /*function downloadAudio(convertedAudioDataObj) {
-                    let a = document.createElement("a");
-                    a.href = convertedAudioDataObj;
-                    a.download = "file.mp3";
-                    a.click();
-                  }
-                  downloadAudio(audio);*/
-                }}
-                className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer outline-none focus:outline-none"
-              >
+              <summary className="text-sm leading-6 dark:text-slate-300 text-slate-900 font-semibold font-sans select-none cursor-pointer outline-none focus:outline-none">
                 Details
               </summary>
 
@@ -563,12 +559,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         title="Upload Recording"
                         onChange={(e) => {
                           setFile(e.target.files[0]);
-                          console.log(
-                            convertRecording(e.target.files[0], "mp3").then(
-                              (data) => console.table(data)
-                            )
-                          );
-                          console.log(e.target.files[0]);
                         }}
                         className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
                       />

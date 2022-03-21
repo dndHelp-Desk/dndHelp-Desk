@@ -199,7 +199,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                       markAsSeen(message.id, "read");
                     });
                 /**Get The Recording ================== */
-                if (ticket.status === "solved") {
+                if (
+                  ticket.status === "solved" &&
+                  ticket.hasRecording === true
+                ) {
                   const storage = getStorage();
                   const recordingRef = ref(
                     storage,
@@ -356,7 +359,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                 >
                   <BiListMinus />
                 </button>
-                <div className="col-span-2 border dark:border-slate-800 border-slate-300 dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-300 text-slate-800 font-bold text-sm tracking-wider flex items-center justify-center">
+                <div
+                  className="col-span-2 border dark:border-slate-800 border-slate-300 dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-300 text-slate-800 font-bold text-sm tracking-wider flex items-center justify-center"
+                >
                   {loadMore - 50 === 0 ? 1 : loadMore - 50} - {loadMore}
                 </div>
                 <button
