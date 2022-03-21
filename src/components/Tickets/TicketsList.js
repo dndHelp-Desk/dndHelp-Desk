@@ -118,7 +118,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         <div
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-slate-300 relative rounded-tl-md rounded-bl-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-slate-300 relative rounded-l-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
