@@ -78,6 +78,7 @@ const NewContact = ({ contactModal, setModal }) => {
               id="name"
               autoComplete="nope"
               placeholder="Fullname ..."
+              required
               onChange={(e) =>
                 setValue({ ...newContactValue, name: e.target.value })
               }
@@ -88,9 +89,11 @@ const NewContact = ({ contactModal, setModal }) => {
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
+              multiple
+              required
               autoComplete="nope"
               placeholder="One email or multiple seperated by commas ..."
               onChange={(e) =>
@@ -107,6 +110,7 @@ const NewContact = ({ contactModal, setModal }) => {
               name="number"
               id="number"
               autoComplete="off"
+              required
               onChange={(e) =>
                 setValue({ ...newContactValue, phoneNumber: e.target.value })
               }
@@ -123,6 +127,7 @@ const NewContact = ({ contactModal, setModal }) => {
               id="company"
               autoComplete="nope"
               placeholder="Company Name ..."
+              required
               onChange={(e) =>
                 setValue({ ...newContactValue, company: e.target.value })
               }

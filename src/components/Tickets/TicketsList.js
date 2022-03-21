@@ -7,7 +7,7 @@ import {
   reOpenTicket,
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
-import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
+import { BsFillBookmarkCheckFill, BsFillBookmarkXFill, BsFillBookmarkFill } from "react-icons/bs";
 import { BiListPlus, BiListMinus, BiArrowBack } from "react-icons/bi";
 import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
@@ -126,7 +126,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         >
           {/**Indicate The ticket is resolved ================*/}
           {ticket.status && ticket.status.toLowerCase() === "solved" && (
-            <BsBookmarkCheck className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-blue-500" />
+            <BsFillBookmarkCheckFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-blue-500" />
           )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
@@ -134,19 +134,19 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             ticket.status &&
             ticket.status.toLowerCase() !== "solved" &&
             ticket.status.toLowerCase() !== "on hold" && (
-              <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
+              <BsFillBookmarkFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
             )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
           {ticket.status.toLowerCase() === "on hold" && (
-            <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
+            <BsFillBookmarkFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
           )}
 
           {/**Indicate The ticket that is  overdue ================*/}
           {new Date(ticket.due_date).getTime() <= new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() === "open" && (
-              <BsBookmarkX className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
+              <BsFillBookmarkXFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
             )}
 
           {/**Indicate if it's new messsage ================*/}

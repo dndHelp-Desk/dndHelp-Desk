@@ -5,7 +5,7 @@ import {
   BsThreeDotsVertical,
   BsChatRight,
 } from "react-icons/bs";
-import { BiPaperPlane } from "react-icons/bi";
+import { BiPaperPlane, BiMailSend } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import {
@@ -16,6 +16,7 @@ import {
 import { updateAlert } from "../../store/NotificationsSlice";
 import { addRecording } from "./../authentication/Firebase";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+
 
 const MessageThread = ({ isChatOpen, audio }) => {
   const threadId = useSelector((state) => state.Tickets.threadId);
@@ -50,9 +51,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   }, [filteredTickets, threadId]);
 
   //Solution =========================
-  const [solution, setSolution] = useState(
-    firstMessage.length >= 1 && firstMessage[0].solution
-  );
+  const [solution, setSolution] = useState("");
 
   //Reply State and value ==================================
   const [reply, setReply] = useState({
@@ -86,7 +85,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   let date = firstMessage.length >= 1 && firstMessage[0].due_date;
 
   //Scroll to last message Function
-  const LastMessage = () => {
+  const lastMessage = () => {
     scrollToLastMessage.current &&
       scrollToLastMessage.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -352,14 +351,13 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const sendSolution = (e) => {
     e.preventDefault();
     // Upload Recordings
-    recordingFile !== false &&
-      addRecording(recordingFile, `/dial_n_dine/${threadId}`);
+    recordingFile && addRecording(recordingFile, `/dial_n_dine/${threadId}`);
 
     //Add ticket on firebase storage =============================
     resolveTicket(
       firstMessage.length >= 1 && firstMessage[0].id,
       solution,
-      `${recordingFile && recordingFile !== false ? true : false}`
+      recordingFile && recordingFile !== false ? true : false
     );
 
     //Sending Account =============================
@@ -474,8 +472,8 @@ const MessageThread = ({ isChatOpen, audio }) => {
   //Component ======================================
   return (
     <div
-      className={`h-[40rem] ${
-        isChatOpen ? "flex" : "hidden"
+      className={`h-[40rem] ${isChatOpen ? "flex" : "hidden"} ${
+        isChatOpen && lastMessage()
       } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
       <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
@@ -487,90 +485,101 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-200 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-200 after:border-l-transparent">
-                <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold underline">
-                  Ticket Details
-                </h2>
-                <ul className="dark:text-slate-400 text-slate-700 mt-2 space-y-2 capitalize">
-                  <li className="text-xs">
-                    <b>Open Date ⇒ </b>
-                    {firstMessage.length >= 1 &&
-                      new Date(firstMessage[0].date).toLocaleString()}{" "}
-                  </li>
-                  <li className="text-xs">
-                    <b>FCR ⇒ </b>
-                    {firstMessage.length >= 1 && firstMessage[0].fcr}{" "}
-                  </li>
-                  <li className="text-xs">
-                    <b>Complainant Name ⇒ </b>
-                    {firstMessage.length >= 1 &&
-                      firstMessage[0].complainant_name}{" "}
-                  </li>
-                  <li className="text-xs">
-                    <b>Complainant Number ⇒ </b>
-                    {firstMessage.length >= 1 &&
-                      firstMessage[0].complainant_number}{" "}
-                  </li>
-                  <li className="text-xs">
-                    <b>Complainant Email ⇒ </b>
-                    <span className="lowercase">
+              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-100 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-100 after:border-l-transparent border border-slate-200 dark:border-slate-700">
+                <div>
+                  <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold">
+                    Ticket Details
+                  </h2>
+                  <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-4 capitalize">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                      <b>Open Date : </b>
                       {firstMessage.length >= 1 &&
-                        firstMessage[0].complainant_email}{" "}
-                    </span>
-                  </li>
-                </ul>
-                <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2 underline">
-                  Case Details
-                </h2>
-                <p className="dark:text-slate-400 text-slate-700 text-xs mt-1 p-1 h-[5rem] overflow-hidden overflow-y-scroll">
-                  {firstMessage.length >= 1 && firstMessage[0].message}{" "}
-                </p>
+                        new Date(firstMessage[0].date).toLocaleString()}{" "}
+                    </li>
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                      <b>Assigned To : </b>
+                      {firstMessage.length >= 1 && firstMessage[0].agent_name}
+                    </li>
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                      <b>Brand/Company : </b>
+                      {firstMessage.length >= 1 &&
+                        firstMessage[0].branch_company}
+                    </li>
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                      <b>First Contact Resolution : </b>
+                      {firstMessage.length >= 1 && firstMessage[0].fcr}{" "}
+                    </li>
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                      <b>Complainant Name : </b>
+                      {firstMessage.length >= 1 &&
+                        firstMessage[0].complainant_name}{" "}
+                    </li>
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                      <b>Complainant Number : </b>
+                      {firstMessage.length >= 1 &&
+                        firstMessage[0].complainant_number}{" "}
+                    </li>
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                      <b>Complainant Email : </b>
+                      <span className="lowercase">
+                        {firstMessage.length >= 1 &&
+                          firstMessage[0].complainant_email}{" "}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
 
                 {/***Add Solution ============================================= */}
-                <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2 underline">
-                  Add Solution
-                </h2>
-                <form
-                  className="dark:bg-slate-800 bg-slate-200 w-full h-fit overflow-hidden rounded-md mt-2 p-1 relative"
-                  onSubmit={(e) => sendSolution(e)}
-                >
-                  <textarea
-                    name="reply"
-                    id="reply"
-                    cols="30"
-                    rows="10"
-                    placeholder="Add solution ..."
-                    autoComplete="off"
-                    required
-                    onChange={(e) => {
-                      setSolution(e.target.value);
-                    }}
-                    value={solution}
-                    className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-700 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
-                  ></textarea>
-                  <div className="w-full flex justify-between h-[2rem]">
-                    <label htmlFor="recording" className="block">
-                      <span className="sr-only">Choose recording</span>
-                      <input
-                        type="file"
-                        id="recording"
-                        accept=".wav"
-                        name="recording"
-                        title="Upload Recording"
-                        onChange={(e) => {
-                          setFile(e.target.files[0]);
-                        }}
-                        className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
-                      />
-                    </label>
-                    <button
-                      type="submit"
-                      className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold text-slate-300 bg-blue-700 z-[99]"
-                    >
-                      <BiPaperPlane />
-                    </button>
-                  </div>
-                </form>
+                <div>
+                  <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2">
+                    Add Solution
+                  </h2>
+                  <form
+                    className="dark:bg-slate-800 bg-slate-100 w-full h-fit overflow-hidden rounded-md mt-2 p-1 relative"
+                    onSubmit={(e) => sendSolution(e)}
+                  >
+                    <textarea
+                      name="reply"
+                      id="reply"
+                      cols="30"
+                      rows="10"
+                      placeholder="Add solution ..."
+                      autoComplete="off"
+                      required
+                      onChange={(e) => {
+                        setSolution(e.target.value);
+                      }}
+                      value={
+                        solution === ""
+                          ? firstMessage.length >= 1 && firstMessage[0].solution
+                          : solution
+                      }
+                      className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-700 border-slate-300 placeholder:text-slate-500 placeholder:text-sm"
+                    ></textarea>
+                    <div className="w-full flex justify-between h-[2rem]">
+                      <label htmlFor="recording" className="block">
+                        <span className="sr-only">Choose recording</span>
+                        <input
+                          type="file"
+                          id="recording"
+                          accept=".wav"
+                          name="recording"
+                          title="Upload Recording"
+                          onChange={(e) => {
+                            setFile(e.target.files[0]);
+                          }}
+                          className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
+                        />
+                      </label>
+                      <button
+                        type="submit"
+                        className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold text-slate-300 bg-blue-700 z-[99]"
+                      >
+                        <BiMailSend />
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </details>
 
@@ -582,7 +591,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
               </span>{" "}
               {/**Scroll to Last Message ================== */}
               <button
-                onClick={() => LastMessage()}
+                onClick={() => lastMessage()}
                 className="outline-none focus:outline-none text-lg dark:text-slate-400 text-slate-700 capitalize flex items-center justify-end space-x-1"
               >
                 <HiOutlineArrowSmDown />
@@ -676,7 +685,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
                   sendReply(e);
-                  LastMessage();
+                  lastMessage();
                 }
               }}
               required
@@ -701,7 +710,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
               className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border-0 dark:placeholder:text-slate-500 placeholder:text-slate-700 placeholder:text-sm"
             ></textarea>
             <button
-              onClick={() => LastMessage()}
+              onClick={() => lastMessage()}
               type="submit"
               className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
             >

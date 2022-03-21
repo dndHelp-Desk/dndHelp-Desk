@@ -213,7 +213,7 @@ const OverviewReport = ({ data }) => {
               Total Tickets
             </h4>
           </div>
-          <div className="dark:text-slate-300 text-slate-500">
+          <div className="dark:text-slate-300 text-slate-700">
             <h4 className="text-base font-semibold text-center uppercase">
               {totalCalls}
             </h4>
