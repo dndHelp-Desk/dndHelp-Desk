@@ -1,13 +1,15 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
   BsFillTelephoneFill,
   BsFillPersonFill,
   BsFillEnvelopeFill,
 } from "react-icons/bs";
-import {editContact} from "././../Data_Fetching/TicketsnUserData"
+import { editContact } from "././../Data_Fetching/TicketsnUserData";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import { useSelector } from "react-redux";
 
 const EditContact = ({ edit, setEdit, selectedArray }) => {
+  const allContacts = useSelector((state) => state.Tickets.contacts);
   const closeCanvasRef = useOnClickOutside(() => {
     setEdit(false);
   });
@@ -21,12 +23,12 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
   let ticketId = selectedArray[0];
   const saveContact = (e) => {
     e.preventDefault();
-	editContact(ticketId, newContactValue.name, newContactValue.phoneNumber);
-	setValue({
-    name: "",
-    email: "",
-    phoneNumber: "",
-  });
+    editContact(ticketId, newContactValue.name, newContactValue.phoneNumber);
+    setValue({
+      name: "",
+      email: "",
+      phoneNumber: "",
+    });
   };
 
   //Component =========================
@@ -60,7 +62,15 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               onChange={(e) =>
                 setValue({ ...newContactValue, name: e.target.value })
               }
-              value={newContactValue.name}
+              value={
+                allContacts.length >= 1 &&
+                selectedArray[0] &&
+                newContactValue.name === ""
+                  ? allContacts.filter(
+                      (contact) => contact.id === selectedArray[0]
+                    )[0].name
+                  : newContactValue.name
+              }
               className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
@@ -72,11 +82,19 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               id="email"
               autoComplete="nope"
               placeholder="Valid Email ..."
-			  disabled
+              disabled
               onChange={(e) =>
                 setValue({ ...newContactValue, email: e.target.value })
               }
-              value={newContactValue.email}
+              value={
+                allContacts.length >= 1 &&
+                selectedArray[0] &&
+                newContactValue.name === ""
+                  ? allContacts.filter(
+                      (contact) => contact.id === selectedArray[0]
+                    )[0].email
+                  : newContactValue.name
+              }
               className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
@@ -90,7 +108,15 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               onChange={(e) =>
                 setValue({ ...newContactValue, phoneNumber: e.target.value })
               }
-              value={newContactValue.phoneNumber}
+              value={
+                allContacts.length >= 1 &&
+                selectedArray[0] &&
+                newContactValue.name === ""
+                  ? allContacts.filter(
+                      (contact) => contact.id === selectedArray[0]
+                    )[0].phone
+                  : newContactValue.name
+              }
               placeholder="Phone Number ..."
               className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
