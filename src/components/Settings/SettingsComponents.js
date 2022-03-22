@@ -29,12 +29,12 @@ const SettingsComponents = () => {
               </NavLink>
             </li>
             <li
-              className={`${member_details[0].access === "agent" && "hidden"}`}
+              className={`${member_details[0].access !== "admin" && "hidden"}`}
             >
               <NavLink
                 to="/app/settings/team"
                 className={`settingsNav ${
-                  member_details[0].access === "agent" && "hidden"
+                  member_details[0].access !== "admin" && "hidden"
                 }`}
               >
                 <BsPeopleFill />
@@ -42,12 +42,12 @@ const SettingsComponents = () => {
               </NavLink>
             </li>
             <li
-              className={`${member_details[0].access === "agent" && "hidden"}`}
+              className={`${member_details[0].access !== "admin" && "hidden"}`}
             >
               <NavLink
                 to="/app/settings/support-operations"
                 className={`settingsNav ${
-                  member_details[0].access === "agent" && "hidden"
+                  member_details[0].access !== "admin" && "hidden"
                 }`}
               >
                 <BsChatSquareDotsFill />
@@ -55,12 +55,12 @@ const SettingsComponents = () => {
               </NavLink>
             </li>
             <li
-              className={`${member_details[0].access === "agent" && "hidden"}`}
+              className={`${member_details[0].access !== "admin" && "hidden"}`}
             >
               <NavLink
                 to="/app/settings/automated-reports"
                 className={`settingsNav ${
-                  member_details[0].access === "agent" && "hidden"
+                  member_details[0].access !== "admin" && "hidden"
                 }`}
               >
                 <BsFileTextFill />

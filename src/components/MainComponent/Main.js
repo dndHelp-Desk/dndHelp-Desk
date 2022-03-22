@@ -92,7 +92,7 @@ const Main = () => {
                 />
               </div>
               <article className="text-lg font-bold dark:text-slate-300 text-slate-900 capitalize text-center px-8 leading-5">
-                <h2>Welcome back, {user[0].name.split(" ")[0]}.</h2>
+                <h2>Welcome back, {user[0].name.split(" ")[0]}</h2>
                 <q className="text-xs dark:text-slate-400 text-slate-700">
                   Remeber Our greatest asset is the customer! Treat each
                   customer as if they are the only one!

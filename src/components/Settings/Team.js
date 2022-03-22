@@ -32,6 +32,7 @@ const Team = () => {
     bio: "",
     active: true,
     password: "",
+    companies: "",
   });
 
   const handleSubmit = (e) => {
@@ -78,15 +79,18 @@ const Team = () => {
       inputValues.email,
       inputValues.access,
       inputValues.bio,
-      inputValues.active
+      inputValues.active,
+      inputValues.companies
     );
     setValues({
-      ...inputValues,
       name: "",
       dept: "",
-      bio: "",
       email: "",
+      access: "",
+      bio: "",
+      active: true,
       password: "",
+      companies: "",
     });
   };
 
@@ -109,7 +113,7 @@ const Team = () => {
           updateAlert([
             ...alerts,
             {
-              message: "Delete User Successfully",
+              message: "Deleted User Successfully",
               color: "bg-green-200",
             },
           ])
@@ -141,6 +145,10 @@ const Team = () => {
             user.name
               .toLowerCase()
               .replace(/\s/g, "")
+              .includes(search.toLowerCase().replace(/\s/g, "")) === true ||
+            user.email
+              .toLowerCase()
+              .replace(/\s/g, "")
               .includes(search.toLowerCase().replace(/\s/g, "")) === true
               ? ""
               : "hidden"
@@ -162,7 +170,7 @@ const Team = () => {
               <abbr title={user.name}>{user.name}</abbr>
               <br />
               <small className="capitalize col-span-1 dark:text-slate-500 text-slate-500 w-40">
-                {user.dept}
+                {user.dept} / {user.access}
               </small>
             </h3>
           </div>
@@ -340,6 +348,26 @@ const Team = () => {
               </option>
             </select>
             <BsPersonLinesFill className="absolute text-slate-500 text-lg top-3 left-4" />
+          </div>
+          <div
+            className={` ${
+              inputValues.access === "client" ? "" : "hidden"
+            } h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative`}
+          >
+            <input
+              type="text"
+              name="department"
+              id="department"
+              autoComplete="nope"
+              placeholder="Companies / Restuarants ..."
+              required
+              onChange={(e) =>
+                setValues({ ...inputValues, companies: e.target.value })
+              }
+              value={inputValues.companies}
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+            />
+            <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
             <input

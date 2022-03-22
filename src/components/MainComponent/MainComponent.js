@@ -85,15 +85,20 @@ const MainComponent = () => {
         )
       );
     } else if (allTickets.length >= 1 && user[0].access === "client") {
-      dispatch(
-        updateFilteredTickets(
-          allTickets.filter(
-            (ticket) =>
-              ticket.message_position === 1 &&
-              ticket.recipient_email === user[0].email
-          )
-        )
-      );
+      let ticketsContainer = [];
+      user[0].companies &&
+        user[0].companies.split(",").forEach((company) => {
+          ticketsContainer = [
+            ...ticketsContainer,
+            ...allTickets.filter(
+              (ticket) =>
+                ticket.message_position === 1 &&
+                ticket.branch_company.toLowerCase().replace(/\s/g, "") ===
+                  company.toLowerCase().replace(/\s/g, "")
+            ),
+          ];
+          dispatch(updateFilteredTickets(ticketsContainer));
+        });
     }
   }, [allTickets, dispatch, user]);
 

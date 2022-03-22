@@ -90,7 +90,7 @@ export const deleteUser = (id) => {
 };
 
 // New User =================================
-export const createUser = (name, dept, email, access, bio, active) => {
+export const createUser = (name, dept, email, access, bio, active, companies) => {
   addDoc(membersRef, {
     name: name,
     dept: dept,
@@ -100,6 +100,7 @@ export const createUser = (name, dept, email, access, bio, active) => {
     active: active,
     status: "unavailable",
     photoUrl: "",
+    companies: companies,
   });
 };
 
@@ -322,7 +323,7 @@ const TicketsnUserData = () => {
 
   //Data Loading =====================================
   useEffect(() => {
-    return (
+    return currentUser.email && (
       //Members Data Fetching
       onSnapshot(membersRef, (snapshot) => {
         dispatch(
@@ -339,8 +340,8 @@ const TicketsnUserData = () => {
               .map((doc) => ({ ...doc.data(), id: doc.id }))
               .filter(
                 (member) =>
-                  member.email.toLowerCase().trim() ===
-                  currentUser.email.toLowerCase().trim()
+                 currentUser.email &&  member.email.toLowerCase().trim() ===
+                 currentUser.email.toLowerCase().trim()
               )
           )
         );

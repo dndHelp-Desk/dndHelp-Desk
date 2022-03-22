@@ -39,6 +39,11 @@ const Table = ({ setModal }) => {
             contact.branch_company
               .toLowerCase()
               .replace(/\s/g, "")
+              .includes(searchResults.toLowerCase().replace(/\s/g, "")) ===
+              true ||
+            contact.name
+              .toLowerCase()
+              .replace(/\s/g, "")
               .includes(searchResults.toLowerCase().replace(/\s/g, "")) === true
               ? ""
               : "hidden"
