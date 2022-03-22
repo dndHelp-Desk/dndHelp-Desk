@@ -126,12 +126,15 @@ const LogIn = () => {
       {/**Top Nav ================= */}
       <nav className="absolute bg-[#11182780] w-[75%] h-[4rem] backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center">
         {/**Logo ==================== */}
-        <div aria-label="logo" className="h-full flex items-center justify-center overflow-hidden pt-1">
-            <img
-              src={lightLogo}
-              alt="logo"
-              className="object-cover object-center w-[12rem]"
-            />
+        <div
+          aria-label="logo"
+          className="h-full flex items-center justify-center overflow-hidden pt-1"
+        >
+          <img
+            src={lightLogo}
+            alt="logo"
+            className="object-cover object-center w-[12rem]"
+          />
         </div>
 
         {/**Small Screen Menu ================ */}
@@ -237,7 +240,11 @@ const LogIn = () => {
               onSubmit={handleSubmit}
             >
               <div className="flex flex-col space-y-2">
-                <label className="font-semibold" htmlFor="email">
+                <label
+                  aria-label="email"
+                  className="font-semibold"
+                  htmlFor="email"
+                >
                   Email
                 </label>
                 <input
@@ -254,7 +261,11 @@ const LogIn = () => {
               </div>
               {/** Password ========================= */}
               <div className="flex flex-col space-y-2 mt-6">
-                <label className="font-semibold" htmlFor="password">
+                <label
+                  aria-label="password"
+                  className="font-semibold"
+                  htmlFor="password"
+                >
                   Password
                 </label>
                 <input

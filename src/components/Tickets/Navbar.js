@@ -55,29 +55,34 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
             deleteTicket(ticket.id);
             let recRef = ref(storage, `/dial_n_dine/${ticket.ticket_id}.wav`);
             // Delete the file
-            deleteObject(recRef)
-              .then(() => {
-                dispatch(
-                  updateAlert([
-                    ...alerts,
-                    {
-                      message: "Recording Deleted Successfully",
-                      color: "bg-green-200",
-                    },
-                  ])
-                );
-              })
-              .catch((error) => {
-                dispatch(
-                  updateAlert([
-                    ...alerts,
-                    {
-                      message: error.message,
-                      color: "bg-red-200",
-                    },
-                  ])
-                );
-              });
+            if (
+              ticket.hasRecording === true ||
+              ticket.hasRecording === "true"
+            ) {
+              deleteObject(recRef)
+                .then(() => {
+                  dispatch(
+                    updateAlert([
+                      ...alerts,
+                      {
+                        message: "Recording Deleted Successfully",
+                        color: "bg-green-200",
+                      },
+                    ])
+                  );
+                })
+                .catch((error) => {
+                  dispatch(
+                    updateAlert([
+                      ...alerts,
+                      {
+                        message: error.message,
+                        color: "bg-red-200",
+                      },
+                    ])
+                  );
+                });
+            }
           });
     }
     setDelete([]);
