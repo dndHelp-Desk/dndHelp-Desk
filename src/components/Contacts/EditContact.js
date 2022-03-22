@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   BsFillTelephoneFill,
   BsFillPersonFill,
@@ -14,10 +14,26 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
     setEdit(false);
   });
   const [newContactValue, setValue] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
+    name:"",
+    email:"",
+    phoneNumber:"",
   });
+
+  useEffect(() => {
+    allContacts.length >= 1 &&
+      selectedArray.length >= 1 &&
+      setValue({
+        name: allContacts.filter(
+          (contact) => contact.id === selectedArray[0]
+        )[0].name,
+        email: allContacts.filter(
+          (contact) => contact.id === selectedArray[0]
+        )[0].email,
+        phoneNumber: allContacts.filter(
+          (contact) => contact.id === selectedArray[0]
+        )[0].phone,
+      });
+  },[allContacts,selectedArray]);
 
   //Submit ===============
   let ticketId = selectedArray[0];
@@ -62,15 +78,7 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               onChange={(e) =>
                 setValue({ ...newContactValue, name: e.target.value })
               }
-              value={
-                allContacts.length >= 1 &&
-                selectedArray[0] &&
-                newContactValue.name === ""
-                  ? allContacts.filter(
-                      (contact) => contact.id === selectedArray[0]
-                    )[0].name
-                  : newContactValue.name
-              }
+              value={newContactValue.name}
               className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
@@ -86,15 +94,7 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               onChange={(e) =>
                 setValue({ ...newContactValue, email: e.target.value })
               }
-              value={
-                allContacts.length >= 1 &&
-                selectedArray[0] &&
-                newContactValue.name === ""
-                  ? allContacts.filter(
-                      (contact) => contact.id === selectedArray[0]
-                    )[0].email
-                  : newContactValue.name
-              }
+              value={newContactValue.email}
               className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
@@ -108,15 +108,7 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               onChange={(e) =>
                 setValue({ ...newContactValue, phoneNumber: e.target.value })
               }
-              value={
-                allContacts.length >= 1 &&
-                selectedArray[0] &&
-                newContactValue.name === ""
-                  ? allContacts.filter(
-                      (contact) => contact.id === selectedArray[0]
-                    )[0].phone
-                  : newContactValue.name
-              }
+              value={newContactValue.phoneNumber}
               placeholder="Phone Number ..."
               className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
             />

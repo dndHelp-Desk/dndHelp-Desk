@@ -6,12 +6,12 @@ import {
   HiOutlineSearch,
   HiPlus,
 } from "react-icons/hi";
-import { deleteContact} from "../Data_Fetching/TicketsnUserData";
+import { deleteContact } from "../Data_Fetching/TicketsnUserData";
 import EditContact from "./EditContact";
 
 const Table = ({ setModal }) => {
   const contacts = useSelector((state) => state.Tickets.contacts);
-  const [edit,setEdit] = useState(false)
+  const [edit, setEdit] = useState(false);
   const [searchResults, setResults] = useState("");
   const [selectedArray, select] = useState([]);
 
@@ -31,7 +31,7 @@ const Table = ({ setModal }) => {
   //Loop Through Each Contact =========================
   const contactList =
     contacts.length >= 1 &&
-    contacts.map((contact,index) => {
+    contacts.map((contact, index) => {
       return (
         <tr
           key={contact.id}
@@ -61,7 +61,8 @@ const Table = ({ setModal }) => {
             />
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
-           {index+1}{".  "} {contact.name}
+            {index + 1}
+            {".  "} {contact.name}
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
             {contact.email}
@@ -80,21 +81,29 @@ const Table = ({ setModal }) => {
   return (
     <div className="mx-auto container bg-slate-100 dark:bg-slate-900 shadow rounded-xl p-2 h-[40rem] overflow-hidden relative">
       {/**Edit Contact ============ */}
-      <EditContact edit={edit} setEdit={setEdit} selectedArray={selectedArray}/>
+      <EditContact
+        edit={edit}
+        setEdit={setEdit}
+        selectedArray={selectedArray}
+      />
       {/**================== Tables */}
-      
+
       <div className="flex flex-col md:flex-row p-4 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99] bg-slate-100 dark:bg-slate-900">
         <div className="flex flex-col md:flex-row items-start lg:items-center">
           <div className="flex items-center gap-2">
             <abbr title="Edit">
-              <button onClick={()=>setEdit(true)} className="contacts-control">
+              <button
+                onClick={() => setEdit(true)}
+                className="contacts-control"
+              >
                 <HiOutlinePencilAlt />
               </button>
             </abbr>
             <abbr title="Delete">
               <button
                 onClick={() => {
-                  deleteCont();
+                  let pin = prompt("Enter Admin Pin");
+                  pin === "0001" ? deleteCont() : alert("Wrong Pin");
                 }}
                 className="text-red-500 p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
               >
