@@ -261,7 +261,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               </select>
             </div>
             {/**Change Ticket Status ========================================== */}
-            <div className="w-[10rem] flex items-baseline justify-end">
+            <div className="w-[10rem] flgit ex items-baseline justify-end">
               <select
                 onChange={(e) =>
                   e.target.value === "solved"

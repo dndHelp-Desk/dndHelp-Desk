@@ -472,7 +472,9 @@ const MessageThread = ({ isChatOpen, audio }) => {
   //Component ======================================
   return (
     <div
-      className={`h-[40rem] ${isChatOpen ? "flex" : "hidden"} lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
+      className={`h-[40rem] ${
+        isChatOpen ? "flex" : "hidden"
+      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap dark:bg-slate-900 bg-slate-100`}
     >
       <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
@@ -686,6 +688,11 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   lastMessage();
                 }
               }}
+              readOnly={
+                firstMessage.length >= 1 && firstMessage[0].status === "solved"
+                  ? true
+                  : false
+              }
               required
               onChange={(e) => {
                 setReply({
@@ -708,11 +715,16 @@ const MessageThread = ({ isChatOpen, audio }) => {
               className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border-0 dark:placeholder:text-slate-500 placeholder:text-slate-700 placeholder:text-sm"
             ></textarea>
             <button
+              disabled={
+                firstMessage.length >= 1 && firstMessage[0].status === "solved"
+                  ? true
+                  : false
+              }
               onClick={() => lastMessage()}
               type="submit"
-              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99]"
+              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99] flex items-center space-x-1"
             >
-              <BiPaperPlane />
+              <BiPaperPlane /><span className="text-xs uppercase font-semibold">Update</span>
             </button>
           </form>
         </div>
