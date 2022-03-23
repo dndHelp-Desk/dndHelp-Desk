@@ -76,7 +76,7 @@ const Profile = () => {
         className="flex flex-col relative"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <button aria-label="Upload Profile"
+        <button 
           className={`text-xs ${
             showChange ? "" : "hidden"
           } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
@@ -120,7 +120,7 @@ const Profile = () => {
           ></span>
 
           {/** Change Agent Online Stutus ============*/}
-          <div className="hoverProfile_Details p-4 absolute w-[12rem] overflow-hidden dark:bg-slate-800 bg-white hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.5rem] after:content-[''] after:fixed after:top-[3.7rem] after:right-[1rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-white after:border-l-transparent">
+          <div role="tooltip" className="hoverProfile_Details p-4 absolute w-[12rem] overflow-hidden dark:bg-slate-800 bg-white hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.5rem] after:content-[''] after:fixed after:top-[3.7rem] after:right-[1rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-white after:border-l-transparent">
             <div className="pb-2">
               <small
                 className={`text-xs text-center capitalize font-semibold flex items-center space-x-1 justify-center ${

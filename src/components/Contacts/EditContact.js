@@ -39,7 +39,12 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
   let ticketId = selectedArray[0];
   const saveContact = (e) => {
     e.preventDefault();
-    editContact(ticketId, newContactValue.name, newContactValue.phoneNumber);
+    editContact(
+      ticketId,
+      newContactValue.name,
+      newContactValue.phoneNumber,
+      newContactValue.email
+    );
     setValue({
       name: "",
       email: "",
@@ -75,6 +80,7 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               id="name"
               autoComplete="nope"
               placeholder="Fullname ..."
+              required
               onChange={(e) =>
                 setValue({ ...newContactValue, name: e.target.value })
               }
@@ -89,8 +95,8 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
               name="email"
               id="email"
               autoComplete="nope"
+              required
               placeholder="Valid Email ..."
-              disabled
               onChange={(e) =>
                 setValue({ ...newContactValue, email: e.target.value })
               }

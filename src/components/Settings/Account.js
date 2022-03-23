@@ -170,13 +170,13 @@ const Account = () => {
             </h5>
           )}
           {!emailStatus && (
-            <h5 className="dark:text-slate-400 text-slate-700 text-xs font-medium whitespace-nowrap text-ellipsis flex items-center justify-center space-x-1 overflow-hidden">
+            <button className="dark:text-slate-400 text-slate-700 text-xs font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden outline-none focus:outline-none">
               <BsFillPatchExclamationFill className="inline text-red-600" />{" "}
               <span>
                 Please verify your email,{" "}
                 <span
                   onClick={() => {
-                    if (!auth.currentUser.user.emailVerified) {
+                    if (!emailStatus) {
                       sendEmailVerification(auth.currentUser)
                         .then(() => {
                           dispatch(
@@ -204,7 +204,7 @@ const Account = () => {
                   click here to get the email.
                 </span>
               </span>
-            </h5>
+            </button>
           )}
         </div>
         <button

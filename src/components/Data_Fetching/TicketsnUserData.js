@@ -90,7 +90,15 @@ export const deleteUser = (id) => {
 };
 
 // New User =================================
-export const createUser = (name, dept, email, access, bio, active, companies) => {
+export const createUser = (
+  name,
+  dept,
+  email,
+  access,
+  bio,
+  active,
+  companies
+) => {
   addDoc(membersRef, {
     name: name,
     dept: dept,
@@ -132,11 +140,12 @@ export const newContact = (name, email, phone, company) => {
 };
 
 //Edit Contact ========================
-export const editContact = (id, name, phone) => {
+export const editContact = (id, name, phone, email) => {
   let docRef = doc(db, "contacts", id);
   updateDoc(docRef, {
     name: name,
     phone: phone,
+    email: email,
   });
 };
 
@@ -281,7 +290,8 @@ export const addTicket = (
   c_name,
   c_email,
   c_number,
-  team,hasRecording
+  team,
+  hasRecording
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -323,9 +333,10 @@ const TicketsnUserData = () => {
 
   //Data Loading =====================================
   useEffect(() => {
-    return currentUser.email && (
+    return (
+      currentUser.email &&
       //Members Data Fetching
-      onSnapshot(membersRef, (snapshot) => {
+      (onSnapshot(membersRef, (snapshot) => {
         dispatch(
           addAllMembers(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -340,8 +351,9 @@ const TicketsnUserData = () => {
               .map((doc) => ({ ...doc.data(), id: doc.id }))
               .filter(
                 (member) =>
-                 currentUser.email &&  member.email.toLowerCase().trim() ===
-                 currentUser.email.toLowerCase().trim()
+                  currentUser.email &&
+                  member.email.toLowerCase().trim() ===
+                    currentUser.email.toLowerCase().trim()
               )
           )
         );
@@ -394,7 +406,7 @@ const TicketsnUserData = () => {
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
           )
         );
-      })
+      }))
     );
   }, [dispatch, currentUser.email]);
 

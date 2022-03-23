@@ -575,7 +575,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         type="submit"
                         className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold text-slate-300 bg-blue-700 z-[99]"
                       >
-                        <BiMailSend />
+                        <BiPaperPlane />
                       </button>
                     </div>
                   </form>
@@ -724,7 +724,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
               type="submit"
               className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99] flex items-center space-x-1"
             >
-              <BiPaperPlane /><span className="text-xs uppercase font-semibold">Update</span>
+              <BiMailSend/>
             </button>
           </form>
         </div>

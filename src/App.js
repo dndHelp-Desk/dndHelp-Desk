@@ -7,13 +7,21 @@ import ReportsComponent from "./components/Reports/ReportComponent";
 import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
 import SettingsComponent from "./components/Settings/SettingsComponents";
-const SupportHome = lazy(() => import("./components/ClientSupport/SupportHome"));
+const SupportHome = lazy(() =>
+  import("./components/ClientSupport/SupportHome")
+);
 const NewTicket = lazy(() => import("./components/ClientSupport/NewTicket"));
-const KnowledgeBase = lazy(() => import("./components/ClientSupport/KnowledgeBase"));
+const KnowledgeBase = lazy(() =>
+  import("./components/ClientSupport/KnowledgeBase")
+);
 const Account = lazy(() => import("./components/Settings/Account"));
 const Team = lazy(() => import("./components/Settings/Team"));
-const SupportOperations = lazy(() => import("./components/Settings/Support Operations/SupportOperations"));
-const AutomatedReports = lazy(() => import("./components/Settings/AutomatedReports"));
+const SupportOperations = lazy(() =>
+  import("./components/Settings/Support Operations/SupportOperations")
+);
+const AutomatedReports = lazy(() =>
+  import("./components/Settings/AutomatedReports")
+);
 const Solutions = lazy(() => import("./components/Settings/Solutions"));
 
 const App = () => {
@@ -22,9 +30,14 @@ const App = () => {
       <BrowserRouter>
         <Suspense
           fallback={
-            <div
-              className="h-screen w-screen bg-slate-900 flex items-center justify-center"
-            ><h1 className="text-slate-300 text-3xl font-bold italic capitalize">Loading ...</h1></div>
+            <div className="h-screen w-screen bg-slate-900 flex items-center justify-center">
+              <div>
+                <div
+                  style={{ borderTopColor: "transparent" }}
+                  className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"
+                ></div>
+              </div>
+            </div>
           }
         >
           <Routes>

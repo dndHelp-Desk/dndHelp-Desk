@@ -8,11 +8,11 @@ import {
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
 import {
-  BsFillBookmarkCheckFill,
-  BsFillBookmarkXFill,
-  BsFillBookmarkFill,
+  BsBookmarkCheck,
+  BsBookmarkX,
+  BsBookmark,
 } from "react-icons/bs";
-import { BiListPlus, BiListMinus, BiArrowBack } from "react-icons/bi";
+import { BiChevronRight, BiChevronLeft, BiArrowBack } from "react-icons/bi";
 import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
 import { updateAlert } from "../../store/NotificationsSlice";
@@ -120,37 +120,31 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
 
       return (
         <div
+        role="row"
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-[#94a3b885] relative rounded-l-md dark:bg-[#1e293b9c] shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-[#94a3b885] relative rounded-l-md dark:bg-[#1e293b9c] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
-          } bg-slate-200 p-2 space-x-2 flex`}
+          }`}
         >
           {/**Indicate The ticket is resolved ================*/}
           {ticket.status && ticket.status.toLowerCase() === "solved" && (
-            <BsFillBookmarkCheckFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-blue-500" />
+            <BsBookmarkCheck className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-blue-500" />
           )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
-          {new Date(ticket.due_date).getTime() >= new Date().getTime() &&
-            ticket.status &&
-            ticket.status.toLowerCase() !== "solved" &&
-            ticket.status.toLowerCase() !== "on hold" && (
-              <BsFillBookmarkFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
-            )}
-
-          {/**Indicate The ticket that is not solved or  overdue ================*/}
-          {ticket.status.toLowerCase() === "on hold" && (
-            <BsFillBookmarkFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
-          )}
+          {ticket.status.toLowerCase() === "on hold" ||
+            (ticket.status.toLowerCase() === "reopened" && (
+              <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
+            ))}
 
           {/**Indicate The ticket that is  overdue ================*/}
           {new Date(ticket.due_date).getTime() <= new Date().getTime() &&
             ticket.status &&
             ticket.status.toLowerCase() === "open" && (
-              <BsFillBookmarkXFill className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
+              <BsBookmarkX className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
             )}
 
           {/**Indicate if it's new messsage ================*/}
@@ -338,7 +332,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             setFilters={setFilters}
           />
           <div className="w-full h-full flex flex-col overflow-hidden">
-            <div className="w-full h-[90%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1">
+            <div role="table" className="w-full h-[90%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1">
               {tickets}
               {filteredTickets.length <= 0 && (
                 <>
@@ -355,17 +349,19 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             </div>
             {/**Pagination ================================ */}
             <div className="h-[10%] md:h-[3.2rem] w-full dark:bg-slate-900 bg-slate-100 bottom-0 flex justify-center items-center">
-              <div className="h-8 w-40 rounded-md grid grid-cols-4 gap-1">
+              <div className="h-8 w-40 grid grid-cols-4 gap-1 dark:bg-[#1e293b9c] bg-slate-200 py-1 rounded-md custom-shadow">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
                   }}
-                  className="col-span-1 border dark:border-slate-800 border-slate-300 dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+                  className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
                 >
-                  <BiListMinus />
+                  <BiChevronLeft />
                 </button>
-                <div className="col-span-2 border dark:border-slate-800 border-slate-300 dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-300 text-slate-800 font-bold text-sm tracking-wider flex items-center justify-center">
-                  {loadMore - 50 === 0 ? 1 : loadMore - 50} - {loadMore}
+                <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-sm tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-300 overflow-hidden px-1">
+                  <p className="overflow-hidden overflow-ellipsis whitespace-nowrap">
+                    {loadMore - 50 === 0 ? 1 : loadMore - 50} - {loadMore}
+                  </p>
                 </div>
                 <button
                   onClick={() => {
@@ -373,9 +369,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                       fetchedTickets.length > loadMore ? loadMore + 50 : 50
                     );
                   }}
-                  className="col-span-1 border dark:border-slate-800 border-slate-300 dark:bg-slate-800 bg-slate-200 rounded-md dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+                  className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
                 >
-                  <BiListPlus />
+                  <BiChevronRight />
                 </button>
               </div>
             </div>

@@ -124,12 +124,12 @@ const LogIn = () => {
       {/**Alert */}
 
       {/**Top Nav ================= */}
-      <nav className="absolute bg-[#11182780] w-[75%] h-[4rem] backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center">
+      <nav
+        role="navigation"
+        className="absolute bg-[#11182780] w-[75%] h-[4rem] backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
+      >
         {/**Logo ==================== */}
-        <div
-          aria-label="logo"
-          className="h-full flex items-center justify-center overflow-hidden pt-1"
-        >
+        <div className="h-full flex items-center justify-center overflow-hidden pt-1">
           <img
             src={lightLogo}
             alt="logo"
@@ -143,6 +143,7 @@ const LogIn = () => {
           className="font-semibold text-xl text-gray-200 lg:hidden flex cursor-pointer"
         />
         <div
+          role="navigation"
           className={`flex lg:hidden absolute top-14 right-2 w-[16rem] border border-slate-800 shadow-2xl rounded-lg bg-[#131538] ${
             menu ? "h-[10rem]" : "h-0 opacity-0"
           } transition-scale duration-300 flex flex-col space-y-2 p-4 justify-center overflow-hidden`}
@@ -227,12 +228,12 @@ const LogIn = () => {
       {/**Second Half ==================================== */}
       <section className="w-screen lg:w-[50%] h-full bg-gradient-to-t to-[#0c0c34] from-[#040b22] lg:pl-14 p-2">
         <div className="w-full h-full flex flex-col items-center lg:items-start justify-center p-2 space-y-4">
-          <h2 className="font-bold text-gray-200 text-3xl font-['Plus Jakarta','Helvetica','Arial','sans-serif']">
+          <h1 className="font-bold text-gray-200 text-3xl font-['Plus Jakarta','Helvetica','Arial','sans-serif']">
             Nice to see you!
-          </h2>
-          <h3 className="text-gray-200">
+          </h1>
+          <h2 className="text-gray-200">
             Enter your email and password to sign in
-          </h3>
+          </h2>
           <div className="w-[20rem] h-[23rem] border border-slate-600 rounded-[1.25rem] bg-[#131538] p-8">
             <form
               action=""
@@ -252,6 +253,9 @@ const LogIn = () => {
                   name="email"
                   id="email"
                   placeholder="Your email..."
+                  required
+                  aria-required
+                  aria-placeholder="Your email..."
                   onChange={(e) =>
                     setValues({ ...inputValues, email: e.target.value })
                   }
@@ -272,6 +276,9 @@ const LogIn = () => {
                   type="password"
                   name="password"
                   id="password"
+                  aria-required
+                  required
+                  aria-placeholder="Your password..."
                   placeholder="Your password..."
                   onChange={(e) =>
                     setValues({ ...inputValues, password: e.target.value })

@@ -353,7 +353,7 @@ const Main = () => {
           {/**Online Users ================================ */}
           <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-xl dark:bg-slate-900 bg-slate-100 p-2">
             <div className="h-full w-full dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
-              {allMembers.length >= 1 && (
+              {allMembers.length >= 1 && user[0].access !== "client" && (
                 <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                   <h3 className="dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">
                     <span>All Agents</span>
@@ -367,20 +367,21 @@ const Main = () => {
                   {users}
                 </div>
               )}
-              {!allMembers.length >= 1 && (
-                <div className="h-full w-full">
-                  <div className="h-full w-full rounded-lg dark:bg-slate-900 bg-slate-100 border dark:border-slate-800 border-slate-300 p-6">
-                    <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
-                      add your team members
-                    </h2>
-                    <img
-                      src={noUsers}
-                      alt="no-users"
-                      className="object-center object-fit w-full h-full"
-                    />
+              {!allMembers.length >= 1 ||
+                (user[0].access === "client" && (
+                  <div className="h-full w-full">
+                    <div className="h-full w-full rounded-lg dark:bg-slate-900 bg-slate-100 border dark:border-slate-800 border-slate-300 p-6 space-y-4">
+                      <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
+                        add your team members
+                      </h2>
+                      <img
+                        src={noUsers}
+                        alt="no-users"
+                        className="object-center object-fit w-full h-[90%]"
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                ))}
             </div>
           </div>
         </section>

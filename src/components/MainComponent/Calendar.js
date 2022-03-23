@@ -169,6 +169,7 @@ const Calendar = () => {
         <div className="px-2 rounded-xl">
           <div className="flex items-center justify-between">
             <HiChevronLeft
+              role="button"
               onClick={() => {
                 setMonth(month === 1 ? 12 : month - 1);
                 setYear(month === 1 ? year - 1 : year);
@@ -180,6 +181,7 @@ const Calendar = () => {
               {`${monthsWords[month]} ${year}`}
             </h1>
             <HiChevronRight
+              role="button"
               onClick={() => {
                 setMonth(month === 12 ? 1 : month + 1);
                 setYear(month === 12 ? year + 1 : year);

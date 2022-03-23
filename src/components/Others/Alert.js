@@ -33,6 +33,7 @@ const Alert = () => {
     alerts.map((alert, index) => {
       return (
         <div
+        role="alert"
           key={index}
           className={`transition duration-150 max-w-[35rem] ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow-2xl rounded overflow-hidden ${alert.color}`}
         >
