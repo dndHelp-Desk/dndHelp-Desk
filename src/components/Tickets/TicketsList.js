@@ -7,11 +7,7 @@ import {
   reOpenTicket,
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
-import {
-  BsBookmarkCheck,
-  BsBookmarkX,
-  BsBookmark,
-} from "react-icons/bs";
+import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
 import { BiChevronRight, BiChevronLeft, BiArrowBack } from "react-icons/bi";
 import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
@@ -120,7 +116,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
 
       return (
         <div
-        role="row"
+          role="row"
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
           className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-[#94a3b885] relative rounded-l-md dark:bg-[#1e293b9c] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
@@ -135,8 +131,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           )}
 
           {/**Indicate The ticket that is not solved or  overdue ================*/}
-          {ticket.status.toLowerCase() === "on hold" ||
-            (ticket.status.toLowerCase() === "reopened" && (
+          {(ticket.status.toLowerCase() === "open" &&
+            new Date(ticket.due_date).getTime() > new Date().getTime()) ||
+            (ticket.status.toLowerCase() === "on hold" && (
               <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
             ))}
 
@@ -318,7 +315,6 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           <span className="text-xs">Back</span>
         </div>
 
-        {/**Components ================================== */}
         <div
           className={`w-full lg:w-[40%] h-[40rem] flex flex-col gap-2.5 pt-1 ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
@@ -332,7 +328,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             setFilters={setFilters}
           />
           <div className="w-full h-full flex flex-col overflow-hidden">
-            <div role="table" className="w-full h-[90%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1">
+            <div
+              role="table"
+              className="w-full h-[90%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1"
+            >
               {tickets}
               {filteredTickets.length <= 0 && (
                 <>
