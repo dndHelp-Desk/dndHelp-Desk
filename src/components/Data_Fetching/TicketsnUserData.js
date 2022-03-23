@@ -22,10 +22,14 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  enableIndexedDbPersistence,
 } from "firebase/firestore";
 
 // init services for firestore =========================
 const db = getFirestore();
+
+// Subsequent queries will use persistence, if it was enabled successfully
+enableIndexedDbPersistence(db)
 
 // collection ref
 let membersRef = collection(db, "members");
