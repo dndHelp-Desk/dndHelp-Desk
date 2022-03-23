@@ -13,6 +13,7 @@ import {
   updateProfileUrl,
   updateUID,
 } from "../Data_Fetching/TicketsnUserData";
+import defaultProfile from "./../../default.webp";
 
 const Profile = () => {
   const currentUser = useAuth();
@@ -22,9 +23,7 @@ const Profile = () => {
   const [showChangeIcon, setChangeIcon] = useState("scale-0");
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
-  const [photoURL, setPhotoURL] = useState(
-    "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
-  );
+  const [photoURL, setPhotoURL] = useState(defaultProfile);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {

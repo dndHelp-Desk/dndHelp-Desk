@@ -137,6 +137,7 @@ const MainComponent = () => {
 
             {/**Small Screen Menu Btn ================ */}
             <button
+              aria-label="button"
               onClick={() => setShowMenu(showMenu === false ? true : false)}
               className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex lg:hidden"
             >
@@ -244,6 +245,7 @@ const MainComponent = () => {
               {/**Change Theme =========================== */}
               <abbr title="theme">
                 <button
+                  aria-label="button"
                   onClick={() => {
                     dispatch(changeTheme(theme === "dark" ? "light" : "dark"));
                     window.localStorage.setItem(
@@ -282,13 +284,13 @@ const MainComponent = () => {
 
               {/**Settings ================================================ */}
               <NavLink
+                role="button"
+                aria-label="button"
                 to="/app/settings/account"
-                className="outline-none focus:outline-none"
+                className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
               >
                 <abbr title="Settings">
-                  <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold">
-                    <BsGear />
-                  </button>
+                  <BsGear />
                 </abbr>
               </NavLink>
 

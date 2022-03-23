@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { getAuth } from "firebase/auth";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import defaultProfile from "./../../default.webp"
 import noUsers from "./images/no-userss.svg";
 import { BsEnvelope, BsAlarm, BsStopFill, BsArrowRight } from "react-icons/bs";
 import Calendar from "./Calendar";
@@ -41,7 +42,7 @@ const Main = () => {
                 src={
                   user.photoUrl !== null && user.photoUrl !== ""
                     ? user.photoUrl
-                    : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
+                    : defaultProfile
                 }
                 alt="profile"
                 className="object-cover w-full h-full object-center rounded-lg"

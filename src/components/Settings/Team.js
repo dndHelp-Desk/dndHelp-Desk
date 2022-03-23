@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import defaultProfile from "./../../default.webp";
 import noUsers from "./../MainComponent/images/no-userss.svg";
 import { Navigate } from "react-router";
 import {
@@ -35,6 +36,7 @@ const Team = () => {
     companies: "",
   });
 
+  //Create User ===========================
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("https://dndhelp-desk-first.herokuapp.com/create", {
@@ -160,7 +162,7 @@ const Team = () => {
                 src={
                   user.photoUrl !== null && user.photoUrl !== ""
                     ? user.photoUrl
-                    : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
+                    : defaultProfile
                 }
                 alt="profile"
                 className="object-cover w-full h-full object-center rounded-lg"
