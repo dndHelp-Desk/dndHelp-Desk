@@ -231,7 +231,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         },
         body: JSON.stringify({
           from: `${sendingAccount.email}`,
-          company:`${company_details.name} ${sendingAccount.name}`,
+          company: `${company_details.name} ${sendingAccount.name}`,
           password: sendingAccount.password,
           host: sendingAccount.host,
           port: sendingAccount.port,
@@ -243,9 +243,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
         Hi ${inputValue.recipient_name},
       </p>
-      <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-        Dial & Dine has opened a new ticket regarding ${inputValue.category}. The case details are as follow:
-      </p>
+      <h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;font-size:15px">
+        <b>Dial & Dine has opened a new ticket regarding ${inputValue.category}. The case details are as follows:</b>
+      </h1>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
         <b>Tickect Details:</b>
       </p>
@@ -288,10 +288,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
      Hi ${inputValue.recipient_name},
   </p>
-  <p
+  <h1
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-    Dial & Dine has opened a new ticket with ID: ${inputValue.ticket_id} which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.
-  </p>
+    <b>Dial & Dine has opened a new ticket with ID: ${inputValue.ticket_id} which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
+  </h1>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
     <b>Tickect Details:</b>
