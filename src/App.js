@@ -3,10 +3,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing Page/Landing";
 import LogIn from "./components/authentication/LogIn";
 import MainComponent from "./components/MainComponent/MainComponent";
-import ReportsComponent from "./components/Reports/ReportComponent";
 import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
-import SettingsComponent from "./components/Settings/SettingsComponents";
+
+//Lazy Loading Components || Code Splitting ====================
+const ReportsComponent = lazy(() =>
+  import("./components/Reports/ReportComponent")
+);
+const SettingsComponent = lazy(() =>
+  import("./components/Settings/SettingsComponents")
+);
 const SupportHome = lazy(() =>
   import("./components/ClientSupport/SupportHome")
 );
