@@ -362,7 +362,6 @@ const Team = () => {
               id="department"
               autoComplete="nope"
               placeholder="Companies / Restuarants ..."
-              required
               onChange={(e) =>
                 setValues({ ...inputValues, companies: e.target.value })
               }
