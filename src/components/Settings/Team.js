@@ -272,7 +272,7 @@ const Team = () => {
 
       {/**Add New User ==================== */}
       <div className="col-span-1 flex flex-col items-center justify-center lg:border-l dark:border-slate-800 border-slate-300 p-4">
-        <h2 className="dark:text-slate-300 text-slate-800 text-base font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+        <h2 className="dark:text-slate-300 text-slate-800 text-base font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden uppercase">
           Add New User
         </h2>
         <form
@@ -388,7 +388,7 @@ const Team = () => {
           </div>
           <button
             type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded-md hover:opacity-80 outline-none focus:outline-none"
+            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded-md hover:opacity-80 outline-none focus:outline-none uppercase"
           >
             Create User
           </button>

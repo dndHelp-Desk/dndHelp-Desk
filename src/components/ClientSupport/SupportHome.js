@@ -15,7 +15,7 @@ const SupportHome = () => {
 
   //Component =======================================
   return (
-    <div className="bg-slate-300 w-screen min-h-screen pb-6 overflow-hidden relative">
+    <div className="bg-slate-300 min-w-screen min-h-screen pb-6 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar relative">
       <div className="w-full h-[5rem] bg-slate-900 px-6 flex items-center justify-between">
         {/**Logo ==================== */}
         <div className="h-full flex items-center justify-center overflow-hidden pt-1">

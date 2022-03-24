@@ -24,6 +24,7 @@ import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 import Profile from "../authentication/Profile";
 import Notification from "./Notifications & Chat/Notification";
 import LogRocket from "logrocket";
+import SettingsTooltip from "./SettingsTooltip";
 
 const MainComponent = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
@@ -117,8 +118,8 @@ const MainComponent = () => {
 
   //Component =================================
   return (
-    <div className={`${theme} relative`}>
-      <div className="dark:bg-slate-700 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col items-center selection:bg-blue-600 selection:text-slate-100">
+    <div className={`${theme} relative bg-slate-700`}>
+      <div className="min-w-screen min-h-screen dark:bg-slate-700 bg-slate-300 pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col items-center selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
         {/**NavBar ============== */}
@@ -296,11 +297,13 @@ const MainComponent = () => {
                 role="button"
                 aria-label="button"
                 to="/app/settings/account"
-                className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
+                className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold group"
               >
                 <abbr title="Settings">
                   <BsGear />
                 </abbr>
+                {/**Settings Tooltip ================================== */}
+                <SettingsTooltip/>
               </NavLink>
 
               {/**Profile And User Settings =========================== */}

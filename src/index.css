@@ -33,7 +33,10 @@
     @apply border-t-2 border-blue-600;
   }
   .settingsNav {
-    @apply dark:text-slate-400 text-slate-700 text-sm font-semibold flex items-center space-x-1 hover:text-blue-500 dark:hover:text-blue-500 border-b md:border-0 p-1 border-slate-500;
+    @apply dark:text-slate-400 text-slate-700 text-sm font-semibold flex items-center space-x-1 hover:text-blue-500 dark:hover:text-blue-500;
+  }
+  .settingsNav.active {
+    @apply text-blue-600;
   }
   .sidenav .active {
     @apply text-blue-500;

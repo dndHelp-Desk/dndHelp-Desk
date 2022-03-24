@@ -25,7 +25,7 @@ const Landing = () => {
 
   //Component =====================
   return (
-    <div className="bg-slate-50 pb-2 relative">
+    <div className="bg-slate-50 pb-2 relative h-fit">
       {/**Navigation ========================== */}
       <nav className="w-full bg-slate-200">
         <div className="h-[20rem] py-6 w-full bg-transparent m-auto">

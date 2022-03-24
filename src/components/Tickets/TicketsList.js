@@ -265,7 +265,8 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                           },
                         ])
                       )
-                    : e.target.value === "reopened"
+                    : e.target.value === "reopened" ||
+                      ticket.status === "solved"
                     ? reOpenTicket(ticket.id, e.target.value, true)
                     : changeStatus(ticket.id, e.target.value)
                 }
