@@ -23,6 +23,7 @@ import Alert from "../Others/Alert";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 import Profile from "../authentication/Profile";
 import Notification from "./Notifications & Chat/Notification";
+import LogRocket from "logrocket";
 
 const MainComponent = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
@@ -37,6 +38,9 @@ const MainComponent = () => {
   const notificationMsgs = useSelector(
     (state) => state.NotificationsData.messages
   );
+
+  //Trackign Issues  ========================
+  LogRocket.init("g9yqq9/dndhelp-desk");
 
   useEffect(() => {
     dispatch(
