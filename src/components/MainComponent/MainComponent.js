@@ -118,7 +118,7 @@ const MainComponent = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="dark:bg-slate-700 bg-slate-400 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col items-center selection:bg-blue-600 selection:text-slate-100">
+      <div className="dark:bg-slate-700 bg-slate-300 w-screen min-h-screen pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col items-center selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
         {/**NavBar ============== */}
