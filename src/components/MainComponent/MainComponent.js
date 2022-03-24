@@ -41,6 +41,11 @@ const MainComponent = () => {
 
   //Trackign Issues  ========================
   LogRocket.init("g9yqq9/dndhelp-desk");
+  // This is an example script - don't forget to change it!
+  LogRocket.identify(user[0].name, {
+    name: user[0].name,
+    email: user[0].email,
+  });
 
   useEffect(() => {
     dispatch(
