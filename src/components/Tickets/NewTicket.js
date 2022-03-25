@@ -407,7 +407,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-screen max-h-[45rem] flex justify-end px-6 pt-[6.8rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] min-h-[20rem] h-[20rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
+          className={`w-[98%] lg:w-[58%] min-h-[20rem] h-[20rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-xl overflow-hidden ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1`}
         >

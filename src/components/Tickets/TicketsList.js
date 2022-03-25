@@ -119,7 +119,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           role="row"
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-slate-300 relative rounded-l-md dark:bg-[#182235] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-[#94a3b8a8] relative rounded-l-md dark:bg-[#182235] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -133,9 +133,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           {/**Indicate The ticket that is not solved or  overdue ================*/}
           {(ticket.status.toLowerCase() === "open" &&
             new Date(ticket.due_date).getTime() > new Date().getTime()) ||
-            ticket.status.toLowerCase() === "on hold" ? (
-              <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
-            ):""}
+          ticket.status.toLowerCase() === "on hold" ? (
+            <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
+          ) : (
+            ""
+          )}
 
           {/**Indicate The ticket that is  overdue ================*/}
           {new Date(ticket.due_date).getTime() <= new Date().getTime() &&
