@@ -54,7 +54,7 @@ const SupportOperations = () => {
 
   //Component =================
   return (
-    <section className="bg-transparent w-full h-full grid grid-rows-9 overflow-hidden">
+    <section className="bg-transparent w-full h-full grid grid-rows-9 gap-4 overflow-hidden">
       <nav className="row-span-1 w-full flex justify-center">
         <ul className="h-full flex items-center justify-center">{tabsMenu}</ul>
       </nav>

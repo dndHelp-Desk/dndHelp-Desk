@@ -14,7 +14,7 @@ const SummaryPie = () => {
         width: "100%",
       }}
       option={{
-        backgroundColor: theme === "dark" ? "#1e293b18" : "#ecf3f5",
+        backgroundColor: theme === "dark" ? "#1e293b18" : "#f1f5f9",
         tooltip: {
           trigger: "item",
         },
