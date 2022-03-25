@@ -14,7 +14,7 @@ const ContactsComponent = () => {
   }
   //Component ======================================
   return (
-    <div className="bg-transparent mt-4 min-h-[40rem] w-[90%] space-y-4 md:w-full rounded-xl container 2xl:w-[72rem] overflow-hidden pt-2 pb-1">
+    <div className="dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 mt-4 container w-[90%] md:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col tracking-wider relative">
       <Table setModal={setModal} />
       <NewContact contactModal={contactModal} setModal={setModal} />
     </div>

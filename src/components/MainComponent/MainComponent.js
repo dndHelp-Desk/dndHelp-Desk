@@ -118,15 +118,15 @@ const MainComponent = () => {
 
   //Component =================================
   return (
-    <div className={`${theme} relative bg-slate-700`}>
-      <div className="min-w-screen min-h-screen dark:bg-slate-700 bg-slate-300 pb-4 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col items-center selection:bg-blue-600 selection:text-slate-100">
+    <div className={`${theme} relative`}>
+      <div className="w-full min-h-[45rem] h-screen dark:bg-slate-900 bg-slate-100 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
         {/**NavBar ============== */}
-        <div className="flex justify-center h-[4rem] w-full bg-transparent mt-4">
+        <div className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-[#1e293b18] bg-[#e2e8f059] border-b dark:border-slate-800 border-slate-300">
           {/**Alert */}
           <Alert />
-          <nav className="dark:bg-slate-900 bg-slate-100 backdrop-blur-lg p-2 flex rounded-xl justify-between items-center w-[90%] md:w-full container 2xl:w-[72rem] relative z-[999]">
+          <nav className="container w-[90%] md:w-full 2xl:w-[72rem] backdrop-blur-lg p-2 flex justify-between items-center relative z-[999]">
             {/**Logo ==================== */}
             <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
               {theme !== "dark" && (
@@ -303,7 +303,7 @@ const MainComponent = () => {
                   <BsGear />
                 </abbr>
                 {/**Settings Tooltip ================================== */}
-                <SettingsTooltip/>
+                <SettingsTooltip />
               </NavLink>
 
               {/**Profile And User Settings =========================== */}
@@ -311,7 +311,7 @@ const MainComponent = () => {
             </div>
           </nav>
         </div>
-        <main className="w-full flex flex-col items-center">
+        <main className="w-full h-full flex-[8] flex flex-col items-center">
           <Main />
           <Outlet />
         </main>

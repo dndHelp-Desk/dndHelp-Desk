@@ -71,13 +71,13 @@ const Main = () => {
     <div
       className={`${
         location.pathname === "/app" ? "grid" : "hidden"
-      } dark:bg-transparent bg-transparent w-[90%] md:w-full container 2xl:w-[72rem] mt-4 overflow-hidden select-text`}
+      } dark:bg-transparent bg-transparent w-[90%] md:w-full h-full container 2xl:w-[72rem] mt-4 overflow-hidden select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**User Details  ============== */}
-          <div className="col-span-1 h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl overflow-hidden p-4">
-            <div className="flex flex-col h-full w-full justify-center space-y-6 items-center overflow-hidden dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300  rounded-lg">
+          <div className="col-span-1 h-[20rem] dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-xl overflow-hidden p-4">
+            <div className="flex flex-col h-full w-full justify-center space-y-6 items-center overflow-hidden  rounded-lg">
               <div className="w-24 h-24 rounded-full overflow-hidden p-[2px] border-2 dark:border-slate-400 border-slate-800">
                 <img
                   src={
@@ -104,7 +104,7 @@ const Main = () => {
           {/**Todo List ================================ */}
           {/* <ToDo />*/}
           {/**Monthly Summary ================================ */}
-          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-900 bg-slate-100 rounded-xl px-4">
+          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-xl px-4">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4 space-y-4">
               <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold capitalize">
                 Monthly Summary
@@ -139,7 +139,7 @@ const Main = () => {
             </div>
           </div>
           {/**Calendar ================================= */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-900 bg-slate-100 rounded-xl p-4 pt-3 pb-4 flex flex-col justify-between items-center">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-[#1e293b18] bg-[#e2e8f059]  border dark:border-slate-800 border-slate-300 rounded-xl p-4 pt-3 pb-4 flex flex-col justify-between items-center">
             <article className="text-center">
               <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
                 Due Dates
@@ -153,7 +153,7 @@ const Main = () => {
         </section>
 
         {/**Others  ====================================== */}
-        <div className="w-full rounded-xl dark:bg-slate-900 bg-slate-100 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3">
+        <div className="w-full rounded-xl dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3">
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 flex justify-center items-center">
             <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 rounded-lg p-2">
@@ -229,7 +229,7 @@ const Main = () => {
         <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden items-center space-y-4 lg:space-y-0 lg:gap-4">
           <div className="col-span-2 w-full rounded-xl grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Quotes ==================================== */}
-            <div className="col-span-5 h-[16rem] rounded-xl dark:bg-slate-900 bg-slate-100 p-4 overflow-hidden relative">
+            <div className="col-span-5 h-[16rem] rounded-xl dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 p-4 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
                 alt="background"
@@ -254,7 +254,7 @@ const Main = () => {
               </div>
             </div>
             {/**Progress ============================== */}
-            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-xl dark:bg-slate-900 bg-slate-100 p-4 flex flex-col space-y-5">
+            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-xl dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
                 Progress
               </h3>
@@ -352,8 +352,8 @@ const Main = () => {
             </article>
           </div>
           {/**Online Users ================================ */}
-          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-xl dark:bg-slate-900 bg-slate-100 p-2">
-            <div className="h-full w-full dark:bg-slate-900 bg-slate-100 rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
+          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-xl dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 p-2">
+            <div className="h-full w-full dark:bg-[#1e293b18] bg-[#e2e8f059] rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
               {allMembers.length >= 1 && user[0].access !== "client" && (
                 <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                   <h3 className="dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">
@@ -371,7 +371,7 @@ const Main = () => {
               {!allMembers.length >= 1 ||
                 (user[0].access === "client" && (
                   <div className="h-full w-full">
-                    <div className="h-full w-full rounded-lg dark:bg-slate-900 bg-slate-100 border dark:border-slate-800 border-slate-300 p-6 space-y-4">
+                    <div className="h-full w-full rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 p-6 space-y-4">
                       <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
                         add your team members
                       </h2>

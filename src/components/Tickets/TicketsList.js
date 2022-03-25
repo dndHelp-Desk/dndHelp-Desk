@@ -133,9 +133,9 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           {/**Indicate The ticket that is not solved or  overdue ================*/}
           {(ticket.status.toLowerCase() === "open" &&
             new Date(ticket.due_date).getTime() > new Date().getTime()) ||
-            (ticket.status.toLowerCase() === "on hold" && (
+            ticket.status.toLowerCase() === "on hold" ? (
               <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
-            ))}
+            ):""}
 
           {/**Indicate The ticket that is  overdue ================*/}
           {new Date(ticket.due_date).getTime() <= new Date().getTime() &&
@@ -265,8 +265,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                           },
                         ])
                       )
-                    : e.target.value === "reopened" ||
-                      ticket.status === "solved"
+                    : e.target.value === "reopened"
                     ? reOpenTicket(ticket.id, e.target.value, true)
                     : changeStatus(ticket.id, e.target.value)
                 }

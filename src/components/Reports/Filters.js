@@ -20,11 +20,11 @@ const Filters = ({ filters, setFilters }) => {
         <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
-      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsSearch className="text-slate-500 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded-md text-xs p-2 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
           <option value="">Category</option>
           {categories.length >= 1 &&
@@ -43,11 +43,11 @@ const Filters = ({ filters, setFilters }) => {
             ))}
         </select>
       </div>
-      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
-          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded-md text-xs p-2 dark:bg-[#1e293b18] bg-[#e2e8f059] dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
           <option value="">Agent Name</option>
           {allMembers.length >= 1 &&
@@ -66,7 +66,7 @@ const Filters = ({ filters, setFilters }) => {
               ))}
         </select>
       </div>
-      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -78,11 +78,11 @@ const Filters = ({ filters, setFilters }) => {
           placeholder="Brand ..."
         />
       </div>
-      <div className="md:max-w-[14rem] h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
+      <div className="md:max-w-[14rem] h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsCheckSquare className="text-slate-500 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded-md text-xs p-2 dark:bg-[#1e293b18] bg-[#e2e8f059] dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
           <option value="">Status</option>
           <option value="open">Open</option>

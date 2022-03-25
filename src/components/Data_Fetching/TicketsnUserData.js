@@ -29,7 +29,7 @@ import {
 const db = getFirestore();
 
 // Subsequent queries will use persistence, if it was enabled successfully
-enableIndexedDbPersistence(db)
+enableIndexedDbPersistence(db, { experimentalTabSynchronization: true });
 
 // collection ref
 let membersRef = collection(db, "members");
