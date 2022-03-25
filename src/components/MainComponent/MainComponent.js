@@ -5,7 +5,7 @@ import {
   BsJustifyLeft,
   BsBrightnessHigh,
   BsGear,
-  BsCloudMoon,
+  BsMoonStars,
 } from "react-icons/bs";
 import darkLogo from "./logos/dndHelp-Desk_Dark.png";
 import lightLogo from "./logos/dndHelp-Desk_Light.png";
@@ -266,7 +266,7 @@ const MainComponent = () => {
                   className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
                 >
                   {theme === "dark" && <BsBrightnessHigh />}
-                  {theme !== "dark" && <BsCloudMoon />}
+                  {theme !== "dark" && <BsMoonStars />}
                 </button>
               </abbr>
 
@@ -311,7 +311,7 @@ const MainComponent = () => {
             </div>
           </nav>
         </div>
-        <main className="w-full h-full flex-[8] flex flex-col items-center">
+        <main className="w-full h-full flex-[8] flex flex-col pb-2 items-center">
           <Main />
           <Outlet />
         </main>

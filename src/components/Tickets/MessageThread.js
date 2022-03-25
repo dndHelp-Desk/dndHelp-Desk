@@ -474,9 +474,9 @@ const MessageThread = ({ isChatOpen, audio }) => {
     <div
       className={`h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col overflow-hidden w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-200  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap bg-transparent`}
+      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-slate-800 border-slate-300  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap bg-transparent`}
     >
-      <div className="h-full w-full dark:bg-[#1e293b9c] bg-slate-200 px-2 pb-2 space-y-4 overflow-hidden flex flex-col">
+      <div className="h-full w-full dark:bg-[#182235] bg-slate-200 border border-l-0 dark:border-slate-800 border-slate-300 px-2 pb-2 space-y-4 flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
@@ -485,7 +485,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-100 p-4  after:content-[''] after:absolute after:top-[-0.5rem] after:left-2 after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-slate-100 after:border-l-transparent border border-slate-200 dark:border-slate-700">
+              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-100 border border-slate-200 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
                 <div>
                   <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold">
                     Ticket Details
@@ -668,8 +668,8 @@ const MessageThread = ({ isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[8rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center relative">
-        <div className="h-full w-full p-2 shadow-sm rounded-lg dark:bg-[#1e293b9c] bg-slate-200 border border-slate-300 dark:border-slate-800 after:content-[''] after:absolute after:top-[1rem] after:left-[5rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-[#1e293b9c] after:border-b-slate-200 after:border-l-transparent overflow-hidden">
+      <div className="h-[8rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center">
+        <div className="h-full w-full relative p-2 shadow-sm rounded-lg dark:bg-[#182235] bg-slate-200 border border-slate-300 dark:border-slate-800 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="h-full w-full bg-transparent rounded-lg relative"
@@ -724,7 +724,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
               type="submit"
               className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99] flex items-center space-x-1"
             >
-              <BiMailSend/>
+              <BiMailSend />
             </button>
           </form>
         </div>

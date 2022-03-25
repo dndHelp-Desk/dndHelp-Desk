@@ -119,7 +119,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           role="row"
           key={ticket.id}
           //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-slate-400 relative rounded-l-md dark:bg-[#1e293b9c] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-slate-300 relative rounded-l-md dark:bg-[#182235] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -348,7 +348,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             </div>
             {/**Pagination ================================ */}
             <div className="h-[10%] md:h-[3.2rem] w-full bottom-0 flex justify-center items-center">
-              <div className="h-8 w-40 grid grid-cols-4 gap-1 dark:bg-[#1e293b9c] bg-slate-200 py-1 rounded-md custom-shadow">
+              <div className="h-8 w-40 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-200 py-1 rounded-md custom-shadow">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);

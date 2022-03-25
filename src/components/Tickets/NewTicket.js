@@ -400,406 +400,59 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   //Component =====================================
   return (
     <div
-      className={`absolute top-[-0.5rem] left-[-0.5rem] bottom-[-0.5rem] right-[-0.5rem] bg-[#030d2769] rounded-lg ${
+      className={`fixed top-[-0.5rem] left-[-0.5rem] bottom-[-0.5rem] right-[-0.5rem] bg-[#030d2769] rounded-lg justify-center ${
         newTicketModal === true ? "flex z-[999]" : "hidden"
       }`}
     >
-      <form
-        onSubmit={(e) => handleSubmit(e)}
-        className={`w-[98%] lg:w-[56.5%] h-[35rem] lg:h-[39rem] lg:top-[1rem] top-[4rem] right-[1%] lg:right-[1%] dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
-          newTicketModal === true ? "absolute flex" : "hidden"
-        } flex-col justify-between space-y-1`}
-      >
-        {/**Close Modal or Minimuze and save window ============= */}
-        <div className="absolute right-1 top-1 flex space-x-1 items-center z-[999]">
-          {/**Minimize and save */}
-          <abbr title="minimize and save">
-            <span
-              onClick={() => {
-                setModal(false);
-                window.localStorage.setItem(
-                  "draftMsg",
-                  JSON.stringify(inputValue)
-                );
-              }}
-              className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all cursor-pointer"
-            >
-              <BiMinus className="dark:text-slate-300 text-slate-500 text-lg" />
-            </span>
-          </abbr>
-          {/**Close and Clear  */}
-          <abbr title="Close">
-            <span
-              onClick={() => {
-                setModal(false);
-                window.localStorage.setItem(
-                  "draftMsg",
-                  JSON.stringify({
-                    recipient_name: "",
-                    recipient_email: "",
-                    agent: "",
-                    priority: "",
-                    category: "",
-                    branch_company: "",
-                    message: "",
-                    state: "",
-                    date: "",
-                    ticket_id: "",
-                    agent_email: "",
-                    complainant_name: "",
-                    complainant_email: "",
-                    complainant_number: "",
-                    send_as: "",
-                  })
-                );
-                setValues({
-                  recipient_name: "",
-                  recipient_email: "",
-                  agent: "",
-                  priority: "",
-                  category: "",
-                  branch_company: "",
-                  message: "",
-                  state: "",
-                  date: "",
-                  ticket_id: "",
-                  agent_email: "",
-                  complainant_name: "",
-                  complainant_email: "",
-                  complainant_number: "",
-                  send_as: "",
-                });
-                setFile(false);
-              }}
-              className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all cursor-pointer"
-            >
-              <BiX className="dark:text-slate-300 text-slate-500 text-lg" />
-            </span>
-          </abbr>
-        </div>
-
-        {/**Top Section ============================= */}
-        <div className="w-full h-[90%] p-4">
-          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
-            {/**Recipient Name ============================= */}
-            <label
-              htmlFor="to"
-              autoComplete="off"
-              className="md:w-[48%] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>To : </span>
-              <input
-                type="text"
-                id="to"
-                name="to"
-                placeholder="Restuarant ..."
-                required={true}
-                autoComplete="off"
-                value={recepient}
-                onKeyPress={() => setResults(true)}
-                onKeyDown={() => setResults(true)}
-                onFocus={() => setResults(true)}
-                onChange={(e) => {
-                  setRecipient(e.target.value);
-                }}
-                className="h-8 w-[80%] md:w-[85%]  bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-500 focus:ring-0 focus:border-0 text-sm"
-              />
-              <ul
-                ref={closeSuggestionsRef}
-                className={`${
-                  searchResults ? "" : "hidden"
-                } absolute top-8 h-[11rem] w-full shadow-2xl dark:bg-slate-700 bg-slate-200 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
-              >
-                {contactsList}
-              </ul>{" "}
-            </label>
-            {/**Subject ============================= */}
-            <label
-              htmlFor="subject"
-              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>Subject :</span>
-              <select
-                className="h-8 w-[80%] md:w-[73%] p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
-                id="subject"
-                name="subject"
-                value={inputValue.category}
-                required={true}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    category: e.target.value,
-                  })
-                }
-              >
-                <option className="capitalize" value="">
-                  Subject ...
-                </option>
-                {categoriesList}
-              </select>
-            </label>
-          </div>
-          {/**Priority & Status ============================= */}
-          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
-            {/**Priority  ======================================== */}
-            <label
-              htmlFor="priority"
-              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>Priority :</span>
-              <select
-                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
-                id="priority"
-                name="priority"
-                value={inputValue.priority}
-                required={true}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    priority: e.target.value,
-                  })
-                }
-              >
-                <option className="capitalize" value="">
-                  Priority ...
-                </option>
-                <option className="capitalize">Low</option>
-                <option className="capitalize">Medium</option>
-                <option className="capitalize">High</option>
-                <option className="capitalize">Urgent</option>
-              </select>
-            </label>
-            {/**Status  ======================================== */}
-            <label
-              htmlFor="status"
-              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>Status :</span>
-              <select
-                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
-                id="status"
-                name="status"
-                value={inputValue.state}
-                required={true}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    state: e.target.value,
-                  })
-                }
-              >
-                <option className="capitalize" value="">
-                  Status ...
-                </option>
-                <option className="capitalize" value="open">
-                  open
-                </option>
-                <option className="capitalize" value="on hold">
-                  on hold
-                </option>
-                <option className="capitalize" value="solved">
-                  first Contact Resolution
-                </option>
-              </select>
-            </label>
-          </div>
-          {/**Complaintant Details ============================= */}
-          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
-            {/**Complainat Email  ======================================== */}
-            <label
-              htmlFor="email"
-              autoComplete="off"
-              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>Email :</span>
-              <input
-                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
-                type="email"
-                id="email"
-                name="email"
-                value={inputValue.complainant_email}
-                autoComplete="nope"
-                placeholder="Complainant Email"
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    complainant_email: e.target.value,
-                  })
-                }
-              />
-            </label>
-            {/**Complainant Number  ======================================== */}
-            <label
-              htmlFor="numbers"
-              autoComplete="off"
-              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>Phone :</span>
-              <input
-                className="h-8 w-[80%] md:w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
-                id="numbers"
-                name="numbers"
-                type="text"
-                autoComplete="nope"
-                placeholder="073 5698 625"
-                required={true}
-                pattern="^[0-9]{10}$"
-                value={inputValue.complainant_number}
-                onChange={(e) => {
-                  setValues({
-                    ...inputValue,
-                    complainant_number: e.target.value,
-                    ticket_id:
-                      allTickets.length >= 1 &&
-                      allTickets.filter(
-                        (ticket) =>
-                          ticket.ticket_id ===
-                          `#${(
-                            new Date().getSeconds() +
-                            (new Date().getTime() +
-                              e.target.value.split("").splice(3, 5).join(""))
-                          )
-                            .split("")
-                            .slice(9, 14)
-                            .join("")}`
-                      ).length <= 0
-                        ? `#${(
-                            new Date().getSeconds() +
-                            (new Date().getTime() +
-                              e.target.value.split("").splice(3, 5).join(""))
-                          )
-                            .split("")
-                            .slice(9, 14)
-                            .join("")}`
-                        : `#${
-                            (
-                              new Date().getSeconds() +
-                              (new Date().getTime() +
-                                e.target.value.split("").splice(3, 5).join(""))
-                            )
-                              .split("")
-                              .slice(9, 14)
-                              .join("") + 1
-                          }`,
-                    agent: member_details[0].name,
-                    agent_email: member_details[0].email,
-                  });
-                }}
-              />
-              <ul
-                className={`${
-                  numbersArray.length >= 1 && showOpenedTickets ? "" : "hidden"
-                } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border z-[999] rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
-              >
-                {exist}
-                <label
-                  className="absolute bg-transparent top-[-0.5rem] right-2 outline-none focus:outline-none hover:opacity-80"
-                  htmlFor="suggestion"
-                >
-                  <input
-                    type="checkbox"
-                    name="suggestion"
-                    id="suggestion"
-                    onChange={() => setShowOpen(false)}
-                    className="rounded checked:bg-slate-700"
-                  />
-                </label>
-              </ul>
-            </label>
-          </div>
-          {/**Complainant Name And Send As ============================= */}
-          <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
-            {/**Complainant Name =========================================== */}
-            <label
-              htmlFor="email"
-              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>Name :</span>
-              <input
-                className="h-8 w-[80%] md:w-[80%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Complainant Name ..."
-                value={inputValue.complainant_name}
-                required={true}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    complainant_name: e.target.value,
-                    agent: member_details[0].name,
-                    agent_email: member_details[0].email,
-                  })
-                }
-              />
-            </label>
-            {/**Select Team */}
-            {/**Send AS  ======================================== */}
-            <label
-              htmlFor="priority"
-              className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
-            >
-              <span>Send As :</span>
-              <select
-                className="h-8 w-[80%] md:w-[72%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
-                id="priority"
-                name="priority"
-                value={inputValue.send_as}
-                required={true}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    send_as: e.target.value,
-                  })
-                }
-              >
-                <option className="capitalize" value="">
-                  Send As ...
-                </option>
-                {email_accounts.length >= 1 &&
-                  email_accounts.map((team) => {
-                    return (
-                      <option
-                        key={team.id}
-                        className="capitalize"
-                        value={team.name}
-                      >
-                        {team.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </label>
-          </div>
-          {/**Message ====================================== */}
-          <div className="w-full h-[40%] md:h-[65%] lg:h-[70%] mt-4 rounded-xl">
-            <label htmlFor="message" className="w-full h-full">
-              <textarea
-                className="resize-none w-full h-full bg-transparent rounded-xl  text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 border dark:border-slate-700 border-slate-300 overflow-hidden dark:text-slate-300 text-slate-700 focus:ring-0 focus:border-slate-300 outline-none focus:outline-none"
-                placeholder="Type your message here ..."
-                id="message"
-                name="message"
-                required={true}
-                rows="5"
-                value={inputValue.message}
-                onChange={(e) =>
-                  setValues({
-                    ...inputValue,
-                    message: e.target.value,
-                  })
-                }
-              ></textarea>
-            </label>
-          </div>
-        </div>
-
-        {/**Bottom Controls ========================================= */}
-        <div className="dark:bg-slate-700 bg-slate-200 h-[9%] md:h-[8%] w-full p-2 px-4 flex justify-between items-center overflow-hidden select-none">
-          <div className="flex justify-center items-center">
-            {/**Reset Input ========================================= */}
-            <abbr title="Clear Inputs">
+      <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-screen max-h-[45rem] flex justify-end px-6 pt-[6.8rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className={`w-[98%] lg:w-[58%] min-h-[20rem] h-[20rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden ${
+            newTicketModal === true ? "flex" : "hidden"
+          } flex-col justify-between space-y-1`}
+        >
+          {/**Close Modal or Minimuze and save window ============= */}
+          <div className="absolute right-1 top-1 flex space-x-1 items-center z-[999]">
+            {/**Minimize and save */}
+            <abbr title="minimize and save">
               <span
                 onClick={() => {
+                  setModal(false);
+                  window.localStorage.setItem(
+                    "draftMsg",
+                    JSON.stringify(inputValue)
+                  );
+                }}
+                className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all cursor-pointer"
+              >
+                <BiMinus className="dark:text-slate-300 text-slate-500 text-lg" />
+              </span>
+            </abbr>
+            {/**Close and Clear  */}
+            <abbr title="Close">
+              <span
+                onClick={() => {
+                  setModal(false);
+                  window.localStorage.setItem(
+                    "draftMsg",
+                    JSON.stringify({
+                      recipient_name: "",
+                      recipient_email: "",
+                      agent: "",
+                      priority: "",
+                      category: "",
+                      branch_company: "",
+                      message: "",
+                      state: "",
+                      date: "",
+                      ticket_id: "",
+                      agent_email: "",
+                      complainant_name: "",
+                      complainant_email: "",
+                      complainant_number: "",
+                      send_as: "",
+                    })
+                  );
                   setValues({
                     recipient_name: "",
                     recipient_email: "",
@@ -819,118 +472,480 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   });
                   setFile(false);
                 }}
-                className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400 cursor-pointer"
+                className="h-4 w-4 rounded-md flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all cursor-pointer"
               >
-                <BiTrash />
+                <BiX className="dark:text-slate-300 text-slate-500 text-lg" />
               </span>
             </abbr>
-            {/**Attach A file ========================================= */}
-            <abbr title="Attachment">
-              <label
-                htmlFor="attachment"
-                className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400"
-              >
-                <BiPaperclip />
-                <input
-                  type="file"
-                  name="attachment"
-                  id="attachment"
-                  className="hidden"
-                />
-              </label>
-            </abbr>
           </div>
-          <div className="flex items-center space-x-2">
-            {/**Templates ========================================= */}
-            <div
-              id="email"
-              className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded-xl border dark:border-slate-600 border-slate-300"
-            >
-              <abbr title="Templates">
-                <BiFile />
-              </abbr>
-              <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded-xl shadow-md dark:bg-slate-700 bg-slate-200 dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-700 after:border-slate-200">
-                <ul className="h-full w-full flex flex-col justify-center space-y-2 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-sm px-1">
-                  {categories &&
-                    categories.map((category, index) => {
-                      return (
-                        <li
-                          onClick={() =>
-                            setValues({
-                              ...inputValue,
-                              message:
-                                templates.length >= 1
-                                  ? templates.filter(
-                                      (template) =>
-                                        template.name
-                                          .split(" ")
-                                          .join("")
-                                          .replace(/\(/g, "")
-                                          .replace(/\)/g, "")
-                                          .toLowerCase() ===
-                                        category
-                                          .split(" ")
-                                          .join("")
-                                          .replace(/\(/g, "")
-                                          .replace(/\)/g, "")
-                                          .toLowerCase()
-                                    )[0].message
-                                  : "",
-                            })
-                          }
-                          className="capitalize hover:opacity-80"
-                          value={category}
-                          key={index}
-                        >
-                          {category}
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
-            </div>
-            {/**Upload Recordings ========================================= */}
-            <abbr title="Upload Your Recording">
-              <div className="w-8 h-8 border border-slate-300 dark:border-slate-600 rounded-xl flex justify-center items-center">
+
+          {/**Top Section ============================= */}
+          <div className="w-full h-[90%] flex flex-col p-4">
+            <div className="w-full flex-[2] flex md:flex-col flex-row justify-between md:items-center">
+              <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
+                {/**Recipient Name ============================= */}
                 <label
-                  htmlFor="recording"
-                  className="w-full h-full flex justify-center items-center text-base text-slate-600 dark:text-slate-400 cursor-pointer"
+                  htmlFor="to"
+                  autoComplete="off"
+                  className="md:w-[48%] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
                 >
-                  <BiMicrophone className="text-lg" />
+                  <span>To : </span>
                   <input
-                    type="file"
-                    id="recording"
-                    name="recording"
-                    accept=".wav"
-                    value={recordingFile ? recordingFile.filename : ""}
-                    title="Upload Recording"
+                    type="text"
+                    id="to"
+                    name="to"
+                    placeholder="Restuarant ..."
+                    required={true}
+                    autoComplete="off"
+                    value={recepient}
+                    onKeyPress={() => setResults(true)}
+                    onKeyDown={() => setResults(true)}
+                    onFocus={() => setResults(true)}
                     onChange={(e) => {
-                      setFile(e.target.files[0]);
+                      setRecipient(e.target.value);
                     }}
-                    className="outline-none focus:outline-none hidden"
+                    className="h-8 w-[80%] md:w-[85%]  bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-500 focus:ring-0 focus:border-0 text-sm"
                   />
+                  <ul
+                    ref={closeSuggestionsRef}
+                    className={`${
+                      searchResults ? "" : "hidden"
+                    } absolute top-8 h-[11rem] w-full shadow-2xl dark:bg-slate-700 bg-slate-200 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                  >
+                    {contactsList}
+                  </ul>{" "}
+                </label>
+                {/**Subject ============================= */}
+                <label
+                  htmlFor="subject"
+                  className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                >
+                  <span>Subject :</span>
+                  <select
+                    className="h-8 w-[80%] md:w-[73%] p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    id="subject"
+                    name="subject"
+                    value={inputValue.category}
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        category: e.target.value,
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      Subject ...
+                    </option>
+                    {categoriesList}
+                  </select>
                 </label>
               </div>
-            </abbr>
-            {/**Due date ========================================= */}
-            <abbr title="Due Time">
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-400 border dark:border-slate-600 border-slate-300">
-                <BiCalendar className="absolute" />
-                <DueDate setValues={setValues} inputValue={inputValue} />
+              {/**Priority & Status ============================= */}
+              <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
+                {/**Priority  ======================================== */}
+                <label
+                  htmlFor="priority"
+                  className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                >
+                  <span>Priority :</span>
+                  <select
+                    className="h-8 w-[80%] md:w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    id="priority"
+                    name="priority"
+                    value={inputValue.priority}
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        priority: e.target.value,
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      Priority ...
+                    </option>
+                    <option className="capitalize">Low</option>
+                    <option className="capitalize">Medium</option>
+                    <option className="capitalize">High</option>
+                    <option className="capitalize">Urgent</option>
+                  </select>
+                </label>
+                {/**Status  ======================================== */}
+                <label
+                  htmlFor="status"
+                  className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                >
+                  <span>Status :</span>
+                  <select
+                    className="h-8 w-[80%] md:w-[75%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    id="status"
+                    name="status"
+                    value={inputValue.state}
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        state: e.target.value,
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      Status ...
+                    </option>
+                    <option className="capitalize" value="open">
+                      open
+                    </option>
+                    <option className="capitalize" value="on hold">
+                      on hold
+                    </option>
+                    <option className="capitalize" value="solved">
+                      first Contact Resolution
+                    </option>
+                  </select>
+                </label>
               </div>
-            </abbr>
-            {/**Send ========================================= */}
-            <abbr title="Open Ticket">
-              <button
-                type="submit"
-                className="h-8 w-28 flex justify-center items-center outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded-md text-slate-100 dark:text-slate-100 font-medium text-sm font-sans transition-all"
-              >
-                Submit now
-              </button>
-            </abbr>
+              {/**Complaintant Details ============================= */}
+              <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
+                {/**Complainat Email  ======================================== */}
+                <label
+                  htmlFor="email"
+                  autoComplete="off"
+                  className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                >
+                  <span>Email :</span>
+                  <input
+                    className="h-8 w-[80%] md:w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={inputValue.complainant_email}
+                    autoComplete="nope"
+                    placeholder="Complainant Email"
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        complainant_email: e.target.value,
+                      })
+                    }
+                  />
+                </label>
+                {/**Complainant Number  ======================================== */}
+                <label
+                  htmlFor="numbers"
+                  autoComplete="off"
+                  className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                >
+                  <span>Phone :</span>
+                  <input
+                    className="h-8 w-[80%] md:w-[75%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                    id="numbers"
+                    name="numbers"
+                    type="text"
+                    autoComplete="nope"
+                    placeholder="073 5698 625"
+                    required={true}
+                    pattern="^[0-9]{10}$"
+                    value={inputValue.complainant_number}
+                    onChange={(e) => {
+                      setValues({
+                        ...inputValue,
+                        complainant_number: e.target.value,
+                        ticket_id:
+                          allTickets.length >= 1 &&
+                          allTickets.filter(
+                            (ticket) =>
+                              ticket.ticket_id ===
+                              `#${(
+                                new Date().getSeconds() +
+                                (new Date().getTime() +
+                                  e.target.value
+                                    .split("")
+                                    .splice(3, 5)
+                                    .join(""))
+                              )
+                                .split("")
+                                .slice(9, 14)
+                                .join("")}`
+                          ).length <= 0
+                            ? `#${(
+                                new Date().getSeconds() +
+                                (new Date().getTime() +
+                                  e.target.value
+                                    .split("")
+                                    .splice(3, 5)
+                                    .join(""))
+                              )
+                                .split("")
+                                .slice(9, 14)
+                                .join("")}`
+                            : `#${
+                                (
+                                  new Date().getSeconds() +
+                                  (new Date().getTime() +
+                                    e.target.value
+                                      .split("")
+                                      .splice(3, 5)
+                                      .join(""))
+                                )
+                                  .split("")
+                                  .slice(9, 14)
+                                  .join("") + 1
+                              }`,
+                        agent: member_details[0].name,
+                        agent_email: member_details[0].email,
+                      });
+                    }}
+                  />
+                  <ul
+                    className={`${
+                      numbersArray.length >= 1 && showOpenedTickets
+                        ? ""
+                        : "hidden"
+                    } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border z-[999] rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
+                  >
+                    {exist}
+                    <label
+                      className="absolute bg-transparent top-[-0.5rem] right-2 outline-none focus:outline-none hover:opacity-80"
+                      htmlFor="suggestion"
+                    >
+                      <input
+                        type="checkbox"
+                        name="suggestion"
+                        id="suggestion"
+                        onChange={() => setShowOpen(false)}
+                        className="rounded checked:bg-slate-700"
+                      />
+                    </label>
+                  </ul>
+                </label>
+              </div>
+              {/**Complainant Name And Send As ============================= */}
+              <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
+                {/**Complainant Name =========================================== */}
+                <label
+                  htmlFor="email"
+                  className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                >
+                  <span>Name :</span>
+                  <input
+                    className="h-8 w-[80%] md:w-[80%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Complainant Name ..."
+                    value={inputValue.complainant_name}
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        complainant_name: e.target.value,
+                        agent: member_details[0].name,
+                        agent_email: member_details[0].email,
+                      })
+                    }
+                  />
+                </label>
+                {/**Select Team */}
+                {/**Send AS  ======================================== */}
+                <label
+                  htmlFor="priority"
+                  className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                >
+                  <span>Send As :</span>
+                  <select
+                    className="h-8 w-[80%] md:w-[72%] p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    id="priority"
+                    name="priority"
+                    value={inputValue.send_as}
+                    required={true}
+                    onChange={(e) =>
+                      setValues({
+                        ...inputValue,
+                        send_as: e.target.value,
+                      })
+                    }
+                  >
+                    <option className="capitalize" value="">
+                      Send As ...
+                    </option>
+                    {email_accounts.length >= 1 &&
+                      email_accounts.map((team) => {
+                        return (
+                          <option
+                            key={team.id}
+                            className="capitalize"
+                            value={team.name}
+                          >
+                            {team.name}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </label>
+              </div>
+            </div>
+            {/**Message ====================================== */}
+            <div className="w-full h-full flex-[5] md:h-[65%] lg:h-[70%] mt-4 rounded-xl">
+              <label htmlFor="message" className="w-full h-full">
+                <textarea
+                  className="resize-none w-full h-full bg-transparent rounded-xl  text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 border dark:border-slate-700 border-slate-300 overflow-hidden dark:text-slate-300 text-slate-700 focus:ring-0 focus:border-slate-300 outline-none focus:outline-none"
+                  placeholder="Type your message here ..."
+                  id="message"
+                  name="message"
+                  required={true}
+                  rows="5"
+                  value={inputValue.message}
+                  onChange={(e) =>
+                    setValues({
+                      ...inputValue,
+                      message: e.target.value,
+                    })
+                  }
+                ></textarea>
+              </label>
+            </div>
           </div>
-        </div>
-      </form>
+
+          {/**Bottom Controls ========================================= */}
+          <div className="dark:bg-slate-700 bg-slate-200 min-h-[3rem] h-[9%] md:h-[8%] w-full p-2 px-4 flex justify-between items-center overflow-hidden select-none">
+            <div className="flex justify-center items-center">
+              {/**Reset Input ========================================= */}
+              <abbr title="Clear Inputs">
+                <span
+                  onClick={() => {
+                    setValues({
+                      recipient_name: "",
+                      recipient_email: "",
+                      agent: "",
+                      priority: "",
+                      category: "",
+                      branch_company: "",
+                      message: "",
+                      state: "",
+                      date: "",
+                      ticket_id: "",
+                      agent_email: "",
+                      complainant_name: "",
+                      complainant_email: "",
+                      complainant_number: "",
+                      send_as: "",
+                    });
+                    setFile(false);
+                  }}
+                  className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400 cursor-pointer"
+                >
+                  <BiTrash />
+                </span>
+              </abbr>
+              {/**Attach A file ========================================= */}
+              <abbr title="Attachment">
+                <label
+                  htmlFor="attachment"
+                  className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400"
+                >
+                  <BiPaperclip />
+                  <input
+                    type="file"
+                    name="attachment"
+                    id="attachment"
+                    className="hidden"
+                  />
+                </label>
+              </abbr>
+            </div>
+            <div className="flex items-center space-x-2">
+              {/**Templates ========================================= */}
+              <div
+                id="email"
+                className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded-xl border dark:border-slate-600 border-slate-300"
+              >
+                <abbr title="Templates">
+                  <BiFile />
+                </abbr>
+                <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded-xl shadow-md dark:bg-slate-700 bg-slate-200 dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-700 after:border-slate-200">
+                  <ul className="h-full w-full flex flex-col justify-center space-y-2 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-sm px-1">
+                    {categories &&
+                      categories.map((category, index) => {
+                        return (
+                          <li
+                            onClick={() =>
+                              setValues({
+                                ...inputValue,
+                                message:
+                                  templates.length >= 1
+                                    ? templates.filter(
+                                        (template) =>
+                                          template.name
+                                            .split(" ")
+                                            .join("")
+                                            .replace(/\(/g, "")
+                                            .replace(/\)/g, "")
+                                            .toLowerCase() ===
+                                          category
+                                            .split(" ")
+                                            .join("")
+                                            .replace(/\(/g, "")
+                                            .replace(/\)/g, "")
+                                            .toLowerCase()
+                                      )[0].message
+                                    : "",
+                              })
+                            }
+                            className="capitalize hover:opacity-80"
+                            value={category}
+                            key={index}
+                          >
+                            {category}
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </div>
+              {/**Upload Recordings ========================================= */}
+              <abbr title="Upload Your Recording">
+                <div className="w-8 h-8 border border-slate-300 dark:border-slate-600 rounded-xl flex justify-center items-center">
+                  <label
+                    htmlFor="recording"
+                    className="w-full h-full flex justify-center items-center text-base text-slate-600 dark:text-slate-400 cursor-pointer"
+                  >
+                    <BiMicrophone className="text-lg" />
+                    <input
+                      type="file"
+                      id="recording"
+                      name="recording"
+                      accept=".wav"
+                      value={recordingFile ? recordingFile.filename : ""}
+                      title="Upload Recording"
+                      onChange={(e) => {
+                        setFile(e.target.files[0]);
+                      }}
+                      className="outline-none focus:outline-none hidden"
+                    />
+                  </label>
+                </div>
+              </abbr>
+              {/**Due date ========================================= */}
+              <abbr title="Due Time">
+                <div className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-400 border dark:border-slate-600 border-slate-300">
+                  <BiCalendar className="absolute" />
+                  <DueDate setValues={setValues} inputValue={inputValue} />
+                </div>
+              </abbr>
+              {/**Send ========================================= */}
+              <abbr title="Open Ticket">
+                <button
+                  type="submit"
+                  className="h-8 w-28 flex justify-center items-center outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded-md text-slate-100 dark:text-slate-100 font-medium text-sm font-sans transition-all"
+                >
+                  Submit now
+                </button>
+              </abbr>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

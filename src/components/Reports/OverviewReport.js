@@ -200,7 +200,7 @@ const OverviewReport = ({ data }) => {
   //Component =============================
   return (
     <div className="col-span-3 lg:col-span-1  rounded-xl flex flex-col space-y-4">
-      <div className="h-[13rem] dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl">
+      <div className="h-[13rem] dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl shadow">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
           Tickets Statistics
         </h2>
@@ -280,7 +280,7 @@ const OverviewReport = ({ data }) => {
       </div>
 
       {/**Traffic trend chart ======================== */}
-      <div className="h-[18rem] dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-xl">
+      <div className="h-[18rem] dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-xl shadow">
         <div className="h-full w-full overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
@@ -325,7 +325,9 @@ const OverviewReport = ({ data }) => {
               },
               series: [
                 {
-                  data: chartData.map((data) => (data.value / chartData.length).toFixed(0)),
+                  data: chartData.map((data) =>
+                    (data.value / chartData.length).toFixed(0)
+                  ),
                   type: "line",
                   smooth: true,
                   showSymbol: false,

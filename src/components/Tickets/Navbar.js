@@ -164,7 +164,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
         />
         <button
           onClick={() => setfiltersModal(true)}
-          className="h-9 w-11 rounded-md flex space-x-2 justify-center items-center dark:bg-slate-800 bg-slate-200 focus:outline-none outline-none custom-shadow hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold"
+          className="h-9 w-11 rounded-md flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-200 focus:outline-none outline-none custom-shadow hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold"
         >
           <abbr title="filters" className="">
             <BsFunnelFill className="dark:text-slate-300 text-slate-800 font-bold" />
@@ -174,7 +174,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
         {/**Assign Agent ================================= */}
         <button
           onClick={() => setPanel(true)}
-          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  dark:text-slate-300 text-slate-800  font-semibold custom-shadow ${
+          className={`dark:bg-[#182235] bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  dark:text-slate-300 text-slate-800  font-semibold custom-shadow ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
@@ -191,7 +191,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
             let code = prompt("Enter Pin To Perform Action");
             code === "0001" ? deleteSelected() : alert("Wrong Pin");
           }}
-          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  text-red-600  font-semibold custom-shadow ${
+          className={`dark:bg-[#182235] bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  text-red-600  font-semibold custom-shadow ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
@@ -204,7 +204,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
 
         {/**Mark All ================================= */}
         <button
-          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  flex items-center justify-center  ${
+          className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  flex items-center justify-center custom-shadow  ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"

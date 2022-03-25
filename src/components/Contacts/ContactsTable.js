@@ -110,7 +110,7 @@ const Table = ({ setModal }) => {
                   let pin = prompt("Enter Admin Pin");
                   pin === "0001" ? deleteCont() : alert("Wrong Pin");
                 }}
-                className="text-red-500 p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
+                className="text-red-500 p-2 border-transparent border bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
               >
                 <HiOutlineTrash />
               </button>
@@ -141,7 +141,7 @@ const Table = ({ setModal }) => {
       </div>
       <div className="w-full h-[31rem] px-2 overflow-hidden overflow-y-scroll">
         <table className="min-w-full  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-          <thead className="sticky top-0 z-[99]">
+          <thead className="sticky top-0 z-[99] dark:bg-slate-800 bg-slate-200">
             <tr className="w-full h-16 border-gray-300 dark:border-slate-700 border-b py-8">
               <th className="pl-8 text-slate-900 dark:text-gray-400 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 <input
