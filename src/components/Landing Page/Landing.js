@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import Cloud from "./Cloud";
@@ -11,6 +11,7 @@ import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router";
 import Help from "./../ClientSupport/Help";
+import Cookies from "./Cookies";
 
 const Landing = () => {
   const logged = useSelector((state) => state.UserInfo.authenticated);
@@ -58,25 +59,25 @@ const Landing = () => {
             <div className="hidden lg:flex space-x-4">
               <Link
                 to=""
-                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
               >
                 Solutions
               </Link>
               <Link
                 to=""
-                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
               >
                 Pricing
               </Link>
               <Link
                 to=""
-                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
               >
                 Partners
               </Link>
               <Link
                 to=""
-                className="text-slate-500 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
               >
                 Company
               </Link>
@@ -113,9 +114,12 @@ const Landing = () => {
               only on what matters with a short learning curve.
             </p>
             <div className="h-12 w-full flex justify-center gap-6">
-              <button className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-300">
-                Get started
-              </button>
+              <NavLink
+                to="/getting-started"
+                className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-300"
+              >
+                <div className="h-full w-full flex justify-center items-center">Get started</div>
+              </NavLink>
               <button className="bg-[#1d4fd8c7] h-10 w-[8rem] rounded-md text-slate-300 font-medium tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
                 Live demo
               </button>
@@ -215,6 +219,7 @@ const Landing = () => {
       </section>
       <Footer />
       <Help />
+      <Cookies/>
     </div>
   );
 };

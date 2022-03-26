@@ -119,7 +119,7 @@ const Profile = () => {
           ></span>
 
           {/** Change Agent Online Stutus ============*/}
-          <div role="tooltip" className="hoverProfile_Details p-4 absolute w-[12rem] overflow-hidden dark:bg-slate-800 bg-white hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.3rem] after:content-[''] after:fixed after:top-[4rem] after:right-[0.8rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-white after:border-l-transparent">
+          <div role="tooltip" className="hoverProfile_Details p-4 absolute w-[12rem] overflow-hidden dark:bg-slate-700 bg-white hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.3rem] after:content-[''] after:fixed after:top-[4rem] after:right-[0.8rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
             <div className="pb-2">
               <small
                 className={`text-xs text-center capitalize font-semibold flex items-center space-x-1 justify-center ${
@@ -156,7 +156,7 @@ const Profile = () => {
                     );
                   }, 3000);
                 }}
-                className="h-8 border-b border-t hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
+                className="h-8 border-b border-t hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
                   <BsStopFill /> <span>available</span>
@@ -180,7 +180,7 @@ const Profile = () => {
                     );
                   }, 3000);;
                 }}
-                className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
+                className="h-8 border-b hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
                   <BsStopFill /> <span>Busy</span>
@@ -204,7 +204,7 @@ const Profile = () => {
                     );
                   },3000);
                 }}
-                className="h-8 border-b hover:opacity-80 dark:border-slate-700 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
+                className="h-8 border-b hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
               >
                 <span className="flex items-center space-x-1">
                   <BsStopFill /> <span>Unavailable</span>

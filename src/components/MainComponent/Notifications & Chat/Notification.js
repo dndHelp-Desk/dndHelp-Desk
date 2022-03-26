@@ -44,7 +44,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
     <div
     role="banner"
       ref={panelRef}
-      className={`h-[20rem] w-[15rem] z-[999] dark:bg-slate-800 bg-white shadow-2xl rounded-lg p-2 absolute right-4 top-[4.2rem] after:content-[''] after:fixed after:top-[3.5rem] after:right-[6.8rem] after:mt-[-15px] after:border-[15px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-white after:border-l-transparent flex-col items-center lg:border-t dark:border-slate-800 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap overflow-hidden ${
+      className={`h-[20rem] w-[15rem] z-[999] dark:bg-slate-700 bg-white shadow-2xl rounded-lg p-2 absolute right-4 top-[4.2rem] after:content-[''] after:fixed after:top-[3.5rem] after:right-[6.8rem] after:mt-[-15px] after:border-[15px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent flex-col items-center lg:border-t dark:border-slate-700 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap overflow-hidden ${
         openNotifications === true ? "flex" : "hidden"
       }`}
     >

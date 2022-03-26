@@ -13,7 +13,7 @@ const TopCards = ({ data }) => {
   return (
     <div className="w-full rounded-xl grid grid-cols-1 lg:grid-cols-3 gap-4">
       {/**First Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
+      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
         <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h3 className="dark:text-slate-400  flex space-x-4 text-slate-900 font-bold font-sans leading-1 text-[1.7rem]">
@@ -23,7 +23,7 @@ const TopCards = ({ data }) => {
             </h3>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>Resolved</span>
-              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-900 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsCheckAll />
               </span>
             </h2>
@@ -39,7 +39,7 @@ const TopCards = ({ data }) => {
             </h3>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>First-CR</span>
-              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-900 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsPatchCheck />
               </span>
             </h2>
@@ -48,7 +48,7 @@ const TopCards = ({ data }) => {
       </div>
 
       {/**Second Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
+      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
         <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h3 className="dark:text-slate-400  flex space-x-4 text-slate-900 font-bold font-sans leading-1 text-[1.7rem]">
@@ -62,7 +62,7 @@ const TopCards = ({ data }) => {
             </h3>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>Overdue</span>
-              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-900 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsStopwatch />
               </span>
             </h2>
@@ -78,7 +78,7 @@ const TopCards = ({ data }) => {
             </h3>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>re-opened</span>
-              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-900 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsArrowClockwise />
               </span>
             </h2>
@@ -87,7 +87,7 @@ const TopCards = ({ data }) => {
       </div>
 
       {/**Third Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-[#1e293b18] bg-[#e2e8f059] border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
+      <div className="col-span-1 h-[7rem] rounded-lg dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
         <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h3 className="dark:text-slate-400  flex space-x-4 text-slate-900 font-bold font-sans leading-1 text-[1.7rem]">
@@ -97,7 +97,7 @@ const TopCards = ({ data }) => {
             </h3>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>Open</span>
-              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-900 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsEnvelopeOpen />
               </span>
             </h2>
@@ -113,7 +113,7 @@ const TopCards = ({ data }) => {
             </h3>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>on hold</span>
-              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-800 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-xl custom-shadow  dark:bg-slate-900 bg-slate-300 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsDashCircleDotted />
               </span>
             </h2>

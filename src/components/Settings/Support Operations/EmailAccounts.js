@@ -95,7 +95,7 @@ const EmailAccounts = () => {
                 }}
                 className=""
               >
-                <fieldset className="border dark:border-slate-800 border-slate-300 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-[#25396823] bg-slate-200">
+                <fieldset className="border dark:border-slate-700 border-slate-300 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-[#25396823] bg-slate-100">
                   {" "}
                   <legend className="text-slate-600 dark:text-slate-400 font-semibold uppercase text-sm">
                     {account.name}
@@ -207,13 +207,13 @@ const EmailAccounts = () => {
                         });
                         setEditable(account.id);
                       }}
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-l-md bg-blue-700 text-slate-100 border-r border-slate-400 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-l-md bg-slate-700 text-slate-100 border-r border-slate-400 font-bold tracking-wider text-xs uppercase"
                     >
                       Edit
                     </button>
                     <button
                       type="submit"
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all bg-blue-700 text-slate-100 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all bg-slate-700 text-slate-100 font-bold tracking-wider text-xs uppercase"
                     >
                       Save
                     </button>

@@ -148,6 +148,32 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    //Send SMS ===========================================
+    /*var xhr = new XMLHttpRequest(),
+      body = JSON.stringify({
+        messages: [
+          {
+            channel: "whatsapp",
+            to: "27732341215",
+            content: `${inputValue.message}`,
+          },
+          {
+            channel: "sms",
+            to: "27732341215",
+            content: `${inputValue.message}`,
+          },
+        ],
+      });
+    xhr.open("POST", "https://platform.clickatell.com/v1/message", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "KuUgDS0pSiOYrnltdo0opA==");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        console.log("success");
+      }
+    };
+    xhr.send(body);*/
+
     // Upload Recordings
     recordingFile &&
       inputValue.state === "solved" &&
@@ -220,7 +246,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
         inputValue.complainant_email,
         inputValue.complainant_number,
         inputValue.send_as,
-        `${recordingFile && inputValue.state === "solved"?true:false}`
+        `${recordingFile && inputValue.state === "solved" ? true : false}`
       );
 
       //Send Email Using Nodemailer ===================
@@ -729,7 +755,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 >
                   <span>Name :</span>
                   <input
-                    className="h-8 w-[80%] md:w-[80%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 autofill:hidden"
+                    className="h-8 w-[80%] md:w-[80%] p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
                     id="name"
                     name="name"
                     type="text"

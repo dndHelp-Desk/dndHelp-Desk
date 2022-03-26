@@ -110,7 +110,7 @@ const Table = ({ setModal }) => {
                   let pin = prompt("Enter Admin Pin");
                   pin === "0001" ? deleteCont() : alert("Wrong Pin");
                 }}
-                className="text-red-500 p-2 border-transparent border bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
+                className="text-red-500 p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-700 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
               >
                 <HiOutlineTrash />
               </button>

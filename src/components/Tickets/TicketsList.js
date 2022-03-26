@@ -7,7 +7,7 @@ import {
   reOpenTicket,
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
-import { BsBookmarkCheck, BsBookmarkX, BsBookmark } from "react-icons/bs";
+import { BsStopFill } from "react-icons/bs";
 import { BiChevronRight, BiChevronLeft, BiArrowBack } from "react-icons/bi";
 import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
@@ -118,34 +118,12 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         <div
           role="row"
           key={ticket.id}
-          //Filter Added Using Conditional Styling =============================
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-800 border-[#94a3b8a8] relative rounded-l-md dark:bg-[#182235] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-[#33415596] border-[#94a3b8a8] relative rounded-l-md dark:bg-[#182235] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
           }`}
         >
-          {/**Indicate The ticket is resolved ================*/}
-          {ticket.status && ticket.status.toLowerCase() === "solved" && (
-            <BsBookmarkCheck className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-blue-500" />
-          )}
-
-          {/**Indicate The ticket that is not solved or  overdue ================*/}
-          {(ticket.status.toLowerCase() === "open" &&
-            new Date(ticket.due_date).getTime() > new Date().getTime()) ||
-          ticket.status.toLowerCase() === "on hold" ? (
-            <BsBookmark className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs dark:text-slate-400 text-slate-500" />
-          ) : (
-            ""
-          )}
-
-          {/**Indicate The ticket that is  overdue ================*/}
-          {new Date(ticket.due_date).getTime() <= new Date().getTime() &&
-            ticket.status &&
-            ticket.status.toLowerCase() === "open" && (
-              <BsBookmarkX className="absolute left-[1.2rem] top-0 flex justify-center items-center tracking-wide rounded-sm w-4 h-5 text-xs text-red-500" />
-            )}
-
           {/**Indicate if it's new messsage ================*/}
           {unread.length >= 1 &&
             unread.filter((data) => data.ticket_id === ticket.ticket_id)
@@ -211,7 +189,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   });
                 }
               }}
-              className="h-full w-[85%] flex flex-col justify-center space-y-1"
+              className="h-full w-[85%] flex flex-col justify-center space-y-1 relative"
             >
               <abbr title={ticket.ticket_id}>
                 <h2 className="dark:text-slate-300 text-slate-900 text-xs dark:font-semibold font-bold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
@@ -223,8 +201,29 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   {ticket.branch_company}
                 </abbr>
               </h5>
-              <small className="dark:text-slate-400 text-slate-500 text-[0.6rem] whitespace-nowrap">
-                Due on {new Date(ticket.due_date).toLocaleString()}
+              {/**Indicate The ticket that is solved or  overdue and open ================*/}
+              <small className="dark:text-slate-400 text-slate-500 flex items-center space-x-1 text-[0.6rem] whitespace-nowrap">
+                <span
+                  className={`${
+                    new Date(ticket.due_date).getTime() <=
+                      new Date().getTime() &&
+                    ticket.status &&
+                    ticket.status.toLowerCase() === "open"
+                      ? "text-red-600"
+                      : (ticket.status.toLowerCase() === "open" &&
+                          new Date(ticket.due_date).getTime() >
+                            new Date().getTime()) ||
+                        ticket.status.toLowerCase() === "on hold"
+                      ? "text-slate-500"
+                      : ticket.status &&
+                        ticket.status.toLowerCase() === "solved"
+                      ? "text-blue-600"
+                      : ""
+                  } `}
+                >
+                  <BsStopFill />
+                </span>{" "}
+                <span>Due on {new Date(ticket.due_date).toLocaleString()}</span>
               </small>
             </div>
           </div>
@@ -350,7 +349,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             </div>
             {/**Pagination ================================ */}
             <div className="h-[10%] md:h-[3.2rem] w-full bottom-0 flex justify-center items-center">
-              <div className="h-8 w-40 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-200 py-1 rounded-md custom-shadow">
+              <div className="h-8 w-40 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-200 py-1 rounded-md border dark:border-[#33415596] border-slate-300">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);

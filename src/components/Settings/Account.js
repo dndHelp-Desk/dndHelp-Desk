@@ -122,7 +122,7 @@ const Account = () => {
   return (
     <div className="h-full w-full grid grid-cols-1 lg:grid-cols-2 p-1">
       {/**Profile Datils ======================= */}
-      <div className="col-span-1 lg:border-r dark:border-slate-800 border-slate-300 flex flex-col p-6 space-y-2">
+      <div className="col-span-1 lg:border-r dark:border-slate-700 border-slate-300 flex flex-col p-6 space-y-2">
         <div
           style={{
             backgroundImage: `url(
@@ -149,7 +149,7 @@ const Account = () => {
           </h3>
         </div>
         {/**Bio ====================== */}
-        <div className=" mt-[5rem] border border-slate-300 dark:border-slate-800 p-4 w-full min-h-36 rounded-lg leading-12">
+        <div className=" mt-[5rem] border border-slate-300 dark:border-slate-700 p-4 w-full min-h-36 rounded-lg leading-12">
           <h6 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide">
             About Me
           </h6>

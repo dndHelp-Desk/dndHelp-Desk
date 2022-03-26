@@ -17,7 +17,7 @@ const SettingsTooltip = () => {
     <>
       <div
         role="tooltip"
-        className="min-h-[10rem] w-[13rem] z-[9999] dark:bg-slate-800 bg-white shadow-2xl rounded-lg p-2  py-5 absolute right-[-3rem] top-[3.5rem] after:content-[''] after:fixed after:top-[4rem] after:right-[3.8rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-800 after:border-b-white after:border-l-transparent items-center lg:border-t dark:border-slate-800 border-slate-300no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap overflow-hidden hidden group-hover:flex flex-col "
+        className="min-h-[10rem] w-[13rem] z-[9999] dark:bg-slate-700 bg-white shadow-2xl rounded-lg p-2  py-5 absolute right-[-3rem] top-[3.5rem] after:content-[''] after:fixed after:top-[4rem] after:right-[3.8rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent  lg:border-t dark:border-slate-700 border-slate-300 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap overflow-hidden hidden group-hover:flex flex-col items-center"
       >
         <h2 className="dark:text-slate-300 text-slate-800 text-xl font-bold text-left w-full px-2">
           Settings

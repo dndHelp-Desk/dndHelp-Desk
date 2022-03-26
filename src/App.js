@@ -29,6 +29,9 @@ const AutomatedReports = lazy(() =>
   import("./components/Settings/AutomatedReports")
 );
 const Solutions = lazy(() => import("./components/Settings/Solutions"));
+const GettingStarted = lazy(() =>
+  import("./components/Landing Page/GettingStarted")
+);
 
 const App = () => {
   return (
@@ -48,6 +51,7 @@ const App = () => {
         >
           <Routes>
             <Route exact path="/" element={<Landing />} />
+            <Route exact path="/getting-started" element={<GettingStarted />} />
             <Route exact path="/logIn" element={<LogIn />} />
             <Route exact path="/support" element={<SupportHome />}>
               <Route path="new-ticket" element={<NewTicket />} />

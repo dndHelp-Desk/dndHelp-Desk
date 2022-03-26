@@ -123,7 +123,7 @@ const MainComponent = () => {
         {/**Data Fetching Components */}
         <TicketsnUserData />
         {/**NavBar ============== */}
-        <div className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-[#1e293b18] bg-[#e2e8f059] border-b dark:border-slate-800 border-slate-300">
+        <div className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-slate-200 border-b dark:border-slate-800 border-slate-300">
           {/**Alert */}
           <Alert />
           <nav className="container w-[90%] md:w-full 2xl:w-[72rem] backdrop-blur-lg p-2 flex justify-between items-center relative z-[999]">

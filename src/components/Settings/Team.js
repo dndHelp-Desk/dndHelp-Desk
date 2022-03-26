@@ -143,7 +143,7 @@ const Team = () => {
       return (
         <div
           key={id}
-          className={`w-full snap_child h-16 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 grid grid-cols-5 space-x-4 p-2 border dark:border-slate-800 border-slate-300 ${
+          className={`w-full snap_child h-16 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 grid grid-cols-5 space-x-4 p-2 border dark:border-slate-700 border-slate-400 ${
             user.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -246,7 +246,7 @@ const Team = () => {
         <section className="col-span-1 h-[35rem] bg-transparent rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
           {allMembers.length >= 1 && (
             <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-              <h2 className="w-full h-6 text-xs sticky top-0 z-[99] flex items-center justify-between space-x-4 font-semibold uppercase dark:text-slate-300 text-slate-700 px-3 border-b border-slate-300 dark:border-slate-700">
+              <h2 className="w-full h-6 text-xs sticky top-0 z-[99] flex items-center justify-between space-x-4 font-semibold uppercase dark:text-slate-300 text-slate-700 px-3 border-b border-slate-400 dark:border-slate-700">
                 <span>User-Name</span>
                 <span>Action</span>
               </h2>
@@ -255,7 +255,7 @@ const Team = () => {
           )}
           {!allMembers.length >= 1 && (
             <div className="h-full w-full">
-              <div className="h-full w-full rounded-lg border dark:border-slate-800 border-slate-300 p-6">
+              <div className="h-full w-full rounded-lg border dark:border-slate-700 border-slate-400 p-6">
                 <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
                   add your team members
                 </h2>
