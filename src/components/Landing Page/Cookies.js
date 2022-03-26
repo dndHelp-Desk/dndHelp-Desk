@@ -16,9 +16,9 @@ const Cookies = () => {
     >
       <div
         id="menu"
-        className="bottom-6 xl:bottom-20 sm:right-6 xl:right-20 fixed sticky-0"
+        className="bottom-8 right-6 fixed sticky-0"
       >
-        <div className="w-[22rem] overflow-hidden rounded-xl relative flex flex-col justify-start items-start bg-white px-4 md:px-8 py-12">
+        <div className="w-[22rem] overflow-hidden rounded-xl relative flex flex-col justify-start items-start bg-slate-100 shadow-2xl drop-shadow-2xl px-4 md:px-8 py-12">
           <div role="banner" className="flex flex-col items-center w-full">
             <svg
               width="96"

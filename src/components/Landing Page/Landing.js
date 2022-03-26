@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import darkLogo from "./images/dndHelp-Desk_Dark.png";
+import lightLogo from "./images/dndHelp-Desk_Light.png";
 import Cloud from "./Cloud";
 import HeroImg from "./images/Hero.jpg";
 import ShowcaseOne from "./images/chatDark.png";
@@ -10,7 +10,7 @@ import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import Help from "./../ClientSupport/Help";
+import Help from "../Others/Help";
 import Cookies from "./Cookies";
 
 const Landing = () => {
@@ -26,15 +26,15 @@ const Landing = () => {
 
   //Component =====================
   return (
-    <div className="bg-slate-50 pb-2 relative h-fit">
+    <div className="bg-slate-300 pb-2 relative h-fit">
       {/**Navigation ========================== */}
-      <nav className="w-full bg-slate-200">
-        <div className="h-[20rem] py-6 w-full bg-transparent m-auto">
-          <div className="w-full h-[4rem] py-2 flex justify-between items-center border-b border-slate-400">
+      <nav className="w-full bg-gradient-to-b from-slate-500 to-slate-300">
+        <div className="h-[20rem] w-full m-auto">
+          <div className="w-full h-[4rem] fixed top-0 z-[99] flex justify-between items-center bg-slate-900">
             {/**Logo ==================== */}
             <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
               <img
-                src={darkLogo}
+                src={lightLogo}
                 alt="logo"
                 className="object-cover object-center w-[14rem]"
               />
@@ -49,7 +49,7 @@ const Landing = () => {
             </button>
             <div
               ref={smallMenuRef}
-              className={`absolute h-[15rem] w-[12rem] shadow-2xl lg:hidden bg-slate-800 rounded-xl top-[5rem] left-4  ${
+              className={`absolute h-[15rem] w-[12rem] shadow-2xl lg:hidden bg-slate-300 rounded-xl top-[5rem] left-4  ${
                 menu ? "" : "hidden"
               }`}
             ></div>
@@ -59,25 +59,25 @@ const Landing = () => {
             <div className="hidden lg:flex space-x-4">
               <Link
                 to=""
-                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
               >
                 Solutions
               </Link>
               <Link
                 to=""
-                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
               >
                 Pricing
               </Link>
               <Link
                 to=""
-                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
               >
                 Partners
               </Link>
               <Link
                 to=""
-                className="text-slate-700 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
               >
                 Company
               </Link>
@@ -86,7 +86,7 @@ const Landing = () => {
             <div className="flex space-x-2 items-center relative px-4">
               {/**Logiin button ================== */}
               <Link to="/logIn">
-                <button className="bg-slate-800 h-10 w-[7rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
+                <button className="bg-blue-600 h-9 w-[6rem] rounded-md text-slate-300 font-bold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
                   Log In
                 </button>
               </Link>
@@ -96,7 +96,7 @@ const Landing = () => {
       </nav>
 
       {/** Hero Section ========================= */}
-      <section className="w-full bg-gradient-to-b from-slate-300 to-slate-50 p-6">
+      <section className="w-full bg-slate-300 p-6">
         <div
           style={{ backgroundImage: `url(${HeroImg})` }}
           className="w-[90%] md:w-full container 2xl:w-[75rem]  m-auto h-[30rem] rounded-xl bg-slate-900 mt-[-15rem] bg-no-repeat bg-center bg-cover overflow-hidden"
@@ -118,7 +118,9 @@ const Landing = () => {
                 to="/getting-started"
                 className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-300"
               >
-                <div className="h-full w-full flex justify-center items-center">Get started</div>
+                <div className="h-full w-full flex justify-center items-center">
+                  Get started
+                </div>
               </NavLink>
               <button className="bg-[#1d4fd8c7] h-10 w-[8rem] rounded-md text-slate-300 font-medium tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
                 Live demo
@@ -134,7 +136,7 @@ const Landing = () => {
       {/**First Section ================================ */}
       <section className="w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
         <div className="col-span-1 flex flex-col justify-center p-4">
-          <div className="border-b border-slate-300 space-y-4 py-2">
+          <div className="border-b border-slate-900 space-y-4 py-2">
             <h2 className="text-slate-800 text-2xl font-bold tracking-tightest">
               Stay on top of your customers
             </h2>
@@ -174,7 +176,7 @@ const Landing = () => {
           <img
             src={ShowcaseTwo}
             alt=""
-            className="object-center object-fit rounded-tr-xl rounded-br-xl shadow-xl w-[90%]"
+            className="object-center object-fit rounded-tr-xl rounded-br-xl w-[90%] shadow-2xl drop-shadow-2xl"
           />
         </div>
         <div className="col-span-1 flex flex-col justify-center p-4">
@@ -219,7 +221,7 @@ const Landing = () => {
       </section>
       <Footer />
       <Help />
-      <Cookies/>
+      <Cookies />
     </div>
   );
 };

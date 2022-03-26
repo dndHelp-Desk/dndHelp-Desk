@@ -8,7 +8,7 @@ import {
 import lightLogo from "./images/dndHelp-Desk_Light.png";
 import TicketStatus from "./TicketStatus";
 import DataFetching from "./DataFetching"
-import Help from "./Help";
+import Help from "./../Others/Help";
 
 const SupportHome = () => {
   const location = useLocation();

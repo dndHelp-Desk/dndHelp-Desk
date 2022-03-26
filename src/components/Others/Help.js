@@ -15,9 +15,9 @@ const Help = () => {
       ref={closeChatRef}
       className={`${
         chatStatus === true
-          ? "h-[30rem] w-[20rem]"
+          ? "h-[30rem] w-[22rem]"
           : "cursor-pointer hover:bg-slate-800 h-14 w-20"
-      } transition-all flex bg-slate-900 rounded-xl overflow-hidden fixed left-6 bottom-6 justify-center items-center`}
+      } transition-all flex bg-slate-900 rounded-xl overflow-hidden fixed left-6 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl`}
     >
       <BsFillChatSquareTextFill
         className={`text-2xl text-slate-300 ${chatStatus ? "hidden" : "flex"}`}
@@ -42,20 +42,17 @@ const Help = () => {
           <BsXSquareFill className="text-slate-400" />
         </button>
         {/***Logo =================================== */}
-        <div className="h-20 w-full bg-slate-800 flex justify-center items-center">
+        <div className="h-20 w-[95%] m-auto bg-slate-900 flex justify-center items-center border-b border-slate-500">
           <h2 className="text-2xl font-semibold text-slate-800 relative">
             <img
               src={lightLogo}
               alt="logo"
               className="w-[90%] h-[90%] m-auto object-cover object-center"
             />
-            <span className="text-slate-400 absolute bottom-6 left-[28.5%] text-sm font-semibold border-b border-slate-400">
-              Support
-            </span>
           </h2>
         </div>
         {/***Contents =================================== */}
-        <form className="h-[23rem] w-[90%] m-auto bg-slate-800 rounded-xl flex flex-col p-1">
+        <form className="h-[23rem] w-[90%] m-auto bg-slate-800 rounded-lg flex flex-col p-1">
           <div className="w-full h-[90%]"></div>
           <div className="w-full h-[10%] bg-slate-900 rounded-xl"></div>
         </form>
