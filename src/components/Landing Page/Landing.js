@@ -154,10 +154,10 @@ const Landing = () => {
               Get started
             </button>
           </div>
-          <p className="text-slate-500 text-sm mt-4">
-            “Revolve your world around the customer and more customers will
-            revolve around you.” – Heather Williams
-          </p>
+          <q className="text-slate-500 text-sm mt-4">
+            Revolve your world around the customer and more customers will
+            revolve around you.
+          </q>
         </div>
         <div className="col-span-1 justify-end flex items-center rounded-tr-md rounded-br-xl py-8">
           {" "}
