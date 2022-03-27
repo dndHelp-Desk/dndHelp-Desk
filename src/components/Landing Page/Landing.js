@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import lightLogo from "./images/dndHelp-Desk_Light.png";
 import heroTop from "./images/heroTop.png"
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import Cloud from "./Cloud";
-import HeroImg from "./images/Hero.jpg";
 import halfDark_Chat from "./images/halfDark_Chat.png";
 import ShowcaseTwo from "./images/chatLight.png";
 import Footer from "./Footer";
@@ -125,7 +123,7 @@ const Landing = () => {
           <div className="flex-[1] h-full bg-transparent p-6 flex justify-center items-center">
             <img
               src={heroTop}
-              alt="hero-image"
+              alt="showcase"
               className="object-fit object-center object-cover rounded-xl shadow-2xl drop-shadow-2xl"
             />
           </div>
