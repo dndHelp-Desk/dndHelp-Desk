@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import lightLogo from "./images/dndHelp-Desk_Light.png";
+import heroTop from "./images/heroTop.png"
+import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import Cloud from "./Cloud";
 import HeroImg from "./images/Hero.jpg";
-import ShowcaseOne from "./images/chatDark.png";
+import halfDark_Chat from "./images/halfDark_Chat.png";
 import ShowcaseTwo from "./images/chatLight.png";
 import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
@@ -27,19 +29,18 @@ const Landing = () => {
   //Component =====================
   return (
     <div className="bg-slate-300 pb-2 relative h-fit">
-      {/**Navigation ========================== */}
-      <nav className="w-full bg-gradient-to-b from-slate-500 to-slate-300">
-        <div className="h-[20rem] w-full m-auto">
-          <div className="w-full h-[4rem] fixed top-0 z-[99] flex justify-between items-center bg-slate-900">
+      <section className="h-fit bg-slate-300">
+        {/**Navigation ========================== */}
+        <nav className="w-full">
+          <div className="w-full h-[4rem] z-[99] flex justify-between items-center bg-slate-300 border-b border-slate-500 px-12">
             {/**Logo ==================== */}
             <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
               <img
-                src={lightLogo}
+                src={darkLogo}
                 alt="logo"
                 className="object-cover object-center w-[14rem]"
               />
             </div>
-
             {/**Small Menu Options =================== */}
             <button
               onClick={() => setMenu(true)}
@@ -54,60 +55,54 @@ const Landing = () => {
               }`}
             ></div>
             {/**Small Menu Options =================== */}
-
             {/**Menu Options ========================= */}
             <div className="hidden lg:flex space-x-4">
               <Link
                 to=""
-                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
                 Solutions
               </Link>
               <Link
                 to=""
-                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
                 Pricing
               </Link>
               <Link
                 to=""
-                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
                 Partners
               </Link>
               <Link
                 to=""
-                className="text-slate-300 font-semibold text-base hover:text-blue-600 "
+                className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
                 Company
               </Link>
             </div>
-
             <div className="flex space-x-2 items-center relative px-4">
               {/**Logiin button ================== */}
               <Link to="/logIn">
-                <button className="bg-blue-600 h-9 w-[6rem] rounded-md text-slate-300 font-bold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
+                <button className="bg-slate-900 h-9 w-[7rem] rounded-md text-slate-300 font-bold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
                   Log In
                 </button>
               </Link>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      {/** Hero Section ========================= */}
-      <section className="w-full bg-slate-300 p-6">
+        {/**Hero Section =========================== */}
         <div
-          style={{ backgroundImage: `url(${HeroImg})` }}
-          className="w-[90%] md:w-full container 2xl:w-[75rem]  m-auto h-[30rem] rounded-xl bg-slate-900 mt-[-15rem] bg-no-repeat bg-center bg-cover overflow-hidden"
+          className="h-fit
+         mt-[2rem] flex flex-col justify-between items-center container w-[90%] md:w-full 2xl:w-[72rem] m-auto"
         >
-          <div className="w-full h-full bg-[#0e0c4ebe] p-10 px-6 lg:px-36 flex flex-col justify-center items-center gap-4">
-            <h1 className="text-2xl sm:text-[2.3rem] md:text-[4rem] sm:leading-[2rem] md:leading-[4rem] text-slate-100 font-bold text-center">
-              <span className="">Take control of your</span>
-              <br />
-              <span className="text-slate-300">customer support</span>
+          <div className="flex-[1] h-full bg-transparent flex flex-col justify-center items-center space-y-6">
+            <h1 className="text-2xl sm:text-[2.3rem] md:text-[4rem] sm:leading-[2rem] md:leading-[4rem] text-slate-900 font-bold text-center">
+              Take control of your customer support
             </h1>
-            <p className="text-center text-slate-100 text-base font-semibold font-sans">
+            <p className=" text-slate-700 text-lg font-semibold font-sans text-center">
               Customer service shouldn't just be a department, it should be the
               entire company. dndHelp-Desk makes customer service better. With
               our powerful simple to comprehend software, we make sure you focus
@@ -116,16 +111,23 @@ const Landing = () => {
             <div className="h-12 w-full flex justify-center gap-6">
               <NavLink
                 to="/getting-started"
-                className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-300"
+                className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-100"
               >
-                <div className="h-full w-full flex justify-center items-center">
+                <div className="h-full w-full flex justify-center items-center font-semibold">
                   Get started
                 </div>
               </NavLink>
-              <button className="bg-[#1d4fd8c7] h-10 w-[8rem] rounded-md text-slate-300 font-medium tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
+              <button className="bg-[#1d4fd8c7] h-10 w-[8rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
                 Live demo
               </button>
             </div>
+          </div>
+          <div className="flex-[1] h-full bg-transparent p-6 flex justify-center items-center">
+            <img
+              src={heroTop}
+              alt="hero-image"
+              className="object-fit object-center object-cover rounded-xl shadow-2xl drop-shadow-2xl"
+            />
           </div>
         </div>
       </section>
@@ -134,7 +136,7 @@ const Landing = () => {
       <Cloud />
 
       {/**First Section ================================ */}
-      <section className="w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
+      <section className="w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] grid grid-cols-1 md:grid-cols-2 gap-4 py-4 px-2">
         <div className="col-span-1 flex flex-col justify-center p-4">
           <div className="border-b border-slate-900 space-y-4 py-2">
             <h2 className="text-slate-800 text-2xl font-bold tracking-tightest">
@@ -159,24 +161,24 @@ const Landing = () => {
             revolve around you.” – Heather Williams
           </p>
         </div>
-        <div className="col-span-1 h-[30rem] flex items-center rounded-tr-md rounded-br-xl overflow-hidden">
+        <div className="col-span-1 justify-end flex items-center rounded-tr-md rounded-br-xl py-8">
           {" "}
           <img
-            src={ShowcaseOne}
+            src={halfDark_Chat}
             alt=""
-            className="object-center object-cover"
+            className="object-center object-fit rounded-l-xl w-[90%] shadow-2xl drop-shadow-2xl"
           />
         </div>
       </section>
 
       {/**Second Section ================================ */}
-      <section className="w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] grid grid-cols-1 md:grid-cols-2 gap-4 py-4 px-2 overflow-hidden">
-        <div className="col-span-1  flex items-center rounded-tr-md rounded-br-xl overflow-hidden py-8">
+      <section className="w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] grid grid-cols-1 md:grid-cols-2 gap-4 py-4 px-2">
+        <div className="col-span-1  flex items-center rounded-tr-md rounded-br-xl py-8">
           {" "}
           <img
             src={ShowcaseTwo}
             alt=""
-            className="object-center object-fit rounded-tr-xl rounded-br-xl w-[90%] shadow-2xl drop-shadow-2xl"
+            className="object-center object-fit rounded-r-xl w-[90%] shadow-2xl drop-shadow-2xl"
           />
         </div>
         <div className="col-span-1 flex flex-col justify-center p-4">

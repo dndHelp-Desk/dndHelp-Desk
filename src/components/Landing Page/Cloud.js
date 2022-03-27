@@ -1,7 +1,7 @@
 import React from "react";
 const Cloud =()=>{
   return (
-    <div className="w-[90%] delayDisplay md:w-full container 2xl:w-[75rem]  m-auto border-t border-slate-900 py-4 pt-10 flex flex-col justify-center">
+    <div className="w-[90%] delayDisplay md:w-full container 2xl:w-[75rem]  m-auto py-4 pt-10 flex flex-col justify-center">
       <div className="flex flex-col items-center justify-center">
         <h1 className="lg:text-5xl md:text-4xl text-2xl font-bold leading-10 text-slate-800">
           Our Trusted Partners
