@@ -95,20 +95,22 @@ const MainComponent = () => {
         )
       );
     } else if (allTickets.length >= 1 && user[0].access === "client") {
-      let ticketsContainer = [];
-      user[0].companies &&
-        user[0].companies.split(",").forEach((company) => {
-          ticketsContainer = [
-            ...ticketsContainer,
-            ...allTickets.filter(
-              (ticket) =>
-                ticket.message_position === 1 &&
-                ticket.branch_company.toLowerCase().replace(/\s/g, "") ===
-                  company.toLowerCase().replace(/\s/g, "")
-            ),
-          ];
-          dispatch(updateFilteredTickets(ticketsContainer));
-        });
+       dispatch(
+         updateFilteredTickets(
+           user[0].companies &&
+             allTickets.filter(
+               (ticket) =>
+                 ticket.message_position === 1 &&
+                 user[0].companies
+                   .split(",")
+                   .some(
+                     (msg) =>
+                       msg.toLowerCase().replace(/\s/g, "") ===
+                       ticket.branch_company.toLowerCase().replace(/\s/g, "")
+                   )
+             )
+         )
+       );
     }
   }, [allTickets, dispatch, user]);
 

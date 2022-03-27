@@ -71,7 +71,7 @@ const Main = () => {
     <div
       className={`${
         location.pathname === "/app" ? "grid" : "hidden"
-      } dark:bg-transparent bg-transparent w-[90%] md:w-full h-full container 2xl:w-[72rem] mt-4 overflow-hidden select-text`}
+      } dark:bg-transparent bg-transparent w-[90%] md:w-full h-full container 2xl:w-[72rem] mt-4 select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

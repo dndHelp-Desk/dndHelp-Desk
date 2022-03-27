@@ -33,21 +33,11 @@ const OverviewReport = ({ data }) => {
 
   //Total Calls Incoming or Outgoing ===========================
   const totalCalls = useMemo(() => {
-    let count = 0;
-    data.length >= 1 &&
-      allTickets.length >= 1 &&
-      data.forEach((ticket) => {
-        count += allTickets.filter(
-          (msg) => msg.ticket_id === ticket.ticket_id
-        ).length;
-        count += allTickets.filter(
-          (msg) =>
-            msg.status === "solved" &&
-            msg.fcr === "no" &&
-            msg.ticket_id === ticket.ticket_id
-        ).length;
-      });
-    return count;
+    return allTickets.length >= 1 && data.length >= 1
+      ? allTickets.filter((ticket) =>
+          data.some((item) => item.ticket_id === ticket.ticket_id)
+        ).length
+      : 0;
   }, [allTickets, data]);
 
   //Top 5 categories Bar ==================
@@ -91,6 +81,9 @@ const OverviewReport = ({ data }) => {
   //Preping daily count  Data==============
   let toolTip = option === "day" ? "Day" : "Time";
   let toolTipEtxra = option === "day" ? "" : ":00Hrs";
+  const solvedTickets =
+    data.length >= 1 &&
+    data.filter((ticket) => ticket.status === "solved" && ticket.fcr === "no");
   const chartData = useMemo(() => {
     return [
       ...new Set(
@@ -107,90 +100,8 @@ const OverviewReport = ({ data }) => {
           ? data.filter((data) => new Date(data.date).getDate() === elem).length
           : data.filter((data) => new Date(data.date).getHours() === elem)
               .length,
-      avg_handleTime:
-        option === "day"
-          ? //Daily Average handle time Calculation ===============
-            data
-              .filter(
-                (data) =>
-                  new Date(data.date).getDate() === elem &&
-                  data.status === "solved" &&
-                  data.fcr !== "yes"
-              )
-              .map((data) =>
-                !(
-                  new Date(data.closed_time).getTime() -
-                  new Date(data.date).getTime()
-                )
-                  ? 0
-                  : new Date(data.closed_time).getTime() -
-                    new Date(data.date).getTime()
-              ).length >= 1
-            ? (
-                data
-                  .filter(
-                    (data) =>
-                      new Date(data.date).getDate() === elem &&
-                      data.status === "solved" &&
-                      data.fcr !== "yes"
-                  )
-                  .map((data) =>
-                    !(
-                      new Date(data.closed_time).getTime() -
-                      new Date(data.date).getTime()
-                    )
-                      ? 0
-                      : new Date(data.closed_time).getTime() -
-                        new Date(data.date).getTime()
-                  )
-                  .reduce((acc, value) => acc + value, 0) /
-                data.filter((data) => new Date(data.date).getDate() === elem)
-                  .length /
-                60000
-              ).toFixed(0)
-            : 0
-          : //Hourly Average handle time Calculation ===============
-          data
-              .filter(
-                (data) =>
-                  new Date(data.date).getHours() === elem &&
-                  data.status === "solved" &&
-                  data.fcr !== "yes"
-              )
-              .map((data) =>
-                !(
-                  new Date(data.closed_time).getTime() -
-                  new Date(data.date).getTime()
-                )
-                  ? 0
-                  : new Date(data.closed_time).getTime() -
-                    new Date(data.date).getTime()
-              ).length >= 1
-          ? (
-              data
-                .filter(
-                  (data) =>
-                    new Date(data.date).getHours() === elem &&
-                    data.status === "solved" &&
-                    data.fcr !== "yes"
-                )
-                .map((data) =>
-                  !(
-                    new Date(data.closed_time).getTime() -
-                    new Date(data.date).getTime()
-                  )
-                    ? 0
-                    : new Date(data.closed_time).getTime() -
-                      new Date(data.date).getTime()
-                )
-                .reduce((acc, value) => acc + value, 0) /
-              data.filter((data) => new Date(data.date).getHours() === elem)
-                .length /
-              60000
-            ).toFixed(0)
-          : 0,
     }));
-  },[data,option]);
+  }, [data, option]);
 
   //Sort data =========
   chartData.sort((a, b) => {
@@ -224,42 +135,42 @@ const OverviewReport = ({ data }) => {
           <div className="dark:text-slate-300 text-slate-700">
             <h4 className="text-base font-semibold text-center">
               {`${
-                Number(
-                  (
-                    chartData
-                      .map((data) => data.avg_handleTime)
-                      .reduce((acc, value) => acc + Number(value), 0) /
-                    chartData.length
-                  ).toFixed(0) / 60
-                ).toFixed(0) > 1
-                  ? Number(
-                      (
-                        chartData
-                          .map((data) => data.avg_handleTime)
-                          .reduce((acc, value) => acc + Number(value), 0) /
-                        chartData.length
-                      ).toFixed(0) / 60
-                    ).toFixed(0)
+                solvedTickets.length >= 1
+                  ? (
+                      Number(
+                        (
+                          solvedTickets
+                            .map(
+                              (data) =>
+                                new Date(data.closed_time).getTime() -
+                                new Date(data.date).getTime()
+                            )
+                            .reduce((acc, value) => acc + value, 0) /
+                          solvedTickets.length /
+                          60000
+                        ).toFixed(0)
+                      ) / 60
+                    )
+                      .toString()
+                      .split(".")[0]
                   : 0
               }`}
               <span className="text-xs">hrs</span>{" "}
               {`${
-                Number(
-                  (
-                    chartData
-                      .map((data) => data.avg_handleTime)
-                      .reduce((acc, value) => acc + Number(value), 0) /
-                    chartData.length
-                  ).toFixed(0) % 60
-                ) > 1
+                solvedTickets.length >= 1
                   ? Number(
                       (
-                        chartData
-                          .map((data) => data.avg_handleTime)
-                          .reduce((acc, value) => acc + Number(value), 0) /
-                        chartData.length
-                      ).toFixed(0) % 60
-                    )
+                        solvedTickets
+                          .map(
+                            (data) =>
+                              new Date(data.closed_time).getTime() -
+                              new Date(data.date).getTime()
+                          )
+                          .reduce((acc, value) => acc + value, 0) /
+                        solvedTickets.length /
+                        60000
+                      ).toFixed(0)
+                    ) % 60
                   : 0
               }`}
               <span className="text-xs">mins</span>

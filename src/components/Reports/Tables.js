@@ -1,8 +1,10 @@
-import React, { useState,useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { HiOutlineSwitchVertical } from "react-icons/hi";
 import { BsDownload } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const Tables = ({ data }) => {
+  const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const [option, setOption] = useState("branch_company");
   const [sortBy, setSort] = useState(["total", 1]);
   const tableData = useMemo(
@@ -49,7 +51,10 @@ const Tables = ({ data }) => {
         className="w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize"
       >
         <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
-          {index +1}. {elem.name}
+          {index + 1}.{" "}
+          {allMembers.length >= 1 && option === "agent_email"
+            ? allMembers.filter((agent) => agent.email === elem.name)[0].name
+            : elem.name}
         </td>
         <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.open}
@@ -74,9 +79,7 @@ const Tables = ({ data }) => {
       return value;
     };
     const processRow = (row) =>
-      keys
-        .map((key) => JSON.stringify(row[key], replacer(row[key])))
-        .join(",");
+      keys.map((key) => JSON.stringify(row[key], replacer(row[key]))).join(",");
     return [keys.join(","), ...arr.map(processRow)].join("\r\n");
   };
 
@@ -99,7 +102,7 @@ const Tables = ({ data }) => {
       <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-3000 rounded-xl overflow-hidden shadow p-1">
         <div className="h-12 flex justify-between items-center px-4">
           <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
-            {option === "agent_name" ? "Agents" : "Restuarants"}
+            {option === "agent_email" ? "Agents" : "Restuarants"}
           </h2>
           <div className="flex space-x-2">
             {/**Select Report ================= */}
@@ -108,7 +111,7 @@ const Tables = ({ data }) => {
               className="h-8 w-40 rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="branch_company">Restuarants</option>
-              <option value="agent_name">Agents</option>
+              <option value="agent_email">Agents</option>
             </select>
             <button
               onClick={() => {

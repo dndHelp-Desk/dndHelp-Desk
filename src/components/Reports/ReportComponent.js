@@ -40,7 +40,7 @@ const ReportsComponent = () => {
               .replace(/\(/g, "")
               .replace(/\)/g, "")
               .match(new RegExp(filters.category, "gi")) &&
-            ticket.agent_name
+            ticket.agent_email
               .replace(/\s/g, "")
               .replace(/\(/g, "")
               .replace(/\)/g, "")
@@ -77,7 +77,7 @@ const ReportsComponent = () => {
 
   //Component =========================
   return (
-    <div className="bg-transparent mt-4 container w-[90%] md:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col tracking-wider relative ">
+    <div className="bg-transparent mt-4 container w-[90%] md:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col tracking-wider relative pb-4">
       {/**Filters ============= */}
       <div className="w-full bg-transparent flex flex-wrap lg:flex-nowrap justify-between gap-4">
         <Filters setFilters={setFilters} filters={filters} />

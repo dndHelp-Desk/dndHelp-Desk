@@ -52,7 +52,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               .replace(/\(/g, "")
               .replace(/\)/g, "")
               .match(new RegExp(filters.category, "gi")) &&
-            ticket.agent_name
+            ticket.agent_email
               .replace(/\s/g, "")
               .replace(/\(/g, "")
               .replace(/\)/g, "")
@@ -336,7 +336,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               {tickets}
               {filteredTickets.length <= 0 && (
                 <>
-                  <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold mb-20">
+                  <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-[4.5rem] uppercase text-xs font-sans font-bold mb-20">
                     There are no tickets
                   </h2>
                   <img

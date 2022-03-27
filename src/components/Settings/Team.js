@@ -358,8 +358,8 @@ const Team = () => {
           >
             <input
               type="text"
-              name="department"
-              id="department"
+              name="company"
+              id="company"
               autoComplete="nope"
               placeholder="Companies / Restuarants ..."
               onChange={(e) =>

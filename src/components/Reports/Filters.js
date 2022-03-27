@@ -49,19 +49,15 @@ const Filters = ({ filters, setFilters }) => {
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
           className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-800 bg-slate-200 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10 shadow"
         >
-          <option value="">Agent Name</option>
+          <option value="">All Agents</option>
           {allMembers.length >= 1 &&
             allMembers
-              .map((agent) => agent.access === "agent" && agent.name)
+              .map((agent) => agent.access === "agent" && agent)
               .filter(Boolean)
-              .sort((a, b) => (a < b ? -1 : 1))
+              .sort((a, b) => (a.name < b.name ? -1 : 1))
               .map((agent, index) => (
-                <option
-                  key={index}
-                  className="capitalize"
-                  value={agent.split(" ").join("")}
-                >
-                  {agent}
+                <option key={index} className="capitalize" value={agent.email}>
+                  {agent.name}
                 </option>
               ))}
         </select>

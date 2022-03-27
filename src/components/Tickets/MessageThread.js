@@ -473,9 +473,9 @@ const MessageThread = ({ isChatOpen, audio }) => {
     <div
       className={`h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none border-l-0 lg:border-l dark:border-[#33415596] border-slate-300  overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap bg-transparent`}
+      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none  bg-transparent overflow-hidden`}
     >
-      <div className="h-full w-full dark:bg-[#182235] bg-slate-200 border border-l-0 dark:border-[#33415596] border-slate-300 px-2 pb-2 space-y-4 flex flex-col">
+      <div className="h-[80%] w-full dark:bg-[#182235] bg-slate-200 border dark:border-[#33415596] border-slate-300 px-2 py-4 space-y-4 flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
@@ -668,7 +668,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[8rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center">
+      <div className="h-[8rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center border-l-0 lg:border-l dark:border-[#33415596] border-slate-300">
         <div className="h-full w-full relative p-2 shadow-sm rounded-lg dark:bg-[#182235] bg-slate-200 border border-slate-300 dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
