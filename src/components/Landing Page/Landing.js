@@ -109,13 +109,13 @@ const Landing = () => {
             <div className="h-12 w-full flex justify-center gap-6">
               <NavLink
                 to="/getting-started"
-                className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-100"
+                className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-100 border border-slate-800"
               >
                 <div className="h-full w-full flex justify-center items-center font-semibold">
                   Get started
                 </div>
               </NavLink>
-              <button className="bg-[#1d4fd8c7] h-10 w-[8rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
+              <button className="bg-blue-700 h-10 w-[8rem] rounded-md text-slate-300 font-semibold tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-800">
                 Live demo
               </button>
             </div>
