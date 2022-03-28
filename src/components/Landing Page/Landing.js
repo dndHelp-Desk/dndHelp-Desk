@@ -62,7 +62,7 @@ const Landing = () => {
                 Solutions
               </Link>
               <Link
-                to=""
+                to="/getting-started"
                 className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
                 Pricing
@@ -104,7 +104,7 @@ const Landing = () => {
               Customer service shouldn't just be a department, it should be the
               entire company. dndHelp-Desk makes customer service better. With
               our powerful simple to comprehend software, we make sure you focus
-              only on what matters with a short learning curve.
+              only on what matters within a short learning curve.
             </p>
             <div className="h-12 w-full flex justify-center gap-6">
               <NavLink
