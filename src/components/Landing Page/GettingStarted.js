@@ -43,12 +43,12 @@ const GettingStarted = () => {
           <div className="w-11/12 mx-auto">
             <div className="xl:flex lg:flex items-end">
               <div className="flex flex-wrap xl:w-[29%] bg-white items-center justify-center pt-8 pb-8 lg:mb-0 xl:mb-0 md:mb-2 sm:mb-2 mb-2 shadow">
-                <img src="https://cdn.tuk.dev/assets/calculator-img.png" alt />
+                <img src="https://cdn.tuk.dev/assets/calculator-img.png" alt="tbn" />
               </div>
               <div className="xl:flex lg:flex md:flex sm:flex shadow">
                 <div className="bg-white pt-8 pb-8 lg:mb-0 xl:mb-0 md:mb-0 sm:mb-0 mb-2 pl-6 pr-6 flex flex-col xl:w-1/3 lg:w-1/3 justify-center items-center border-r border-l border-gray-200">
                   <div className="mb-6">
-                    <img src="https://cdn.tuk.dev/assets/paper-plane.png" alt />
+                    <img src="https://cdn.tuk.dev/assets/paper-plane.png" alt="tbn" />
                   </div>
                   <p className="text-center text-2xl font-bold text-gray-800 mb-3">
                     Basic
@@ -62,7 +62,7 @@ const GettingStarted = () => {
                 </div>
                 <div className="bg-white pt-8 pb-8 lg:mb-0 xl:mb-0 md:mb-0 sm:mb-0 mb-2 pl-6 pr-6 flex flex-col xl:w-1/3 lg:w-1/3 justify-center items-center border-r border-l border-gray-200">
                   <div className="mb-5">
-                    <img src="https://cdn.tuk.dev/assets/plane.png" alt />
+                    <img src="https://cdn.tuk.dev/assets/plane.png" alt="tbn" />
                   </div>
                   <p className="text-center text-2xl font-bold text-gray-800 mb-3">
                     Professional
@@ -78,7 +78,7 @@ const GettingStarted = () => {
                   <div className="mb-6">
                     <img
                       src="https://cdn.tuk.dev/assets/start-button.png"
-                      alt
+                      alt="tbn"
                     />
                   </div>
                   <p className="text-center text-2xl font-bold text-gray-800 mb-3">
