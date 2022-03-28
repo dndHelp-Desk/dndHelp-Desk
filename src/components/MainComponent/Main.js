@@ -1,8 +1,7 @@
 import React, { useMemo } from "react";
-import { getAuth } from "firebase/auth";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import defaultProfile from "./../../default.webp"
+import defaultProfile from "./../../default.webp";
 import noUsers from "./images/no-userss.svg";
 import { BsEnvelope, BsAlarm, BsStopFill, BsArrowRight } from "react-icons/bs";
 import Calendar from "./Calendar";
@@ -12,6 +11,7 @@ const Main = () => {
   const location = useLocation();
   const todoList = useSelector((state) => state.UserInfo.toDo);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
+  const categories = useSelector((state) => state.Tickets.categories);
   const user = useSelector((state) => state.UserInfo.member_details);
   const unread = useSelector((state) => state.Tickets.unread);
   let filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
@@ -25,6 +25,47 @@ const Main = () => {
       )
     );
   }, [filteredTickets]);
+
+  const categoriesData = useMemo(() => {
+    return (
+      categories.length >= 1 &&
+      categories
+        .map((element) => {
+          return {
+            name: element,
+            value: (
+              ((filteredTickets.length >= 1 &&
+                filteredTickets.filter(
+                  (ticket) =>
+                    ticket.category.toLowerCase() === element.toLowerCase()
+                ).length) /
+                filteredTickets.length) *
+              100
+            ).toFixed(1),
+          };
+        })
+        .splice(0, 5)
+        .sort((a, b) => b.value - a.value)
+    );
+  }, [categories, filteredTickets]);
+
+  const categoryPreloader =
+    !categoriesData &&
+    [1, 2, 3, 4, 5].map((index) => {
+      return (
+        <div key={index} className="w-full">
+          <small className="text-slate-700 dark:text-slate-400 text-xs">
+            Loading
+          </small>
+          <div className="w-full flex items-center justify-between">
+            <div className="h-2 w-full flex-[3] rounded-full animate-pulse bg-slate-400 dark:bg-slate-700 overflow-hidden"></div>
+            <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-semibold text-xs">
+              <span>0.0%</span>
+            </div>
+          </div>
+        </div>
+      );
+    });
 
   //Loop Through All Users ================
   const users =
@@ -75,30 +116,54 @@ const Main = () => {
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/**User Details  ============== */}
+          {/**Top 5 Categories  ========================= */}
           <div className="col-span-1 h-[20rem] dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 rounded-xl overflow-hidden p-4 shadow">
-            <div className="flex flex-col h-full w-full justify-center space-y-6 items-center overflow-hidden  rounded-lg">
-              <div className="w-24 h-24 rounded-2xl overflow-hidden p-[3px] border-2 dark:border-slate-400 border-slate-800">
-                <img
-                  src={
-                    getAuth().currentUser &&
-                    getAuth().currentUser.photoURL !== null &&
-                    getAuth().currentUser &&
-                    getAuth().currentUser.photoURL !== ""
-                      ? getAuth().currentUser && getAuth().currentUser.photoURL
-                      : "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/no-profile.jpg?alt=media&token=82e21d0b-4af2-40d3-9f69-5ff676aa36d5"
-                  }
-                  alt="avatar"
-                  className="w-full h-full rounded-xl border dark:border-slate-400 border-slate-400 object-fit object-cover object-center"
-                />
-              </div>
-              <article className="text-lg font-bold dark:text-slate-300 text-slate-900 capitalize text-center px-8 leading-5">
-                <h2>Welcome back, {user[0].name.split(" ")[0]}</h2>
-                <q className="text-xs dark:text-slate-400 text-slate-700">
-                  Remeber Our greatest asset is the customer! Treat each
-                  customer as if they are the only one!
-                </q>
-              </article>
+            <h2 className="dark:text-slate-300 text-slate-900 text-lg text-center font-bold capitalize">
+              Top 5 Categories
+            </h2>
+            <p className="text-center text-xs text-slate-700 dark:text-slate-400">
+              Actual figures can be found on the reports page.
+            </p>
+            <div className="flex flex-col mt-2 w-full justify-center gap-2 overflow-hidden rounded-lg px-4">
+              {categoriesData.length >= 1 &&
+                categoriesData.map((element, index) => {
+                  return (
+                    <div key={index} className="w-full">
+                      <small className="text-slate-700 dark:text-slate-400 text-xs">
+                        {element.name}
+                      </small>
+                      <div className="w-full flex items-center justify-between">
+                        <div className="h-2 w-full flex-[3] rounded-full bg-slate-300 dark:bg-slate-700 overflow-hidden">
+                          <div
+                            style={{
+                              width: `${
+                                Number(element.value)
+                                  ? parseFloat(element.value).toFixed(1)
+                                  : "0.0"
+                              }%`,
+                            }}
+                            className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full"
+                          >
+                            <abbr
+                              title={`${element.name} : ${
+                                Number(element.value)
+                                  ? parseFloat(element.value).toFixed(0)
+                                  : 0.0
+                              }%`}
+                            >
+                              <div className="w-full h-full"></div>
+                            </abbr>
+                          </div>
+                        </div>
+                        <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-semibold text-xs">
+                          <span>{element.value >= 0.1?element.value:"0.0"}%</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              {/**Preloader ============= */}
+              {categoryPreloader}
             </div>
           </div>
           {/**Todo List ================================ */}

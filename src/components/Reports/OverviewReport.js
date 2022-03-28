@@ -6,7 +6,7 @@ const OverviewReport = ({ data }) => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = useSelector((state) => state.Tickets.categories);
   const [option, setOption] = useState("hour");
-  const dataArray = useMemo(() => {
+  const categoriesData = useMemo(() => {
     return (
       categories.length >= 1 &&
       categories.map((element) => {
@@ -26,8 +26,8 @@ const OverviewReport = ({ data }) => {
     );
   }, [categories, data]);
 
-  dataArray &&
-    dataArray.sort((a, b) => {
+  categoriesData &&
+    categoriesData.sort((a, b) => {
       return Number(b.value) - Number(a.value);
     });
 
@@ -52,8 +52,8 @@ const OverviewReport = ({ data }) => {
     "#2563eb",
   ];
   const category =
-    dataArray.length >= 1 &&
-    dataArray.map((element, index) => {
+    categoriesData.length >= 1 &&
+    categoriesData.map((element, index) => {
       return (
         <div
           key={index}

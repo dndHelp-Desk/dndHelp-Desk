@@ -75,7 +75,7 @@ const Profile = () => {
         className="flex flex-col relative"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <button 
+        <button
           className={`text-xs ${
             showChange ? "" : "hidden"
           } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
@@ -90,7 +90,7 @@ const Profile = () => {
             className="h-10 w-10 border-2 p-[2px] dark:border-slate-300 border-slate-900 rounded-xl flex justify-center items-center cursor-pointer"
           >
             <img
-              className="rounded-lg bg-slate-500 h-full w-full object-cover object-center"
+              className="rounded-lg bg-slate-500 h-full w-full object-cover object-center border dark:border-slate-400 border-slate-400"
               src={photoURL}
               alt="profile"
             />
@@ -119,7 +119,10 @@ const Profile = () => {
           ></span>
 
           {/** Change Agent Online Stutus ============*/}
-          <div role="tooltip" className="hoverProfile_Details p-4 absolute w-[12rem] overflow-hidden dark:bg-slate-700 bg-white hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.3rem] after:content-[''] after:fixed after:top-[4rem] after:right-[0.8rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent">
+          <div
+            role="tooltip"
+            className="hoverProfile_Details p-4 absolute w-[12rem] overflow-hidden dark:bg-slate-700 bg-white hidden flex-col justify-between space-y-4 rounded-xl shadow-2xl  top-14 right-[-0.3rem] after:content-[''] after:fixed after:top-[4rem] after:right-[0.8rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent"
+          >
             <div className="pb-2">
               <small
                 className={`text-xs text-center capitalize font-semibold flex items-center space-x-1 justify-center ${
@@ -178,7 +181,7 @@ const Profile = () => {
                         },
                       ])
                     );
-                  }, 3000);;
+                  }, 3000);
                 }}
                 className="h-8 border-b hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
               >
@@ -202,7 +205,7 @@ const Profile = () => {
                         },
                       ])
                     );
-                  },3000);
+                  }, 3000);
                 }}
                 className="h-8 border-b hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
               >

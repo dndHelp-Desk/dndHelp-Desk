@@ -26,7 +26,7 @@ const initialState = {
   authenticated: false,
   routeLocation: initialLocation(),
   toDo: [],
-  theme: initialTheme() === null ? "dark" : initialTheme(),
+  theme: initialTheme() === null ? "light" : initialTheme(),
 };
 
 export const UserSlice = createSlice({
