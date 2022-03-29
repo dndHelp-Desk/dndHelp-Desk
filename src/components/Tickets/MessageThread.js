@@ -7,7 +7,6 @@ import {
 } from "react-icons/bs";
 import {
   BiPaperPlane,
-  BiSend,
   BiMicrophone,
   BiPaperclip,
 } from "react-icons/bi";
@@ -757,7 +756,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700  rounded-md text-lg p-2 px-4 font-semibold  text-slate-300 bg-slate-900 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all"
                 >
                   <span className="text-xs">Send</span>
-                  <BiSend />
+                  <BiPaperPlane />
                 </button>
               </div>
             </div>
