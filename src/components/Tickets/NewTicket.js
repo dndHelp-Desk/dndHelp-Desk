@@ -123,7 +123,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
               .includes(recepient.toLowerCase().replace(/\s/g, "")) === true
               ? ""
               : "hidden"
-          } text-xs dark:text-slate-400 text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b  dark:border-slate-600 border-slate-300 capitalize`}
+          } text-xs dark:text-slate-400 text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b  dark:border-slate-700 border-slate-300 capitalize`}
         >
           <abbr title={contact.branch_company}>{contact.branch_company}</abbr>
         </li>
@@ -520,7 +520,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     type="text"
                     id="to"
                     name="to"
-                    placeholder="Restuarant ..."
+                    placeholder="Contact ..."
                     required={true}
                     autoComplete="off"
                     value={recepient}
@@ -536,7 +536,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     ref={closeSuggestionsRef}
                     className={`${
                       searchResults ? "" : "hidden"
-                    } absolute top-8 h-[11rem] w-full shadow-2xl dark:bg-slate-700 bg-slate-200 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2`}
+                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-200 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2 border dark:border-slate-700 border-slate-400`}
                   >
                     {contactsList}
                   </ul>{" "}

@@ -56,13 +56,38 @@ const Filters = ({ filters, setFilters }) => {
       <div className="col-span-1 h-12 dark:bg-slate-900 bg-slate-200 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-md relative">
         <BsInfoSquare className="text-slate-500 text-lg absolute h-10 left-3" />
         <select
-          onChange={(e) => setFilters({ ...filters, others: e.target.value })}
           className="h-full w-full rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-200 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10"
         >
-          <option value={true}>Others</option>
-          <option value="yes">First Contact Resolution</option>
-          <option value="overdue">Overdue</option>
-          <option value="reopened">Re-Opened</option>
+          <option
+            onClick={() => setFilters({ ...filters, overdue: false.valueOf,fcr:false,reopened:false,hasRecording:false })}
+            value=""
+          >
+            Others
+          </option>
+          <option
+            onClick={() => setFilters({ ...filters, fcr: "yes" })}
+            value=""
+          >
+            First Contact Resolution
+          </option>
+          <option
+            onClick={() => setFilters({ ...filters, overdue: true })}
+            value=""
+          >
+            Overdue
+          </option>
+          <option
+            onClick={() => setFilters({ ...filters, reopened: true })}
+            value=""
+          >
+            Re-Opened
+          </option>
+          <option
+            onClick={() => setFilters({ ...filters, hasRecording: true })}
+            value=""
+          >
+            Has Recording
+          </option>
         </select>
       </div>
 
@@ -79,11 +104,7 @@ const Filters = ({ filters, setFilters }) => {
               .filter(Boolean)
               .sort((a, b) => (a.name < b.name ? -1 : 1))
               .map((agent, index) => (
-                <option
-                  key={index}
-                  className="capitalize"
-                  value={agent.email}
-                >
+                <option key={index} className="capitalize" value={agent.email}>
                   {agent.name}
                 </option>
               ))}

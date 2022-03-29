@@ -3,15 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   changePriority,
-  changeStatus,
-  reOpenTicket,
   markAsSeen,
 } from "./../Data_Fetching/TicketsnUserData";
 import { BsStopFill } from "react-icons/bs";
-import { BiChevronRight, BiChevronLeft, BiArrowBack } from "react-icons/bi";
+import {
+  BiChevronRight,
+  BiChevronLeft,
+  BiArrowBack,
+  BiMicrophone,
+  BiMicrophoneOff,
+} from "react-icons/bi";
 import { setThreadId } from "./../../store/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
-import { updateAlert } from "../../store/NotificationsSlice";
 import Navbar from "./Navbar";
 import noTickets from "./images/no-userss.svg";
 import NewTicket from "./NewTicket";
@@ -19,7 +22,6 @@ import NewTicket from "./NewTicket";
 const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
   const fetchedTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
   const [audio, audioUrl] = useState("");
@@ -36,7 +38,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
     category: "",
     complainant_number: "",
     status: "",
-    others: "",
+    fcr: "no",
+    reopened: false,
+    overdue: false,
+    hasRecording: false,
   });
   const filteredTickets = useMemo(() => {
     return fetchedTickets.length >= 1
@@ -85,7 +90,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               .toLowerCase()
               .replace(/\s/g, "")
               .includes(filters.ticket_id.toLowerCase().replace(/\s/g, "")) ===
-              true
+              true /*&&
+            ticket.fcr === filters.fcr  &&
+            ticket.reopened === filters.reopened &&
+            ticket.hasRecording === filters.hasRecording*/
         )
       : [];
   }, [
@@ -254,40 +262,16 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             </div>
             {/**Change Ticket Status ========================================== */}
             <div className="w-[10rem] flex items-baseline justify-end">
-              <select
-                onChange={(e) =>
-                  e.target.value === "solved"
-                    ? dispatch(
-                        updateAlert([
-                          ...alerts,
-                          {
-                            message: "Please Add the Resolution.",
-                            color: "bg-yellow-200",
-                          },
-                        ])
-                      )
-                    : e.target.value === "reopened"
-                    ? reOpenTicket(ticket.id, e.target.value, true)
-                    : changeStatus(ticket.id, e.target.value)
-                }
-                className="h-8 w-28 rounded-md p-2 dark:bg-[#192235] bg-slate-200 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700"
-              >
-                <option className="p-2" value="resolved">
-                  {ticket.status}
-                </option>
-                <option className="p-2" value="open">
-                  open
-                </option>
-                <option className="p-2" value="on hold">
-                  on hold
-                </option>
-                <option className="p-2" value="solved">
-                  solved
-                </option>
-                <option className="p-2" value="reopened">
-                  reopened
-                </option>
-              </select>
+              <div className="h-8 w-28 rounded-md p-2 dark:bg-inherit dark:border-slate-700 border-slate-300 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700 flex justify-between">
+                <span>{ticket.status}</span>
+                {/**Indicate if ticket has recording ============== */}
+                {ticket.hasRecording === true ||
+                ticket.hasRecording === "true" ? (
+                  <BiMicrophone className="inline text-xs dark:text-slate-500 text-slate-500" />
+                ) : (
+                  <BiMicrophoneOff className="inline text-xs dark:text-slate-500 text-slate-500" />
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -348,8 +332,8 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               )}
             </div>
             {/**Pagination ================================ */}
-            <div className="h-[10%] md:h-[3.2rem] w-full bottom-0 flex justify-center items-center">
-              <div className="h-8 w-40 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-200 py-1 rounded-md border dark:border-[#33415596] border-slate-300">
+            <div className="h-[10%] md:h-[3.2rem] w-full bottom-0 flex flex-col justify-center items-center">
+              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-200 py-1 rounded-md border dark:border-[#33415596] border-slate-300">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
@@ -359,8 +343,11 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   <BiChevronLeft />
                 </button>
                 <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-sm tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-300 overflow-hidden px-1">
-                  <p className="overflow-hidden overflow-ellipsis whitespace-nowrap">
-                    {loadMore - 50 === 0 ? 1 : loadMore - 50} - {loadMore}
+                  <p className="text-xs overflow-hidden overflow-ellipsis whitespace-nowrap">
+                    {loadMore - 50 === 0 ? 1 : loadMore - 50}{" "}
+                    <span className="text-slate-500">-</span> {loadMore}{" "}
+                    <span className="text-slate-500">of </span>
+                    {filteredTickets.length}
                   </p>
                 </div>
                 <button

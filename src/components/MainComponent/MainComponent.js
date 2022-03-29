@@ -256,20 +256,42 @@ const MainComponent = () => {
             <div className="flex space-x-2">
               {/**Change Theme =========================== */}
               <abbr title="theme">
-                <button
-                  aria-label="button"
-                  onClick={() => {
-                    dispatch(changeTheme(theme === "dark" ? "light" : "dark"));
-                    window.localStorage.setItem(
-                      "theme",
-                      JSON.stringify(theme === "dark" ? "light" : "dark")
-                    );
-                  }}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
-                >
-                  {theme === "dark" && <BsBrightnessHigh />}
-                  {theme !== "dark" && <BsMoonStars />}
-                </button>
+                <div className="w-20 flex justify-between rounded-xl p-1 border dark:border-slate-700 border-slate-400">
+                  <button
+                    aria-label="button"
+                    onClick={() => {
+                      dispatch(
+                        changeTheme(theme === "dark" ? "light" : "dark")
+                      );
+                      window.localStorage.setItem(
+                        "theme",
+                        JSON.stringify(theme === "dark" ? "light" : "dark")
+                      );
+                    }}
+                    className={`dark:text-gray-200 ${
+                      theme !== "dark" && "bg-slate-400"
+                    } text-slate-900 text-xl relative focus:outline-none outline-none h-8 w-8 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold`}
+                  >
+                    <BsBrightnessHigh />
+                  </button>
+                  <button
+                    aria-label="button"
+                    onClick={() => {
+                      dispatch(
+                        changeTheme(theme === "dark" ? "light" : "dark")
+                      );
+                      window.localStorage.setItem(
+                        "theme",
+                        JSON.stringify(theme === "dark" ? "light" : "dark")
+                      );
+                    }}
+                    className={`dark:text-gray-200 ${
+                      theme === "dark" && "bg-slate-700"
+                    } text-slate-900 text-xl relative focus:outline-none outline-none h-8 w-8 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold`}
+                  >
+                    <BsMoonStars />
+                  </button>
+                </div>
               </abbr>
 
               {/**Notifications ================================================ */}

@@ -5,13 +5,20 @@ import {
   BsThreeDotsVertical,
   BsChatRight,
 } from "react-icons/bs";
-import { BiPaperPlane, BiMailSend } from "react-icons/bi";
+import {
+  BiPaperPlane,
+  BiSend,
+  BiMicrophone,
+  BiPaperclip,
+} from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import {
   addReply,
   deleteTicket,
   resolveTicket,
+  changeStatus,
+  reOpenTicket,
 } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
 import { addRecording } from "./../authentication/Firebase";
@@ -56,6 +63,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const [reply, setReply] = useState({
     message: "",
     subject: "",
+    status: "",
     message_position: threadMessage.length + 1,
     ticket_id: firstMessage.length >= 1 ? firstMessage.ticket_id : "none",
   });
@@ -191,14 +199,140 @@ const MessageThread = ({ isChatOpen, audio }) => {
       );
     });
 
-  //Link Google Appscript API for sendind Emails To new Tickect ================
-  /*const sendMailAPI =
-    "https://script.google.com/macros/s/AKfycbzkiHwJbA0lXnz40HZ7mls-oNMUJdMjMbvyNTMlx513iXSADnSkLlaYfL1TUV0WPBOS3w/exec?action=addData";*/
+  //Send Solution send Solution ====================
+  const sendSolution = () => {
+    // Upload Recordings
+    recordingFile !== false &&
+      addRecording(recordingFile, `/dial_n_dine/${threadId}`);
+
+    //Add ticket recording on firebase storage =============================
+    resolveTicket(
+      firstMessage.length >= 1 && firstMessage[0].id,
+      solution,
+      (recordingFile !== false ? true : false)
+    );
+
+    //Sending Account =============================
+    let sendingAccount =
+      firstMessage.length >= 1 &&
+      email_accounts.filter(
+        (account) =>
+          account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
+      )[0];
+
+    //Relpy Using Nodemailer ===================
+    let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
+      new Date().getMinutes() + 1
+    } hrs`;
+
+    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        from: `${sendingAccount.email}`,
+        company: `${company_details.name} ${sendingAccount.name}`,
+        password: sendingAccount.password,
+        host: sendingAccount.host,
+        port: sendingAccount.port,
+        email: clientEmail,
+        subject: firstMessage.length >= 1 && firstMessage[0].category,
+        ticket_id: threadId,
+        email_body: `<p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+     Hi ${clientName},
+  </p>
+  <h1
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+   <b> A ticket with ID: ${threadId} has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
+  </h1>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Tickect Details:</b>
+  </p>
+  <ul
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
+    <li><b>Brand:</b>
+      ${brand}
+    </li>
+    <li><b>Tickect-ID:</b>
+      ${threadId}
+    </li>
+    <li><b>Closed On:</b>
+      ${closingTime}
+    </li>
+    <li><b>Status:</b>
+      Resolved
+    </li>
+  </ul>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+    <b>Resolution:</b>
+  </p>
+  <p
+    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    ${solution}
+  </p>
+  <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i>In order to update or respond to this issue please click the button below,</i>
+  </p>
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+    <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
+  </p>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
+    <b>Disclaimer</b>
+  </p>
+  <p
+    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
+    The information contained in this communication from the sender is confidential. It is intended solely for use by
+    the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any
+    disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
+    prohibited and may be unlawful.
+  </p>`,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const resData = data;
+        if (resData.status === "success") {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Ticket has been resolved",
+                color: "bg-green-200",
+              },
+            ])
+          );
+          setReply({ ...reply, message: "" });
+        } else if (resData.status === "fail") {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Ticket Failed To Resolve",
+                color: "bg-red-200",
+              },
+            ])
+          );
+        }
+      });
+    setSolution("");
+    setReply({ ...reply, message: "",status:"" });
+  };
 
   //Send Reply Function ============================
   const sendReply = (e) => {
     e.preventDefault();
-    if (user[0].name !== "User Loader" && reply.ticket_id !== "none") {
+    if (
+      user[0].name !== "User Loader" &&
+      reply.ticket_id !== "none" &&
+      reply.status !== "" &&
+      reply.status !== "solved"
+    ) {
       addReply(
         reply.message,
         reply.message_position,
@@ -210,7 +344,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
         clientEmail,
         firstMessage.length >= 1 && firstMessage[0].team
       );
-      setReply({ ...reply, message: "" });
 
       //Sending Account =============================
       let sendingAccount =
@@ -219,25 +352,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
           (account) =>
             account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
         )[0];
-
-      //Send Email Using App Script  =============
-      /*fetch(sendMailAPI, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name: clientName,
-          email: clientEmail,
-          subject: reply.subject,
-          message: reply.message,
-          ticket_id: threadId,
-          brand: brand,
-          ticket_status: ticket_status,
-          date: date,
-        }),
-      });*/
 
       //Relpy Using Nodemailer ===================
       fetch("https://dndhelp-desk-first.herokuapp.com/send", {
@@ -331,6 +445,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 },
               ])
             );
+    setReply({ ...reply, message: "", status: "" });
           } else if (resData.status === "fail") {
             dispatch(
               updateAlert([
@@ -344,128 +459,31 @@ const MessageThread = ({ isChatOpen, audio }) => {
           }
         });
     }
-  };
-
-  //Send Solution send Solution ====================
-  const sendSolution = (e) => {
-    e.preventDefault();
-    // Upload Recordings
-    recordingFile && addRecording(recordingFile, `/dial_n_dine/${threadId}`);
-
-    //Add ticket on firebase storage =============================
-    resolveTicket(
-      firstMessage.length >= 1 && firstMessage[0].id,
-      solution,
-      recordingFile && recordingFile !== false ? true : false
-    );
-
-    //Sending Account =============================
-    let sendingAccount =
-      firstMessage.length >= 1 &&
-      email_accounts.filter(
-        (account) =>
-          account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
-      )[0];
-
-    //Relpy Using Nodemailer ===================
-    let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
-      new Date().getMinutes() + 1
-    } hrs`;
-    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        from: `${sendingAccount.email}`,
-        company: `${company_details.name} ${sendingAccount.name}`,
-        password: sendingAccount.password,
-        host: sendingAccount.host,
-        port: sendingAccount.port,
-        email: clientEmail,
-        subject: firstMessage.length >= 1 && firstMessage[0].category,
-        ticket_id: threadId,
-        email_body: `<p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-     Hi ${clientName},
-  </p>
-  <h1
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-   <b> A ticket with ID: ${threadId} has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
-  </h1>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
-    <b>Tickect Details:</b>
-  </p>
-  <ul
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
-    <li><b>Brand:</b>
-      ${brand}
-    </li>
-    <li><b>Tickect-ID:</b>
-      ${threadId}
-    </li>
-    <li><b>Closed On:</b>
-      ${closingTime}
-    </li>
-    <li><b>Status:</b>
-      Resolved
-    </li>
-  </ul>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
-    <b>Resolution:</b>
-  </p>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-    ${solution}
-  </p>
-  <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i>In order to update or respond to this issue please click the button below,</i>
-  </p>
-  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
-  </p>
-  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
-  <p
-    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
-    <b>Disclaimer</b>
-  </p>
-  <p
-    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-    The information contained in this communication from the sender is confidential. It is intended solely for use by
-    the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any
-    disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
-    prohibited and may be unlawful.
-  </p>`,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const resData = data;
-        if (resData.status === "success") {
-          dispatch(
-            updateAlert([
-              ...alerts,
-              {
-                message: "Ticket has been resolved",
-                color: "bg-green-200",
-              },
-            ])
-          );
-        } else if (resData.status === "fail") {
-          dispatch(
-            updateAlert([
-              ...alerts,
-              {
-                message: "Ticket Failed To Resolve",
-                color: "bg-red-200",
-              },
-            ])
-          );
-        }
-      });
-    setSolution("");
+    if (reply.status === "solved") {
+      sendSolution();
+    setReply({ ...reply, message: "", status: "" });
+    } else if (reply.status === "reopened") {
+      reOpenTicket(firstMessage[0].id, reply.status, true);
+    setReply({ ...reply, message: "", status: "" });
+    } else if (
+      reply.status !== "" &&
+      reply.status !== "solved" &&
+      reply.status !== "reopened"
+    ) {
+      changeStatus(firstMessage[0].id, reply.status);
+    setReply({ ...reply, message: "", status: "" });
+    }
+    if (reply.status === "") {
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Please Select A Proper Status",
+            color: "bg-yellow-200",
+          },
+        ])
+      );
+    }
   };
 
   //Component ======================================
@@ -475,7 +493,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
         isChatOpen ? "flex" : "hidden"
       } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none  bg-transparent overflow-hidden`}
     >
-      <div className="h-[80%] w-full dark:bg-[#182235] bg-slate-200 border dark:border-[#33415596] border-slate-300 px-2 py-4 space-y-4 flex flex-col">
+      <div className="h-[30rem] w-full dark:bg-[#182235] bg-slate-200 border dark:border-[#33415596] border-slate-300 px-2 py-4 space-y-4 flex flex-col">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
@@ -484,7 +502,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[28rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-200 border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-200 border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
                 <div>
                   <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold">
                     Ticket Details
@@ -526,58 +544,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       </span>
                     </li>
                   </ul>
-                </div>
-
-                {/***Add Solution ============================================= */}
-                <div>
-                  <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold mt-2">
-                    Add Solution
-                  </h2>
-                  <form
-                    className="dark:bg-slate-800 bg-slate-200 w-full h-fit overflow-hidden rounded-md mt-2 p-1 relative"
-                    onSubmit={(e) => sendSolution(e)}
-                  >
-                    <textarea
-                      name="reply"
-                      id="reply"
-                      cols="30"
-                      rows="10"
-                      placeholder="Add solution ..."
-                      autoComplete="off"
-                      required
-                      onChange={(e) => {
-                        setSolution(e.target.value);
-                      }}
-                      value={
-                        solution === ""
-                          ? firstMessage.length >= 1 && firstMessage[0].solution
-                          : solution
-                      }
-                      className=" h-[5rem] w-full bg-transparent rounded-md resize-none text-sm dark:text-slate-400 text-slate-500 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-700 focus:ring-slate-300 transition-all border dark:border-slate-700 border-slate-400 placeholder:text-slate-500 placeholder:text-sm"
-                    ></textarea>
-                    <div className="w-full flex justify-between h-[2rem]">
-                      <label htmlFor="recording" className="block">
-                        <span className="sr-only">Choose recording</span>
-                        <input
-                          type="file"
-                          id="recording"
-                          accept=".wav"
-                          name="recording"
-                          title="Upload Recording"
-                          onChange={(e) => {
-                            setFile(e.target.files[0]);
-                          }}
-                          className="block w-full text-sm text-slate-500 border border-slate-300 dark:border-slate-700 rounded outline-none focus:outline-none file:mr-2 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-white dark:file:bg-slate-700 file:text-blue-600 hover:file:opacity-80"
-                        />
-                      </label>
-                      <button
-                        type="submit"
-                        className="outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md text-lg p-2 px-4 font-semibold text-slate-300 bg-blue-700 z-[99]"
-                      >
-                        <BiPaperPlane />
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </details>
@@ -630,21 +596,24 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       {firstMessage.length >= 1 && firstMessage[0].solution}
                     </p>
                     {/**Play Recording ================================ */}
-                    <audio
-                      id="rec"
-                      controls
-                      className="h-[2rem] w-full max-w-[18rem] mt-2 "
-                      src={audio}
-                      type="audio/wav"
-                      preload="metadata"
-                    >
-                      <source src={audio} type="audio/ogg" />
-                      <source src={audio} type="audio/mpeg" />
-                      <source src={audio} type="audio/wav" />
-                      <source src={audio} type="audio/mp3" />
-                      Your browser does not support the
-                      <code>audio</code> element.
-                    </audio>
+                    {(firstMessage[0].hasRecording === true ||
+                      firstMessage[0].hasRecording === "true") && (
+                      <audio
+                        id="rec"
+                        controls
+                        className="h-[2rem] w-full max-w-[18rem] mt-2 "
+                        src={audio}
+                        type="audio/wav"
+                        preload="metadata"
+                      >
+                        <source src={audio} type="audio/ogg" />
+                        <source src={audio} type="audio/mpeg" />
+                        <source src={audio} type="audio/wav" />
+                        <source src={audio} type="audio/mp3" />
+                        Your browser does not support the
+                        <code>audio</code> element.
+                      </audio>
+                    )}
                   </div>
                 </div>
               </div>
@@ -668,64 +637,130 @@ const MessageThread = ({ isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[8rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center border-l-0 lg:border-l dark:border-[#33415596] border-slate-300">
-        <div className="h-full w-full relative p-2 shadow-sm rounded-lg dark:bg-[#182235] bg-slate-200 border border-slate-300 dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+      <div className="h-[10.1rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center border-l-0 lg:border-l dark:border-[#33415596] border-slate-300">
+        <div className="h-full w-full relative shadow-sm rounded-lg dark:bg-[#182235] bg-slate-200 border border-slate-300 dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
-            className="h-full w-full bg-transparent rounded-lg relative"
+            className="w-full h-full bg-transparent rounded-lg flex flex-col overflow-hidden"
           >
-            <textarea
-              name="reply"
-              id="reply"
-              cols="30"
-              rows="10"
-              placeholder="Type your message here..."
-              autoComplete="off"
-              onKeyUp={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  sendReply(e);
-                  lastMessage();
-                }
-              }}
-              readOnly={
-                firstMessage.length >= 1 && firstMessage[0].status === "solved"
-                  ? true
-                  : false
-              }
-              required
-              onChange={(e) => {
-                setReply({
-                  ...reply,
-                  message: e.target.value,
-                  message_position: threadMessage.length + 1,
-                  ticket_id:
-                    threadMessage.length >= 1 &&
-                    threadMessage.filter(
-                      (message) => message.message_position === 1
-                    )[0].ticket_id,
-                  subject:
-                    threadMessage.length >= 1 &&
-                    threadMessage.filter(
-                      (msg) => msg.message_position === 1
-                    )[0]["category"],
-                });
-              }}
-              value={reply.message}
-              className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 dark:focus:ring-slate-800 focus:ring-slate-300 transition-all border-0 dark:placeholder:text-slate-500 placeholder:text-slate-700 placeholder:text-sm"
-            ></textarea>
-            <button
-              disabled={
-                firstMessage.length >= 1 && firstMessage[0].status === "solved"
-                  ? true
-                  : false
-              }
-              onClick={() => lastMessage()}
-              type="submit"
-              className="absolute outline-none focus:outline-none focus:ring-1 focus:ring-blue-600 bottom-2 rounded-md text-lg right-2 p-2 px-4 font-semibold  text-slate-300 bg-blue-700 z-[99] flex items-center space-x-1"
-            >
-              <BiMailSend />
-            </button>
+            <div className="w-full h-[4.8rem]">
+              <textarea
+                name="reply"
+                id="reply"
+                cols="30"
+                rows="10"
+                placeholder="Type your message here..."
+                autoComplete="off"
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    sendReply(e);
+                    lastMessage();
+                  }
+                }}
+                required
+                onChange={(e) => {
+                  setReply({
+                    ...reply,
+                    message: e.target.value,
+                    message_position: threadMessage.length + 1,
+                    ticket_id:
+                      threadMessage.length >= 1 &&
+                      threadMessage.filter(
+                        (message) => message.message_position === 1
+                      )[0].ticket_id,
+                    subject:
+                      threadMessage.length >= 1 &&
+                      threadMessage.filter(
+                        (msg) => msg.message_position === 1
+                      )[0]["category"],
+                  });
+                  setSolution(e.target.value);
+                }}
+                value={reply.message}
+                className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 focus:ring-0 transition-all border-0 dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm"
+              ></textarea>
+            </div>
+            {/**Reply options ======================= */}
+            <div className="row-span-2 h-10 px-1 w-full flex justify-between items-center">
+              <div className="h-full flex items-center">
+                {/**Attach A file ========================================= */}
+                <abbr title="Attachment">
+                  <label
+                    htmlFor="attachment"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 rounded-l-md flex justify-center items-center outline-none focus:outline-none hover:opacity-80 text-slate-500 text-base"
+                  >
+                    <BiPaperclip />
+                    <input
+                      type="file"
+                      name="attachment"
+                      id="attachment"
+                      className="hidden"
+                    />
+                  </label>
+                </abbr>
+                {/**Upload Recordings ========================================= */}
+                <abbr title="Upload Your Recording">
+                  <label
+                    htmlFor="recording"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                  >
+                    <BiMicrophone className="text-lg" />
+                    <input
+                      type="file"
+                      id="recording"
+                      accept=".wav"
+                      name="recording"
+                      title="Upload Recording"
+                      onChange={(e) => {
+                        setFile(e.target.files[0]);
+                      }}
+                      className="outline-none focus:outline-none hidden"
+                    />
+                  </label>
+                </abbr>
+                {/**Change Status ========================================= */}
+                <abbr title="Upload Your Recording">
+                  <select
+                    htmlFor="recording"
+                    onChange={(e) =>
+                      setReply({ ...reply, status: e.target.value })
+                    }
+                    required
+                    className="w-28 h-8 pt-2 rounded-r-md border border-slate-300 dark:border-slate-800 bg-slate-200 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
+                  >
+                    <option
+                      className="p-2"
+                      value={firstMessage.length >= 1 && firstMessage[0].status}
+                    >
+                      {firstMessage.length >= 1 && firstMessage[0].status}
+                    </option>
+                    <option className="p-2" value="open">
+                      open
+                    </option>
+                    <option className="p-2" value="on hold">
+                      on hold
+                    </option>
+                    <option className="p-2" value="solved">
+                      solved
+                    </option>
+                    <option className="p-2" value="reopened">
+                      reopened
+                    </option>
+                  </select>
+                </abbr>
+              </div>
+              <div className="flex space-x-2 items-center">
+                <button
+                  onClick={() => lastMessage()}
+                  type="submit"
+                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700  rounded-md text-lg p-2 px-4 font-semibold  text-slate-300 bg-slate-900 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all"
+                >
+                  <span className="text-xs">Send</span>
+                  <BiSend />
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
