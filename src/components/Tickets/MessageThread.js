@@ -62,7 +62,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const [reply, setReply] = useState({
     message: "",
     subject: "",
-    status: "",
+    status: firstMessage.length >= 1 && firstMessage[0].status,
     message_position: threadMessage.length + 1,
     ticket_id: firstMessage.length >= 1 ? firstMessage.ticket_id : "none",
   });
@@ -730,9 +730,9 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   >
                     <option
                       className="p-2"
-                      value={firstMessage.length >= 1 && firstMessage[0].status}
+                      value={reply.status}
                     >
-                      {firstMessage.length >= 1 && firstMessage[0].status}
+                      {firstMessage.length >= 1 && reply.status !== ""? firstMessage[0].status:"Status"}
                     </option>
                     <option className="p-2" value="open">
                       open
