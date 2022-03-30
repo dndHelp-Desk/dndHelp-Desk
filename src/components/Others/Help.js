@@ -17,7 +17,7 @@ const Help = () => {
         chatStatus === true
           ? "h-[30rem] w-[22rem]"
           : "cursor-pointer hover:bg-slate-800 h-14 w-20"
-      } transition-all flex bg-slate-900 rounded-xl overflow-hidden fixed left-6 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl border border-slate-500`}
+      } transition-all flex bg-slate-900 rounded-xl overflow-hidden fixed right-6 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl border border-slate-500`}
     >
       <BsFillChatSquareTextFill
         className={`text-2xl text-slate-300 ${chatStatus ? "hidden" : "flex"}`}

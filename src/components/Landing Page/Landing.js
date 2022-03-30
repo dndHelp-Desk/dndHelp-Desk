@@ -8,21 +8,14 @@ import halfDark_Chat from "./images/halfDark_Chat.png";
 import ShowcaseTwo from "./images/chatLight.png";
 import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
 import Help from "../Others/Help";
 import Cookies from "./Cookies";
 
 const Landing = () => {
-  const logged = useSelector((state) => state.UserInfo.authenticated);
   const [menu, setMenu] = useState(false);
   const smallMenuRef = useOnClickOutside(() => {
     setMenu(false);
   });
-
-  if (logged === true) {
-    return <Navigate to="/app" />;
-  }
 
   //Component =====================
   return (
@@ -32,13 +25,16 @@ const Landing = () => {
         <nav className="w-full">
           <div className="w-full h-[4rem] z-[99] flex justify-between items-center bg-slate-300 border-b border-slate-500 px-12">
             {/**Logo ==================== */}
-            <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
+            <Link
+              to="/"
+              className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1 outline-none focus:outline-none"
+            >
               <img
                 src={darkLogo}
                 alt="logo"
                 className="object-cover object-center w-[14rem]"
               />
-            </div>
+            </Link>
             {/**Small Menu Options =================== */}
             <button
               onClick={() => setMenu(true)}

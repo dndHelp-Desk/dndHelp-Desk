@@ -261,11 +261,11 @@ const MainComponent = () => {
                     aria-label="button"
                     onClick={() => {
                       dispatch(
-                        changeTheme(theme === "dark" ? "light" : "dark")
+                        changeTheme("light")
                       );
                       window.localStorage.setItem(
                         "theme",
-                        JSON.stringify(theme === "dark" ? "light" : "dark")
+                        JSON.stringify("light")
                       );
                     }}
                     className={`dark:text-gray-200 ${
@@ -278,11 +278,11 @@ const MainComponent = () => {
                     aria-label="button"
                     onClick={() => {
                       dispatch(
-                        changeTheme(theme === "dark" ? "light" : "dark")
+                        changeTheme("dark")
                       );
                       window.localStorage.setItem(
                         "theme",
-                        JSON.stringify(theme === "dark" ? "light" : "dark")
+                        JSON.stringify("dark")
                       );
                     }}
                     className={`dark:text-gray-200 ${

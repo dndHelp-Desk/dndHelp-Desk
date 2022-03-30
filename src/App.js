@@ -29,8 +29,13 @@ const AutomatedReports = lazy(() =>
   import("./components/Settings/AutomatedReports")
 );
 const Solutions = lazy(() => import("./components/Settings/Solutions"));
+
+//Getting Started Or Setting Up An Account ========================
 const GettingStarted = lazy(() =>
   import("./components/Landing Page/GettingStarted")
+);
+const CompanySetUp = lazy(() =>
+  import("./components/Landing Page/CompanySetUp")
 );
 
 const App = () => {
@@ -50,13 +55,21 @@ const App = () => {
           }
         >
           <Routes>
+            {/**Landing ======================== */}
             <Route exact path="/" element={<Landing />} />
             <Route exact path="/getting-started" element={<GettingStarted />} />
+            <Route path="/company-set-up" element={<CompanySetUp />} />
+
+            {/**LogIn ======================== */}
             <Route exact path="/logIn" element={<LogIn />} />
+
+            {/**Support ======================== */}
             <Route exact path="/support" element={<SupportHome />}>
               <Route path="new-ticket" element={<NewTicket />} />
               <Route path="knowledge_base" element={<KnowledgeBase />} />
             </Route>
+
+            {/**App======================== */}
             <Route path="/app" element={<MainComponent />}>
               <Route path="tickets" element={<TicketsComponent />} />
               <Route path="reports" element={<ReportsComponent />} />
