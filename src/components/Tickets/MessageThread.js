@@ -62,12 +62,12 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const [reply, setReply] = useState({
     message: "",
     subject: "",
-    status: firstMessage.length >= 1 && firstMessage[0].status,
+    status: firstMessage.length >= 1 ?firstMessage[0].status:"",
     message_position: threadMessage.length + 1,
     ticket_id: firstMessage.length >= 1 ? firstMessage.ticket_id : "none",
   });
 
-  //Message options ========================================
+  //Message options ========================================gi
   const [msgOptions, setOptions] = useState({
     status: false,
     id: "",
