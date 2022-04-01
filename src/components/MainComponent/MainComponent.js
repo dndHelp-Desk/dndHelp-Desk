@@ -128,21 +128,21 @@ const MainComponent = () => {
         <div className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-slate-200 border-b dark:border-slate-800 border-slate-300">
           {/**Alert */}
           <Alert />
-          <nav className="container w-[90%] md:w-full 2xl:w-[72rem] backdrop-blur-lg p-2 flex justify-between items-center relative z-[999]">
+          <nav className="container w-[90%] md:w-full 2xl:w-[72rem] backdrop-blur-lg py-2 flex justify-between items-center relative z-[999]">
             {/**Logo ==================== */}
-            <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
+            <div className="h-12 w-[10rem] ml-[-0.75rem] hidden lg:flex items-center justify-start overflow-hidden pt-1">
               {theme !== "dark" && (
                 <img
                   src={darkLogo}
                   alt="logo"
-                  className="object-cover object-center w-[10rem]"
+                  className="object-cover object-center w-full h-full"
                 />
               )}
               {theme === "dark" && (
                 <img
                   src={lightLogo}
                   alt="logo"
-                  className="object-cover object-center w-[10rem] relative after:absolute after:h-full after:w-full after:bg-slate-400"
+                  className="object-cover object-center w-full h-full relative after:absolute after:h-full after:w-full after:bg-slate-400"
                 />
               )}
             </div>
@@ -256,42 +256,19 @@ const MainComponent = () => {
             <div className="flex space-x-2">
               {/**Change Theme =========================== */}
               <abbr title="theme">
-                <div className="w-20 flex justify-between rounded-xl p-1 border dark:border-slate-700 border-slate-400">
-                  <button
-                    aria-label="button"
-                    onClick={() => {
-                      dispatch(
-                        changeTheme("light")
-                      );
-                      window.localStorage.setItem(
-                        "theme",
-                        JSON.stringify("light")
-                      );
-                    }}
-                    className={`dark:text-gray-200 ${
-                      theme !== "dark" && "bg-slate-400"
-                    } text-slate-900 text-xl relative focus:outline-none outline-none h-8 w-8 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold`}
-                  >
-                    <BsBrightnessHigh />
-                  </button>
-                  <button
-                    aria-label="button"
-                    onClick={() => {
-                      dispatch(
-                        changeTheme("dark")
-                      );
-                      window.localStorage.setItem(
-                        "theme",
-                        JSON.stringify("dark")
-                      );
-                    }}
-                    className={`dark:text-gray-200 ${
-                      theme === "dark" && "bg-slate-700"
-                    } text-slate-900 text-xl relative focus:outline-none outline-none h-8 w-8 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold`}
-                  >
-                    <BsMoonStars />
-                  </button>
-                </div>
+                <button
+                  aria-label="button"
+                  onClick={() => {
+                    dispatch(changeTheme(theme === "dark" ? "light" : "dark"));
+                    window.localStorage.setItem(
+                      "theme",
+                      JSON.stringify(theme === "dark" ? "light" : "dark")
+                    );
+                  }}
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-400 hover:text-slate-100 items-center justify-center flex font-bold"
+                >
+                  {theme === "dark" ? <BsBrightnessHigh /> : <BsMoonStars />}
+                </button>
               </abbr>
 
               {/**Notifications ================================================ */}

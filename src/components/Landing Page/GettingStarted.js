@@ -16,13 +16,16 @@ const GettingStarted = () => {
     <>
       <section className="bg-slate-300 h-screen w-screen min-h-[40rem]">
         {/**Help Chat ============ */}
-        <Help/>
+        <Help />
 
         {/**Navigation ========================== */}
         <nav className="w-full">
           <div className="w-full h-[4rem] z-[99] flex justify-between items-center bg-slate-300 border-b border-slate-500 px-12">
             {/**Logo ==================== */}
-            <Link to="/" className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1 outline-none focus:outline-none">
+            <Link
+              to="/"
+              className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1 outline-none focus:outline-none"
+            >
               <img
                 src={darkLogo}
                 alt="logo"
@@ -81,11 +84,11 @@ const GettingStarted = () => {
           </div>
         </nav>
 
-       {/** //Section =======================*/}
-        <div className="mt-6 mx-auto container">
+        {/** //Section =======================*/}
+        <div className="mt-12 mx-auto container">
           <div className="flex flex-col lg:items-center justify-center w-full">
             <h1 className="font-semibold text-gray-800 text-3xl md:text-4xl">
-              The Right Plan for your business
+              Get started at no cost, then pay as you go.
             </h1>
             <p className="mt-2.5 lg:w-1/2 lg:text-center text-2xl">
               We have several plans to showcase your Business. Get everything
@@ -125,7 +128,7 @@ const GettingStarted = () => {
                   <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
                     <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
                       <h4 className="text-2xl text-indigo-700 font-semibold pb-8">
-                        Basic
+                        Free
                       </h4>
                       <ul className="flex flex-col mb-6">
                         <li className="flex items-center mb-2.5">
@@ -191,7 +194,7 @@ const GettingStarted = () => {
                       </ul>
                       <p className="text-base text-indigo-700 relative pl-3 mb-5">
                         <span className="font-light text-lg">$</span>
-                        <span className="text-2xl font-semibold">20</span>
+                        <span className="text-2xl font-semibold">0</span>
                         <span className="text-gray-600 font-light text-lg">
                           /month
                         </span>
@@ -207,7 +210,7 @@ const GettingStarted = () => {
                   <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
                     <div className="py-5 px-4 bg-indigo-700 border border-gray-200 shadow rounded-lg text-left">
                       <h4 className="text-2xl text-white font-semibold pb-8">
-                        Pro
+                        Basic
                       </h4>
                       <ul className="flex flex-col mb-6">
                         <li className="flex items-center mb-2.5">
@@ -273,8 +276,8 @@ const GettingStarted = () => {
                       </ul>
                       <p className="text-base text-white relative pl-3 mb-5">
                         <span className="font-light text-lg">$</span>
-                        <span className="text-2xl font-semibold">100</span>
-                        <span className="font-light text-lg">/month</span>
+                        <span className="text-2xl font-semibold">5</span>
+                        <span className="font-light text-lg">/month/User</span>
                       </p>
                       <Link
                         to="/company-set-up"
@@ -287,7 +290,7 @@ const GettingStarted = () => {
                   <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
                     <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
                       <h4 className="text-2xl text-indigo-700 font-semibold pb-8">
-                        Enterprise
+                        Pro
                       </h4>
                       <ul className="flex flex-col mb-6">
                         <li className="flex items-center mb-2.5">
@@ -353,8 +356,8 @@ const GettingStarted = () => {
                       </ul>
                       <p className="text-base text-indigo-700 relative pl-3 mb-5">
                         <span className="font-light text-lg">$</span>
-                        <span className="text-2xl font-semibold">200</span>
-                        <span className="font-light text-lg">/month</span>
+                        <span className="text-2xl font-semibold">10</span>
+                        <span className="font-light text-lg">/month/User</span>
                       </p>
                       <Link
                         to="/company-set-up"

@@ -294,7 +294,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           onClick={() => setChat(false)}
           className={`dark:text-slate-400 text-slate-800 font-bold mt-2 py-1 h-2 w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer ${
             !isChatOpen && "hidden"
-          } md:hidden`}
+          }`}
         >
           <BiArrowBack />
           <span className="text-xs">Back</span>

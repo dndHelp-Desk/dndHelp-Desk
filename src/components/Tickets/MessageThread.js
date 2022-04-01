@@ -4,6 +4,9 @@ import {
   BsFillTrashFill,
   BsThreeDotsVertical,
   BsChatRight,
+  BsTypeItalic,
+  BsTypeUnderline,
+  BsCodeSlash,
 } from "react-icons/bs";
 import {
   BiPaperPlane,
@@ -111,7 +114,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
           className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all"
         >
           {/**Message ====================== */}
-          <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-2 relative">
+          <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-4 relative">
             <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center capitalize font-bold text-sm">
               <BsChatRight />
             </div>
@@ -189,7 +192,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   </div>
                 </div>
               </div>
-              <p className="mt-2 py-2 dark:text-slate-400 text-slate-700">
+              <p className="mt-2 py-2 dark:text-slate-400 text-slate-700 border dark:border-[#33415560] border-slate-300 p-2 rounded-lg">
                 {message.message}
               </p>
             </div>
@@ -490,9 +493,9 @@ const MessageThread = ({ isChatOpen, audio }) => {
     <div
       className={`h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none  bg-transparent overflow-hidden`}
+      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none  bg-transparent`}
     >
-      <div className="h-[30rem] w-full dark:bg-[#182235] bg-slate-200 border dark:border-[#33415596] border-slate-300 px-2 py-4 space-y-4 flex flex-col">
+      <div className="h-[30rem] w-full dark:bg-[#182235] bg-slate-200 border dark:border-[#33415596] border-[#94a3b8a8] rounded-none lg:rounded-tr-md px-2 pb-4 gap-4 flex flex-col overflow-hidden">
         <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
@@ -507,35 +510,35 @@ const MessageThread = ({ isChatOpen, audio }) => {
                     Ticket Details
                   </h2>
                   <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-4 capitalize">
-                    <li className="text-xs flex items-center justify-between border-b border-slate-300 dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
                       <b>Open Date : </b>
                       {firstMessage.length >= 1 &&
                         new Date(firstMessage[0].date).toLocaleString()}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-300 dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
                       <b>Assigned To : </b>
                       {firstMessage.length >= 1 && firstMessage[0].agent_name}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-300 dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
                       <b>Brand/Company : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].branch_company}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-300 dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
                       <b>First Contact Resolution : </b>
                       {firstMessage.length >= 1 && firstMessage[0].fcr}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-300 dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
                       <b>Complainant Name : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].complainant_name}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-300 dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
                       <b>Complainant Number : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].complainant_number}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-300 dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
                       <b>Complainant Email : </b>
                       <span className="lowercase">
                         {firstMessage.length >= 1 &&
@@ -591,7 +594,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         </span>
                       </div>
                     </div>
-                    <p className="mt-2 pt-6 dark:text-slate-400 text-slate-700 capitalize">
+                    <p className="mt-6 dark:text-slate-400 text-slate-700 capitalize border dark:border-[#33415560] border-slate-300 p-2 rounded-lg">
                       {firstMessage.length >= 1 && firstMessage[0].solution}
                     </p>
                     {/**Play Recording ================================ */}
@@ -636,8 +639,8 @@ const MessageThread = ({ isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[10.1rem] w-full bg-transparent p-4 pt-6 flex items-center justify-center border-l-0 lg:border-l dark:border-[#33415596] border-slate-300">
-        <div className="h-full w-full relative shadow-sm rounded-lg dark:bg-[#182235] bg-slate-200 border border-slate-300 dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+      <div className="h-[10.1rem] w-full bg-transparent py-4 pt-6 flex items-center justify-center">
+        <div className="h-full w-full relative shadow-sm rounded-lg dark:bg-[#182235] bg-slate-200 border border-[#94a3b8a8] dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col overflow-hidden"
@@ -681,7 +684,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
               ></textarea>
             </div>
             {/**Reply options ======================= */}
-            <div className="row-span-2 h-10 px-1 w-full flex justify-between items-center">
+            <div className="row-span-2 h-10 px-1.5 w-full flex justify-between items-center">
               <div className="h-full flex items-center">
                 {/**Attach A file ========================================= */}
                 <abbr title="Attachment">
@@ -718,8 +721,44 @@ const MessageThread = ({ isChatOpen, audio }) => {
                     />
                   </label>
                 </abbr>
+                {/**Bold Words ========================================= */}
+                <abbr title="Bold ">
+                  <button
+                    type="button"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base font-medium outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                  >
+                    <span>B</span>
+                  </button>
+                </abbr>
+                {/**Italic Words ========================================= */}
+                <abbr title="Italic">
+                  <button
+                    type="button"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base italic font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                  >
+                    <BsTypeItalic />
+                  </button>
+                </abbr>
+                {/**Underline Words ========================================= */}
+                <abbr title="Underline">
+                  <button
+                    type="button"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                  >
+                    <BsTypeUnderline />
+                  </button>
+                </abbr>
+                {/**Turn Into Code ========================================= */}
+                <abbr title="Code">
+                  <button
+                    type="button"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                  >
+                    <BsCodeSlash />
+                  </button>
+                </abbr>
                 {/**Change Status ========================================= */}
-                <abbr title="Upload Your Recording">
+                <abbr title="Change Status">
                   <select
                     htmlFor="recording"
                     onChange={(e) =>
@@ -728,11 +767,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
                     required
                     className="w-28 h-8 pt-2 rounded-r-md border border-slate-300 dark:border-slate-800 bg-slate-200 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
                   >
-                    <option
-                      className="p-2"
-                      value={reply.status}
-                    >
-                      {firstMessage.length >= 1 && reply.status !== ""? firstMessage[0].status:"Status"}
+                    <option className="p-2" value={reply.status}>
+                      {firstMessage.length >= 1 && reply.status !== ""
+                        ? firstMessage[0].status
+                        : "Status"}
                     </option>
                     <option className="p-2" value="open">
                       open

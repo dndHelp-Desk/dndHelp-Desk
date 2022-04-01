@@ -29,26 +29,25 @@ const CompanySetUp = () => {
 
   //Component  =================================
   return (
-    <div className="h-screen w-screen min-h-[40rem] bg-slate-300 grid grid-cols-5 relative">
+    <div className="h-screen w-screen min-h-[40rem] bg-slate-300 grid grid-cols-3 lg:grid-cols-5 overflow-hidden overflow-y-scroll relative">
       {/**Contents Fist Half ================================= */}
-      <div className="col-span-2 bg-slate-900 flex flex-col items-center justify-center p-4">
+      <div className="col-span-2 bg-slate-900 hidden lg:flex flex-col items-center justify-center p-4">
         <div className="relative w-full flex justify-center">
           <img src={lightLogo} alt="welcome" className="w-[50%]" />
-          <small className="absolute text-sm text-slate-200 bottom-8 left-[38.5%]">
-            Good service is good business.
-          </small>
         </div>
         <img src={supportImage} alt="welcome" className="w-[70%]" />
       </div>
 
       {/**Contents Second Half ================================= */}
       <div className="col-span-3 bg-inherit flex items-center justify-center p-4 relative">
-        <div className="absolute top-8 right-6 text-slate-800 text-sm font-semibold">
+        <div className="absolute top-2 2xl:top-8 right-6 text-slate-800 text-sm font-semibold">
           Already have an account ?{" "}
           <Link to="/logIn" className="text-blue-600">
             Login now !
           </Link>
         </div>
+
+		{/**Form ============================================== */}
         <form
           onSubmit={(e) =>
             handleSubmit(e, setUpValues.user_email, setUpValues.user_password)
@@ -63,17 +62,19 @@ const CompanySetUp = () => {
           </h1>
 
           {/**Start =========================== */}
-          <h2 className="mt-4 text-base font-semibold text-center uppercase text-slate-600">
+          <h2 className="mt-4 text-sm font-semibold text-center uppercase text-slate-600">
             Personal Info
           </h2>
-          <hr className="bg-slate-500 border-0 h-[2px]" />
+          <hr className="bg-slate-400 border-0 h-[1px]" />
           {/**Name & Email Address ========================= */}
           <div className="flex w-full justify-between items-center gap-4">
             <label
               htmlFor="user_name"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">Full-Name</span>
+              <span className="uppercase text-[0.65rem] font-semibold">
+                Full-Name
+              </span>
               <input
                 type="text"
                 name="user_name"
@@ -84,14 +85,14 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, user_name: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
               htmlFor="user_email"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
+              <span className="uppercase text-[0.65rem] font-semibold">
                 Email Address
               </span>
               <input
@@ -104,7 +105,7 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, user_email: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -115,7 +116,9 @@ const CompanySetUp = () => {
               htmlFor="user_password"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">Password</span>
+              <span className="uppercase text-[0.65rem] font-semibold">
+                Password
+              </span>
               <input
                 type="password"
                 name="user_password"
@@ -126,14 +129,14 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, user_password: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
               htmlFor="categories"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
+              <span className="uppercase text-[0.65rem] font-semibold">
                 Groups/categories
               </span>
               <input
@@ -146,15 +149,15 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, categories: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
 
-          <h2 className="mt-8 text-base font-semibold text-center uppercase text-slate-600">
+          <h2 className="mt-8 text-sm font-semibold text-center uppercase text-slate-600">
             Your Company
           </h2>
-          <hr className="bg-slate-500 border-0 h-[2px]" />
+          <hr className="bg-slate-400 border-0 h-[1px]" />
 
           {/**Company Name & Company Address ========================= */}
           <div className="flex w-full justify-between items-center gap-4">
@@ -162,7 +165,7 @@ const CompanySetUp = () => {
               htmlFor="company_name"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
+              <span className="uppercase text-[0.65rem] font-semibold">
                 Company name
               </span>
               <input
@@ -175,14 +178,14 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, company_name: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
               htmlFor="companany_address"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
+              <span className="uppercase text-[0.65rem] font-semibold">
                 Company Address
               </span>
               <input
@@ -198,7 +201,7 @@ const CompanySetUp = () => {
                     companany_address: e.target.value,
                   })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -209,7 +212,7 @@ const CompanySetUp = () => {
               htmlFor="sending_email"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
+              <span className="uppercase text-[0.65rem] font-semibold">
                 Email Account
               </span>
               <input
@@ -222,14 +225,14 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, sending_email: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
               htmlFor="host"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
+              <span className="uppercase text-[0.65rem] font-semibold">
                 Outgoing Mail Server Host
               </span>
               <input
@@ -245,7 +248,7 @@ const CompanySetUp = () => {
                     host: e.target.value,
                   })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -256,7 +259,7 @@ const CompanySetUp = () => {
               htmlFor="port"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
+              <span className="uppercase text-[0.65rem] font-semibold">
                 OUTGOING MAIL SERVER PORT
               </span>
               <input
@@ -269,15 +272,15 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, port: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
               htmlFor="password"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
-              <span className="uppercase text-xs font-semibold">
-                Email Account paasword
+              <span className="uppercase text-[0.65rem] font-semibold">
+                Email Account password
               </span>
               <input
                 type="password"
@@ -292,7 +295,7 @@ const CompanySetUp = () => {
                     password: e.target.value,
                   })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-100 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -304,10 +307,14 @@ const CompanySetUp = () => {
             </button>
           </div>
 
-          <div className="flex justify-center space-x-1">
-            <span>By creating the account you agree to our</span>{" "}
+          <div className="flex justify-center space-x-1 font-medium text-sm">
+            <span>By creating an account you agree to our</span>{" "}
             <Link to="" className="text-blue-600">
-              Terms and Conditions and Privacy Policy.
+              Terms and Conditions
+            </Link>{" "}
+            <span>and </span>
+            <Link to="" className="text-blue-600">
+              Privacy Policy.
             </Link>
           </div>
         </form>
