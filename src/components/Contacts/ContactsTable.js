@@ -94,7 +94,7 @@ const Table = ({ setModal }) => {
 
   //Component  =============================
   return (
-    <div className="mx-auto container shadow rounded-xl p-2 h-[42rem] overflow-hidden relative">
+    <div className="mx-auto container shadow rounded-xl p-2pb-4 h-[52rem] overflow-hidden relative">
       {/**Edit Contact ============ */}
       <EditContact
         edit={edit}
@@ -149,7 +149,7 @@ const Table = ({ setModal }) => {
           </button>
         </div>
       </div>
-      <div className="w-full h-[32.5rem] px-2 overflow-hidden overflow-y-scroll">
+      <div className="w-[98%] h-[46rem] m-auto px-2 overflow-hidden overflow-y-scroll">
         <table className="min-w-full  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
           <thead className="sticky top-0 z-[99] dark:bg-slate-700 bg-slate-100">
             <tr className="w-full h-16">

@@ -14,7 +14,7 @@ const Pricing = () => {
   //Coimponent ==============================
   return (
     <>
-      <section className="bg-slate-300 h-screen w-screen min-h-[40rem]">
+      <section className="bg-slate-300 h-screen w-screen min-h-[40rem] overflow-hidden overflow-y-scroll">
         {/**Help Chat ============ */}
         <Help />
 

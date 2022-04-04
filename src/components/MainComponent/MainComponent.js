@@ -7,8 +7,8 @@ import {
   BsGear,
   BsMoonStars,
 } from "react-icons/bs";
-import darkLogo from "./logos/dndHelp-Desk_Dark.png";
-import lightLogo from "./logos/dndHelp-Desk_Light.png";
+import darkLogo from "./logos/dndHelp-Desk.png";
+import lightLogo from "./logos/dndHelp-Desk_.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../store/UserSlice";
@@ -163,19 +163,19 @@ const MainComponent = () => {
             <Alert />
             <nav className="container w-[90%] md:w-full 2xl:w-[72rem] backdrop-blur-lg py-2 flex justify-between items-center relative z-[999]">
               {/**Logo ==================== */}
-              <div className="h-12 w-[10rem] ml-[-0.75rem] hidden lg:flex items-center justify-start overflow-hidden pt-1">
+              <div className="h-10 w-10 hidden lg:flex items-center justify-center overflow-hidden">
                 {theme !== "dark" && (
                   <img
                     src={darkLogo}
                     alt="logo"
-                    className="object-cover object-center w-full h-full"
+                    className="object-cover object-center w-10 h-10"
                   />
                 )}
                 {theme === "dark" && (
                   <img
                     src={lightLogo}
                     alt="logo"
-                    className="object-cover object-center w-full h-full relative after:absolute after:h-full after:w-full after:bg-slate-400"
+                    className="object-cover object-center w-10 h-10"
                   />
                 )}
               </div>

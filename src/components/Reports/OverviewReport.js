@@ -164,7 +164,7 @@ const OverviewReport = ({ data }) => {
           </h3>
           <p className="text-xs text-center text-slate-500 dark:text-slate-400">
             More features will be added soon in the meantime explore the reports
-            by making use of filters. You can find your current stisfaction
+            by making use of filters. You can find your current satisfaction
             ratings below.
           </p>
           <div className="|">
