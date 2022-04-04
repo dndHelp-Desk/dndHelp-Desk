@@ -257,9 +257,13 @@ const LogIn = () => {
                     onChange={(e) => {
                       window.localStorage.setItem(
                         "organization_name",
-                       JSON.stringify(e.target.value.toLocaleLowerCase().replace(/\s/g, ""))
+                       JSON.stringify(e.target.value.toLowerCase().replace(/\s/g, ""))
                       );
-                      dispatch(setCompany(e.target.value));
+                      dispatch(
+                        setCompany(
+                          e.target.value.toLowerCase().replace(/\s/g, "")
+                        )
+                      );
                       setValues({ ...inputValues, company: e.target.value });
                     }}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
