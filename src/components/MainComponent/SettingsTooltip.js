@@ -17,7 +17,7 @@ const SettingsTooltip = () => {
     <>
       <div
         role="tooltip"
-        className="min-h-[10rem] w-[13rem] z-[9999] dark:bg-slate-700 bg-white shadow-2xl rounded-lg p-2  py-5 absolute right-[-3rem] top-[3.5rem] after:content-[''] after:fixed after:top-[4rem] after:right-[3.8rem] after:mt-[-15px] after:border-[12px] after:border-t-transparent after:border-r-transparent dark:after:border-b-slate-700 after:border-b-white after:border-l-transparent  lg:border-t dark:border-slate-700 border-slate-300 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap overflow-hidden hidden group-hover:flex flex-col items-center"
+        className="min-h-[10rem] w-[13rem] z-[999] dark:bg-slate-700 bg-white border dark:border-slate-700 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded-lg p-2 fixed right-4 top-[4.2rem] after:content-[''] after:absolute after:right-[2.5rem] after:top-[-0.8rem] after:h-6 after:w-6 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit hidden group-hover:flex flex-col items-center"
       >
         <h2 className="dark:text-slate-300 text-slate-800 text-xl font-bold text-left w-full px-2">
           Settings
@@ -29,33 +29,45 @@ const SettingsTooltip = () => {
               <span>Account</span>
             </NavLink>
           </li>
-          <li className={`${user[0].access !== "admin" && "hidden"}`}>
+          <li
+            className={`${
+              user.length >= 1 && user[0].access !== "admin" && "hidden"
+            }`}
+          >
             <NavLink
               to="/app/settings/team"
               className={`settingsNav ${
-                user[0].access !== "admin" && "hidden"
+                user.length >= 1 && user[0].access !== "admin" && "hidden"
               }`}
             >
               <BsPeopleFill />
               <span>Team</span>
             </NavLink>
           </li>
-          <li className={`${user[0].access !== "admin" && "hidden"}`}>
+          <li
+            className={`${
+              user.length >= 1 && user[0].access !== "admin" && "hidden"
+            }`}
+          >
             <NavLink
               to="/app/settings/support-operations"
               className={`settingsNav ${
-                user[0].access !== "admin" && "hidden"
+                user.length >= 1 && user[0].access !== "admin" && "hidden"
               }`}
             >
               <BsChatSquareDotsFill />
               <span>Support Operations</span>
             </NavLink>
           </li>
-          <li className={`${user[0].access !== "admin" && "hidden"}`}>
+          <li
+            className={`${
+              user.length >= 1 && user[0].access !== "admin" && "hidden"
+            }`}
+          >
             <NavLink
               to="/app/settings/automated-reports"
               className={`settingsNav ${
-                user[0].access !== "admin" && "hidden"
+                user.length >= 1 && user[0].access !== "admin" && "hidden"
               }`}
             >
               <BsFileTextFill />

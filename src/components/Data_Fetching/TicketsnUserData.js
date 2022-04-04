@@ -12,6 +12,7 @@ import {
   setCompanyDetails,
 } from "../../store/Tickets_n_Settings_Slice";
 import { setMessages } from "../../store/NotificationsSlice";
+import { store } from "../../store/store";
 
 //Firestore ===================
 import {
@@ -25,29 +26,37 @@ import {
   enableIndexedDbPersistence,
 } from "firebase/firestore";
 
+
 // init services for firestore =========================
 const db = getFirestore();
 
 // Subsequent queries will use persistence, if it was enabled successfully
 enableIndexedDbPersistence(db, { experimentalTabSynchronization: true });
+const org = store.getState().UserInfo.company_name; 
 
 // collection ref
-let membersRef = collection(db, "members");
-let ticketsRef = collection(db, "tickects");
-let contactsRef = collection(db, "contacts");
-let settingsRef = collection(db, "settings");
-let emailAccountsRef = collection(db, "email_accounts");
+let membersRef = collection(db, `companies/${org}/members`);
+let ticketsRef = collection(db, `companies/${org}/tickets`);
+let contactsRef = collection(db, `companies/${org}/contacts`);
+let settingsRef = collection(db, `companies/${org}/settings`);
+let emailAccountsRef = collection(db, `companies/${org}/email_accounts`);
 let email_TemplatesRef = collection(
   db,
-  "settings/all_settings/email_templates"
+  `companies/${org}/settings/all_settings/email_templates`
 );
-let categoriesRef = collection(db, "settings/all_settings/categories");
-let companyDetailsRef = collection(db, "settings/all_settings/company_details");
+let categoriesRef = collection(
+  db,
+  `companies/${org}/settings/all_settings/categories`
+);
+let companyDetailsRef = collection(
+  db,
+  `companies/${org}/settings/all_settings/company_details`
+);
 
 //===================================USER===========================================
 // Update User Details ================
 export const updateUserDetails = (id, name, dept, bio) => {
-  let docRef = doc(db, "members", id);
+  let docRef = doc(db, `companies/${org}/members`, id);
   updateDoc(docRef, {
     name: name,
     dept: dept,
@@ -57,7 +66,7 @@ export const updateUserDetails = (id, name, dept, bio) => {
 
 // Update Agent Online Status ================
 export const updateUserStatus = (id, status) => {
-  let docRef = doc(db, "members", id);
+  let docRef = doc(db, `companies/${org}/members`, id);
   updateDoc(docRef, {
     status: status,
   });
@@ -65,7 +74,7 @@ export const updateUserStatus = (id, status) => {
 
 // Update Agent profileUrl on FireBase Doc ================
 export const updateProfileUrl = (id, photoUrl) => {
-  let docRef = doc(db, "members", id);
+  let docRef = doc(db, `companies/${org}/members`, id);
   updateDoc(docRef, {
     photoUrl: photoUrl,
   });
@@ -73,7 +82,7 @@ export const updateProfileUrl = (id, photoUrl) => {
 
 // Update User Uid ================
 export const updateUID = (id, uid) => {
-  let docRef = doc(db, "members", id);
+  let docRef = doc(db, `companies/${org}/members`, id);
   updateDoc(docRef, {
     uid: uid,
   });
@@ -81,7 +90,7 @@ export const updateUID = (id, uid) => {
 
 // change user active status ================
 export const activateUser = (id, state) => {
-  let docRef = doc(db, "members", id);
+  let docRef = doc(db, `companies/${org}/members`, id);
   updateDoc(docRef, {
     active: state,
   });
@@ -89,7 +98,7 @@ export const activateUser = (id, state) => {
 
 // Delete User ================
 export const deleteUser = (id) => {
-  let docRef = doc(db, "members", id);
+  let docRef = doc(db, `companies/${org}/members`, id);
   deleteDoc(docRef);
 };
 
@@ -119,7 +128,7 @@ export const createUser = (
 //===================================NOTIFICATIONS===========================================
 // Add Notifications =================================
 export const addNotification = (id, title, message) => {
-  addDoc(collection(db, `members/${id}/notifications`), {
+  addDoc(collection(db, `companies/${org}/members/${id}/notifications`), {
     title: title,
     message: message,
     date: new Date().toLocaleString(),
@@ -128,7 +137,7 @@ export const addNotification = (id, title, message) => {
 
 //Delete notification ============================
 export const deleteNotification = (id, user_id) => {
-  let docRef = doc(db, `members/${user_id}/notifications`, id);
+  let docRef = doc(db, `companies/${org}/members/${user_id}/notifications`, id);
   deleteDoc(docRef);
 };
 
@@ -145,7 +154,7 @@ export const newContact = (name, email, phone, company) => {
 
 //Edit Contact ========================
 export const editContact = (id, name, phone, email) => {
-  let docRef = doc(db, "contacts", id);
+  let docRef = doc(db, `companies/${org}/contacts`, id);
   updateDoc(docRef, {
     name: name,
     phone: phone,
@@ -155,14 +164,14 @@ export const editContact = (id, name, phone, email) => {
 
 // Delete Contact ================
 export const deleteContact = (id) => {
-  let docRef = doc(db, "contacts", id);
+  let docRef = doc(db, `companies/${org}/contacts`, id);
   deleteDoc(docRef);
 };
 
 //===================================EMAIL ACCOUNTS MANAGEMENT===========================================
 // Update Email Account =================================
 export const updateEmailAccount = (id, email, password, host, port) => {
-  let docRef = doc(db, "email_accounts", id);
+  let docRef = doc(db, `companies/${org}/email_accounts`, id);
   updateDoc(docRef, {
     email: email,
     password: password,
@@ -184,21 +193,21 @@ export const newEmailAccount = (name, email, password, host, port) => {
 
 // Delete Contact ================
 export const deleteEmailAccount = (id) => {
-  let docRef = doc(db, "email_accounts", id);
+  let docRef = doc(db, `companies/${org}/email_accounts`, id);
   deleteDoc(docRef);
 };
 
 //===================================TICKETS===========================================
 // Change Ticket Priority ================
 export const changePriority = (id, selected) => {
-  let docRef = doc(db, "tickects", id);
+  let docRef = doc(db, `companies/${org}/tickets`, id);
   updateDoc(docRef, {
     priority: selected,
   });
 };
 // Resolve Ticket Ticket  ================
 export const resolveTicket = (id, solution, hasRecording) => {
-  let docRef = doc(db, "tickects", id);
+  let docRef = doc(db, `companies/${org}/tickets`, id);
   updateDoc(docRef, {
     status: "solved",
     solution: solution,
@@ -209,7 +218,7 @@ export const resolveTicket = (id, solution, hasRecording) => {
 
 // Change Reopen Ticket ================
 export const reOpenTicket = (id) => {
-  let docRef = doc(db, "tickects", id);
+  let docRef = doc(db, `companies/${org}/tickets`, id);
   updateDoc(docRef, {
     status: "reopened",
     reopened: true,
@@ -218,7 +227,7 @@ export const reOpenTicket = (id) => {
 
 // Change Ticket Status ================
 export const changeStatus = (id, state) => {
-  let docRef = doc(db, "tickects", id);
+  let docRef = doc(db, `companies/${org}/tickets`, id);
   updateDoc(docRef, {
     status: state,
   });
@@ -226,13 +235,13 @@ export const changeStatus = (id, state) => {
 
 // deleting Tickets
 export const deleteTicket = (id) => {
-  const docRef = doc(db, "tickects", id);
+  const docRef = doc(db, `companies/${org}/tickets`, id);
   deleteDoc(docRef);
 };
 
 // Assign Different Agent ================
 export const assignAgent = (id, agent, email, assigner) => {
-  let docRef = doc(db, "tickects", id);
+  let docRef = doc(db, `companies/${org}/tickets`, id);
   updateDoc(docRef, {
     agent_name: agent,
     agent_email: email,
@@ -272,7 +281,7 @@ export const addReply = (
 
 //Mark Message as Seen ============
 export const markAsSeen = (id, readStatus) => {
-  let docRef = doc(db, "tickects", id);
+  let docRef = doc(db, `companies/${org}/tickets`, id);
   updateDoc(docRef, {
     readStatus: readStatus,
   });
@@ -338,17 +347,15 @@ const TicketsnUserData = () => {
   //Data Loading =====================================
   useEffect(() => {
     return (
-      currentUser.email &&
       //Members Data Fetching
-      (onSnapshot(membersRef, (snapshot) => {
-        dispatch(
+        org && onSnapshot(membersRef, (snapshot) => {dispatch(
           addAllMembers(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
           )
         );
       }),
       //Add User Details ==============
-      onSnapshot(membersRef, (snapshot) => {
+      org && onSnapshot(membersRef, (snapshot) => {
         dispatch(
           updateUser(
             snapshot.docs
@@ -356,14 +363,14 @@ const TicketsnUserData = () => {
               .filter(
                 (member) =>
                   currentUser.email &&
-                  member.email.toLowerCase().trim() ===
-                    currentUser.email.toLowerCase().trim()
+                  member.email.toLowerCase().replace(/\s/g, "") ===
+                    currentUser.email.toLowerCase().replace(/\s/g, "")
               )
           )
         );
       }),
       //Tickects Data Fetching ======================
-      onSnapshot(ticketsRef, (snapshot) => {
+      org && onSnapshot(ticketsRef, (snapshot) => {
         dispatch(
           addAllTickets(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -371,7 +378,7 @@ const TicketsnUserData = () => {
         );
       }),
       //Contacts Data Fetching ======================
-      onSnapshot(contactsRef, (snapshot) => {
+      org && onSnapshot(contactsRef, (snapshot) => {
         dispatch(
           setContacts(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -379,7 +386,7 @@ const TicketsnUserData = () => {
         );
       }),
       //Settings Data Fetching ======================
-      onSnapshot(settingsRef, (snapshot) => {
+      org && onSnapshot(settingsRef, (snapshot) => {
         dispatch(
           loadSettings(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -387,7 +394,7 @@ const TicketsnUserData = () => {
         );
       }),
       //Email Tenplates Data Fetching ======================
-      onSnapshot(email_TemplatesRef, (snapshot) => {
+      org && onSnapshot(email_TemplatesRef, (snapshot) => {
         dispatch(
           loadTemplates(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -395,7 +402,7 @@ const TicketsnUserData = () => {
         );
       }),
       //Categories Data Fetching ======================
-      onSnapshot(categoriesRef, (snapshot) => {
+      org && onSnapshot(categoriesRef, (snapshot) => {
         dispatch(
           setCategories(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
@@ -404,51 +411,59 @@ const TicketsnUserData = () => {
         );
       }),
       //Company Details Data Fetching ======================
-      onSnapshot(companyDetailsRef, (snapshot) => {
+      org && onSnapshot(companyDetailsRef, (snapshot) => {
         dispatch(
           setCompanyDetails(
             snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
           )
         );
-      }))
+      })
     );
   }, [dispatch, currentUser.email]);
 
   //Load Email_Accounts ====================
   useEffect(() => {
-    return onSnapshot(emailAccountsRef, (snapshot) => {
-      member_details[0].id &&
-        dispatch(
-          loadAccounts(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-          )
-        );
-    });
+    return member_details.length >= 1
+      ? member_details[0].id &&
+          onSnapshot(emailAccountsRef, (snapshot) => {
+            member_details[0].id &&
+              dispatch(
+                loadAccounts(
+                  snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+                )
+              );
+          })
+      : "";
   }, [dispatch, member_details]);
 
   //Todo CollectionRef and Notifications ====================
   useEffect(() => {
-    let toDoRef = collection(db, `members/${member_details[0].id}/to-do`);
-    let notificationsRef = collection(
-      db,
-      `members/${member_details[0].id}/notifications`
-    );
-    return (
-      onSnapshot(toDoRef, (snapshot) => {
-        member_details[0].id &&
-          dispatch(
-            setToDo(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-          );
-      }),
-      onSnapshot(notificationsRef, (snapshot) => {
-        member_details[0].id &&
-          dispatch(
-            setMessages(
-              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-            )
-          );
-      })
-    );
+    let toDoRef =
+      member_details.length >= 1 &&
+      collection(db, `companies/${org}/members/${member_details[0].id}/to-do`);
+    let notificationsRef =
+      member_details.length >= 1 &&
+      collection(
+        db,
+        `companies/${org}/members/${member_details[0].id}/notifications`
+      );
+    return member_details.length >= 1
+      ? member_details[0].id &&
+          (onSnapshot(toDoRef, (snapshot) => {
+            dispatch(
+              setToDo(
+                snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+              )
+            );
+          }),
+          onSnapshot(notificationsRef, (snapshot) => {
+            dispatch(
+              setMessages(
+                snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+              )
+            );
+          }))
+      : "";
   }, [dispatch, member_details]);
   return <></>;
 };

@@ -19,6 +19,7 @@ import {
   BsFillKeyFill,
   BsBoxArrowRight,
 } from "react-icons/bs";
+import defaultProfile from "./../../default.webp";
 import {
   updateUserDetails,
   updateUserStatus,
@@ -39,10 +40,10 @@ const Account = () => {
   });
   const auth = getAuth();
   const user = auth.currentUser;
-  let photoUrl = "";
+  let photoUrl = defaultProfile;
   let emailStatus = false;
   if (user !== null) {
-    photoUrl = user.photoURL;
+    user.photoURL && (photoUrl = user.photoURL);
     emailStatus = user.emailVerified;
   }
 
@@ -133,7 +134,12 @@ const Account = () => {
         >
           <div className="h-20 w-20 mt-[8rem] dark:bg-slate-700 bg-slate-200 border-2 border-slate-400 p-[2px] rounded-xl overflow-hidden">
             <img
-              src={photoUrl}
+              src={
+                member_details[0].photoUrl !== null &&
+                member_details[0].photoUrl !== ""
+                  ? member_details[0].photoUrl
+                  : photoUrl
+              }
               alt="profile"
               className="object-cover object-center rounded-lg h-full w-full"
             />

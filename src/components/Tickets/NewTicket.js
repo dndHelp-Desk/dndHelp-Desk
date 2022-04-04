@@ -175,19 +175,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     xhr.send(body);*/
 
     // Upload Recordings
-    recordingFile &&
-      inputValue.state === "solved" &&
       recordingFile &&
       addRecording(recordingFile, `/dial_n_dine/${inputValue.ticket_id}`);
 
-    let dueDate = `${new Date(
-      inputValue.date
-    ).toDateString()}, ${new Date().getHours()}:${
-      new Date().getMinutes() + 1
-    } hrs`;
-    let openDate = `${new Date().toLocaleDateString()}, ${new Date().getHours()}:${
-      new Date().getMinutes() + 1
-    } hrs`;
+    let dueDate = `${new Date(inputValue.date).toLocaleString()}`;
+    let openDate = `${new Date().toLocaleString()}`;
 
     //Alert if Due Date is Empty =============
     inputValue.date === "" &&
@@ -225,9 +217,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       sendingAccount !== undefined &&
       inputValue.branch_company !== "" &&
       member_details.id !== false &&
-      allTickets.length >= 1 &&
+      (allTickets.length >= 1 &&
       allTickets.filter((ticket) => ticket.ticket_id === inputValue.ticket_id)
-        .length <= 0
+        .length <= 0)
     ) {
       //Open New Ticket ========================
       addTicket(

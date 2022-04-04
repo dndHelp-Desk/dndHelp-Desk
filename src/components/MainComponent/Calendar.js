@@ -165,7 +165,7 @@ const Calendar = () => {
   //Component
   return (
     <>
-      <div className="w-full py-2 flex flex-col justify-center px-4 select-none rounded-xl border dark:border-slate-800 border-slate-300">
+      <div className="w-full py-2 flex flex-col justify-center px-4 select-none rounded-xl border dark:border-slate-700 border-slate-200">
         <div className="px-2 rounded-xl">
           <div className="flex items-center justify-between">
             <HiChevronLeft

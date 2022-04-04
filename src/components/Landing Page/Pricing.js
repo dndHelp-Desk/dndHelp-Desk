@@ -1,11 +1,11 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
-import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import Help from "../Others/Help";
 
-const GettingStarted = () => {
+const Pricing = () => {
   const [menu, setMenu] = useState(false);
   const smallMenuRef = useOnClickOutside(() => {
     setMenu(false);
@@ -389,4 +389,4 @@ const GettingStarted = () => {
     </>
   );
 };
-export default GettingStarted;
+export default Pricing;

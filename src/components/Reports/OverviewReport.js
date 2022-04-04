@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import { useSelector } from "react-redux";
+import Pie from "./Pie";
+import HeatMap from "./HeatMap";
 
 const OverviewReport = ({ data }) => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
@@ -40,44 +42,6 @@ const OverviewReport = ({ data }) => {
       : 0;
   }, [allTickets, data]);
 
-  //Top 5 categories Bar ==================
-  const colorPalettes = [
-    "#1e40af",
-    "#6366f1",
-    "#2563eb",
-    "#3b82f6",
-    "#60a5fa",
-    "#1e40af",
-    "#6366f1",
-    "#2563eb",
-  ];
-  const category =
-    categoriesData.length >= 1 &&
-    categoriesData.map((element, index) => {
-      return (
-        <div
-          key={index}
-          style={{
-            width: `${
-              Number(element.value)
-                ? parseFloat(element.value).toFixed(1)
-                : "0.0"
-            }%`,
-            backgroundColor: `${colorPalettes[index]}`,
-          }}
-          className="h-full text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80"
-        >
-          <abbr
-            title={`${element.name} : ${
-              Number(element.value) ? parseFloat(element.value).toFixed(0) : 0
-            }%`}
-          >
-            <div className="w-full h-full"></div>
-          </abbr>
-        </div>
-      );
-    });
-
   //Preping daily count  Data==============
   let toolTip = option === "day" ? "Day" : "Time";
   let toolTipEtxra = option === "day" ? "" : ":00Hrs";
@@ -110,12 +74,12 @@ const OverviewReport = ({ data }) => {
 
   //Component =============================
   return (
-    <div className="col-span-3 lg:col-span-1  rounded-xl flex flex-col space-y-4">
-      <div className="h-[13rem] dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl shadow">
+    <div className="w-full rounded-xl grid grid-cols-3 gap-4">
+      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl shadow">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
           Tickets Statistics
         </h2>
-        <div className="mt-4 flex space-x-4 px-2 h-14 w-full justify-between">
+        <div className="mt-6 flex space-x-4 px-2 h-14 w-full justify-between">
           <div className="dark:text-slate-300 text-slate-700">
             <h4 className="text-base font-semibold text-center uppercase">
               {data.length}
@@ -180,18 +144,20 @@ const OverviewReport = ({ data }) => {
             </h4>
           </div>
         </div>
-        <div className="flex flex-col h-16 space-y-2 w-full justify-center">
-          <small className="text-xs space-y-2 font-semibold tracking-normal capitalize dark:text-slate-300 text-slate-900">
-            Tickets Per Categories
-          </small>
-          <div className="h-2.5 w-full rounded-full dark:bg-slate-700 bg-slate-200 flex overflow-hidden border dark:border-slate-800 border-slate-400">
-            {category}
-          </div>
+        <div className="flex flex-col mt-2 h-44 space-y-2 w-full justify-center overflow-hidden">
+          <HeatMap/>
         </div>
       </div>
 
+      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl shadow flex flex-col justify-center gap-2 px-4 h-[20rem] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+        <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
+          Tickets Per Category
+        </h2>
+        <Pie data={data} />
+      </div>
+
       {/**Traffic trend chart ======================== */}
-      <div className="h-[18rem] dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-xl shadow">
+      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-xl shadow">
         <div className="h-full w-full overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">

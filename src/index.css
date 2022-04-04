@@ -58,7 +58,7 @@
 
   /* Audio/ Recording player styling =====================================*/
   audio::-webkit-media-controls-panel {
-    @apply dark:bg-slate-400 bg-slate-300;
+    @apply dark:bg-slate-500 bg-slate-200;
   }
 
   .delayDisplay {

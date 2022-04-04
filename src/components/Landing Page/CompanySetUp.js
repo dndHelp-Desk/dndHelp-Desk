@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Help from "../Others/Help";
-import darkLogo from "./images/dndHelp-Desk_Dark.png";
+import darkLogo from "./images/dndHelp-Desk.png";
 import lightLogo from "./images/dndHelp-Desk_Light.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import supportImage from "./images/support-image.svg";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
+//Firestore ===================
+import { collection, addDoc, getFirestore } from "firebase/firestore";
+
 const CompanySetUp = () => {
+  const navigate = useNavigate();
   const auth = getAuth();
   const [setUpValues, setValues] = useState({
     user_name: "",
@@ -14,17 +18,112 @@ const CompanySetUp = () => {
     user_password: "",
     company_name: "",
     companany_address: "",
-    categories: "",
+    department: "",
     sending_email: "",
     password: "",
     port: "",
     host: "",
   });
 
+  // init services for firestore =========================
+  const db = getFirestore();
+
+  //collectionsRef =======================================
+  let membersRef =
+    setUpValues.company_name &&
+    collection(
+      db,
+      `companies/${setUpValues.company_name
+        .toLowerCase()
+        .replace(/\s/g, "")}/members`
+    );
+
+  let emailAccountsRef =
+    setUpValues.company_name &&
+    collection(
+      db,
+      `companies/${setUpValues.company_name
+        .toLowerCase()
+        .replace(/\s/g, "")}/email_accounts`
+    );
+
+  let companyDetailsRef =
+    setUpValues.company_name &&
+    collection(
+      db,
+      `companies/${setUpValues.company_name
+        .toLowerCase()
+        .replace(/\s/g, "")}/settings/all_settings/company_details`
+    );
+
+  let categoriesRef =
+    setUpValues.company_name &&
+    collection(
+      db,
+      `companies/${setUpValues.company_name
+        .toLowerCase()
+        .replace(/\s/g, "")}/settings/all_settings/categories`
+    );
+
   //Sing Up Or Create New Accouunt
   const handleSubmit = (e, email, password) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((data) => {
+        if (data) {
+          // New User =================================
+          addDoc(membersRef, {
+            name: setUpValues.user_name,
+            dept: setUpValues.department,
+            email: setUpValues.user_email,
+            access: "admin",
+            bio: "",
+            active: true,
+            status: "unavailable",
+            photoUrl: "",
+            companies: "",
+          });
+
+          //New  Email Account ==========================
+          addDoc(emailAccountsRef, {
+            name: "Support",
+            email: setUpValues.sending_email,
+            password: setUpValues.password,
+            host: setUpValues.host,
+            port: setUpValues.port,
+          });
+
+          //Company Details ==========================
+          addDoc(companyDetailsRef, {
+            name: setUpValues.company_name,
+            address: setUpValues.companany_address,
+            subscription: "Pro Plus",
+          });
+
+          //Support Categories ==========================
+          addDoc(categoriesRef, {
+            categories: [
+              "Late Delivery",
+              "Failed Order",
+              "Incorrect Order",
+              "Refund",
+              "Poor Service (Driver)",
+              "Poor Service (Agent)",
+              "Poor Service (Store)",
+            ],
+          });
+
+          //Set Organisation For LogIn ================================
+          window.localStorage.setItem(
+            "orgarnization_name",
+            setUpValues.company_name.toLocaleLowerCase().replace(/\s/g, "")
+          );
+
+          //Redirect To LogIn ================================
+          navigate("/app");
+        }
+      })
+      .catch(() => navigate("/error-page"));
   };
 
   //Component  =================================
@@ -47,7 +146,7 @@ const CompanySetUp = () => {
           </Link>
         </div>
 
-		{/**Form ============================================== */}
+        {/**Form ============================================== */}
         <form
           onSubmit={(e) =>
             handleSubmit(e, setUpValues.user_email, setUpValues.user_password)
@@ -55,7 +154,7 @@ const CompanySetUp = () => {
           className="w-full max-w-[40rem] gap-4 flex flex-col p-2"
         >
           <div className="flex justify-center w-full">
-            <img src={darkLogo} alt="logo" className="w-40 mt-auto" />
+            <img src={darkLogo} alt="logo" className="w-24 mt-auto" />
           </div>
           <h1 className="text-xl font-semibold text-center capitalize text-slate-800">
             Create Your Account
@@ -85,7 +184,7 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, user_name: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
@@ -105,7 +204,7 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, user_email: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -129,27 +228,27 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, user_password: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
-              htmlFor="categories"
+              htmlFor="department"
               className="w-2/4 text-xs font-medium text-slate-800"
             >
               <span className="uppercase text-[0.65rem] font-semibold">
-                Groups/categories
+                Department
               </span>
               <input
                 type="text"
-                name="categories"
-                id="categories"
+                name="department"
+                id="department"
                 required
-                placeholder="Complaints, Billing, Query ..."
-                value={setUpValues.categories}
+                placeholder="Co-Founder ..."
+                value={setUpValues.department}
                 onChange={(e) =>
-                  setValues({ ...setUpValues, categories: e.target.value })
+                  setValues({ ...setUpValues, department: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -178,7 +277,7 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, company_name: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
@@ -201,7 +300,7 @@ const CompanySetUp = () => {
                     companany_address: e.target.value,
                   })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -225,7 +324,7 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, sending_email: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
@@ -248,7 +347,7 @@ const CompanySetUp = () => {
                     host: e.target.value,
                   })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>
@@ -272,7 +371,7 @@ const CompanySetUp = () => {
                 onChange={(e) =>
                   setValues({ ...setUpValues, port: e.target.value })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
             <label
@@ -295,7 +394,7 @@ const CompanySetUp = () => {
                     password: e.target.value,
                   })
                 }
-                className="outline-none focus:outline-none rounded-md placeholder:text-xs w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
+                className="outline-none focus:outline-none rounded-md placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
               />
             </label>
           </div>

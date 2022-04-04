@@ -7,6 +7,7 @@ import Filters from "./Filters";
 
 const ReportsComponent = () => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
+
   //Filters =====================
   const [filters, setFilters] = useState({
     startDate: new Date(
@@ -86,10 +87,10 @@ const ReportsComponent = () => {
       {/**Stats ==================================== */}
       <TopCards data={data} setFilters={setFilters} filters={filters} />
       {/** Overview Report ============================ */}
-      <div className="w-full rounded-xl bg-transparent grid grid-cols-3 lg:grid-cols-3 gap-4">
+      <div className="w-full rounded-xl bg-transparent">
         <OverviewReport data={data} />
-        <Tables data={data} />
       </div>
+      <Tables data={data} />
     </div>
   );
 };

@@ -5,6 +5,9 @@ import {
   HiOutlineTrash,
   HiOutlineSearch,
   HiPlus,
+  HiUser,
+  HiMail,
+  HiPhone,
 } from "react-icons/hi";
 import { deleteContact } from "../Data_Fetching/TicketsnUserData";
 import EditContact from "./EditContact";
@@ -62,21 +65,28 @@ const Table = ({ setModal }) => {
                   ? select([...selectedArray, contact.id])
                   : select(selectedArray.filter((data) => data !== contact.id))
               }
-              className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 outline-none"
+              className="cursor-pointer relative w-3 h-3 border rounded border-gray-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 outline-none"
             />
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
-            {index + 1}
-            {".  "} {contact.name}
+            <div className="h-full w-full flex items-center space-x-2">
+              <div className="h-8 w-8 flex items-center justify-center rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-400 font-bold border border-slate-400 dark:border-slate-500">
+                {contact.branch_company.charAt(0)}
+              </div>
+              <div>
+                <span className="w-40 overflow-hidden whitespace-nowrap text-xs font-bold">
+                  {contact.branch_company}
+                </span>
+                <br />
+                <span className="text-xs">{contact.name}</span>
+              </div>
+            </div>
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
+          <td className="pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4 text-xs lowercase">
             {contact.email}
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
+          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4 w-10">
             {contact.phone}
-          </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
-            {contact.branch_company}
           </td>
         </tr>
       );
@@ -84,7 +94,7 @@ const Table = ({ setModal }) => {
 
   //Component  =============================
   return (
-    <div className="mx-auto container shadow rounded-xl p-2 h-[40rem] overflow-hidden relative">
+    <div className="mx-auto container shadow rounded-xl p-2 h-[42rem] overflow-hidden relative">
       {/**Edit Contact ============ */}
       <EditContact
         edit={edit}
@@ -139,10 +149,10 @@ const Table = ({ setModal }) => {
           </button>
         </div>
       </div>
-      <div className="w-full h-[31rem] px-2 overflow-hidden overflow-y-scroll">
+      <div className="w-full h-[32.5rem] px-2 overflow-hidden overflow-y-scroll">
         <table className="min-w-full  overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-          <thead className="sticky top-0 z-[99] dark:bg-slate-800 bg-slate-200">
-            <tr className="w-full h-16 border-gray-300 dark:border-slate-700 border-b py-8">
+          <thead className="sticky top-0 z-[99] dark:bg-slate-700 bg-slate-100">
+            <tr className="w-full h-16">
               <th className="pl-8 text-slate-900 dark:text-gray-400 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
                 <input
                   type="checkbox"
@@ -155,16 +165,13 @@ const Table = ({ setModal }) => {
                 />
               </th>
               <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
-                Full Name
+               <HiUser className="inline"/> Contact
               </th>
               <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
-                Email
+               <HiMail className="inline"/> Email
               </th>
               <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
-                Phone Number
-              </th>
-              <th className="text-slate-900 dark:text-gray-300 font-semibold pr-6 text-left text-sm tracking-normal leading-4">
-                Company Name
+               <HiPhone className="inline"/> Phone Number
               </th>
             </tr>
           </thead>

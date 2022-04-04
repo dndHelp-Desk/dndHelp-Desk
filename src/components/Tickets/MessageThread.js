@@ -114,9 +114,11 @@ const MessageThread = ({ isChatOpen, audio }) => {
           className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all"
         >
           {/**Message ====================== */}
-          <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-4 relative">
-            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center capitalize font-bold text-sm">
-              <BsChatRight />
+          <div className="w-[95%] 2xl:w-full bg-tranparent px-6 pb-4 relative">
+            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md border dark:border-slate-500 border-slate-500 dark:bg-slate-700 bg-slate-200 px-1 overflow-hidden">
+              <div className="w-full h-full dark:bg-slate-700 bg-slate-200 dark:text-gray-300 text-slate-600 flex justify-center items-center capitalize font-bold text-sm">
+                <BsChatRight />
+              </div>
             </div>
             {/**Contents ======================= */}
             <div className="w-full bg-transparent rounded-lg">
@@ -146,7 +148,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 </div>{" "}
                 <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
                   <span className="flex space-x-2">
-                    <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
+                    <span className="text-xs dark:text-slate-400 text-slate-700  font-medium">
                       {`${new Date(message.date).toLocaleString()}`}
                     </span>
                   </span>
@@ -159,7 +161,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         threadId: message.ticket_id,
                       })
                     }
-                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-500 text-slate-500 flex items-center justify-center outline-none focus:outline-none"
+                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-400 text-slate-700 flex items-center justify-center outline-none focus:outline-none"
                   >
                     <BsThreeDotsVertical className="inline  cursor-pointer" />
                   </button>
@@ -192,7 +194,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   </div>
                 </div>
               </div>
-              <p className="mt-2 py-2 dark:text-slate-400 text-slate-700 border dark:border-[#33415560] border-slate-300 p-2 rounded-lg">
+              <p className="mt-2 py-2 dark:text-slate-400 text-slate-700 border-b dark:border-slate-800 border-slate-200 p-2 text-[13px]">
                 {message.message}
               </p>
             </div>
@@ -493,10 +495,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
     <div
       className={`h-[40rem] ${
         isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none  bg-transparent`}
+      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent`}
     >
-      <div className="h-[30rem] w-full dark:bg-[#182235] bg-slate-200 border dark:border-[#33415596] border-[#94a3b8a8] rounded-none lg:rounded-tr-md px-2 pb-4 gap-4 flex flex-col overflow-hidden">
-        <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-slate-800 border-slate-300">
+      <div className="h-[30rem] w-full dark:bg-[#182235] bg-slate-50 border dark:border-[#33415596] border-slate-300 rounded-none lg:rounded-tr-md pb-4 gap-4 flex flex-col overflow-hidden">
+        <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <details className="relative flex items-center space-x-2 outline-none focus:outline-none">
@@ -504,41 +506,41 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-200 border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[25rem] md:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-50 border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
                 <div>
                   <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold">
                     Ticket Details
                   </h2>
                   <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-4 capitalize">
-                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b>Open Date : </b>
                       {firstMessage.length >= 1 &&
                         new Date(firstMessage[0].date).toLocaleString()}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b>Assigned To : </b>
                       {firstMessage.length >= 1 && firstMessage[0].agent_name}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b>Brand/Company : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].branch_company}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b>First Contact Resolution : </b>
                       {firstMessage.length >= 1 && firstMessage[0].fcr}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b>Complainant Name : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].complainant_name}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b>Complainant Number : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].complainant_number}{" "}
                     </li>
-                    <li className="text-xs flex items-center justify-between border-b border-[#94a3b8a8] dark:border-slate-700">
+                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b>Complainant Email : </b>
                       <span className="lowercase">
                         {firstMessage.length >= 1 &&
@@ -551,7 +553,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
             </details>
 
             {/**Subject And Scroll To Last Message Details =========================== */}
-            <div className="font-semibold text-sm dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
+            <div className="dark:font-semibold text-sm font-bold dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span className="uppercase text-xs">
                 {firstMessage.length >= 1 && firstMessage[0].category}
                 {!threadId && "Nothing is selected"}
@@ -569,23 +571,25 @@ const MessageThread = ({ isChatOpen, audio }) => {
         </div>
 
         {/**Thread Messages ============================ */}
-        <div className="h-full w-full p-6 overflow-y-scroll scroll-snap">
+        <div className="h-full w-[98%] m-auto p-6 overflow-y-scroll scroll-snap">
           {thread}
           {
             //Final Solution If there is one =====================
             firstMessage.length >= 1 && firstMessage[0].status === "solved" && (
               <div className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all">
                 {/**Message ====================== */}
-                <div className="w-[95%] 2xl:w-full bg-tranparent border-l dark:border-slate-700 border-slate-400  px-6 pb-2 relative">
-                  <div className="absolute left-[-1rem] top-0 h-[2rem] px-2 rounded-md dark:bg-slate-700 bg-slate-500 border-2 dark:border-[#1e293b] border-slate-200 dark:text-gray-300 text-slate-50 flex justify-center items-center font-medium tracking-widest uppercase text-[0.6rem]">
-                    Solution
+                <div className="w-[95%] 2xl:w-full bg-tranparent px-6 pb-2 relative">
+                  <div className="absolute left-[-1rem] top-0 h-[2rem] rounded-md dark:bg-slate-700 bg-slate-200 border dark:border-slate-500 border-slate-500 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
+                    <div className="w-full h-full dark:bg-slate-700 bg-slate-200 rounded-[0.3rem]  dark:text-gray-300 text-slate-600 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
+                      Solution
+                    </div>
                   </div>
                   {/**Contents ======================= */}
                   <div className="w-full bg-transparent rounded-lg">
                     <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
                       <div className="flex w-full h-full items-center justify-end pr-10 pt-2">
                         <span className="flex space-x-2">
-                          <span className="text-xs dark:text-slate-500 text-slate-500  font-medium">
+                          <span className="text-xs dark:text-slate-400 text-slate-700  font-medium">
                             {`${new Date(
                               firstMessage.length >= 1 &&
                                 firstMessage[0].closed_time
@@ -594,7 +598,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         </span>
                       </div>
                     </div>
-                    <p className="mt-6 dark:text-slate-400 text-slate-700 capitalize border dark:border-[#33415560] border-slate-300 p-2 rounded-lg">
+                    <p className="mt-6 dark:text-slate-400 text-slate-700 capitalize border-b dark:border-slate-800 border-slate-200 p-2 text-[12px]">
                       {firstMessage.length >= 1 && firstMessage[0].solution}
                     </p>
                     {/**Play Recording ================================ */}
@@ -640,7 +644,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[10.1rem] w-full bg-transparent py-4 pt-6 flex items-center justify-center">
-        <div className="h-full w-full relative shadow-sm rounded-lg dark:bg-[#182235] bg-slate-200 border border-[#94a3b8a8] dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+        <div className="h-full w-full relative shadow-sm rounded-lg dark:bg-[#182235] bg-slate-50 border border-slate-300 dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col overflow-hidden"
@@ -690,7 +694,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <abbr title="Attachment">
                   <label
                     htmlFor="attachment"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 rounded-l-md flex justify-center items-center outline-none focus:outline-none hover:opacity-80 text-slate-500 text-base"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 rounded-l-md flex justify-center items-center outline-none focus:outline-none hover:opacity-80 text-slate-500 text-base"
                   >
                     <BiPaperclip />
                     <input
@@ -705,7 +709,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <abbr title="Upload Your Recording">
                   <label
                     htmlFor="recording"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500"
                   >
                     <BiMicrophone className="text-lg" />
                     <input
@@ -725,7 +729,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <abbr title="Bold ">
                   <button
                     type="button"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base font-medium outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base font-medium outline-none focus:outline-none hover:opacity-80 text-slate-500"
                   >
                     <span>B</span>
                   </button>
@@ -734,7 +738,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <abbr title="Italic">
                   <button
                     type="button"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base italic font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base italic font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
                   >
                     <BsTypeItalic />
                   </button>
@@ -743,7 +747,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <abbr title="Underline">
                   <button
                     type="button"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
                   >
                     <BsTypeUnderline />
                   </button>
@@ -752,7 +756,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <abbr title="Code">
                   <button
                     type="button"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-slate-800 flex justify-center items-center text-base font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base font-sans outline-none focus:outline-none hover:opacity-80 text-slate-500"
                   >
                     <BsCodeSlash />
                   </button>
@@ -765,7 +769,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value })
                     }
                     required
-                    className="w-28 h-8 pt-2 rounded-r-md border border-slate-300 dark:border-slate-800 bg-slate-200 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
+                    className="w-28 h-8 pt-2 rounded-r-md border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
                   >
                     <option className="p-2" value={reply.status}>
                       {firstMessage.length >= 1 && reply.status !== ""
@@ -791,7 +795,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <button
                   onClick={() => lastMessage()}
                   type="submit"
-                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700  rounded-md text-lg p-2 px-4 font-semibold  text-slate-300 bg-slate-900 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all"
+                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700  rounded-md text-lg p-2 px-4 font-semibold  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm"
                 >
                   <span className="text-xs">Send</span>
                   <BiPaperPlane />

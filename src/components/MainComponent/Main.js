@@ -76,7 +76,7 @@ const Main = () => {
         return (
           <div
             key={user.id}
-            className="w-full snap_child h-13 rounded-lg dark:bg-slate-800 bg-slate-200 flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-400"
+            className="w-full snap_child h-13 rounded-lg dark:bg-slate-800 bg-white flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-200"
           >
             <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
               <img
@@ -117,7 +117,7 @@ const Main = () => {
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**Top 5 Categories  ========================= */}
-          <div className="col-span-1 h-[20rem] dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 rounded-xl overflow-hidden p-4 shadow">
+          <div className="col-span-1 h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl overflow-hidden p-4 shadow">
             <h2 className="dark:text-slate-300 text-slate-900 text-lg text-center font-bold capitalize">
               Top 5 Categories
             </h2>
@@ -156,7 +156,9 @@ const Main = () => {
                           </div>
                         </div>
                         <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-semibold text-xs">
-                          <span>{element.value >= 0.1?element.value:"0.0"}%</span>
+                          <span>
+                            {element.value >= 0.1 ? element.value : "0.0"}%
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -169,8 +171,8 @@ const Main = () => {
           {/**Todo List ================================ */}
           {/* <ToDo />*/}
           {/**Monthly Summary ================================ */}
-          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 rounded-xl px-4 shadow">
-            <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-400 flex flex-col justify-center items-center px-4 space-y-4">
+          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl px-4 shadow">
+            <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-200 flex flex-col justify-center items-center px-4 space-y-4">
               <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold capitalize">
                 Monthly Summary
               </h2>
@@ -184,13 +186,13 @@ const Main = () => {
                           new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            1
+                            0
                           ).getTime() &&
                         new Date(data.date).getTime() <=
                           new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            30
+                            31
                           ).getTime()
                     ).length
                   }
@@ -204,7 +206,7 @@ const Main = () => {
             </div>
           </div>
           {/**Calendar ================================= */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-800 bg-slate-200  border dark:border-slate-800 border-slate-300 rounded-xl p-4 pt-3 pb-4 flex flex-col justify-between items-center shadow">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-800 bg-white  border dark:border-slate-800 border-slate-300 rounded-xl p-4 pt-3 pb-4 flex flex-col justify-between items-center shadow">
             <article className="text-center">
               <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
                 Due Dates
@@ -218,10 +220,10 @@ const Main = () => {
         </section>
 
         {/**Others  ====================================== */}
-        <div className="w-full rounded-xl dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3 shadow">
+        <div className="w-full rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3 shadow">
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 flex justify-center items-center">
-            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-slate-200 border dark:border-slate-700 border-slate-300 rounded-lg p-2">
+            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-lg p-2">
               <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
                 <BsEnvelope />
               </div>
@@ -233,7 +235,7 @@ const Main = () => {
           </div>
           {/**Reminders  Count ====================== */}
           <div className="col-span-1 flex justify-center items-center">
-            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-slate-200 border dark:border-slate-700 border-slate-300 rounded-lg p-2">
+            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-lg p-2">
               <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
                 <BsAlarm />
               </div>
@@ -249,7 +251,7 @@ const Main = () => {
           <div className="w-full h-20 col-span-1 flex justify-center py-4">
             <div className="h-full w-full flex flex-col justify-between space-y-2">
               <div className="space-x-2 items-center h-full w-full grid grid-cols-3 px-2 capitalize">
-                <div className="col-span-1 h-full border-r dark:border-slate-700 border-slate-300 pr-6 flex flex-col justify-center items-center">
+                <div className="col-span-1 h-full border-r dark:border-slate-700 border-slate-200 pr-6 flex flex-col justify-center items-center">
                   <p className="dark:text-slate-300 text-slate-700 text-lg font-bold">
                     {
                       allMembers
@@ -261,7 +263,7 @@ const Main = () => {
                     available
                   </p>
                 </div>
-                <div className="col-span-1 h-full border-r dark:border-slate-700 border-slate-300 pr-6 flex flex-col justify-center items-center">
+                <div className="col-span-1 h-full border-r dark:border-slate-700 border-slate-200 pr-6 flex flex-col justify-center items-center">
                   <p className="dark:text-slate-300 text-slate-700  text-lg font-bold">
                     {
                       allMembers
@@ -294,7 +296,7 @@ const Main = () => {
         <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
           <div className="col-span-2 w-full rounded-xl grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Quotes ==================================== */}
-            <div className="col-span-5 h-[16rem] rounded-xl dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 p-4 overflow-hidden relative shadow">
+            <div className="col-span-5 h-[16rem] rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden relative shadow">
               <img
                 src="https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
                 alt="background"
@@ -319,7 +321,7 @@ const Main = () => {
               </div>
             </div>
             {/**Progress ============================== */}
-            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-xl dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5 shadow">
+            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5 shadow">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
                 Progress
               </h3>
@@ -417,8 +419,8 @@ const Main = () => {
             </article>
           </div>
           {/**Online Users ================================ */}
-          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-xl dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 p-2 shadow">
-            <div className="h-full w-full dark:bg-slate-800 bg-slate-200 rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
+          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 shadow">
+            <div className="h-full w-full dark:bg-slate-800 bg-white rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
               {allMembers.length >= 1 && user[0].access !== "client" && (
                 <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                   <h3 className="dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">
@@ -433,21 +435,22 @@ const Main = () => {
                   {users}
                 </div>
               )}
-              {!allMembers.length >= 1 ||
-                (user[0].access === "client" && (
-                  <div className="h-full w-full">
-                    <div className="h-full w-full rounded-lg dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-300 p-6 space-y-4">
-                      <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
-                        add your team members
-                      </h2>
-                      <img
-                        src={noUsers}
-                        alt="no-users"
-                        className="object-center object-fit w-full h-[90%]"
-                      />
-                    </div>
+              {(allMembers.filter((user) => user.access === "agent").length <=
+                0 ||
+                user[0].access === "client") && (
+                <div className="h-full w-full">
+                  <div className="h-full w-full rounded-lg dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-6 space-y-4">
+                    <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
+                      add your team members
+                    </h2>
+                    <img
+                      src={noUsers}
+                      alt="no-users"
+                      className="object-center object-fit w-full h-[90%]"
+                    />
                   </div>
-                ))}
+                </div>
+              )}
             </div>
           </div>
         </section>

@@ -58,7 +58,7 @@ const Landing = () => {
                 Solutions
               </Link>
               <Link
-                to="/getting-started"
+                to="/pricing"
                 className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
                 Pricing
@@ -104,7 +104,7 @@ const Landing = () => {
             </p>
             <div className="h-12 w-full flex justify-center gap-6">
               <NavLink
-                to="/getting-started"
+                to="/pricing"
                 className="hidden sm:inline-block bg-slate-200 h-10 w-[8rem] rounded-md text-slate-800 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-800 hover:bg-slate-100 border border-slate-800"
               >
                 <div className="h-full w-full flex justify-center items-center font-semibold">

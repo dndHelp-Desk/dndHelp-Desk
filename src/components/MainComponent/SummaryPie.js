@@ -31,13 +31,13 @@ const SummaryPie = () => {
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        1
+                        0
                       ).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        30
+                        31
                       ).getTime() &&
                     data.status.toLowerCase() === "solved"
                 ).length,
@@ -50,13 +50,13 @@ const SummaryPie = () => {
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        1
+                        0
                       ).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        30
+                        31
                       ).getTime() &&
                     data.reopened === true
                 ).length,
@@ -69,13 +69,13 @@ const SummaryPie = () => {
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        1
+                        0
                       ).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        30
+                        31
                       ).getTime() &&
                     data.status.toLowerCase() === "on hold"
                 ).length,
@@ -88,13 +88,13 @@ const SummaryPie = () => {
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        1
+                        0
                       ).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        30
+                        31
                       ).getTime() &&
                     data.status.toLowerCase() === "open"
                 ).length,

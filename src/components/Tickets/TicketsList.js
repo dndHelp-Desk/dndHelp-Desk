@@ -43,6 +43,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
     overdue: false,
     hasRecording: false,
   });
+
   const filteredTickets = useMemo(() => {
     return fetchedTickets.length >= 1
       ? fetchedTickets.filter(
@@ -126,7 +127,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] custom-shadow border dark:border-[#33415596] border-[#94a3b8a8] relative rounded-l-md dark:bg-[#182235] bg-slate-200 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-[#33415596] border-slate-300 relative rounded-l-md dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -152,7 +153,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             <div className="h-full w-[15%] flex justify-between items-center">
               <input
                 type="checkbox"
-                className="rounded-[0.18rem]  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-800 border-slate-500 dark:bg-slate-400 dark:checked:bg-blue-600 bg-slate-100 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
+                className="rounded-[0.18rem]  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-800 border-slate-500 dark:bg-slate-400 dark:checked:bg-blue-600 bg-slate-200 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
                 name="mark"
                 id="mark"
                 checked={
@@ -241,7 +242,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               {/**Change Ticket Priority ========================================== */}
               <select
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="h-8 w-28 rounded-md p-2 dark:bg-[#192235] bg-slate-200 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700"
+                className="h-8 w-28 rounded-md p-2 dark:bg-[#192235] bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700"
               >
                 <option className="p-2" value="low">
                   {ticket.priority}
@@ -260,7 +261,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                 </option>
               </select>
             </div>
-            {/**Change Ticket Status ========================================== */}
+            {/**Ticket Status ========================================== */}
             <div className="w-[10rem] flex items-baseline justify-end">
               <div className="h-8 w-28 rounded-md p-2 dark:bg-inherit dark:border-slate-700 border-slate-300 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700 flex justify-between">
                 <span>{ticket.status}</span>
@@ -331,9 +332,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                 </>
               )}
             </div>
+            
             {/**Pagination ================================ */}
             <div className="h-[10%] md:h-[3.2rem] w-full bottom-0 flex flex-col justify-center items-center">
-              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-200 py-1 rounded-md border dark:border-[#33415596] border-slate-300">
+              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded-md border dark:border-[#33415596] border-slate-300">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);

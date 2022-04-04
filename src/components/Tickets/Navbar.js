@@ -135,7 +135,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
             assgn(member.name, member.email, member.id);
             setPanel(false);
           }}
-          className={`dark:bg-slate-600 bg-slate-100 w-full h-8 text-sm font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
+          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-600 bg-slate-50 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
             member.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -152,7 +152,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
 
   //Component ======================
   return (
-    <nav className="flex pb-1.5 justify-between items-center w-full relative border-b mt-[0.30rem] border-slate-300 dark:border-[#33415596]">
+    <nav className="flex pb-1.5 justify-between items-center w-full relative mt-[0.30rem]">
       {/**Search Bar ============================== */}
       <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}
@@ -164,7 +164,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
         />
         <button
           onClick={() => setfiltersModal(true)}
-          className="h-9 w-11 rounded-md flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-200 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-[#33415596] border-slate-300"
+          className="h-9 w-11 rounded-md flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-50 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-[#33415596] border-slate-300"
         >
           <abbr title="filters" className="">
             <BsFunnelFill className="dark:text-slate-300 text-slate-800 font-bold" />
@@ -174,7 +174,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
         {/**Assign Agent ================================= */}
         <button
           onClick={() => setPanel(true)}
-          className={`dark:bg-[#182235] bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-[#33415596] border-slate-300 ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-[#33415596] border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
@@ -191,7 +191,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
             let code = prompt("Enter Pin To Perform Action");
             code === "0001" ? deleteSelected() : alert("Wrong Pin");
           }}
-          className={`dark:bg-[#182235] bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  text-red-600  font-semibold  border dark:border-[#33415596] border-slate-300 ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  text-red-600  font-semibold  border dark:border-[#33415596] border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
@@ -204,7 +204,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
 
         {/**Mark All ================================= */}
         <button
-          className={`dark:bg-[#182235] bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  flex items-center justify-center  border dark:border-[#33415596] border-slate-300  ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-md  flex items-center justify-center  border dark:border-[#33415596] border-slate-300  ${
             deleteArray.length >= 1 && activeUser[0].access === "admin"
               ? "flex"
               : "hidden"
@@ -255,7 +255,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
           onClick={() =>
             setModal(user[0].name !== "User Loader" ? true : false)
           }
-          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-200 px-4 space-x-2 rounded-md flex justify-center items-center  text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold custom-shadow"
+          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-50 px-4 space-x-2 rounded-md flex justify-center items-center  text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold custom-shadow"
         >
           <span>NEW</span>
         </button>

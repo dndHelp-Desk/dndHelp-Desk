@@ -20,13 +20,14 @@ const initialState = {
       id: false,
       name: "User Loader",
       status: "offline",
-      photoUrl:""
+      photoUrl: "",
     },
   ],
   authenticated: false,
   routeLocation: initialLocation(),
   toDo: [],
   theme: initialTheme() === null ? "light" : initialTheme(),
+  company_name: JSON.parse(localStorage.getItem("organization_name")),
 };
 
 export const UserSlice = createSlice({
@@ -51,6 +52,9 @@ export const UserSlice = createSlice({
     changeTheme: (state, action) => {
       state.theme = action.payload;
     },
+    setCompany:(state,action)=>{
+      state.company_name = action.payload
+    },
   },
 });
 
@@ -61,6 +65,7 @@ export const {
   changeLocation,
   setToDo,
   changeTheme,
+  setCompany,
 } = UserSlice.actions;
 
 export default UserSlice.reducer;

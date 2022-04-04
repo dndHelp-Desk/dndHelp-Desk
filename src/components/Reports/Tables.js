@@ -99,7 +99,7 @@ const Tables = ({ data }) => {
   //Component ==========================================
   return (
     <div className="col-span-3 h-[32rem] lg:col-span-2 rounded-xl flex flex-col gap-2">
-      <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-slate-200 border dark:border-slate-800 border-slate-3000 rounded-xl overflow-hidden shadow p-1">
+      <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-xl overflow-hidden shadow p-1">
         <div className="h-12 flex justify-between items-center px-4">
           <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
             {option === "agent_email" ? "Agents" : "Restaurants"}
@@ -129,7 +129,7 @@ const Tables = ({ data }) => {
           </div>
         </div>
         <table className="w-full h-[28rem] flex flex-col px-4 gap-1">
-          <thead className="w-full flex items-center  dark:bg-slate-700 bg-slate-300 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
+          <thead className="w-full flex items-center  dark:bg-slate-700 bg-slate-200 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
             <tr className="w-full h-10 grid grid-cols-5 md:grid-cols-7 text-left px-2">
               <th className="flex col-span-3 space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 Name

@@ -7,14 +7,14 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
 } from "firebase/auth";
-import lightLogo from "./images/dndHelp-Desk_Light.png"
+import darkLogo from "./images/dndHelp-Desk_Dark.png";
+import minidarkLogo from "./images/dndHelp-Desk.png";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
-import Background from "./images/welcome.jpg";
-import { isAuthenticated } from "../../store/UserSlice";
+import { isAuthenticated, setCompany } from "../../store/UserSlice";
 import Alert from "../Others/Alert";
 import { updateAlert } from "../../store/NotificationsSlice";
 
@@ -42,6 +42,7 @@ const LogIn = () => {
   const [inputValues, setValues] = useState({
     email: "",
     password: "",
+    company: "",
   });
 
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
@@ -54,6 +55,7 @@ const LogIn = () => {
     setPersistence(auth, browserLocalPersistence).then(() => {
       signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
         .then((currentUser) => {
+    window.location.reload(true);
           if (!currentUser.user.emailVerified) {
             sendEmailVerification(auth.currentUser)
               .then(() => {
@@ -120,18 +122,18 @@ const LogIn = () => {
 
   //React Component =====================================================================================
   return (
-    <div className="bg-slate-900 w-screen h-screen min-h-[45rem] flex relative overflow-hidden">
+    <div className="bg-slate-100 w-screen h-screen min-h-[45rem] flex relative overflow-hidden">
       {/**Alert */}
 
       {/**Top Nav ================= */}
       <nav
         role="navigation"
-        className="absolute bg-[#11182780] w-[75%] h-[4rem] backdrop-blur-lg rounded-[1.25rem] border border-slate-500 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
+        className="absolute bg-slate-200 w-[75%] h-[4rem] backdrop-blur-lg rounded-lg border border-slate-300 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
       >
         {/**Logo ==================== */}
         <div className="h-full flex items-center justify-center overflow-hidden pt-1">
           <img
-            src={lightLogo}
+            src={darkLogo}
             alt="logo"
             className="object-cover object-center w-[12rem]"
           />
@@ -140,7 +142,7 @@ const LogIn = () => {
         {/**Small Screen Menu ================ */}
         <FaAlignRight
           onClick={() => setMenu(menu === false ? true : false)}
-          className="font-semibold text-xl text-gray-200 lg:hidden flex cursor-pointer"
+          className="font-semibold text-xl text-gray-900 lg:hidden flex cursor-pointer"
         />
         <div
           role="navigation"
@@ -148,7 +150,7 @@ const LogIn = () => {
             menu ? "h-[10rem]" : "h-0 opacity-0"
           } transition-scale duration-300 flex flex-col space-y-2 p-4 justify-center overflow-hidden`}
         >
-          <div className="text-gray-200 md-hidden flex flex-col space-y-2">
+          <div className="text-gray-900 md-hidden flex flex-col space-y-2">
             <a
               href="https://call-center-erp.netlify.app"
               target={"_blank"}
@@ -176,7 +178,7 @@ const LogIn = () => {
             href="https://join.slack.com/t/dialndine/signup"
             target={"_blank"}
             rel="noreferrer"
-            className="lg:hidden flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-200 rounded-xl p-2 px-4"
+            className="lg:hidden flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-md p-2 px-4"
           >
             <FaSlack className="text-lg inline-block" />
             <span>Our Workspace</span>
@@ -184,7 +186,7 @@ const LogIn = () => {
         </div>
 
         {/**Large Screens Menu Items===================== */}
-        <div className="text-gray-200 hidden lg:flex space-x-10">
+        <div className="text-gray-900 hidden lg:flex space-x-10">
           <a
             href="https://call-center-erp.netlify.app"
             target={"_blank"}
@@ -212,129 +214,161 @@ const LogIn = () => {
           href="https://join.slack.com/t/dialndine/signup"
           target={"_blank"}
           rel="noreferrer"
-          className="hidden lg:flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-200 rounded-xl p-2 px-4"
+          className="hidden lg:flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-md p-2 px-4"
         >
           <FaSlack className="text-lg inline-block" />
           <span>Our Workspace</span>
         </a>
       </nav>
 
-      {/**First Half ================ */}
+      {/**First Half ================ 
       <div
         style={{ backgroundImage: `url(${Background})` }}
         className="hidden lg:flex lg:flex-col w-[50%] h-full  bg-no-repeat bg-cover bg-center items-center justify-center px-4"
-      ></div>
+        ></div>*/}
 
-      {/**Second Half ==================================== */}
-      <section className="w-screen lg:w-[50%] h-full bg-gradient-to-t to-[#0c0c34] from-[#040b22] lg:pl-14 p-2">
-        <div className="w-full h-full flex flex-col items-center lg:items-start justify-center p-2 space-y-4">
-          <h1 className="font-bold text-gray-200 text-3xl font-['Plus Jakarta','Helvetica','Arial','sans-serif']">
-            Nice to see you!
-          </h1>
-          <h2 className="text-gray-200">
-            Enter your email and password to sign in
-          </h2>
-          <div className="w-[20rem] h-[23rem] border border-slate-600 rounded-[1.25rem] bg-[#131538] p-8">
-            <form
-              action=""
-              className="text-gray-200 flex flex-col justify-center h-full"
-              onSubmit={handleSubmit}
-            >
-              <div className="flex flex-col space-y-2">
-                <label
-                  aria-label="email"
-                  className="font-semibold"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Your email..."
-                  required
-                  aria-required
-                  aria-placeholder="Your email..."
-                  onChange={(e) =>
-                    setValues({ ...inputValues, email: e.target.value })
-                  }
-                  value={inputValues.email}
-                  className="log_In_Input input:-webkit-autofill input:-webkit-autofill:hover input:-webkit-autofill:focus textarea:-webkit-autofill textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus select:-webkit-autofill select:-webkit-autofill:hover select:-webkit-autofill:focus"
-                />
+      <>
+        <div className="min-h-full w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-md w-full space-y-8">
+            <div>
+              <img
+                className="mx-auto h-16 w-auto"
+                src={minidarkLogo}
+                alt="dndHelp-Desk"
+              />
+              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Sign in to your account
+              </h2>
+            </div>
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+              <input type="hidden" name="remember" defaultValue="true" />
+              <div className="rounded-md shadow-sm -space-y-px">
+                <div>
+                  <label htmlFor="email-address" className="sr-only">
+                    Your Company name
+                  </label>
+                  <input
+                    type="text"
+                    name="company_name"
+                    id="company_name"
+                    required
+                    aria-required
+                    aria-placeholder="Company name..."
+                    onChange={(e) => {
+                      window.localStorage.setItem(
+                        "organization_name",
+                       JSON.stringify(e.target.value.toLocaleLowerCase().replace(/\s/g, ""))
+                      );
+                      dispatch(setCompany(e.target.value));
+                      setValues({ ...inputValues, company: e.target.value });
+                    }}
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    placeholder="Company name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email-address" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    required
+                    aria-required
+                    aria-placeholder="Your email..."
+                    onChange={(e) =>
+                      setValues({ ...inputValues, email: e.target.value })
+                    }
+                    value={inputValues.email}
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    placeholder="Email address"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="sr-only">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    aria-required
+                    required
+                    aria-placeholder="Your password..."
+                    onChange={(e) =>
+                      setValues({ ...inputValues, password: e.target.value })
+                    }
+                    value={inputValues.password}
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    placeholder="Password"
+                  />
+                </div>
               </div>
-              {/** Password ========================= */}
-              <div className="flex flex-col space-y-2 mt-6">
-                <label
-                  aria-label="password"
-                  className="font-semibold"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  aria-required
-                  required
-                  aria-placeholder="Your password..."
-                  placeholder="Your password..."
-                  onChange={(e) =>
-                    setValues({ ...inputValues, password: e.target.value })
-                  }
-                  value={inputValues.password}
-                  className="log_In_Input input:-webkit-autofill input:-webkit-autofill:hover input:-webkit-autofill:focus textarea:-webkit-autofill textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus select:-webkit-autofill select:-webkit-autofill:hover select:-webkit-autofill:focus"
-                />
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-2 block text-sm text-gray-900"
+                  >
+                    Remember me
+                  </label>
+                </div>
+
+                <div className="text-sm">
+                  <button
+                    onClick={() => {
+                      sendPasswordResetEmail(auth, inputValues.email)
+                        .then(() => {
+                          dispatch(
+                            updateAlert([
+                              ...alerts,
+                              {
+                                message: "Password reset email sent!",
+                                color: "bg-green-200",
+                              },
+                            ])
+                          );
+                        })
+                        .catch((error) => {
+                          dispatch(
+                            updateAlert([
+                              ...alerts,
+                              {
+                                message: error.message,
+                                color: "bg-red-200",
+                              },
+                            ])
+                          );
+                        });
+                    }}
+                    className="font-medium text-blue-600 hover:text-blue-500 outline-none focus:outline-none cursor-pointer"
+                  >
+                    Forgot your password?
+                  </button>
+                </div>
               </div>
-              <button
-                type="submit"
-                className="h-12 mt-6 bg-blue-700 outline-none focus:outline-none hover:bg-blue-800 text-gray-300 transition-bg duration-300 w-full rounded-xl uppercase font-bold text-xs"
-              >
-                Sign In
-              </button>
-              {/* {signInError && (
-                <small className="mt-2 text-xs text-center text-red-600">
-                  Wrong Password or Email
-                </small>
-              )} */}
-              <small className="mt-4 text-gray-400 flex justify-center">
-                Forgot password ?
-                <p
-                  onClick={() => {
-                    sendPasswordResetEmail(auth, inputValues.email)
-                      .then(() => {
-                        dispatch(
-                          updateAlert([
-                            ...alerts,
-                            {
-                              message: "Password reset email sent!",
-                              color: "bg-green-200",
-                            },
-                          ])
-                        );
-                      })
-                      .catch((error) => {
-                        dispatch(
-                          updateAlert([
-                            ...alerts,
-                            {
-                              message: error.message,
-                              color: "bg-red-200",
-                            },
-                          ])
-                        );
-                      });
-                  }}
-                  className="text-blue-500 pl-1 cursor-pointer"
+
+              <div>
+                <button
+                  type="submit"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  Reset
-                </p>
-              </small>
+                  <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
+                  Sign in
+                </button>
+              </div>
             </form>
           </div>
         </div>
-      </section>
+      </>
       <Alert />
     </div>
   );

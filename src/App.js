@@ -5,6 +5,7 @@ import LogIn from "./components/authentication/LogIn";
 import MainComponent from "./components/MainComponent/MainComponent";
 import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
+import ErrorPage from "./components/Landing Page/ErrorPage"
 
 //Lazy Loading Components || Code Splitting ====================
 const ReportsComponent = lazy(() =>
@@ -31,8 +32,8 @@ const AutomatedReports = lazy(() =>
 const Solutions = lazy(() => import("./components/Settings/Solutions"));
 
 //Getting Started Or Setting Up An Account ========================
-const GettingStarted = lazy(() =>
-  import("./components/Landing Page/GettingStarted")
+const Pricing = lazy(() =>
+  import("./components/Landing Page/Pricing")
 );
 const CompanySetUp = lazy(() =>
   import("./components/Landing Page/CompanySetUp")
@@ -57,8 +58,11 @@ const App = () => {
           <Routes>
             {/**Landing ======================== */}
             <Route exact path="/" element={<Landing />} />
-            <Route exact path="/getting-started" element={<GettingStarted />} />
+            <Route exact path="/pricing" element={<Pricing />} />
             <Route path="/company-set-up" element={<CompanySetUp />} />
+
+            {/**Error Page ===========================*/}
+            <Route exact path="/error-page" element={<ErrorPage />} />
 
             {/**LogIn ======================== */}
             <Route exact path="/logIn" element={<LogIn />} />
