@@ -2,11 +2,11 @@ import React, { useState, useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import { useSelector } from "react-redux";
 import Pie from "./Pie";
-import HeatMap from "./HeatMap";
 
 const OverviewReport = ({ data }) => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const categories = useSelector((state) => state.Tickets.categories);
+  const user = useSelector((state) => state.UserInfo.member_details);
   const [option, setOption] = useState("hour");
   const categoriesData = useMemo(() => {
     return (
@@ -71,6 +71,17 @@ const OverviewReport = ({ data }) => {
   chartData.sort((a, b) => {
     return Number(a.name) - Number(b.name);
   });
+
+  //Calculate The resolution Rate ==========
+  const ratings = useMemo(()=>{
+    return (
+      (data.filter(
+        (ticket) => ticket.status === "solved" && ticket.reopened === false
+      ).length /
+        data.length) *
+      100
+    ).toFixed(1);
+  },[data])
 
   //Component =============================
   return (
@@ -144,8 +155,70 @@ const OverviewReport = ({ data }) => {
             </h4>
           </div>
         </div>
-        <div className="flex flex-col mt-2 h-44 space-y-2 w-full justify-center overflow-hidden">
-          <HeatMap/>
+        <div
+          className="flex flex-col mt-2 h-44 space-y-2 w-full overflow-hidden rounded-md 
+        p-2"
+        >
+          <h3 className="text-xs text-center dark:text-slate-300 text-slate-700 font-sans dark:font-semibold font-bold uppercase tracking-normal">
+            Welcome back, {user[0].name && user[0].name.split(" ")[0]} 🖐️.
+          </h3>
+          <p className="text-xs text-center text-slate-500 dark:text-slate-400">
+            More features will be added soon in the meantime explore the reports
+            by making use of filters. You can find your current stisfaction
+            ratings below.
+          </p>
+          <div className="|">
+            <h4 className="text-center dark:text-slate-300 text-slate-700 font-semibold text-sm">
+              {ratings?ratings:0.0}%
+            </h4>
+            <div className="flex w-full justify-center items-center text-2xl border-b border-slate-300 dark:border-slate-700">
+              <span
+                className={`${
+                  ratings > 0
+                    ? "text-yellow-600"
+                    : "text-slate-700 dark:text-slate-300"
+                }`}
+              >
+                <abbr title="Bad Performer">&#9733;</abbr>
+              </span>{" "}
+              <span
+                className={`${
+                  ratings > 51
+                    ? "text-yellow-600"
+                    : "text-slate-700 dark:text-slate-300"
+                }`}
+              >
+                <abbr title="Poor Performer">&#9733;</abbr>
+              </span>{" "}
+              <span
+                className={`${
+                  ratings > 80
+                    ? "text-yellow-600"
+                    : "text-slate-700 dark:text-slate-300"
+                }`}
+              >
+                <abbr title="Under Performer">&#9733;</abbr>
+              </span>{" "}
+              <span
+                className={`${
+                  ratings > 90
+                    ? "text-yellow-600"
+                    : "text-slate-700 dark:text-slate-300"
+                }`}
+              >
+                <abbr title="Good Performer">&#9733;</abbr>
+              </span>{" "}
+              <span
+                className={`${
+                  ratings > 91
+                    ? "text-yellow-600"
+                    : "text-slate-700 dark:text-slate-300"
+                }`}
+              >
+                <abbr title="Excellent Performer">&#9733;</abbr>
+              </span>{" "}
+            </div>
+          </div>
         </div>
       </div>
 
