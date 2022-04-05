@@ -7,7 +7,7 @@ import Filters from "./Filters";
 
 const ReportsComponent = () => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-
+console.log(filteredTickets);
   //Filters =====================
   const [filters, setFilters] = useState({
     startDate: new Date(
@@ -59,11 +59,11 @@ const ReportsComponent = () => {
             Number(new Date(ticket.date).getTime()) >=
               Number(new Date(filters.startDate).getTime()) &&
             Number(new Date(ticket.date).getTime()) <=
-              new Date(
+              Number(new Date(
                 new Date(filters.endDate).setDate(
                   new Date(filters.endDate).getDate() + 1
                 )
-              ).getTime()
+              ).getTime())
         )
       : [];
   }, [
