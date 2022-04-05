@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import heroTop from "./images/heroTop.png"
+import heroTop from "./images/heroTop.png";
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import Cloud from "./Cloud";
 import halfDark_Chat from "./images/halfDark_Chat.png";
@@ -93,15 +93,17 @@ const Landing = () => {
          mt-[2rem] flex flex-col justify-between items-center container w-[90%] md:w-full 2xl:w-[72rem] m-auto"
         >
           <div className="flex-[1] h-full bg-transparent flex flex-col justify-center items-center space-y-6">
-            <h1 className="text-2xl sm:text-[2.3rem] md:text-[4rem] sm:leading-[2rem] md:leading-[4rem] text-slate-900 font-bold text-center">
-              Take control of your customer support
-            </h1>
-            <p className=" text-slate-700 text-lg font-semibold font-sans text-center">
-              Customer service shouldn't just be a department, it should be the
-              entire company. dndHelp-Desk makes customer service better. With
-              our powerful simple to comprehend software, we make sure you focus
-              only on what matters within a short learning curve.
-            </p>
+            <header>
+              <h1 className="text-2xl sm:text-[2.3rem] md:text-[4rem] sm:leading-[2rem] md:leading-[4rem] text-slate-900 font-bold text-center">
+                Take control of your customer support
+              </h1>
+              <h2 className=" text-slate-700 text-lg font-semibold font-sans text-center">
+                Customer service should not be limited to a single department,
+                but rather encompass the entire organization. Customer service
+                is improved with dndHelp-Desk.With our simple yet powerful
+                software, we make sure you focus only on what matters.
+              </h2>
+            </header>
             <div className="h-12 w-full flex justify-center gap-6">
               <NavLink
                 to="/pricing"
