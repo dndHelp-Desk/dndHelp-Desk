@@ -102,7 +102,7 @@ const Tables = ({ data }) => {
       <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-xl overflow-hidden shadow p-1">
         <div className="h-12 flex justify-between items-center px-4">
           <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
-            {option === "agent_email" ? "Agents" : "Restaurants"}
+            {option === "agent_email" ? "Agents" : "Company"}
           </h2>
           <div className="flex space-x-2">
             {/**Select Report ================= */}
@@ -110,7 +110,7 @@ const Tables = ({ data }) => {
               onChange={(e) => setOption(e.target.value)}
               className="h-8 w-40 rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
-              <option value="branch_company">Restaurants</option>
+              <option value="branch_company">Company</option>
               <option value="agent_email">Agents</option>
             </select>
             <button

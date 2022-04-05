@@ -4,7 +4,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import heroTop from "./images/heroTop.png";
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import Cloud from "./Cloud";
-import halfDark_Chat from "./images/halfDark_Chat.png";
+import reportImg from "./images/report.png";
 import ShowcaseTwo from "./images/chatLight.png";
 import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
@@ -97,11 +97,12 @@ const Landing = () => {
               <h1 className="text-2xl sm:text-[2.3rem] md:text-[4rem] sm:leading-[2rem] md:leading-[4rem] text-slate-900 font-bold text-center">
                 Take control of your customer support
               </h1>
-              <h2 className=" text-slate-700 text-lg font-semibold font-sans text-center">
+              <h2 className="mt-6 text-slate-700 text-lg font-semibold font-sans text-center">
                 Customer service should not be limited to a single department,
                 but rather encompass the entire organization. Customer service
-                is improved with dndHelp-Desk.With our simple yet powerful
-                software, we make sure you focus only on what matters.
+                is improved with <strong>dndHelp-Desk</strong>.With our simple
+                yet powerful software, we make sure you focus only on what
+                matters.
               </h2>
             </header>
             <div className="h-12 w-full flex justify-center gap-6">
@@ -160,7 +161,7 @@ const Landing = () => {
         <div className="col-span-1 justify-end flex items-center rounded-tr-md rounded-br-xl py-8">
           {" "}
           <img
-            src={halfDark_Chat}
+            src={reportImg}
             alt=""
             className="object-center object-fit rounded-l-xl w-[90%] shadow-2xl drop-shadow-2xl"
           />

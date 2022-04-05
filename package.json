@@ -1,6 +1,18 @@
 {
-  "name": "dial_n_dine_help_desk",
-  "version": "0.1.0",
+  "author": {
+    "name": "Sands",
+    "email": "sandsqa@hotmail.com"
+  },
+  "name": "dndhelp-desk",
+  "version": "2.8.0",
+  "keywords": [
+    "email",
+    "dndhelp-desk",
+    "dndHelpDesk",
+    "customer support",
+    "help desk",
+    "customer solution"
+  ],
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",

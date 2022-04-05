@@ -20,12 +20,12 @@ import { updateAlert } from "../../store/NotificationsSlice";
 
 //Config Firebase ==================================
 const firebaseConfig = {
-  apiKey: "AIzaSyA62ZCv7_0Ktz4y-gU2EvHIpKTn3WFXM3U",
-  authDomain: "dial-n-dine-help-desk.firebaseapp.com",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   projectId: "dial-n-dine-help-desk",
   storageBucket: "dial-n-dine-help-desk.appspot.com",
-  messagingSenderId: "143621322408",
-  appId: "1:143621322408:web:14f3e35a0529b1f5dc749d",
+  messagingSenderId: process.env.REACT_APP_MS_ID,
+  appId: process.env.REACT_APP_APP_ID,
   measurementId: "G-GZCS9SQW3Z",
 };
 
@@ -131,13 +131,13 @@ const LogIn = () => {
         className="absolute bg-slate-200 w-[75%] h-[4rem] backdrop-blur-lg rounded-lg border border-slate-300 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
       >
         {/**Logo ==================== */}
-        <div className="h-full flex items-center justify-center overflow-hidden pt-1">
+        <Link to="/" className="h-full flex items-center justify-center overflow-hidden pt-1">
           <img
             src={darkLogo}
             alt="logo"
             className="object-cover object-center w-[12rem]"
           />
-        </div>
+        </Link>
 
         {/**Small Screen Menu ================ */}
         <FaAlignRight

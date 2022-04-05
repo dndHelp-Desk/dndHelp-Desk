@@ -17,7 +17,7 @@ import {
   setUnread,
 } from "../../store/Tickets_n_Settings_Slice";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import Main from "./Main";
 import Alert from "../Others/Alert";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
@@ -163,7 +163,7 @@ const MainComponent = () => {
             <Alert />
             <nav className="container w-[90%] md:w-full 2xl:w-[72rem] backdrop-blur-lg py-2 flex justify-between items-center relative z-[999]">
               {/**Logo ==================== */}
-              <div className="h-10 w-10 hidden lg:flex items-center justify-center overflow-hidden">
+              <Link to="/" className="h-10 w-10 hidden lg:flex items-center justify-center overflow-hidden">
                 {theme !== "dark" && (
                   <img
                     src={darkLogo}
@@ -178,7 +178,7 @@ const MainComponent = () => {
                     className="object-cover object-center w-10 h-10"
                   />
                 )}
-              </div>
+              </Link>
 
               {/**Small Screen Menu Btn ================ */}
               <button
@@ -330,10 +330,7 @@ const MainComponent = () => {
                 />
 
                 {/**Settings ================================================ */}
-                <NavLink
-                  role="button"
-                  aria-label="button"
-                  to="/app/settings/account"
+                <div
                   className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-10 w-10 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold group"
                 >
                   <abbr title="Settings">
@@ -341,7 +338,7 @@ const MainComponent = () => {
                   </abbr>
                   {/**Settings Tooltip ================================== */}
                   <SettingsTooltip />
-                </NavLink>
+                </div>
 
                 {/**Profile And User Settings =========================== */}
                 <Profile />
