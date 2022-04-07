@@ -50,6 +50,7 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
       email: "",
       phoneNumber: "",
     });
+    setEdit(false)
   };
 
   //Component =========================
@@ -91,7 +92,7 @@ const EditContact = ({ edit, setEdit, selectedArray }) => {
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded-md dark:bg-slate-900 bg-slate-100 relative">
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
               autoComplete="nope"

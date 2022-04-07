@@ -7,7 +7,7 @@ import Filters from "./Filters";
 
 const ReportsComponent = () => {
   const filteredTickets = useSelector((state) => state.Tickets.filteredTickets);
-console.log(filteredTickets);
+  
   //Filters =====================
   const [filters, setFilters] = useState({
     startDate: new Date(

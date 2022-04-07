@@ -35,7 +35,7 @@ const Alert = () => {
         <div
         role="alert"
           key={index}
-          className={`transition duration-150 max-w-[35rem] ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow-2xl rounded overflow-hidden ${alert.color}`}
+          className={`transition duration-150 max-w-[35rem] min-w-[5rem] ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow-2xl rounded overflow-hidden ${alert.color}`}
         >
           <div className="sm:flex sm:items-start lg:items-center">
             <div className="flex items-center space-x-2 justify-between px-2 border-r border-slate-900">

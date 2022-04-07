@@ -21,12 +21,13 @@ import NewTicket from "./NewTicket";
 
 const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
   const dispatch = useDispatch();
+  const company_details = useSelector((state) => state.Tickets.company_details);
   const fetchedTickets = useSelector((state) => state.Tickets.filteredTickets);
-  const [isChatOpen, setChat] = useState(false);
   const threadId = useSelector((state) => state.Tickets.threadId);
+  const unread = useSelector((state) => state.Tickets.unread);
+  const [isChatOpen, setChat] = useState(false);
   const [audio, audioUrl] = useState("");
   const [loadMore, setLimit] = useState(50);
-  const unread = useSelector((state) => state.Tickets.unread);
 
   //Filters =====================
   const [filters, setFilters] = useState({
@@ -191,7 +192,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
                   const storage = getStorage();
                   const recordingRef = ref(
                     storage,
-                    `/dial_n_dine/${ticket.ticket_id}.wav`
+                    `/${company_details.name}/${ticket.ticket_id}`
                   );
                   getDownloadURL(recordingRef).then((url) => {
                     audioUrl(url);

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth } from "firebase/auth";
+import { getAuth} from "firebase/auth";
 import { updateUser, addAllMembers, setToDo } from "../../store/UserSlice";
 import {
   addAllTickets,
@@ -32,26 +32,22 @@ const db = getFirestore();
 
 // Subsequent queries will use persistence, if it was enabled successfully
 enableIndexedDbPersistence(db, { experimentalTabSynchronization: true });
-const org = store.getState().UserInfo.company_name; 
+let org = store.getState().UserInfo.company_name;
 
 // collection ref
-let membersRef = collection(db, `companies/${org}/members`);
-let ticketsRef = collection(db, `companies/${org}/tickets`);
-let contactsRef = collection(db, `companies/${org}/contacts`);
-let settingsRef = collection(db, `companies/${org}/settings`);
-let emailAccountsRef = collection(db, `companies/${org}/email_accounts`);
-let email_TemplatesRef = collection(
-  db,
-  `companies/${org}/settings/all_settings/email_templates`
-);
-let categoriesRef = collection(
-  db,
-  `companies/${org}/settings/all_settings/categories`
-);
-let companyDetailsRef = collection(
-  db,
-  `companies/${org}/settings/all_settings/company_details`
-);
+let membersRef =org && collection(db, `companies/${org}/members`);
+let ticketsRef = org && collection(db, `companies/${org}/tickets`);
+let contactsRef = org && collection(db, `companies/${org}/contacts`);
+let settingsRef = org && collection(db, `companies/${org}/settings`);
+let emailAccountsRef = org && collection(db, `companies/${org}/email_accounts`);
+let email_TemplatesRef =
+  org &&
+  collection(db, `companies/${org}/settings/all_settings/email_templates`);
+let categoriesRef =
+  org && collection(db, `companies/${org}/settings/all_settings/categories`);
+let companyDetailsRef =
+  org &&
+  collection(db, `companies/${org}/settings/all_settings/company_details`);
 
 //===================================USER===========================================
 // Update User Details ================
@@ -344,80 +340,90 @@ const TicketsnUserData = () => {
   const currentUser = getAuth().currentUser;
   const member_details = useSelector((state) => state.UserInfo.member_details);
 
+
   //Data Loading =====================================
   useEffect(() => {
     return (
       //Members Data Fetching
-        org && onSnapshot(membersRef, (snapshot) => {dispatch(
-          addAllMembers(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-          )
-        );
-      }),
+      org &&
+        onSnapshot(membersRef, (snapshot) => {
+          dispatch(
+            addAllMembers(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            )
+          );
+        }),
       //Add User Details ==============
-      org && onSnapshot(membersRef, (snapshot) => {
-        dispatch(
-          updateUser(
-            snapshot.docs
-              .map((doc) => ({ ...doc.data(), id: doc.id }))
-              .filter(
-                (member) =>
-                  currentUser.email &&
-                  member.email.toLowerCase().replace(/\s/g, "") ===
-                    currentUser.email.toLowerCase().replace(/\s/g, "")
-              )
-          )
-        );
-      }),
+      org &&
+        onSnapshot(membersRef, (snapshot) => {
+          dispatch(
+            updateUser(
+              snapshot.docs
+                .map((doc) => ({ ...doc.data(), id: doc.id }))
+                .filter(
+                  (member) =>
+                    currentUser.email &&
+                    member.email.toLowerCase().replace(/\s/g, "") ===
+                      currentUser.email.toLowerCase().replace(/\s/g, "")
+                )
+            )
+          );
+        }),
       //Tickects Data Fetching ======================
-      org && onSnapshot(ticketsRef, (snapshot) => {
-        dispatch(
-          addAllTickets(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-          )
-        );
-      }),
+      org &&
+        onSnapshot(ticketsRef, (snapshot) => {
+          dispatch(
+            addAllTickets(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            )
+          );
+        }),
       //Contacts Data Fetching ======================
-      org && onSnapshot(contactsRef, (snapshot) => {
-        dispatch(
-          setContacts(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-          )
-        );
-      }),
+      org &&
+        onSnapshot(contactsRef, (snapshot) => {
+          dispatch(
+            setContacts(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            )
+          );
+        }),
       //Settings Data Fetching ======================
-      org && onSnapshot(settingsRef, (snapshot) => {
-        dispatch(
-          loadSettings(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-          )
-        );
-      }),
+      org &&
+        onSnapshot(settingsRef, (snapshot) => {
+          dispatch(
+            loadSettings(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            )
+          );
+        }),
       //Email Tenplates Data Fetching ======================
-      org && onSnapshot(email_TemplatesRef, (snapshot) => {
-        dispatch(
-          loadTemplates(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-          )
-        );
-      }),
+      org &&
+        onSnapshot(email_TemplatesRef, (snapshot) => {
+          dispatch(
+            loadTemplates(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            )
+          );
+        }),
       //Categories Data Fetching ======================
-      org && onSnapshot(categoriesRef, (snapshot) => {
-        dispatch(
-          setCategories(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
-              .categories
-          )
-        );
-      }),
+      org &&
+        onSnapshot(categoriesRef, (snapshot) => {
+          dispatch(
+            setCategories(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
+                .categories
+            )
+          );
+        }),
       //Company Details Data Fetching ======================
-      org && onSnapshot(companyDetailsRef, (snapshot) => {
-        dispatch(
-          setCompanyDetails(
-            snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
-          )
-        );
-      })
+      org &&
+        onSnapshot(companyDetailsRef, (snapshot) => {
+          dispatch(
+            setCompanyDetails(
+              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0]
+            )
+          );
+        })
     );
   }, [dispatch, currentUser.email]);
 
@@ -439,9 +445,11 @@ const TicketsnUserData = () => {
   //Todo CollectionRef and Notifications ====================
   useEffect(() => {
     let toDoRef =
+      org &&
       member_details.length >= 1 &&
       collection(db, `companies/${org}/members/${member_details[0].id}/to-do`);
     let notificationsRef =
+      org &&
       member_details.length >= 1 &&
       collection(
         db,

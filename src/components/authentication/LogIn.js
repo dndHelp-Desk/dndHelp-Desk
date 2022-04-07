@@ -55,7 +55,6 @@ const LogIn = () => {
     setPersistence(auth, browserLocalPersistence).then(() => {
       signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
         .then((currentUser) => {
-    window.location.reload(true);
           if (!currentUser.user.emailVerified) {
             sendEmailVerification(auth.currentUser)
               .then(() => {
@@ -90,13 +89,17 @@ const LogIn = () => {
               },
             ])
           );
+          window.location.reload(true)
         })
         .catch((error) => {
           dispatch(
             updateAlert([
               ...alerts,
               {
-                message: error.message,
+                message:
+                  error.message.includes(":") === true
+                    ? error.message.split(":")[1].replace("Error", "")
+                    : error.message,
                 color: "bg-red-200",
               },
             ])
@@ -123,15 +126,16 @@ const LogIn = () => {
   //React Component =====================================================================================
   return (
     <div className="bg-slate-100 w-screen h-screen min-h-[45rem] flex relative overflow-hidden">
-      {/**Alert */}
-
       {/**Top Nav ================= */}
       <nav
         role="navigation"
         className="absolute bg-slate-200 w-[75%] h-[4rem] backdrop-blur-lg rounded-lg border border-slate-300 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
       >
         {/**Logo ==================== */}
-        <Link to="/" className="h-full flex items-center justify-center overflow-hidden pt-1">
+        <Link
+          to="/"
+          className="h-full flex items-center justify-center overflow-hidden pt-1"
+        >
           <img
             src={darkLogo}
             alt="logo"
@@ -146,7 +150,7 @@ const LogIn = () => {
         />
         <div
           role="navigation"
-          className={`flex lg:hidden absolute top-14 right-2 w-[16rem] border border-slate-800 shadow-2xl rounded-lg bg-[#131538] ${
+          className={`flex lg:hidden absolute top-14 right-2 w-[16rem] border border-slate-400 shadow-2xl rounded-lg bg-slate-300 ${
             menu ? "h-[10rem]" : "h-0 opacity-0"
           } transition-scale duration-300 flex flex-col space-y-2 p-4 justify-center overflow-hidden`}
         >
@@ -257,7 +261,9 @@ const LogIn = () => {
                     onChange={(e) => {
                       window.localStorage.setItem(
                         "organization_name",
-                       JSON.stringify(e.target.value.toLowerCase().replace(/\s/g, ""))
+                        JSON.stringify(
+                          e.target.value.toLowerCase().replace(/\s/g, "")
+                        )
                       );
                       dispatch(
                         setCompany(
@@ -266,6 +272,7 @@ const LogIn = () => {
                       );
                       setValues({ ...inputValues, company: e.target.value });
                     }}
+                    value={inputValues.company}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Company name"
                   />
@@ -299,6 +306,7 @@ const LogIn = () => {
                     id="password"
                     aria-required
                     required
+                    autoComplete={inputValues.password}
                     aria-placeholder="Your password..."
                     onChange={(e) =>
                       setValues({ ...inputValues, password: e.target.value })
@@ -373,6 +381,8 @@ const LogIn = () => {
           </div>
         </div>
       </>
+
+      {/**Alert */}
       <Alert />
     </div>
   );

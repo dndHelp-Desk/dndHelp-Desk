@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 const Cookies = () => {
   const initialCookieState = window.localStorage.getItem("allowedCookies");
   const [acceptedCookies, setCookies] = useState(initialCookieState);
-
-  useEffect(() => {
-    window.localStorage.setItem("allowedCookies", "no");
-  });
 
   //Component  =======================================
   return (

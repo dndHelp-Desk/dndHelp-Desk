@@ -1,4 +1,5 @@
 import React, { useState, useRef, useMemo } from "react";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillTrashFill,
@@ -8,11 +9,7 @@ import {
   BsTypeUnderline,
   BsCodeSlash,
 } from "react-icons/bs";
-import {
-  BiPaperPlane,
-  BiMicrophone,
-  BiPaperclip,
-} from "react-icons/bi";
+import { BiPaperPlane, BiMicrophone, BiPaperclip } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import {
@@ -65,10 +62,11 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const [reply, setReply] = useState({
     message: "",
     subject: "",
-    status: firstMessage.length >= 1 ?firstMessage[0].status:"",
+    status: firstMessage.length >= 1 ? firstMessage[0].status : "",
     message_position: threadMessage.length + 1,
     ticket_id: firstMessage.length >= 1 ? firstMessage.ticket_id : "none",
   });
+  const [attachmentArray, setAttachArray] = useState(false);
 
   //Message options ========================================gi
   const [msgOptions, setOptions] = useState({
@@ -99,121 +97,16 @@ const MessageThread = ({ isChatOpen, audio }) => {
       scrollToLastMessage.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  //Loop Through Each Message In a thread ====================
-  const thread =
-    threadMessage.length >= 1 &&
-    threadMessage.map((message, index) => {
-      return (
-        <div
-          ref={
-            threadMessage.length - 1 === index
-              ? scrollToLastMessage
-              : scrollToNone
-          }
-          key={index}
-          className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all"
-        >
-          {/**Message ====================== */}
-          <div className="w-[95%] 2xl:w-full bg-tranparent px-6 pb-4 relative">
-            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md border dark:border-slate-500 border-slate-500 dark:bg-slate-700 bg-slate-200 px-1 overflow-hidden">
-              <div className="w-full h-full dark:bg-slate-700 bg-slate-200 dark:text-gray-300 text-slate-600 flex justify-center items-center capitalize font-bold text-sm">
-                <BsChatRight />
-              </div>
-            </div>
-            {/**Contents ======================= */}
-            <div className="w-full bg-transparent rounded-lg">
-              <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-                <div className="flex items-center dark:text-slate-300 text-slate-900">
-                  <span>
-                    {message.agent_name}
-                    {message.user}
-                  </span>
-                  <span
-                    className={`flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
-                      message.user_email === user[0].email ||
-                      message.agent_email === user[0].email
-                        ? ""
-                        : "hidden"
-                    }`}
-                  >
-                    <span className="flex font-bold space-x-[1px] text-sm">
-                      <HiCheck />
-                      <HiCheck
-                        className={`${
-                          message.readStatus !== "read" ? "text-slate-500" : ""
-                        }`}
-                      />
-                    </span>{" "}
-                  </span>
-                </div>{" "}
-                <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
-                  <span className="flex space-x-2">
-                    <span className="text-xs dark:text-slate-400 text-slate-700  font-medium">
-                      {`${new Date(message.date).toLocaleString()}`}
-                    </span>
-                  </span>
-                  <button
-                    onClick={() =>
-                      user[0].access === "admin" &&
-                      setOptions({
-                        status: true,
-                        id: message.message_position,
-                        threadId: message.ticket_id,
-                      })
-                    }
-                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-400 text-slate-700 flex items-center justify-center outline-none focus:outline-none"
-                  >
-                    <BsThreeDotsVertical className="inline  cursor-pointer" />
-                  </button>
-
-                  {/**Message Options =========================== */}
-                  <div
-                    ref={msgOptionsRef}
-                    className={`w-[10rem] ${
-                      msgOptions.status === true &&
-                      msgOptions.id === message.message_position &&
-                      msgOptions.threadId === message.ticket_id
-                        ? ""
-                        : "hidden"
-                    } z-[99] shadow-lg border dark:border-slate-800 border-slate-100 dark:bg-slate-700 bg-white backdrop-blur-sm rounded-lg absolute right-0 top-8 p-4`}
-                  >
-                    <h5 className="dark:text-slate-300 text-slate-500 font-semibold text-sm flex justify-between items-center">
-                      <span>Delete</span>
-                      <BsFillTrashFill
-                        onClick={() => {
-                          deleteTicket(message.id);
-                          setOptions({
-                            status: false,
-                            id: "",
-                            threadId: "",
-                          });
-                        }}
-                        className="hover:text-red-500 cursor-pointer"
-                      />
-                    </h5>
-                  </div>
-                </div>
-              </div>
-              <p className="mt-2 py-2 dark:text-slate-400 text-slate-700 border-b dark:border-slate-800 border-slate-200 p-2 text-[13px]">
-                {message.message}
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    });
-
   //Send Solution send Solution ====================
   const sendSolution = () => {
     // Upload Recordings
-    recordingFile !== false &&
-      addRecording(recordingFile, `/dial_n_dine/${threadId}`);
+    recordingFile !== false && addRecording(recordingFile, `/${company_details.name}/${threadId}`);
 
     //Add ticket recording on firebase storage =============================
     resolveTicket(
       firstMessage.length >= 1 && firstMessage[0].id,
       solution,
-      (recordingFile !== false ? true : false)
+      recordingFile !== false ? true : false
     );
 
     //Sending Account =============================
@@ -325,12 +218,14 @@ const MessageThread = ({ isChatOpen, audio }) => {
         }
       });
     setSolution("");
-    setReply({ ...reply, message: "",status:"" });
+    setReply({ ...reply, message: "", status: "" });
   };
 
-  //Send Reply Function ============================
+  //Send Reply Function ========================
   const sendReply = (e) => {
     e.preventDefault();
+
+    //Check if field are then send ======================
     if (
       user[0].name !== "User Loader" &&
       reply.ticket_id !== "none" &&
@@ -349,7 +244,19 @@ const MessageThread = ({ isChatOpen, audio }) => {
         firstMessage.length >= 1 && firstMessage[0].team
       );
 
-      //Sending Account =============================
+      //Upload File if there is one
+      const storage = getStorage();
+      if (attachmentArray.length >= 1) {
+        attachmentArray.forEach((file, index) => {
+          uploadBytes(ref(storage, `/${company_details.name}/${index}`), file).then(
+            (snapshot) => {
+              console.log(snapshot.downloadURL);
+            }
+          );
+        });
+      }
+
+      //Sending Account ========================
       let sendingAccount =
         firstMessage.length >= 1 &&
         email_accounts.filter(
@@ -357,7 +264,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
             account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
         )[0];
 
-      //Relpy Using Nodemailer ===================
+      //Send Using Nodemailer ===================
       fetch("https://dndhelp-desk-first.herokuapp.com/send", {
         method: "POST",
         headers: {
@@ -449,7 +356,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 },
               ])
             );
-    setReply({ ...reply, message: "", status: "" });
+            setReply({ ...reply, message: "", status: "" });
           } else if (resData.status === "fail") {
             dispatch(
               updateAlert([
@@ -463,19 +370,21 @@ const MessageThread = ({ isChatOpen, audio }) => {
           }
         });
     }
+
+    //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
     if (reply.status === "solved") {
       sendSolution();
-    setReply({ ...reply, message: "", status: "" });
+      setReply({ ...reply, message: "", status: "" });
     } else if (reply.status === "reopened") {
       reOpenTicket(firstMessage[0].id, reply.status, true);
-    setReply({ ...reply, message: "", status: "" });
+      setReply({ ...reply, message: "", status: "" });
     } else if (
       reply.status !== "" &&
       reply.status !== "solved" &&
       reply.status !== "reopened"
     ) {
       changeStatus(firstMessage[0].id, reply.status);
-    setReply({ ...reply, message: "", status: "" });
+      setReply({ ...reply, message: "", status: "" });
     }
     if (reply.status === "") {
       dispatch(
@@ -489,6 +398,128 @@ const MessageThread = ({ isChatOpen, audio }) => {
       );
     }
   };
+
+  //Loop Through Each Message In a thread ====================
+  const thread =
+    threadMessage.length >= 1 &&
+    threadMessage.map((message, index) => {
+      return (
+        <div
+          ref={
+            threadMessage.length - 1 === index
+              ? scrollToLastMessage
+              : scrollToNone
+          }
+          key={index}
+          className="w-full snap_childTwo text-slate-400 text-sm leading-6 flex transition-all"
+        >
+          {/**Message ====================== */}
+          <div className="w-[95%] 2xl:w-full bg-tranparent px-6 pb-4 relative">
+            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded-md border dark:border-slate-500 border-slate-500 dark:bg-slate-700 bg-slate-200 px-1 overflow-hidden">
+              <div className="w-full h-full dark:bg-slate-700 bg-slate-200 dark:text-gray-300 text-slate-600 flex justify-center items-center capitalize font-bold text-sm">
+                <BsChatRight />
+              </div>
+            </div>
+            {/**Contents ======================= */}
+            <div className="w-full bg-transparent rounded-lg">
+              <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
+                <div className="flex items-center dark:text-slate-300 text-slate-900">
+                  <span>
+                    {message.agent_name}
+                    {message.user}
+                  </span>
+                  <span
+                    className={`flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
+                      message.user_email === user[0].email ||
+                      message.agent_email === user[0].email
+                        ? ""
+                        : "hidden"
+                    }`}
+                  >
+                    <span className="flex font-bold space-x-[1px] text-sm">
+                      <HiCheck />
+                      <HiCheck
+                        className={`${
+                          message.readStatus !== "read" ? "text-slate-500" : ""
+                        }`}
+                      />
+                    </span>{" "}
+                  </span>
+                </div>{" "}
+                <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
+                  <span className="flex space-x-2">
+                    <span className="text-xs dark:text-slate-400 text-slate-700  font-medium">
+                      {`${new Date(message.date).toLocaleString()}`}
+                    </span>
+                  </span>
+                  <button
+                    onClick={() =>
+                      user[0].access === "admin" &&
+                      setOptions({
+                        status: true,
+                        id: message.message_position,
+                        threadId: message.ticket_id,
+                      })
+                    }
+                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-400 text-slate-700 flex items-center justify-center outline-none focus:outline-none"
+                  >
+                    <BsThreeDotsVertical className="inline  cursor-pointer" />
+                  </button>
+
+                  {/**Message Options =========================== */}
+                  <div
+                    ref={msgOptionsRef}
+                    className={`w-[10rem] ${
+                      msgOptions.status === true &&
+                      msgOptions.id === message.message_position &&
+                      msgOptions.threadId === message.ticket_id
+                        ? ""
+                        : "hidden"
+                    } z-[99] shadow-lg border dark:border-slate-800 border-slate-100 dark:bg-slate-700 bg-white backdrop-blur-sm rounded-lg absolute right-0 top-8 p-4`}
+                  >
+                    <h5 className="dark:text-slate-300 text-slate-500 font-semibold text-sm flex justify-between items-center">
+                      <span>Delete</span>
+                      <BsFillTrashFill
+                        onClick={() => {
+                          deleteTicket(message.id);
+                          setOptions({
+                            status: false,
+                            id: "",
+                            threadId: "",
+                          });
+                        }}
+                        className="hover:text-red-500 cursor-pointer"
+                      />
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-2 py-2 dark:text-slate-400 text-slate-700 border-b dark:border-slate-800 border-slate-200 p-2 text-[13px]">
+                <p>{message.message}</p>
+                {/**Image attachments if available ========================== */}
+                <div className="w-full py-2 gap-2 flex flex-wrap overflow-hidden">
+                  <label htmlFor="index" className="overflow-hidden">
+                    <input
+                      type="checkbox"
+                      name="index"
+                      id="index"
+                      className="hidden"
+                    />
+                    <div className="chatImage bg-transparent backdrop-blur-sm flex justify-center overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                        alt="attach"
+                        className="max-w-[30rem] max-h-[35rem] object-cover object-fit"
+                      />
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
 
   //Component ======================================
   return (
@@ -698,10 +729,12 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   >
                     <BiPaperclip />
                     <input
+                      multiple
                       type="file"
                       name="attachment"
                       id="attachment"
                       className="hidden"
+                      onChange={(e) => setAttachArray(e.target.files)}
                     />
                   </label>
                 </abbr>
@@ -720,7 +753,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       title="Upload Recording"
                       onChange={(e) => {
                         setFile(e.target.files[0]);
+                        console.log(e.target);
                       }}
+
+                      onClick={()=>console.log("HI")}
                       className="outline-none focus:outline-none hidden"
                     />
                   </label>

@@ -4,6 +4,8 @@ import darkLogo from "./images/dndHelp-Desk.png";
 import lightLogo from "./images/dndHelp-Desk_Light.png";
 import { Link, useNavigate } from "react-router-dom";
 import supportImage from "./images/support-image.svg";
+import { useDispatch } from "react-redux";
+import { setCompany } from "../../store/UserSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 //Firestore ===================
@@ -11,6 +13,7 @@ import { collection, addDoc, getFirestore } from "firebase/firestore";
 
 const CompanySetUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const auth = getAuth();
   const [setUpValues, setValues] = useState({
     user_name: "",
@@ -37,6 +40,16 @@ const CompanySetUp = () => {
         .toLowerCase()
         .replace(/\s/g, "")}/members`
     );
+
+    
+let ticketsRef =
+  setUpValues.company_name &&
+  collection(
+    db,
+    `companies/${setUpValues.company_name
+      .toLowerCase()
+      .replace(/\s/g, "")}/tickets`
+  );
 
   let emailAccountsRef =
     setUpValues.company_name &&
@@ -113,17 +126,50 @@ const CompanySetUp = () => {
             ],
           });
 
+          // New Tickects ==============================
+           addDoc(ticketsRef, {
+             recipient_name: "dndHelp-Desk",
+             recipient_email: "support@dndhelpdesk.co.za",
+             message_position: 1,
+             priority: "Medium",
+             agent_name: "dndHelpDesk",
+             date: new Date().toLocaleString(),
+             category: "Welcome",
+             branch_company: setUpValues.company_name,
+             message:
+               "Great to have you on board!\n The next step is crucial, yet simple! To see messages from your customers in HelpDesk, just set up forwarding from your support inbox.",
+             time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+             ticket_id: "#123456",
+             status: "open",
+             due_date: new Date().toLocaleString(),
+             from: "agent",
+             agent_email: "support@dndhelpdesk.co.za",
+             readStatus: "delivered",
+             complainant_name: "test user",
+             complainant_email: "testuser@example.com",
+             complainant_number: "0123457892",
+             closed_time: "",
+             fcr:"no",
+             hasRecording: false,
+             solution:"",
+             reopened: false,
+             assigned: false,
+             assignee: "",
+             assigner: "",
+             team: "support",
+           });
+
           //Set Organisation For LogIn ================================
           window.localStorage.setItem(
             "orgarnization_name",
             setUpValues.company_name.toLocaleLowerCase().replace(/\s/g, "")
           );
+          dispatch(setCompany(e.target.value.toLowerCase().replace(/\s/g, "")));
 
           //Redirect To LogIn ================================
           navigate("/app");
         }
       })
-      .catch(() => navigate("/error-page"));
   };
 
   //Component  =================================
@@ -198,7 +244,7 @@ const CompanySetUp = () => {
                 type="email"
                 name="user_email"
                 id="user_email"
-                placeholder="yoremail@email.com"
+                placeholder="youremail@email.com"
                 required
                 value={setUpValues.user_email}
                 onChange={(e) =>
@@ -223,6 +269,8 @@ const CompanySetUp = () => {
                 name="user_password"
                 id="user_password"
                 required
+                pattern=".{8,}"
+                title="Enter at least 8 characters"
                 placeholder="⁎⁎⁎⁎⁎⁎⁎⁎⁎⁎⁎"
                 value={setUpValues.user_password}
                 onChange={(e) =>
@@ -272,6 +320,8 @@ const CompanySetUp = () => {
                 name="company_name"
                 id="company_name"
                 placeholder="dndHelp-Desk"
+                pattern="[A-Za-z]*"
+                title="It must contain letters only and space if needed."
                 required
                 value={setUpValues.company_name}
                 onChange={(e) =>

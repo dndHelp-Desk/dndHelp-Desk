@@ -169,7 +169,7 @@ const OverviewReport = ({ data }) => {
           </p>
           <div className="|">
             <h4 className="text-center dark:text-slate-300 text-slate-700 font-semibold text-sm">
-              {ratings?ratings:0.0}%
+              {ratings !== "NaN" ? ratings : "0.0"}%
             </h4>
             <div className="flex w-full justify-center items-center text-2xl border-b border-slate-300 dark:border-slate-700">
               <span

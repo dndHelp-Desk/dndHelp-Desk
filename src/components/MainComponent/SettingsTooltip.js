@@ -6,12 +6,24 @@ import {
   BsChatSquareDotsFill,
   BsFileTextFill,
   BsBookHalf,
+  BsFillDoorOpenFill,
 } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {
+  signOut,
+  getAuth,
+} from "firebase/auth";
+import {
+  updateUserStatus,
+} from "./../Data_Fetching/TicketsnUserData";
+import { changeLocation, isAuthenticated } from "../../store/UserSlice";
+import { NavLink,useNavigate } from "react-router-dom";
+import { useSelector ,useDispatch} from "react-redux";
 
 const SettingsTooltip = () => {
   const user = useSelector((state) => state.UserInfo.member_details);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = getAuth();
 
   //Component =======================================
   return (
@@ -81,6 +93,23 @@ const SettingsTooltip = () => {
                 <BsBookHalf />
                 <span>Solutions</span>
               </NavLink>
+            </li>
+            <li>
+              <button onClick={()=>{
+                  updateUserStatus(user[0].id, "unavailable");
+                  setTimeout(() => {
+                    signOut(auth).then(() => {
+                      dispatch(isAuthenticated(false));
+                      window.localStorage.clear();
+                      dispatch(changeLocation("Dial n Dine Help-Desk"));
+                      document.title = "Dial n Dine Help-Desk";
+                      navigate("/logIn");
+                    });
+                  }, 1000);
+              }} className="py-2 px-4 w-full rounded outline-none focus:outline-none bg-red-600 text-slate-300 text-sm font-semibold flex justify-center items-center space-x-1 hover:opacity-80">
+                <BsFillDoorOpenFill />
+                <span>Sign Out</span>
+              </button>
             </li>
             <small className="text-slate-500 text-xs font-light italic">
               version: {packageJson.version}

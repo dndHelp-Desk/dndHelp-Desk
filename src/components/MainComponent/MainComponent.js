@@ -117,6 +117,7 @@ const MainComponent = () => {
       <div className="w-full min-h-[45rem] h-screen dark:bg-slate-900 bg-slate-200 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex flex-col selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
+       
         {/**NavBar ============== */}
         <div className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300">
           {/**Alert */}

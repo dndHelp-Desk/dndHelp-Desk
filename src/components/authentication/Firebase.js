@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
-
 import {
   getAuth,
   onAuthStateChanged,
@@ -36,8 +34,8 @@ export async function upload(file, currentUser) {
   return true;
 }
 
-export async function addRecording(file, ticket_id) {
-  const fileRef = ref(storage, ticket_id + ".wav");
+export async function addRecording(file, nameRef) {
+  const fileRef = ref(storage, nameRef);
   await uploadBytes(fileRef, file);
-  return (true,console.log("done"));
+  return (console.log("done"));
 }

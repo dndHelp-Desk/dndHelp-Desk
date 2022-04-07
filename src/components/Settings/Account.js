@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  signOut,
   getAuth,
   sendEmailVerification,
   updatePassword,
@@ -9,7 +8,6 @@ import {
   EmailAuthProvider,
 } from "firebase/auth";
 import { updateAlert } from "../../store/NotificationsSlice";
-import { changeLocation, isAuthenticated } from "../../store/UserSlice";
 import {
   BsEnvelope,
   BsFillPatchCheckFill,
@@ -17,17 +15,13 @@ import {
   BsFillPersonFill,
   BsBuilding,
   BsFillKeyFill,
-  BsBoxArrowRight,
 } from "react-icons/bs";
 import defaultProfile from "./../../default.webp";
 import {
   updateUserDetails,
-  updateUserStatus,
 } from "../Data_Fetching/TicketsnUserData";
-import { useNavigate } from "react-router-dom";
 
 const Account = () => {
-  const navigate = useNavigate();
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const dispatch = useDispatch();
@@ -46,20 +40,6 @@ const Account = () => {
     user.photoURL && (photoUrl = user.photoURL);
     emailStatus = user.emailVerified;
   }
-
-  //Sign Out User =================
-  const signOutUser = () => {
-    updateUserStatus(member_details[0].id, "unavailable");
-    setTimeout(() => {
-      signOut(auth).then(() => {
-        dispatch(isAuthenticated(false));
-        window.localStorage.clear();
-        dispatch(changeLocation("Dial n Dine Help-Desk"));
-        document.title = "Dial n Dine Help-Desk";
-        navigate("/logIn");
-      });
-    }, 1000);
-  };
 
   //Set New Password ===========================
   const newPassword = (e) => {
@@ -213,14 +193,6 @@ const Account = () => {
             </button>
           )}
         </div>
-        <button
-          onClick={() => {
-            signOutUser();
-          }}
-          className="dark:bg-red-800 bg-red-600 px-4 w-[9rem] p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center"
-        >
-          <BsBoxArrowRight /> <span>Sign Out</span>
-        </button>
       </div>
 
       {/**Update Details =========================== */}

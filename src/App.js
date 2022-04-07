@@ -1,13 +1,17 @@
 import React, { Suspense, lazy } from "react";
+import preLoaderLogo from "./dndHelp-Desk_.webp"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing Page/Landing";
 import LogIn from "./components/authentication/LogIn";
-import MainComponent from "./components/MainComponent/MainComponent";
 import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
 import ErrorPage from "./components/Landing Page/ErrorPage"
 
+
 //Lazy Loading Components || Code Splitting ====================
+const MainComponent = lazy(() =>
+  import("./components/MainComponent/MainComponent")
+);
 const ReportsComponent = lazy(() =>
   import("./components/Reports/ReportComponent")
 );
@@ -45,11 +49,14 @@ const App = () => {
       <BrowserRouter>
         <Suspense
           fallback={
-            <div className="h-screen w-screen bg-slate-900 flex items-center justify-center">
+            <div className="h-screen w-screen bg-slate-900 gap-4 flex flex-col items-center justify-center">
               <div>
+                <div className="w-16 h-16 overflow-hidden">
+                  <img src={preLoaderLogo} alt="preloaderLogo" className="w-full object-cover object-center" />
+                </div>
                 <div
                   style={{ borderTopColor: "transparent" }}
-                  className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"
+                  className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"
                 ></div>
               </div>
             </div>
