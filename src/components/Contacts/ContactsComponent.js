@@ -14,9 +14,11 @@ const ContactsComponent = () => {
   }
   //Component ======================================
   return (
-    <div className="dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 mt-4 container w-[90%] md:w-full rounded-xl 2xl:w-[72rem] gap-4 flex flex-col tracking-wider relative">
-      <Table setModal={setModal} />
-      <NewContact contactModal={contactModal} setModal={setModal} />
+    <div className=" mt-4 container w-[90%] md:w-full 2xl:w-[72rem] min-h-screen">
+      <div className="dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 gap-4 flex flex-col tracking-wider rounded-xl relative">
+        <Table setModal={setModal} />
+        <NewContact contactModal={contactModal} setModal={setModal} />
+      </div>
     </div>
   );
 };

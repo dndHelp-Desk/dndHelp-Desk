@@ -65,9 +65,9 @@ const EmailAccounts = () => {
 
   //Componet  =======================
   return (
-    <section className="w-full h-full p-2 grid gricols-1 lg:grid-cols-2 gap-2 overflow-hidden">
+    <section className="w-full h-full p-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
       {/**Accounts List ======================================= */}
-      <div className="col-span-1 h-[35rem] overflow-hidden overflow-y-scroll px-4 space-y-4">
+      <div className="col-span-1 h-full overflow-hidden overflow-y-scroll px-4 space-y-4">
         {email_accounts.length >= 1 &&
           email_accounts.map((account) => {
             return (
@@ -95,9 +95,9 @@ const EmailAccounts = () => {
                 }}
                 className=""
               >
-                <fieldset className="border dark:border-slate-700 border-slate-300 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-[#25396823] bg-slate-100">
+                <fieldset className="border dark:border-slate-700 border-slate-300 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
                   {" "}
-                  <legend className="text-slate-600 dark:text-slate-400 font-semibold uppercase text-sm">
+                  <legend className="px-2 bg-slate-200 dark:bg-slate-900 rounded-md text-slate-600 dark:text-slate-400 font-semibold uppercase text-sm">
                     {account.name}
                   </legend>
                   <label
@@ -120,7 +120,7 @@ const EmailAccounts = () => {
                       onChange={(e) =>
                         setValues({ ...updatedValues, email: e.target.value })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-700"
                     />
                   </label>
                   <label
@@ -143,7 +143,7 @@ const EmailAccounts = () => {
                       onChange={(e) =>
                         setValues({ ...updatedValues, host: e.target.value })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-700"
                     />
                   </label>
                   <label
@@ -166,7 +166,7 @@ const EmailAccounts = () => {
                       onChange={(e) =>
                         setValues({ ...updatedValues, port: e.target.value })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-700"
                     />
                   </label>
                   <label
@@ -192,7 +192,7 @@ const EmailAccounts = () => {
                           password: e.target.value,
                         })
                       }
-                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-800"
+                      className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-700"
                     />
                   </label>
                   <div className="flex justify-center items-center py-2">
@@ -252,7 +252,7 @@ const EmailAccounts = () => {
           <h3 className="text-lg text-center dark:text-slate-400 text-slate-800 capitalize font-bold font-sans">
             new account
           </h3>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
             <input
               type="text"
               name="name"
@@ -263,11 +263,11 @@ const EmailAccounts = () => {
                 setValue({ ...newAccountValue, name: e.target.value })
               }
               value={newAccountValue.name}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
             <input
               type="email"
               name="email"
@@ -278,11 +278,11 @@ const EmailAccounts = () => {
                 setValue({ ...newAccountValue, email: e.target.value })
               }
               value={newAccountValue.email}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-slate-800 bg-slate-200"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
             <input
               type="text"
               name="host"
@@ -293,11 +293,11 @@ const EmailAccounts = () => {
                 setValue({ ...newAccountValue, host: e.target.value })
               }
               value={newAccountValue.host}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
             />
             <BsServer className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
             <input
               type="number"
               name="port"
@@ -308,11 +308,11 @@ const EmailAccounts = () => {
                 setValue({ ...newAccountValue, port: e.target.value })
               }
               value={newAccountValue.port}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
             />
             <BsFillPlugFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
             <input
               type="password"
               name="password"
@@ -323,7 +323,7 @@ const EmailAccounts = () => {
                 setValue({ ...newAccountValue, password: e.target.value })
               }
               value={newAccountValue.password}
-              className="bg-transparent w-full h-full rounded-lg border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded-lg border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
             />
             <BsFillLockFill className="absolute text-slate-500 top-[0.85rem] text-base left-4" />
           </div>

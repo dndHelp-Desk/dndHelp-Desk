@@ -6,95 +6,22 @@ import { Navigate } from "react-router";
 import {
   deleteUser,
   activateUser,
-  createUser,
 } from "../Data_Fetching/TicketsnUserData";
 import {
   BsFillTrashFill,
-  BsFillPersonFill,
-  BsFillEnvelopeFill,
-  BsBuilding,
-  BsPersonLinesFill,
-  BsLockFill,
   BsSearch,
+  BsPlusLg,
 } from "react-icons/bs";
 import { updateAlert } from "../../store/NotificationsSlice";
+import NewUser from "./NewUser";
 
 const Team = () => {
   const dispatch = useDispatch();
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const member_details = useSelector((state) => state.UserInfo.member_details);
+  const [newUserModal,setModal] = useState(false)
   const [search, setSearch] = useState(" ");
-  const [inputValues, setValues] = useState({
-    name: "",
-    dept: "",
-    email: "",
-    access: "",
-    bio: "",
-    active: true,
-    password: "",
-    companies: "",
-  });
-
-  //Create User ===========================
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch("https://dndhelp-desk-first.herokuapp.com/create", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email: inputValues.email,
-        password: inputValues.password,
-        displayName: inputValues.name,
-      }),
-    })
-      .then((req) => {
-        req.json();
-      })
-      .then(() => {
-        dispatch(
-          updateAlert([
-            ...alerts,
-            {
-              message: "New User Has Been Created Successfully",
-              color: "bg-green-200",
-            },
-          ])
-        );
-      })
-      .catch((error) => {
-        dispatch(
-          updateAlert([
-            ...alerts,
-            {
-              message: "Failed To Create New User" + error,
-              color: "bg-red-200",
-            },
-          ])
-        );
-      });
-    createUser(
-      inputValues.name,
-      inputValues.dept,
-      inputValues.email,
-      inputValues.access,
-      inputValues.bio,
-      inputValues.active,
-      inputValues.companies
-    );
-    setValues({
-      name: "",
-      dept: "",
-      email: "",
-      access: "",
-      bio: "",
-      active: true,
-      password: "",
-      companies: "",
-    });
-  };
 
   //Delete User ================
   const deleteMember = (id, uid) => {
@@ -141,9 +68,9 @@ const Team = () => {
     allMembers.map((user) => {
       let id = user.id;
       return (
-        <div
+        <tr
           key={id}
-          className={`w-full snap_child h-16 rounded-lg dark:bg-[#1e293b9c] bg-slate-200 grid grid-cols-5 space-x-4 p-2 border dark:border-slate-700 border-slate-400 ${
+          className={`w-full snap_child h-16 rounded-lg dark:bg-slate-800 bg-white grid grid-cols-9 space-x-4 p-2 border dark:border-slate-700 border-slate-300 ${
             user.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -156,7 +83,7 @@ const Team = () => {
               : "hidden"
           }`}
         >
-          <div className="col-span-3 space-x-1 items-center flex">
+          <td className="col-span-4 space-x-1 items-center flex">
             <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
               <img
                 src={
@@ -168,15 +95,20 @@ const Team = () => {
                 className="object-cover w-full h-full object-center rounded-lg"
               />
             </div>
-            <h3 className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600 w-40">
+            <p className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600">
               <abbr title={user.name}>{user.name}</abbr>
               <br />
-              <small className="capitalize col-span-1 dark:text-slate-500 text-slate-500 w-40">
+              <small className="capitalize col-span-1 dark:text-slate-500 text-slate-500">
                 {user.dept} / {user.access}
               </small>
-            </h3>
-          </div>
-          <div className="text-xs items-right flex justify-end items-center col-span-2 space-x-4">
+            </p>
+          </td>
+          <td className="col-span-4 h-full">
+            <p className=" h-full text-xs lowercase whitespace-nowrap overflow-hidden text-ellipsis dark:text-slate-400 text-slate-600 flex items-center">
+              <abbr title={user.email}>{user.email}</abbr>
+            </p>
+          </td>
+          <td className="col-span-1 text-xs items-right flex justify-end items-center space-x-4">
             <div className="cursor-pointer rounded-full bg-slate-400 relative shadow-sm">
               <abbr title="Activate / Deactivate">
                 <input
@@ -203,13 +135,13 @@ const Team = () => {
                     ? deleteMember(user.id, user.uid)
                     : alert("Wrong Pin");
                 }}
-                className="h-8 w-8 rounded-xl outline-none focus:outline-none flex items-center justify-center dark:bg-slate-800 bg-slate-300 hover:opacity-80"
+                className="h-8 w-8 rounded-xl outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
               >
                 <BsFillTrashFill className="text-red-500 cursor-pointer text-base" />
               </button>
             </abbr>
-          </div>
-        </div>
+          </td>
+        </tr>
       );
     });
 
@@ -220,21 +152,22 @@ const Team = () => {
 
   //Component ==================
   return (
-    <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 gap-2">
-      <div className="col-span-1 p-1 py-2">
-        <div className="flex items-center justify-between">
-          <h6 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
-            All Members
-          </h6>
+    <div className="h-full w-full">
+      <div className="flex items-center justify-between">
+        <h1 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
+          All Members
+        </h1>
+        <div className="flex items-center gap-4">
           <label className="relative" htmlFor="searchUser">
             <input
               type="search"
               name="searchUser"
               id="searchUser"
+              placeholder="Quick Search ..."
               autoComplete="off"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="h-10 w-10 focus:w-[12rem] transition-all bg-transparent rounded-lg border dark:border-slate-700 border-slate-500 focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 text-slate-600 dark:text-slate-400 z-[999]"
+              className="h-10 w-[15rem] transition-all bg-transparent border-0 border-b dark:border-slate-700 border-slate-500 focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 text-slate-600 dark:text-slate-400 placeholder:text-xs placeholder:text-slate-600 dark:placeholder:text-slate-400 z-[999] pl-8"
             />
             <BsSearch
               className={`absolute top-3 left-3 text-slate-600 dark:text-slate-400 text-sm ${
@@ -242,158 +175,47 @@ const Team = () => {
               }`}
             />
           </label>
-        </div>
-        <section className="col-span-1 h-[35rem] bg-transparent rounded-xl flex flex-col place-items-center p-4 overflow-hidden">
-          {allMembers.length >= 1 && (
-            <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-              <h2 className="w-full h-6 text-xs sticky top-0 z-[99] flex items-center justify-between space-x-4 font-semibold uppercase dark:text-slate-300 text-slate-700 px-3 border-b border-slate-400 dark:border-slate-700">
-                <span>User-Name</span>
-                <span>Action</span>
-              </h2>
-              {users}
-            </div>
-          )}
-          {!allMembers.length >= 1 && (
-            <div className="h-full w-full">
-              <div className="h-full w-full rounded-lg border dark:border-slate-700 border-slate-400 p-6">
-                <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
-                  add your team members
-                </h2>
-                <img
-                  src={noUsers}
-                  alt="no-users"
-                  className="object-center object-fit w-full h-full"
-                />
-              </div>
-            </div>
-          )}
-        </section>
-      </div>
-
-      {/**Add New User ==================== */}
-      <div className="col-span-1 flex flex-col items-center justify-center lg:border-l dark:border-slate-800 border-slate-300 p-4">
-        <h2 className="dark:text-slate-300 text-slate-800 text-base font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden uppercase">
-          Add New User
-        </h2>
-        <form
-          action=""
-          onSubmit={(e) => handleSubmit(e)}
-          className="mt-2 space-y-3 pb-5 w-[90%] flex flex-col items-center"
-        >
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              autoComplete="nope"
-              placeholder="Full-Name ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, name: e.target.value })
-              }
-              value={inputValues.name}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
-            />
-            <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              autoComplete="nope"
-              placeholder="Email ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, email: e.target.value })
-              }
-              value={inputValues.email}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
-            />
-            <BsFillEnvelopeFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              autoComplete="nope"
-              placeholder="Password ..."
-              required
-              minLength="6"
-              onChange={(e) =>
-                setValues({ ...inputValues, password: e.target.value })
-              }
-              value={inputValues.password}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
-            />
-            <BsLockFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
-            <select
-              onChange={(e) =>
-                setValues({ ...inputValues, access: e.target.value })
-              }
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow"
-            >
-              <option className="capitalize p-2" value="">
-                Access
-              </option>
-              <option className="capitalize p-2" value="agent">
-                Agent
-              </option>
-              <option className="capitalize p-2" value="admin">
-                Admin
-              </option>
-              <option className="capitalize p-2" value="client">
-                Client
-              </option>
-            </select>
-            <BsPersonLinesFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div
-            className={` ${
-              inputValues.access === "client" ? "" : "hidden"
-            } h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative`}
-          >
-            <input
-              type="text"
-              name="company"
-              id="company"
-              autoComplete="nope"
-              placeholder="Companies / Restuarants ..."
-              onChange={(e) =>
-                setValues({ ...inputValues, companies: e.target.value })
-              }
-              value={inputValues.companies}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
-            />
-            <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="text"
-              name="department"
-              id="department"
-              autoComplete="nope"
-              placeholder="Department ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, dept: e.target.value })
-              }
-              value={inputValues.dept}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
-            />
-            <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
           <button
-            type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded-md hover:opacity-80 outline-none focus:outline-none uppercase"
+            onClick={() => setModal(true)}
+            className="h-10 w-10 rounded-lg bg-blue-600 text-slate-300 font-bold text-sm flex items-center justify-center outline-none focus:outline-none"
           >
-            Create User
+            <BsPlusLg />
           </button>
-        </form>
+        </div>
       </div>
+      <section className="h-[49rem] bg-transparent rounded-xl flex flex-col place-items-center mt-1 py-4 overflow-hidden">
+        {allMembers.length >= 1 && (
+          <table className="w-full h-full flex flex-col justify-between">
+            <thead className="w-full">
+              <tr className="w-full h-6 mb-4 text-xs sticky top-0 z-[99] grid grid-cols-9 gap-2 font-semibold uppercase dark:text-slate-300 text-slate-700 border-b border-slate-400 dark:border-slate-700 bg-inherit">
+                <th className="col-span-4 text-left">User</th>
+                <th className="col-span-4 text-left pl-4">Email</th>
+                <th className="col-span-1 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="w-full h-[45rem] overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
+              {users}
+            </tbody>
+          </table>
+        )}
+        {!allMembers.length >= 1 && (
+          <div className="h-full w-full">
+            <div className="h-full w-full rounded-lg border dark:border-slate-700 border-slate-400 p-6">
+              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
+                add your team members
+              </h2>
+              <img
+                src={noUsers}
+                alt="no-users"
+                className="object-center object-fit w-full h-full"
+              />
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/**Add New User ============================= */}
+      <NewUser newUserModal={newUserModal} setModal={setModal}/>
     </div>
   );
 };

@@ -1,12 +1,10 @@
 import React, { Suspense, lazy } from "react";
-import preLoaderLogo from "./dndHelp-Desk_.webp"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing Page/Landing";
 import LogIn from "./components/authentication/LogIn";
 import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";
-import ErrorPage from "./components/Landing Page/ErrorPage"
-
+import ErrorPage from "./components/Landing Page/ErrorPage";
 
 //Lazy Loading Components || Code Splitting ====================
 const MainComponent = lazy(() =>
@@ -36,9 +34,7 @@ const AutomatedReports = lazy(() =>
 const Solutions = lazy(() => import("./components/Settings/Solutions"));
 
 //Getting Started Or Setting Up An Account ========================
-const Pricing = lazy(() =>
-  import("./components/Landing Page/Pricing")
-);
+const Pricing = lazy(() => import("./components/Landing Page/Pricing"));
 const CompanySetUp = lazy(() =>
   import("./components/Landing Page/CompanySetUp")
 );
@@ -50,14 +46,34 @@ const App = () => {
         <Suspense
           fallback={
             <div className="h-screen w-screen bg-slate-900 gap-4 flex flex-col items-center justify-center">
-              <div>
-                <div className="w-16 h-16 overflow-hidden">
-                  <img src={preLoaderLogo} alt="preloaderLogo" className="w-full object-cover object-center" />
+              {/* <!--card--> */}
+              <div className="w-64 bg-slate-200 rounded shadow-2xl">
+                {/* <!--image--> */}
+                <div className="h-32 bg-slate-400 rounded-tr rounded-tl flex gap-2 flex-col justify-center items-center p-2">
+                  <div>
+                    <div className="w-8 h-8 border-4 border-slate-800 border-l-slate-700 rounded-full animate-spin"></div>
+                  </div>
+                  <p class="w-full text-center text-xs text-slate-800">
+                    This may take a few seconds, please don't close this page.
+                  </p>
                 </div>
-                <div
-                  style={{ borderTopColor: "transparent" }}
-                  className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"
-                ></div>
+                <div className="p-5">
+                  {/* <!--title--> */}
+                  <div className="h-6 rounded-sm bg-slate-400 animate-pulse mb-4"></div>
+                  {/* <!--content--> */}
+                  <div className="grid grid-cols-4 gap-1">
+                    <div className="col-span-3 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="col-span-2 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="col-span-2h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="col-span-3 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                    <div className="col-span-2 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
+                  </div>
+                </div>
               </div>
             </div>
           }

@@ -122,9 +122,9 @@ const Profile = () => {
 
           {/** Change Agent Online Stutus ============*/}
           <div 
-              role="tooltip" className="bg-transparent p-1 pt-4 absolute right-[-0.3rem] top-[2.2rem] hidden group-hover:flex flex-col">
+              role="tooltip" className="bg-transparent p-1 pt-4 absolute right-[-0.3rem] top-[2.3rem] hidden group-hover:flex flex-col">
             <div
-              className="p-4 z-[999] dark:bg-slate-700 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded-lg after:content-[''] after:absolute after:right-[1rem] after:top-[0.5rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit"
+              className="p-4 z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded-lg after:content-[''] after:absolute after:right-[1rem] after:top-[0.5rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit"
             >
               <div className="pb-2">
                 <h3 className="dark:text-slate-300 text-slate-900 text-sm text-center capitalize font-semibold">

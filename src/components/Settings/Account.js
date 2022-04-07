@@ -17,9 +17,7 @@ import {
   BsFillKeyFill,
 } from "react-icons/bs";
 import defaultProfile from "./../../default.webp";
-import {
-  updateUserDetails,
-} from "../Data_Fetching/TicketsnUserData";
+import { updateUserDetails } from "../Data_Fetching/TicketsnUserData";
 
 const Account = () => {
   const member_details = useSelector((state) => state.UserInfo.member_details);
@@ -101,59 +99,63 @@ const Account = () => {
 
   //Component =========================
   return (
-    <div className="h-full w-full grid grid-cols-1 lg:grid-cols-2 p-1">
+    <div className="w-full">
       {/**Profile Datils ======================= */}
-      <div className="col-span-1 lg:border-r dark:border-slate-700 border-slate-300 flex flex-col p-6 space-y-2">
+      <div className="w-full h-[15rem] rounded-lg dark:bg-slate-800 bg-white flex flex-col relative overflow-hidden">
         <div
           style={{
             backgroundImage: `url(
-              "https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+              "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1544&q=80"
             )`,
           }}
-          className="w-full h-[10rem] rounded-xl bg-slate-800 pl-10 bg-no-repeat bg-center  backdrop-hue-rotate-60"
-        >
-          <div className="h-20 w-20 mt-[8rem] dark:bg-slate-700 bg-slate-200 border-2 border-slate-400 p-[2px] rounded-xl overflow-hidden">
-            <img
-              src={
-                member_details[0].photoUrl !== null &&
-                member_details[0].photoUrl !== ""
-                  ? member_details[0].photoUrl
-                  : photoUrl
-              }
-              alt="profile"
-              className="object-cover object-center rounded-lg h-full w-full"
-            />
-          </div>
+          className="w-full h-[70%] bg-slate-800 pl-10 bg-no-repeat bg-center  backdrop-hue-rotate-60"
+        ></div>
+        <div className="h-28 w-28 mt-[8rem] dark:bg-slate-700 bg-slate-200 border-2 border-slate-300 p-[2px] rounded-full overflow-hidden absolute left-8 bottom-[10%]">
+          <img
+            src={
+              member_details[0].photoUrl !== null &&
+              member_details[0].photoUrl !== ""
+                ? member_details[0].photoUrl
+                : photoUrl
+            }
+            alt="profile"
+            className="object-cover object-center rounded-full h-full w-full"
+          />
+          <p className="absolute ">pp</p>
         </div>
         {/**User Name & Time ================= */}
         <div className="mt-[.25rem] w-full pr-10">
-          <h2 className="dark:text-slate-300 text-slate-800 text-right text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+          <h1 className="dark:text-slate-300 text-slate-800 text-right text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].name}
-          </h2>
-          <h3 className="dark:text-slate-400 text-slate-700 text-right text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+          </h1>
+          <h2 className="dark:text-slate-400 text-slate-700 text-right text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].dept}
-          </h3>
+          </h2>
         </div>
+      </div>
+      <div className="flex flex-col py-4 space-y-2">
         {/**Bio ====================== */}
-        <div className=" mt-[5rem] border border-slate-300 dark:border-slate-700 p-4 w-full min-h-36 rounded-lg leading-12">
-          <h6 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide">
+        <div className=" mt-[1rem] border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 w-full h-[15rem] rounded-lg leading-12 overflow-hidden">
+          <h3 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide">
             About Me
-          </h6>
-          <p className="dark:text-slate-400 text-slate-700 text-xs capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden mt-2">
-            {member_details.length !== undefined && member_details[0].bio}
+          </h3>
+          <p className="dark:text-slate-400 text-slate-700 text-sm capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden overflow-y-scroll h-[5rem] p-2 mt-2">
+            {member_details.length !== undefined
+              ? member_details[0].bio
+              : "Write some details about yourself here ... Like your ambitionss, aspirations, profession and so on , might be useful for your collegues 😉"}
           </p>
-          <h6 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide mt-4">
+          <h4 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide mt-4">
             Contact Info
-          </h6>
-          <h4 className="dark:text-slate-400 text-slate-700 text-xs lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+          </h4>
+          <p className="dark:text-slate-400 text-slate-700 text-sm lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden px-2">
             <BsEnvelope className="inline" />{" "}
             {member_details.length !== undefined && member_details[0].email}
-          </h4>
+          </p>
           {emailStatus && (
-            <h5 className="dark:text-slate-400 text-slate-700 text-xs capitalize font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden">
+            <p className="dark:text-slate-400 text-slate-700 text-sm capitalize font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden px-2">
               <BsFillPatchCheckFill className="inline text-green-600" />{" "}
               <span>Your email is verified.</span>
-            </h5>
+            </p>
           )}
           {!emailStatus && (
             <button className="dark:text-slate-400 text-slate-700 text-xs font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden outline-none focus:outline-none">
@@ -196,7 +198,7 @@ const Account = () => {
       </div>
 
       {/**Update Details =========================== */}
-      <div className="col-span-1 p-6">
+      <div className="col-span-1 py-4">
         <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
           Edit Information
         </h2>
@@ -217,7 +219,7 @@ const Account = () => {
                 setValues({ ...inputValues, name: e.target.value })
               }
               value={inputValues.name}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-300 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -233,7 +235,7 @@ const Account = () => {
                 setValues({ ...inputValues, dept: e.target.value })
               }
               value={inputValues.dept}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-300 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -249,7 +251,7 @@ const Account = () => {
                 setValues({ ...inputValues, bio: e.target.value })
               }
               value={inputValues.bio}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow resize-none"
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-300 outline-none focus:outline-none text-sm px-4 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white resize-none"
             />
           </div>
           <button
@@ -280,7 +282,7 @@ const Account = () => {
                 setValues({ ...inputValues, old_password: e.target.value })
               }
               value={inputValues.old_password}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-300 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -297,7 +299,7 @@ const Account = () => {
                 setValues({ ...inputValues, password: e.target.value })
               }
               value={inputValues.password}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-300 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -308,7 +310,12 @@ const Account = () => {
             Change Password
           </button>
         </form>
-        <button className="dark:bg-red-800 bg-red-600 px-4 w-[9rem] mt-4 p-2 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center">
+
+        {/**Delete Account ================================ */}
+        <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden mt-4">
+          Danger Zone
+        </h2>
+        <button className=" w-[9rem] px-4 p-2 mt-4 dark:bg-red-800 bg-red-600 text-slate-300 font-semibold text-xs rounded-md hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center">
           <span>Delete Account</span>
         </button>
       </div>
