@@ -65,7 +65,7 @@ const EmailAccounts = () => {
 
   //Componet  =======================
   return (
-    <section className="w-full h-full p-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
+    <section className="w-full h-full py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
       {/**Accounts List ======================================= */}
       <div className="col-span-1 h-full overflow-hidden overflow-y-scroll px-4 space-y-4">
         {email_accounts.length >= 1 &&

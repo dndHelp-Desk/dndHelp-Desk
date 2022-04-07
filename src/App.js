@@ -50,12 +50,6 @@ const App = () => {
               <div className="w-64 bg-slate-200 rounded shadow-2xl">
                 {/* <!--image--> */}
                 <div className="h-32 bg-slate-400 rounded-tr rounded-tl flex gap-2 flex-col justify-center items-center p-2">
-                  <div>
-                    <div className="w-8 h-8 border-4 border-slate-800 border-l-slate-700 rounded-full animate-spin"></div>
-                  </div>
-                  <p class="w-full text-center text-xs text-slate-800">
-                    This may take a few seconds, please don't close this page.
-                  </p>
                 </div>
                 <div className="p-5">
                   {/* <!--title--> */}
