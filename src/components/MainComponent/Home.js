@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
 import noUsers from "./images/no-userss.svg";
-import { BsEnvelope, BsAlarm, BsStopFill, BsArrowRight } from "react-icons/bs";
+import { BsEnvelope, BsAlarm, BsArrowRight } from "react-icons/bs";
 import MostRecent from "./MostRecent";
 import StatusSummary from "./StatusSummary";
 
