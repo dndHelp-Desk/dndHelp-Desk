@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
 import noUsers from "./images/no-userss.svg";
 import { BsEnvelope, BsAlarm, BsStopFill, BsArrowRight } from "react-icons/bs";
-import Calendar from "./Calendar";
-import SummaryPie from "./SummaryPie";
+import MostRecent from "./MostRecent";
+import StatusSummary from "./StatusSummary";
 
-const Main = () => {
+const Home = () => {
   const location = useLocation();
   const todoList = useSelector((state) => state.UserInfo.toDo);
   const allMembers = useSelector((state) => state.UserInfo.allMembers);
@@ -70,15 +70,13 @@ const Main = () => {
   //Loop Through All Users ================
   const users =
     allMembers.length >= 1 &&
-    allMembers
-      .filter((user) => user.access === "agent")
-      .map((user) => {
+    allMembers.map((user) => {
         return (
           <div
             key={user.id}
-            className="w-full snap_child h-13 rounded-lg dark:bg-slate-800 bg-white flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-200"
+            className="w-full snap_child h-13 rounded-lg dark:bg-slate-800 bg-white flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-200 shadow-sm"
           >
-            <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
+            <div className="h-10 w-10 rounded-lg border-2 p-[2px] dark:border-slate-500 border-slate-600 relative">
               <img
                 src={
                   user.photoUrl !== null && user.photoUrl !== ""
@@ -86,22 +84,24 @@ const Main = () => {
                     : defaultProfile
                 }
                 alt="profile"
-                className="object-cover w-full h-full object-center rounded-lg"
+                className="object-cover w-full h-full object-center rounded-md"
               />
+              <div
+                className={`absolute h-3 w-3 border-2 border-white dark:border-slate-800 rounded-full right-[-0.4rem] top-[-0.2rem] ${
+                  user.status === "available"
+                    ? "bg-green-600"
+                    : user.status === "unavailable"
+                    ? "bg-red-600"
+                    : "bg-yellow-600"
+                }`}
+              ></div>
             </div>
             <h3 className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-800 w-36">
               <abbr title={user.name}>{user.name}</abbr>
             </h3>
-            <h3
-              className={`text-[0.68rem] flex items-center space-x-1 ${
-                user.status === "available"
-                  ? "text-green-600"
-                  : user.status === "unavailable"
-                  ? "text-red-600"
-                  : "text-yellow-600"
-              } capitalize`}
-            >
-              <BsStopFill /> <span>{user.status}</span>
+            <h3 className="text-xs font-bold uppercase flex justify-end flex-[2] space-x-1 dark:text-slate-400 text-slate-800">
+              <span>{filteredTickets.length >= 1 && filteredTickets.filter(ticket=>ticket.agent_name === user.name).length}</span>
+              <small>Tickets</small>
             </h3>
           </div>
         );
@@ -117,19 +117,21 @@ const Main = () => {
       <div className="grid gap-4 place-content-center pb-4 h-fit">
         <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**Top 5 Categories  ========================= */}
-          <div className="col-span-1 h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl overflow-hidden p-4 shadow">
-            <h2 className="dark:text-slate-300 text-slate-900 text-lg text-center font-bold capitalize">
-              Top 5 Categories
-            </h2>
-            <p className="text-center text-xs text-slate-700 dark:text-slate-400">
-              Actual figures can be found on the reports page.
-            </p>
-            <div className="flex flex-col mt-2 w-full justify-center gap-2 overflow-hidden rounded-lg px-4">
+          <div className="col-span-1 h-[20rem] flex flex-col justify-between dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl overflow-hidden p-4 py-6 shadow">
+            <div className="w-full">
+              <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold uppercase">
+                Top 5 Categories
+              </h1>
+              <p className="text-center text-xs text-slate-700 dark:text-slate-400 mt-2">
+                Actual figures can be found on the reports page.
+              </p>
+            </div>
+            <div className="flex flex-col mt-2 w-full justify-center gap-1 overflow-hidden rounded-lg px-4">
               {categoriesData.length >= 1 &&
                 categoriesData.map((element, index) => {
                   return (
                     <div key={index} className="w-full">
-                      <small className="text-slate-700 dark:text-slate-400 text-xs">
+                      <small className="text-slate-700 dark:text-slate-400 text-[0.7rem]">
                         {element.name}
                       </small>
                       <div className="w-full flex items-center justify-between">
@@ -170,52 +172,30 @@ const Main = () => {
           </div>
           {/**Todo List ================================ */}
           {/* <ToDo />*/}
-          {/**Monthly Summary ================================ */}
-          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl px-4 shadow">
-            <div className="row-span-2 bg-no-repeat bg-center bg-contain border-b dark:border-slate-700 border-slate-200 flex flex-col justify-center items-center px-4 space-y-4">
-              <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold capitalize">
-                Monthly Summary
-              </h2>
-              <p className="dark:text-slate-400 text-slate-700 text-center text-sm">
-                You have{" "}
-                <span className="dark:text-slate-300 text-slate800 font-semibold">
-                  {
-                    filteredTickets.filter(
-                      (data) =>
-                        new Date(data.date).getTime() >=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            0
-                          ).getTime() &&
-                        new Date(data.date).getTime() <=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            31
-                          ).getTime()
-                    ).length
-                  }
-                </span>{" "}
-                tickets in total, to see more analytics please visit the reports
-                page. Make use of filters to get more insight.
+          {/**Tickets Per Status Summary ================================ */}
+          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl px-4 pb-4 shadow">
+            <div className="row-span-2 bg-no-repeat bg-center bg-contain flex flex-col justify-center items-center px-4">
+              <h1 className="dark:text-slate-300 text-slate-900 text-xs font-bold uppercase mt-1">
+                Tickets Per Status
+              </h1>
+              <p className="dark:text-slate-400 text-slate-700 text-center text-xs mt-2 px-2">
+                Hover your mouse on top of each slice below to see the
+                percentages, for more analytics please visit the reports page.
               </p>
             </div>
-            <div className="row-span-3 space-y-2 px-4 p-2">
-              <SummaryPie />
-            </div>
+            <StatusSummary />
           </div>
-          {/**Calendar ================================= */}
+          {/**MostRecent ================================= */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-800 bg-white  border dark:border-slate-800 border-slate-300 rounded-xl p-4 pt-3 pb-4 flex flex-col justify-between items-center shadow">
             <article className="text-center">
-              <h2 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
-                Due Dates
-              </h2>
-              <p className="text-sm font-medium dark:text-slate-400 text-slate-700">
-                Hover on top of each date to see the details.
+              <h1 className="dark:text-slate-300 text-slate-900 text-xs font-bold font-sans uppercase mt-3">
+                Recent Activities
+              </h1>
+              <p className="text-xs font-medium dark:text-slate-400 text-slate-700 mt-2">
+                Your most recent activities.
               </p>
             </article>
-            <Calendar />
+            <MostRecent />
           </div>
         </section>
 
@@ -423,21 +403,14 @@ const Main = () => {
             <div className="h-full w-full dark:bg-slate-800 bg-white rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
               {allMembers.length >= 1 && user[0].access !== "client" && (
                 <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                  <h3 className="dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">
-                    <span>All Agents</span>
-                    <span>
-                      {
-                        allMembers.filter((user) => user.access === "agent")
-                          .length
-                      }
-                    </span>
+                  <h3 className="sticky top-0 dark:bg-slate-800 bg-white z-[99] dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">
+                    <span>Members</span>
+                    <span>{allMembers.length}</span>
                   </h3>
                   {users}
                 </div>
               )}
-              {(allMembers.filter((user) => user.access === "agent").length <=
-                0 ||
-                user[0].access === "client") && (
+              {(allMembers.length <= 0 || user[0].access === "client") && (
                 <div className="h-full w-full">
                   <div className="h-full w-full rounded-lg dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-6 space-y-4">
                     <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
@@ -459,4 +432,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;

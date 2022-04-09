@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo } from "react";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillTrashFill,
@@ -9,7 +9,7 @@ import {
   BsTypeUnderline,
   BsCodeSlash,
 } from "react-icons/bs";
-import { BiPaperPlane, BiMicrophone, BiPaperclip } from "react-icons/bi";
+import { BiPaperPlane, BiMicrophone, BiImageAlt } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import {
@@ -31,6 +31,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const company_details = useSelector((state) => state.Tickets.company_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recordingFile, setFile] = useState(false);
+  const [imageAttachments, setImageArray] = useState([]);
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
   const scrollToLastMessage = useRef();
@@ -100,7 +101,8 @@ const MessageThread = ({ isChatOpen, audio }) => {
   //Send Solution send Solution ====================
   const sendSolution = () => {
     // Upload Recordings
-    recordingFile !== false && addRecording(recordingFile, `/${company_details.name}/${threadId}`);
+    recordingFile !== false &&
+      addRecording(recordingFile, `/${company_details.name}/${threadId}`);
 
     //Add ticket recording on firebase storage =============================
     resolveTicket(
@@ -220,7 +222,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
     setSolution("");
     setReply({ ...reply, message: "", status: "" });
   };
-
   //Send Reply Function ========================
   const sendReply = (e) => {
     e.preventDefault();
@@ -232,28 +233,58 @@ const MessageThread = ({ isChatOpen, audio }) => {
       reply.status !== "" &&
       reply.status !== "solved"
     ) {
-      addReply(
-        reply.message,
-        reply.message_position,
-        reply.ticket_id,
-        user[0].name,
-        user[0].email,
-        user[0].access,
-        clientName,
-        clientEmail,
-        firstMessage.length >= 1 && firstMessage[0].team
-      );
-
       //Upload File if there is one
       const storage = getStorage();
       if (attachmentArray.length >= 1) {
-        attachmentArray.forEach((file, index) => {
-          uploadBytes(ref(storage, `/${company_details.name}/${index}`), file).then(
-            (snapshot) => {
-              console.log(snapshot.downloadURL);
-            }
-          );
-        });
+        for (let i = 0; i < attachmentArray.length; i++) {
+          uploadBytes(
+            ref(storage, `/${company_details.name}/${reply.ticket_id}P${[i]}`),
+            attachmentArray[i]
+          )
+            .then((snapshot) => {
+              return getDownloadURL(snapshot.ref);
+            })
+            .then((downloadURL) => {
+              setImageArray([...imageAttachments, downloadURL]);
+              window.localStorage.setItem(
+                "url",
+                `${
+                  window.localStorage.getItem("url") === null
+                    ? downloadURL
+                    : window.localStorage.getItem("url") + ", " + downloadURL
+                }`
+              );
+            });
+
+          if (attachmentArray.length - 1 === i) {
+            addReply(
+              reply.message,
+              reply.message_position,
+              reply.ticket_id,
+              user[0].name,
+              user[0].email,
+              user[0].access,
+              clientName,
+              clientEmail,
+              firstMessage.length >= 1 && firstMessage[0].team,
+              window.localStorage.getItem("url").split(",")
+            );
+            window.localStorage.removeItem("url");
+          }
+        }
+      } else {
+        addReply(
+          reply.message,
+          reply.message_position,
+          reply.ticket_id,
+          user[0].name,
+          user[0].email,
+          user[0].access,
+          clientName,
+          clientEmail,
+          firstMessage.length >= 1 && firstMessage[0].team,
+          imageAttachments
+        );
       }
 
       //Sending Account ========================
@@ -357,6 +388,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
               ])
             );
             setReply({ ...reply, message: "", status: "" });
+            window.localStorage.removeItem("url");
           } else if (resData.status === "fail") {
             dispatch(
               updateAlert([
@@ -498,21 +530,31 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 <p>{message.message}</p>
                 {/**Image attachments if available ========================== */}
                 <div className="w-full py-2 gap-2 flex flex-wrap overflow-hidden">
-                  <label htmlFor="index" className="overflow-hidden">
-                    <input
-                      type="checkbox"
-                      name="index"
-                      id="index"
-                      className="hidden"
-                    />
-                    <div className="chatImage bg-transparent backdrop-blur-sm flex justify-center overflow-hidden">
-                      <img
-                        src="https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                        alt="attach"
-                        className="max-w-[30rem] max-h-[35rem] object-cover object-fit"
-                      />
-                    </div>
-                  </label>
+                  {message.imageAttachments &&
+                    message.imageAttachments.length >= 1 &&
+                    message.imageAttachments.map((img, index) => {
+                      return (
+                        <label
+                          key={index}
+                          htmlFor="index"
+                          className="overflow-hidden"
+                        >
+                          <input
+                            type="checkbox"
+                            name="index"
+                            id="index"
+                            className="hidden"
+                          />
+                          <div className="chatImage bg-transparent backdrop-blur-sm flex justify-center overflow-hidden border-2 border-slate-600 dark:border-slate-500">
+                            <img
+                              src={img}
+                              alt={"img" + index}
+                              className="max-w-[30rem] max-h-[35rem] object-cover object-fit"
+                            />
+                          </div>
+                        </label>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -629,9 +671,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         </span>
                       </div>
                     </div>
-                    <p className="mt-6 dark:text-slate-400 text-slate-700 capitalize border-b dark:border-slate-800 border-slate-200 p-2 text-[12px]">
-                      {firstMessage.length >= 1 && firstMessage[0].solution}
-                    </p>
+                    <div className="w-full py-2 border-b dark:border-slate-800 border-slate-200">
+                      <p className="mt-6 dark:text-slate-400 text-slate-700 capitalize p-2 text-[12px]">
+                        {firstMessage.length >= 1 && firstMessage[0].solution}
+                      </p>
                     {/**Play Recording ================================ */}
                     {(firstMessage[0].hasRecording === true ||
                       firstMessage[0].hasRecording === "true") && (
@@ -651,6 +694,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                         <code>audio</code> element.
                       </audio>
                     )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -721,42 +765,42 @@ const MessageThread = ({ isChatOpen, audio }) => {
             {/**Reply options ======================= */}
             <div className="row-span-2 h-10 px-1.5 w-full flex justify-between items-center">
               <div className="h-full flex items-center">
-                {/**Attach A file ========================================= */}
+                {/**Image file ========================================= */}
                 <abbr title="Attachment">
                   <label
-                    htmlFor="attachment"
-                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 rounded-l-md flex justify-center items-center outline-none focus:outline-none hover:opacity-80 text-slate-500 text-base"
+                    htmlFor="picture"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 rounded-l-md flex justify-center items-center outline-none focus:outline-none hover:opacity-80 text-slate-500 text-lg cursor-pointer"
                   >
-                    <BiPaperclip />
+                    <BiImageAlt />
                     <input
                       multiple
                       type="file"
-                      name="attachment"
-                      id="attachment"
+                      accept="image/*"
+                      name="picture"
+                      id="picture"
                       className="hidden"
-                      onChange={(e) => setAttachArray(e.target.files)}
+                      onChange={(e) => {
+                        setAttachArray(e.target.files);
+                      }}
                     />
                   </label>
                 </abbr>
                 {/**Upload Recordings ========================================= */}
                 <abbr title="Upload Your Recording">
                   <label
-                    htmlFor="recording"
-                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500"
+                    htmlFor="replyRecording"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500 cursor-pointer"
                   >
-                    <BiMicrophone className="text-lg" />
+                    <BiMicrophone className="text-base" />
                     <input
                       type="file"
-                      id="recording"
+                      id="replyRecording"
                       accept=".wav"
-                      name="recording"
+                      name="replyRecording"
                       title="Upload Recording"
                       onChange={(e) => {
                         setFile(e.target.files[0]);
-                        console.log(e.target);
                       }}
-
-                      onClick={()=>console.log("HI")}
                       className="outline-none focus:outline-none hidden"
                     />
                   </label>

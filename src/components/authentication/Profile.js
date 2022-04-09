@@ -87,15 +87,15 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-10 w-10 border-2 p-[2px] dark:border-slate-300 border-slate-900 rounded-xl flex justify-center items-center cursor-pointer"
+            className="h-10 w-10 border-2 p-[2px] dark:border-slate-300 border-slate-900 rounded-lg flex justify-center items-center cursor-pointer"
           >
             <img
-              className="rounded-lg bg-slate-500 h-full w-full object-cover object-center border dark:border-slate-400 border-slate-400"
+              className="rounded-md bg-slate-500 h-full w-full object-cover object-center border dark:border-slate-400 border-slate-400"
               src={photoURL}
               alt="profile"
             />
             <label
-              className={`absolute bg-[#1c105283] h-10 w-10 rounded-xl flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
+              className={`absolute bg-[#1c105283] h-10 w-10 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
               htmlFor="profile"
             >
               <BsCameraFill />
@@ -109,7 +109,7 @@ const Profile = () => {
             </label>
           </div>
           <span
-            className={`absolute h-2.5 w-2.5 rounded-full border dark:border-slate-900 border-slate-100  ${
+            className={`absolute h-3 w-3 rounded-full border-2 dark:border-slate-800 border-white  ${
               member_details.length >= 1 &&
               member_details[0].status === "available"
                 ? "bg-green-500"

@@ -87,7 +87,7 @@
   }
 
   input[type="checkbox"]:not(:checked) + .chatImage {
-    @apply h-28 w-28 rounded-lg cursor-zoom-in items-center;
+    @apply h-20 w-24 bg-slate-100 dark:bg-slate-700 rounded-md cursor-zoom-in items-center;
   }
 
   /*Tool Tip Bottom Cal*/

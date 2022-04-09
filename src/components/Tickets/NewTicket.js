@@ -9,7 +9,7 @@ import {
   BiTrash,
   BiCalendar,
   BiFile,
-  BiPaperclip,
+  BiImageAlt,
   BiX,
   BiMinus,
   BiMicrophone,
@@ -176,7 +176,10 @@ const NewTicket = ({ newTicketModal, setModal }) => {
 
     // Upload Recordings
       recordingFile &&
-      addRecording(recordingFile, `/dial_n_dine/${inputValue.ticket_id}`);
+        addRecording(
+          recordingFile,
+          `/${company_details.name}/${inputValue.ticket_id}`
+        );
 
     let dueDate = `${new Date(inputValue.date).toLocaleString()}`;
     let openDate = `${new Date().toLocaleString()}`;
@@ -856,23 +859,25 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   <BiTrash />
                 </span>
               </abbr>
-              {/**Attach A file ========================================= */}
-              <abbr title="Attachment">
-                <label
-                  htmlFor="attachment"
-                  className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded-xl text-slate-600 dark:text-slate-400"
-                >
-                  <BiPaperclip />
-                  <input
-                    type="file"
-                    name="attachment"
-                    id="attachment"
-                    className="hidden"
-                  />
-                </label>
-              </abbr>
             </div>
             <div className="flex items-center space-x-2">
+              {/**Attach an Image ========================================= */}
+              <abbr title="Upload Your Image">
+                <div className="w-8 h-8 border border-slate-300 dark:border-slate-600 rounded-xl flex justify-center items-center">
+                  <label
+                    htmlFor="image"
+                    className="w-full h-full flex justify-center items-center text-base text-slate-600 dark:text-slate-400 cursor-pointer"
+                  >
+                    <BiImageAlt />
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </abbr>
               {/**Templates ========================================= */}
               <div
                 id="email"

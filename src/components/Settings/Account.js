@@ -139,7 +139,7 @@ const Account = () => {
           <h3 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide">
             About Me
           </h3>
-          <p className="dark:text-slate-400 text-slate-700 text-sm capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden overflow-y-scroll h-[5rem] p-2 mt-2">
+          <p className="dark:text-slate-400 text-slate-700 text-xs capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden overflow-y-scroll h-[5rem] p-2 mt-2">
             {member_details.length !== undefined
               ? member_details[0].bio
               : "Write some details about yourself here ... Like your ambitionss, aspirations, profession and so on , might be useful for your collegues 😉"}

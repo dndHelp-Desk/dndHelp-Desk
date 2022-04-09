@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { updateUser, addAllMembers, setToDo } from "../../store/UserSlice";
 import {
   addAllTickets,
@@ -26,7 +26,6 @@ import {
   enableIndexedDbPersistence,
 } from "firebase/firestore";
 
-
 // init services for firestore =========================
 const db = getFirestore();
 
@@ -35,7 +34,7 @@ enableIndexedDbPersistence(db, { experimentalTabSynchronization: true });
 let org = store.getState().UserInfo.company_name;
 
 // collection ref
-let membersRef =org && collection(db, `companies/${org}/members`);
+let membersRef = org && collection(db, `companies/${org}/members`);
 let ticketsRef = org && collection(db, `companies/${org}/tickets`);
 let contactsRef = org && collection(db, `companies/${org}/contacts`);
 let settingsRef = org && collection(db, `companies/${org}/settings`);
@@ -257,7 +256,8 @@ export const addReply = (
   from,
   r_name,
   r_email,
-  team
+  team,
+  imageAttachments
 ) => {
   addDoc(ticketsRef, {
     date: new Date().toLocaleString(),
@@ -272,6 +272,7 @@ export const addReply = (
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     readStatus: "delivered",
     team: team,
+    imageAttachments: imageAttachments,
   });
 };
 
@@ -340,7 +341,6 @@ const TicketsnUserData = () => {
   const currentUser = getAuth().currentUser;
   const member_details = useSelector((state) => state.UserInfo.member_details);
 
-
   //Data Loading =====================================
   useEffect(() => {
     return (
@@ -349,7 +349,9 @@ const TicketsnUserData = () => {
         onSnapshot(membersRef, (snapshot) => {
           dispatch(
             addAllMembers(
-              snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+              snapshot.docs
+                .map((doc) => ({ ...doc.data(), id: doc.id }))
+                .sort((a, b) => (a.name < b.name ? -1 : 1))
             )
           );
         }),

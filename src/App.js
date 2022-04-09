@@ -45,7 +45,7 @@ const App = () => {
       <BrowserRouter>
         <Suspense
           fallback={
-            <div className="h-screen w-screen bg-slate-900 gap-4 flex flex-col items-center justify-center">
+            <div className="h-screen w-screen bg-slate-500 gap-4 flex flex-col items-center justify-center">
               {/* <!--card--> */}
               <div className="w-64 bg-slate-200 rounded shadow-2xl">
                 {/* <!--image--> */}

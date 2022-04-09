@@ -15,6 +15,7 @@ const initialState = {
   categories: [],
   settings: [],
   unread:[],
+  imageAttachments:[],
   filteredTickets: [],
   frequentlyAsked: [],
 };
@@ -41,16 +42,19 @@ export const TicketsSlice = createSlice({
     loadAccounts: (state, action) => {
       state.email_accounts = action.payload;
     },
+    setImageArray: (state, action) => {
+      state.imageAttachments = action.payload;
+    },
     loadTemplates: (state, action) => {
       state.email_templates = action.payload;
     },
     setUnread: (state, action) => {
       state.unread = action.payload;
     },
-    setCategories:(state,action)=>{
-      state.categories = action.payload
+    setCategories: (state, action) => {
+      state.categories = action.payload;
     },
-    setCompanyDetails:(state,action)=>{
+    setCompanyDetails: (state, action) => {
       state.company_details = action.payload;
     },
     updateFilteredTickets: (state, action) => {
@@ -70,7 +74,7 @@ export const {
   loadFrequentlyAsked,
   loadTemplates,
   updateFilteredTickets,
-  setUnread,
+  setUnread,setImageArray,
   loadAccounts,
   setCategories,
   setCompanyDetails,
