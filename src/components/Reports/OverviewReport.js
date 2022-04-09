@@ -85,12 +85,12 @@ const OverviewReport = ({ data }) => {
 
   //Component =============================
   return (
-    <div className="w-full rounded-xl grid grid-cols-3 gap-4">
+    <div className="w-full rounded-xl grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl shadow">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
           Tickets Statistics
         </h2>
-        <div className="mt-6 flex space-x-4 px-2 h-14 w-full justify-between">
+        <div className="mt-6 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
           <div className="dark:text-slate-300 text-slate-700">
             <h4 className="text-base font-semibold text-center uppercase">
               {data.length}
@@ -167,14 +167,14 @@ const OverviewReport = ({ data }) => {
             by making use of filters. You can find your current satisfaction
             ratings below.
           </p>
-          <div className="|">
+          <div className="">
             <h4 className="text-center dark:text-slate-300 text-slate-700 font-semibold text-sm">
               {ratings !== "NaN" ? ratings : "0.0"}%
             </h4>
-            <div className="flex w-full justify-center items-center text-2xl border-b border-slate-300 dark:border-slate-700">
+            <div className="flex w-full justify-center items-center text-2xl">
               <span
                 className={`${
-                  ratings > 0
+                  ratings > 20
                     ? "text-yellow-600"
                     : "text-slate-700 dark:text-slate-300"
                 }`}
@@ -183,7 +183,7 @@ const OverviewReport = ({ data }) => {
               </span>{" "}
               <span
                 className={`${
-                  ratings > 51
+                  ratings > 40
                     ? "text-yellow-600"
                     : "text-slate-700 dark:text-slate-300"
                 }`}
@@ -192,7 +192,7 @@ const OverviewReport = ({ data }) => {
               </span>{" "}
               <span
                 className={`${
-                  ratings > 80
+                  ratings > 60
                     ? "text-yellow-600"
                     : "text-slate-700 dark:text-slate-300"
                 }`}
@@ -201,7 +201,7 @@ const OverviewReport = ({ data }) => {
               </span>{" "}
               <span
                 className={`${
-                  ratings > 90
+                  ratings > 80
                     ? "text-yellow-600"
                     : "text-slate-700 dark:text-slate-300"
                 }`}
@@ -210,7 +210,7 @@ const OverviewReport = ({ data }) => {
               </span>{" "}
               <span
                 className={`${
-                  ratings > 91
+                  ratings > 95
                     ? "text-yellow-600"
                     : "text-slate-700 dark:text-slate-300"
                 }`}

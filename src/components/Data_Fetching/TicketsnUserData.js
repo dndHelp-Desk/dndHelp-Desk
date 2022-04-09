@@ -301,7 +301,8 @@ export const addTicket = (
   c_email,
   c_number,
   team,
-  hasRecording
+  hasRecording,
+  imageAttachments
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
@@ -332,6 +333,7 @@ export const addTicket = (
     assignee: "",
     assigner: "",
     team: team,
+    imageAttachments: imageAttachments,
   });
 };
 

@@ -31,7 +31,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const company_details = useSelector((state) => state.Tickets.company_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
   const [recordingFile, setFile] = useState(false);
-  const [imageAttachments, setImageArray] = useState([]);
   const user = useSelector((state) => state.UserInfo.member_details);
   const dispatch = useDispatch();
   const scrollToLastMessage = useRef();
@@ -222,9 +221,18 @@ const MessageThread = ({ isChatOpen, audio }) => {
     setSolution("");
     setReply({ ...reply, message: "", status: "" });
   };
+  
   //Send Reply Function ========================
   const sendReply = (e) => {
     e.preventDefault();
+
+    //Sending Account ========================
+    let sendingAccount =
+      firstMessage.length >= 1 &&
+      email_accounts.filter(
+        (account) =>
+          account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
+      )[0];
 
     //Check if field are then send ======================
     if (
@@ -233,30 +241,18 @@ const MessageThread = ({ isChatOpen, audio }) => {
       reply.status !== "" &&
       reply.status !== "solved"
     ) {
+
       //Upload File if there is one
       const storage = getStorage();
       if (attachmentArray.length >= 1) {
-        for (let i = 0; i < attachmentArray.length; i++) {
-          uploadBytes(
-            ref(storage, `/${company_details.name}/${reply.ticket_id}P${[i]}`),
-            attachmentArray[i]
-          )
-            .then((snapshot) => {
-              return getDownloadURL(snapshot.ref);
-            })
-            .then((downloadURL) => {
-              setImageArray([...imageAttachments, downloadURL]);
-              window.localStorage.setItem(
-                "url",
-                `${
-                  window.localStorage.getItem("url") === null
-                    ? downloadURL
-                    : window.localStorage.getItem("url") + ", " + downloadURL
-                }`
-              );
-            });
-
-          if (attachmentArray.length - 1 === i) {
+        uploadBytes(
+          ref(storage, `/${company_details.name}/${reply.ticket_id}+${new Date().getTime()}`),
+          attachmentArray[0]
+        )
+          .then((snapshot) => {
+            return getDownloadURL(snapshot.ref);
+          })
+          .then((downloadURL) => {
             addReply(
               reply.message,
               reply.message_position,
@@ -267,11 +263,10 @@ const MessageThread = ({ isChatOpen, audio }) => {
               clientName,
               clientEmail,
               firstMessage.length >= 1 && firstMessage[0].team,
-              window.localStorage.getItem("url").split(",")
+              [downloadURL]
             );
-            window.localStorage.removeItem("url");
-          }
-        }
+            setAttachArray(false);
+          });
       } else {
         addReply(
           reply.message,
@@ -283,34 +278,27 @@ const MessageThread = ({ isChatOpen, audio }) => {
           clientName,
           clientEmail,
           firstMessage.length >= 1 && firstMessage[0].team,
-          imageAttachments
+          []
         );
       }
+    }
 
-      //Sending Account ========================
-      let sendingAccount =
-        firstMessage.length >= 1 &&
-        email_accounts.filter(
-          (account) =>
-            account.name.toLowerCase() === firstMessage[0].team.toLowerCase()
-        )[0];
-
-      //Send Using Nodemailer ===================
-      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          from: `${sendingAccount.email}`,
-          company: `${company_details.name} ${sendingAccount.name}`,
-          password: sendingAccount.password,
-          host: sendingAccount.host,
-          port: sendingAccount.port,
-          email: clientEmail,
-          subject: reply.subject,
-          ticket_id: threadId,
-          email_body: `<p
+    //Send Using Nodemailer ===================
+    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        from: `${sendingAccount.email}`,
+        company: `${company_details.name} ${sendingAccount.name}`,
+        password: sendingAccount.password,
+        host: sendingAccount.host,
+        port: sendingAccount.port,
+        email: clientEmail,
+        subject: reply.subject,
+        ticket_id: threadId,
+        email_body: `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
     Hi ${clientName},
   </p>
@@ -372,36 +360,35 @@ const MessageThread = ({ isChatOpen, audio }) => {
     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
     prohibited and may be unlawful.
   </p>`,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const resData = data;
-          if (resData.status === "success") {
-            dispatch(
-              updateAlert([
-                ...alerts,
-                {
-                  message: "Response Has Been Sent.",
-                  color: "bg-green-200",
-                },
-              ])
-            );
-            setReply({ ...reply, message: "", status: "" });
-            window.localStorage.removeItem("url");
-          } else if (resData.status === "fail") {
-            dispatch(
-              updateAlert([
-                ...alerts,
-                {
-                  message: "Email Failed To Send",
-                  color: "bg-red-200",
-                },
-              ])
-            );
-          }
-        });
-    }
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const resData = data;
+        if (resData.status === "success") {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Response Has Been Sent.",
+                color: "bg-green-200",
+              },
+            ])
+          );
+          setReply({ ...reply, message: "", status: "" });
+          setAttachArray(false);
+        } else if (resData.status === "fail") {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Email Failed To Send",
+                color: "bg-red-200",
+              },
+            ])
+          );
+        }
+      });
 
     //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
     if (reply.status === "solved") {
@@ -536,13 +523,13 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       return (
                         <label
                           key={index}
-                          htmlFor="index"
+                          htmlFor={img}
                           className="overflow-hidden"
                         >
                           <input
                             type="checkbox"
-                            name="index"
-                            id="index"
+                            name={img}
+                            id={img}
                             className="hidden"
                           />
                           <div className="chatImage bg-transparent backdrop-blur-sm flex justify-center overflow-hidden border-2 border-slate-600 dark:border-slate-500">
@@ -604,17 +591,17 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       {firstMessage.length >= 1 && firstMessage[0].fcr}{" "}
                     </li>
                     <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b>Complainant Name : </b>
+                      <b>Customer's Name : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].complainant_name}{" "}
                     </li>
                     <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b>Complainant Number : </b>
+                      <b>Customer's Number : </b>
                       {firstMessage.length >= 1 &&
                         firstMessage[0].complainant_number}{" "}
                     </li>
                     <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b>Complainant Email : </b>
+                      <b>Customer's Email : </b>
                       <span className="lowercase">
                         {firstMessage.length >= 1 &&
                           firstMessage[0].complainant_email}{" "}
@@ -675,25 +662,25 @@ const MessageThread = ({ isChatOpen, audio }) => {
                       <p className="mt-6 dark:text-slate-400 text-slate-700 capitalize p-2 text-[12px]">
                         {firstMessage.length >= 1 && firstMessage[0].solution}
                       </p>
-                    {/**Play Recording ================================ */}
-                    {(firstMessage[0].hasRecording === true ||
-                      firstMessage[0].hasRecording === "true") && (
-                      <audio
-                        id="rec"
-                        controls
-                        className="h-[2rem] w-full max-w-[18rem] mt-2 "
-                        src={audio}
-                        type="audio/wav"
-                        preload="metadata"
-                      >
-                        <source src={audio} type="audio/ogg" />
-                        <source src={audio} type="audio/mpeg" />
-                        <source src={audio} type="audio/wav" />
-                        <source src={audio} type="audio/mp3" />
-                        Your browser does not support the
-                        <code>audio</code> element.
-                      </audio>
-                    )}
+                      {/**Play Recording ================================ */}
+                      {(firstMessage[0].hasRecording === true ||
+                        firstMessage[0].hasRecording === "true") && (
+                        <audio
+                          id="rec"
+                          controls
+                          className="h-[2rem] w-full max-w-[18rem] mt-2 "
+                          src={audio}
+                          type="audio/wav"
+                          preload="metadata"
+                        >
+                          <source src={audio} type="audio/ogg" />
+                          <source src={audio} type="audio/mpeg" />
+                          <source src={audio} type="audio/wav" />
+                          <source src={audio} type="audio/mp3" />
+                          Your browser does not support the
+                          <code>audio</code> element.
+                        </audio>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -773,7 +760,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
                   >
                     <BiImageAlt />
                     <input
-                      multiple
                       type="file"
                       accept="image/*"
                       name="picture"
@@ -852,9 +838,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                     className="w-28 h-8 pt-2 rounded-r-md border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
                   >
                     <option className="p-2" value={reply.status}>
-                      {firstMessage.length >= 1 && reply.status !== ""
-                        ? firstMessage[0].status
-                        : "Status"}
+                      Status
                     </option>
                     <option className="p-2" value="open">
                       open
@@ -873,7 +857,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
               </div>
               <div className="flex space-x-2 items-center">
                 <button
-                  onClick={() => lastMessage()}
                   type="submit"
                   className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700  rounded-md text-lg p-2 px-4 font-semibold  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm"
                 >

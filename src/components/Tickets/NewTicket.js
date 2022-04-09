@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import DueDate from "./DueDate";
 import { useSelector, useDispatch } from "react-redux";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addTicket } from "./../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../store/NotificationsSlice";
 import useClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
@@ -24,6 +25,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   const templates = useSelector((state) => state.Tickets.email_templates);
   const member_details = useSelector((state) => state.UserInfo.member_details);
   const alerts = useSelector((state) => state.NotificationsData.alerts);
+  const [attachmentArray, setAttachArray] = useState(false);
   const [recepient, setRecipient] = useState("");
   const [searchResults, setResults] = useState(false);
   const [showOpenedTickets, setShowOpen] = useState(true);
@@ -175,11 +177,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
     xhr.send(body);*/
 
     // Upload Recordings
-      recordingFile &&
-        addRecording(
-          recordingFile,
-          `/${company_details.name}/${inputValue.ticket_id}`
-        );
+    recordingFile &&
+      addRecording(
+        recordingFile,
+        `/${company_details.name}/${inputValue.ticket_id}`
+      );
 
     let dueDate = `${new Date(inputValue.date).toLocaleString()}`;
     let openDate = `${new Date().toLocaleString()}`;
@@ -220,29 +222,71 @@ const NewTicket = ({ newTicketModal, setModal }) => {
       sendingAccount !== undefined &&
       inputValue.branch_company !== "" &&
       member_details.id !== false &&
-      (allTickets.length >= 1 &&
+      allTickets.length >= 1 &&
       allTickets.filter((ticket) => ticket.ticket_id === inputValue.ticket_id)
-        .length <= 0)
+        .length <= 0
     ) {
-      //Open New Ticket ========================
-      addTicket(
-        inputValue.recipient_name,
-        inputValue.recipient_email,
-        inputValue.agent,
-        inputValue.priority,
-        inputValue.category,
-        inputValue.branch_company,
-        inputValue.message,
-        inputValue.state,
-        inputValue.date,
-        inputValue.ticket_id,
-        inputValue.agent_email,
-        inputValue.complainant_name,
-        inputValue.complainant_email,
-        inputValue.complainant_number,
-        inputValue.send_as,
-        `${recordingFile && inputValue.state === "solved" ? true : false}`
-      );
+      //Upload File if there is one
+      const storage = getStorage();
+      if (attachmentArray.length >= 1) {
+        uploadBytes(
+          ref(
+            storage,
+            `/${company_details.name}/${
+              inputValue.ticket_id
+            }+${new Date().getTime()}`
+          ),
+          attachmentArray[0]
+        )
+          .then((snapshot) => {
+            return getDownloadURL(snapshot.ref);
+          })
+          .then((downloadURL) => {
+            //Open New Ticket ========================
+            addTicket(
+              inputValue.recipient_name,
+              inputValue.recipient_email,
+              inputValue.agent,
+              inputValue.priority,
+              inputValue.category,
+              inputValue.branch_company,
+              inputValue.message,
+              inputValue.state,
+              inputValue.date,
+              inputValue.ticket_id,
+              inputValue.agent_email,
+              inputValue.complainant_name,
+              inputValue.complainant_email,
+              inputValue.complainant_number,
+              inputValue.send_as,
+              `${
+                recordingFile && inputValue.state === "solved" ? true : false
+              }`,
+              [downloadURL]
+            );
+            setAttachArray(false)
+          });
+      } else {
+        addTicket(
+          inputValue.recipient_name,
+          inputValue.recipient_email,
+          inputValue.agent,
+          inputValue.priority,
+          inputValue.category,
+          inputValue.branch_company,
+          inputValue.message,
+          inputValue.state,
+          inputValue.date,
+          inputValue.ticket_id,
+          inputValue.agent_email,
+          inputValue.complainant_name,
+          inputValue.complainant_email,
+          inputValue.complainant_number,
+          inputValue.send_as,
+          `${recordingFile && inputValue.state === "solved" ? true : false}`,
+          []
+        );
+      }
 
       //Send Email Using Nodemailer ===================
       fetch("https://dndhelp-desk-first.herokuapp.com/send", {
@@ -373,6 +417,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                 },
               ])
             );
+            setAttachArray(false);
           } else if (resData.status === "fail") {
             dispatch(
               updateAlert([
@@ -874,6 +919,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                       name="image"
                       id="image"
                       className="hidden"
+                      onChange={(e) => {
+                        setAttachArray(e.target.files);
+                      }}
                     />
                   </label>
                 </div>
