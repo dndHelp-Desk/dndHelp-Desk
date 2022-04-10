@@ -128,7 +128,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] custom-shadow border dark:border-[#33415596] border-slate-300 relative rounded-l-md dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-[#33415596] border-slate-300 relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -243,7 +243,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
               {/**Change Ticket Priority ========================================== */}
               <select
                 onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="h-8 w-28 rounded-md p-2 dark:bg-[#192235] bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700"
+                className="h-8 w-28 rounded p-2 dark:bg-[#192235] bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700"
               >
                 <option className="p-2" value="low">
                   {ticket.priority}
@@ -264,7 +264,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             </div>
             {/**Ticket Status ========================================== */}
             <div className="w-[10rem] flex items-baseline justify-end">
-              <div className="h-8 w-28 rounded-md p-2 dark:bg-inherit dark:border-slate-700 border-slate-300 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700 flex justify-between">
+              <div className="h-8 w-28 rounded p-2 dark:bg-inherit dark:border-slate-700 border-slate-300 uppercase text-[0.6rem] font-semibold dark:text-slate-400 text-slate-700 flex justify-between">
                 <span>{ticket.status}</span>
                 {/**Indicate if ticket has recording ============== */}
                 {ticket.hasRecording === true ||
@@ -294,7 +294,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         {/**Back To Main List On Small Screens ====================== */}
         <div
           onClick={() => setChat(false)}
-          className={`dark:text-slate-400 text-slate-800 font-bold mt-2 py-1 h-2 w-full text-xl hover:opacity-80 rounded-md flex lg:hidden items-center space-x-1 cursor-pointer ${
+          className={`dark:text-slate-400 text-slate-800 font-bold mt-2 py-1 h-2 w-full text-xl hover:opacity-80 rounded flex lg:hidden items-center space-x-1 cursor-pointer ${
             !isChatOpen && "hidden"
           }`}
         >
@@ -336,7 +336,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             
             {/**Pagination ================================ */}
             <div className="h-[10%] md:h-[3.2rem] w-full bottom-0 flex flex-col justify-center items-center">
-              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded-md border dark:border-[#33415596] border-slate-300">
+              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-[#33415596] border-slate-300">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);

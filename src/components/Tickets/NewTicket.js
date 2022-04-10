@@ -466,14 +466,14 @@ const NewTicket = ({ newTicketModal, setModal }) => {
   //Component =====================================
   return (
     <div
-      className={`fixed top-[-0.5rem] left-[-0.5rem] bottom-[-0.5rem] right-[-0.5rem] bg-[#030d2769] rounded-lg justify-center ${
+      className={`fixed top-[-0.5rem] left-[-0.5rem] bottom-[-0.5rem] right-[-0.5rem] bg-[#030d2769] rounded-md justify-center ${
         newTicketModal === true ? "flex z-[999]" : "hidden"
       }`}
     >
       <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-screen max-h-[45rem] flex justify-end px-6 pt-[6.8rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] min-h-[20rem] h-[20rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-xl overflow-hidden ${
+          className={`w-[98%] lg:w-[58%] min-h-[20rem] h-[20rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1`}
         >
@@ -671,9 +671,9 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   </select>
                 </label>
               </div>
-              {/**Complaintant Details ============================= */}
+              {/**Client Details ============================= */}
               <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
-                {/**Complainat Email  ======================================== */}
+                {/**Client Email  ======================================== */}
                 <label
                   htmlFor="email"
                   autoComplete="off"
@@ -687,7 +687,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     name="email"
                     value={inputValue.complainant_email}
                     autoComplete="nope"
-                    placeholder="Complainant Email"
+                    placeholder="Customer's Email"
                     onChange={(e) =>
                       setValues({
                         ...inputValue,
@@ -786,11 +786,11 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                   </ul>
                 </label>
               </div>
-              {/**Complainant Name And Send As ============================= */}
+              {/**Customer's Name And Send As ============================= */}
               <div className="w-full md:h-10 flex flex-col md:flex-row md:justify-between md:items-center">
                 {/**Complainant Name =========================================== */}
                 <label
-                  htmlFor="email"
+                  htmlFor="name"
                   className="md:w-[48%] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
                 >
                   <span>Name :</span>
@@ -799,7 +799,7 @@ const NewTicket = ({ newTicketModal, setModal }) => {
                     id="name"
                     name="name"
                     type="text"
-                    placeholder="Complainant Name ..."
+                    placeholder="Customer's Name ..."
                     value={inputValue.complainant_name}
                     required={true}
                     onChange={(e) =>

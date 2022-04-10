@@ -74,9 +74,9 @@ const Home = () => {
         return (
           <div
             key={user.id}
-            className="w-full snap_child h-13 rounded-lg dark:bg-slate-800 bg-white flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-200 shadow-sm"
+            className="w-full snap_child h-13 rounded-md dark:bg-slate-800 bg-white flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-200 shadow-sm"
           >
-            <div className="h-10 w-10 rounded-lg border-2 p-[2px] dark:border-slate-500 border-slate-600 relative">
+            <div className="h-10 w-10 relative">
               <img
                 src={
                   user.photoUrl !== null && user.photoUrl !== ""
@@ -84,10 +84,10 @@ const Home = () => {
                     : defaultProfile
                 }
                 alt="profile"
-                className="object-cover w-full h-full object-center rounded-md"
+                className="object-cover w-full h-full object-center rounded-md border-2 dark:border-slate-500 border-slate-600"
               />
               <div
-                className={`absolute h-3 w-3 border-2 border-white dark:border-slate-800 rounded-full right-[-0.4rem] top-[-0.2rem] ${
+                className={`absolute h-2.5 w-2.5 border-2 border-white dark:border-slate-800 rounded-full right-[-0.25rem] top-[-0.15rem] ${
                   user.status === "available"
                     ? "bg-green-600"
                     : user.status === "unavailable"
@@ -112,12 +112,12 @@ const Home = () => {
     <div
       className={`${
         location.pathname === "/app" ? "grid" : "hidden"
-      } dark:bg-transparent bg-transparent w-[90%] md:w-full min-h-screen container 2xl:w-[72rem] mt-4 select-text`}
+      } dark:bg-transparent bg-transparent w-[95%] 2xl:w-[75rem] min-h-screen mt-4 select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit">
-        <section className="row-span-3 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <section className="row-span-3 rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**Top 5 Categories  ========================= */}
-          <div className="col-span-1 h-[20rem] flex flex-col justify-between dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl overflow-hidden p-4 py-6 shadow">
+          <div className="col-span-1 h-[20rem] flex flex-col justify-between dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-md overflow-hidden p-4 py-6 shadow">
             <div className="w-full">
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold uppercase">
                 Top 5 Categories
@@ -173,7 +173,7 @@ const Home = () => {
           {/**Todo List ================================ */}
           {/* <ToDo />*/}
           {/**Tickets Per Status Summary ================================ */}
-          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-xl px-4 pb-4 shadow">
+          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-md px-4 pb-4 shadow">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain flex flex-col justify-center items-center px-4">
               <h1 className="dark:text-slate-300 text-slate-900 text-xs font-bold uppercase mt-1">
                 Tickets Per Status
@@ -186,7 +186,7 @@ const Home = () => {
             <StatusSummary />
           </div>
           {/**MostRecent ================================= */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-800 bg-white  border dark:border-slate-800 border-slate-300 rounded-xl p-4 pt-3 pb-4 flex flex-col justify-between items-center shadow">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-800 bg-white  border dark:border-slate-800 border-slate-300 rounded-md p-4 pt-3 pb-4 flex flex-col justify-between items-center shadow">
             <article className="text-center">
               <h1 className="dark:text-slate-300 text-slate-900 text-xs font-bold font-sans uppercase mt-3">
                 Recent Activities
@@ -200,10 +200,10 @@ const Home = () => {
         </section>
 
         {/**Others  ====================================== */}
-        <div className="w-full rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3 shadow">
+        <div className="w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3 shadow">
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 flex justify-center items-center">
-            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-lg p-2">
+            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-md p-2">
               <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
                 <BsEnvelope />
               </div>
@@ -215,7 +215,7 @@ const Home = () => {
           </div>
           {/**Reminders  Count ====================== */}
           <div className="col-span-1 flex justify-center items-center">
-            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-lg p-2">
+            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-md p-2">
               <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
                 <BsAlarm />
               </div>
@@ -273,35 +273,37 @@ const Home = () => {
         </div>
 
         {/**Bottom Half ================================ */}
-        <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
-          <div className="col-span-2 w-full rounded-xl grid grid-cols-2 md:grid-cols-7 gap-4">
+        <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
+          <div className="col-span-2 w-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Quotes ==================================== */}
-            <div className="col-span-5 h-[16rem] rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden relative shadow">
+            <div className="col-span-5 h-[16rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden relative shadow">
               <img
                 src="https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
                 alt="background"
-                className="rounded-xl h-full w-full object-center object-cover"
+                className="rounded-md h-full w-full object-center object-cover"
               />
-              <div className="absolute top-4 left-4 right-4 bottom-4 rounded-xl bg-[#0f172ac9]">
-                <article className="h-full w-full p-6 flex flex-col justify-between">
-                  <h2 className="text-slate-100 text-2xl font-bold">
+              <div className="absolute top-4 left-4 right-4 bottom-4 rounded-md bg-[#0f172ac9] overflow-hidden">
+                <article className="h-[16rem]w-full p-6 flex flex-col justify-between overflow-hidden">
+                  <h2 className="text-slate-100 text-xl sm:text-2xl font-bold">
                     Customer Service Tip
                   </h2>
                   <p className="text-slate-100 text-sm font-medium">
                     Excellence in anything increases your potential in
                     everything. There are few positions for which this applies
                     more than support — clarity in communication is paramount
-                    because it affects everything you do. Styling affects
-                    communication. Tone affects communication. Common mistakes
-                    include using passive-aggressive language (“Actually…”) or
-                    confusing customers with slang, colloquialisms, or technical
-                    jargon.
+                    because it affects everything you do.<span className="hidden sm:flex"> Styling affects
+                    communication.
+                       Tone affects communication. Common mistakes
+                      include using passive-aggressive language (“Actually…”) or
+                      confusing customers with slang, colloquialisms, or technical
+                      jargon.
+                    </span>
                   </p>
                 </article>
               </div>
             </div>
             {/**Progress ============================== */}
-            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5 shadow">
+            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5 shadow">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-bold font-sans capitalize">
                 Progress
               </h3>
@@ -399,8 +401,8 @@ const Home = () => {
             </article>
           </div>
           {/**Online Users ================================ */}
-          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 shadow">
-            <div className="h-full w-full dark:bg-slate-800 bg-white rounded-xl flex flex-col place-items-center p-4 py-2 overflow-hidden">
+          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 shadow">
+            <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-4 py-2 overflow-hidden">
               {allMembers.length >= 1 && user[0].access !== "client" && (
                 <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                   <h3 className="sticky top-0 dark:bg-slate-800 bg-white z-[99] dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">

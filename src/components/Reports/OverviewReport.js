@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import ReactECharts from "echarts-for-react";
+import {FaChartBar} from "react-icons/fa"
 import { useSelector } from "react-redux";
 import Pie from "./Pie";
 
@@ -85,8 +86,8 @@ const OverviewReport = ({ data }) => {
 
   //Component =============================
   return (
-    <div className="w-full rounded-xl grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl shadow">
+    <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md shadow">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
           Tickets Statistics
         </h2>
@@ -130,7 +131,7 @@ const OverviewReport = ({ data }) => {
                       .split(".")[0]
                   : 0
               }`}
-              <span className="text-xs">hrs</span>{" "}
+              <span className="text-xs">hr</span>{" "}
               {`${
                 solvedTickets.length >= 1
                   ? Number(
@@ -148,7 +149,7 @@ const OverviewReport = ({ data }) => {
                     ) % 60
                   : 0
               }`}
-              <span className="text-xs">mins</span>
+              <span className="text-xs">min</span>
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
               AV Age of Query
@@ -159,19 +160,19 @@ const OverviewReport = ({ data }) => {
           className="flex flex-col mt-2 h-44 space-y-2 w-full overflow-hidden rounded-md 
         p-2"
         >
-          <h3 className="text-xs text-center dark:text-slate-300 text-slate-700 font-sans dark:font-semibold font-bold uppercase tracking-normal">
-            Welcome back, {user[0].name && user[0].name.split(" ")[0]} 🖐️.
+          <h3 className="text-xs dark:text-slate-300 text-slate-700 font-sans dark:font-semibold font-bold uppercase tracking-normal flex items-center space-x-2">
+            <span>Welcome back, {user[0].name && user[0].name.split(" ")[0]}</span> <FaChartBar className="text-blue-700 text-lg"/>
           </h3>
-          <p className="text-xs text-center text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             More features will be added soon in the meantime explore the reports
             by making use of filters. You can find your current satisfaction
             ratings below.
           </p>
           <div className="">
-            <h4 className="text-center dark:text-slate-300 text-slate-700 font-semibold text-sm">
+            <h4 className="dark:text-slate-300 text-slate-700 font-semibold text-sm">
               {ratings !== "NaN" ? ratings : "0.0"}%
             </h4>
-            <div className="flex w-full justify-center items-center text-2xl">
+            <div className="flex w-full items-center text-2xl">
               <span
                 className={`${
                   ratings > 20
@@ -222,7 +223,7 @@ const OverviewReport = ({ data }) => {
         </div>
       </div>
 
-      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-xl shadow flex flex-col justify-center gap-2 px-4 h-[20rem] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md shadow flex flex-col justify-center gap-2 px-4 h-[20rem] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
           Tickets Per Category
         </h2>
@@ -230,7 +231,7 @@ const OverviewReport = ({ data }) => {
       </div>
 
       {/**Traffic trend chart ======================== */}
-      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-xl shadow">
+      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md shadow">
         <div className="h-full w-full overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
@@ -238,7 +239,7 @@ const OverviewReport = ({ data }) => {
             </h2>
             <select
               onChange={(e) => setOption(e.target.value)}
-              className="h-8 w-20 rounded-md text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-8 w-20 rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="hour">Hourly</option>
               <option value="day">Daily</option>

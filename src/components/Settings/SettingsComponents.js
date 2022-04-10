@@ -5,7 +5,7 @@ const SettingsComponents = () => {
 
   //Component ======================
   return (
-    <div className="mt-4 container w-[90%] md:w-full 2xl:w-[72rem] min-h-screen overflow-hidden">
+    <div className="mt-4 w-[95%] 2xl:w-[75rem] min-h-screen overflow-hidden">
       {/**Main Components ============================== */}
         <Outlet />
     </div>

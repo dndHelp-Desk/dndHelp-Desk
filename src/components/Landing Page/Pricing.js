@@ -1,9 +1,11 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 import Help from "../Others/Help";
+import Footer from "./Footer";
 
 const Pricing = () => {
   const [menu, setMenu] = useState(false);
@@ -14,13 +16,13 @@ const Pricing = () => {
   //Coimponent ==============================
   return (
     <>
-      <section className="bg-slate-300 h-screen w-screen min-h-[40rem] overflow-hidden overflow-y-scroll">
+      <section className="bg-slate-300 pt-28 h-screen w-screen min-h-[40rem] overflow-hidden overflow-y-scroll">
         {/**Help Chat ============ */}
         <Help />
 
         {/**Navigation ========================== */}
-        <nav className="w-full">
-          <div className="w-full h-[4rem] z-[99] flex justify-between items-center bg-slate-300 border-b border-slate-500 px-12">
+        <nav className="w-full fixed z-[999] top-0 shadow-xl">
+          <div className="w-full h-[5rem] z-[99] flex justify-between items-center bg-[#b4c0d0] px-12">
             {/**Logo ==================== */}
             <Link
               to="/"
@@ -49,13 +51,7 @@ const Pricing = () => {
             {/**Menu Options ========================= */}
             <div className="hidden lg:flex space-x-4">
               <Link
-                to=""
-                className="text-slate-900 font-semibold text-base hover:text-blue-600 "
-              >
-                Solutions
-              </Link>
-              <Link
-                to="/getting-started"
+                to="/pricing"
                 className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
                 Pricing
@@ -64,7 +60,7 @@ const Pricing = () => {
                 to=""
                 className="text-slate-900 font-semibold text-base hover:text-blue-600 "
               >
-                Partners
+                Resources
               </Link>
               <Link
                 to=""
@@ -76,7 +72,7 @@ const Pricing = () => {
             <div className="flex space-x-2 items-center relative px-4">
               {/**Logiin button ================== */}
               <Link to="/logIn">
-                <button className="bg-slate-900 h-9 w-[7rem] rounded-md text-slate-300 font-bold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
+                <button className="bg-slate-900 h-9 w-[7rem] rounded text-slate-300 font-bold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800">
                   Log In
                 </button>
               </Link>
@@ -85,287 +81,151 @@ const Pricing = () => {
         </nav>
 
         {/** //Section =======================*/}
-        <div className="mt-12 mx-auto container">
+        <div className="my-16 mx-auto container">
           <div className="flex flex-col lg:items-center justify-center w-full">
-            <h1 className="font-semibold text-gray-800 text-3xl md:text-4xl">
+            <h1 className="font-semibold text-slate-800 text-3xl md:text-4xl">
               Get started at no cost, then pay as you go.
             </h1>
-            <p className="mt-2.5 lg:w-1/2 lg:text-center text-2xl">
+            <h2 className="mt-2.5 lg:w-1/2 lg:text-center text-2xl">
               We have several plans to showcase your Business. Get everything
               you need
-            </p>
+            </h2>
           </div>
           <div className="flex items-center justify-center w-full">
-            <div className="pt-14">
+            <div className="pt-6">
               <div className="container mx-auto">
-                <div className="xl:w-4/5 w-11/12 mx-auto mb-28">
-                  <div
-                    className="flex justify-center items-center"
-                    role="button"
-                  >
-                    <p className="mr-3 text-lg text-gray-600 font-bold">
-                      Bill Monthly
-                    </p>
-                    <div className="cursor-pointer w-12 h-6 rounded-full relative shadow-sm">
-                      <input
-                        defaultChecked
-                        type="checkbox"
-                        name="toggle"
-                        id="toggle2"
-                        className="focus:outline-none checkbox w-4 h-4 rounded-full bg-indigo-700 transition duration-150 ease-in-out absolute m-1 shadow-sm appearance-none cursor-pointer"
-                      />
-                      <label
-                        htmlFor="toggle2"
-                        className="toggle-label block w-12 h-6 overflow-hidden rounded-full border border-indigo-700 cursor-pointer"
-                      />
-                    </div>
-                    <p className="ml-3 text-lg font-normal text-gray-800">
-                      Bill Anually
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-wrap mb-12 justify-between sm:justify-center -mx-6">
-                  <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
-                    <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
-                      <h4 className="text-2xl text-indigo-700 font-semibold pb-8">
-                        Free
-                      </h4>
-                      <ul className="flex flex-col mb-6">
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            24/7 access
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            Order labs + Results
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="opacity-0 mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-400 text-base font-normal">
-                            Radiology tests + Results
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="opacity-0 mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-400 text-base font-normal">
-                            Partnership + Discounts
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="opacity-0 mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-400 text-base font-normal">
-                            Direct doctor phone number
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="opacity-0 mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-400 text-base font-normal">
-                            Specialists appoinments
-                          </p>
-                        </li>
-                      </ul>
-                      <p className="text-base text-indigo-700 relative pl-3 mb-5">
-                        <span className="font-light text-lg">$</span>
-                        <span className="text-2xl font-semibold">0</span>
-                        <span className="text-gray-600 font-light text-lg">
-                          /month
-                        </span>
-                      </p>
-                      <Link
-                        to="/company-set-up"
-                        className="w-full bg-gray-200 hover:bg-gray-300 focus:outline-none transition duration-150 ease-in-out rounded text-indigo-700 px-8 text-base font-semibold py-3"
-                      >
+                <div className="flex flex-wrap justify-center items-center gap-6 mt-6 h-[36rem]">
+                  <div className="flex-[1] h-full w-[20rem] bg-white rounded-lg space-y-4 p-4 shadow-2xl drop-shadow-md">
+                    <h3 className="text-2xl font-medium text-slate-600 font-sans">
+                      Free plan
+                    </h3>
+                    <h4 className="traciking-wide">
+                      <span className="text-xl text-slate-800 font-bold">
+                        $
+                      </span>
+                      <span className="text-3xl text-slate-800 font-bold">
+                        0{" "}
+                      </span>
+                      <span className="text-base text-slate-600 font-medium">
+                        /month
+                      </span>
+                    </h4>
+                    <ul className="text-sm text-slate-600 font-medium space-y-4">
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>Email Ticketing</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>2 Agents and 1 admin</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>Up to 500 tickets /month</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>2 Teams Max</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>Knowledge Base</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>Custom email templates</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>Contacts 100</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                        <span>Basic Reports</span>
+                      </li>
+                      <li className="flex items-center space-x-2 line-through">
+                        <BsFillCheckCircleFill className="text-slate-500 text-lg" />
+                        <span>Automated Reports</span>
+                      </li>
+                      <li className="flex items-center space-x-2 line-through">
+                        <BsFillCheckCircleFill className="text-slate-500 text-lg" />
+                        <span>Ticket merging</span>
+                      </li>
+                      <li className="flex items-center space-x-2 line-through">
+                        <BsFillCheckCircleFill className="text-slate-500 text-lg" />
+                        <span>Advanced reporting</span>
+                      </li>
+                    </ul>
+                    <Link to="/company-set-up">
+                      <div className="mt-4 w-full h-10 bg-blue-600 rounded text-slate-50 text-base font-semibold flex justify-center items-center">
                         Choose
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   </div>
-                  <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
-                    <div className="py-5 px-4 bg-indigo-700 border border-gray-200 shadow rounded-lg text-left">
-                      <h4 className="text-2xl text-white font-semibold pb-8">
-                        Basic
-                      </h4>
-                      <ul className="flex flex-col mb-6">
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-white text-base font-normal">
-                            24/7 access
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-white text-base font-normal">
-                            Order labs + Results
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-white text-base font-normal">
-                            Radiology tests + Results
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-white text-base font-normal">
-                            Partnership + Discounts
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4 opacity-0"
-                            alt="check-mark"
-                          />
-                          <p className="text-indigo-700 text-base font-normal">
-                            Direct doctor phone number
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4 opacity-0"
-                            alt="check-mark"
-                          />
-                          <p className="text-indigo-700 text-base font-normal">
-                            Specialists appoinments
-                          </p>
-                        </li>
-                      </ul>
-                      <p className="text-base text-white relative pl-3 mb-5">
-                        <span className="font-light text-lg">$</span>
-                        <span className="text-2xl font-semibold">5</span>
-                        <span className="font-light text-lg">/month/User</span>
-                      </p>
-                      <Link
-                        to="/company-set-up"
-                        className="w-full text-indigo-700 focus:outline-none transition duration-150 ease-in-out rounded bg-white hover:bg-gray-100 px-8 text-base font-semibold py-3"
-                      >
-                        Try
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
-                    <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
-                      <h4 className="text-2xl text-indigo-700 font-semibold pb-8">
-                        Pro
-                      </h4>
-                      <ul className="flex flex-col mb-6">
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            24/7 access
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            Order labs + Results
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            Radiology tests + Results
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            Partnership + Discounts
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            Direct doctor phone number
-                          </p>
-                        </li>
-                        <li className="flex items-center mb-2.5">
-                          <img
-                            src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png"
-                            className="mr-4"
-                            alt="check-mark"
-                          />
-                          <p className="text-gray-800 text-base font-normal">
-                            Specialists appoinments
-                          </p>
-                        </li>
-                      </ul>
-                      <p className="text-base text-indigo-700 relative pl-3 mb-5">
-                        <span className="font-light text-lg">$</span>
-                        <span className="text-2xl font-semibold">10</span>
-                        <span className="font-light text-lg">/month/User</span>
-                      </p>
-                      <Link
-                        to="/company-set-up"
-                        className="w-full bg-gray-200 hover:bg-gray-300 focus:outline-none transition duration-150 ease-in-out rounded text-indigo-700 px-8 text-base font-semibold py-3"
-                      >
+                  <div className="flex-[1] h-full w-[20rem] bg-blue-600 rounded-lg space-y-4 p-4 shadow-2xl drop-shadow-md">
+                    <h3 className="text-2xl font-medium text-slate-100 font-sans">
+                      Pro plan
+                    </h3>
+                    <h4 className="traciking-wide">
+                      <span className="text-xl text-slate-50 font-bold">$</span>
+                      <span className="text-3xl text-slate-50 font-bold">
+                        0.034{" "}
+                      </span>
+                      <span className="text-base text-slate-100 font-medium">
+                        /ticket
+                      </span>
+                    </h4>
+                    <ul className="text-sm text-slate-200 font-medium space-y-4">
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Omni Channel</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Unlimited Agents and admins</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Up to 500 Free then $0.034 /ticket</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>50 Teams Max</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Knowledge Base</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Custom email templates</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Unlimited contacts</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Advanced Reports - prebuilt</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Automated Reports</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Ticket merging</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                        <span>Intergrations prebuilt</span>
+                      </li>
+                    </ul>
+                    <Link to="/company-set-up">
+                      <div className="mt-4 w-full h-10 bg-slate-100 rounded text-blue-600 text-base font-semibold flex justify-center items-center">
                         Choose
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -377,6 +237,7 @@ const Pricing = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </section>
       <style>
         {` 

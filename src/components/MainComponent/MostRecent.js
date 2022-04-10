@@ -35,7 +35,7 @@ const MostRecent = () => {
   //Component =================
   return (
     <>
-      <div className="w-full h-[75%] p-2 pl-6 px-4 flex flex-col items-center select-none rounded-lg border border-slate-200 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="w-full h-[75%] p-2 pl-6 px-4 flex flex-col items-center select-none rounded border border-slate-200 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         {activities.length >= 1 &&
           activities.slice(0, 4).map((activity, index) => {
             return (

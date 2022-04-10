@@ -1,5 +1,8 @@
 import React from "react";
 import darkLogo from "./images/dndHelp-Desk_Dark.png";
+import { Link } from "react-router-dom";
+import { BsTwitter, BsLinkedin, BsYoutube } from "react-icons/bs";
+import { FaInstagramSquare } from "react-icons/fa";
 
 
 
@@ -8,47 +11,80 @@ function Footer() {
   //Component =============================
   return (
     <>
-      <footer className=" bg-linear-pink-invert pb-12 w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] overflow-hidden">
-        <div className="mx-auto container pt-2 border-t border-slate-300 flex flex-col items-center justify-center">
-          <div className="text-slate-600 flex flex-col md:items-center justify-center f-f-l pt-3">
+      <footer className=" bg-linear-pink-invert pb-12 w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] overflow-hidden border-t border-slate-400">
+        <div className="w-full grid grid-cols-7 pb-2">
+          <div className="col-span-4 flex flex-col py-2">
             {/**Logo ==================== */}
-            <div className="h-full hidden lg:flex items-center justify-center overflow-hidden pt-1">
-              <img
-                src={darkLogo}
-                alt="logo"
-                className="object-cover object-center w-[10rem]"
-              />
+            <img
+              src={darkLogo}
+              alt="logo"
+              className="object-cover object-center w-[10rem]"
+            />
+            <small className="text-slate-700 w-3/4">
+              A business absolutely devoted to Customer Service Excellence will
+              have only one worry about profits. The purpose of business is to
+              create and keep a customer.
+            </small>
+          </div>
+          <div className="col-span-1 py-2">
+            <h4 className="mt-4 font-bold text-base text-slate-800">About</h4>
+            <div className="space-y-2 pt-2 flex flex-col">
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Features</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Support</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Pricing</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Privacy policy</Link>
             </div>
-
-            <div className="my-6 text-base text-color f-f-l">
-              <ul className="md:flex items-center">
-                <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">About</li>
-                <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">
-                  Features
-                </li>
-                <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">
-                  Pricing
-                </li>
-                <li className=" md:mr-6 cursor-pointer pt-4 lg:py-0">
-                  Careers
-                </li>
-                <a
-                  href="mailto:support@dndhelp-desk.co.za"
-                  target={"_blank"}
-                  rel="noreferrer"
-                  className=" md:mr-6 cursor-pointer pt-4 lg:py-0"
-                >
-                  Help
-                </a>
-                <li className="cursor-pointer pt-4 lg:py-0">Privacy Policy</li>
-              </ul>
+          </div>
+          <div className="col-span-1 py-2">
+            <h4 className="mt-4 font-bold text-base text-slate-800">Project</h4>
+            <div className="space-y-2 pt-2 flex flex-col">
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Contibute</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Media assets</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Changelog</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Releases</Link>
             </div>
-            <div className="text-sm text-color mb-10 f-f-l">
-              <p>
-                {" "}
-                © {new Date().getFullYear()} dndHelp-Desk. All rights reserved
-              </p>
+          </div>
+          <div className="col-span-1 py-2">
+            <h4 className="mt-4 font-bold text-base text-slate-800">
+              Community
+            </h4>
+            <div className="space-y-2 pt-2 flex flex-col">
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Join Discord</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Follow on Twitter</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Email newsletter</Link>
+              <Link to="" className="text-xs text-slate-600 outline-none focus:outline-none">Github discussions</Link>
             </div>
+          </div>
+        </div>
+        <div className="w-full flex justify-between items-center p-2 border-t border-[#94a3b869] text-xs text-slate-600">
+          <p>
+            &copy; {new Date().getFullYear} dndhelp-desk. All rights reserved.
+          </p>
+          <div className="flex item-center gap-2">
+            <Link
+              to=""
+              className="text-base text-slate-600 outline-none focus:outline-none"
+            >
+              <BsTwitter />
+            </Link>
+            <Link
+              to=""
+              className="text-base text-slate-600 outline-none focus:outline-none"
+            >
+              <BsLinkedin />
+            </Link>
+            <Link
+              to=""
+              className="text-base text-slate-600 outline-none focus:outline-none"
+            >
+              <FaInstagramSquare />
+            </Link>
+            <Link
+              to=""
+              className="text-base text-slate-600 outline-none focus:outline-none"
+            >
+              <BsYoutube />
+            </Link>
           </div>
         </div>
       </footer>
