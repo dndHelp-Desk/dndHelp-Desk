@@ -288,7 +288,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
       {/**Tickets ========================================== */}
       <div
         className={`flex flex-col lg:flex-row bg-transparent rounded-xl   ${
-          isChatOpen && "space-y-4"
+          isChatOpen && "gap-4"
         } lg:space-y-0 lg:gap-2 space-x-0 ralative`}
       >
         {/**Back To Main List On Small Screens ====================== */}
@@ -303,7 +303,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
         </div>
 
         <div
-          className={`w-full lg:w-[40%] h-[40rem] flex flex-col gap-2.5 pt-1 ${
+          className={`w-full lg:w-[40%] h-[45rem] flex flex-col justify-between ${
             isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
           }`}
         >
@@ -314,10 +314,10 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             filters={filters}
             setFilters={setFilters}
           />
-          <div className="w-full h-full flex flex-col overflow-hidden">
+          <div className="w-full flex-[15] flex flex-col overflow-hidden">
             <div
               role="table"
-              className="w-full h-[90%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1"
+              className="w-full h-[92%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1"
             >
               {tickets}
               {filteredTickets.length <= 0 && (
@@ -335,7 +335,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
             </div>
             
             {/**Pagination ================================ */}
-            <div className="h-[10%] md:h-[3.2rem] w-full bottom-0 flex flex-col justify-center items-center">
+            <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
               <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-[#33415596] border-slate-300">
                 <button
                   onClick={() => {

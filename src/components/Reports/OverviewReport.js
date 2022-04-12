@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
-import ReactECharts from "echarts-for-react";
 import {FaChartBar} from "react-icons/fa"
 import { useSelector } from "react-redux";
-import Pie from "./Pie";
+import CategoryDonut from "./CategoryDonut";
+import TrafficChart from "./TrafficChart";
 
 const OverviewReport = ({ data }) => {
   const allTickets = useSelector((state) => state.Tickets.allTickets);
@@ -44,8 +44,6 @@ const OverviewReport = ({ data }) => {
   }, [allTickets, data]);
 
   //Preping daily count  Data==============
-  let toolTip = option === "day" ? "Day" : "Time";
-  let toolTipEtxra = option === "day" ? "" : ":00Hrs";
   const solvedTickets =
     data.length >= 1 &&
     data.filter((ticket) => ticket.status === "solved" && ticket.fcr === "no");
@@ -223,16 +221,16 @@ const OverviewReport = ({ data }) => {
         </div>
       </div>
 
-      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md shadow flex flex-col justify-center gap-2 px-4 h-[20rem] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md shadow flex flex-col gap-2 px-4 h-[20rem] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
           Tickets Per Category
         </h2>
-        <Pie data={data} />
+        <CategoryDonut data={data} />
       </div>
 
       {/**Traffic trend chart ======================== */}
       <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md shadow">
-        <div className="h-full w-full overflow-hidden">
+        <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-normal">
               Traffic
@@ -245,58 +243,7 @@ const OverviewReport = ({ data }) => {
               <option value="day">Daily</option>
             </select>
           </div>
-          <ReactECharts
-            style={{ height: "100%", width: "100%" }}
-            option={{
-              xAxis: {
-                show: true,
-                type: "category",
-                data: chartData.map((data) => data.name),
-                splitNumber: 1,
-                splitLine: {
-                  show: false,
-                },
-                axisLine: {
-                  show: true,
-                  lineStyle: { color: "#64748b" },
-                },
-              },
-              yAxis: {
-                show: true,
-                type: "value",
-                splitNumber: 1,
-                splitLine: {
-                  show: false,
-                },
-                axisLine: {
-                  show: true,
-                  lineStyle: { color: "#64748b" },
-                },
-                min: 0,
-              },
-              series: [
-                {
-                  data: chartData.map((data) =>
-                    (data.value / chartData.length).toFixed(0)
-                  ),
-                  type: "line",
-                  smooth: true,
-                  showSymbol: false,
-                  lineStyle: { width: 2 },
-                  areaStyle: {},
-                },
-              ],
-              tooltip: {
-                trigger: "axis",
-                formatter: `${toolTip} {b0}${toolTipEtxra} : {c0} Tickets`,
-                backgroundColor: "#94a3b8",
-                borderColor: "#94a3b8",
-                textStyle: {
-                  color: "#fff",
-                },
-              },
-            }}
-          />
+          <TrafficChart chartData={chartData}/>
         </div>
       </div>
     </div>

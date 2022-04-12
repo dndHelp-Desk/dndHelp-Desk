@@ -42,9 +42,9 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
   //Component =========================
   return (
     <div
-    role="banner"
+      role="banner"
       ref={panelRef}
-      className={`h-[20rem] w-[18rem] z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300  flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded-lg p-2 fixed right-2 top-[4.2rem] after:content-[''] after:absolute after:right-[2.8rem] after:top-[-0.8rem] after:h-6 after:w-6 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit ${
+      className={`h-[20rem] w-[18rem] z-[999] transition-all duration-500 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300  flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded-lg p-2 fixed right-2 top-[4.2rem] after:content-[''] after:absolute after:right-[2.8rem] after:top-[-0.8rem] after:h-6 after:w-6 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit ${
         openNotifications === true ? "flex" : "hidden"
       }`}
     >

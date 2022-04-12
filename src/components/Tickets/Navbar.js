@@ -152,7 +152,7 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
 
   //Component ======================
   return (
-    <nav className="flex pb-1.5 justify-between items-center w-full relative mt-[0.30rem]">
+    <nav className="flex flex-[1] pb-1.5 justify-between items-center w-full relative mt-[0.30rem]">
       {/**Search Bar ============================== */}
       <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}

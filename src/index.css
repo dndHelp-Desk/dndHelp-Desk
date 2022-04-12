@@ -79,15 +79,19 @@
 
   /** Zoom chat Images===========================================================*/
   input:checked + .chatImage {
-    @apply top-4 bottom-4 left-4 right-4 pt-24 fixed z-[999] rounded-lg border border-slate-300 dark:border-slate-700;
+    @apply top-4 bottom-4 left-4 right-4 flex items-center justify-center fixed z-[999] rounded-lg border border-slate-300 dark:border-slate-700 p-6;
   }
 
-  input:checked + .chatImage + img {
-    @apply h-[80%];
+  input:checked + .chatImage img {
+    @apply h-[80%] max-w-[85%];
   }
 
   input[type="checkbox"]:not(:checked) + .chatImage {
     @apply h-20 w-24 bg-slate-100 dark:bg-slate-700 rounded-md cursor-zoom-in items-center;
+  }
+
+  input[type="checkbox"]:not(:checked) + .chatImage img {
+    @apply h-full w-full;
   }
 
   /*Tool Tip Bottom Cal*/

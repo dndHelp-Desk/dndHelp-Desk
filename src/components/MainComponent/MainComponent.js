@@ -121,7 +121,7 @@ const MainComponent = () => {
         <nav className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden">
           {/**Alert */}
           <Alert />
-          <div className="w-[95%] 2xl:w-[75rem] backdrop-blur-lg py-2 flex justify-between items-center relative z-[999]">
+          <div className="w-[95%] 2xl:w-[75rem] py-2 flex justify-between items-center relative z-[999]">
             {/**Other Controls and logo ================ */}
             <div className="h-full flex items-center gap-2">
               {/**Small Screen Menu Btn ================ */}

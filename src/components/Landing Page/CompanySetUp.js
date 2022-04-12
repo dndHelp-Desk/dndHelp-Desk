@@ -4,16 +4,17 @@ import darkLogo from "./images/dndHelp-Desk.png";
 import lightLogo from "./images/dndHelp-Desk_Light.png";
 import { Link, useNavigate } from "react-router-dom";
 import supportImage from "./images/support-image.svg";
-import { useDispatch } from "react-redux";
-import { setCompany } from "../../store/UserSlice";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signOut,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 //Firestore ===================
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 
 const CompanySetUp = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
   const auth = getAuth();
   const [setUpValues, setValues] = useState({
     user_name: "",
@@ -41,15 +42,14 @@ const CompanySetUp = () => {
         .replace(/\s/g, "")}/members`
     );
 
-    
-let ticketsRef =
-  setUpValues.company_name &&
-  collection(
-    db,
-    `companies/${setUpValues.company_name
-      .toLowerCase()
-      .replace(/\s/g, "")}/tickets`
-  );
+  let ticketsRef =
+    setUpValues.company_name &&
+    collection(
+      db,
+      `companies/${setUpValues.company_name
+        .toLowerCase()
+        .replace(/\s/g, "")}/tickets`
+    );
 
   let emailAccountsRef =
     setUpValues.company_name &&
@@ -81,95 +81,92 @@ let ticketsRef =
   //Sing Up Or Create New Accouunt
   const handleSubmit = (e, email, password) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((data) => {
-        if (data) {
-          // New User =================================
-          addDoc(membersRef, {
-            name: setUpValues.user_name,
-            dept: setUpValues.department,
-            email: setUpValues.user_email,
-            access: "admin",
-            bio: "",
-            active: true,
-            status: "unavailable",
-            photoUrl: "",
-            companies: "",
+    createUserWithEmailAndPassword(auth, email, password).then((data) => {
+      if (data) {
+        // New User =================================
+        addDoc(membersRef, {
+          name: setUpValues.user_name,
+          dept: setUpValues.department,
+          email: setUpValues.user_email,
+          access: "admin",
+          bio: "",
+          active: true,
+          status: "unavailable",
+          photoUrl: "",
+          companies: "",
+        });
+
+        //New  Email Account ==========================
+        addDoc(emailAccountsRef, {
+          name: "Support",
+          email: setUpValues.sending_email,
+          password: setUpValues.password,
+          host: setUpValues.host,
+          port: setUpValues.port,
+        });
+
+        //Company Details ==========================
+        addDoc(companyDetailsRef, {
+          name: setUpValues.company_name,
+          address: setUpValues.companany_address,
+          subscription: "Pro Plus",
+        });
+
+        //Support Categories ==========================
+        addDoc(categoriesRef, {
+          categories: [
+            "Late Delivery",
+            "Failed Order",
+            "Incorrect Order",
+            "Refund",
+            "Poor Service (Driver)",
+            "Poor Service (Agent)",
+            "Poor Service (Store)",
+          ],
+        });
+
+        // New Tickects ==============================
+        addDoc(ticketsRef, {
+          recipient_name: "dndHelp-Desk",
+          recipient_email: "support@dndhelpdesk.co.za",
+          message_position: 1,
+          priority: "Medium",
+          agent_name: "dndHelpDesk",
+          date: new Date().toLocaleString(),
+          category: "Welcome",
+          branch_company: setUpValues.company_name,
+          message:
+            "Great to have you on board!\n The next step is crucial, yet simple! To see messages from your customers in HelpDesk, just set up forwarding from your support inbox.",
+          time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+          ticket_id: "#123456",
+          status: "open",
+          due_date: new Date().toLocaleString(),
+          from: "agent",
+          agent_email: "support@dndhelpdesk.co.za",
+          readStatus: "delivered",
+          complainant_name: "test user",
+          complainant_email: "testuser@example.com",
+          complainant_number: "0123457892",
+          closed_time: "",
+          fcr: "no",
+          hasRecording: false,
+          solution: "",
+          reopened: false,
+          assigned: false,
+          assignee: "",
+          assigner: "",
+          team: "support",
+        });
+
+        //Sign-Out  and Redirect to login ================================
+        setTimeout(() => {
+          signOut(auth).then(() => {
+            //Redirect To LogIn ================================
+            navigate("/logIn");
           });
-
-          //New  Email Account ==========================
-          addDoc(emailAccountsRef, {
-            name: "Support",
-            email: setUpValues.sending_email,
-            password: setUpValues.password,
-            host: setUpValues.host,
-            port: setUpValues.port,
-          });
-
-          //Company Details ==========================
-          addDoc(companyDetailsRef, {
-            name: setUpValues.company_name,
-            address: setUpValues.companany_address,
-            subscription: "Pro Plus",
-          });
-
-          //Support Categories ==========================
-          addDoc(categoriesRef, {
-            categories: [
-              "Late Delivery",
-              "Failed Order",
-              "Incorrect Order",
-              "Refund",
-              "Poor Service (Driver)",
-              "Poor Service (Agent)",
-              "Poor Service (Store)",
-            ],
-          });
-
-          // New Tickects ==============================
-           addDoc(ticketsRef, {
-             recipient_name: "dndHelp-Desk",
-             recipient_email: "support@dndhelpdesk.co.za",
-             message_position: 1,
-             priority: "Medium",
-             agent_name: "dndHelpDesk",
-             date: new Date().toLocaleString(),
-             category: "Welcome",
-             branch_company: setUpValues.company_name,
-             message:
-               "Great to have you on board!\n The next step is crucial, yet simple! To see messages from your customers in HelpDesk, just set up forwarding from your support inbox.",
-             time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-             ticket_id: "#123456",
-             status: "open",
-             due_date: new Date().toLocaleString(),
-             from: "agent",
-             agent_email: "support@dndhelpdesk.co.za",
-             readStatus: "delivered",
-             complainant_name: "test user",
-             complainant_email: "testuser@example.com",
-             complainant_number: "0123457892",
-             closed_time: "",
-             fcr:"no",
-             hasRecording: false,
-             solution:"",
-             reopened: false,
-             assigned: false,
-             assignee: "",
-             assigner: "",
-             team: "support",
-           });
-
-          //Set Organisation For LogIn ================================
-          window.localStorage.setItem(
-            "orgarnization_name",
-            setUpValues.company_name.toLocaleLowerCase().replace(/\s/g, "")
-          );
-          dispatch(setCompany(e.target.value.toLowerCase().replace(/\s/g, "")));
-
-          //Redirect To LogIn ================================
-          navigate("/app");
-        }
-      })
+        }, 1000);
+      }
+    });
   };
 
   //Component  =================================
