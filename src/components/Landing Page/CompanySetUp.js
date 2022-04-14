@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Help from "../Others/Help";
-import darkLogo from "./images/dndHelp-Desk.png";
-import lightLogo from "./images/dndHelp-Desk_Light.png";
+import darkLogo from "./images/dndHelp-Desk.webp";
+import lightLogo from "./images/dndHelp-Desk_Light.webp";
 import { Link, useNavigate } from "react-router-dom";
 import supportImage from "./images/support-image.svg";
 import {

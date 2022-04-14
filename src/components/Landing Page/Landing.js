@@ -1,11 +1,11 @@
 import React, { useState,useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import heroTop from "./images/heroTop.png";
-import darkLogo from "./images/dndHelp-Desk_Dark.png";
+import heroTop from "./images/heroTop.webp";
+import darkLogo from "./images/dndHelp-Desk_Dark.webp";
 import Cloud from "./Cloud";
-import reportImg from "./images/report.png";
-import reportImg2 from "./images/report2.png";
+import reportImg from "./images/report.webp";
+import reportImg2 from "./images/report2.webp";
 import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import Help from "../Others/Help";

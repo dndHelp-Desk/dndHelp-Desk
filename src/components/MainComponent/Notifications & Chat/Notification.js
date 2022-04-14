@@ -1,18 +1,21 @@
 import React from "react";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import noDataImg from "./../images/no-notifications.svg";
-import {HiOutlineX} from "react-icons/hi"
+import { HiOutlineX } from "react-icons/hi";
 import useClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
 import { deleteNotification } from "../../Data_Fetching/TicketsnUserData";
+import { setUnread } from "../../../store/Tickets_n_Settings_Slice";
 
 const Notification = ({ openNotifications, setOpenNotification }) => {
-  const panelRef = useClickOutside(() => {
-    setOpenNotification(false);
-  });
+  const user = useSelector((state) => state.UserInfo.member_details);
+  const unread = useSelector((state) => state.Tickets.unread);
   const notificationMsgs = useSelector(
     (state) => state.NotificationsData.messages
   );
-  const user = useSelector((state) => state.UserInfo.member_details);
+  const dispatch = useDispatch();
+  const panelRef = useClickOutside(() => {
+    setOpenNotification(false);
+  });
 
   //loop through Notications List =============================
   const notificationList =
@@ -21,16 +24,52 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
       return (
         <div
           key={notif.id}
-          className="w-full rounded-xl dark:bg-slate-700 bg-slate-200 p-2 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 relative"
+          className="w-full rounded dark:bg-slate-700 bg-slate-50 p-2 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 space-y-2 relative"
         >
           <h4 className="dark text-sm font-semibold">{notif.title}</h4>
-          <p className="dark text-xs font-base">{notif.message}.</p>
-          <small className="dark text-xs font-semibold text-left dark:text-slate-400 text-slate-700">
+          <p className="dark text-xs font-base whitespace-pre-line">
+            {notif.message}.
+          </p>
+          <small className="dark text-[0.6rem] font-semibold text-left dark:text-slate-400 text-slate-700">
             {new Date(notif.date).toLocaleString()}
           </small>
           {/**Delete Notification */}
           <button
-            onClick={() => deleteNotification(notif.id,user[0].id)}
+            onClick={() => deleteNotification(notif.id, user[0].id)}
+            className="absolute top-1 right-1 h-4 w-4 rounded-full dark:bg-slate-800 bg-slate-400 dark:text-slate-300 text-slate-800 text-xs font-bold flex items-center justify-center hover:opacity-75 outline-none focus:outline-none"
+          >
+            <HiOutlineX />
+          </button>
+        </div>
+      );
+    });
+
+  //loop through Unread Messages List =============================
+  const unreadMsg =
+    unread.length >= 1 &&
+    unread.map((msg) => {
+      return (
+        <div
+          key={msg.id}
+          className="w-full rounded dark:bg-slate-700 bg-slate-50 p-2 px-4 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 space-y-1 relative"
+        >
+          <h4 className="dark text-xs uppercase font-bold">
+            You have a new message !
+          </h4>
+          <p className="dark text-xs font-base">
+            <strong>Ticket ID:</strong> <span>{msg.ticket_id}</span>
+          </p>
+
+          <p className="dark text-[0.6rem] font-semibold text-left dark:text-slate-400 text-slate-700">
+            {new Date(msg.date).toLocaleString()}
+          </p>
+          {/**Delete Notification */}
+          <button
+            onClick={() =>
+              dispatch(
+                setUnread(unread.filter((message) => message.id !== msg.id))
+              )
+            }
             className="absolute top-1 right-1 h-4 w-4 rounded-full dark:bg-slate-800 bg-slate-400 dark:text-slate-300 text-slate-800 text-xs font-bold flex items-center justify-center hover:opacity-75 outline-none focus:outline-none"
           >
             <HiOutlineX />
@@ -49,7 +88,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
       }`}
     >
       <div className="h-full w-full overflow-x-hidden overflow-y-scroll space-y-2 p-2">
-        {notificationMsgs.length <= 0 && (
+        {notificationMsgs.length <= 0 && unread.length <= 0 && (
           <div className="h-full w-full items-center flex flex-col justify-center space-y-4">
             <img
               src={noDataImg}
@@ -61,6 +100,7 @@ const Notification = ({ openNotifications, setOpenNotification }) => {
             </h2>
           </div>
         )}
+        {unreadMsg}
         {notificationList}
       </div>
     </div>

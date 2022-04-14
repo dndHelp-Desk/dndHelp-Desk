@@ -1,5 +1,5 @@
 import React from "react";
-import darkLogo from "./images/dndHelp-Desk_Dark.png";
+import darkLogo from "./images/dndHelp-Desk_Dark.webp";
 import { Link } from "react-router-dom";
 import { BsTwitter, BsLinkedin, BsYoutube } from "react-icons/bs";
 import { FaInstagramSquare } from "react-icons/fa";

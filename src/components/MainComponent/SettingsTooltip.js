@@ -106,7 +106,7 @@ const SettingsTooltip = () => {
                       document.title = "Dial n Dine Help-Desk";
                       navigate("/logIn");
                     });
-                  }, 1000);
+                  }, 2000);
                 }}
                 className="py-2 px-4 w-full rounded outline-none focus:outline-none bg-red-600 text-slate-300 text-sm font-semibold flex justify-center items-center space-x-1 hover:opacity-80"
               >

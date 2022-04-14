@@ -108,7 +108,8 @@ const Navbar = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
             addNotification(
               id,
               "You've got a new Ticket",
-              `You've been sssigned a ticket with id: ${ticket.ticket_id} by:${user[0].name}`
+              `You've been assigned a ticket with id: ${ticket.ticket_id} 
+              By:${user[0].name}`
             );
           });
     }

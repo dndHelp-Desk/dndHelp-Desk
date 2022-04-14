@@ -1,7 +1,7 @@
 import React from "react";
-import debonairs from "./cloudImages/deb.png"
-import steers from "./cloudImages/steers.png";
-import fishaways from "./cloudImages/fishaways.png";
+import debonairs from "./cloudImages/deb.webp"
+import steers from "./cloudImages/steers.webp";
+import fishaways from "./cloudImages/fishaways.webp";
 
 const Cloud = () => {
   return (

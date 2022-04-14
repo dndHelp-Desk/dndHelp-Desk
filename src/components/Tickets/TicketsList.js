@@ -138,7 +138,7 @@ const TicketsList = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
           {unread.length >= 1 &&
             unread.filter((data) => data.ticket_id === ticket.ticket_id)
               .length >= 1 && (
-              <div className="absolute left-7 top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
+              <div className="absolute left-[0.15rem] top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
                 <span>
                   New :{" "}
                   {unread.length >= 1 &&

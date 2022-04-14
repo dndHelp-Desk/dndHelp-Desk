@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
-import darkLogo from "./images/dndHelp-Desk_Dark.png";
+import darkLogo from "./images/dndHelp-Desk_Dark.webp";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import Help from "../Others/Help";

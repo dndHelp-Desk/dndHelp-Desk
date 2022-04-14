@@ -9,8 +9,8 @@ import {
   setPersistence,
   browserLocalPersistence,
 } from "firebase/auth";
-import darkLogo from "./images/dndHelp-Desk_Dark.png";
-import minidarkLogo from "./images/dndHelp-Desk.png";
+import darkLogo from "./images/dndHelp-Desk_Dark.webp";
+import minidarkLogo from "./images/dndHelp-Desk.webp";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";

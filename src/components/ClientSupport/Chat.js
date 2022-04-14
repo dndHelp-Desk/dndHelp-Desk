@@ -8,6 +8,7 @@ const Chat = () => {
   const threadId = useSelector((state) => state.Tickets.threadId);
   let allTickets = useSelector((state) => state.Tickets.allTickets);
   const preloaderData = [1, 2, 3, 4];
+  console.log(window.location.search)
 
   //Filter Thread Messages =====================================
   const threadMessage = useMemo(() => {

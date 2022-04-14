@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
-import {
-  BsBell,
-  BsJustifyLeft,
-  BsGear,
-} from "react-icons/bs";
+import { BsBell, BsJustifyLeft, BsGear } from "react-icons/bs";
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
-import darkLogo from "./logos/dndHelp-Desk.png";
-import lightLogo from "./logos/dndHelp-Desk_.png";
+import darkLogo from "./logos/dndHelp-Desk.webp";
+import lightLogo from "./logos/dndHelp-Desk_.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../store/UserSlice";
@@ -29,14 +25,14 @@ const MainComponent = () => {
   const routeLocation = useSelector((state) => state.UserInfo.routeLocation);
   const theme = useSelector((state) => state.UserInfo.theme);
   const user = useSelector((state) => state.UserInfo.member_details);
-  const [openNotifications, setOpenNotification] = useState(false);
-  const location = useLocation();
-  const dispatch = useDispatch();
   const allTickets = useSelector((state) => state.Tickets.allTickets);
   const unread = useSelector((state) => state.Tickets.unread);
+  const [openNotifications, setOpenNotification] = useState(false);
   const notificationMsgs = useSelector(
     (state) => state.NotificationsData.messages
   );
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
@@ -45,7 +41,7 @@ const MainComponent = () => {
           allTickets.filter(
             (ticket) =>
               ticket.readStatus !== "read" &&
-              ticket.recipient_email === user[0].email
+              (ticket.recipient_email === user[0].email || user[0].companies.includes(ticket.branch_company))
           )
       )
     );
@@ -113,7 +109,7 @@ const MainComponent = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <main className="w-full dark:bg-slate-900 bg-slate-200 flex flex-col selection:bg-blue-600 selection:text-slate-100">
+      <div className="w-full dark:bg-slate-900 bg-slate-200 flex flex-col selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
 
@@ -309,13 +305,13 @@ const MainComponent = () => {
                   className="border dark:border-slate-700 border-slate-200 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <BsBell />
-                  {unread.length >= 1 ||
-                    (notificationMsgs.length >= 1 && (
+                  {(unread.length >= 1 ||
+                    notificationMsgs.length >= 1) && (
                       <span className="flex h-2 w-2 absolute top-1 right-1">
                         <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                       </span>
-                    ))}
+                    )}
                 </button>
               </abbr>
               {/**Expanded Notification & Chat  =============================== */}
@@ -329,11 +325,11 @@ const MainComponent = () => {
             </div>
           </div>
         </nav>
-        <section className="w-full h-full flex-[8] flex flex-col pb-2 items-center">
+        <main className="w-full h-full flex-[8] flex flex-col pb-2 items-center">
           <Home />
           <Outlet />
-        </section>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

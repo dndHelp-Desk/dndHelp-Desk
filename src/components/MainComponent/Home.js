@@ -403,7 +403,7 @@ const Home = () => {
           {/**Online Users ================================ */}
           <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 shadow">
             <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-4 py-2 overflow-hidden">
-              {allMembers.length >= 1 && user[0].access !== "client" && (
+              {allMembers.length >= 1 && (user[0].access && user[0].access) !== "client" && (
                 <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                   <h3 className="sticky top-0 dark:bg-slate-800 bg-white z-[99] dark:text-slate-300 text-slate-900 text-base font-bold font-sans capitalize h-6 flex justify-between items-center">
                     <span>Members</span>
@@ -412,7 +412,7 @@ const Home = () => {
                   {users}
                 </div>
               )}
-              {(allMembers.length <= 0 || user[0].access === "client") && (
+              {(allMembers.length <= 0 || (user[0].access && user[0].access) === "client") && (
                 <div className="h-full w-full">
                   <div className="h-full w-full rounded-lg dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-6 space-y-4">
                     <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">

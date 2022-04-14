@@ -62,7 +62,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
   const [reply, setReply] = useState({
     message: "",
     subject: "",
-    status: firstMessage.length >= 1 ? firstMessage[0].status : "",
+    status: firstMessage.length >= 1 ? firstMessage[0].status : "Status",
     message_position: threadMessage.length + 1,
     ticket_id: firstMessage.length >= 1 ? firstMessage.ticket_id : "none",
   });
@@ -176,9 +176,9 @@ const MessageThread = ({ isChatOpen, audio }) => {
     <i>In order to update or respond to this issue please click the button below,</i>
   </p>
   <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
+    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>You can alternatively click here.</a></i>
   </p>
-  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>Update or Respond Here</a></button>
   <p
     style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
     <b>Disclaimer</b>
@@ -238,15 +238,20 @@ const MessageThread = ({ isChatOpen, audio }) => {
     if (
       user[0].name !== "User Loader" &&
       reply.ticket_id !== "none" &&
+      reply.status !== "Status" &&
       reply.status !== "" &&
       reply.status !== "solved"
     ) {
-
       //Upload File if there is one
       const storage = getStorage();
       if (attachmentArray.length >= 1) {
         uploadBytes(
-          ref(storage, `/${company_details.name}/${reply.ticket_id}+${new Date().getTime()}`),
+          ref(
+            storage,
+            `/${company_details.name}/${
+              reply.ticket_id
+            }+${new Date().getTime()}`
+          ),
           attachmentArray[0]
         )
           .then((snapshot) => {
@@ -281,7 +286,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
           []
         );
       }
-    }
 
     //Send Using Nodemailer ===================
     fetch("https://dndhelp-desk-first.herokuapp.com/send", {
@@ -346,9 +350,9 @@ const MessageThread = ({ isChatOpen, audio }) => {
     <i>In order to update or respond to this issue please click the button below,</i>
   </p>
   <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i> <a target="_blank" href="https://www.dndhelp-desk.co.za/support">You can alternatively click here.</a></i>
+    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>You can alternatively click here.</a></i>
   </p>
-  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href="https://www.dndhelp-desk.co.za/support">Update or Respond Here</a></button>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>Update or Respond Here</a></button>
   <p
     style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
     <b>Disclaimer</b>
@@ -375,7 +379,12 @@ const MessageThread = ({ isChatOpen, audio }) => {
               },
             ])
           );
-          setReply({ ...reply, message: "", status: "" });
+          setReply({
+            ...reply,
+            message: "",
+            status:
+              firstMessage.length >= 1 ? firstMessage[0].status : "Status",
+          });
           setAttachArray(false);
         } else if (resData.status === "fail") {
           dispatch(
@@ -389,23 +398,37 @@ const MessageThread = ({ isChatOpen, audio }) => {
           );
         }
       });
+    }
 
     //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
     if (reply.status === "solved") {
       sendSolution();
-      setReply({ ...reply, message: "", status: "" });
+      setReply({
+        ...reply,
+        message: "",
+        status: firstMessage.length >= 1 ? firstMessage[0].status : "Status",
+      });
     } else if (reply.status === "reopened") {
       reOpenTicket(firstMessage[0].id, reply.status, true);
-      setReply({ ...reply, message: "", status: "" });
+      setReply({
+        ...reply,
+        message: "",
+        status: firstMessage.length >= 1 ? firstMessage[0].status : "Status",
+      });
     } else if (
       reply.status !== "" &&
+      reply.status !== "Status" &&
       reply.status !== "solved" &&
       reply.status !== "reopened"
     ) {
       changeStatus(firstMessage[0].id, reply.status);
-      setReply({ ...reply, message: "", status: "" });
+      setReply({
+        ...reply,
+        message: "",
+        status: firstMessage.length >= 1 ? firstMessage[0].status : "Status",
+      });
     }
-    if (reply.status === "") {
+    if (reply.status !== "Status" && reply.status === "") {
       dispatch(
         updateAlert([
           ...alerts,
@@ -448,21 +471,21 @@ const MessageThread = ({ isChatOpen, audio }) => {
                     {message.user}
                   </span>
                   <span
-                    className={`flex justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
-                      message.user_email === user[0].email ||
-                      message.agent_email === user[0].email
-                        ? ""
+                    className={`justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
+                      (message.user_email === user[0].email ||
+                      message.agent_email === user[0].email)
+                        ? "flex"
                         : "hidden"
                     }`}
                   >
-                    <span className="flex font-bold space-x-[1px] text-sm">
                       <HiCheck />
                       <HiCheck
                         className={`${
-                          message.readStatus !== "read" ? "text-slate-500" : ""
+                          message.readStatus !== "read" 
+                            ? "text-slate-500"
+                            : ""
                         }`}
                       />
-                    </span>{" "}
                   </span>
                 </div>{" "}
                 <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
@@ -626,7 +649,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 className="outline-none focus:outline-none text-lg dark:text-slate-400 text-slate-700 capitalize flex items-center justify-end space-x-1"
               >
                 <HiOutlineArrowSmDown />
-                <span className="text-xs">Last Message</span>
+                <span className="text-xs">Jump To Last Message</span>
               </button>
             </div>
           </div>
@@ -832,7 +855,6 @@ const MessageThread = ({ isChatOpen, audio }) => {
                 {/**Change Status ========================================= */}
                 <abbr title="Change Status">
                   <select
-                    htmlFor="recording"
                     onChange={(e) =>
                       setReply({ ...reply, status: e.target.value })
                     }
@@ -840,7 +862,7 @@ const MessageThread = ({ isChatOpen, audio }) => {
                     className="w-24 md:w-28 h-8 pt-2 rounded-r border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
                   >
                     <option className="p-2" value={reply.status}>
-                      Status
+                      {reply.status}
                     </option>
                     <option className="p-2" value="open">
                       open

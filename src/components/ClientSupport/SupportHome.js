@@ -5,7 +5,7 @@ import {
   BsFillPlusSquareFill,
   BsBookHalf,
 } from "react-icons/bs";
-import lightLogo from "./images/dndHelp-Desk_Light.png";
+import lightLogo from "./images/dndHelp-Desk_Light.webp";
 import TicketStatus from "./TicketStatus";
 import DataFetching from "./DataFetching"
 import Help from "./../Others/Help";
