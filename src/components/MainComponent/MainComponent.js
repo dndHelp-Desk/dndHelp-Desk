@@ -34,17 +34,31 @@ const MainComponent = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  //Filter Unread messages =======================
   useEffect(() => {
-    dispatch(
-      setUnread(
-        allTickets.length >= 1 &&
-          allTickets.filter(
-            (ticket) =>
-              ticket.readStatus !== "read" &&
-              (ticket.recipient_email === user[0].email || user[0].companies.includes(ticket.branch_company))
-          )
-      )
-    );
+    if (user[0].access !== "client") {
+      dispatch(
+        setUnread(
+          allTickets.length >= 1 &&
+            allTickets.filter(
+              (ticket) =>
+                ticket.readStatus !== "read" &&
+                ticket.recipient_email === user[0].email
+            )
+        )
+      );
+    } else {
+      dispatch(
+        setUnread(
+          allTickets.length >= 1 &&
+            allTickets.filter(
+              (ticket) =>
+                ticket.readStatus !== "read" &&
+                user[0].companies.includes(ticket.branch_company)
+            )
+        )
+      );
+    }
   }, [allTickets, dispatch, user]);
 
   //Small Screen Menu ===================
@@ -305,13 +319,12 @@ const MainComponent = () => {
                   className="border dark:border-slate-700 border-slate-200 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <BsBell />
-                  {(unread.length >= 1 ||
-                    notificationMsgs.length >= 1) && (
-                      <span className="flex h-2 w-2 absolute top-1 right-1">
-                        <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                      </span>
-                    )}
+                  {(unread.length >= 1 || notificationMsgs.length >= 1) && (
+                    <span className="flex h-2 w-2 absolute top-1 right-1">
+                      <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                  )}
                 </button>
               </abbr>
               {/**Expanded Notification & Chat  =============================== */}
