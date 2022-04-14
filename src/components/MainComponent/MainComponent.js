@@ -74,6 +74,10 @@ const MainComponent = () => {
         ? "Dial n Dine Help-Desk"
         : "Dial n Dine Help-Desk" + routeLocation.split("/").join(" | ");
     dispatch(changeLocation(location.pathname));
+    
+  window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches &&
+    window.localStorage.setItem("theme", JSON.stringify("dark"));
   }, [routeLocation, dispatch, location]);
 
   //FilterTckets Based on user's access ========

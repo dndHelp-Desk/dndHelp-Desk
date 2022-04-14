@@ -6,8 +6,6 @@ const initialLocation = () =>
 //Get Theme From Local Storage ==============
 const initialTheme = () => {
   const currentTheme = localStorage.getItem("theme");
-  window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches && window.localStorage.setItem("theme","dark")
   return JSON.parse(currentTheme);
 };
 
