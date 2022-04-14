@@ -47,7 +47,7 @@ const MainComponent = () => {
             )
         )
       );
-    } else {
+    } else if (user[0].companies.length >= 1 && user[0].access === "client") {
       dispatch(
         setUnread(
           allTickets.length >= 1 &&

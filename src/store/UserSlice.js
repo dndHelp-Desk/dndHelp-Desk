@@ -6,6 +6,8 @@ const initialLocation = () =>
 //Get Theme From Local Storage ==============
 const initialTheme = () => {
   const currentTheme = localStorage.getItem("theme");
+  window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches && window.localStorage.setItem("theme","dark")
   return JSON.parse(currentTheme);
 };
 
@@ -26,7 +28,13 @@ const initialState = {
   authenticated: false,
   routeLocation: initialLocation(),
   toDo: [],
-  theme: initialTheme() === null ? "light" : initialTheme(),
+  theme:
+    initialTheme() === null
+      ? "light"
+      : window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : initialTheme(),
   company_name: JSON.parse(localStorage.getItem("organization_name")),
 };
 
@@ -52,8 +60,8 @@ export const UserSlice = createSlice({
     changeTheme: (state, action) => {
       state.theme = action.payload;
     },
-    setCompany:(state,action)=>{
-      state.company_name = action.payload
+    setCompany: (state, action) => {
+      state.company_name = action.payload;
     },
   },
 });
