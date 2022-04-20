@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   addAllTickets,
   loadFrequentlyAsked,
-} from "../../store/Tickets_n_Settings_Slice";
+} from "../../Redux/Slices/Tickets_n_Settings_Slice";
 //Firestore ===================
 import {
   getFirestore,

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300&family=Gothic+A1&family=IBM+Plex+Sans+Thai+Looped:wght@300&family=League+Spartan:wght@300&family=Manrope:wght@300&family=PT+Sans&family=Poppins:wght@500&family=Sora:wght@300&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,7 +25,7 @@
   }
 
   .TabsLinks {
-    @apply flex items-center space-x-1 hover:opacity-80 text-xs outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wide transition-opacity duration-300;
+    @apply flex items-center space-x-1 hover:opacity-80 text-xs outline-none focus:outline-none font-sans dark:font-medium font-bold uppercase tracking-wide transition-opacity duration-300;
   }
   .navlinks.active {
     @apply text-blue-600 lg:dark:text-gray-300 lg:text-slate-900 lg:border-b border-slate-400;
@@ -77,21 +78,25 @@
     }
   }
 
-  /** Zoom chat Images===========================================================*/
-  input:checked + .chatImage {
-    @apply top-4 bottom-4 left-4 right-4 flex items-center justify-center fixed z-[999] rounded-lg border border-slate-300 dark:border-slate-700 p-6;
+  /** chat Images And Styling===========================================================*/
+  .messageContainer img {
+    @apply max-h-[30rem] rounded;
   }
-
-  input:checked + .chatImage img {
-    @apply h-[80%] max-w-[85%];
+  
+  .messageContainer h1{
+    @apply text-3xl font-bold;
   }
-
-  input[type="checkbox"]:not(:checked) + .chatImage {
-    @apply h-20 w-24 bg-slate-100 dark:bg-slate-700 rounded-md cursor-zoom-in items-center;
+  .messageContainer h2{
+    @apply text-2xl font-bold;
   }
-
-  input[type="checkbox"]:not(:checked) + .chatImage img {
-    @apply h-full w-full;
+  .messageContainer h3{
+    @apply text-xl font-bold;
+  }
+  .messageContainer ul{
+    @apply list-disc;
+  }
+  .messageContainer ol{
+    @apply list-decimal;
   }
 
   /*Tool Tip Bottom Cal*/
@@ -157,4 +162,5 @@
   .snap_childTwo {
     scroll-snap-align: start end;
   }
+  
 }

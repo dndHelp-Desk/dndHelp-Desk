@@ -4,7 +4,7 @@ import Chat from "./Chat";
 import {BsSearch} from "react-icons/bs"
 import {
   setThreadId,
-} from "../../store/Tickets_n_Settings_Slice";
+} from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import { useDispatch, useSelector } from "react-redux";
 import {markAsSeen} from "./DataFetching"
 
