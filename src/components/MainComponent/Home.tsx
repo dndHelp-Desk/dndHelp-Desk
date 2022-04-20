@@ -433,7 +433,7 @@ const Home:FC = () => {
                   </div>
                 )}
               {(allMembers.length <= 0 ||
-                (user[0].access && user[0].access) === "client") && (
+                (user[0]?.access && user[0]?.access) === "client") && (
                 <div className="h-full w-full">
                   <div className="h-full w-full rounded-lg dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 p-6 space-y-4">
                     <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
