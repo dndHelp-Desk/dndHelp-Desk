@@ -7,12 +7,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### ⚠ BREAKING CHANGES
 
-* **texteditor:** Removed an image array on tickets document , the message is now being store as pure
-html
+* **Texteditor:** Removed an image array on tickets document, the message is now being stored as pure HTML
 
 ### Features
 
-* **texteditor:** migrated from react.js to react.ts (typescript),Added Rich Text Editor ([c2a74da](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/c2a74dac7991272330127ce6ac4cb3cf84918cd9))
+* **Texteditor:** migrated from react.js to react.ts (typescript),Added Rich Text Editor ([c2a74da](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/c2a74dac7991272330127ce6ac4cb3cf84918cd9))
 
 - Adding Change log
 - Minor Fix
