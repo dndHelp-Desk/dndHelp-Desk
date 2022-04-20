@@ -877,7 +877,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               </div>
             </div>
             {/**Message ====================================== */}
-            <div className="w-full h-full flex-[5] md:h-[65%] lg:h-[70%] mt-4 rounded">
+            <div className="w-full h-full flex-[5] md:h-[65%] lg:h-[70%] mt-4 rounded overflow-hidden">
               <RichTextEditor
                 value={value}
                 onImageUpload={handleImageUpload}
