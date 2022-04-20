@@ -11,7 +11,6 @@ import {
   BiTrash,
   BiCalendar,
   BiFile,
-  BiX,
   BiMinus,
   BiMicrophone,
 } from "react-icons/bi";

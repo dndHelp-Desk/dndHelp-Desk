@@ -36,7 +36,6 @@
   "scripts": {
     "release": "standard-version",
     "commit": "cz",
-    "version": "auto-changelog -p && git add CHANGELOG.md",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
