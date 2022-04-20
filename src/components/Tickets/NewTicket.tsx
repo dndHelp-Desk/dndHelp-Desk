@@ -6,7 +6,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addTicket } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
-import { addRecording } from "../Authentication/Firebase";
+import { addRecording } from "../Auth/Firebase";
 import {
   BiTrash,
   BiCalendar,

@@ -16,7 +16,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
 import Alert from "../Others/Alert";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
-import Profile from "../Authentication/Profile";
+import Profile from "../Auth/Profile";
 import Notification from "./Notifications & Chat/Notification";
 import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";

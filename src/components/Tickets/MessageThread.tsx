@@ -16,7 +16,7 @@ import {
   reOpenTicket,
 } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import { addRecording } from "../Authentication/Firebase";
+import { addRecording } from "../Auth/Firebase";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import TextEditor from "./TextEditor";
 import { AppDispatch, RootState } from "../../Redux/store";
