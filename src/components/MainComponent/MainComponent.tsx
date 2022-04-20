@@ -47,8 +47,8 @@ const MainComponent:FC = () => {
           allTickets &&
             allTickets?.filter(
               (ticket) =>
-                ticket.readStatus !== "read" &&
-                ticket.recipient_email === user[0].email
+                ticket?.readStatus !== "read" &&
+                ticket?.recipient_email === user[0]?.email
             )
         )
       );
@@ -95,8 +95,8 @@ const MainComponent:FC = () => {
           updateFilteredTickets(
             allTickets.filter(
               (ticket) =>
-                ticket.message_position === 1 &&
-                ticket.agent_email === user[0].email
+                ticket?.message_position === 1 &&
+                ticket?.agent_email === user[0]?.email
             )
           )
         );
