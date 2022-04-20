@@ -76,9 +76,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
     message: "<p>Type here ...</p>",
     subject:
       threadMessage.length >= 1 &&
-      threadMessage.filter((msg: any) => msg.message_position === 1)[0][
-        "category"
-      ],
+      threadMessage.filter((msg: any) => msg.message_position === 1)[0]?.category,
     status: "Status",
     message_position: threadMessage.length + 1,
     ticket_id: threadId,
@@ -545,10 +543,10 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 </div>
               </div>
               <div className="mt-2 py-2 dark:text-slate-400 text-slate-700 border-b dark:border-slate-800 border-slate-200 p-2 text-[13px]">
-                <div
-                  dangerouslySetInnerHTML={{ __html: message.message }}
+                {message.message &&(<div
+                  dangerouslySetInnerHTML={{ __html: message?.message }}
                   className="messageContainer dark:marker:text-slate-400 marker:text-slate-800 list-disc"
-                ></div>
+                ></div>)}
               </div>
             </div>
           </div>

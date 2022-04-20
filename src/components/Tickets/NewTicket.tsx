@@ -291,7 +291,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         inputValue.send_as,
         `${recordingFile && inputValue.state === "solved" ? true : false}`
       );
-
       //Send Email Using Nodemailer ===================
       fetch("https://dndhelp-desk-first.herokuapp.com/send", {
         method: "POST",
