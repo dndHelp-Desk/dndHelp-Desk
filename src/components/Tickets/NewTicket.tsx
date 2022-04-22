@@ -71,7 +71,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         ticket_id: "",
         agent_email: "",
         complainant_name: "",
-        complainant_email: "",
+        complainant_email: "none",
         complainant_number: "",
         send_as: "",
       }
@@ -286,7 +286,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         inputValue.ticket_id,
         inputValue.agent_email,
         inputValue.complainant_name,
-        inputValue.complainant_email,
+        inputValue.complainant_email === ""
+          ? "none"
+          : inputValue.complainant_email,
         inputValue.complainant_number,
         inputValue.send_as,
         `${recordingFile && inputValue?.state === "solved" ? true : false}`
@@ -450,7 +452,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         ticket_id: "",
         agent_email: "",
         complainant_name: "",
-        complainant_email: "",
+        complainant_email: "none",
         complainant_number: "",
         send_as: "",
       });
@@ -524,7 +526,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       ticket_id: "",
                       agent_email: "",
                       complainant_name: "",
-                      complainant_email: "",
+                      complainant_email: "none",
                       complainant_number: "",
                       send_as: "",
                     })
@@ -542,7 +544,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     ticket_id: "",
                     agent_email: "",
                     complainant_name: "",
-                    complainant_email: "",
+                    complainant_email: "none",
                     complainant_number: "",
                     send_as: "",
                   });
@@ -602,7 +604,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     Subject :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm capitalize"
                     id="subject"
                     name="subject"
                     value={inputValue.category}
@@ -689,7 +691,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   </select>
                 </label>
               </div>
-              {/**Client Details ============================= */}
+              {/**Customer's Email And Number ============================= */}
               <div className="w-full md:h-10 flex flex-col md:flex-row gap-4 md:justify-between md:items-center">
                 {/**Client Email  ======================================== */}
                 <label
@@ -700,9 +702,10 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     Email :
                   </span>
                   <input
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
-                    type="email"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 capitalize"
+                    type="text"
                     id="email"
+                    title="Enter A valid Email"
                     name="email"
                     value={inputValue.complainant_email}
                     autoComplete="nope"
@@ -710,7 +713,10 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     onChange={(e) =>
                       setValues({
                         ...inputValue,
-                        complainant_email: e.target.value,
+                        complainant_email:
+                          e.target.value?.replace(/\s/g, "") === ""
+                            ? "none"
+                            : e.target.value,
                       })
                     }
                   />
@@ -923,7 +929,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       ticket_id: "",
                       agent_email: "",
                       complainant_name: "",
-                      complainant_email: "",
+                      complainant_email: "none",
                       complainant_number: "",
                       send_as: "",
                     });

@@ -41,10 +41,8 @@ let org = store.getState().UserInfo.company_name;
 // collection ref
 let membersRef: any = org && collection(db, `companies/${org}/members`);
 let ticketsRef: any = org && collection(db, `companies/${org}/tickets`);
-let contactsRef: any =
-  org && collection(db, `companies/${org}/contacts`);
-let settingsRef: any =
-  org && collection(db, `companies/${org}/settings`);
+let contactsRef: any = org && collection(db, `companies/${org}/contacts`);
+let settingsRef: any = org && collection(db, `companies/${org}/settings`);
 let emailAccountsRef: any =
   org && collection(db, `companies/${org}/email_accounts`);
 let email_TemplatesRef: any =
@@ -193,7 +191,7 @@ export const updateEmailAccount = (
   email: string,
   password: string,
   host: string,
-  port: string|number
+  port: string | number
 ) => {
   let docRef = doc(db, `companies/${org}/email_accounts`, id);
   updateDoc(docRef, {
@@ -210,7 +208,7 @@ export const newEmailAccount = (
   email: string,
   password: string,
   host: string,
-  port: string|number
+  port: string | number
 ) => {
   addDoc(emailAccountsRef, {
     name: name,
@@ -300,7 +298,7 @@ export const addReply = (
   from: any,
   r_name: any,
   r_email: any,
-  team: any,
+  team: any
 ) => {
   addDoc(ticketsRef, {
     date: new Date().toLocaleString(),
@@ -314,7 +312,7 @@ export const addReply = (
     ticket_id: ticket_id,
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     readStatus: "delivered",
-    team: team
+    team: team,
   });
 };
 
@@ -343,7 +341,7 @@ export const addTicket = (
   c_email: any,
   c_number: any,
   team: any,
-  hasRecording: string,
+  hasRecording: string
 ) => {
   addDoc(ticketsRef, {
     recipient_name: recipient_name,
