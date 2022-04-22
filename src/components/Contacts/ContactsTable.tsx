@@ -46,7 +46,7 @@ const Table: FC<Prop> = ({ setModal }) => {
           className={`h-14 border-gray-300 dark:border-slate-700 border-b ${
             contact.branch_company
               ?.toLowerCase()
-              .replace(/\s/g, "")
+              ?.replace(/\s/g, "")
               .includes(searchResults?.toLowerCase().replace(/\s/g, "")) ===
               true ||
             contact?.name

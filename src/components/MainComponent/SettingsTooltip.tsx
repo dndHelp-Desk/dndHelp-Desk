@@ -98,8 +98,8 @@ const SettingsTooltip:FC = () => {
             <li>
               <button
                 onClick={() => {
-                  updateUserStatus(user[0].id, "unavailable");
-                  setTimeout(() => {
+                  const logOut= async ()=>{
+                    updateUserStatus(user[0].id, "unavailable");
                     signOut(auth).then(() => {
                       dispatch(isAuthenticated(false));
                       window.localStorage.clear();
@@ -107,7 +107,9 @@ const SettingsTooltip:FC = () => {
                       document.title = "Dial n Dine Help-Desk";
                       navigate("/logIn");
                     });
-                  }, 2000);
+                  }
+
+                  logOut()
                 }}
                 className="py-2 px-4 w-full rounded outline-none focus:outline-none bg-red-600 text-slate-300 text-sm font-semibold flex justify-center items-center space-x-1 hover:opacity-80"
               >

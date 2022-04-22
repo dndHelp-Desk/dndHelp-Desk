@@ -5,12 +5,12 @@ import { RootState } from "../../Redux/store";
 
 type chartData = any;
 
-const TrafficChart: FC<chartData> = ({ chartData }) => {
+const TrafficChart: FC<chartData> = ({ chartData, option }) => {
   const theme = useSelector((state: RootState) => state.UserInfo.theme);
 
   const series = [
     {
-      name: "Traffic",
+      name: "Tickets Per Hour/Day ",
       data: chartData.map((data: any) =>
         (data.value / chartData.length).toFixed(0)
       ),
@@ -22,43 +22,37 @@ const TrafficChart: FC<chartData> = ({ chartData }) => {
       zoom: {
         enabled: false,
       },
+      stacked: true,
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
     },
     xaxis: {
       type: "category",
+      tickAmount: 13,
       categories: chartData.map((data: any) => data.name),
+      tooltip: {
+        enabled: true,
+        formatter: (val: any) => (option !== "day" ? val + ":00hrs" : val),
+      },
       labels: {
         show: true,
-        hideOverlappingLabels: true,
-        showDuplicates: false,
-        trim: false,
-        colors: theme !== "dark" ? ["#1e293b"] : ["#94a3b8"],
-        style: {
-          colors: theme !== "dark" ? ["#1e293b"] : ["#94a3b8"],
-          fontSize: "12px",
-          fontFamily: "Helvetica, Arial, sans-serif",
-          fontWeight: 500,
-        },
-      },
-      tooltip: {
-        enabled: false,
-        formatter: (val: any) => val + ":00hrs",
+        rotate: 0,
       },
       axisTicks: {
         show: false,
       },
       axisBorder: {
-        show: true,
+        show: false,
         color: theme !== "dark" ? "#1e293b" : "#94a3b8",
-        height: 1,
+        height: 0.5,
         width: "100%",
+        offsetY: 3,
       },
     },
     yaxis: {
       labels: {
-        show: true,
+        show: false,
         hideOverlappingLabels: true,
         showDuplicates: false,
         trim: false,
@@ -72,10 +66,6 @@ const TrafficChart: FC<chartData> = ({ chartData }) => {
           cssClass: "apexcharts-xaxis-label",
         },
       },
-    },
-    stroke: {
-      curve: "smooth",
-      width: 2,
     },
     fill: {
       colors: ["#3b82f6"],
@@ -95,6 +85,17 @@ const TrafficChart: FC<chartData> = ({ chartData }) => {
       },
     },
     colors: ["#2563eb"],
+    stroke: {
+      curve: "smooth",
+      width: 2,
+    },
+    tooltip: {
+      enabled: true,
+      x: {
+        show: false,
+        formatter: (val: any) => (option !== "day" ? val + ":00hrs" : val),
+      },
+    },
   };
 
   return (

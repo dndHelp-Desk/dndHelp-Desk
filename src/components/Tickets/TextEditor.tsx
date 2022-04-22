@@ -1,4 +1,4 @@
-import { FC, useEffect} from "react";
+import { FC, useEffect } from "react";
 import { RichTextEditor } from "@mantine/rte";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
@@ -6,11 +6,11 @@ import { RootState } from "../../Redux/store";
 
 interface Props {
   setReply: (reply: any) => any;
-  value:any;
-  onChange:any;
+  value: any;
+  onChange: any;
 }
 
-const TextEditor: FC<Props> = ({ setReply,value,onChange }) => {
+const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
   const company_details = useSelector(
     (state: RootState) => state.Tickets.company_details
@@ -47,10 +47,10 @@ const TextEditor: FC<Props> = ({ setReply,value,onChange }) => {
       value={value}
       onImageUpload={handleImageUpload}
       onChange={onChange}
-      className="`replyEditor h-full w-full border-0 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar"
+      className="h-full w-full border-0 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar rounded-none"
       classNames={{
         toolbar:
-          "dark:bg-[#182235] bg-slate-50 flex justify-center items-center w-full text-inherit border-slate-300 dark:border-slate-700",
+          "bg-inherit flex justify-center items-center w-full text-inherit border-slate-200 dark:border-slate-800 rounded-none",
         toolbarInner:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
         toolbarGroup:

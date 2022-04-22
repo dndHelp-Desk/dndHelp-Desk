@@ -2,7 +2,7 @@ import { FC, useState, useMemo } from "react";
 import { FaChartBar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
-import CategoryDonut from "./CategoryDonut";
+import CategoryChart from "./CategoryChart";
 import TrafficChart from "./TrafficChart";
 
 export type data = any;
@@ -56,6 +56,8 @@ const OverviewReport: FC<data> = ({ data }) => {
     data.filter(
       (ticket: any) => ticket.status === "solved" && ticket.fcr === "no"
     );
+
+  //Trafiic Chart Data ===============
   const chartData = useMemo(() => {
     return Array.from(
       new Set(
@@ -177,7 +179,7 @@ const OverviewReport: FC<data> = ({ data }) => {
           <p className="text-xs text-slate-500 dark:text-slate-400">
             More features will be added soon in the meantime explore the reports
             by making use of filters. You can find your current satisfaction
-            ratings below.
+            rating below.
           </p>
           <div className="">
             <h4 className="dark:text-slate-300 text-slate-700 font-semibold text-sm">
@@ -238,7 +240,7 @@ const OverviewReport: FC<data> = ({ data }) => {
         <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-medium font-semibold uppercase tracking-normal">
           Tickets Per Category
         </h2>
-        <CategoryDonut data={data} />
+        <CategoryChart data={data} />
       </div>
 
       {/**Traffic trend chart ======================== */}
@@ -246,7 +248,7 @@ const OverviewReport: FC<data> = ({ data }) => {
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-medium font-semibold uppercase tracking-normal">
-              Traffic
+              AVG Traffic
             </h2>
             <select
               onChange={(e) => setOption(e.target.value)}
@@ -256,7 +258,7 @@ const OverviewReport: FC<data> = ({ data }) => {
               <option value="day">Daily</option>
             </select>
           </div>
-          <TrafficChart chartData={chartData} />
+          <TrafficChart chartData={chartData} option={option} />
         </div>
       </div>
     </div>

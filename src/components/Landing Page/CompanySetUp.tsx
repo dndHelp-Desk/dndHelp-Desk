@@ -134,10 +134,10 @@ const CompanySetUp:FC = () => {
           priority: "Medium",
           agent_name: "dndHelpDesk",
           date: new Date().toLocaleString(),
-          category: "Welcome",
+          category: "Welcome, Get Started",
           branch_company: setUpValues.company_name,
           message:
-            "Great to have you on board!\n The next step is crucial, yet simple! To see messages from your customers in HelpDesk, just set up forwarding from your support inbox.",
+            "<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple< To see messages from your customers in HelpDesk, just set up forwarding from your support inbox.",
           time: `${new Date().getHours()}:${new Date().getMinutes()}`,
           ticket_id: "#123456",
           status: "open",

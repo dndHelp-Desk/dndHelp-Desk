@@ -1,10 +1,7 @@
-import {FC, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import {
-  changePriority,
-  markAsSeen,
-} from "../Data_Fetching/TicketsnUserData";
+import { changePriority, markAsSeen } from "../Data_Fetching/TicketsnUserData";
 import { BsStopFill } from "react-icons/bs";
 import {
   BiChevronRight,
@@ -20,22 +17,31 @@ import noTickets from "./images/no-userss.svg";
 import NewTicket from "./NewTicket";
 import { AppDispatch, RootState } from "../../Redux/store";
 
-interface Props{
-  setDelete:any;
-  deleteArray:any;
-  setModal:any;
-  newTicketModal:()=>any
+interface Props {
+  setDelete: any;
+  deleteArray: any;
+  setModal: any;
+  newTicketModal: () => any;
 }
 
-const TicketsList:FC<Props> = ({ setDelete, deleteArray, setModal, newTicketModal }) => {
-  const dispatch:AppDispatch = useDispatch();
-  const company_details = useSelector((state:RootState) => state.Tickets.company_details);
-  const fetchedTickets = useSelector((state:RootState) => state.Tickets.filteredTickets);
-  const threadId = useSelector((state:RootState) => state.Tickets.threadId);
-  const unread = useSelector((state:RootState) => state.Tickets.unread);
+const TicketsList: FC<Props> = ({
+  setDelete,
+  deleteArray,
+  setModal,
+  newTicketModal,
+}) => {
+  const dispatch: AppDispatch = useDispatch();
+  const company_details = useSelector(
+    (state: RootState) => state.Tickets.company_details
+  );
+  const fetchedTickets = useSelector(
+    (state: RootState) => state.Tickets.filteredTickets
+  );
+  const threadId = useSelector((state: RootState) => state.Tickets.threadId);
+  const unread = useSelector((state: RootState) => state.Tickets.unread);
   const [isChatOpen, setChat] = useState<boolean>(false);
-  const [audio, audioUrl] = useState<string|any>("");
-  const [loadMore, setLimit] = useState<number|any>(50);
+  const [audio, audioUrl] = useState<string | any>("");
+  const [loadMore, setLimit] = useState<number | any>(50);
 
   //Filters =====================
   const [filters, setFilters] = useState({
@@ -172,7 +178,9 @@ const TicketsList:FC<Props> = ({ setDelete, deleteArray, setModal, newTicketModa
                   e.target.checked === true
                     ? setDelete([...deleteArray, ticket.ticket_id])
                     : setDelete(
-                        deleteArray.filter((data:any) => data !== ticket.ticket_id)
+                        deleteArray.filter(
+                          (data: any) => data !== ticket.ticket_id
+                        )
                       )
                 }
               />
@@ -343,7 +351,7 @@ const TicketsList:FC<Props> = ({ setDelete, deleteArray, setModal, newTicketModa
                 </>
               )}
             </div>
-            
+
             {/**Pagination ================================ */}
             <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
               <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-[#33415596] border-slate-300">

@@ -1,4 +1,4 @@
-import {FC, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
@@ -8,9 +8,9 @@ import MostRecent from "./MostRecent";
 import StatusSummary from "./StatusSummary";
 import { RootState } from "../../Redux/store";
 
-const Home:FC = () => {
+const Home: FC = () => {
   const location = useLocation();
-  const todoList = useSelector((state:RootState) => state.UserInfo.toDo);
+  const todoList = useSelector((state: RootState) => state.UserInfo.toDo);
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
@@ -42,17 +42,17 @@ const Home:FC = () => {
           return {
             name: element,
             value: (
-              ((filteredTickets?.filter(
-                  (ticket) =>
-                    ticket?.category?.toLowerCase() === element?.toLowerCase()
-                ).length) /
+              (filteredTickets?.filter(
+                (ticket) =>
+                  ticket?.category?.toLowerCase() === element?.toLowerCase()
+              ).length /
                 filteredTickets.length) *
               100
             ).toFixed(1),
           };
         })
         .splice(0, 5)
-        .sort((a:any, b:any) => b.value - a.value)
+        .sort((a: any, b: any) => b.value - a.value)
     );
   }, [categories, filteredTickets]);
 
@@ -65,7 +65,11 @@ const Home:FC = () => {
             No Data
           </small>
           <div className="w-full flex items-center justify-between">
-            <div className="h-2 w-full flex-[3] rounded-full animate-pulse bg-slate-400 dark:bg-slate-700 overflow-hidden"></div>
+            <div
+              role="progressbar"
+              aria-label="progressbas"
+              className="h-2 w-full flex-[3] rounded-full animate-pulse bg-slate-400 dark:bg-slate-700 overflow-hidden"
+            ></div>
             <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-semibold text-xs">
               <span>0.0%</span>
             </div>
@@ -83,7 +87,9 @@ const Home:FC = () => {
           key={user.id}
           className="w-full snap_child h-13 rounded-md dark:bg-slate-800 bg-white flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-200"
         >
-          <div className="h-10 w-10 relative">
+          <div
+            className={`h-10 w-10 flex justify-center items-center rounded relative`}
+          >
             <img
               src={
                 user.photoUrl !== null && user.photoUrl !== ""
@@ -91,10 +97,10 @@ const Home:FC = () => {
                   : defaultProfile
               }
               alt="profile"
-              className="object-cover w-full h-full object-center rounded-md border-2 dark:border-slate-500 border-slate-600"
+              className={`object-cover w-full h-full object-center rounded`}
             />
             <div
-              className={`absolute h-2.5 w-2.5 border-2 border-white dark:border-slate-800 rounded-full right-[-0.25rem] top-[-0.15rem] ${
+              className={`absolute right-[-0.25rem] top-[-0.1rem] h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-slate-50 ${
                 user.status === "available"
                   ? "bg-green-600"
                   : user.status === "unavailable"
@@ -142,14 +148,18 @@ const Home:FC = () => {
             </div>
             <div className="flex flex-col mt-2 w-full justify-center gap-1 overflow-hidden rounded-lg px-4">
               {categoriesData &&
-                categoriesData?.map((element:any, index) => {
+                categoriesData?.map((element: any, index) => {
                   return (
                     <div key={index} className="w-full">
                       <small className="text-slate-700 dark:text-slate-400 text-[0.7rem]">
                         {element.name}
                       </small>
                       <div className="w-full flex items-center justify-between">
-                        <div className="h-2 w-full flex-[3] rounded-full bg-slate-300 dark:bg-slate-700 overflow-hidden">
+                        <div
+                          role="progressbar"
+                          aria-label="progressbas"
+                          className="h-2 w-full flex-[3] rounded-full bg-slate-300 dark:bg-slate-700 overflow-hidden"
+                        >
                           <div
                             style={{
                               width: `${
@@ -323,24 +333,10 @@ const Home:FC = () => {
               </h3>
               <p className="text-xs dark:text-slate-400 text-slate-700">
                 You managed to get{" "}
-                {(
-                  (filteredTickets.filter(
-                    (data) =>
-                      new Date(data.date).getTime() >=
-                        new Date(
-                          new Date().getFullYear(),
-                          new Date().getMonth(),
-                          1
-                        ).getTime() &&
-                      new Date(data.date).getTime() <=
-                        new Date(
-                          new Date().getFullYear(),
-                          new Date().getMonth(),
-                          30
-                        ).getTime() &&
-                      data?.status?.toLowerCase() === "solved"
-                  ).length /
-                    filteredTickets.filter(
+                <b>
+                  {" "}
+                  {(
+                    (filteredTickets.filter(
                       (data) =>
                         new Date(data.date).getTime() >=
                           new Date(
@@ -353,18 +349,43 @@ const Home:FC = () => {
                             new Date().getFullYear(),
                             new Date().getMonth(),
                             30
-                          ).getTime()
-                    ).length) *
-                  100
-                ).toFixed(1)}
-                % of your tickets resolved.
+                          ).getTime() &&
+                        data?.status?.toLowerCase() === "solved"
+                    ).length /
+                      filteredTickets.filter(
+                        (data) =>
+                          new Date(data.date).getTime() >=
+                            new Date(
+                              new Date().getFullYear(),
+                              new Date().getMonth(),
+                              1
+                            ).getTime() &&
+                          new Date(data.date).getTime() <=
+                            new Date(
+                              new Date().getFullYear(),
+                              new Date().getMonth(),
+                              30
+                            ).getTime()
+                      ).length) *
+                    100
+                  ).toFixed(1)}
+                  %
+                </b>{" "}
+                of your tickets resolved.
                 <br /> Currently you have{" "}
-                {filteredTickets.length >= 1 &&
-                  filteredTickets.filter((ticket) => ticket.status === "open")
-                    .length}{" "}
-                open tickets, and {overDue.length} overdue tickets.
+                <b>
+                  {" "}
+                  {filteredTickets.length >= 1 &&
+                    filteredTickets.filter((ticket) => ticket.status === "open")
+                      .length}
+                </b>{" "}
+                open tickets, and <b>{overDue.length}</b> overdue tickets.
               </p>
-              <div className="w-full h-2 rounded-full overflow-hidden dark:bg-slate-700 bg-slate-300">
+              <div
+                role="progressbar"
+                aria-label="progressbas"
+                className="w-full h-2 rounded-full overflow-hidden dark:bg-slate-700 bg-slate-300"
+              >
                 <div
                   style={{
                     width: `${(
