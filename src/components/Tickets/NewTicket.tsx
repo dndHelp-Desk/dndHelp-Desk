@@ -286,7 +286,8 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         inputValue.ticket_id,
         inputValue.agent_email,
         inputValue.complainant_name,
-        inputValue.complainant_email === ""
+        inputValue.complainant_email === "" ||
+          inputValue.complainant_email === undefined
           ? "none"
           : inputValue.complainant_email,
         inputValue.complainant_number,

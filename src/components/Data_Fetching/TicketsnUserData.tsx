@@ -361,7 +361,8 @@ export const addTicket = (
     agent_email: agent_email,
     readStatus: "delivered",
     complainant_name: c_name,
-    complainant_email: c_email,
+    complainant_email:
+      c_email === "" || c_email === undefined || !c_email ? "none" : c_email,
     complainant_number: c_number,
     closed_time: state === "solved" ? new Date().toLocaleString() : "",
     fcr: state === "solved" ? "yes" : "no",
