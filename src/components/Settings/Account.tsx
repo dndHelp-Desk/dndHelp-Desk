@@ -163,7 +163,7 @@ const Account: FC = () => {
             </p>
           )}
           {!emailStatus && (
-            <button className="dark:text-slate-400 text-slate-700 text-xs font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden outline-none focus:outline-none">
+            <button className="dark:text-slate-400 text-slate-700 text-xs font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden outline-none focus:outline-none focus:ring-0 focus:border-0">
               <BsFillPatchExclamationFill className="inline text-red-600" />{" "}
               <span>
                 Please verify your email,{" "}
@@ -194,7 +194,7 @@ const Account: FC = () => {
                   }}
                   className="text-blue-500 underline"
                 >
-                  click here to get the email.
+                  click here to get the verification email.
                 </span>
               </span>
             </button>
@@ -224,7 +224,7 @@ const Account: FC = () => {
                 setValues({ ...inputValues, name: e.target.value })
               }
               value={inputValues.name}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
+              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -240,7 +240,7 @@ const Account: FC = () => {
                 setValues({ ...inputValues, dept: e.target.value })
               }
               value={inputValues.dept}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
+              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -255,12 +255,12 @@ const Account: FC = () => {
                 setValues({ ...inputValues, bio: e.target.value })
               }
               value={inputValues.bio}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none text-sm px-4 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white resize-none"
+              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white resize-none"
             />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none"
+            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
           >
             Save Changes
           </button>
@@ -286,7 +286,7 @@ const Account: FC = () => {
                 setValues({ ...inputValues, old_password: e.target.value })
               }
               value={inputValues.old_password}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
+              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -303,13 +303,13 @@ const Account: FC = () => {
                 setValues({ ...inputValues, password: e.target.value })
               }
               value={inputValues.password}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
+              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
             <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none"
+            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
           >
             Change Password
           </button>
@@ -319,7 +319,7 @@ const Account: FC = () => {
         <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden mt-4">
           Danger Zone
         </h2>
-        <button className=" w-[9rem] px-4 p-2 mt-4 dark:bg-red-800 bg-red-600 text-slate-300 font-semibold text-xs rounded hover:opacity-80 outline-none focus:outline-none uppercase flex space-x-1 items-center justify-center">
+        <button className=" w-[9rem] px-4 p-2 mt-4 dark:bg-red-800 bg-red-600 text-slate-300 font-semibold text-xs rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0 uppercase flex space-x-1 items-center justify-center">
           <span>Delete Account</span>
         </button>
       </div>

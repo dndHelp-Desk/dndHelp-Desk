@@ -1,9 +1,9 @@
-import {FC, useState } from "react";
+import { FC, useState } from "react";
 import { BsFillChatSquareTextFill, BsXSquareFill } from "react-icons/bs";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import lightLogo from "./images/dndHelp-Desk_Light.png";
 
-const Help:FC = () => {
+const Help: FC = () => {
   const [chatStatus, setChat] = useState<boolean>(false);
   const closeChatRef = useClickOutside(() => {
     setChat(false);
@@ -17,7 +17,7 @@ const Help:FC = () => {
         chatStatus === true
           ? "h-[30rem] w-[22rem]"
           : "cursor-pointer hover:bg-slate-800 h-14 w-20"
-      } transition-all flex bg-slate-900 rounded-xl overflow-hidden fixed right-6 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl border border-slate-500`}
+      } transition-all flex bg-slate-900 rounded overflow-hidden fixed right-6 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl border border-slate-500`}
     >
       <BsFillChatSquareTextFill
         className={`text-2xl text-slate-300 ${chatStatus ? "hidden" : "flex"}`}
@@ -25,7 +25,7 @@ const Help:FC = () => {
       {/**Open Chat =========================================== */}
       <div
         onClick={() => setChat(true)}
-        className={`h-full w-full absolute bg-transparent z-[999] rounded-xl ${
+        className={`h-full w-full absolute bg-transparent z-[999] rounded ${
           chatStatus === true ? "hidden" : "flex"
         }`}
       ></div>
@@ -54,7 +54,7 @@ const Help:FC = () => {
         {/***Contents =================================== */}
         <form className="h-[23rem] w-[90%] m-auto bg-slate-800 rounded-lg flex flex-col p-1">
           <div className="w-full h-[90%]"></div>
-          <div className="w-full h-[10%] bg-slate-900 rounded-xl"></div>
+          <div className="w-full h-[10%] bg-slate-900 rounded"></div>
         </form>
       </div>
     </div>

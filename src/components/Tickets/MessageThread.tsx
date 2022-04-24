@@ -76,7 +76,8 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
     message: "<p>Type here ...</p>",
     subject:
       threadMessage.length >= 1 &&
-      threadMessage.filter((msg: any) => msg.message_position === 1)[0]?.category,
+      threadMessage.filter((msg: any) => msg.message_position === 1)[0]
+        ?.category,
     status: "Status",
     message_position: threadMessage.length + 1,
     ticket_id: threadId,
@@ -543,10 +544,12 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 </div>
               </div>
               <div className="mt-2 py-2 dark:text-slate-400 text-slate-700 border-b dark:border-slate-800 border-slate-200 p-2 text-[13px]">
-                {message.message &&(<div
-                  dangerouslySetInnerHTML={{ __html: message?.message }}
-                  className="messageContainer dark:marker:text-slate-400 marker:text-slate-800 list-disc"
-                ></div>)}
+                {message.message && (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: message?.message }}
+                    className="messageContainer dark:marker:text-slate-400 marker:text-slate-800 list-disc"
+                  ></div>
+                )}
               </div>
             </div>
           </div>
@@ -566,16 +569,16 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <details className="relative flex items-center space-x-2 outline-none focus:outline-none">
-              <summary className="text-xs leading-6 dark:text-slate-300 text-slate-900 dark:font-light font-medium font-sans select-none cursor-pointer outline-none focus:outline-none">
+              <summary className="text-[0.65rem] leading-6 dark:text-slate-300 text-slate-900 font-bold uppercase select-none cursor-pointer outline-none focus:outline-none">
                 Details
               </summary>
 
               <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-50 border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
                 <div>
-                  <h2 className="dark:text-slate-300 text-slate-700 text-sm font-semibold">
+                  <h2 className="dark:text-slate-300 text-slate-900 text-sm font-semibold">
                     Ticket Details
                   </h2>
-                  <ul className="dark:text-slate-400 text-slate-500 mt-2 space-y-4 capitalize">
+                  <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
                     <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b className="hidden sm:flex">Open Date : </b>
                       {firstMessage &&
@@ -616,7 +619,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
             {/**Subject And Scroll To Last Message Details =========================== */}
             <div className="dark:font-medium font-semibold dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
-              <span className="uppercase text-[0.6rem]">
+              <span className="uppercase text-[0.6rem] font-bold">
                 {firstMessage && firstMessage[0]?.category}
                 {(!threadId || threadMessage.length <= 0) &&
                   "Nothing is selected"}
@@ -639,7 +642,10 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
           {
             //Final Solution If there is one =====================
             firstMessage && firstMessage[0]?.status === "solved" && (
-              <div className="w-full text-slate-400 text-sm leading-6 flex transition-all">
+              <div
+                ref={scrollToLastMessage}
+                className="w-full text-slate-400 text-sm leading-6 flex transition-all"
+              >
                 {/**Message ====================== */}
                 <div className="w-[95%] 2xl:w-full bg-tranparent px-6 pb-2 relative">
                   <div className="absolute left-[-1rem] top-0 h-[2rem] rounded dark:bg-slate-700 bg-slate-200 border dark:border-slate-500 border-slate-500 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
@@ -652,7 +658,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                     <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
                       <div className="flex w-full h-full items-center justify-end sm:pr-10 pt-2">
                         <span className="flex space-x-2">
-                          <span className="text-xs dark:text-slate-400 text-slate-700  font-medium">
+                          <span className="text-[0.7rem] dark:text-slate-400 text-slate-700  font-medium">
                             {`${new Date(
                               firstMessage && firstMessage[0]?.closed_time
                             ).toLocaleString()}`}
@@ -731,7 +737,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 <abbr title="Upload Your Recording">
                   <label
                     htmlFor="replyRecording"
-                    className="w-8 h-8 rounded-l border border-r-0 border-slate-200 dark:border-slate-800 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500 cursor-pointer"
+                    className="w-8 h-8 rounded-l border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500 cursor-pointer"
                   >
                     <BiMicrophone className="text-base" />
                     <input
@@ -756,7 +762,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className="w-24 md:w-28 h-8 pt-2 rounded-r border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
+                    className="w-24 md:w-28 h-8 pt-2 rounded-r border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
                   >
                     <option
                       className="p-2"

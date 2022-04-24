@@ -1,4 +1,4 @@
-import React, { FC,useState,useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import {
   BsFillTelephoneFill,
   BsFillPersonFill,
@@ -10,20 +10,20 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
 interface Props {
-  edit:any;
-  setEdit:any;
-  selectedArray:any;
+  edit: any;
+  setEdit: any;
+  selectedArray: any;
 }
 
-const EditContact:FC<Props> = ({ edit, setEdit, selectedArray }) => {
-  const allContacts = useSelector((state:RootState) => state.Tickets.contacts);
+const EditContact: FC<Props> = ({ edit, setEdit, selectedArray }) => {
+  const allContacts = useSelector((state: RootState) => state.Tickets.contacts);
   const closeCanvasRef = useOnClickOutside(() => {
     setEdit(false);
   });
   const [newContactValue, setValue] = useState<any>({
-    name:"",
-    email:"",
-    phoneNumber:"",
+    name: "",
+    email: "",
+    phoneNumber: "",
   });
 
   useEffect(() => {
@@ -40,11 +40,11 @@ const EditContact:FC<Props> = ({ edit, setEdit, selectedArray }) => {
           (contact) => contact.id === selectedArray[0]
         )[0].phone,
       });
-  },[allContacts,selectedArray]);
+  }, [allContacts, selectedArray]);
 
   //Submit ===============
   let ticketId = selectedArray[0];
-  const saveContact = (e:React.SyntheticEvent) => {
+  const saveContact = (e: React.SyntheticEvent) => {
     e.preventDefault();
     editContact(
       ticketId,
@@ -57,7 +57,7 @@ const EditContact:FC<Props> = ({ edit, setEdit, selectedArray }) => {
       email: "",
       phoneNumber: "",
     });
-    setEdit(false)
+    setEdit(false);
   };
 
   //Component =========================
@@ -78,10 +78,10 @@ const EditContact:FC<Props> = ({ edit, setEdit, selectedArray }) => {
           onSubmit={(e) => saveContact(e)}
           className="space-y-6 h-full w-full max-w-[23rem] flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
         >
-          <h3 className="text-lg text-center dark:text-slate-400 text-slate-500 capitalize font-bold font-sans">
+          <h3 className="text-base text-center dark:text-slate-300 text-slate-800 uppercase font-bold font-sans">
             edit contact
           </h3>
-          <div className="h-11 w-full min-w-[15rem] rounded-md dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="text"
               name="name"
@@ -93,11 +93,11 @@ const EditContact:FC<Props> = ({ edit, setEdit, selectedArray }) => {
                 setValue({ ...newContactValue, name: e.target.value })
               }
               value={newContactValue.name}
-              className="bg-transparent w-full h-full rounded-md dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-md dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="text"
               name="email"
@@ -109,11 +109,11 @@ const EditContact:FC<Props> = ({ edit, setEdit, selectedArray }) => {
                 setValue({ ...newContactValue, email: e.target.value })
               }
               value={newContactValue.email}
-              className="bg-transparent w-full h-full rounded-md dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-md dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="tel"
               name="number"
@@ -124,13 +124,13 @@ const EditContact:FC<Props> = ({ edit, setEdit, selectedArray }) => {
               }
               value={newContactValue.phoneNumber}
               placeholder="Phone Number ..."
-              className="bg-transparent w-full h-full rounded-md dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsFillTelephoneFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-10 px-6 rounded-md flex justify-center items-center text-slate-300  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
+            className="bg-blue-700 min-w-[8rem] h-10 px-6 rounded flex justify-center items-center text-slate-100  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
           >
             Edit Contact
           </button>

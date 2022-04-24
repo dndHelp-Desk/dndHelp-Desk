@@ -1,4 +1,4 @@
-import {FC, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import { BsBell, BsJustifyLeft, BsGear } from "react-icons/bs";
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
@@ -21,8 +21,10 @@ import Notification from "./Notifications & Chat/Notification";
 import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";
 
-const MainComponent:FC = () => {
-  const logged = useSelector((state:RootState) => state.UserInfo.authenticated);
+const MainComponent: FC = () => {
+  const logged = useSelector(
+    (state: RootState) => state.UserInfo.authenticated
+  );
   const routeLocation = useSelector(
     (state: RootState) => state.UserInfo.routeLocation
   );
@@ -37,7 +39,7 @@ const MainComponent:FC = () => {
   );
   const [openNotifications, setOpenNotification] = useState<boolean>(false);
   const location = useLocation();
-  const dispatch:AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   //Filter Unread messages =======================
   useEffect(() => {
@@ -110,7 +112,7 @@ const MainComponent:FC = () => {
                   user[0].companies
                     .split(",")
                     .some(
-                      (msg:any) =>
+                      (msg: any) =>
                         msg.toLowerCase().replace(/\s/g, "") ===
                         ticket.branch_company.toLowerCase().replace(/\s/g, "")
                     )
@@ -170,10 +172,10 @@ const MainComponent:FC = () => {
               </Link>
 
               {/**Change Theme =========================== */}
-              <div className="h-9 w-32 p-1 rounded dark:bg-[#0f172a91] bg-slate-200 overflow-hidden relative">
+              <div className="h-9 w-32 p-[0.2rem] rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 overflow-hidden relative">
                 <div className="w-full h-full flex">
                   <div
-                    className={`h-full w-2/4 bg-white dark:bg-slate-700 border dark:border-slate-700 border-slate-200 rounded shadow-lg transition-all duration-500 ${
+                    className={`h-full w-2/4 bg-white dark:bg-slate-700 border dark:border-slate-600 border-slate-300 rounded-sm shadow-lg transition-all duration-500 ${
                       theme === "dark" && "translate-x-[100%] "
                     }`}
                   ></div>
@@ -187,7 +189,7 @@ const MainComponent:FC = () => {
                         JSON.stringify("light")
                       );
                     }}
-                    className="flex-[1] bg-transparent outline-none focus:outline-none flex items-center justify-center space-x-1 p-1 px-2 text-xs text-slate-900 dark:text-slate-300 font-medium"
+                    className="flex-[1] bg-transparent outline-none focus:outline-none flex items-center justify-center space-x-1 p-1 px-1 text-xs text-slate-900 dark:text-slate-300 font-medium"
                   >
                     <HiOutlineSun className="text-sm" />
                     <span>Light</span>
@@ -309,7 +311,7 @@ const MainComponent:FC = () => {
             {/*Notifications & Controls ====================*/}
             <div className="flex items-center h-full space-x-2">
               {/**Settings ================================================ */}
-              <div className="border dark:border-slate-700 border-slate-200 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold group">
+              <div className="rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold group">
                 <abbr title="Settings">
                   <BsGear />
                 </abbr>
@@ -321,7 +323,7 @@ const MainComponent:FC = () => {
               <abbr title="Notifications">
                 <button
                   onClick={() => setOpenNotification(true)}
-                  className="border dark:border-slate-700 border-slate-200 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <BsBell />
                   {(unread.length >= 1 || notificationMsgs.length >= 1) && (

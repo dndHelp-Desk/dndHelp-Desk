@@ -68,17 +68,17 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
       {/**Add new Contact =========================================== */}
       <div
         ref={contactRef}
-        className="max-h-[35rem] h-[90%] w-[25rem] dark:bg-slate-900 bg-slate-100 border border-slate-500 flex justify-center rounded-xl p-6 shadow-2xl"
+        className="max-h-[35rem] h-[90%] w-[25rem] dark:bg-slate-900 bg-white border border-slate-500 flex justify-center rounded p-6 shadow-2xl"
       >
         <form
           action=""
           onSubmit={(e) => handleNewContact(e)}
           className="space-y-6 h-full w-full max-w-[23rem] flex flex-col items-center justify-center mt-2 dark:autofill:bg-slate-900"
         >
-          <h3 className="text-lg text-center dark:text-slate-400 text-slate-500 capitalize font-bold font-sans">
+          <h3 className="text-lg text-center dark:text-slate-400 text-slate-900 uppercase font-bold font-sans">
             add new contact
           </h3>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="text"
               name="name"
@@ -90,11 +90,11 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
                 setValue({ ...newContactValue, name: e.target.value })
               }
               value={newContactValue.name}
-              className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="email"
               name="email"
@@ -107,11 +107,11 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
                 setValue({ ...newContactValue, email: e.target.value })
               }
               value={newContactValue.email}
-              className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="tel"
               name="number"
@@ -123,11 +123,11 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
               }
               value={newContactValue.phoneNumber}
               placeholder="Phone Number ..."
-              className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsFillTelephoneFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="text"
               name="company"
@@ -139,13 +139,13 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
                 setValue({ ...newContactValue, company: e.target.value })
               }
               value={newContactValue.company}
-              className="bg-transparent w-full h-full rounded-xl dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsPinMapFill className="absolute text-slate-500 top-[0.85rem] text-base left-4" />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-10 px-6 rounded-lg flex justify-center items-center text-slate-300  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
+            className="bg-blue-700 min-w-[8rem] h-10 px-6 rounded flex justify-center items-center text-slate-100  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
           >
             Add Contact
           </button>

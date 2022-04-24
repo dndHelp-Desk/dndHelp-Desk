@@ -104,13 +104,12 @@ const Tables: FC<Props> = ({ data }) => {
     document.body.removeChild(link);
   };
 
-  
   //Component ==========================================
   return (
     <div className="col-span-3 h-[32rem] lg:col-span-2 rounded-md flex flex-col gap-2">
       <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-md overflow-hidden shadow p-1">
         <div className="h-12 flex justify-between items-center px-4">
-          <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-medium font-semibold uppercase tracking-normal">
+          <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-wider">
             {option === "agent_email" ? "Agents" : "Company"}
           </h2>
           <div className="flex space-x-2">
@@ -127,7 +126,7 @@ const Tables: FC<Props> = ({ data }) => {
                 let code = prompt("Enter Admin Pin");
                 code === "0001" ? window.print() : alert("Wrong Pin");
               }}
-              className="h-8 w-20 rounded text-xs p-2 bg-blue-600  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded text-xs p-2 bg-blue-700  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >
               <span>Print</span>
               <BsPrinter className="text-sm text-white" />
@@ -140,7 +139,7 @@ const Tables: FC<Props> = ({ data }) => {
                   ? downloadFile("Tickects Report.csv", csv)
                   : alert("Wrong Pin");
               }}
-              className="h-8 w-20 rounded text-xs p-2 bg-blue-600  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded text-xs p-2 bg-blue-700  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >
               <span>CSV</span>
               <BsCloudDownload className="text-sm text-white" />

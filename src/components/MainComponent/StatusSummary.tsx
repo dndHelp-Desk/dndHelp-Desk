@@ -1,9 +1,11 @@
-import {FC} from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
-const StatusSummary:FC = () => {
-  const filteredTickets = useSelector((state:RootState) => state.Tickets.filteredTickets);
+const StatusSummary: FC = () => {
+  const filteredTickets = useSelector(
+    (state: RootState) => state.Tickets.filteredTickets
+  );
 
   const data =
     filteredTickets.length >= 1 &&
@@ -16,7 +18,7 @@ const StatusSummary:FC = () => {
                 new Date(
                   new Date().getFullYear(),
                   new Date().getMonth(),
-                  0
+                  1
                 ).getTime() &&
               new Date(data.date).getTime() <=
                 new Date(
@@ -32,7 +34,7 @@ const StatusSummary:FC = () => {
                   new Date(
                     new Date().getFullYear(),
                     new Date().getMonth(),
-                    0
+                    1
                   ).getTime() &&
                 new Date(data.date).getTime() <=
                   new Date(
@@ -53,7 +55,7 @@ const StatusSummary:FC = () => {
                 new Date(
                   new Date().getFullYear(),
                   new Date().getMonth(),
-                  0
+                  1
                 ).getTime() &&
               new Date(data.date).getTime() <=
                 new Date(
@@ -61,7 +63,7 @@ const StatusSummary:FC = () => {
                   new Date().getMonth(),
                   31
                 ).getTime() &&
-              data.reopened === true
+              data.status === "reopened"
           ).length /
             filteredTickets.filter(
               (data) =>
@@ -69,7 +71,7 @@ const StatusSummary:FC = () => {
                   new Date(
                     new Date().getFullYear(),
                     new Date().getMonth(),
-                    0
+                    1
                   ).getTime() &&
                 new Date(data.date).getTime() <=
                   new Date(
@@ -90,7 +92,7 @@ const StatusSummary:FC = () => {
                 new Date(
                   new Date().getFullYear(),
                   new Date().getMonth(),
-                  0
+                  1
                 ).getTime() &&
               new Date(data.date).getTime() <=
                 new Date(
@@ -106,7 +108,7 @@ const StatusSummary:FC = () => {
                   new Date(
                     new Date().getFullYear(),
                     new Date().getMonth(),
-                    0
+                    1
                   ).getTime() &&
                 new Date(data.date).getTime() <=
                   new Date(
@@ -127,7 +129,7 @@ const StatusSummary:FC = () => {
                 new Date(
                   new Date().getFullYear(),
                   new Date().getMonth(),
-                  0
+                  1
                 ).getTime() &&
               new Date(data.date).getTime() <=
                 new Date(
@@ -143,7 +145,7 @@ const StatusSummary:FC = () => {
                   new Date(
                     new Date().getFullYear(),
                     new Date().getMonth(),
-                    0
+                    1
                   ).getTime() &&
                 new Date(data.date).getTime() <=
                   new Date(
@@ -156,14 +158,14 @@ const StatusSummary:FC = () => {
         ).toFixed(1),
         name: "Open",
       },
-    ].sort((a:any, b:any)=>{
+    ].sort((a: any, b: any) => {
       return a.value - b.value;
     });
 
   //Component =========================
   return (
     <div className="row-span-3 flex flex-col justify-center items-center">
-      <h2 className="text-center uppercase font-semibold text-[0.7rem] dark:text-slate-300 text-slate-800">
+      <h2 className="text-center uppercase font-bold text-[0.7rem] dark:text-slate-300 text-slate-800">
         {
           filteredTickets.filter(
             (data) =>
@@ -171,7 +173,7 @@ const StatusSummary:FC = () => {
                 new Date(
                   new Date().getFullYear(),
                   new Date().getMonth(),
-                  0
+                  1
                 ).getTime() &&
               new Date(data.date).getTime() <=
                 new Date(
@@ -185,7 +187,7 @@ const StatusSummary:FC = () => {
       </h2>
       <div className="w-[7rem] h-[8rem] mt-3 flex flex-col bg-gradient-to-t from-blue-700 to-blue-500 rounded-b shadow-lg">
         {data &&
-          data?.map((status:any, index:number) => {
+          data?.map((status: any, index: number) => {
             return (
               <div
                 style={{ height: `calc(${status.value}% + 8px)` }}

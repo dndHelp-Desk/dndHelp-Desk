@@ -61,7 +61,7 @@ const Home: FC = () => {
     [1, 2, 3, 4, 5].map((index) => {
       return (
         <div key={index} className="w-full">
-          <small className="text-slate-700 dark:text-slate-400 text-xs">
+          <small className="text-slate-700 uppercase font-medium dark:text-slate-400 text-[0.6rem]">
             No Data
           </small>
           <div className="w-full flex items-center justify-between">
@@ -109,20 +109,16 @@ const Home: FC = () => {
               }`}
             ></div>
           </div>
-          <p className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-800 w-36">
-            <abbr title={user.name}>{user.name}</abbr>
-            <br />
-            <span className="text-[0.6rem]">{user.dept}</span>
-          </p>
-          <p className="text-xs font-semibold uppercase flex justify-end flex-[2] space-x-1 dark:text-slate-400 text-slate-800">
-            <small>
-              {filteredTickets.length >= 1 &&
-                filteredTickets.filter(
-                  (ticket) => ticket.agent_name === user.name
-                ).length}{" "}
-              Tickets
-            </small>
-          </p>
+          <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-bold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
+            <abbr title={user.name}>
+              <p>{user.name}</p>
+            </abbr>
+            <abbr title={user.email}>
+              <p className="text-[0.7rem] font-medium italic dark:text-slate-400 text-slate-600 lowercase">
+                {user.email}
+              </p>
+            </abbr>
+          </div>
         </div>
       );
     });
@@ -142,7 +138,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase">
                 Top 5 Categories
               </h1>
-              <p className="text-center text-xs text-slate-700 dark:text-slate-400 mt-2">
+              <p className="text-center text-xs font-medium text-slate-700 dark:text-slate-400 mt-2">
                 Actual figures can be found on the reports page.
               </p>
             </div>
@@ -151,7 +147,7 @@ const Home: FC = () => {
                 categoriesData?.map((element: any, index) => {
                   return (
                     <div key={index} className="w-full">
-                      <small className="text-slate-700 dark:text-slate-400 text-[0.7rem]">
+                      <small className="text-slate-800 dark:text-slate-400 text-[0.6rem] font-medium uppercase">
                         {element.name}
                       </small>
                       <div className="w-full flex items-center justify-between">
@@ -202,7 +198,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-1">
                 Tickets Per Status
               </h1>
-              <p className="dark:text-slate-400 text-slate-700 text-center text-xs mt-2 px-2">
+              <p className="dark:text-slate-400 text-slate-700 text-center text-xs font-medium mt-2 px-2">
                 Hover your mouse on top of each slice below to see the
                 percentages, for more analytics please visit the reports page.
               </p>
@@ -228,7 +224,7 @@ const Home: FC = () => {
           {/**Messages Reply Count ====================== */}
           <div className="col-span-1 flex justify-center items-center">
             <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-md p-2">
-              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
+              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded">
                 <BsEnvelope />
               </div>
               <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
@@ -239,8 +235,8 @@ const Home: FC = () => {
           </div>
           {/**Reminders  Count ====================== */}
           <div className="col-span-1 flex justify-center items-center">
-            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-md p-2">
-              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded-md">
+            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded p-2">
+              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded">
                 <BsAlarm />
               </div>
               <h2 className="dark:text-slate-300 text-slate-700 uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
@@ -331,9 +327,9 @@ const Home: FC = () => {
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
                 Progress
               </h3>
-              <p className="text-xs dark:text-slate-400 text-slate-700">
+              <p className="text-xs font-normal dark:text-slate-400 text-slate-700">
                 You managed to get{" "}
-                <b>
+                <span className="text-slate-900 dark:text-slate-300 font-semibold">
                   {" "}
                   {(
                     (filteredTickets.filter(
@@ -370,16 +366,18 @@ const Home: FC = () => {
                     100
                   ).toFixed(1)}
                   %
-                </b>{" "}
+                </span>{" "}
                 of your tickets resolved.
                 <br /> Currently you have{" "}
-                <b>
+                <span className="text-slate-900 dark:text-slate-300 font-semibold">
                   {" "}
                   {filteredTickets.length >= 1 &&
                     filteredTickets.filter((ticket) => ticket.status === "open")
                       .length}
-                </b>{" "}
-                open tickets, and <b>{overDue.length}</b> overdue tickets.
+                </span>{" "}
+                open tickets, and{" "}
+                <span className="text-slate-900 dark:text-slate-300 font-semibold">{overDue.length}</span> overdue
+                tickets.
               </p>
               <div
                 role="progressbar"

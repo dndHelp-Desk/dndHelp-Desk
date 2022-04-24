@@ -1,10 +1,12 @@
-import {FC} from "react";
-import {HiOutlineAnnotation} from "react-icons/hi"
+import { FC } from "react";
+import { HiOutlineAnnotation } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
-const MostRecent:FC = () => {
-  const filteredTickets = useSelector((state:RootState) => state.Tickets.filteredTickets);
+const MostRecent: FC = () => {
+  const filteredTickets = useSelector(
+    (state: RootState) => state.Tickets.filteredTickets
+  );
   let activities = filteredTickets;
   const noData = [
     {
@@ -55,7 +57,7 @@ const MostRecent:FC = () => {
                       {activity.category} : {activity.ticket_id}
                     </span>
                     <div
-                      className={`w-16 px-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 text-[0.6rem] text-slate-800 dark:text-slate-400 flex justify-center items-center`}
+                      className={`w-16 px-2 py-[0.2rem] rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 text-[0.6rem] text-slate-800 dark:text-slate-300 flex justify-center items-center`}
                     >
                       {activity.status}
                     </div>
@@ -87,7 +89,7 @@ const MostRecent:FC = () => {
                       {activity.category} : {activity.ticket_id}
                     </span>
                     <div
-                      className={`w-16 px-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 text-[0.6rem] text-slate-800 dark:text-slate-400 flex justify-center items-center`}
+                      className={`w-16 px-2 py-[0.2rem] rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 text-[0.6rem] text-slate-800 dark:text-slate-400 flex justify-center items-center`}
                     >
                       {activity.status}
                     </div>

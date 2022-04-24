@@ -11,10 +11,6 @@ module.exports = {
       "2xl": "1350px",
       "3xl": "1700px",
     },
-    fontFamily: {
-      sans: ["Poppins", "sans-serif"],
-      serif: ["Manrope", "sans-serif"],
-    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

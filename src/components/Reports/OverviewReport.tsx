@@ -2,7 +2,7 @@ import { FC, useState, useMemo } from "react";
 import { FaChartBar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
-import CategoryChart from "./CategoryChart";
+import CategoryProgress from "./CategoryProgress";
 import TrafficChart from "./TrafficChart";
 
 export type data = any;
@@ -98,7 +98,7 @@ const OverviewReport: FC<data> = ({ data }) => {
   return (
     <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md shadow">
-        <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-medium font-semibold uppercase tracking-normal">
+        <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Statistics
         </h2>
         <div className="mt-6 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
@@ -176,7 +176,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             </span>{" "}
             <FaChartBar className="text-blue-700 text-lg" />
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs font-medium text-slate-600 dark:text-slate-400">
             More features will be added soon in the meantime explore the reports
             by making use of filters. You can find your current satisfaction
             rating below.
@@ -236,18 +236,20 @@ const OverviewReport: FC<data> = ({ data }) => {
         </div>
       </div>
 
-      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md shadow flex flex-col gap-2 px-4 h-[20rem] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-        <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-medium font-semibold uppercase tracking-normal">
+      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md shadow flex flex-col gap-2 px-4 h-[20rem]">
+        <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider flex-[2]">
           Tickets Per Category
         </h2>
-        <CategoryChart data={data} />
+        <div className="flex-[8] w-full px-4 overflow-hidden overflow-y-scroll ">
+          <CategoryProgress data={data} />
+        </div>
       </div>
 
       {/**Traffic trend chart ======================== */}
       <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md shadow">
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
-            <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-medium font-semibold uppercase tracking-normal">
+            <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider">
               AVG Traffic
             </h2>
             <select

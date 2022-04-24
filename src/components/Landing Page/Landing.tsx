@@ -1,4 +1,4 @@
-import {FC, useState,useRef } from "react";
+import { FC, useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import heroTop from "./images/heroTop.webp";
@@ -11,8 +11,8 @@ import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
 import Help from "../Others/Help";
 import Cookies from "./Cookies";
 
-export const Landing:FC = () => {
-  const scrollToFeatures = useRef<HTMLDivElement|null>(null);
+const Landing: FC = () => {
+  const scrollToFeatures = useRef<HTMLDivElement | null>(null);
   const [menu, setMenu] = useState<boolean>(false);
   const smallMenuRef = useOnClickOutside(() => {
     setMenu(false);
@@ -20,9 +20,9 @@ export const Landing:FC = () => {
 
   //Scroll to Features =====
   const features = () => {
-     if(scrollToFeatures && scrollToFeatures.current) {
-       scrollToFeatures.current.scrollIntoView({ behavior: "smooth" });
-     }
+    if (scrollToFeatures && scrollToFeatures.current) {
+      scrollToFeatures.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   //Component =====================
@@ -217,7 +217,7 @@ export const Landing:FC = () => {
           or resourcefulness was key.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-          <article className="bg-slate-200 shadow-lg col-span-1 h-[13rem] rounded p-4">
+          <article className="bg-slate-200 shadow-lg col-span-1 min-h-[13rem] rounded p-4">
             <h6 className="test-base text-slate-900 font-semibold">
               Resolve tickets with more accuracy.
             </h6>
@@ -226,7 +226,7 @@ export const Landing:FC = () => {
               in-house expert for an accurate response.
             </p>
           </article>
-          <article className="bg-slate-200 shadow-lg col-span-1 h-[13rem] rounded p-4">
+          <article className="bg-slate-200 shadow-lg col-span-1 min-h-[13rem] rounded p-4">
             <h6 className="test-base text-slate-900 font-semibold">
               Address Service Level Agreements.
             </h6>
@@ -236,7 +236,7 @@ export const Landing:FC = () => {
               premium, gets the appropriate customer service.
             </p>
           </article>
-          <article className="bg-slate-200 shadow-lg col-span-1 h-[13rem] rounded p-4">
+          <article className="bg-slate-200 shadow-lg col-span-1 min-h-[13rem] rounded p-4">
             <h6 className="test-base text-slate-900 font-semibold">
               Resolve tickets faster.
             </h6>
@@ -247,7 +247,7 @@ export const Landing:FC = () => {
               accessing product specs.
             </p>
           </article>
-          <article className="bg-slate-200 shadow-lg col-span-1 h-[13rem] rounded p-4">
+          <article className="bg-slate-200 shadow-lg col-span-1 min-h-[13rem] rounded p-4">
             <h6 className="test-base text-slate-900 font-semibold">
               Resolve tickets consistently.
             </h6>
@@ -266,3 +266,4 @@ export const Landing:FC = () => {
   );
 };
 
+export default Landing

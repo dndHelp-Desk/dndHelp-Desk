@@ -1,4 +1,4 @@
-import {FC, useState } from "react";
+import { FC, useState } from "react";
 
 import Help from "../Others/Help";
 import darkLogo from "./images/dndHelp-Desk.webp";
@@ -14,10 +14,10 @@ import {
 //Firestore ===================
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 
-const CompanySetUp:FC = () => {
+const CompanySetUp: FC = () => {
   const navigate = useNavigate();
   const auth = getAuth();
-  const [setUpValues, setValues] = useState<any|null>({
+  const [setUpValues, setValues] = useState<any | null>({
     user_name: "",
     user_email: "",
     user_password: "",
@@ -34,7 +34,7 @@ const CompanySetUp:FC = () => {
   const db = getFirestore();
 
   //collectionsRef =======================================
-  let membersRef:any =
+  let membersRef: any =
     setUpValues.company_name &&
     collection(
       db,
@@ -80,7 +80,11 @@ const CompanySetUp:FC = () => {
     );
 
   //Sing Up Or Create New Accouunt
-  const handleSubmit = (e: React.SyntheticEvent, email:string, password:string) => {
+  const handleSubmit = (
+    e: React.SyntheticEvent,
+    email: string,
+    password: string
+  ) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password).then((data) => {
       if (data) {
@@ -110,7 +114,7 @@ const CompanySetUp:FC = () => {
         addDoc(companyDetailsRef, {
           name: setUpValues.company_name,
           address: setUpValues.companany_address,
-          subscription: "Pro Plus",
+          subscription: window.localStorage.getItem("plan"),
         });
 
         //Support Categories ==========================
@@ -137,7 +141,7 @@ const CompanySetUp:FC = () => {
           category: "Welcome, Get Started",
           branch_company: setUpValues.company_name,
           message:
-            "<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple< To see messages from your customers in HelpDesk, just set up forwarding from your support inbox.",
+            '<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple</h2><br/> <p>Please watch the video below to get started. We have set default settings for you but there can be adjusted, before changing anything please watch the video to make informed changes.</p><br/> <video width="400" controls><source src="//player.vimeo.com/video/372340634?title=0&portrait=0&byline=0&autoplay=1" type="video/mp4"><source src="//player.vimeo.com/video/372340634?title=0&portrait=0&byline=0&autoplay=1" type="video/ogg">Your browser does not support HTML video.</video>',
           time: `${new Date().getHours()}:${new Date().getMinutes()}`,
           ticket_id: "#123456",
           status: "open",
@@ -318,7 +322,7 @@ const CompanySetUp:FC = () => {
                 name="company_name"
                 id="company_name"
                 placeholder="dndHelp-Desk"
-                pattern="[A-Za-z]*"
+                pattern="[A-Za-z0-9\s]*"
                 title="It must contain letters only and space if needed."
                 required
                 value={setUpValues.company_name}

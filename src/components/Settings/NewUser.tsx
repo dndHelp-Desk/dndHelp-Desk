@@ -99,14 +99,14 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 left-0 bottom-0 bg-inherit backdrop-blur-sm ${
+      className={`fixed top-0 right-0 left-0 bottom-0 bg-[#0813227e] backdrop-blur-sm ${
         newUserModal ? "flex" : "hidden"
       } items-center justify-center z-[999]`}
     >
       {/**Add New User ==================== */}
       <div
         ref={closeModalRef}
-        className="w-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center justify-center rounded-md p-4"
+        className="w-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center justify-center rounded p-4"
       >
         <h2 className="dark:text-slate-300 text-slate-800 text-base font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden uppercase">
           Add New User
@@ -116,7 +116,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
           onSubmit={(e) => handleSubmit(e)}
           className="mt-2 space-y-3 pb-5 w-[90%] flex flex-col items-center"
         >
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="text"
               name="name"
@@ -128,11 +128,11 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, name: e.target.value })
               }
               value={inputValues.name}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="email"
               name="email"
@@ -144,11 +144,11 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, email: e.target.value })
               }
               value={inputValues.email}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="password"
               name="password"
@@ -161,16 +161,16 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, password: e.target.value })
               }
               value={inputValues.password}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsLockFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <select
               onChange={(e) =>
                 setValues({ ...inputValues, access: e.target.value })
               }
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 custom-shadow"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 "
             >
               <option className="capitalize p-2" value="">
                 Access
@@ -190,7 +190,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
           <div
             className={` ${
               inputValues.access === "client" ? "" : "hidden"
-            } h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative`}
+            } h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative`}
           >
             <input
               type="text"
@@ -202,11 +202,11 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, companies: e.target.value })
               }
               value={inputValues.companies}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-lg dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="text"
               name="department"
@@ -218,13 +218,13 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, dept: e.target.value })
               }
               value={inputValues.dept}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded-md hover:opacity-80 outline-none focus:outline-none uppercase"
+            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none uppercase"
           >
             Create User
           </button>

@@ -99,7 +99,7 @@ const Profile = () => {
         <button
           className={`text-xs ${
             showChange ? "" : "hidden"
-          } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded-lg flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
+          } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
           type="submit"
         >
           <BsBoxArrowUp />
@@ -108,10 +108,10 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-10 w-10  rounded-lg flex justify-center items-center cursor-pointer"
+            className="h-10 w-10  rounded flex justify-center items-center cursor-pointer"
           >
             <img
-              className="rounded-md bg-slate-500 h-full w-full object-cover object-center border-2 dark:border-blue-300 border-slate-900"
+              className="rounded bg-slate-500 h-full w-full object-cover object-center border-2 dark:border-blue-300 border-slate-900"
               src={photoURL}
               alt="profile"
             />

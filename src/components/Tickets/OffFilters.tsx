@@ -7,6 +7,7 @@ interface Props {
   setfiltersModal: any;
   filtersModal: any;
   setFilters: any;
+  setTickets: any;
 }
 
 const OffCanvasMenu: FC<Props> = ({
@@ -14,6 +15,7 @@ const OffCanvasMenu: FC<Props> = ({
   setfiltersModal,
   filters,
   setFilters,
+  setTickets,
 }) => {
   const closeCanvasRef = useOnClickOutside(() => {
     setfiltersModal(false);
@@ -32,7 +34,11 @@ const OffCanvasMenu: FC<Props> = ({
           filtersModal ? "" : "hidden"
         } transition-all`}
       >
-        <Filters filters={filters} setFilters={setFilters} />
+        <Filters
+          filters={filters}
+          setFilters={setFilters}
+          setTickets={setTickets}
+        />
       </div>
     </div>
   );

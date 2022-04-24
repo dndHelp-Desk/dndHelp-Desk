@@ -71,8 +71,102 @@ const EmailAccounts: FC = () => {
   //Componet  =======================
   return (
     <section className="w-full h-full py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
+      {/**New Account ============================================ */}
+      <div className="col-span-1 h-full min-h-[45rem] overflow-hidden px-4 rounded bg-white dark:bg-slate-800 ">
+        <form
+          action=""
+          onSubmit={(e) => handleNewContact(e)}
+          className="space-y-6 h-full w-full flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
+        >
+          <h3 className="text-lg text-center dark:text-slate-400 text-slate-800 capitalize font-bold font-sans">
+            new account
+          </h3>
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autoComplete="nope"
+              placeholder="Name ..."
+              onChange={(e) =>
+                setValue({ ...newAccountValue, name: e.target.value })
+              }
+              value={newAccountValue.name}
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+            />
+            <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
+          </div>
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autoComplete="nope"
+              placeholder="Valid Email ..."
+              onChange={(e) =>
+                setValue({ ...newAccountValue, email: e.target.value })
+              }
+              value={newAccountValue.email}
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-slate-800 bg-slate-200"
+            />
+            <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
+          </div>
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+            <input
+              type="text"
+              name="host"
+              id="host"
+              autoComplete="nope"
+              placeholder="Host ..."
+              onChange={(e) =>
+                setValue({ ...newAccountValue, host: e.target.value })
+              }
+              value={newAccountValue.host}
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+            />
+            <BsServer className="absolute text-slate-500 text-lg top-3 left-4" />
+          </div>
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+            <input
+              type="number"
+              name="port"
+              id="port"
+              autoComplete="nope"
+              placeholder="Port ..."
+              onChange={(e) =>
+                setValue({ ...newAccountValue, port: e.target.value })
+              }
+              value={newAccountValue.port}
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+            />
+            <BsFillPlugFill className="absolute text-slate-500 text-lg top-3 left-4" />
+          </div>
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              autoComplete="nope"
+              placeholder="Password "
+              onChange={(e) =>
+                setValue({ ...newAccountValue, password: e.target.value })
+              }
+              value={newAccountValue.password}
+              className="bg-transparent w-full h-full rounded border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+            />
+            <BsFillLockFill className="absolute text-slate-500 top-[0.85rem] text-base left-4" />
+          </div>
+          <button
+            type="submit"
+            className="bg-blue-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
+          >
+            Add Account
+          </button>
+        </form>
+      </div>
+
       {/**Accounts List ======================================= */}
-      <div className="col-span-1 h-full overflow-hidden overflow-y-scroll px-4 space-y-4">
+      <div className="col-span-1 h-full min-h-[45rem] overflow-hidden overflow-y-scroll px-4 space-y-4">
         {email_accounts.length >= 1 &&
           email_accounts.map((account) => {
             return (
@@ -100,9 +194,9 @@ const EmailAccounts: FC = () => {
                 }}
                 className=""
               >
-                <fieldset className="border dark:border-slate-700 border-slate-300 rounded-lg p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
+                <fieldset className="border dark:border-slate-700 border-slate-300 rounded p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
                   {" "}
-                  <legend className="px-2 bg-slate-200 dark:bg-slate-900 rounded-md text-slate-600 dark:text-slate-400 font-semibold uppercase text-sm">
+                  <legend className="px-2 bg-slate-200 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
                     {account.name}
                   </legend>
                   <label
@@ -247,99 +341,6 @@ const EmailAccounts: FC = () => {
           })}
       </div>
 
-      {/**New Account ============================================ */}
-      <div className="col-span-1 h-full overflow-hidden px-4">
-        <form
-          action=""
-          onSubmit={(e) => handleNewContact(e)}
-          className="space-y-6 h-full w-full flex flex-col items-center justify-center mt-2 dark:autofill:bg-slate-900"
-        >
-          <h3 className="text-lg text-center dark:text-slate-400 text-slate-800 capitalize font-bold font-sans">
-            new account
-          </h3>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              autoComplete="nope"
-              placeholder="Name ..."
-              onChange={(e) =>
-                setValue({ ...newAccountValue, name: e.target.value })
-              }
-              value={newAccountValue.name}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
-            />
-            <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              autoComplete="nope"
-              placeholder="Valid Email ..."
-              onChange={(e) =>
-                setValue({ ...newAccountValue, email: e.target.value })
-              }
-              value={newAccountValue.email}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-slate-800 bg-slate-200"
-            />
-            <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
-            <input
-              type="text"
-              name="host"
-              id="host"
-              autoComplete="nope"
-              placeholder="Host ..."
-              onChange={(e) =>
-                setValue({ ...newAccountValue, host: e.target.value })
-              }
-              value={newAccountValue.host}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
-            />
-            <BsServer className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
-            <input
-              type="number"
-              name="port"
-              id="port"
-              autoComplete="nope"
-              placeholder="Port ..."
-              onChange={(e) =>
-                setValue({ ...newAccountValue, port: e.target.value })
-              }
-              value={newAccountValue.port}
-              className="bg-transparent w-full h-full rounded-lg dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
-            />
-            <BsFillPlugFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-white relative">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              autoComplete="nope"
-              placeholder="Password "
-              onChange={(e) =>
-                setValue({ ...newAccountValue, password: e.target.value })
-              }
-              value={newAccountValue.password}
-              className="bg-transparent w-full h-full rounded-lg border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
-            />
-            <BsFillLockFill className="absolute text-slate-500 top-[0.85rem] text-base left-4" />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-700 min-w-[8rem] h-8 px-4 rounded-md flex justify-center items-center text-slate-100  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
-          >
-            Add Account
-          </button>
-        </form>
-      </div>
     </section>
   );
 };

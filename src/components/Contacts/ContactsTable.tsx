@@ -77,11 +77,11 @@ const Table: FC<Prop> = ({ setModal }) => {
           </td>
           <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4">
             <div className="h-full w-full flex items-center space-x-2">
-              <div className="h-8 w-8 flex items-center justify-center rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-400 font-bold border border-slate-400 dark:border-slate-500">
+              <div className="h-8 w-8 flex items-center justify-center rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-400 font-bold border border-slate-400 dark:border-slate-500">
                 {contact.branch_company.charAt(0)}
               </div>
               <div>
-                <span className="w-40 overflow-hidden whitespace-nowrap text-xs font-bold">
+                <span className="w-40 text-slate-800 dark:text-slate-300 overflow-hidden whitespace-nowrap text-xs font-bold">
                   {contact.branch_company}
                 </span>
                 <br />
@@ -92,7 +92,7 @@ const Table: FC<Prop> = ({ setModal }) => {
           <td className="pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4 text-xs lowercase">
             {contact.email}
           </td>
-          <td className="text-sm pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4 w-10">
+          <td className="text-xs pr-6 whitespace-no-wrap text-slate-700 dark:text-slate-400 tracking-normal leading-4 w-10">
             {contact.phone}
           </td>
         </tr>

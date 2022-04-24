@@ -1,6 +1,6 @@
 import { FC, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Landing } from "./components/Landing Page/Landing";
+import Landing from "./components/Landing Page/Landing";
 import LogIn from "./components/Auth/LogIn";
 import TicketsComponent from "./components/Tickets/TicketsComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent";

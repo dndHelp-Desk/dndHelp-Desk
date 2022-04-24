@@ -70,7 +70,7 @@ const Team: FC = () => {
       return (
         <tr
           key={id}
-          className={`w-full snap_child h-16 rounded-lg dark:bg-slate-800 bg-white grid grid-cols-9 space-x-4 p-2 border dark:border-slate-700 border-slate-300 ${
+          className={`w-full snap_child h-16 rounded dark:bg-slate-800 bg-white grid grid-cols-9 space-x-4 p-2 border dark:border-slate-700 border-slate-300 ${
             user.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -84,7 +84,7 @@ const Team: FC = () => {
           }`}
         >
           <td className="col-span-4 space-x-1 items-center flex">
-            <div className="h-10 w-10 rounded-xl border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
+            <div className="h-10 w-10 rounded border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
               <img
                 src={
                   user.photoUrl !== null && user.photoUrl !== ""
@@ -92,7 +92,7 @@ const Team: FC = () => {
                     : defaultProfile
                 }
                 alt="profile"
-                className="object-cover w-full h-full object-center rounded-lg"
+                className="object-cover w-full h-full object-center rounded-sm"
               />
             </div>
             <p className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600">
@@ -135,7 +135,7 @@ const Team: FC = () => {
                     ? deleteMember(user.id, user.uid)
                     : alert("Wrong Pin");
                 }}
-                className="h-8 w-8 rounded-xl outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
+                className="h-8 w-8 rounded outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
               >
                 <BsFillTrashFill className="text-red-500 cursor-pointer text-base" />
               </button>
@@ -177,13 +177,13 @@ const Team: FC = () => {
           </label>
           <button
             onClick={() => setModal(true)}
-            className="h-10 w-10 rounded-lg bg-blue-600 text-slate-300 font-bold text-sm flex items-center justify-center outline-none focus:outline-none"
+            className="h-10 w-10 rounded bg-blue-600 text-slate-300 font-bold text-sm flex items-center justify-center outline-none focus:outline-none"
           >
             <BsPlusLg />
           </button>
         </div>
       </div>
-      <section className="h-[49rem] bg-transparent rounded-xl flex flex-col place-items-center mt-1 py-4 overflow-hidden">
+      <section className="h-[49rem] bg-transparent rounded flex flex-col place-items-center mt-1 py-4 overflow-hidden">
         {allMembers.length >= 1 && (
           <table className="w-full h-full flex flex-col justify-between">
             <thead className="w-full">
@@ -200,7 +200,7 @@ const Team: FC = () => {
         )}
         {allMembers.length <= 0 && (
           <div className="h-full w-full">
-            <div className="h-full w-full rounded-lg border dark:border-slate-700 border-slate-400 p-6">
+            <div className="h-full w-full rounded border dark:border-slate-700 border-slate-400 p-6">
               <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
                 add your team members
               </h2>

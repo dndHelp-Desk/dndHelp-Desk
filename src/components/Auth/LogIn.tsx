@@ -1,4 +1,4 @@
-import {FC, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -16,7 +16,8 @@ import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
 import { isAuthenticated, setCompany } from "../../Redux/Slices/UserSlice";
 import Alert from "../Others/Alert";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import {AppDispatch, RootState } from "../../Redux/store";
+import { AppDispatch, RootState } from "../../Redux/store";
+import Help from "../Others/Help";
 
 //Config Firebase ==================================
 const firebaseConfig = {
@@ -41,7 +42,7 @@ interface InputInter {
   company: string;
 }
 
-const LogIn:FC = () => {
+const LogIn: FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [menu, setMenu] = useState(false);
@@ -51,7 +52,9 @@ const LogIn:FC = () => {
     company: "",
   });
 
-  const routeLocation = useSelector((state:RootState) => state.UserInfo.routeLocation);
+  const routeLocation = useSelector(
+    (state: RootState) => state.UserInfo.routeLocation
+  );
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
@@ -62,17 +65,18 @@ const LogIn:FC = () => {
     e.preventDefault();
     setPersistence(auth, browserLocalPersistence).then(() => {
       signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
-        .then((currentUser:any) => {
+        .then((currentUser: any) => {
           if (!currentUser.user.emailVerified) {
-                dispatch(
-                  updateAlert([
-                    ...alerts,
-                    {
-                      message: "Please Verify your account",
-                      color: "bg-green-200",
-                    },
-                  ])
-                );}
+            dispatch(
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Please Verify your account",
+                  color: "bg-green-200",
+                },
+              ])
+            );
+          }
           dispatch(
             updateAlert([
               ...alerts,
@@ -227,7 +231,7 @@ const LogIn:FC = () => {
                 src={minidarkLogo}
                 alt="dndHelp-Desk"
               />
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
                 Sign in to your account
               </h2>
             </div>
@@ -246,7 +250,10 @@ const LogIn:FC = () => {
                     aria-required
                     aria-placeholder="Company name..."
                     onChange={(e) => {
-                      window.localStorage.setItem("organization_name", `${e.target.value.toLowerCase().replace(/\s/g, "")}`);
+                      window.localStorage.setItem(
+                        "organization_name",
+                        `${e.target.value.toLowerCase().replace(/\s/g, "")}`
+                      );
                       dispatch(
                         setCompany(
                           e.target.value.toLowerCase().replace(/\s/g, "")
@@ -366,6 +373,7 @@ const LogIn:FC = () => {
 
       {/**Alert */}
       <Alert />
+      <Help/>
     </div>
   );
 };

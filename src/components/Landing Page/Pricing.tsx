@@ -1,4 +1,4 @@
-import {FC, useState } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import darkLogo from "./images/dndHelp-Desk_Dark.webp";
@@ -7,8 +7,8 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import Help from "../Others/Help";
 import Footer from "./Footer";
 
-const Pricing:FC = () => {
-  const [menu, setMenu] = useState<boolean|null>(false);
+const Pricing: FC = () => {
+  const [menu, setMenu] = useState<boolean | null>(false);
   const smallMenuRef = useOnClickOutside(() => {
     setMenu(false);
   });
@@ -86,7 +86,7 @@ const Pricing:FC = () => {
             <h1 className="font-semibold text-slate-800 text-3xl md:text-4xl">
               Get started at no cost, then pay as you go.
             </h1>
-            <h2 className="mt-2.5 lg:w-1/2 lg:text-center text-2xl">
+            <h2 className="mt-2.5 lg:w-1/2 lg:text-center text-lg">
               We have several plans to showcase your Business. Get everything
               you need
             </h2>
@@ -156,7 +156,12 @@ const Pricing:FC = () => {
                         <span>Advanced reporting</span>
                       </li>
                     </ul>
-                    <Link to="/company-set-up">
+                    <Link
+                      onClick={() => {
+                        window.localStorage.setItem("plan", "free");
+                      }}
+                      to="/company-set-up"
+                    >
                       <div className="mt-4 w-full h-10 bg-blue-600 rounded text-slate-50 text-base font-semibold flex justify-center items-center">
                         Choose
                       </div>
@@ -221,7 +226,12 @@ const Pricing:FC = () => {
                         <span>Intergrations prebuilt</span>
                       </li>
                     </ul>
-                    <Link to="/company-set-up">
+                    <Link
+                      onClick={() => {
+                        window.localStorage.setItem("plan", "pro");
+                      }}
+                      to="/company-set-up"
+                    >
                       <div className="mt-4 w-full h-10 bg-slate-100 rounded text-blue-600 text-base font-semibold flex justify-center items-center">
                         Choose
                       </div>

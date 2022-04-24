@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { changePriority, markAsSeen } from "../Data_Fetching/TicketsnUserData";
@@ -42,10 +42,9 @@ const TicketsList: FC<Props> = ({
   const [isChatOpen, setChat] = useState<boolean>(false);
   const [audio, audioUrl] = useState<string | any>("");
   const [loadMore, setLimit] = useState<number | any>(50);
-
   //Filters =====================
   const [filters, setFilters] = useState({
-    startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 0),
+    startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
     endDate: new Date(new Date().getFullYear(), new Date().getMonth(), 31),
     brand: "",
     ticket_id: "",
@@ -59,75 +58,26 @@ const TicketsList: FC<Props> = ({
     hasRecording: false,
   });
 
-  const filteredTickets = useMemo(() => {
-    return fetchedTickets.length >= 1
+  const [filteredTickets, setTickets] = useState<any>(
+    fetchedTickets.length >= 1
       ? fetchedTickets?.filter(
           (ticket) =>
-            ticket?.status
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.status, "gi")) &&
-            ticket?.category
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.category, "gi")) &&
-            ticket?.agent_email
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.agent, "gi")) &&
-            ticket?.branch_company
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.brand, "gi")) &&
-            ticket?.status
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.status, "gi")) &&
-            Number(new Date(ticket.date).getTime()) >=
-              Number(new Date(filters.startDate).getTime()) &&
-            Number(new Date(ticket.date).getTime()) <=
+            Number(new Date(ticket?.date).getTime()) >=
+              Number(new Date(filters?.startDate).getTime() + 1) &&
+            Number(new Date(ticket?.date).getTime()) <=
               new Date(
-                new Date(filters.endDate).setDate(
-                  new Date(filters.endDate).getDate() + 1
+                new Date(filters?.endDate).setDate(
+                  new Date(filters?.endDate).getDate()
                 )
-              ).getTime() &&
-            ticket?.complainant_number
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(
-                filters.complainant_number.toLowerCase().replace(/\s/g, "")
-              ) === true &&
-            ticket?.ticket_id
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.ticket_id?.toLowerCase().replace(/\s/g, "")) ===
-              true /*&&
-            ticket.fcr === filters.fcr  &&
-            ticket.reopened === filters.reopened &&
-            ticket.hasRecording === filters.hasRecording*/
+              ).getTime()
         )
-      : [];
-  }, [
-    fetchedTickets,
-    filters.agent,
-    filters.category,
-    filters.endDate,
-    filters.startDate,
-    filters.status,
-    filters.brand,
-    filters.complainant_number,
-    filters.ticket_id,
-  ]);
+      : []
+  );
 
   //Loop Through Each Tickects =================
   const tickets =
     filteredTickets.length >= 1 &&
-    filteredTickets.slice(loadMore - 50, loadMore).map((ticket) => {
+    filteredTickets.slice(loadMore - 50, loadMore).map((ticket: any) => {
       /**Mark As read if thread is Active ========== */
       threadId === ticket.ticket_id &&
         unread.length >= 1 &&
@@ -218,7 +168,7 @@ const TicketsList: FC<Props> = ({
               className="h-full w-[85%] flex flex-col justify-center space-y-1 relative"
             >
               <abbr title={ticket.ticket_id}>
-                <p className="dark:text-slate-300 text-slate-900 text-xs font-semibold dark:font-medium font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
+                <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
                   <span className="">
                     {ticket.category} : {ticket.ticket_id}
                   </span>
@@ -331,6 +281,7 @@ const TicketsList: FC<Props> = ({
             setModal={setModal}
             filters={filters}
             setFilters={setFilters}
+            setTickets={setTickets}
           />
           <div className="w-full flex-[15] flex flex-col overflow-hidden">
             <div

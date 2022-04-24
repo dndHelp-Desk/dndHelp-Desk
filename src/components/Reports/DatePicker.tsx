@@ -1,10 +1,14 @@
-import { FC,useState } from "react";
+import { FC, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Props } from "./Filters";
 
-const DateFilter:FC<Props> = ({ filters, setFilters }) => {
-  const [dateRange, setDateRange] = useState<Date|any>([null, null]);
+interface Props {
+  filters: any;
+  setFilters: any;
+}
+
+const DateFilter: FC<Props> = ({ filters, setFilters }) => {
+  const [dateRange, setDateRange] = useState<Date | any>([null, null]);
   const [startDate, endDate] = dateRange;
 
   //Component =========================================
@@ -14,7 +18,7 @@ const DateFilter:FC<Props> = ({ filters, setFilters }) => {
       startDate={startDate}
       endDate={endDate}
       placeholderText="Pick A Date"
-      className="dark:bg-slate-800 bg-white  border  dark:border-slate-700 border-slate-300  w-full h-10 z-[999] rounded text-xs pl-10 text-slate-500 cursor-pointer shadow"
+      className="dark:bg-slate-800 bg-white  border  dark:border-slate-700 border-slate-300  w-full h-10 z-[999] rounded text-xs pl-10 dark:text-slate-400 text-slate-900 placeholder:text-slate-900 dark:placeholder:text-slate-400 cursor-pointer shadow"
       onChange={(update) => {
         setDateRange(update);
         setFilters({

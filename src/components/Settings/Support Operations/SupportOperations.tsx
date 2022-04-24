@@ -61,7 +61,7 @@ const SupportOperations: FC = () => {
       <nav className="row-span-1 w-full flex justify-center">
         <ul className="h-full flex items-center justify-center">{tabsMenu}</ul>
       </nav>
-      <div className="row-span-8 w-full h-[50rem]">
+      <div className="row-span-8 w-full min-h-[50rem]">
         {menuItems.filter(
           (item: any) => item.name === "Email Accounts" && item.active === true
         ).length >= 1 && <EmailAccounts />}

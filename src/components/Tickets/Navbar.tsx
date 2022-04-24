@@ -1,4 +1,4 @@
-import { FC,useState } from "react";
+import { FC, useState } from "react";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import {
   BsSearch,
@@ -19,24 +19,42 @@ import OffFilters from "./OffFilters";
 import { AppDispatch, RootState } from "../../Redux/store";
 
 interface Props {
-  deleteArray:any;
-  setDelete:any;
-  setModal:any;
-  filters:any;
-  setFilters:any;
+  deleteArray: any;
+  setDelete: any;
+  setModal: any;
+  filters: any;
+  setFilters: any;
+  setTickets: any;
 }
 
-const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilters }) => {
-  const [filtersModal, setfiltersModal] = useState<boolean|any>(false);
-  const activeUser = useSelector((state:RootState) => state.UserInfo.member_details);
+const Navbar: FC<Props> = ({
+  deleteArray,
+  setDelete,
+  setModal,
+  filters,
+  setFilters,
+  setTickets,
+}) => {
+  const [filtersModal, setfiltersModal] = useState<boolean | any>(false);
+  const activeUser = useSelector(
+    (state: RootState) => state.UserInfo.member_details
+  );
   const [contactsPanel, setPanel] = useState<boolean | any>(false);
-  const user = useSelector((state:RootState) => state.UserInfo.member_details);
-  const allTickets = useSelector((state:RootState) => state.Tickets.allTickets);
-  const filteredTickets = useSelector((state:RootState) => state.Tickets.filteredTickets);
-  const alerts = useSelector((state:RootState) => state.NotificationsData.alerts);
-  const dispatch:AppDispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.UserInfo.member_details);
+  const allTickets = useSelector(
+    (state: RootState) => state.Tickets.allTickets
+  );
+  const filteredTickets = useSelector(
+    (state: RootState) => state.Tickets.filteredTickets
+  );
+  const alerts = useSelector(
+    (state: RootState) => state.NotificationsData.alerts
+  );
+  const dispatch: AppDispatch = useDispatch();
   const [searchAsssignee, setSearch] = useState("");
-  const allMembers = useSelector((state:RootState) => state.UserInfo.allMembers);
+  const allMembers = useSelector(
+    (state: RootState) => state.UserInfo.allMembers
+  );
 
   //Close Agents List on Click outside ===========
   const assigneeRef = useClickOutside(() => {
@@ -46,7 +64,7 @@ const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilter
   //MarkAll ==========================================
   const markAll = () => {
     setDelete([]);
-    let arr:any[] = [];
+    let arr: any[] = [];
     filteredTickets.length >= 1 &&
       filteredTickets.forEach((ticket) => arr.push(ticket.ticket_id));
     setDelete(arr);
@@ -107,7 +125,7 @@ const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilter
   };
 
   //Assign Tickect To an Agent =================
-  const assgn = (name:any, email:any, id:any) => {
+  const assgn = (name: any, email: any, id: any) => {
     for (let i = 0; i < deleteArray.length; i++) {
       allTickets.length >= 1 &&
         allTickets
@@ -171,6 +189,7 @@ const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilter
           setfiltersModal={setfiltersModal}
           filters={filters}
           setFilters={setFilters}
+          setTickets={setTickets}
         />
         <button
           onClick={() => setfiltersModal(true)}
@@ -185,7 +204,7 @@ const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilter
         <button
           onClick={() => setPanel(true)}
           className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-[#33415596] border-slate-300 ${
-            deleteArray.length >= 1 && activeUser[0].access === "admin"
+            deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
           } items-center justify-center text-lg`}
@@ -202,7 +221,7 @@ const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilter
             code === "0001" ? deleteSelected() : alert("Wrong Pin");
           }}
           className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-[#33415596] border-slate-300 ${
-            deleteArray.length >= 1 && activeUser[0].access === "admin"
+            deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
           } items-center justify-center text-lg`}
@@ -226,7 +245,7 @@ const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilter
           >
             <input
               onChange={(e) =>
-                e.target.checked === true ? markAll() : setDelete([])
+                e.target?.checked === true ? markAll() : setDelete([])
               }
               className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
               type="checkbox"
@@ -238,7 +257,7 @@ const Navbar:FC<Props> = ({ deleteArray, setDelete, setModal, filters, setFilter
         </button>
 
         {/**Agent List to assign ============= */}
-        {activeUser[0].access === "admin" && (
+        {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
             className={`h-[15rem] w-[12rem] dark:bg-slate-700 bg-white shadow-2xl backdrop-blur-sm p-2 pt-0 border border-slate-400 dark:border-slate-700 rounded-lg absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${

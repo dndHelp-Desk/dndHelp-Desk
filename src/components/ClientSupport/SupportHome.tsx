@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import {
   BsLightningChargeFill,
@@ -7,10 +7,10 @@ import {
 } from "react-icons/bs";
 import lightLogo from "./images/dndHelp-Desk_Light.webp";
 import TicketStatus from "./TicketStatus";
-import DataFetching from "./DataFetching"
-import Help from "./../Others/Help";
+import DataFetching from "./DataFetching";
+import Help from "../Others/Help";
 
-const SupportHome = () => {
+const SupportHome: FC = () => {
   const location = useLocation();
 
   //Component =======================================
@@ -30,7 +30,7 @@ const SupportHome = () => {
         <div className="flex space-x-4 items-center">
           <NavLink to="/logIn">
             <button
-              className="bg-blue-700 px-6 p-2 rounded-md text-slate-300 font-bold text-sm tracking-wide uppercase outline-none
+              className="bg-blue-700 px-6 p-2 rounded text-slate-100 font-bold text-sm tracking-wide uppercase outline-none
 					 focus:outline-none hover:opacity-90 transition-all duration-300 focus:ring focus:ring-blue-600"
             >
               Login
