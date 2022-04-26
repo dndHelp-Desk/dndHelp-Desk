@@ -24,7 +24,6 @@ interface Props {
   setModal: any;
   filters: any;
   setFilters: any;
-  setTickets: any;
 }
 
 const Navbar: FC<Props> = ({
@@ -33,7 +32,6 @@ const Navbar: FC<Props> = ({
   setModal,
   filters,
   setFilters,
-  setTickets,
 }) => {
   const [filtersModal, setfiltersModal] = useState<boolean | any>(false);
   const activeUser = useSelector(
@@ -189,7 +187,6 @@ const Navbar: FC<Props> = ({
           setfiltersModal={setfiltersModal}
           filters={filters}
           setFilters={setFilters}
-          setTickets={setTickets}
         />
         <button
           onClick={() => setfiltersModal(true)}

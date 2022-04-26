@@ -293,32 +293,13 @@ const Home: FC = () => {
         {/**Bottom Half ================================ */}
         <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
           <div className="col-span-2 w-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
-            {/**Quotes ==================================== */}
-            <div className="col-span-5 h-[16rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden relative">
-              <img
-                src="https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
-                alt="background"
-                className="rounded-md h-full w-full object-center object-cover"
-              />
-              <div className="absolute top-4 left-4 right-4 bottom-4 rounded-md bg-[#0f172ac9] overflow-hidden">
-                <article className="h-[16rem]w-full p-6 flex flex-col justify-between overflow-hidden">
-                  <h2 className="text-slate-100 text-xl sm:text-2xl font-bold">
-                    Customer Service Tip
-                  </h2>
-                  <p className="text-slate-100 text-sm font-medium">
-                    Excellence in anything increases your potential in
-                    everything. There are few positions for which this applies
-                    more than support — clarity in communication is paramount
-                    because it affects everything you do.
-                    <span className="hidden sm:flex">
-                      {" "}
-                      Styling affects communication. Tone affects communication.
-                      Common mistakes include using passive-aggressive language
-                      (“Actually…”) or confusing customers with slang,
-                      colloquialisms, or technical jargon.
-                    </span>
-                  </p>
-                </article>
+            {/**Quick Settings ==================================== */}
+            <div className="col-span-5 h-[16rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 overflow-hidden relative">
+              <div className="rounded w-full h-full p-2 flex-col flex justify-between gap-4">
+                <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
+                  Quick Settings
+                </h3>
+                <div className="w-full rounded border border-slate-200 dark:border-slate-700 flex-[5]"></div>
               </div>
             </div>
 

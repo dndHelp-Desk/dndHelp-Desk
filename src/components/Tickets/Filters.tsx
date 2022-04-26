@@ -7,7 +7,6 @@ import {
   BsCalendar2Week,
   BsCheckSquare,
   BsInfoSquare,
-  BsFilter,
 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -16,15 +15,11 @@ import DateFilter from "./DatePicker";
 interface Props {
   filters: any;
   setFilters: (filetrs: any) => any;
-  setTickets: any;
 }
 
-const Filters: FC<Props> = ({ filters, setFilters, setTickets }) => {
+const Filters: FC<Props> = ({ filters, setFilters}) => {
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
-  );
-  const fetchedTickets = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
   );
   const categories = useSelector(
     (state: RootState) => state.Tickets.categories
@@ -172,70 +167,6 @@ const Filters: FC<Props> = ({ filters, setFilters, setTickets }) => {
           placeholder="Customer's Number ..."
         />
       </div>
-
-      {/**Apply Filters =========================== */}
-      <button
-        onClick={() => {
-          setTickets(
-            fetchedTickets.length >= 1
-              ? fetchedTickets?.filter(
-                  (ticket) =>
-                    ticket?.status
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.status, "gi")) &&
-                    ticket?.category
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.category, "gi")) &&
-                    ticket?.agent_email
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.agent, "gi")) &&
-                    ticket?.branch_company
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.brand, "gi")) &&
-                    ticket?.status
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.status, "gi")) &&
-                    Number(new Date(ticket.date).getTime()) >=
-                      Number(new Date(filters.startDate).getTime()) &&
-                    Number(new Date(ticket.date).getTime()) <=
-                      new Date(
-                        new Date(filters.endDate).setDate(
-                          new Date(filters.endDate).getDate() + 1
-                        )
-                      ).getTime() &&
-                    ticket?.complainant_number
-                      .toLowerCase()
-                      .replace(/\s/g, "")
-                      .includes(
-                        filters.complainant_number
-                          .toLowerCase()
-                          .replace(/\s/g, "")
-                      ) === true &&
-                    ticket?.ticket_id
-                      .toLowerCase()
-                      .replace(/\s/g, "")
-                      .includes(
-                        filters.ticket_id?.toLowerCase().replace(/\s/g, "")
-                      ) === true
-                )
-              : []
-          );
-        }}
-        className="col-span-1 h-10 bg-blue-700 text-slate-100 text-center text-base w-full min-w-[15rem] lg:min-w-0  rounded outline-none focus:outline-none hover:opacity-90 transition-all flex justify-center items-center space-x-2"
-      >
-        <BsFilter />
-        <span>Apply</span>
-      </button>
     </>
   );
 };

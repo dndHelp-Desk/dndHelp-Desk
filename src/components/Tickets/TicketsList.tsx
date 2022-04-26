@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { changePriority, markAsSeen } from "../Data_Fetching/TicketsnUserData";
@@ -58,21 +58,67 @@ const TicketsList: FC<Props> = ({
     hasRecording: false,
   });
 
-  const [filteredTickets, setTickets] = useState<any>(
-    fetchedTickets.length >= 1
+  const filteredTickets: any = useMemo(() => {
+    return fetchedTickets.length >= 1
       ? fetchedTickets?.filter(
           (ticket) =>
-            Number(new Date(ticket?.date).getTime()) >=
-              Number(new Date(filters?.startDate).getTime() + 1) &&
-            Number(new Date(ticket?.date).getTime()) <=
+            ticket?.status
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.status, "gi")) &&
+            ticket?.category
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.category, "gi")) &&
+            ticket?.agent_email
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.agent, "gi")) &&
+            ticket?.branch_company
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.brand, "gi")) &&
+            ticket?.status
+              .replace(/\s/g, "")
+              .replace(/\(/g, "")
+              .replace(/\)/g, "")
+              .match(new RegExp(filters.status, "gi")) &&
+            Number(new Date(ticket.date).getTime()) >=
+              Number(new Date(filters.startDate).getTime()) &&
+            Number(new Date(ticket.date).getTime()) <=
               new Date(
-                new Date(filters?.endDate).setDate(
-                  new Date(filters?.endDate).getDate()
+                new Date(filters.endDate).setDate(
+                  new Date(filters.endDate).getDate() + 1
                 )
-              ).getTime()
+              ).getTime() &&
+            ticket?.complainant_number
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(
+                filters.complainant_number.toLowerCase().replace(/\s/g, "")
+              ) === true &&
+            ticket?.ticket_id
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(filters.ticket_id?.toLowerCase().replace(/\s/g, "")) ===
+              true
         )
-      : []
-  );
+      : [];
+  }, [
+    fetchedTickets,
+    filters.agent,
+    filters.brand,
+    filters.category,
+    filters.complainant_number,
+    filters.endDate,
+    filters.startDate,
+    filters.status,
+    filters.ticket_id,
+  ]);
 
   //Loop Through Each Tickects =================
   const tickets =
@@ -281,7 +327,6 @@ const TicketsList: FC<Props> = ({
             setModal={setModal}
             filters={filters}
             setFilters={setFilters}
-            setTickets={setTickets}
           />
           <div className="w-full flex-[15] flex flex-col overflow-hidden">
             <div
