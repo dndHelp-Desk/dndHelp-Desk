@@ -50,7 +50,7 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
       className="h-full w-full border-0 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar rounded-none"
       classNames={{
         toolbar:
-          "bg-inherit flex justify-center items-center w-full text-inherit border-slate-200 dark:border-slate-800 rounded-none",
+          "bg-inherit flex justify-center items-center w-full text-inherit border-slate-200 dark:border-slate-800 rounded-none dark:bg-[#182235] bg-slate-50",
         toolbarInner:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
         toolbarGroup:

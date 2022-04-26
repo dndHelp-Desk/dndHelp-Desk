@@ -1,12 +1,13 @@
-import React, { useState, useMemo } from "react";
+import {FC, useState, useMemo } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiCheck } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { addClientReply } from "./DataFetching";
+import { RootState } from "../../Redux/store";
 
-const Chat = () => {
-  const threadId = useSelector((state) => state.Tickets.threadId);
-  let allTickets = useSelector((state) => state.Tickets.allTickets);
+const Chat:FC = () => {
+  const threadId = useSelector((state:RootState) => state.Tickets.threadId);
+  let allTickets = useSelector((state: RootState) => state.Tickets.allTickets);
   const preloaderData = [1, 2, 3, 4];
 
   //Filter Thread Messages =====================================
@@ -123,10 +124,10 @@ const Chat = () => {
   });
 
   //Send Reply Function ============================
-  const sendReply = (e) => {
+  const sendReply = (e:React.SyntheticEvent) => {
     e.preventDefault();
     threadMessage.length >= 1 &&
-      addClientReply(reply.message, reply.message_position, reply.ticket_id);
+      addClientReply("user","email","r_name","r_email",reply.message, reply.message_position, reply.ticket_id);
     setReply({ ...reply, message: "" });
   };
 
@@ -168,8 +169,8 @@ const Chat = () => {
             <textarea
               name="reply"
               id="reply"
-              cols="30"
-              rows="10"
+              cols={30}
+              rows={10}
               placeholder="Type your message here..."
               autoComplete="off"
               onChange={(e) => {

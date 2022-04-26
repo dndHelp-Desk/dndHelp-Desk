@@ -31,10 +31,6 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
       type: "category",
       tickAmount: 13,
       categories: chartData.map((data: any) => data.name),
-      tooltip: {
-        enabled: true,
-        formatter: (val: any) => (option !== "day" ? val + ":00hrs" : val),
-      },
       labels: {
         show: true,
         rotate: 0,
@@ -43,7 +39,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
         show: false,
       },
       axisBorder: {
-        show: false,
+        show: true,
         color: theme !== "dark" ? "#1e293b" : "#94a3b8",
         height: 0.5,
         width: "100%",
@@ -52,7 +48,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
     },
     yaxis: {
       labels: {
-        show: false,
+        show: true,
         hideOverlappingLabels: true,
         showDuplicates: false,
         trim: false,
@@ -65,6 +61,9 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
           fontWeight: 500,
           cssClass: "apexcharts-xaxis-label",
         },
+      },
+      axisBorder: {
+        show: false,
       },
     },
     fill: {

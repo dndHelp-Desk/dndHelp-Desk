@@ -1,14 +1,13 @@
-import { FC,useState } from "react";
+import { FC} from "react";
 import { useLocation } from "react-router-dom";
 import Chat from "./Chat";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { markAsSeen } from "./DataFetching";
-import { AppDispatch, RootState } from "../../Redux/store";
+import {  RootState } from "../../Redux/store";
 
 const TicketStatus:FC = () => {
   let allTickets = useSelector((state:RootState) => state.Tickets.allTickets);
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
-  const dispatch:AppDispatch = useDispatch();
   const location = useLocation();
 
   console.log(location.search?.split(/[=&]/)[1]);

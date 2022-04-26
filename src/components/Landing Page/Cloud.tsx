@@ -1,13 +1,13 @@
-import {FC}from "react";
-import debonairs from "./cloudImages/deb.webp"
+import { FC } from "react";
+import debonairs from "./cloudImages/deb.webp";
 import steers from "./cloudImages/steers.webp";
 import fishaways from "./cloudImages/fishaways.webp";
 
-const Cloud:FC = () => {
+const Cloud: FC = () => {
   return (
     <div className="w-[90%] delayDisplay md:w-full container 2xl:w-[75rem]  m-auto py-4 pt-20 flex flex-col justify-center">
       <div className="flex flex-col items-center justify-center">
-        <h3 className="text-3xl font-bold leading-10 text-slate-800">
+        <h3 className="text-3xl text-center font-bold leading-10 text-slate-800">
           The companies you trust, use dndHelp-Desk.
         </h3>
         <p className="text-base leading-normal text-center text-slate-600 mt-4 xl:w-1/2 w-10/12">
@@ -17,7 +17,7 @@ const Cloud:FC = () => {
         </p>
       </div>
       <div className="flex items-center justify-center mt-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 justify-center items-center px-28 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-center items-center px-6 md:px-28 w-full">
           <div className="col-span-1 w-full h-32 bg-slate-200 border border-slate-300 rounded flex items-center justify-center">
             <img
               src={debonairs}

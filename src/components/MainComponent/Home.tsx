@@ -114,7 +114,7 @@ const Home: FC = () => {
               <p>{user.name}</p>
             </abbr>
             <abbr title={user.email}>
-              <p className="text-[0.7rem] font-medium italic dark:text-slate-400 text-slate-600 lowercase">
+              <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase">
                 {user.email}
               </p>
             </abbr>
@@ -138,7 +138,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase">
                 Top 5 Categories
               </h1>
-              <p className="text-center text-xs font-medium text-slate-700 dark:text-slate-400 mt-2">
+              <p className="text-center text-xs font-medium tracking-normal text-slate-700 dark:text-slate-400 mt-2">
                 Actual figures can be found on the reports page.
               </p>
             </div>
@@ -198,7 +198,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-1">
                 Tickets Per Status
               </h1>
-              <p className="dark:text-slate-400 text-slate-700 text-center text-xs font-medium mt-2 px-2">
+              <p className="dark:text-slate-400 text-slate-700 text-center text-xs font-medium tracking-normal mt-2 px-2">
                 Hover your mouse on top of each slice below to see the
                 percentages, for more analytics please visit the reports page.
               </p>
@@ -211,7 +211,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-3">
                 Recent Activities
               </h1>
-              <p className="text-xs font-medium dark:text-slate-400 text-slate-700 mt-2">
+              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2">
                 Your most recent activities.
               </p>
             </article>
@@ -327,7 +327,7 @@ const Home: FC = () => {
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
                 Progress
               </h3>
-              <p className="text-xs font-normal dark:text-slate-400 text-slate-700">
+              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700">
                 You managed to get{" "}
                 <span className="text-slate-900 dark:text-slate-300 font-semibold">
                   {" "}
@@ -362,22 +362,25 @@ const Home: FC = () => {
                               new Date().getMonth(),
                               30
                             ).getTime()
-                      ).length) *
+                      )?.length) *
                     100
-                  ).toFixed(1)}
+                  )?.toFixed(1) || 0}
                   %
                 </span>{" "}
                 of your tickets resolved.
                 <br /> Currently you have{" "}
                 <span className="text-slate-900 dark:text-slate-300 font-semibold">
                   {" "}
-                  {filteredTickets.length >= 1 &&
+                  {(filteredTickets.length >= 1 &&
                     filteredTickets.filter((ticket) => ticket.status === "open")
-                      .length}
+                      ?.length) ||
+                    0}
                 </span>{" "}
                 open tickets, and{" "}
-                <span className="text-slate-900 dark:text-slate-300 font-semibold">{overDue.length}</span> overdue
-                tickets.
+                <span className="text-slate-900 dark:text-slate-300 font-semibold">
+                  {overDue.length}
+                </span>{" "}
+                overdue tickets.
               </p>
               <div
                 role="progressbar"

@@ -46,7 +46,7 @@ const MostRecent: FC = () => {
                 key={index}
                 className="w-full h-12 p-2 pl-6 border-l border-slate-300 dark:border-slate-700 relative"
               >
-                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-50 dark:bg-[#222e40] p-1">
+                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-[#222e40] p-1">
                   <div className="h-full w-full rounded-full bg-slate-600 dark:bg-slate-700 flex items-center justify-center text-xs text-slate-100">
                     <HiOutlineAnnotation />
                   </div>
@@ -78,7 +78,7 @@ const MostRecent: FC = () => {
                 key={index}
                 className="w-full h-12 p-2 pl-6 border-l border-slate-300 dark:border-slate-700 relative"
               >
-                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-50 dark:bg-[#222e40] p-1">
+                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-[#222e40] p-1">
                   <div className="h-full w-full rounded-full bg-slate-600 dark:bg-slate-700 flex items-center justify-center text-xs text-slate-100">
                     <HiOutlineAnnotation />
                   </div>

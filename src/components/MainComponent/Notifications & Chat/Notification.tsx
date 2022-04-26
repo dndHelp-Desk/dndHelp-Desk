@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import noDataImg from "./../images/no-notifications.svg";
 import { HiOutlineX } from "react-icons/hi";
@@ -9,11 +9,14 @@ import { RootState } from "../../../Redux/store";
 
 interface Props {
   openNotifications: boolean;
-  setOpenNotification: (openNotifications:boolean) => any;
+  setOpenNotification: (openNotifications: boolean) => any;
 }
 
-const Notification:FC<Props> = ({ openNotifications, setOpenNotification }) => {
-  const user = useSelector((state:RootState) => state.UserInfo.member_details);
+const Notification: FC<Props> = ({
+  openNotifications,
+  setOpenNotification,
+}) => {
+  const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const unread = useSelector((state: RootState) => state.Tickets.unread);
   const notificationMsgs = useSelector(
     (state: RootState) => state.NotificationsData.messages
@@ -26,7 +29,7 @@ const Notification:FC<Props> = ({ openNotifications, setOpenNotification }) => {
   //loop through Notications List =============================
   const notificationList =
     notificationMsgs.length >= 1 &&
-    notificationMsgs.map((notif:any) => {
+    notificationMsgs.map((notif: any) => {
       return (
         <div
           key={notif.id}
@@ -53,7 +56,7 @@ const Notification:FC<Props> = ({ openNotifications, setOpenNotification }) => {
   //loop through Unread Messages List =============================
   const unreadMsg =
     unread.length >= 1 &&
-    unread.map((msg:any) => {
+    unread.map((msg: any) => {
       return (
         <div
           key={msg.id}
@@ -73,7 +76,9 @@ const Notification:FC<Props> = ({ openNotifications, setOpenNotification }) => {
           <button
             onClick={() =>
               dispatch(
-                setUnread(unread.filter((message:any) => message.id !== msg.id))
+                setUnread(
+                  unread.filter((message: any) => message.id !== msg.id)
+                )
               )
             }
             className="absolute top-1 right-1 h-4 w-4 rounded-full dark:bg-slate-800 bg-slate-400 dark:text-slate-300 text-slate-800 text-xs font-bold flex items-center justify-center hover:opacity-75 outline-none focus:outline-none"
@@ -93,6 +98,11 @@ const Notification:FC<Props> = ({ openNotifications, setOpenNotification }) => {
         openNotifications === true ? "flex" : "hidden"
       }`}
     >
+      <header className="w-full">
+        <h1 className="text-center text-sm dark:text-slate-400 text-slate-900 font-bold uppercase">
+          Notifications
+        </h1>
+      </header>
       <div className="h-full w-full overflow-x-hidden overflow-y-scroll space-y-2 p-2">
         {notificationMsgs.length <= 0 && unread.length <= 0 && (
           <div className="h-full w-full items-center flex flex-col justify-center space-y-4">
@@ -101,8 +111,8 @@ const Notification:FC<Props> = ({ openNotifications, setOpenNotification }) => {
               alt=""
               className="h-2/4 w-[70%] object-center overflow-hidden"
             />
-            <h2 className="text-xs text-center font-semibold dark:text-slate-300 text-slate-700">
-              You Have No New Notifications
+            <h2 className="text-xs text-center font-semibold dark:text-slate-300 text-slate-700 italic">
+              Your notifications will appear here
             </h2>
           </div>
         )}

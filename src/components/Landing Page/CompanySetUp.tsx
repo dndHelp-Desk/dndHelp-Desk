@@ -141,7 +141,7 @@ const CompanySetUp: FC = () => {
           category: "Welcome, Get Started",
           branch_company: setUpValues.company_name,
           message:
-            '<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple</h2><br/> <p>Please watch the video below to get started. We have set default settings for you but there can be adjusted, before changing anything please watch the video to make informed changes.</p><br/> <video width="400" controls><source src="//player.vimeo.com/video/372340634?title=0&portrait=0&byline=0&autoplay=1" type="video/mp4"><source src="//player.vimeo.com/video/372340634?title=0&portrait=0&byline=0&autoplay=1" type="video/ogg">Your browser does not support HTML video.</video>',
+            '<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple</h2><br/> <p>Please watch the video below to get started. We have set default settings for you but there can be adjusted, before changing anything please watch the video to make informed changes.</p><br/> <video width="400" controls><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/mp4"><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/ogg">Your browser does not support HTML video.</video>',
           time: `${new Date().getHours()}:${new Date().getMinutes()}`,
           ticket_id: "#123456",
           status: "open",

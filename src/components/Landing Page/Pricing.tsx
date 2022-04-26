@@ -83,167 +83,158 @@ const Pricing: FC = () => {
         {/** //Section =======================*/}
         <div className="my-16 mx-auto container">
           <div className="flex flex-col lg:items-center justify-center w-full">
-            <h1 className="font-semibold text-slate-800 text-3xl md:text-4xl">
+            <h1 className="font-semibold text-slate-800 text-3xl md:text-4xl text-center">
               Get started at no cost, then pay as you go.
             </h1>
-            <h2 className="mt-2.5 lg:w-1/2 lg:text-center text-lg">
+            <h2 className="mt-2.5 lg:w-1/2 text-center text-slate-700 text-lg">
               We have several plans to showcase your Business. Get everything
               you need
             </h2>
           </div>
           <div className="flex items-center justify-center w-full">
             <div className="pt-6">
-              <div className="container mx-auto">
-                <div className="flex flex-wrap justify-center items-center gap-6 mt-6 h-[36rem]">
-                  <div className="flex-[1] h-full w-[20rem] bg-white rounded-lg space-y-4 p-4 shadow-2xl drop-shadow-md">
-                    <h3 className="text-2xl font-medium text-slate-600 font-sans">
-                      Free plan
-                    </h3>
-                    <h4 className="traciking-wide">
-                      <span className="text-xl text-slate-800 font-bold">
-                        $
-                      </span>
-                      <span className="text-3xl text-slate-800 font-bold">
-                        0{" "}
-                      </span>
-                      <span className="text-base text-slate-600 font-medium">
-                        /month
-                      </span>
-                    </h4>
-                    <ul className="text-sm text-slate-600 font-medium space-y-4">
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>Email Ticketing</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>2 Agents and 1 admin</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>Up to 500 tickets /month</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>2 Teams Max</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>Knowledge Base</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>Custom email templates</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>Contacts 100</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-blue-600 text-lg" />
-                        <span>Basic Reports</span>
-                      </li>
-                      <li className="flex items-center space-x-2 line-through">
-                        <BsFillCheckCircleFill className="text-slate-500 text-lg" />
-                        <span>Automated Reports</span>
-                      </li>
-                      <li className="flex items-center space-x-2 line-through">
-                        <BsFillCheckCircleFill className="text-slate-500 text-lg" />
-                        <span>Ticket merging</span>
-                      </li>
-                      <li className="flex items-center space-x-2 line-through">
-                        <BsFillCheckCircleFill className="text-slate-500 text-lg" />
-                        <span>Advanced reporting</span>
-                      </li>
-                    </ul>
-                    <Link
-                      onClick={() => {
-                        window.localStorage.setItem("plan", "free");
-                      }}
-                      to="/company-set-up"
-                    >
-                      <div className="mt-4 w-full h-10 bg-blue-600 rounded text-slate-50 text-base font-semibold flex justify-center items-center">
-                        Choose
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="flex-[1] h-full w-[20rem] bg-blue-600 rounded-lg space-y-4 p-4 shadow-2xl drop-shadow-md">
-                    <h3 className="text-2xl font-medium text-slate-100 font-sans">
-                      Pro plan
-                    </h3>
-                    <h4 className="traciking-wide">
-                      <span className="text-xl text-slate-50 font-bold">$</span>
-                      <span className="text-3xl text-slate-50 font-bold">
-                        0.034{" "}
-                      </span>
-                      <span className="text-base text-slate-100 font-medium">
-                        /ticket
-                      </span>
-                    </h4>
-                    <ul className="text-sm text-slate-200 font-medium space-y-4">
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Omni Channel</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Unlimited Agents and admins</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Up to 500 Free then $0.034 /ticket</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>50 Teams Max</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Knowledge Base</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Custom email templates</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Unlimited contacts</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Advanced Reports - prebuilt</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Automated Reports</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Ticket merging</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <BsFillCheckCircleFill className="text-slate-100 text-lg" />
-                        <span>Intergrations prebuilt</span>
-                      </li>
-                    </ul>
-                    <Link
-                      onClick={() => {
-                        window.localStorage.setItem("plan", "pro");
-                      }}
-                      to="/company-set-up"
-                    >
-                      <div className="mt-4 w-full h-10 bg-slate-100 rounded text-blue-600 text-base font-semibold flex justify-center items-center">
-                        Choose
-                      </div>
-                    </Link>
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 min-h-[36rem]">
+                <div className="col-span-1 h-full w-[20rem] bg-white rounded-lg space-y-4 p-4 shadow-2xl drop-shadow-md">
+                  <h3 className="text-2xl font-medium text-slate-600 font-sans">
+                    Free plan
+                  </h3>
+                  <h4 className="traciking-wide">
+                    <span className="text-xl text-slate-800 font-bold">$</span>
+                    <span className="text-3xl text-slate-800 font-bold">
+                      0{" "}
+                    </span>
+                    <span className="text-base text-slate-600 font-medium">
+                      /month
+                    </span>
+                  </h4>
+                  <ul className="text-sm text-slate-600 font-medium space-y-4">
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>Email Ticketing</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>2 Agents and 1 admin</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>Up to 500 tickets /month</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>2 Teams Max</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>Knowledge Base</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>Custom email templates</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>Contacts 100</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-blue-600 text-lg" />
+                      <span>Basic Reports</span>
+                    </li>
+                    <li className="flex items-center space-x-2 line-through">
+                      <BsFillCheckCircleFill className="text-slate-500 text-lg" />
+                      <span>Automated Reports</span>
+                    </li>
+                    <li className="flex items-center space-x-2 line-through">
+                      <BsFillCheckCircleFill className="text-slate-500 text-lg" />
+                      <span>Ticket merging</span>
+                    </li>
+                    <li className="flex items-center space-x-2 line-through">
+                      <BsFillCheckCircleFill className="text-slate-500 text-lg" />
+                      <span>Advanced reporting</span>
+                    </li>
+                  </ul>
+                  <Link
+                    onClick={() => {
+                      window.localStorage.setItem("plan", "free");
+                    }}
+                    to="/company-set-up"
+                  >
+                    <div className="mt-4 w-full h-10 bg-blue-600 rounded text-slate-50 text-base font-semibold flex justify-center items-center">
+                      Choose
+                    </div>
+                  </Link>
+                </div>
+                <div className="col-span-1 h-full w-[20rem] bg-blue-600 rounded-lg space-y-4 p-4 shadow-2xl drop-shadow-md">
+                  <h3 className="text-2xl font-medium text-slate-100 font-sans">
+                    Pro plan
+                  </h3>
+                  <h4 className="traciking-wide">
+                    <span className="text-xl text-slate-50 font-bold">$</span>
+                    <span className="text-3xl text-slate-50 font-bold">
+                      0.034{" "}
+                    </span>
+                    <span className="text-base text-slate-100 font-medium">
+                      /ticket
+                    </span>
+                  </h4>
+                  <ul className="text-sm text-slate-200 font-medium space-y-4">
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Omni Channel</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Unlimited Agents and admins</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Up to 500 Free then $0.034 /ticket</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>50 Teams Max</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Knowledge Base</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Custom email templates</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Unlimited contacts</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Advanced Reports - prebuilt</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Automated Reports</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Ticket merging</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <BsFillCheckCircleFill className="text-slate-100 text-lg" />
+                      <span>Intergrations prebuilt</span>
+                    </li>
+                  </ul>
+                  <Link
+                    onClick={() => {
+                      window.localStorage.setItem("plan", "pro");
+                    }}
+                    to="/company-set-up"
+                  >
+                    <div className="mt-4 w-full h-10 bg-slate-100 rounded text-blue-600 text-base font-semibold flex justify-center items-center">
+                      Choose
+                    </div>
+                  </Link>
                 </div>
               </div>
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: "",
-                }}
-              />
             </div>
           </div>
         </div>

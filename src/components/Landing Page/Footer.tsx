@@ -9,8 +9,8 @@ const Footer: FC = () => {
   return (
     <>
       <footer className=" bg-linear-pink-invert pb-12 w-[90%] md:w-full container mt-4 m-auto 2xl:w-[75rem] overflow-hidden border-t border-slate-400">
-        <div className="w-full grid grid-cols-7 pb-2">
-          <div className="col-span-4 flex flex-col py-2">
+        <div className="w-full grid grid-cols-2 md:grid-cols-7 pb-2">
+          <div className="col-span-2 md:col-span-4 flex flex-col py-2">
             {/**Logo ==================== */}
             <img
               src={darkLogo}

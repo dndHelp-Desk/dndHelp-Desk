@@ -575,9 +575,6 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
               <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-50 border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
                 <div>
-                  <h2 className="dark:text-slate-300 text-slate-900 text-sm font-semibold">
-                    Ticket Details
-                  </h2>
                   <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
                     <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                       <b className="hidden sm:flex">Open Date : </b>
@@ -671,7 +668,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                         dangerouslySetInnerHTML={{
                           __html: firstMessage && firstMessage[0]?.solution,
                         }}
-                        className="mt-6 dark:text-slate-400 text-slate-700 p-2 text-[0.79rem] tracking-wide dark:marker:text-slate-400 marker:text-slate-800 list-disc"
+                        className="messageContainer mt-6 dark:text-slate-400 text-slate-700 p-2 text-[0.79rem] tracking-wide dark:marker:text-slate-400 marker:text-slate-800 list-disc"
                       ></div>
                       {/**Play Recording ================================ */}
                       {(firstMessage[0]?.hasRecording === true ||

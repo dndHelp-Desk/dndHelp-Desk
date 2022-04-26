@@ -176,7 +176,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             </span>{" "}
             <FaChartBar className="text-blue-700 text-lg" />
           </h3>
-          <p className="text-xs font-medium text-slate-600 dark:text-slate-400">
+          <p className="text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
             More features will be added soon in the meantime explore the reports
             by making use of filters. You can find your current satisfaction
             rating below.
