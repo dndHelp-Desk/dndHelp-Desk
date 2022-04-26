@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.3](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.2...v0.6.3) (2022-04-26)
+
+
+### Features
+
+* **home.tsx:** added connect UI  feature for prefered channel and, calling btn & Billing Btn ([f9a281e](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/f9a281e60e32e1a60d62e49633bd6f43b14e9417))
+
 ### [0.6.2](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.1...v0.6.2) (2022-04-26)
 
 
