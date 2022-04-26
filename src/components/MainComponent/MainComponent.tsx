@@ -26,7 +26,7 @@ import Profile from "../Auth/Profile";
 import Notification from "./Notification";
 import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";
-import Voice_n_VideoCall from "./Voice_n_VideoCall";
+import VoicexVideoCall from "./VoicexVideoCall";
 
 const MainComponent: FC = () => {
   const logged = useSelector(
@@ -328,7 +328,7 @@ const MainComponent: FC = () => {
                 >
                   <HiOutlinePhone />
                 </button>
-                <Voice_n_VideoCall
+                <VoicexVideoCall
                   phoneToolTip={phoneToolTip}
                   openPhone={openPhone}
                 />

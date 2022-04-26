@@ -1,12 +1,12 @@
 import { FC } from "react";
-import useClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
+import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 
 type Props = {
   openPhone: any;
   phoneToolTip: boolean;
 };
 
-const Voice_n_VideoCall: FC<Props> = ({ phoneToolTip, openPhone }) => {
+const VoicexVideoCall: FC<Props> = ({ phoneToolTip, openPhone }) => {
   const modalRef = useClickOutside(() => {
     openPhone(false);
   });
@@ -25,4 +25,4 @@ const Voice_n_VideoCall: FC<Props> = ({ phoneToolTip, openPhone }) => {
   );
 };
 
-export default Voice_n_VideoCall;
+export default VoicexVideoCall;
