@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.2](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.1...v0.6.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* **tickets list:** update ticket list when a new ticket is added or when an old ticket is updated ([7e8686b](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/7e8686b8084b58c18ca1383cd2f07075c4daedf0)), closes [#14](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/14)
+
 ### [0.6.1](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.0...v0.6.1) (2022-04-26)
 
 
