@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.0...v0.6.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* **minor fix:** changes Filters and Minor fix ([7e1412f](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/7e1412fa8425c55fb683025a834e1b7dbbc654f2))
+* **newticket.tsx:** removed the Client Email Required attribute which was firebase to throw errors ([7ae1624](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/7ae16245e8e90e808d41920865eee5d0b1d973a4)), closes [#12](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/12)
+* **newticket:** new Ticket Show undefined when client email isnot filled ([f1afef1](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/f1afef16d3b27d68de6cfdf0760c18392752c388))
+
 ## [0.6.0](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v1.5.2...v0.6.0) (2022-04-20)
 
 
