@@ -8,6 +8,7 @@ import MostRecent from "./MostRecent";
 import StatusSummary from "./StatusSummary";
 import { RootState } from "../../Redux/store";
 import Connect from "./Connect";
+import ConnectModal from "./ConnectModal";
 
 const Home: FC = () => {
   const location = useLocation();
@@ -223,6 +224,7 @@ const Home: FC = () => {
           <div className="col-span-2 w-full h-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Connect Other Sources || Omni Channel Settings==================================== */}
             <Connect />
+            <ConnectModal/>
 
             {/**Progress ============================== */}
             <article className="col-span-5 md:col-span-2 min-h-[10rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5">
@@ -345,7 +347,7 @@ const Home: FC = () => {
               {allMembers.length >= 1 &&
                 (user[0]?.access && user[0]?.access) !== "client" && (
                   <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                    <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2 mb-1">
+                    <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-200 dark:border-slate-700 pb-2 mb-1">
                       <h3 className="flex-[2] text-base font-medium font-sans tracking-wide capitalize">
                         Members
                       </h3>

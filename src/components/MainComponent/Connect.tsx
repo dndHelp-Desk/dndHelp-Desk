@@ -9,6 +9,7 @@ import {
   BsChatSquareText,
   BsEnvelope,
 } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Connect: FC = () => {
   return (
@@ -79,13 +80,13 @@ const Connect: FC = () => {
           </button>
 
           {/**Email =========================== */}
-          <button className="connect_btn">
+          <Link to="/app/settings/support-operations" className="connect_btn">
             <BsEnvelope className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               Email
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden bg-green-500"></span>
-          </button>
+          </Link>
 
           {/**Telegram =========================== */}
           <button className="connect_btn">

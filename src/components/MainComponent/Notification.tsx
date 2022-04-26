@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import noDataImg from "./../images/no-notifications.svg";
+import noDataImg from "./images/no-notifications.svg";
 import { HiOutlineX } from "react-icons/hi";
-import useClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
-import { deleteNotification } from "../../Data_Fetching/TicketsnUserData";
-import { setUnread } from "../../../Redux/Slices/Tickets_n_Settings_Slice";
-import { RootState } from "../../../Redux/store";
+import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
+import { deleteNotification } from "../Data_Fetching/TicketsnUserData";
+import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
+import { RootState } from "../../Redux/store";
 
 interface Props {
   openNotifications: boolean;
@@ -94,7 +94,7 @@ const Notification: FC<Props> = ({
     <div
       role="banner"
       ref={panelRef}
-      className={`h-[30rem] w-[23rem] z-[999] transition-all duration-500 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300  flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded-lg p-2 absolute right-2 top-[4.2rem] after:content-[''] after:absolute after:right-[5.5rem] after:top-[-0.8rem] after:h-6 after:w-6 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit ${
+      className={`h-[30rem] w-[23rem] z-[999] transition-all duration-500 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300  flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded p-2 absolute right-2 top-[4.2rem] after:content-[''] after:absolute after:right-[5.5rem] after:top-[-0.8rem] after:h-6 after:w-6 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit ${
         openNotifications === true ? "flex" : "hidden"
       }`}
     >

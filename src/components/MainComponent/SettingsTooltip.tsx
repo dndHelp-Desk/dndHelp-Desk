@@ -7,6 +7,7 @@ import {
   BsFileTextFill,
   BsBookHalf,
   BsFillDoorOpenFill,
+  BsFillCreditCard2BackFill,
 } from "react-icons/bs";
 import { signOut, getAuth } from "firebase/auth";
 import { updateUserStatus } from "../Data_Fetching/TicketsnUserData";
@@ -28,8 +29,8 @@ const SettingsTooltip: FC = () => {
         role="tooltip"
         className="bg-transparent p-1 pt-6 absolute right-[-3rem] top-[2rem] hidden group-hover:flex flex-col transition-all duration-500"
       >
-        <div className="min-h-[10rem] w-[13rem] z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl drop-shadow-2xl rounded-lg p-2 relative  after:content-[''] after:absolute after:right-[3rem] after:top-[-0.8rem] after:h-6 after:w-6 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit flex flex-col items-center">
-          <h2 className="dark:text-slate-300 text-slate-800 text-xl font-bold text-left w-full px-2 transition-all duration-500">
+        <div className="min-h-[10rem] w-[13rem] z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl drop-shadow-2xl rounded p-2 relative  after:content-[''] after:absolute after:right-[3rem] after:top-[-0.8rem] after:h-6 after:w-6 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit flex flex-col items-center">
+          <h2 className="dark:text-slate-300 text-slate-800 text-xl font-bold text-left w-full px-2 transition-all duration-500 border-b border-slate-300 dark:border-slate-700 pb-2">
             Settings
           </h2>
           <ul className="flex w-full px-2 space-y-4 mt-4 flex-col">
@@ -90,6 +91,13 @@ const SettingsTooltip: FC = () => {
                 <span>Solutions</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/app/settings/solutions" className="settingsNav">
+                <BsFillCreditCard2BackFill />
+                <span>Billing</span>
+              </NavLink>
+            </li>
+            <hr className="border-slate-300 dark:border-slate-700" />
             <li>
               <button
                 onClick={() => {

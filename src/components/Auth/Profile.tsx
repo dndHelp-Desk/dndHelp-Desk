@@ -14,15 +14,15 @@ import {
   updateUID,
 } from "../Data_Fetching/TicketsnUserData";
 import defaultProfile from "./../../default.webp";
-import {AppDispatch, RootState } from "../../Redux/store";
+import { AppDispatch, RootState } from "../../Redux/store";
 
 const Profile = () => {
-  const currentUser:any = useAuth();
+  const currentUser: any = useAuth();
   const [photo, setPhoto] = useState<string | null>(null);
   const [change, setNewChange] = useState<boolean | string>(true);
   const [showChange, setChange] = useState(false);
   const [showChangeIcon, setChangeIcon] = useState<string>("scale-0");
-  const member_details:any[] = useSelector(
+  const member_details: any[] = useSelector(
     (state: RootState) => state.UserInfo.member_details
   );
   const alerts = useSelector(
@@ -146,7 +146,7 @@ const Profile = () => {
             role="tooltip"
             className="bg-transparent p-1 pt-4 absolute right-[-0.3rem] top-[2.3rem] hidden group-hover:flex flex-col transition-all duration-500"
           >
-            <div className="p-4 z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded-lg after:content-[''] after:absolute after:right-[1rem] after:top-[0.5rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit transition-all duration-500">
+            <div className="p-4 z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded after:content-[''] after:absolute after:right-[1rem] after:top-[0.5rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit transition-all duration-500">
               <div className="pb-2">
                 <h3 className="dark:text-slate-300 text-slate-900 text-sm text-center capitalize font-semibold">
                   {member_details.length >= 1 && member_details[0].name}

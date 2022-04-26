@@ -23,9 +23,10 @@ import Home from "./Home";
 import Alert from "../Others/Alert";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 import Profile from "../Auth/Profile";
-import Notification from "./Notifications & Chat/Notification";
+import Notification from "./Notification";
 import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";
+import Voice_n_VideoCall from "./Voice_n_VideoCall";
 
 const MainComponent: FC = () => {
   const logged = useSelector(
@@ -44,6 +45,7 @@ const MainComponent: FC = () => {
     (state: RootState) => state.NotificationsData.messages
   );
   const [openNotifications, setOpenNotification] = useState<boolean>(false);
+  const [phoneToolTip, openPhone] = useState<boolean>(false);
   const location = useLocation();
   const dispatch: AppDispatch = useDispatch();
 
@@ -181,7 +183,7 @@ const MainComponent: FC = () => {
               <div className="h-9 w-32 p-[0.2rem] rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 overflow-hidden relative">
                 <div className="w-full h-full flex">
                   <div
-                    className={`h-full w-2/4 bg-white dark:bg-slate-700 border dark:border-slate-600 border-slate-300 rounded-sm shadow-lg transition-all duration-500 ${
+                    className={`h-full w-2/4 bg-white dark:bg-[#33415569] border dark:border-slate-600 border-slate-300 rounded-sm shadow-lg transition-all duration-500 ${
                       theme === "dark" && "translate-x-[100%] "
                     }`}
                   ></div>
@@ -317,19 +319,20 @@ const MainComponent: FC = () => {
             {/*Notifications , Controls & Calls ====================*/}
             <div className="flex items-center h-full space-x-2">
               {/**Voice & Video Call =================================== */}
-              <abbr title="Voice & Video Call">
-                <label htmlFor="call_video">
-                  <input
-                    type="checkbox"
-                    name="call_video"
-                    id="call_video"
-                    className="hidden"
-                  />
-                  <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold">
-                    <HiOutlinePhone />
-                  </button>
-                </label>
-              </abbr>
+              <div className="relative">
+                <button
+                  onClick={() => {
+                    openPhone(true);
+                  }}
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                >
+                  <HiOutlinePhone />
+                </button>
+                <Voice_n_VideoCall
+                  phoneToolTip={phoneToolTip}
+                  openPhone={openPhone}
+                />
+              </div>
 
               {/**Notifications ================================================ */}
               <abbr title="Notifications">
