@@ -44,6 +44,10 @@
     @apply text-blue-500;
   }
 
+  .connect_btn {
+    @apply col-span-1 rounded bg-slate-100 dark:bg-[#33415569] border border-slate-200 dark:border-slate-700 flex flex-col justify-center items-center gap-2 outline-none focus:outline-none focus:border-0 focus:ring-[1px] focus:ring-blue-600 hover:opacity-90 dark:hover:opacity-80 hover:shadow-lg transition-all relative;
+  }
+
   .contacts-control {
     @apply text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border-transparent border bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-700 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800;
   }

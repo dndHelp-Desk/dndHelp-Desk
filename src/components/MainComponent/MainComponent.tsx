@@ -1,7 +1,13 @@
 import { FC, useState, useEffect } from "react";
 import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
-import { BsBell, BsJustifyLeft, BsGear } from "react-icons/bs";
-import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
+import { BsJustifyLeft } from "react-icons/bs";
+import {
+  HiOutlineSun,
+  HiOutlineMoon,
+  HiOutlinePhone,
+  HiOutlineCog,
+  HiOutlineBell,
+} from "react-icons/hi";
 import darkLogo from "./logos/dndHelp-Desk.webp";
 import lightLogo from "./logos/dndHelp-Desk_.webp";
 import { useSelector, useDispatch } from "react-redux";
@@ -308,16 +314,22 @@ const MainComponent: FC = () => {
               </NavLink>
             </div>
 
-            {/*Notifications & Controls ====================*/}
+            {/*Notifications , Controls & Calls ====================*/}
             <div className="flex items-center h-full space-x-2">
-              {/**Settings ================================================ */}
-              <div className="rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold group">
-                <abbr title="Settings">
-                  <BsGear />
-                </abbr>
-                {/**Settings Tooltip ================================== */}
-                <SettingsTooltip />
-              </div>
+              {/**Voice & Video Call =================================== */}
+              <abbr title="Voice & Video Call">
+                <label htmlFor="call_video">
+                  <input
+                    type="checkbox"
+                    name="call_video"
+                    id="call_video"
+                    className="hidden"
+                  />
+                  <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold">
+                    <HiOutlinePhone />
+                  </button>
+                </label>
+              </abbr>
 
               {/**Notifications ================================================ */}
               <abbr title="Notifications">
@@ -325,7 +337,7 @@ const MainComponent: FC = () => {
                   onClick={() => setOpenNotification(true)}
                   className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
-                  <BsBell />
+                  <HiOutlineBell />
                   {(unread.length >= 1 || notificationMsgs.length >= 1) && (
                     <span className="flex h-2 w-2 absolute top-1 right-1">
                       <span className="animate-ping absolute inline-flex rounded-full bg-red-500 opacity-75 h-2 w-2"></span>
@@ -339,6 +351,15 @@ const MainComponent: FC = () => {
                 openNotifications={openNotifications}
                 setOpenNotification={setOpenNotification}
               />
+
+              {/**Settings ================================================ */}
+              <div className="rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold group">
+                <abbr title="Settings">
+                  <HiOutlineCog />
+                </abbr>
+                {/**Settings Tooltip ================================== */}
+                <SettingsTooltip />
+              </div>
 
               {/**Profile And User Settings =========================== */}
               <Profile />

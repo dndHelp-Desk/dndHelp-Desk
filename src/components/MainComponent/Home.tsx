@@ -3,14 +3,14 @@ import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
 import noUsers from "./images/no-userss.svg";
-import { BsEnvelope, BsAlarm, BsArrowRight } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
 import MostRecent from "./MostRecent";
 import StatusSummary from "./StatusSummary";
 import { RootState } from "../../Redux/store";
+import Connect from "./Connect";
 
 const Home: FC = () => {
   const location = useLocation();
-  const todoList = useSelector((state: RootState) => state.UserInfo.toDo);
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
@@ -18,7 +18,6 @@ const Home: FC = () => {
     (state: RootState) => state.Tickets.categories
   );
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
-  const unread = useSelector((state: RootState) => state.Tickets.unread);
   let filteredTickets = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
   );
@@ -105,7 +104,7 @@ const Home: FC = () => {
                   ? "bg-green-600"
                   : user.status === "unavailable"
                   ? "bg-red-600"
-                  : "bg-yellow-600"
+                  : "bg-yellow-500"
               }`}
             ></div>
           </div>
@@ -138,7 +137,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase">
                 Top 5 Categories
               </h1>
-              <p className="text-center text-xs font-medium tracking-normal text-slate-700 dark:text-slate-400 mt-2">
+              <p className="text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400 mt-2">
                 Actual figures can be found on the reports page.
               </p>
             </div>
@@ -198,7 +197,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-1">
                 Tickets Per Status
               </h1>
-              <p className="dark:text-slate-400 text-slate-700 text-center text-xs font-medium tracking-normal mt-2 px-2">
+              <p className="dark:text-slate-400 text-slate-600 text-center text-xs font-medium tracking-normal mt-2 px-2">
                 Hover your mouse on top of each slice below to see the
                 percentages, for more analytics please visit the reports page.
               </p>
@@ -211,7 +210,7 @@ const Home: FC = () => {
               <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-3">
                 Recent Activities
               </h1>
-              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2">
+              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600 mt-2">
                 Your most recent activities.
               </p>
             </article>
@@ -219,96 +218,18 @@ const Home: FC = () => {
           </div>
         </section>
 
-        {/**Others  ====================================== */}
-        <div className="w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 overflow-hidden pt-4 lg:pt-0 gap-4 grid grid-cols-1 lg:grid-cols-3">
-          {/**Messages Reply Count ====================== */}
-          <div className="col-span-1 flex justify-center items-center">
-            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded-md p-2">
-              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded">
-                <BsEnvelope />
-              </div>
-              <h2 className="dark:text-slate-300 text-slate-700 tracking-wide uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
-                <span>Inbox Replies</span>
-                <span>{unread.length}</span>
-              </h2>
-            </div>
-          </div>
-          {/**Reminders  Count ====================== */}
-          <div className="col-span-1 flex justify-center items-center">
-            <div className="h-12 w-[90%] dark:custom-shadow flex items-center space-x-4 dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 rounded p-2">
-              <div className="h-8 w-10 bg-slate-700 text-slate-100 dark:text-slate-300 flex justify-center items-center text-xl rounded">
-                <BsAlarm />
-              </div>
-              <h2 className="dark:text-slate-300 text-slate-700 uppercase text-xs font-sans font-semibold w-full pr-2 flex justify-between items-center">
-                <span>Pending Reminders</span>
-                <span>
-                  {todoList.filter((todo) => todo.status === false).length}
-                </span>
-              </h2>
-            </div>
-          </div>
-          {/**Agents Queue ====================== */}
-          <div className="w-full h-20 col-span-1 flex justify-center py-4">
-            <div className="h-full w-full flex flex-col justify-between space-y-2">
-              <div className="space-x-2 items-center h-full w-full grid grid-cols-3 px-2 capitalize">
-                <div className="col-span-1 h-full border-r dark:border-slate-700 border-slate-200 pr-6 flex flex-col justify-center items-center">
-                  <p className="dark:text-slate-300 text-slate-700 text-sm font-bold">
-                    {
-                      allMembers
-                        .filter((user) => user.access === "agent")
-                        .filter((user) => user.status === "available").length
-                    }
-                  </p>
-                  <p className="text-slate-500 text-xs font-semibold">
-                    available
-                  </p>
-                </div>
-                <div className="col-span-1 h-full border-r dark:border-slate-700 border-slate-200 pr-6 flex flex-col justify-center items-center">
-                  <p className="dark:text-slate-300 text-slate-700  text-sm font-bold">
-                    {
-                      allMembers
-                        .filter((user) => user.access === "agent")
-                        .filter((user) => user.status === "busy").length
-                    }
-                  </p>
-                  <p className="text-slate-500 text-xs font-semibold">Busy</p>
-                </div>
-                <div className="col-span-1 h-full pr-6 flex flex-col justify-center items-center">
-                  <p className="dark:text-slate-300 text-slate-700  text-sm font-bold">
-                    {
-                      allMembers
-                        .filter((user) => user.access === "agent")
-                        .filter((user) => user.status === "unavailable").length
-                    }
-                  </p>
-                  <p className="text-slate-500 text-xs font-semibold">
-                    Unavailable
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/**Bottom Half ================================ */}
-        <section className="row-span-2 w-full h-fit lg:h-[16rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
-          <div className="col-span-2 w-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
-            {/**Quick Settings ==================================== */}
-            <div className="col-span-5 h-[16rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 overflow-hidden relative">
-              <div className="rounded w-full h-full p-2 flex-col flex justify-between gap-4">
-                <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
-                  Quick Settings
-                </h3>
-                <div className="w-full rounded border border-slate-200 dark:border-slate-700 flex-[5]"></div>
-              </div>
-            </div>
+        <section className="row-span-2 w-full h-fit lg:h-[18rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
+          <div className="col-span-2 w-full h-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
+            {/**Connect Other Sources || Omni Channel Settings==================================== */}
+            <Connect />
 
             {/**Progress ============================== */}
-            <article className="col-span-5 md:col-span-2 min-h-[8rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5">
+            <article className="col-span-5 md:col-span-2 min-h-[10rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
                 Progress
               </h3>
-              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700">
+              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600">
                 You managed to get{" "}
                 <span className="text-slate-900 dark:text-slate-300 font-semibold">
                   {" "}
@@ -419,22 +340,59 @@ const Home: FC = () => {
           </div>
 
           {/**Online Users ================================ */}
-          <div className="col-span-2 lg:col-span-1 h-[16rem] w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2">
+          <div className="col-span-2 lg:col-span-1 h-[18rem] w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2">
             <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-4 py-2 overflow-hidden">
               {allMembers.length >= 1 &&
                 (user[0]?.access && user[0]?.access) !== "client" && (
                   <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                    <h3 className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-6 flex justify-between items-center">
-                      <span className="text-base font-medium font-sans tracking-wide capitalize">
+                    <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2 mb-1">
+                      <h3 className="flex-[2] text-base font-medium font-sans tracking-wide capitalize">
                         Members
-                      </span>
-                      <span className="text-base font-medium font-sans tracking-wide capitalize">
-                        {allMembers.length}
-                      </span>
-                    </h3>
+                      </h3>
+                      <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize">
+                        <div className="col-span-1 flex flex-col justify-center items-center">
+                          <p className="dark:text-slate-300 text-slate-700 text-xs font-bold">
+                            {
+                              allMembers.filter(
+                                (user) => user.status === "available"
+                              ).length
+                            }
+                          </p>
+                          <p className="text-slate-500 text-[0.6rem] font-semibold">
+                            available
+                          </p>
+                        </div>
+                        <div className="col-span-1 flex flex-col justify-center items-center">
+                          <p className="dark:text-slate-300 text-slate-700  text-xs font-bold">
+                            {
+                              allMembers.filter(
+                                (user) => user.status === "busy"
+                              ).length
+                            }
+                          </p>
+                          <p className="text-slate-500 text-[0.6rem] font-semibold">
+                            Busy
+                          </p>
+                        </div>
+                        <div className="col-span-1 flex flex-col justify-center items-center">
+                          <p className="dark:text-slate-300 text-slate-700  text-xs font-bold">
+                            {
+                              allMembers.filter(
+                                (user) => user.status === "unavailable"
+                              ).length
+                            }
+                          </p>
+                          <p className="text-slate-500 text-[0.6rem] font-semibold">
+                            Unavailable
+                          </p>
+                        </div>
+                      </div>
+                    </header>
                     {users}
                   </div>
                 )}
+
+              {/**Placeholders ||Preloader ====================== */}
               {(allMembers.length <= 0 ||
                 (user[0]?.access && user[0]?.access) === "client") && (
                 <div className="h-full w-full">

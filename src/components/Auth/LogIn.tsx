@@ -325,6 +325,7 @@ const LogIn: FC = () => {
 
                 <div className="text-sm">
                   <button
+                    type="button"
                     onClick={() => {
                       sendPasswordResetEmail(auth, inputValues.email)
                         .then(() => {
@@ -373,7 +374,7 @@ const LogIn: FC = () => {
 
       {/**Alert */}
       <Alert />
-      <Help/>
+      <Help />
     </div>
   );
 };
