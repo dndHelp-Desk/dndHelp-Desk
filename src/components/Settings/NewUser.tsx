@@ -45,14 +45,12 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        email: inputValues.email,
+        email: inputValues.email?.trim()?.replace(/\s/g, ""),
         password: inputValues.password,
         displayName: inputValues.name,
       }),
     })
-      .then((req) => {
-        req.json();
-      })
+      .then((req) => req.json())
       .then(() => {
         dispatch(
           updateAlert([
@@ -74,6 +72,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
             },
           ])
         );
+        console.log(error.message);
       });
     createUser(
       inputValues.name,
@@ -106,7 +105,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
       {/**Add New User ==================== */}
       <div
         ref={closeModalRef}
-        className="w-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center justify-center rounded p-4"
+        className="w-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center justify-center rounded p-4 pt-8"
       >
         <h2 className="dark:text-slate-300 text-slate-800 text-base font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden uppercase">
           Add New User

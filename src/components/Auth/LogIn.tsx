@@ -194,20 +194,12 @@ const LogIn: FC = () => {
             rel="noreferrer"
             className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
           >
-            <FaSellsy
-              className="inline-block
-			  "
-            />
             <span>Dashboard</span>
           </a>
           <Link
             to="/support"
             className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
           >
-            <FaHeadset
-              className="inline-block
-			  "
-            />
             <span>Support</span>
           </Link>
         </div>

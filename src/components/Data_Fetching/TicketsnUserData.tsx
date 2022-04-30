@@ -128,6 +128,7 @@ export const createUser = (
     status: "unavailable",
     photoUrl: "",
     companies: companies,
+    uid:""
   });
 };
 
@@ -498,7 +499,7 @@ const TicketsnUserData: FC = () => {
           );
         })
     );
-  }, [dispatch, currentUser.email]);
+  }, [dispatch, currentUser?.email]);
 
   //Load Email_Accounts ====================
   useEffect(() => {

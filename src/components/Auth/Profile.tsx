@@ -73,19 +73,14 @@ const Profile = () => {
       currentUser
     ) {
       currentUser.photoURL !== null && setPhotoURL(currentUser.photoURL);
-      member_details.length >= 1 &&
-        member_details[0].photoUrl &&
-        currentUser.photoURL !== null &&
+      member_details[0].photoUrl &&
+        currentUser.photoURL === null &&
         updateProfileUrl(
           member_details.length >= 1 && member_details[0].id,
           currentUser.photoURL
         );
-      !member_details.length &&
-        member_details[0].uid &&
-        updateUID(
-          member_details.length >= 1 && member_details[0].id,
-          currentUser.uid
-        );
+      member_details[0].uid?.length <= 1 &&
+        updateUID(member_details[0].id, currentUser.uid);
     }
   }, [currentUser, member_details]);
 

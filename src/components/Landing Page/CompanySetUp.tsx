@@ -99,6 +99,7 @@ const CompanySetUp: FC = () => {
           status: "unavailable",
           photoUrl: "",
           companies: "",
+          uid: auth.currentUser?.uid,
         });
 
         //New  Email Account ==========================

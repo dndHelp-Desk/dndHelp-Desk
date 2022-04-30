@@ -11,7 +11,11 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const Connect: FC = () => {
+type Props = {
+  openAPIModal: any;
+};
+
+const Connect: FC<Props> = ({ openAPIModal }) => {
   return (
     <div className="col-span-5 h-full min-h-[18rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 overflow-hidden relative">
       <div className="rounded w-full h-full p-2 flex-col flex justify-between gap-4">
@@ -24,9 +28,14 @@ const Connect: FC = () => {
             customers in a single thread.
           </p>
         </article>
-        <div className="w-full rounded border border-slate-200 dark:border-slate-700 flex-[5] grid grid-cols-4 grid-rows-2 gap-3 p-3">
+        <div className="w-full rounded border border-slate-300 dark:border-slate-700 flex-[5] grid grid-cols-4 grid-rows-2 gap-3 p-3">
           {/**Slack =========================== */}
-          <button className="connect_btn">
+          <button
+            onClick={() => {
+              openAPIModal(true);
+            }}
+            className="connect_btn"
+          >
             <BsSlack className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               Slack
@@ -35,7 +44,12 @@ const Connect: FC = () => {
           </button>
 
           {/**WhatsApp =========================== */}
-          <button className="connect_btn">
+          <button
+            onClick={() => {
+              openAPIModal(true);
+            }}
+            className="connect_btn"
+          >
             <BsWhatsapp className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               WhatsApp
@@ -44,7 +58,12 @@ const Connect: FC = () => {
           </button>
 
           {/**Instagram =========================== */}
-          <button className="connect_btn">
+          <button
+            onClick={() => {
+              openAPIModal(true);
+            }}
+            className="connect_btn"
+          >
             <BsInstagram className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               Instagram
@@ -53,7 +72,12 @@ const Connect: FC = () => {
           </button>
 
           {/**Twitter =========================== */}
-          <button className="connect_btn">
+          <button
+            onClick={() => {
+              openAPIModal(true);
+            }}
+            className="connect_btn"
+          >
             <BsTwitter className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               Twitter
@@ -62,7 +86,12 @@ const Connect: FC = () => {
           </button>
 
           {/**Messenger =========================== */}
-          <button className="connect_btn">
+          <button
+            onClick={() => {
+              openAPIModal(true);
+            }}
+            className="connect_btn"
+          >
             <BsMessenger className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               Messenger
@@ -71,7 +100,12 @@ const Connect: FC = () => {
           </button>
 
           {/**SMS =========================== */}
-          <button className="connect_btn">
+          <button
+            onClick={() => {
+              openAPIModal(true);
+            }}
+            className="connect_btn"
+          >
             <BsChatSquareText className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               SMS
@@ -89,7 +123,12 @@ const Connect: FC = () => {
           </Link>
 
           {/**Telegram =========================== */}
-          <button className="connect_btn">
+          <button
+            onClick={() => {
+              openAPIModal(true);
+            }}
+            className="connect_btn"
+          >
             <BsTelegram className="text-lg text-slate-800 dark:text-slate-300" />
             <p className="text-[0.65rem] uppercase font-semibold text-slate-700 dark:text-slate-400">
               Telegram

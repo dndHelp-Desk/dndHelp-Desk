@@ -214,15 +214,15 @@ const TicketsList: FC<Props> = ({
               className="h-full w-[85%] flex flex-col justify-center space-y-1 relative"
             >
               <abbr title={ticket.ticket_id}>
-                <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
+                <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans capitalize whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
                   <span className="">
-                    {ticket.category} : {ticket.ticket_id}
+                    {ticket.category} | {ticket.ticket_id}
                   </span>
                 </p>
               </abbr>
-              <p className="dark:text-slate-400 max-w-[11rem] text-slate-700 text-xs tracking-wide font-base capitalize overflow-hidden whitespace-nowrap overflow-ellipsis">
+              <p className="dark:text-slate-400 max-w-[11rem] text-slate-700 text-xs tracking-wide font-base capitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <abbr title={ticket.branch_company}>
-                  {ticket.branch_company}
+                  &rArr; {ticket.branch_company}
                 </abbr>
               </p>
               {/**Indicate The ticket that is solved or  overdue and open ================*/}

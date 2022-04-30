@@ -54,7 +54,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
   const [recordingFile, setFile] = useState<boolean>(false);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
 
-  const [value, onChange] = useState<string | any>("<p>Type Here ...</p>");
+  const [value, onChange] = useState<string | any>("<p></p>");
   const dispatch: AppDispatch = useDispatch();
   const scrollToLastMessage = useRef<HTMLDivElement | any>();
   const scrollToNone = useRef<HTMLDivElement | any>();
@@ -73,7 +73,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
   //Reply State and value ==================================
   const [reply, setReply] = useState<ReplyOptions>({
-    message: "<p>Type here ...</p>",
+    message: "<p></p>",
     subject:
       threadMessage.length >= 1 &&
       threadMessage.filter((msg: any) => msg.message_position === 1)[0]
@@ -159,6 +159,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
     fetch("https://dndhelp-desk-first.herokuapp.com/send", {
       method: "POST",
+      mode: "no-cors",
       headers: {
         "Content-type": "application/json",
       },
@@ -239,8 +240,12 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
               },
             ])
           );
-          onChange("<p>Type here ...</p>");
-          setReply({ ...reply, message: "<p>Type here ...</p>" });
+          onChange("<p></p>");
+          setReply({
+            ...reply,
+            message: "<p></p>",
+            status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+          });
         } else if (resData.status === "fail") {
           dispatch(
             updateAlert([
@@ -255,10 +260,10 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
       });
     setReply({
       ...reply,
-      message: "<p>Type here ...</p>",
-      status: firstMessage ? firstMessage[0]?.status : "Status",
+      message: "<p></p>",
+      status: firstMessage[0] ? firstMessage[0]?.status : "Status",
     });
-    onChange("<p>Type here ...</p>");
+    onChange("<p></p>");
   };
 
   //Send Reply Function ========================
@@ -387,10 +392,10 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             );
             setReply({
               ...reply,
-              message: "<p>Type here ...</p>",
+              message: "<p></p>",
               status: "Status",
             });
-            onChange("<p>Type here ...</p>");
+            onChange("<p></p>");
           } else if (resData.status === "fail") {
             dispatch(
               updateAlert([
@@ -403,7 +408,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             );
           }
         });
-      onChange("<p>Type here ...</p>");
+      onChange("<p></p>");
     }
 
     //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
@@ -411,18 +416,18 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
       sendSolution();
       setReply({
         ...reply,
-        message: "<p>Type here ...</p>",
-        status: firstMessage ? firstMessage[0]?.status : "Status",
+        message: "<p></p>",
+        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
       });
-      onChange("<p>Type here ...</p>");
+      onChange("<p></p>");
     } else if (reply.status === "reopened") {
       reOpenTicket(firstMessage[0]?.id);
       setReply({
         ...reply,
-        message: "<p>Type here ...</p>",
-        status: firstMessage ? firstMessage[0]?.status : "Status",
+        message: "<p></p>",
+        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
       });
-      onChange("<p>Type here ...</p>");
+      onChange("<p></p>");
     } else if (
       reply.status !== "" &&
       reply.status !== "Status" &&
@@ -432,11 +437,11 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
       changeStatus(firstMessage[0]?.id, reply.status);
       setReply({
         ...reply,
-        message: "<p>Type here ...</p>",
-        status: firstMessage ? firstMessage[0]?.status : "Status",
+        message: "<p></p>",
+        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
       });
     }
-    onChange("<p>Type here ...</p>");
+    onChange("<p></p>");
     if (reply.status !== "Status" && reply.status === "") {
       dispatch(
         updateAlert([
@@ -462,12 +467,12 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
               : scrollToNone
           }
           key={index}
-          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide"
+          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-slate-50 dark:bg-[#182235] rounded border border-slate-200 dark:border-[#3341553f]"
         >
           {/**Message ====================== */}
-          <div className="w-[95%] 2xl:w-full bg-tranparent px-6 pb-4 relative">
-            <div className="absolute left-[-1rem] top-0 h-[2rem] w-[2rem] rounded border dark:border-slate-500 border-slate-500 dark:bg-slate-700 bg-slate-200 px-1 overflow-hidden">
-              <div className="w-full h-full dark:bg-slate-700 bg-slate-200 dark:text-gray-300 text-slate-600 flex justify-center items-center capitalize font-bold text-sm">
+          <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
+            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded border dark:border-[#3341553f] border-slate-200 dark:bg-[#182235] bg-slate-50 px-1 overflow-hidden">
+              <div className="w-full h-full dark:bg-[#182235] bg-slate-50 dark:text-gray-300 text-slate-800 flex justify-center items-center capitalize font-bold text-sm">
                 <BsChatRight />
               </div>
             </div>
@@ -475,7 +480,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             <div className="w-full bg-transparent rounded-lg">
               <div className="font-semibold dark:font-medium dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
                 <div className="flex items-center dark:text-slate-300 text-slate-900 text-xs">
-                  <span>
+                  <span className="tracking-normal capitalize">
                     {message.agent_name}
                     {message.user}
                   </span>
@@ -543,7 +548,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                   </div>
                 </div>
               </div>
-              <div className="mt-2 py-2 dark:text-slate-400 text-slate-700 border-b dark:border-slate-800 border-slate-200 p-2 text-[13px]">
+              <div className="py-2 dark:text-slate-400 text-slate-700 p-2 text-[13px]">
                 {message.message && (
                   <div
                     dangerouslySetInnerHTML={{ __html: message?.message }}
@@ -564,8 +569,8 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
         isChatOpen ? "flex" : "hidden"
       } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent`}
     >
-      <div className="h-[65%] w-full dark:bg-[#182235] bg-slate-50 border dark:border-[#33415596] border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
-        <div className="h-14 bg-transparent sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
+      <div className="h-[70%] w-full dark:bg-[#182235] bg-slate-50 border dark:border-[#33415596] border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
+        <div className="h-14 bg-slate-50 dark:bg-[#182235] sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <details className="relative flex items-center space-x-2 outline-none focus:outline-none">
@@ -573,7 +578,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-50 border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
+              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-900 bg-white border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
                 <div>
                   <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
                     <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
@@ -634,19 +639,19 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
         </div>
 
         {/**Thread Messages ============================ */}
-        <div className="h-full w-[98%] m-auto p-6 overflow-y-scroll">
+        <div className="h-full w-[98%] m-auto p-6 flex flex-col gap-3 overflow-y-scroll bg-inherit">
           {thread}
           {
             //Final Solution If there is one =====================
             firstMessage && firstMessage[0]?.status === "solved" && (
               <div
                 ref={scrollToLastMessage}
-                className="w-full text-slate-400 text-sm leading-6 flex transition-all"
+                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-slate-50 dark:bg-[#182235] rounded border border-slate-200 dark:border-[#3341553f]"
               >
                 {/**Message ====================== */}
-                <div className="w-[95%] 2xl:w-full bg-tranparent px-6 pb-2 relative">
-                  <div className="absolute left-[-1rem] top-0 h-[2rem] rounded dark:bg-slate-700 bg-slate-200 border dark:border-slate-500 border-slate-500 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
-                    <div className="w-full h-full dark:bg-slate-700 bg-slate-200 rounded-[0.3rem]  dark:text-gray-300 text-slate-600 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
+                <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
+                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded dark:bg-[#182235] bg-slate-50 border dark:border-[#3341553f] border-slate-200 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
+                    <div className="w-full h-full dark:bg-[#182235] bg-slate-50 rounded-[0.3rem]  dark:text-gray-300 text-slate-600 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
                       Solution
                     </div>
                   </div>
@@ -663,12 +668,12 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                         </span>
                       </div>
                     </div>
-                    <div className="w-full py-2 border-b dark:border-slate-800 border-slate-200">
+                    <div className="w-full">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: firstMessage && firstMessage[0]?.solution,
                         }}
-                        className="messageContainer mt-6 dark:text-slate-400 text-slate-700 p-2 text-[0.79rem] tracking-wide dark:marker:text-slate-400 marker:text-slate-800 list-disc"
+                        className="messageContainer dark:text-slate-400 text-slate-700 p-2 text-[0.79rem] tracking-wide dark:marker:text-slate-400 marker:text-slate-800 list-disc"
                       ></div>
                       {/**Play Recording ================================ */}
                       {(firstMessage[0]?.hasRecording === true ||
@@ -712,13 +717,13 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[35%] w-full bg-transparent pt-6 flex items-center justify-end">
+      <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
         <div className="h-full w-full relative shadow-sm rounded dark:bg-[#182235] bg-slate-50 border border-slate-300 dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"
           >
-            <div className="w-full h-[82%]">
+            <div className="w-full h-[70%]">
               <div className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 focus:ring-0 transition-all border-0 dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden">
                 <TextEditor
                   setReply={setReply}
@@ -728,7 +733,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
               </div>
             </div>
             {/**Reply options ======================= */}
-            <div className="h-[18%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
+            <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center">
                 {/**Upload Recordings ========================================= */}
                 <abbr title="Upload Your Recording">
@@ -759,7 +764,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className="w-24 md:w-28 h-8 pt-2 rounded-r border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize "
+                    className="w-24 md:w-28 h-8 rounded-r border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
                   >
                     <option
                       className="p-2"
@@ -785,9 +790,9 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
               <div className="flex space-x-2 items-center">
                 <button
                   type="submit"
-                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700  rounded text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm"
+                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm"
                 >
-                  <span className="text-xs">Send</span>
+                  <span className="text-xs">Send now</span>
                   <BiPaperPlane />
                 </button>
               </div>

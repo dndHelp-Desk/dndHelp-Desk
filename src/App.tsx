@@ -1,4 +1,5 @@
 import { FC, Suspense, lazy } from "react";
+import ReportsComponent from "./components/Reports/ReportComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing Page/Landing";
 import LogIn from "./components/Auth/LogIn";
@@ -9,9 +10,6 @@ import ErrorPage from "./components/Landing Page/ErrorPage";
 //Lazy Loading Components || Code Splitting ====================
 const MainComponent = lazy(
   () => import("./components/MainComponent/MainComponent")
-);
-const ReportsComponent = lazy(
-  () => import("./components/Reports/ReportComponent")
 );
 const SettingsComponent = lazy(
   () => import("./components/Settings/SettingsComponents")
@@ -108,6 +106,7 @@ const App: FC = () => {
                 <Route path="solutions" element={<Solutions />} />
               </Route>
             </Route>
+            <Route path="*" element={ErrorPage} />
           </Routes>
         </Suspense>
       </BrowserRouter>

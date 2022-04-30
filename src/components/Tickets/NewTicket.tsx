@@ -13,6 +13,7 @@ import {
   BiFile,
   BiMinus,
   BiMicrophone,
+  BiXCircle,
 } from "react-icons/bi";
 import { AppDispatch, RootState } from "../../Redux/store";
 
@@ -100,19 +101,21 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       return (
         <li
           key={index}
-          className={`text-xs text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b dark:border-slate-700 border-slate-300 capitalize leading-5`}
+          className={`text-slate-800 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 dark:bg-slate-600 bg-slate-200 rounded capitalize leading-5`}
         >
-          <span>
-            {data.branch_company} : {data.ticket_id}
-          </span>
-          <br />
-          <span>
-            {new Date(data.date).toDateString()}, {data.due_date.split("T")[1]}
-          </span>
-          <br />
-          <span>Agent Name : {data.agent_name}</span>
-          <br />
-          <span>Status : {data.status}</span>
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+            <span>{data.branch_company} :</span> <span>{data.ticket_id}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+            <span>Date : </span>
+            <span>{new Date(data.date).toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+            <span>Agent Name :</span> <span>{data.agent_name}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+            <span>Status :</span> <span>{data.status}</span>
+          </div>
         </li>
       );
     });
@@ -144,7 +147,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               .includes(recepient.toLowerCase().replace(/\s/g, "")) === true
               ? ""
               : "hidden"
-          } text-xs dark:text-slate-400 text-slate-600 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b  dark:border-slate-700 border-slate-300 capitalize`}
+          } text-xs dark:text-slate-300 text-slate-800 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b  dark:border-slate-700 border-slate-300 capitalize`}
         >
           <abbr title={contact.branch_company}>{contact.branch_company}</abbr>
         </li>
@@ -295,6 +298,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         inputValue.send_as,
         `${recordingFile && inputValue?.state === "solved" ? true : false}`
       );
+      setShowOpen(true);
       //Send Email Using Nodemailer ===================
       fetch("https://dndhelp-desk-first.herokuapp.com/send", {
         method: "POST",
@@ -429,6 +433,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               ])
             );
             onChange("<p>Type here ...</p>");
+            setShowOpen(true);
           } else if (resData.status === "fail") {
             dispatch(
               updateAlert([
@@ -462,6 +467,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       setShowOpen(true);
       setRecipient("");
       onChange("<p>Type here ...</p>");
+      setShowOpen(true);
       setModal(false);
       dispatch(
         updateAlert([
@@ -552,6 +558,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   });
                   setFile(false);
                   onChange("<p>Type here ...</p>");
+                  setShowOpen(true);
                 }}
                 className="h-4 w-4 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-500 text-lg"
               >
@@ -592,7 +599,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     ref={closeSuggestionsRef}
                     className={`${
                       searchResults ? "" : "hidden"
-                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-slate-200 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2 border dark:border-slate-700 border-slate-400`}
+                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-slate-50 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2 border dark:border-slate-700 border-slate-400`}
                   >
                     {contactsList}
                   </div>{" "}
@@ -796,21 +803,16 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       numbersArray.length >= 1 && showOpenedTickets
                         ? ""
                         : "hidden"
-                    } absolute top-12 left-0 h-[12rem] w-full shadow-2xl bg-slate-200 border z-[999] rounded-lg overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
+                    } absolute top-12 left-0 h-[16rem] w-full shadow-2xl bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
                   >
                     {exist}
-                    <label
-                      className="absolute bg-transparent top-[-0.5rem] right-2 outline-none focus:outline-none hover:opacity-80"
-                      htmlFor="suggestion"
+                    <button
+                      type="button"
+                      onClick={() => setShowOpen(false)}
+                      className="absolute bg-transparent top-[-0.5rem] right-0 outline-none focus:outline-none hover:opacity-80 cursor-pointer"
                     >
-                      <input
-                        type="checkbox"
-                        name="suggestion"
-                        id="suggestion"
-                        onChange={() => setShowOpen(false)}
-                        className="rounded checked:bg-slate-700"
-                      />
-                    </label>
+                      <BiXCircle className="text-lg dark:text-slate-400 text-slate-600" />
+                    </button>
                   </ul>
                 </label>
               </div>

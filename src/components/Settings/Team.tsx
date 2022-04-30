@@ -34,9 +34,7 @@ const Team: FC = () => {
         uid: uid,
       }),
     })
-      .then((req) => {
-        req.json();
-      })
+      .then((req) => req.json())
       .then(() => {
         dispatch(
           updateAlert([

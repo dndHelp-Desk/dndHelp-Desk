@@ -1,4 +1,4 @@
-import { FC,useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import {
@@ -8,22 +8,26 @@ import {
 } from "react-icons/bs";
 import { AppDispatch, RootState } from "../../Redux/store";
 
-const Alert:FC = () => {
+const Alert: FC = () => {
   //Data From the store ====
-  const dispatch:AppDispatch = useDispatch();
-  const alerts = useSelector((state:RootState) => state.NotificationsData.alerts);
+  const dispatch: AppDispatch = useDispatch();
+  const alerts = useSelector(
+    (state: RootState) => state.NotificationsData.alerts
+  );
   const [flag, setFlag] = useState<boolean>(false);
-  
+
   useEffect(() => {
     setFlag(alerts.length >= 1 ? true : false);
   }, [alerts.length]);
 
   //Auto Close Alert After 5 sec ==========
   flag === true &&
-    alerts.forEach((alert:any) =>
+    alerts.forEach((alert: any) =>
       setTimeout(() => {
         dispatch(
-          updateAlert(alerts.filter((data:any) => data.message !== alert.message))
+          updateAlert(
+            alerts.filter((data: any) => data.message !== alert.message)
+          )
         );
       }, 5000)
     );
@@ -31,12 +35,12 @@ const Alert:FC = () => {
   //map through each alert =========
   const alert =
     alerts.length >= 1 &&
-    alerts.map((alert:any, index:any) => {
+    alerts.map((alert: any, index: any) => {
       return (
         <div
-        role="alert"
+          role="alert"
           key={index}
-          className={`transition duration-150 max-w-[35rem] min-w-[5rem] ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow-2xl rounded overflow-hidden ${alert.color}`}
+          className={`transition duration-150 max-w-[35rem] min-w-[5rem] ease-in-out mx-auto py-3 px-4 md:flex items-center justify-between shadow-2xl rounded-sm overflow-hidden ${alert.color}`}
         >
           <div className="sm:flex sm:items-start lg:items-center">
             <div className="flex items-center space-x-2 justify-between px-2 border-r border-slate-900">
@@ -66,11 +70,11 @@ const Alert:FC = () => {
               onClick={() => {
                 dispatch(
                   updateAlert(
-                    alerts.filter((data:any) => data.message !== alert.message)
+                    alerts.filter((data: any) => data.message !== alert.message)
                   )
                 );
               }}
-              className="focus:outline-none mr-8 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs"
+              className="focus:outline-none mr-8 bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 rounded-sm text-white px-6 py-2 text-xs"
             >
               Close
             </button>
@@ -81,7 +85,9 @@ const Alert:FC = () => {
 
   //React Component ===========
   return (
-    <div className={`absolute overflow-hidden z-[9999] ${flag ? "" : "hidden"}`}>
+    <div
+      className={`absolute overflow-hidden z-[9999] ${flag ? "" : "hidden"}`}
+    >
       {/* Code block starts */}
       <div className="fixed bottom-24 right-8 flex flex-col space-y-2">
         {alert}

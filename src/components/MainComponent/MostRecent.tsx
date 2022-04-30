@@ -38,7 +38,7 @@ const MostRecent: FC = () => {
   //Component =================
   return (
     <>
-      <div className="w-full h-[75%] p-2 pl-6 px-4 flex flex-col items-center select-none rounded border border-slate-200 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="w-full h-[75%] p-2 pl-6 px-4 flex flex-col items-center select-none rounded border border-slate-300 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         {activities.length >= 1 &&
           activities.slice(0, 4).map((activity, index) => {
             return (
@@ -57,7 +57,7 @@ const MostRecent: FC = () => {
                       {activity.category} : {activity.ticket_id}
                     </span>
                     <div
-                      className={`w-16 px-2 py-[0.2rem] rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 text-[0.6rem] text-slate-800 dark:text-slate-300 flex justify-center items-center`}
+                      className={`w-16 px-2 py-[0.2rem] rounded-sm border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-[#33415569] text-[0.6rem] text-slate-800 dark:text-slate-300 flex justify-center items-center`}
                     >
                       {activity.status}
                     </div>
@@ -89,7 +89,7 @@ const MostRecent: FC = () => {
                       {activity.category} : {activity.ticket_id}
                     </span>
                     <div
-                      className={`w-16 px-2 py-[0.2rem] rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 text-[0.6rem] text-slate-800 dark:text-slate-400 flex justify-center items-center`}
+                      className={`w-16 px-2 py-[0.2rem] rounded-sm border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-[#33415569] text-[0.6rem] text-slate-800 dark:text-slate-400 flex justify-center items-center`}
                     >
                       {activity.status}
                     </div>

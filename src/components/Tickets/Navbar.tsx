@@ -281,7 +281,7 @@ const Navbar: FC<Props> = ({
           onClick={() =>
             setModal(user[0].name !== "User Loader" ? true : false)
           }
-          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-50 px-6 space-x-2 rounded flex justify-center items-center text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold custom-shadow"
+          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-50 px-6 space-x-2 rounded flex justify-center items-center text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold"
         >
           <span>NEW</span>
         </button>

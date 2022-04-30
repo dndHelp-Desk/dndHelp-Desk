@@ -25,12 +25,15 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
       stacked: true,
     },
     dataLabels: {
-      enabled: true,
+      enabled: false,
     },
     xaxis: {
       type: "category",
       tickAmount: 13,
       categories: chartData.map((data: any) => data.name),
+      tooltip: {
+        enabled: false,
+      },
       labels: {
         show: true,
         rotate: 0,

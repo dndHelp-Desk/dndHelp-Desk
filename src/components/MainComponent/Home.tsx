@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
@@ -11,6 +11,7 @@ import Connect from "./Connect";
 import ConnectModal from "./ConnectModal";
 
 const Home: FC = () => {
+  const [apiChannelModal, openAPIModal] = useState<boolean>(false);
   const location = useLocation();
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
@@ -85,7 +86,7 @@ const Home: FC = () => {
       return (
         <div
           key={user.id}
-          className="w-full snap_child h-13 rounded-md dark:bg-slate-800 bg-white flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-200"
+          className="w-full snap_child h-13 rounded dark:bg-[#33415569] bg-[#e2e8f0bd] flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-300"
         >
           <div
             className={`h-10 w-10 flex justify-center items-center rounded relative`}
@@ -97,10 +98,10 @@ const Home: FC = () => {
                   : defaultProfile
               }
               alt="profile"
-              className={`object-cover w-full h-full object-center rounded`}
+              className={`object-cover w-full h-full object-center rounded border-2 border-slate-500 dark:border-slate-300`}
             />
             <div
-              className={`absolute right-[-0.25rem] top-[-0.1rem] h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-slate-50 ${
+              className={`absolute right-[-0.25rem] top-[-0.1rem] h-2.5 w-2.5 rounded-full border-2 dark:border-slate-700 border-slate-200 ${
                 user.status === "available"
                   ? "bg-green-600"
                   : user.status === "unavailable"
@@ -223,8 +224,11 @@ const Home: FC = () => {
         <section className="row-span-2 w-full h-fit lg:h-[18rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
           <div className="col-span-2 w-full h-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Connect Other Sources || Omni Channel Settings==================================== */}
-            <Connect />
-            <ConnectModal/>
+            <Connect openAPIModal={openAPIModal} />
+            <ConnectModal
+              apiChannelModal={apiChannelModal}
+              openAPIModal={openAPIModal}
+            />
 
             {/**Progress ============================== */}
             <article className="col-span-5 md:col-span-2 min-h-[10rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5">
@@ -268,7 +272,7 @@ const Home: FC = () => {
                             ).getTime()
                       )?.length) *
                     100
-                  )?.toFixed(1) || 0}
+                  )?.toFixed(0) || 0}
                   %
                 </span>{" "}
                 of your tickets resolved.
@@ -347,7 +351,7 @@ const Home: FC = () => {
               {allMembers.length >= 1 &&
                 (user[0]?.access && user[0]?.access) !== "client" && (
                   <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                    <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-200 dark:border-slate-700 pb-2 mb-1">
+                    <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
                       <h3 className="flex-[2] text-base font-medium font-sans tracking-wide capitalize">
                         Members
                       </h3>
