@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.5](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.4...v0.6.5) (2022-04-30)
+
+
+### Bug Fixes
+
+* **messagethread:** fixed the height of the text editor and added position sticky to the toolbar ([a7f9781](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/a7f97814e499fbe63799b9d0d8b7c6b8984aa60a)), closes [#16](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/16)
+
 ### [0.6.4](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.3...v0.6.4) (2022-04-30)
 
 
