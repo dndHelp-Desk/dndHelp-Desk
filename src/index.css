@@ -49,7 +49,7 @@
     @apply col-span-1 rounded bg-slate-200 dark:bg-[#33415569] border border-slate-300 dark:border-slate-700 flex flex-col justify-center items-center gap-2 outline-none focus:outline-none focus:border-0 focus:ring-[1px] focus:ring-blue-600 hover:opacity-90 dark:hover:opacity-80 hover:shadow-lg transition-all relative;
   }
 
-  #connectModal{
+  #connectModal {
     box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.3);
   }
   /*End of Connect Channels Styles ================================*/
@@ -99,19 +99,24 @@
     box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.3);
   }
 
-  .messageContainer h1 {
+  .messageContainer h1,
+  .template h1 {
     @apply text-3xl font-bold;
   }
-  .messageContainer h2 {
+  .messageContainer h2,
+  .template h2 {
     @apply text-2xl font-bold;
   }
-  .messageContainer h3 {
+  .messageContainer h3,
+  .template h3 {
     @apply text-xl font-bold;
   }
-  .messageContainer ul {
+  .messageContainer ul,
+  .template ul {
     @apply list-disc;
   }
-  .messageContainer ol {
+  .messageContainer ol,
+  .template ol {
     @apply list-decimal;
   }
 

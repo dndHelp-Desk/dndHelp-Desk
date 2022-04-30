@@ -724,7 +724,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"
           >
             <div className="w-full h-[70%]">
-              <div className="h-full w-full bg-transparent rounded-lg resize-none text-sm dark:text-slate-400 text-slate-700 focus:outline-none outline-none focus:border-0 focus:ring-0 transition-all border-0 dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden">
+              <div className="h-[9.5rem] w-full bg-transparent rounded resize-none text-sm dark:text-slate-400 text-slate-700 transition-all  dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden">
                 <TextEditor
                   setReply={setReply}
                   value={value}

@@ -128,7 +128,7 @@ export const createUser = (
     status: "unavailable",
     photoUrl: "",
     companies: companies,
-    uid:""
+    uid: "",
   });
 };
 
@@ -226,14 +226,26 @@ export const deleteEmailAccount = (id: string) => {
   deleteDoc(docRef);
 };
 
-//===================================TICKETS===========================================
-// Change Ticket Priority ================
-export const changePriority = (id: string, selected: string) => {
-  let docRef = doc(db, `companies/${org}/tickets`, id);
-  updateDoc(docRef, {
-    priority: selected,
+//===================================Templates || Canned Responses===========================================
+//New Template ==========================
+export const newTemplate = (name: string, message: string) => {
+  addDoc(email_TemplatesRef, {
+    name: name,
+    message: message,
   });
 };
+
+// Delete Template ================
+export const deleteTemplate = (id: string) => {
+  let docRef = doc(
+    db,
+    `companies/${org}/settings/all_settings/email_templates`,
+    id
+  );
+  deleteDoc(docRef);
+};
+
+//===================================TICKETS===========================================
 // Resolve Ticket Ticket  ================
 export const resolveTicket = (
   id: string,

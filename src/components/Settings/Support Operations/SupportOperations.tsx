@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Navigate } from "react-router";
 import { useSelector } from "react-redux";
 import EmailAccounts from "./EmailAccounts";
+import Templates from "./Templates";
 import { RootState } from "../../../Redux/store";
 
 const SupportOperations: FC = () => {
@@ -65,6 +66,9 @@ const SupportOperations: FC = () => {
         {menuItems.filter(
           (item: any) => item.name === "Email Accounts" && item.active === true
         ).length >= 1 && <EmailAccounts />}
+        {menuItems.filter(
+          (item: any) => item.name === "Templates" && item.active === true
+        ).length >= 1 && <Templates />}
       </div>
     </section>
   );

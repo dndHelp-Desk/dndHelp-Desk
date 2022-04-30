@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import {
-  BsSearch,
-  BsFunnelFill,
-  BsFillTrashFill,
-  BsFillPersonPlusFill,
-  BsCheck2Square,
-} from "react-icons/bs";
+  BiTrash,
+  BiUser,
+  BiFilterAlt,
+  BiSelectMultiple,
+  BiSearch,
+} from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import {
@@ -161,7 +161,7 @@ const Navbar: FC<Props> = ({
             assgn(member.name, member.email, member.id);
             setPanel(false);
           }}
-          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-600 bg-slate-50 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
+          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-800 bg-slate-50 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
             member.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -171,7 +171,7 @@ const Navbar: FC<Props> = ({
               : "hidden"
           }`}
         >
-          <BsFillPersonPlusFill /> <span>{member.name}</span>
+          <BiUser /> <span>{member.name}</span>
         </button>
       );
     });
@@ -193,7 +193,7 @@ const Navbar: FC<Props> = ({
           className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-50 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-[#33415596] border-slate-300"
         >
           <abbr title="filters" className="">
-            <BsFunnelFill className="dark:text-slate-300 text-slate-800 font-bold" />
+            <BiFilterAlt className="dark:text-slate-300 text-slate-800 font-bold" />
           </abbr>
         </button>
 
@@ -207,7 +207,7 @@ const Navbar: FC<Props> = ({
           } items-center justify-center text-lg`}
         >
           <abbr title="Assign">
-            <BsFillPersonPlusFill />
+            <BiUser />
           </abbr>
         </button>
 
@@ -224,7 +224,7 @@ const Navbar: FC<Props> = ({
           } items-center justify-center text-lg`}
         >
           <abbr title="delete">
-            <BsFillTrashFill />
+            <BiTrash />
           </abbr>
         </button>
 
@@ -249,7 +249,7 @@ const Navbar: FC<Props> = ({
               name="selectAll"
               id="selectAll"
             />
-            <BsCheck2Square />
+            <BiSelectMultiple />
           </label>
         </button>
 
@@ -257,12 +257,12 @@ const Navbar: FC<Props> = ({
         {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15rem] w-[12rem] dark:bg-slate-700 bg-white shadow-2xl backdrop-blur-sm p-2 pt-0 border border-slate-400 dark:border-slate-700 rounded-lg absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm p-2 border border-slate-400 dark:border-slate-700 rounded absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
-            <div className="flex sticky top-0 border-b border-slate-400 dark:bg-slate-700 bg-white shadow-2xl h-8 items-center justify-center ">
-              <BsSearch className="absolute left-3 text-slate-400 font-semibold" />
+            <div className="flex sticky top-0 border-b border-slate-400 dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-8 items-center justify-center ">
+              <BiSearch className="absolute left-3 text-slate-400 font-semibold" />
               <input
                 className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
                 type="search"

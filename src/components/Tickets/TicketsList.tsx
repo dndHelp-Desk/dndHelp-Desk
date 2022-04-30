@@ -1,14 +1,12 @@
 import { FC, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { changePriority, markAsSeen } from "../Data_Fetching/TicketsnUserData";
+import { markAsSeen } from "../Data_Fetching/TicketsnUserData";
 import { BsStopFill } from "react-icons/bs";
 import {
   BiChevronRight,
   BiChevronLeft,
   BiArrowBack,
-  BiMicrophone,
-  BiMicrophoneOff,
 } from "react-icons/bi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
@@ -159,9 +157,9 @@ const TicketsList: FC<Props> = ({
             )}
 
           {/**Ticket Details ========================================== */}
-          <div className="col-span-7 flex relative h-full w-full px-1 cursor-pointer overflow-hidden">
+          <div className="flex relative h-full w-full px-1 cursor-pointer overflow-hidden">
             {/**Mark or Unmark Ticket ========================================== */}
-            <div className="h-full w-[15%] flex justify-between items-center">
+            <div className="h-full w-[9%] flex justify-between items-center px-2">
               <input
                 type="checkbox"
                 className="rounded-[0.18rem]  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-800 border-slate-500 dark:bg-slate-400 dark:checked:bg-blue-600 bg-slate-200 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
@@ -211,16 +209,16 @@ const TicketsList: FC<Props> = ({
                   });
                 }
               }}
-              className="h-full w-[85%] flex flex-col justify-center space-y-1 relative"
+              className="h-full w-[90%] flex flex-col justify-center space-y-1 relative"
             >
               <abbr title={ticket.ticket_id}>
-                <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans capitalize whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
+                <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
                   <span className="">
                     {ticket.category} | {ticket.ticket_id}
                   </span>
                 </p>
               </abbr>
-              <p className="dark:text-slate-400 max-w-[11rem] text-slate-700 text-xs tracking-wide font-base capitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
+              <p className="dark:text-slate-400 max-w-[15rem] text-slate-700 text-xs tracking-wide font-base capitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <abbr title={ticket.branch_company}>
                   &rArr; {ticket.branch_company}
                 </abbr>
@@ -249,45 +247,6 @@ const TicketsList: FC<Props> = ({
                 </span>{" "}
                 <span>Due on {new Date(ticket.due_date).toLocaleString()}</span>
               </small>
-            </div>
-          </div>
-          <div className="col-span-5 float-right h-full w-[20rem] hidden md:flex flex-col items-center justify-center space-y-1">
-            {/**Ticket Priority ========================================== */}
-            <div className="w-[10rem] flex items-baseline justify-end">
-              {/**Change Ticket Priority ========================================== */}
-              <select
-                onChange={(e) => changePriority(ticket.id, e.target.value)}
-                className="h-8 w-28 rounded p-2 dark:bg-[#192235] bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none  border-0 uppercase text-[0.55rem] font-medium dark:text-slate-400 text-slate-700"
-              >
-                <option className="p-2" value="low">
-                  {ticket.priority}
-                </option>
-                <option className="p-2" value="low">
-                  Low
-                </option>
-                <option className="p-2" value="medium">
-                  Medium
-                </option>
-                <option className="p-2" value="high">
-                  High
-                </option>
-                <option className="p-2" value="urgent">
-                  Urgent
-                </option>
-              </select>
-            </div>
-            {/**Ticket Status ========================================== */}
-            <div className="w-[10rem] flex items-baseline justify-end">
-              <div className="h-8 w-28 rounded p-2 dark:bg-inherit dark:border-slate-700 border-slate-300 uppercase text-[0.55rem] font-medium dark:text-slate-400 text-slate-700 flex justify-between">
-                <span>{ticket.status}</span>
-                {/**Indicate if ticket has recording ============== */}
-                {ticket.hasRecording === true ||
-                ticket.hasRecording === "true" ? (
-                  <BiMicrophone className="inline text-xs dark:text-slate-500 text-slate-500" />
-                ) : (
-                  <BiMicrophoneOff className="inline text-xs dark:text-slate-500 text-slate-500" />
-                )}
-              </div>
             </div>
           </div>
         </div>

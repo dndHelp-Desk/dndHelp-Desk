@@ -36,8 +36,8 @@ const EmailAccounts: FC = () => {
     name: "",
     email: "",
     password: "",
-    host: "serv24.registerdomain.com",
-    port: 465,
+    host: "",
+    port: "",
   });
 
   //Add new Account  =======================
@@ -72,15 +72,15 @@ const EmailAccounts: FC = () => {
   return (
     <section className="w-full h-full py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
       {/**New Account ============================================ */}
-      <div className="col-span-1 h-full min-h-[45rem] overflow-hidden px-4 rounded bg-white dark:bg-slate-800 ">
+      <div className="col-span-1 p-6 h-full flex flex-col min-h-[45rem] overflow-hidden bg-white dark:bg-slate-800 ">
         <form
           action=""
           onSubmit={(e) => handleNewContact(e)}
-          className="space-y-6 h-full w-full flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
+          className="space-y-6 flex-[1] w-full flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
         >
-          <h3 className="text-lg text-center dark:text-slate-400 text-slate-800 capitalize font-bold font-sans">
-            new account
-          </h3>
+          <h1 className="text-base text-center dark:text-slate-400 text-slate-800 uppercase font-bold font-sans">
+            New SMPT Account
+          </h1>
           <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
             <input
               type="text"
@@ -163,6 +163,81 @@ const EmailAccounts: FC = () => {
             Add Account
           </button>
         </form>
+
+        {/**Guide ======================================== */}
+        <div className="flex-[1] mt-4 py-4 text-slate-800 dark:text-slate-400 text-sm border-t border-slate-300 dark:border-slate-600">
+          <h3 className="text-base text-center dark:text-slate-400 text-slate-800 uppercase font-bold font-sans mb-4">
+            Need Help ?
+          </h3>
+          <details className="open:bg-white dark:open:bg-slate-800 open:border-b open:border-slate-200 dark:open:border-slate-700 p-2">
+            <summary className="text-sm leading-6 text-slate-800 dark:text-slate-300 font-semibold select-none">
+              What is a Name ?
+            </summary>
+            <div className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+              <p>
+                The name of your sending account will help your clients
+                /customers know which department is contacting them. Also help
+                helpful for you teams if you want to organise your tickets based
+                on nature.
+              </p>
+            </div>
+          </details>
+          <details className="open:bg-white dark:open:bg-slate-800 open:border-b open:border-slate-200 dark:open:border-slate-700 p-2">
+            <summary className="text-sm leading-6 text-slate-800 dark:text-slate-300 font-semibold select-none">
+              What is a valid email ?
+            </summary>
+            <div className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+              <p>This is an email address you wish to add fr sending emails.</p>
+            </div>
+          </details>
+          <details className="open:bg-white dark:open:bg-slate-800 open:border-b open:border-slate-200 dark:open:border-slate-700 p-2">
+            <summary className="text-sm leading-6 text-slate-800 dark:text-slate-300 font-semibold select-none">
+              Where do I find the host ?
+            </summary>
+            <div className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+              <p>
+                If you not sure of what your host is, head over to this link:{" "}
+                <a
+                  href="https://mxtoolbox.com/"
+                  rel="noreferrer"
+                  className="italic text-blue-700"
+                >
+                  {" "}
+                  MXTool
+                </a>{" "}
+                then insert your email on the search bar. Below you will see a
+                table with "Hostname" column then copy the url below.
+              </p>
+            </div>
+          </details>
+          <details className="open:bg-white dark:open:bg-slate-800 open:border-b open:border-slate-200 dark:open:border-slate-700 p-2">
+            <summary className="text-sm leading-6 text-slate-800 dark:text-slate-300 font-semibold select-none">
+              What is my port ?
+            </summary>
+            <div className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+              <p>
+                The various options for incoming and outgoing email servers, as
+                well as secure encryption all require the user to set up various
+                "ports" in the email clients being used. So what exactly is a
+                "port"? In a typical TCP connection, a server (email server) has
+                an IP address and runs programs that host services, which allow
+                for clients to connect and run some task, such as checking
+                email. Since one server can run multiple network services (Web,
+                email, file sharing, and so on), it needs a way to distinguish
+                the network traffic for these services even though they all
+                connect with the same IP address, and ports are the way to do
+                this. The basics for how it works is a standard TCP packet is
+                tagged by the sending computer (your desktop) with a port
+                number, and the server receives that port number and sends the
+                tagged data to the service it is running that is responsible for
+                handling it. As such, the same computer can host a Web site
+                (port 80) and an IMAP email server (ports 143 and 993), at the
+                same time without any traffic interference. Normal 587 or 465
+                should work fine. Please contact support for more.
+              </p>
+            </div>
+          </details>
+        </div>
       </div>
 
       {/**Accounts List ======================================= */}
@@ -340,7 +415,6 @@ const EmailAccounts: FC = () => {
             );
           })}
       </div>
-
     </section>
   );
 };

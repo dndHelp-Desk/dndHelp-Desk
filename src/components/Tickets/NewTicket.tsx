@@ -45,7 +45,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
-  const [value, onChange] = useState<string | any>("<p>Type Here ...</p>");
   const [recepient, setRecipient] = useState<string | any>("");
   const [searchResults, setResults] = useState<boolean | any>(false);
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
@@ -66,7 +65,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         priority: "",
         category: "",
         branch_company: "",
-        message: "",
+        message: "<p>Type Here ...</p>",
         state: "",
         date: "",
         ticket_id: "",
@@ -81,6 +80,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
 
   //Form Input Values =========================
   const [inputValue, setValues] = useState<string | any>(initialDraft);
+  const [value, onChange] = useState<string | any>("<p>Type Here ...</p>");
 
   //Check If Ticket Exists ===================
   const numbersArray = useMemo(() => {
@@ -508,9 +508,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     JSON.stringify(inputValue)
                   );
                 }}
-                className="h-4 w-4 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all outline-none focus:outline-none"
+                className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all outline-none focus:outline-none border border-slate-500 dark:border-slate-6"
               >
-                <BiMinus className="dark:text-slate-300 text-slate-500 text-lg" />
+                <BiMinus className="dark:text-slate-300 text-slate-700 text-base" />
               </button>
             </abbr>
             {/**Close and Clear  */}
@@ -556,13 +556,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     complainant_number: "",
                     send_as: "",
                   });
+                  onChange("");
                   setFile(false);
                   onChange("<p>Type here ...</p>");
                   setShowOpen(true);
                 }}
-                className="h-4 w-4 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-500 text-lg"
+                className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-600"
               >
-                &times;
+                <span>&times;</span>
               </button>
             </abbr>
           </div>
@@ -574,9 +575,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Recipient Name ============================= */}
                 <label
                   htmlFor="to"
-                  className="flex-[1] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     To :{" "}
                   </span>
                   <input
@@ -593,13 +594,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     onChange={(e) => {
                       setRecipient(e.target.value);
                     }}
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-500 focus:ring-0 focus:border-0 text-sm"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-700 focus:ring-0 focus:border-0 text-xs"
                   />
                   <div
                     ref={closeSuggestionsRef}
                     className={`${
                       searchResults ? "" : "hidden"
-                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-700 bg-slate-50 rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2 border dark:border-slate-700 border-slate-400`}
+                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2 border dark:border-slate-600 border-slate-400 list-disc`}
                   >
                     {contactsList}
                   </div>{" "}
@@ -607,13 +608,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Subject ============================= */}
                 <label
                   htmlFor="subject"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     Subject :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm capitalize"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs capitalize"
                     id="subject"
                     name="subject"
                     value={inputValue.category}
@@ -637,13 +638,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Priority  ======================================== */}
                 <label
                   htmlFor="priority"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     Priority :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="priority"
                     name="priority"
                     value={inputValue.priority}
@@ -667,13 +668,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Status  ======================================== */}
                 <label
                   htmlFor="status"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     Status :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsisp-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsisp-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="status"
                     name="status"
                     value={inputValue.state}
@@ -705,13 +706,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Client Email  ======================================== */}
                 <label
                   htmlFor="email"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     Email :
                   </span>
                   <input
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500 capitalize"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs dark:placeholder:text-slate-400 placeholder:text-slate-700 capitalize"
                     type="text"
                     id="email"
                     title="Enter A valid Email"
@@ -733,13 +734,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Complainant Number  ======================================== */}
                 <label
                   htmlFor="numbers"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     Phone :
                   </span>
                   <input
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs dark:placeholder:text-slate-400 placeholder:text-slate-700"
                     id="numbers"
                     name="numbers"
                     type="text"
@@ -821,13 +822,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Complainant Name =========================================== */}
                 <label
                   htmlFor="name"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     Name :
                   </span>
                   <input
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm dark:placeholder:text-slate-400 placeholder:text-slate-500"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs dark:placeholder:text-slate-400 placeholder:text-slate-700"
                     id="name"
                     name="name"
                     type="text"
@@ -848,13 +849,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {/**Send AS  ======================================== */}
                 <label
                   htmlFor="priority"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-500 text-sm font-semibold relative"
+                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                 >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase text-xs dark:font-medium text-slate-800 dark:text-slate-300 text-[0.6rem]">
+                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
                     Send As :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-500 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-sm"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="priority"
                     name="priority"
                     value={inputValue.send_as}
@@ -937,6 +938,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       complainant_number: "",
                       send_as: "",
                     });
+                    onChange("");
                     setFile(false);
                   }}
                   className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded text-slate-600 dark:text-slate-400 cursor-pointer"
@@ -954,40 +956,24 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 <abbr title="Templates">
                   <BiFile />
                 </abbr>
-                <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded shadow-md dark:bg-slate-700 bg-slate-200 dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-700 after:border-slate-200">
-                  <ul className="h-full w-full flex flex-col justify-center space-y-2 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-sm px-1">
-                    {categories &&
-                      categories.map((category, index) => {
+                <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded shadow-md dark:bg-slate-900 bg-white dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-900 after:border-white">
+                  <ul className="h-full w-full flex flex-col justify-center space-y-2 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-xs font-semibold px-1 list-decimal">
+                    {templates.length >= 1 &&
+                      templates.map((template, index) => {
                         return (
                           <li
-                            onClick={() =>
+                            onClick={() => {
                               setValues({
                                 ...inputValue,
-                                message:
-                                  templates.length >= 1
-                                    ? templates.filter(
-                                        (template) =>
-                                          template.name
-                                            .split(" ")
-                                            .join("")
-                                            .replace(/\(/g, "")
-                                            .replace(/\)/g, "")
-                                            .toLowerCase() ===
-                                          category
-                                            .split(" ")
-                                            .join("")
-                                            .replace(/\(/g, "")
-                                            .replace(/\)/g, "")
-                                            .toLowerCase()
-                                      )[0].message
-                                    : "",
-                              })
-                            }
-                            className="capitalize hover:opacity-80"
-                            value={category}
+                                message: template.message,
+                              });
+                              onChange(template.message);
+                            }}
+                            className="capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-800 py-1"
+                            value={template}
                             key={index}
                           >
-                            {category}
+                            {template.name}
                           </li>
                         );
                       })}

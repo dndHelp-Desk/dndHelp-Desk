@@ -183,7 +183,7 @@ const MainComponent: FC = () => {
               <div className="h-9 w-32 p-[0.2rem] rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 overflow-hidden relative">
                 <div className="w-full h-full flex">
                   <div
-                    className={`h-full w-2/4 bg-white dark:bg-[#33415569] border dark:border-slate-600 border-slate-300 rounded-sm shadow-lg transition-all duration-500 ${
+                    className={`h-full w-2/4 bg-white dark:bg-[#33415569] border dark:border-slate-600 border-slate-300 rounded-sm shadow transition-all duration-500 ${
                       theme === "dark" && "translate-x-[100%] "
                     }`}
                   ></div>

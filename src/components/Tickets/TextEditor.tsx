@@ -47,17 +47,17 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
       value={value}
       onImageUpload={handleImageUpload}
       onChange={onChange}
-      className="h-full w-full border-0 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar rounded-none"
+      className="h-full w-full border-0 bg-inherit text-inheri rounded-none relative overflow-hidden"
       classNames={{
         toolbar:
-          "bg-inherit flex justify-center items-center w-full text-inherit border-slate-200 dark:border-slate-800 rounded-none dark:bg-[#182235] bg-slate-50",
+          "bg-slate-50 dark:bg-[#182235] flex justify-center items-center w-full text-slate-700 dark:text-slate-400 border-slate-200 dark:border-slate-800 rounded-none sticky top-0",
         toolbarInner:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
         toolbarGroup:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
         toolbarControl:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
-        root: "h-[15rem] overflow-hidden overflow-y-scroll",
+        root: "h-[9rem] overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar border",
       }}
       controls={[
         ["bold", "italic", "underline", "code", "blockquote"],
