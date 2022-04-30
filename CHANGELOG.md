@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.4](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.3...v0.6.4) (2022-04-30)
+
+
+### Features
+
+* **components:** uI update and Minor bug fix ([21a01d0](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/21a01d04d4b6b12ffca3dfa1700337e420a92abe))
+
 ### [0.6.3](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.2...v0.6.3) (2022-04-26)
 
 
