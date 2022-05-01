@@ -5,9 +5,6 @@ import {
   HiOutlineTrash,
   HiOutlineSearch,
   HiPlus,
-  HiUser,
-  HiMail,
-  HiPhone,
   HiOutlinePhone,
   HiOutlineMail,
 } from "react-icons/hi";
