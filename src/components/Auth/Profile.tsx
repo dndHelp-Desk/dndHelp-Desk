@@ -5,6 +5,7 @@ import {
   BsBoxArrowUp,
   BsCheck,
   BsStopFill,
+  BsPerson,
 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
@@ -111,7 +112,7 @@ const Profile = () => {
               alt="profile"
             />
             <label
-              className={`absolute bg-[#1c105283] h-10 w-10 rounded-md flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
+              className={`absolute bg-[#1c105283] h-10 w-10 rounded flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
               htmlFor="profile"
             >
               <BsCameraFill />
@@ -141,14 +142,14 @@ const Profile = () => {
             role="tooltip"
             className="bg-transparent p-1 pt-4 absolute right-[-0.3rem] top-[2.3rem] hidden group-hover:flex flex-col transition-all duration-500"
           >
-            <div className="p-4 z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded after:content-[''] after:absolute after:right-[1rem] after:top-[0.5rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit transition-all duration-500">
+            <div className="min-w-[12rem] p-4 z-[999] dark:bg-slate-900 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded after:content-[''] after:absolute after:right-[1rem] after:top-[0.5rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit transition-all duration-500">
               <div className="pb-2">
-                <h3 className="dark:text-slate-300 text-slate-900 text-sm text-center capitalize font-semibold">
-                  {member_details.length >= 1 && member_details[0].name}
-                </h3>
-                <h4 className="dark:text-slate-400 text-slate-700 text-xs text-center capitalize font-semibold">
-                  {member_details.length >= 1 && member_details[0].dept}
-                </h4>
+                <h1 className="dark:text-slate-300 text-slate-900 text-sm text-center capitalize font-semibold flex items-center gap-1">
+                  <BsPerson />
+                  <span>
+                    {member_details.length >= 1 && member_details[0].name}
+                  </span>
+                </h1>
               </div>
               <ul className="w-full capitalize">
                 <li
@@ -169,7 +170,7 @@ const Profile = () => {
                       );
                     }, 3000);
                   }}
-                  className="h-8 border-b border-t hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer"
+                  className="h-8 border-b border-t hover:opacity-80 dark:border-slate-800 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer font-semibold"
                 >
                   <span className="flex items-center space-x-1">
                     <BsStopFill /> <span>available</span>
@@ -197,7 +198,7 @@ const Profile = () => {
                       );
                     }, 3000);
                   }}
-                  className="h-8 border-b hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer"
+                  className="h-8 border-b hover:opacity-80 dark:border-slate-800 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer font-semibold"
                 >
                   <span className="flex items-center space-x-1">
                     <BsStopFill /> <span>Busy</span>
@@ -225,10 +226,10 @@ const Profile = () => {
                       );
                     }, 3000);
                   }}
-                  className="h-8 border-b hover:opacity-80 dark:border-slate-600 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer"
+                  className="h-8 border-b hover:opacity-80 dark:border-slate-800 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer font-semibold"
                 >
                   <span className="flex items-center space-x-1">
-                    <BsStopFill /> <span>Unavailable</span>
+                    <BsStopFill /> <span>Away</span>
                   </span>
                   {member_details.length >= 1 &&
                     member_details[0].status === "unavailable" && (

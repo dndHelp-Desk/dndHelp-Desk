@@ -19,7 +19,7 @@ const DateFilter:FC<Props> = ({ filters, setFilters }) => {
       endDate={endDate}
       placeholderText="Pick A Date"
       className="dark:bg-slate-900 bg-slate-100 w-full h-10 border z-[999] dark:border-slate-700 border-slate-400 rounded text-xs pl-10 text-slate-500 cursor-pointer"
-      onChange={(update:any) => {
+      onChange={(update: any) => {
         setDateRange(update);
         setFilters({
           ...filters,

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
@@ -7,160 +7,162 @@ const StatusSummary: FC = () => {
     (state: RootState) => state.Tickets.filteredTickets
   );
 
-  const data =
-    filteredTickets.length >= 1 &&
-    [
-      {
-        value: (
-          (filteredTickets.filter(
-            (data) =>
-              new Date(data.date).getTime() >=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  1
-                ).getTime() &&
-              new Date(data.date).getTime() <=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  31
-                ).getTime() &&
-              data?.status?.toLowerCase() === "solved"
-          ).length /
-            filteredTickets.filter(
-              (data) =>
-                new Date(data.date).getTime() >=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    1
-                  ).getTime() &&
-                new Date(data.date).getTime() <=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    31
-                  ).getTime()
-            ).length) *
-          100
-        ).toFixed(1),
-        name: "Solved",
-      },
-      {
-        value: (
-          (filteredTickets.filter(
-            (data) =>
-              new Date(data.date).getTime() >=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  1
-                ).getTime() &&
-              new Date(data.date).getTime() <=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  31
-                ).getTime() &&
-              data.status === "reopened"
-          ).length /
-            filteredTickets.filter(
-              (data) =>
-                new Date(data.date).getTime() >=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    1
-                  ).getTime() &&
-                new Date(data.date).getTime() <=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    31
-                  ).getTime()
-            ).length) *
-          100
-        ).toFixed(1),
-        name: "Re-Opened",
-      },
-      {
-        value: (
-          (filteredTickets.filter(
-            (data) =>
-              new Date(data.date).getTime() >=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  1
-                ).getTime() &&
-              new Date(data.date).getTime() <=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  31
-                ).getTime() &&
-              data?.status?.toLowerCase() === "on hold"
-          ).length /
-            filteredTickets.filter(
-              (data) =>
-                new Date(data.date).getTime() >=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    1
-                  ).getTime() &&
-                new Date(data.date).getTime() <=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    31
-                  ).getTime()
-            ).length) *
-          100
-        ).toFixed(1),
-        name: "On-Hold",
-      },
-      {
-        value: (
-          (filteredTickets.filter(
-            (data) =>
-              new Date(data.date).getTime() >=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  1
-                ).getTime() &&
-              new Date(data.date).getTime() <=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  31
-                ).getTime() &&
-              data?.status?.toLowerCase() === "open"
-          ).length /
-            filteredTickets.filter(
-              (data) =>
-                new Date(data.date).getTime() >=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    1
-                  ).getTime() &&
-                new Date(data.date).getTime() <=
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    31
-                  ).getTime()
-            ).length) *
-          100
-        ).toFixed(1),
-        name: "Open",
-      },
-    ].sort((a: any, b: any) => {
-      return a.value - b.value;
-    });
+  const data = useMemo(() => {
+    return filteredTickets.length >= 1
+      ? [
+          {
+            value: (
+              (filteredTickets.filter(
+                (data) =>
+                  new Date(data.date).getTime() >=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      1
+                    ).getTime() &&
+                  new Date(data.date).getTime() <=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      31
+                    ).getTime() &&
+                  data?.status?.toLowerCase() === "solved"
+              ).length /
+                filteredTickets.filter(
+                  (data) =>
+                    new Date(data.date).getTime() >=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        1
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        31
+                      ).getTime()
+                ).length) *
+              100
+            ).toFixed(1),
+            name: "Solved",
+          },
+          {
+            value: (
+              (filteredTickets.filter(
+                (data) =>
+                  new Date(data.date).getTime() >=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      1
+                    ).getTime() &&
+                  new Date(data.date).getTime() <=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      31
+                    ).getTime() &&
+                  data.status === "reopened"
+              ).length /
+                filteredTickets.filter(
+                  (data) =>
+                    new Date(data.date).getTime() >=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        1
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        31
+                      ).getTime()
+                ).length) *
+              100
+            ).toFixed(1),
+            name: "Re-Opened",
+          },
+          {
+            value: (
+              (filteredTickets.filter(
+                (data) =>
+                  new Date(data.date).getTime() >=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      1
+                    ).getTime() &&
+                  new Date(data.date).getTime() <=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      31
+                    ).getTime() &&
+                  data?.status?.toLowerCase() === "on hold"
+              ).length /
+                filteredTickets.filter(
+                  (data) =>
+                    new Date(data.date).getTime() >=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        1
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        31
+                      ).getTime()
+                ).length) *
+              100
+            ).toFixed(1),
+            name: "On-Hold",
+          },
+          {
+            value: (
+              (filteredTickets.filter(
+                (data) =>
+                  new Date(data.date).getTime() >=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      1
+                    ).getTime() &&
+                  new Date(data.date).getTime() <=
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      31
+                    ).getTime() &&
+                  data?.status?.toLowerCase() === "open"
+              ).length /
+                filteredTickets.filter(
+                  (data) =>
+                    new Date(data.date).getTime() >=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        1
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        31
+                      ).getTime()
+                ).length) *
+              100
+            ).toFixed(1),
+            name: "Open",
+          },
+        ].sort((a: any, b: any) => {
+          return a.value - b.value;
+        })
+      : [];
+  }, [filteredTickets]);
 
   //Component =========================
   return (
@@ -186,7 +188,7 @@ const StatusSummary: FC = () => {
         tickets
       </h2>
       <div className="w-[7rem] h-[8rem] mt-3 flex flex-col bg-gradient-to-t from-blue-700 to-blue-500 rounded-b shadow-lg">
-        {data &&
+        {data.length >= 1 &&
           data?.map((status: any, index: number) => {
             return (
               <div

@@ -40,7 +40,9 @@ export const TicketsSlice = createSlice({
       state.allTickets = action.payload;
     },
     setContacts: (state, action: PayloadAction<any[]>) => {
-      state.contacts = action.payload;
+      state.contacts = action.payload.sort((a, b) =>
+        a.name < b.name ? -1 : 1
+      );
     },
     loadSettings: (state, action: PayloadAction<any[]>) => {
       state.settings = action.payload;

@@ -21,7 +21,7 @@ const ConnectModal: FC<Props> = ({ apiChannelModal, openAPIModal }) => {
       <div
         ref={modalRef}
         id="connectModal"
-        className={`m-auto mt-24 drop-shadow-2xl bg-slate-50 dark:bg-slate-800 rounded h-[60vh] min-h-[30rem] min-w-[35rem] w-[50vw] flex flex-col justify-between pb-6 border border-slate-200 dark:border-slate-700 transition-all duration-300`}
+        className={`m-auto mt-24 drop-shadow-2xl bg-slate-50 dark:bg-slate-800 rounded h-[60vh] min-h-[30rem] min-w-[35rem] w-[50vw] flex flex-col justify-between pb-6 border border-slate-200 dark:border-slate-700 transition-all duration-300 z-[999]`}
       >
         <header className="w-full min-h-20 border-b border-slate-300 dark:border-slate-700 p-6 space-y-2">
           <h1 className="text-xl font-bold text-slate-800 dark:text-slate-300">
