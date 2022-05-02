@@ -88,7 +88,7 @@ const Home: FC = () => {
       <div className="grid gap-4 place-content-center pb-4 h-fit tracking-wide">
         <section className="row-span-3 rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**Top 5 Categories  ========================= */}
-          <ProgressBars/>
+          <ProgressBars />
           {/**Todo List ================================ */}
           {/* <ToDo />*/}
           {/**Tickets Per Status Summary ================================ */}
@@ -134,82 +134,8 @@ const Home: FC = () => {
                 Progress
               </h3>
               <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600">
-                You managed to get{" "}
-                <span className="text-slate-900 dark:text-slate-300 font-semibold">
-                  {" "}
-                  {!(
-                    (filteredTickets?.filter(
-                      (data) =>
-                        new Date(data.date).getTime() >=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            1
-                          ).getTime() &&
-                        new Date(data.date).getTime() <=
-                          new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            30
-                          ).getTime() &&
-                        data?.status?.toLowerCase() === "solved"
-                    ).length /
-                      filteredTickets.filter(
-                        (data) =>
-                          new Date(data.date).getTime() >=
-                            new Date(
-                              new Date().getFullYear(),
-                              new Date().getMonth(),
-                              1
-                            ).getTime() &&
-                          new Date(data.date).getTime() <=
-                            new Date(
-                              new Date().getFullYear(),
-                              new Date().getMonth(),
-                              30
-                            ).getTime()
-                      )?.length) *
-                    100
-                  )?.toFixed(0)
-                    ? 0
-                    : (
-                        (filteredTickets?.filter(
-                          (data) =>
-                            new Date(data.date).getTime() >=
-                              new Date(
-                                new Date().getFullYear(),
-                                new Date().getMonth(),
-                                1
-                              ).getTime() &&
-                            new Date(data.date).getTime() <=
-                              new Date(
-                                new Date().getFullYear(),
-                                new Date().getMonth(),
-                                30
-                              ).getTime() &&
-                            data?.status?.toLowerCase() === "solved"
-                        ).length /
-                          filteredTickets.filter(
-                            (data) =>
-                              new Date(data.date).getTime() >=
-                                new Date(
-                                  new Date().getFullYear(),
-                                  new Date().getMonth(),
-                                  1
-                                ).getTime() &&
-                              new Date(data.date).getTime() <=
-                                new Date(
-                                  new Date().getFullYear(),
-                                  new Date().getMonth(),
-                                  30
-                                ).getTime()
-                          )?.length) *
-                        100
-                      )?.toFixed(0)}
-                  %
-                </span>{" "}
-                of your tickets resolved.
-                <br /> Currently you have{" "}
+                Manage all tickets in one place
+                <br /> currently you have{" "}
                 <span className="text-slate-900 dark:text-slate-300 font-semibold">
                   {" "}
                   {(filteredTickets.length >= 1 &&
@@ -226,7 +152,7 @@ const Home: FC = () => {
               <div
                 role="progressbar"
                 aria-label="progressbas"
-                className="w-full h-2 rounded-full overflow-hidden dark:bg-slate-700 bg-slate-300"
+                className="w-full h-2 rounded-full overflow-hidden dark:bg-slate-700 bg-slate-300 mb-4"
               >
                 <div
                   style={{

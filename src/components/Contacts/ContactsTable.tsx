@@ -43,7 +43,19 @@ const Table: FC<Prop> = ({ setModal }) => {
       return (
         <div
           key={contact.id}
-          className="col-span-4 md:col-span-2 lg:col-span-1 h-[14.5rem] rounded border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-[#182235] p-4 flex flex-col justify-center items-center relative"
+          className={`col-span-4 md:col-span-2 lg:col-span-1 h-[14.5rem] rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-[#182235] p-4 flex flex-col justify-center items-center relative ${
+            contact.branch_company
+              ?.toLowerCase()
+              ?.replace(/\s/g, "")
+              .includes(searchResults?.toLowerCase().replace(/\s/g, "")) ===
+              true ||
+            contact?.name
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(searchResults.toLowerCase().replace(/\s/g, "")) === true
+              ? ""
+              : "hidden"
+          }`}
         >
           {/**Mark Contact =========================== */}
           <input
