@@ -186,7 +186,7 @@ const LogIn: FC = () => {
               href="https://call-center-erp.netlify.app"
               target={"_blank"}
               rel="noreferrer"
-              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
             >
               <FaSellsy
                 className="inline-block
@@ -196,7 +196,7 @@ const LogIn: FC = () => {
             </a>
             <Link
               to="/support"
-              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
             >
               <FaHeadset
                 className="inline-block
@@ -222,13 +222,13 @@ const LogIn: FC = () => {
             href="https://call-center-erp.netlify.app"
             target={"_blank"}
             rel="noreferrer"
-            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
           >
             <span>Dashboard</span>
           </a>
           <Link
             to="/support"
-            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold"
+            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
           >
             <span>Support</span>
           </Link>

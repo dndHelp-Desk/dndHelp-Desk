@@ -2,9 +2,7 @@ import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
-type Props = {};
-
-const ProgressBars: FC<Props> = () => {
+const ProgressBars: FC = () => {
   const categories = useSelector(
     (state: RootState) => state.Tickets.categories
   );
@@ -21,8 +19,7 @@ const ProgressBars: FC<Props> = () => {
               value: (
                 (filteredTickets?.filter(
                   (ticket) =>
-                    ticket?.category?.toLowerCase() ===
-                      element?.toLowerCase() &&
+                    ticket.category?.toLowerCase() === element?.toLowerCase() &&
                     new Date(ticket.date).getTime() >=
                       new Date(
                         new Date().getFullYear(),
@@ -36,13 +33,27 @@ const ProgressBars: FC<Props> = () => {
                         31
                       ).getTime()
                 ).length /
-                  filteredTickets.length) *
+                  filteredTickets?.filter(
+                    (ticket) =>
+                      new Date(ticket.date).getTime() >=
+                        new Date(
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
+                          1
+                        ).getTime() &&
+                      new Date(ticket.date).getTime() <=
+                        new Date(
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
+                          31
+                        ).getTime()
+                  ).length) *
                 100
               ).toFixed(1),
             };
           })
-          .splice(0, 5)
           .sort((a: any, b: any) => b.value - a.value)
+          .splice(0, 5)
       : [];
   }, [categories, filteredTickets]);
 
