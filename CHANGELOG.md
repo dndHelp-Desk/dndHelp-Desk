@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.7](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.6...v0.6.7) (2022-05-03)
+
+
+### Features
+
+* **component:** added a redirect page when signing in in order to dertemine if workspace exist ([77f7f16](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/77f7f16d4d02e560568d16a4f940963b638d5940)), closes [#19](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/19) [#18](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/18)
+
 ### [0.6.6](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.5...v0.6.6) (2022-05-01)
 
 ### [0.6.5](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.4...v0.6.5) (2022-04-30)
