@@ -35,6 +35,7 @@ interface ReplyOptions {
 }
 
 const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
+  const statusSelectionRef = useRef<HTMLSelectElement>(null);
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
   const allTickets = useSelector(
     (state: RootState) => state.Tickets.allTickets
@@ -442,6 +443,9 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
       });
     }
     onChange("<p></p>");
+    if (statusSelectionRef && statusSelectionRef.current) {
+      statusSelectionRef.current.selectedIndex = 0;
+    }
     if (reply.status !== "Status" && reply.status === "") {
       dispatch(
         updateAlert([
@@ -760,6 +764,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 {/**Change Status ========================================= */}
                 <abbr title="Change Status">
                   <select
+                    ref={statusSelectionRef}
                     onChange={(e) => {
                       setReply({ ...reply, status: e.target.value });
                     }}

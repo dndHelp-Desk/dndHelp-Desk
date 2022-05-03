@@ -17,7 +17,6 @@ import {
   setCompanyDetails,
 } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import { setMessages } from "../../Redux/Slices/NotificationsSlice";
-import { store } from "../../Redux/store";
 
 //Firestore ===================
 import {
@@ -36,7 +35,7 @@ const db = getFirestore();
 
 // Subsequent queries will use persistence, if it was enabled successfully
 enableIndexedDbPersistence(db);
-let org = store.getState().UserInfo.company_name;
+let org = localStorage.getItem("organization_name");
 
 // collection ref
 let membersRef: any = org && collection(db, `companies/${org}/members`);

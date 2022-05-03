@@ -45,7 +45,7 @@ const OverviewReport: FC<data> = ({ data }) => {
   const totalCalls = useMemo(() => {
     return allTickets.length >= 1 && data.length >= 1
       ? allTickets.filter((ticket: any) =>
-          data.some((item: any) => item.ticket_id === ticket.ticket_id)
+          data.every((item: any) => item.ticket_id === ticket.ticket_id)
         ).length
       : 0;
   }, [allTickets, data]);

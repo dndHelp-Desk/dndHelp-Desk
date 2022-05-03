@@ -132,7 +132,7 @@ const MainComponent: FC = () => {
   }, [allTickets, dispatch, user]);
 
   if (logged !== true) {
-    return <Navigate to="/logIn" />;
+    return <Navigate to="/login" />;
   }
 
   //Component =================================

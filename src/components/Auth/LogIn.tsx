@@ -1,17 +1,20 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   setPersistence,
   browserLocalPersistence,
 } from "firebase/auth";
+//Firestore ===================
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
 import darkLogo from "./images/dndHelp-Desk_Dark.webp";
 import minidarkLogo from "./images/dndHelp-Desk.webp";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
 import { isAuthenticated, setCompany } from "../../Redux/Slices/UserSlice";
 import Alert from "../Others/Alert";
@@ -32,6 +35,8 @@ const firebaseConfig = {
 
 // Initialize Firebase for auth======================
 initializeApp(firebaseConfig);
+// init services for firestore =========================
+const db = getFirestore();
 
 //Initialize Services ======
 const auth = getAuth();
@@ -46,19 +51,18 @@ const LogIn: FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [menu, setMenu] = useState(false);
+  const logged = useSelector(
+    (state: RootState) => state.UserInfo.authenticated
+  );
   const [inputValues, setValues] = useState<InputInter>({
     email: "",
     password: "",
     company: "",
   });
 
-  const routeLocation = useSelector(
-    (state: RootState) => state.UserInfo.routeLocation
-  );
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
-  const user = auth.currentUser;
 
   //Log in User =====================
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -66,27 +70,64 @@ const LogIn: FC = () => {
     setPersistence(auth, browserLocalPersistence).then(() => {
       signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
         .then((currentUser: any) => {
-          if (!currentUser.user.emailVerified) {
-            dispatch(
-              updateAlert([
-                ...alerts,
-                {
-                  message: "Please Verify your account",
-                  color: "bg-green-200",
-                },
-              ])
+          //Check If Workspace or Company Exists ===============
+          let companiesRef: any =
+            inputValues.company &&
+            collection(
+              db,
+              `companies/${inputValues.company
+                .toLowerCase()
+                .replace(/\s/g, "")}/members`
             );
-          }
-          dispatch(
-            updateAlert([
-              ...alerts,
-              {
-                message: "Logged In Succesfully",
-                color: "bg-green-200",
-              },
-            ])
-          );
-          window.location.reload();
+
+          //Check if the workspace exist or not ============
+          getDocs(companiesRef)
+            .then((snapshot) => {
+              if (snapshot.docs?.length >= 1) {
+                //Notify User To Verify Their Account ========
+                if (!currentUser.user.emailVerified) {
+                  dispatch(
+                    updateAlert([
+                      ...alerts,
+                      {
+                        message: "Please Verify your account",
+                        color: "bg-green-200",
+                      },
+                    ])
+                  );
+                }
+
+                //Login If All Set ==================
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: "Logged In Succesfully",
+                      color: "bg-green-200",
+                    },
+                  ])
+                );
+                window.localStorage.setItem("auth", "true");
+                dispatch(isAuthenticated(true));
+                navigate("/redirect");
+                window.location.reload();
+              } else {
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message:
+                        "The Workspace You Tyring To Access Doesn't Exist",
+                      color: "bg-red-200",
+                    },
+                  ])
+                );
+                dispatch(isAuthenticated(false));
+              }
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
         })
         .catch((error) => {
           dispatch(
@@ -105,20 +146,9 @@ const LogIn: FC = () => {
     });
   };
 
-  useEffect(() => {
-    //Check If user is logged in ===================
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(isAuthenticated(true));
-        //Rederect User If logged ==============
-        routeLocation === "Dial n Dine Help-Desk"
-          ? navigate("/app")
-          : navigate(routeLocation);
-      } else {
-        dispatch(isAuthenticated(false));
-      }
-    });
-  }, [user, dispatch, navigate, routeLocation]);
+  if (logged === true) {
+    return <Navigate to="/redirect" />;
+  }
 
   //React Component =====================================================================================
   return (
@@ -228,7 +258,6 @@ const LogIn: FC = () => {
               </h2>
             </div>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-              <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
                   <label htmlFor="email-address" className="sr-only">
@@ -299,22 +328,7 @@ const LogIn: FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-900"
-                  >
-                    Remember me
-                  </label>
-                </div>
-
+              <div className="flex items-center justify-center">
                 <div className="text-sm">
                   <button
                     type="button"

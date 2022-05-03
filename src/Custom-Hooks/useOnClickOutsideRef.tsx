@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
-let useClickOutside = (handler:any) => {
-  let dropDownRef = useRef<HTMLDivElement|null>(null);
+let useClickOutside = (handler: any) => {
+  let dropDownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    let maybeHandler = (event:any) => {
+    let maybeHandler = (event: any) => {
       if (dropDownRef && dropDownRef.current) {
         if (event.target && !dropDownRef.current.contains(event.target)) {
           handler();
@@ -22,4 +22,4 @@ let useClickOutside = (handler:any) => {
   return dropDownRef;
 };
 
-export default useClickOutside
+export default useClickOutside;

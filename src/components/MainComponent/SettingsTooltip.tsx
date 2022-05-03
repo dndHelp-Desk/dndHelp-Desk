@@ -106,8 +106,8 @@ const SettingsTooltip: FC = () => {
                     signOut(auth).then(() => {
                       dispatch(isAuthenticated(false));
                       window.localStorage.clear();
-                      dispatch(changeLocation("Dial n Dine Help-Desk"));
-                      document.title = "Dial n Dine Help-Desk";
+                      dispatch(changeLocation("dndHelp-Desk"));
+                      document.title = "dndHelp-Desk";
                       navigate("/logIn");
                     });
                   };

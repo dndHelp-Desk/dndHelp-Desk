@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../Data_Fetching/TicketsnUserData";
 import {
@@ -19,6 +19,7 @@ interface Props {
 
 const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
   const dispatch: AppDispatch = useDispatch();
+  const accessRef = useRef<HTMLSelectElement>(null);
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
@@ -94,6 +95,9 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
       companies: "",
     });
     setModal(false);
+    if (accessRef && accessRef.current) {
+      accessRef.current.selectedIndex = 0;
+    }
   };
 
   return (
@@ -166,6 +170,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <select
+              ref={accessRef}
               onChange={(e) =>
                 setValues({ ...inputValues, access: e.target.value })
               }

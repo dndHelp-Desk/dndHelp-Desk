@@ -1,19 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialLocation = window.localStorage.getItem("locationPath") || "Dial n Dine Help-Desk";
+const initialLocation =
+  window.localStorage.getItem("locationPath") || "dndHelp-Desk";
 
 //Get Theme From Local Storage ==============
-const initialTheme = localStorage.getItem("theme")
+const initialTheme = localStorage.getItem("theme");
+const initialAuth = localStorage.getItem("auth") || false;
 
-interface InitialStateType{
-  username: string,
-  allMembers: any[],
-  member_details: any[]|any,
-  authenticated: boolean,
-  routeLocation: string,
-  toDo: any[],
-  theme:string|null,
-  company_name: string|any,
+interface InitialStateType {
+  username: string;
+  allMembers: any[];
+  member_details: any[] | any;
+  authenticated: boolean | any;
+  routeLocation: string;
+  toDo: any[];
+  theme: string | null;
+  company_name: string | any;
 }
 
 const initialState: InitialStateType = {
@@ -31,7 +33,7 @@ const initialState: InitialStateType = {
       uid: "none",
     },
   ],
-  authenticated: false,
+  authenticated: initialAuth === "true" ? true : false,
   routeLocation: initialLocation,
   toDo: [],
   theme:
@@ -64,10 +66,10 @@ export const UserSlice = createSlice({
     setToDo: (state, action: PayloadAction<any[]>) => {
       state.toDo = action.payload;
     },
-    changeTheme: (state, action: PayloadAction<string|null>) => {
+    changeTheme: (state, action: PayloadAction<string | null>) => {
       state.theme = action.payload;
     },
-    setCompany: (state, action: PayloadAction<string|null>) => {
+    setCompany: (state, action: PayloadAction<string | null>) => {
       state.company_name = action.payload;
     },
   },
