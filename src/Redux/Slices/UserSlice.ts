@@ -18,6 +18,8 @@ interface InitialStateType {
   company_name: string | any;
 }
 
+console.log(initialTheme && JSON.parse(initialTheme) == "dark");
+
 const initialState: InitialStateType = {
   username: "Unkown User",
   allMembers: [],
@@ -36,14 +38,7 @@ const initialState: InitialStateType = {
   authenticated: initialAuth === "true" ? true : false,
   routeLocation: initialLocation,
   toDo: [],
-  theme:
-    initialTheme === null
-      ? "light"
-      : window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches &&
-        initialTheme !== "light"
-      ? "dark"
-      : initialTheme,
+  theme: !initialTheme && window.matchMedia("(prefers-color-scheme: dark)").matches? "dark":(initialTheme && JSON.parse(initialTheme)),
   company_name: localStorage.getItem("organization_name"),
 };
 

@@ -431,8 +431,8 @@ const TicketsnUserData: FC = () => {
                 .filter(
                   (member: { email: string }) =>
                     currentUser.email &&
-                    member.email.toLowerCase().replace(/\s/g, "") ===
-                      currentUser.email.toLowerCase().replace(/\s/g, "")
+                    member?.email.toLowerCase().replace(/\s/g, "") ===
+                      currentUser?.email.toLowerCase().replace(/\s/g, "")
                 )
             )
           );
