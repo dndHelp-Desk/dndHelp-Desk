@@ -18,8 +18,6 @@ interface InitialStateType {
   company_name: string | any;
 }
 
-console.log(initialTheme && JSON.parse(initialTheme) == "dark");
-
 const initialState: InitialStateType = {
   username: "Unkown User",
   allMembers: [],
