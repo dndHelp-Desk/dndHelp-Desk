@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.8](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.7...v0.6.8) (2022-05-04)
+
+
+### Bug Fixes
+
+* **userslice:** enabling dark mode by default if system is on dark mode and remember their  pref ([dabf81a](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/dabf81aa9bbea1ed4448a16da8b57af1a6fafdef))
+
 ### [0.6.7](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.6...v0.6.7) (2022-05-03)
 
 
