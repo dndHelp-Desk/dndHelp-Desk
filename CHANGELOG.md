@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **userslice:** enabling dark mode by default if system is on dark mode and remember their  pref ([dabf81a](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/dabf81aa9bbea1ed4448a16da8b57af1a6fafdef))
+* **userslice:** Added a redirect page when signing in in order to determine if workspace exists and enabled dark mode by default if system is on dark mode and remember their preferfence ([dabf81a](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/dabf81aa9bbea1ed4448a16da8b57af1a6fafdef))
 
 ### [0.6.7](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.6...v0.6.7) (2022-05-03)
 
