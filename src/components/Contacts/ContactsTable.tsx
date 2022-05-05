@@ -128,7 +128,7 @@ const Table: FC<Prop> = ({ setModal }) => {
 
   //Component  =============================
   return (
-    <div className="mx-auto container shadow rounded-xl p-2 pb-4 h-[52rem] relative">
+    <div className="mx-auto container shadow rounded p-2 pb-4 h-[52rem] relative">
       {/**Edit Contact ============ */}
       <EditContact
         edit={edit}

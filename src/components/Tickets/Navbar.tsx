@@ -190,7 +190,7 @@ const Navbar: FC<Props> = ({
         />
         <button
           onClick={() => setfiltersModal(true)}
-          className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-50 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-[#33415596] border-slate-300"
+          className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-50 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-slate-700 border-slate-400"
         >
           <abbr title="filters" className="">
             <BiFilterAlt className="dark:text-slate-300 text-slate-800 font-bold" />
@@ -200,7 +200,7 @@ const Navbar: FC<Props> = ({
         {/**Assign Agent ================================= */}
         <button
           onClick={() => setPanel(true)}
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-[#33415596] border-slate-300 ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-400 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -217,7 +217,7 @@ const Navbar: FC<Props> = ({
             let code = prompt("Enter Pin To Perform Action");
             code === "0001" ? deleteSelected() : alert("Wrong Pin");
           }}
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-[#33415596] border-slate-300 ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-slate-700 border-slate-400 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -230,7 +230,7 @@ const Navbar: FC<Props> = ({
 
         {/**Mark All ================================= */}
         <button
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  flex items-center justify-center  border dark:border-[#33415596] border-slate-300  ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  flex items-center justify-center  border dark:border-slate-700 border-slate-400  ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"

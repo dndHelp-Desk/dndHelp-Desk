@@ -1,7 +1,7 @@
 import { FC } from "react";
 import packageJson from "../../../package.json";
 import {
-  BsSliders,
+  BsFillGearFill,
   BsPeopleFill,
   BsChatSquareDotsFill,
   BsFileTextFill,
@@ -36,7 +36,7 @@ const SettingsTooltip: FC = () => {
           <ul className="flex w-full px-2 space-y-4 mt-4 flex-col">
             <li>
               <NavLink to="/app/settings/account" className="settingsNav">
-                <BsSliders />
+                <BsFillGearFill />
                 <span>Account</span>
               </NavLink>
             </li>

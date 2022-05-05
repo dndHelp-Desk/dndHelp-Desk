@@ -3,11 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { markAsSeen } from "../Data_Fetching/TicketsnUserData";
 import { BsStopFill } from "react-icons/bs";
-import {
-  BiChevronRight,
-  BiChevronLeft,
-  BiArrowBack,
-} from "react-icons/bi";
+import { BiChevronRight, BiChevronLeft, BiArrowBack } from "react-icons/bi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import MessageThread from "./MessageThread";
 import Navbar from "./Navbar";
@@ -136,7 +132,7 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] custom-shadow border dark:border-[#33415596] border-slate-300 relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-700 border-slate-400 relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -309,7 +305,7 @@ const TicketsList: FC<Props> = ({
 
             {/**Pagination ================================ */}
             <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
-              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-[#33415596] border-slate-300">
+              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-slate-400">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);

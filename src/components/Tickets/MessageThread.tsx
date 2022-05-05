@@ -5,7 +5,7 @@ import {
   BsThreeDotsVertical,
   BsChatRight,
 } from "react-icons/bs";
-import { BiPaperPlane, BiMicrophone, BiChat } from "react-icons/bi";
+import { BiPaperPlane, BiMicrophone, BiCommentDetail } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import {
@@ -577,7 +577,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
         isChatOpen ? "flex" : "hidden"
       } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent`}
     >
-      <div className="h-[70%] w-full dark:bg-[#182235] bg-slate-50 border dark:border-[#33415596] border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
+      <div className="h-[70%] w-full dark:bg-[#182235] bg-slate-50 border dark:border-slate-700 border-slate-400 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
         <div className="h-14 bg-slate-50 dark:bg-[#182235] sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
@@ -726,7 +726,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
-        <div className="h-full w-full relative shadow-sm rounded dark:bg-[#182235] bg-slate-50 border border-slate-300 dark:border-[#33415596] before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+        <div className="h-full w-full relative shadow-sm rounded dark:bg-[#182235] bg-slate-50 border border-slate-400 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"
@@ -746,11 +746,11 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 {/**Canned Response ========================================= */}
                 <div className="group w-8 h-8 rounded-l border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-500 relative">
                   <abbr title="Canned Response">
-                    <BiChat className="text-base hover:opacity-80" />
+                    <BiCommentDetail className="text-base hover:opacity-80" />
                   </abbr>
                   <div className="group-hover:flex hidden absolute bottom-[100%] left-0 w-[11rem] h-[9rem] pb-1">
-                    <div className="rounded bg-white dark:bg-slate-800 z-[999] shadow-sm border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden">
-                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-300 px-2 overflow-hidden">
+                    <div className="rounded bg-white dark:bg-slate-800 z-[999] border dark:border-slate-700 border-slate-400 p-2 w-full h-full overflow-hidden shadow-xl">
+                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-400 px-2 overflow-hidden">
                         <input
                           type="search"
                           onChange={(e) => {
@@ -773,7 +773,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                                   });
                                   onChange(template.message);
                                 }}
-                                className={`capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-700 p-1 cursor-pointer ${
+                                className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-700 p-1 cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap ${
                                   template?.name
                                     ?.toLowerCase()
                                     .replace(/\s/g, "")
@@ -826,7 +826,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className="w-24 md:w-28 h-8 rounded-r border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
+                    className="w-24 md:w-28 h-8 rounded-r border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
                   >
                     <option
                       className="p-2"
