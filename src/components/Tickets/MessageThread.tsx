@@ -5,7 +5,7 @@ import {
   BsThreeDotsVertical,
   BsChatRight,
 } from "react-icons/bs";
-import { BiPaperPlane, BiMicrophone } from "react-icons/bi";
+import { BiPaperPlane, BiMicrophone, BiChat } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import {
@@ -52,7 +52,11 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
+  const templates = useSelector(
+    (state: RootState) => state.Tickets.email_templates
+  );
   const [recordingFile, setFile] = useState<boolean>(false);
+  const [cannedSearch, setCannedSearch] = useState<string>("");
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
 
   const [value, onChange] = useState<string | any>("<p></p>");
@@ -739,11 +743,64 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             {/**Reply options ======================= */}
             <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center">
+                {/**Canned Response ========================================= */}
+                <div className="group w-8 h-8 rounded-l border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-500 relative">
+                  <abbr title="Canned Response">
+                    <BiChat className="text-base hover:opacity-80" />
+                  </abbr>
+                  <div className="group-hover:flex hidden absolute bottom-[100%] left-0 w-[11rem] h-[9rem] pb-1">
+                    <div className="rounded bg-white dark:bg-slate-800 z-[999] shadow-sm border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden">
+                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-300 px-2 overflow-hidden">
+                        <input
+                          type="search"
+                          onChange={(e) => {
+                            setCannedSearch(e.target.value);
+                          }}
+                          value={cannedSearch}
+                          placeholder="Quick Search ..."
+                          className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-full w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
+                        />
+                      </div>
+                      <ul className="mt-1 h-full w-full flex flex-col p-2 space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-400 text-slate-700 text-xs font-semibold">
+                        {templates.length >= 1 &&
+                          templates.map((template, index) => {
+                            return (
+                              <li
+                                onClick={() => {
+                                  setReply({
+                                    ...reply,
+                                    message: template.message,
+                                  });
+                                  onChange(template.message);
+                                }}
+                                className={`capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-700 p-1 cursor-pointer ${
+                                  template?.name
+                                    ?.toLowerCase()
+                                    .replace(/\s/g, "")
+                                    .includes(
+                                      cannedSearch
+                                        ?.toLowerCase()
+                                        .replace(/\s/g, "")
+                                    )
+                                    ? ""
+                                    : "hidden"
+                                }`}
+                                value={template}
+                                key={index}
+                              >
+                                {index + 1}. {template.name}
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
                 {/**Upload Recordings ========================================= */}
                 <abbr title="Upload Your Recording">
                   <label
                     htmlFor="replyRecording"
-                    className="w-8 h-8 rounded-l border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500 cursor-pointer"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500 cursor-pointer"
                   >
                     <BiMicrophone className="text-base" />
                     <input

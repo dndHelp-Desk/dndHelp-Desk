@@ -12,7 +12,7 @@ const Templates: FC = () => {
 
   //Component =========================
   return (
-    <div className="w-full min-h-[45rem] rounded bg-white dark:bg-slate-800 p-6 grid grid-cols-2 gap-4">
+    <div className="w-full h-[45rem] rounded bg-white dark:bg-slate-800 p-6 grid grid-cols-2 gap-4">
       <NewTemplate />
       {/**Templates List */}
       <div className="col-span-2 lg:col-span-1 p-2 h-full flex flex-col gap-4 overflow-hidden overflow-y-scroll">

@@ -49,6 +49,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const [searchResults, setResults] = useState<boolean | any>(false);
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
   const [recordingFile, setFile] = useState<boolean | any>(false);
+  const [cannedSearch, setCannedSearch] = useState<string>("");
   const dispatch: AppDispatch = useDispatch();
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
@@ -65,7 +66,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         priority: "",
         category: "",
         branch_company: "",
-        message: "<p>Type Here ...</p>",
+        message: "<p></p>",
         state: "",
         date: "",
         ticket_id: "",
@@ -80,7 +81,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
 
   //Form Input Values =========================
   const [inputValue, setValues] = useState<string | any>(initialDraft);
-  const [value, onChange] = useState<string | any>("<p>Type Here ...</p>");
+  const [value, onChange] = useState<string | any>("<p></p>");
 
   //Check If Ticket Exists ===================
   const numbersArray = useMemo(() => {
@@ -432,7 +433,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 },
               ])
             );
-            onChange("<p>Type here ...</p>");
+            onChange("<p></p>");
             setShowOpen(true);
           } else if (resData.status === "fail") {
             dispatch(
@@ -466,7 +467,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       setFile("");
       setShowOpen(true);
       setRecipient("");
-      onChange("<p>Type here ...</p>");
+      onChange("<p></p>");
       setShowOpen(true);
       setModal(false);
       dispatch(
@@ -558,7 +559,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   });
                   onChange("");
                   setFile(false);
-                  onChange("<p>Type here ...</p>");
+                  onChange("<p></p>");
                   setShowOpen(true);
                 }}
                 className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-600"
@@ -584,7 +585,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     type="text"
                     id="to"
                     name="to"
-                    placeholder="Contact ..."
+                    placeholder="Search Contact ..."
                     required={true}
                     autoComplete="off"
                     value={recepient}
@@ -600,7 +601,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     ref={closeSuggestionsRef}
                     className={`${
                       searchResults ? "" : "hidden"
-                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar p-2 space-y-2 border dark:border-slate-600 border-slate-400 list-disc`}
+                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar px-4 p-2 space-y-2 border dark:border-slate-600 border-slate-400 list-decimal`}
                   >
                     {contactsList}
                   </div>{" "}
@@ -956,8 +957,19 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 <abbr title="Templates">
                   <BiFile />
                 </abbr>
-                <div className="fixed hidden group-hover:flex p-4 bottom-14 min-h-[10rem] w-[13rem] rounded shadow-md dark:bg-slate-900 bg-white dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-900 after:border-white">
-                  <ul className="h-full w-full flex flex-col justify-center space-y-2 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-xs font-semibold px-1 list-decimal">
+                <div className="fixed hidden group-hover:flex flex-col gap-2 p-2 bottom-14 h-[13rem] w-[13rem] rounded shadow-md dark:bg-slate-900 bg-white dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-900 after:border-white">
+                  <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-300 px-2 overflow-hidden">
+                    <input
+                      type="search"
+                      onChange={(e) => {
+                        setCannedSearch(e.target.value);
+                      }}
+                      value={cannedSearch}
+                      placeholder="Quick Search ..."
+                      className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-full w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
+                    />
+                  </div>
+                  <ul className="h-full w-full flex flex-col justify-center space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-xs font-semibold px-1 list-decimal">
                     {templates.length >= 1 &&
                       templates.map((template, index) => {
                         return (
@@ -969,7 +981,16 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                               });
                               onChange(template.message);
                             }}
-                            className="capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-800 py-1"
+                            className={`capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-800 py-1  ${
+                              template?.name
+                                ?.toLowerCase()
+                                .replace(/\s/g, "")
+                                .includes(
+                                  cannedSearch?.toLowerCase().replace(/\s/g, "")
+                                )
+                                ? ""
+                                : "hidden"
+                            }`}
                             value={template}
                             key={index}
                           >
