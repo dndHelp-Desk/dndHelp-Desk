@@ -744,7 +744,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center">
                 {/**Canned Response ========================================= */}
-                <div className="group w-8 h-8 rounded-l border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-500 relative">
+                <div className="group w-8 h-8 rounded-l-sm border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-500 relative">
                   <abbr title="Canned Response">
                     <BiCommentDetail className="text-base hover:opacity-80" />
                   </abbr>
@@ -826,7 +826,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className="w-24 md:w-28 h-8 rounded-r border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
+                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
                   >
                     <option
                       className="p-2"
@@ -852,7 +852,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
               <div className="flex space-x-2 items-center">
                 <button
                   type="submit"
-                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm"
+                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm"
                 >
                   <span className="text-xs">Send now</span>
                   <BiPaperPlane />
