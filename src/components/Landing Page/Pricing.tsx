@@ -157,7 +157,7 @@ const Pricing: FC = () => {
                     onClick={() => {
                       window.localStorage.setItem("plan", "free");
                     }}
-                    to="/company-set-up"
+                    to="/workspace-setup"
                   >
                     <div className="mt-4 w-full h-10 bg-blue-600 rounded text-slate-50 text-base font-semibold flex justify-center items-center">
                       Choose
@@ -227,7 +227,7 @@ const Pricing: FC = () => {
                     onClick={() => {
                       window.localStorage.setItem("plan", "pro");
                     }}
-                    to="/company-set-up"
+                    to="/workspace-setup"
                   >
                     <div className="mt-4 w-full h-10 bg-slate-100 rounded text-blue-600 text-base font-semibold flex justify-center items-center">
                       Choose

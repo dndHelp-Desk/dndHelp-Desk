@@ -266,4 +266,4 @@ const Landing: FC = () => {
   );
 };
 
-export default Landing
+export default Landing;

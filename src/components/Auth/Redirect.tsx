@@ -6,9 +6,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import redirect_img from "./images/redirect_img.webp";
 import { setCompany } from "../../Redux/Slices/UserSlice";
 
-type Props = {};
-
-const Redirect: FC<Props> = () => {
+const Redirect: FC = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -45,7 +43,7 @@ const Redirect: FC<Props> = () => {
         <p className="mt-4 text-base font-semibold text-slate-700 text-center tracking-normal">
           We getting you set up,
           <br />
-          you will be redirect in a few seconds.
+          you will be logged in a few seconds.
         </p>
         <div className="mt-2 m-auto border-4 border-r-blue-600 border-slate-300 rounded-full h-10 w-10 animate-spin"></div>
       </section>

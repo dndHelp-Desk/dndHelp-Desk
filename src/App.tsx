@@ -1,5 +1,6 @@
 import { FC, Suspense, lazy } from "react";
 import Redirect from "./components/Auth/Redirect";
+import SetUpRedirect from "./components/Landing Page/SetUpRedirect";
 import ReportsComponent from "./components/Reports/ReportComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing Page/Landing";
@@ -34,8 +35,8 @@ const Solutions = lazy(() => import("./components/Settings/Solutions"));
 
 //Getting Started Or Setting Up An Account ========================
 const Pricing = lazy(() => import("./components/Landing Page/Pricing"));
-const CompanySetUp = lazy(
-  () => import("./components/Landing Page/CompanySetUp")
+const WorkSpaceSetUp = lazy(
+  () => import("./components/Landing Page/WorkSpaceSetUp")
 );
 
 const App: FC = () => {
@@ -74,13 +75,14 @@ const App: FC = () => {
             {/**Landing ======================== */}
             <Route path="/" element={<Landing />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/company-set-up" element={<CompanySetUp />} />
+            <Route path="/workspace-setup" element={<WorkSpaceSetUp />} />
 
             {/**Error Page ===========================*/}
             <Route path="/error-page" element={<ErrorPage />} />
 
             {/**LogIn ======================== */}
             <Route path="/redirect" element={<Redirect />} />
+            <Route path="/setup-redirect" element={<SetUpRedirect />} />
             <Route path="/logIn" element={<LogIn />} />
 
             {/**Support ======================== */}

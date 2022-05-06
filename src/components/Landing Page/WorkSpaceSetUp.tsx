@@ -12,9 +12,9 @@ import {
 } from "firebase/auth";
 
 //Firestore ===================
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore";
 
-const CompanySetUp: FC = () => {
+const WorkSpaceSetUp: FC = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [setUpValues, setValues] = useState<any | null>({
@@ -29,6 +29,8 @@ const CompanySetUp: FC = () => {
     port: "",
     host: "",
   });
+  const [companyNameError, setCompanyError] = useState<string>("");
+  const [userExistError, setUserExistError] = useState<string>("");
 
   // init services for firestore =========================
   const db = getFirestore();
@@ -86,93 +88,113 @@ const CompanySetUp: FC = () => {
     password: string
   ) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password).then((data) => {
-      if (data) {
-        // New User =================================
-        addDoc(membersRef, {
-          name: setUpValues.user_name,
-          dept: setUpValues.department,
-          email: setUpValues.user_email,
-          access: "admin",
-          bio: "",
-          active: true,
-          status: "unavailable",
-          photoUrl: "",
-          companies: "",
-          uid: auth.currentUser?.uid,
-        });
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((data) => {
+        //Check if the workspace exist or not ============
+        getDocs(membersRef).then((snapshot) => {
+          if (snapshot.docs?.length >= 1) {
+            setCompanyError(
+              "Company already exists, please try a different company name"
+            );
+            fetch("https://dndhelp-desk-first.herokuapp.com/delete", {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                uid: data.user.uid,
+              }),
+            });
+          } else {
+            // New User =================================
+            addDoc(membersRef, {
+              name: setUpValues.user_name,
+              dept: setUpValues.department,
+              email: setUpValues.user_email,
+              access: "admin",
+              bio: "",
+              active: true,
+              status: "unavailable",
+              photoUrl: "",
+              companies: "",
+              uid: auth.currentUser?.uid,
+            });
 
-        //New  Email Account ==========================
-        addDoc(emailAccountsRef, {
-          name: "Support",
-          email: setUpValues.sending_email,
-          password: setUpValues.password,
-          host: setUpValues.host,
-          port: setUpValues.port,
-        });
+            //New  Email Account ==========================
+            addDoc(emailAccountsRef, {
+              name: "Support",
+              email: setUpValues.sending_email,
+              password: setUpValues.password,
+              host: setUpValues.host,
+              port: setUpValues.port,
+            });
 
-        //Company Details ==========================
-        addDoc(companyDetailsRef, {
-          name: setUpValues.company_name,
-          address: setUpValues.companany_address,
-          subscription: window.localStorage.getItem("plan"),
-        });
+            //Company Details ==========================
+            addDoc(companyDetailsRef, {
+              name: setUpValues.company_name,
+              address: setUpValues.companany_address,
+              subscription: window.localStorage.getItem("plan"),
+            });
 
-        //Support Categories ==========================
-        addDoc(categoriesRef, {
-          categories: [
-            "Late Delivery",
-            "Failed Order",
-            "Incorrect Order",
-            "Refund",
-            "Poor Service (Driver)",
-            "Poor Service (Agent)",
-            "Poor Service (Store)",
-          ],
-        });
+            //Support Categories ==========================
+            addDoc(categoriesRef, {
+              categories: [
+                "Late Delivery",
+                "Failed Order",
+                "Incorrect Order",
+                "Refund",
+                "Poor Service (Driver)",
+                "Poor Service (Agent)",
+                "Poor Service (Store)",
+              ],
+            });
 
-        // New Tickects ==============================
-        addDoc(ticketsRef, {
-          recipient_name: "dndHelp-Desk",
-          recipient_email: "support@dndhelpdesk.co.za",
-          message_position: 1,
-          priority: "Medium",
-          agent_name: "dndHelpDesk",
-          date: new Date().toLocaleString(),
-          category: "Welcome, Get Started",
-          branch_company: setUpValues.company_name,
-          message:
-            '<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple</h2><br/> <p>Please watch the video below to get started. We have set default settings for you but there can be adjusted, before changing anything please watch the video to make informed changes.</p><br/> <video width="400" controls><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/mp4"><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/ogg">Your browser does not support HTML video.</video>',
-          time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-          ticket_id: "#123456",
-          status: "open",
-          due_date: new Date().toLocaleString(),
-          from: "agent",
-          agent_email: "support@dndhelpdesk.co.za",
-          readStatus: "delivered",
-          complainant_name: "test user",
-          complainant_email: "testuser@example.com",
-          complainant_number: "0123457892",
-          closed_time: "",
-          fcr: "no",
-          hasRecording: false,
-          solution: "",
-          reopened: false,
-          assigned: false,
-          assignee: "",
-          assigner: "",
-          team: "support",
-        });
+            // New Tickects ==============================
+            addDoc(ticketsRef, {
+              recipient_name: "dndHelp-Desk",
+              recipient_email: "support@dndhelpdesk.co.za",
+              message_position: 1,
+              priority: "Medium",
+              agent_name: "dndHelpDesk",
+              date: new Date().toLocaleString(),
+              category: "Welcome, Get Started",
+              branch_company: setUpValues.company_name,
+              message:
+                '<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple</h2><br/> <p>Please watch the video below to get started. We have set default settings for you but there can be adjusted, before changing anything please watch the video to make informed changes.</p><br/> <video width="400" controls><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/mp4"><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/ogg">Your browser does not support HTML video.</video>',
+              time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+              ticket_id: "#123456",
+              status: "open",
+              due_date: new Date().toLocaleString(),
+              from: "agent",
+              agent_email: "support@dndhelpdesk.co.za",
+              readStatus: "delivered",
+              complainant_name: "test user",
+              complainant_email: "testuser@example.com",
+              complainant_number: "0123457892",
+              closed_time: "",
+              fcr: "no",
+              hasRecording: false,
+              solution: "",
+              reopened: false,
+              assigned: false,
+              assignee: "",
+              assigner: "",
+              team: "support",
+            });
 
-        //Sign-Out  and Redirect to login ================================
-        setTimeout(() => {
-          signOut(auth).then(() => {
-            //Redirect To LogIn ================================
-            navigate("/logIn");
-          });
-        }, 1000);
-      }
-    });
+            //Sign-Out  and Redirect to login ================================
+            setTimeout(() => {
+              signOut(auth).then(() => {
+                //Redirect To LogIn ================================
+                navigate("/setup-redirect");
+              });
+            }, 1000);
+          }
+        });
+      })
+      .catch((err) => {
+        setUserExistError(err.message.split(":")[1]);
+      });
   };
 
   //Component  =================================
@@ -213,6 +235,13 @@ const CompanySetUp: FC = () => {
           <h2 className="mt-4 text-sm font-semibold text-center uppercase text-slate-600">
             Personal Info
           </h2>
+          <small
+            className={`text-center text-red-600 ${
+              userExistError?.length >= 3 ? "" : "hidden"
+            }`}
+          >
+            {userExistError}
+          </small>
           <hr className="bg-slate-400 border-0 h-[1px]" />
           {/**Name & Email Address ========================= */}
           <div className="flex w-full justify-between items-center gap-4">
@@ -307,6 +336,13 @@ const CompanySetUp: FC = () => {
           <h2 className="mt-8 text-sm font-semibold text-center uppercase text-slate-600">
             Your Company
           </h2>
+          <small
+            className={`text-center text-red-600 ${
+              companyNameError?.length >= 3 ? "" : "hidden"
+            }`}
+          >
+            {companyNameError}
+          </small>
           <hr className="bg-slate-400 border-0 h-[1px]" />
 
           {/**Company Name & Company Address ========================= */}
@@ -454,7 +490,7 @@ const CompanySetUp: FC = () => {
 
           {/**Create Account */}
           <div className="flex w-full justify-center items-center gap-4">
-            <button className="mt-2 h-10 w-40 bg-slate-900 rounded-md text-slate-100 font-bold hover:opacity-90 outliq focus:outline-none transition-all uppercase text-sm">
+            <button className="mt-2 h-10 w-40 bg-slate-900 rounded text-slate-100 font-bold hover:opacity-90 outliq focus:outline-none transition-all uppercase text-sm">
               SignUp
             </button>
           </div>
@@ -478,4 +514,4 @@ const CompanySetUp: FC = () => {
   );
 };
 
-export default CompanySetUp;
+export default WorkSpaceSetUp;
