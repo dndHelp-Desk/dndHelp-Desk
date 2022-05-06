@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.9](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.8...v0.6.9) (2022-05-06)
+
+
+### Features
+
+* **messagethread:** added canned response when replying to message thread or ticket thread ([7758e13](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/7758e13b34af84a7daf3779466c5a9028194a8aa))
+
+
+### Bug Fixes
+
+* **workspacesetup:** detect if workspace/email created already exists and notify user ([ad8b1a7](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/ad8b1a7464ce79169ff3d805eedda828283c10da)), closes [#20](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/20)
+
 ### [0.6.8](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.7...v0.6.8) (2022-05-04)
 
 
