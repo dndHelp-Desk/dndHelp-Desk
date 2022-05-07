@@ -42,7 +42,7 @@ const OverviewReport: FC<data> = ({ data }) => {
     });
 
   //Total Calls Incoming or Outgoing ===========================
-  const totalCalls = useMemo(() => {
+  const totalAggregate = useMemo(() => {
     return allTickets.length >= 1 && data.length >= 1
       ? allTickets.filter((ticket: any) =>
           data.some((item: any) => item.ticket_id === ticket.ticket_id)
@@ -112,7 +112,7 @@ const OverviewReport: FC<data> = ({ data }) => {
           </div>
           <div className="dark:text-slate-300 text-slate-700">
             <h4 className="text-base font-semibold text-center uppercase">
-              {totalCalls}
+              {totalAggregate}
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
               Aggregate

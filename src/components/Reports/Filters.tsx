@@ -98,6 +98,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setData }) => {
           <option value="">Status</option>
           <option value="open">Open</option>
           <option value="on hold">On Hold</option>
+          <option value="reopened">Reopened</option>
           <option value="solved">Resolved</option>
         </select>
       </div>

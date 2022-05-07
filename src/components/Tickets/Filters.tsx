@@ -6,7 +6,6 @@ import {
   BsReceiptCutoff,
   BsCalendar2Week,
   BsCheckSquare,
-  BsInfoSquare,
 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -17,7 +16,7 @@ interface Props {
   setFilters: (filetrs: any) => any;
 }
 
-const Filters: FC<Props> = ({ filters, setFilters}) => {
+const Filters: FC<Props> = ({ filters, setFilters }) => {
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
@@ -60,50 +59,8 @@ const Filters: FC<Props> = ({ filters, setFilters}) => {
           <option value="">Status</option>
           <option value="open">Open</option>
           <option value="on hold">On Hold</option>
+          <option value="reopened">Reopened</option>
           <option value="solved">Resolved</option>
-        </select>
-      </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsInfoSquare className="text-slate-500 text-lg absolute h-10 left-3" />
-        <select className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10">
-          <option
-            onClick={() =>
-              setFilters({
-                ...filters,
-                overdue: false.valueOf,
-                fcr: false,
-                reopened: false,
-                hasRecording: false,
-              })
-            }
-            value=""
-          >
-            Others
-          </option>
-          <option
-            onClick={() => setFilters({ ...filters, fcr: "yes" })}
-            value=""
-          >
-            First Contact Resolution
-          </option>
-          <option
-            onClick={() => setFilters({ ...filters, overdue: true })}
-            value=""
-          >
-            Overdue
-          </option>
-          <option
-            onClick={() => setFilters({ ...filters, reopened: true })}
-            value=""
-          >
-            Re-Opened
-          </option>
-          <option
-            onClick={() => setFilters({ ...filters, hasRecording: true })}
-            value=""
-          >
-            Has Recording
-          </option>
         </select>
       </div>
 

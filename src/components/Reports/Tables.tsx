@@ -61,8 +61,8 @@ const Tables: FC<Props> = ({ data }) => {
         <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
           {index + 1}.{" "}
           {allMembers.length >= 1 && option === "agent_email"
-            ? allMembers.filter((agent) => agent.email === elem.name)[0].name
-            : elem.name}
+            ? allMembers.filter((agent) => agent?.email === elem?.name)[0]?.name
+            : elem?.name}
         </td>
         <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.open}

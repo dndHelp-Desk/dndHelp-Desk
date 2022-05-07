@@ -24,7 +24,7 @@ const ReportsComponent: FC = () => {
   const [data, setData] = useState<any>(
     filteredTickets.length >= 1
       ? filteredTickets.filter(
-          (ticket) =>
+          (ticket: any) =>
             Number(new Date(ticket.date).getTime()) >=
               Number(new Date(filters.startDate).getTime()) &&
             Number(new Date(ticket.date).getTime()) <=
