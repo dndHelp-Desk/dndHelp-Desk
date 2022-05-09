@@ -34,8 +34,8 @@ const MainComponent: FC = () => {
   );
   const theme = useSelector((state: RootState) => state.UserInfo.theme);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
-  const allTickets = useSelector(
-    (state: RootState) => state.Tickets.allTickets
+  const dashboardData = useSelector(
+    (state: RootState) => state.Tickets.dashboardData
   );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
   const notificationMsgs = useSelector(
@@ -51,8 +51,8 @@ const MainComponent: FC = () => {
     if (user[0]?.access !== "client") {
       dispatch(
         setUnread(
-          allTickets &&
-            allTickets?.filter(
+          dashboardData &&
+            dashboardData?.filter(
               (ticket) =>
                 ticket?.readStatus !== "read" &&
                 ticket?.recipient_email === user[0]?.email
@@ -62,8 +62,8 @@ const MainComponent: FC = () => {
     } else if (user[0]?.companies.length >= 1 && user[0]?.access === "client") {
       dispatch(
         setUnread(
-          allTickets &&
-            allTickets?.filter(
+          dashboardData &&
+            dashboardData?.filter(
               (ticket) =>
                 ticket.readStatus !== "read" &&
                 user[0].companies.includes(ticket.branch_company)
@@ -71,7 +71,7 @@ const MainComponent: FC = () => {
         )
       );
     }
-  }, [allTickets, dispatch, user]);
+  }, [dashboardData, dispatch, user]);
 
   //Small Screen Menu ===================
   const [showMenu, setShowMenu] = useState<boolean>(false);

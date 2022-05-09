@@ -259,7 +259,7 @@ const TicketsList: FC<Props> = ({
       <div
         className={`flex flex-col lg:flex-row bg-transparent rounded-xl   ${
           isChatOpen && "gap-4"
-        } lg:space-y-0 lg:gap-2 space-x-0 ralative`}
+        } lg:space-y-0 lg:space-x-2 space-x-0 ralative`}
       >
         {/**Back To Main List On Small Screens ====================== */}
         <div

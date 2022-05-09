@@ -627,109 +627,36 @@ const TicketsnUserData: FC = () => {
       //Tickects Data Fetching ======================
       org &&
       onSnapshot(ticketsRef, (snapshot: { docs: any[] }) => {
-        if (
-          member_details.length >= 1 &&
-          member_details[0]?.access === "admin"
-        ) {
-          dispatch(
-            addAllTickets(
-              snapshot.docs
-                .map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      Number(
-                        new Date(ticketsComponentDates.startDate).getTime()
-                      ) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(ticketsComponentDates.endDate).setDate(
-                            new Date(ticketsComponentDates.endDate).getDate() +
-                              1
-                          )
-                        ).getTime()
-                      )
-                )
-            )
-          );
-        } else if (
-          member_details.length >= 1 &&
-          member_details[0].access === "client"
-        ) {
-          dispatch(
-            addAllTickets(
-              snapshot.docs
-                .map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      Number(
-                        new Date(ticketsComponentDates.startDate).getTime()
-                      ) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(ticketsComponentDates.endDate).setDate(
-                            new Date(ticketsComponentDates.endDate).getDate() +
-                              1
-                          )
-                        ).getTime()
-                      ) &&
-                    member_details[0]?.companies
-                      .split(",")
-                      .some(
-                        (msg: any) =>
-                          msg.toLowerCase().replace(/\s/g, "") ===
-                          data.branch_company?.toLowerCase().replace(/\s/g, "")
-                      )
-                )
-            )
-          );
-        } else if (
-          member_details.length >= 1 &&
-          member_details[0].access === "agent"
-        ) {
-          dispatch(
-            addAllTickets(
-              snapshot.docs
-                .map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .filter(
-                  (data) =>
-                    data?.agent_email === member_details[0]?.email &&
-                    new Date(data.date).getTime() >=
-                      Number(
-                        new Date(ticketsComponentDates.startDate).getTime()
-                      ) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(ticketsComponentDates.endDate).setDate(
-                            new Date(ticketsComponentDates.endDate).getDate() +
-                              1
-                          )
-                        ).getTime()
-                      )
-                )
-            )
-          );
-        }
+        dispatch(
+          addAllTickets(
+            snapshot.docs
+              .map((doc: { data: () => any; id: any }) => ({
+                ...doc.data(),
+                id: doc.id,
+              }))
+              .filter(
+                (data) =>
+                  new Date(data.date).getTime() >=
+                    Number(
+                      new Date(ticketsComponentDates.startDate).getTime()
+                    ) &&
+                  new Date(data.date).getTime() <=
+                    Number(
+                      new Date(
+                        new Date(ticketsComponentDates.endDate).setDate(
+                          new Date(ticketsComponentDates.endDate).getDate() + 1
+                        )
+                      ).getTime()
+                    )
+              )
+          )
+        );
       })
     );
   }, [
     ticketsComponentDates.endDate,
     ticketsComponentDates.startDate,
     dispatch,
-    member_details,
   ]);
 
   //Load Dashboard Data Based On Acess Level =========
@@ -892,99 +819,34 @@ const TicketsnUserData: FC = () => {
     );
   }, [dispatch, member_details]);
 
-  //Load Reports Data Based On Acess Level =========
+  //Load Reports Data =========
   useEffect((): any => {
     return (
       //Tickects Data Fetching ======================
       org &&
       onSnapshot(ticketsRef, (snapshot: { docs: any[] }) => {
-        if (
-          member_details.length >= 1 &&
-          member_details[0]?.access === "admin"
-        ) {
-          dispatch(
-            updateReportsData(
-              snapshot.docs
-                .map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      Number(new Date(dates.startDate).getTime()) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(dates.endDate).setDate(
-                            new Date(dates.endDate).getDate() + 1
-                          )
-                        ).getTime()
-                      )
-                )
-            )
-          );
-        } else if (
-          member_details.length >= 1 &&
-          member_details[0].access === "client"
-        ) {
-          dispatch(
-            updateReportsData(
-              snapshot.docs
-                .map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      Number(new Date(dates.startDate).getTime()) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(dates.endDate).setDate(
-                            new Date(dates.endDate).getDate() + 1
-                          )
-                        ).getTime()
-                      ) &&
-                    member_details[0]?.companies
-                      .split(",")
-                      .some(
-                        (msg: any) =>
-                          msg?.toLowerCase().replace(/\s/g, "") ===
-                          data.branch_company?.toLowerCase().replace(/\s/g, "")
-                      )
-                )
-            )
-          );
-        } else if (
-          member_details.length >= 1 &&
-          member_details[0].access === "agent"
-        ) {
-          dispatch(
-            updateReportsData(
-              snapshot.docs
-                .map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .filter(
-                  (data) =>
-                    data?.agent_email === member_details[0]?.email &&
-                    new Date(data.date).getTime() >=
-                      Number(new Date(dates.startDate).getTime()) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(dates.endDate).setDate(
-                            new Date(dates.endDate).getDate() + 1
-                          )
-                        ).getTime()
-                      )
-                )
-            )
-          );
-        }
+        dispatch(
+          updateReportsData(
+            snapshot.docs
+              .map((doc: { data: () => any; id: any }) => ({
+                ...doc.data(),
+                id: doc.id,
+              }))
+              .filter(
+                (data) =>
+                  new Date(data.date).getTime() >=
+                    Number(new Date(dates.startDate).getTime()) &&
+                  new Date(data.date).getTime() <=
+                    Number(
+                      new Date(
+                        new Date(dates.endDate).setDate(
+                          new Date(dates.endDate).getDate() + 1
+                        )
+                      ).getTime()
+                    )
+              )
+          )
+        );
       })
     );
   }, [dispatch, member_details, dates.endDate, dates.startDate]);

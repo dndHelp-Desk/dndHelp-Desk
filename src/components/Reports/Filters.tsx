@@ -26,13 +26,13 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
   //Component ==============================
   return (
     <>
-      <div className="md:max-w-[14rem] h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
-        <BsCalendar2Week className="dark:text-slate-400 text-slate-900 absolute h-10 left-3 z-[999]" />
+      <div className="md:max-w-[14rem] h-14 lg:h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
+        <BsCalendar2Week className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-3 z-[999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
 
-      <div className="md:max-w-[14rem] h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsSearch className="dark:text-slate-400 text-slate-900 text-lg absolute h-10 left-3" />
+      <div className="md:max-w-[14rem] h-14 lg:h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+        <BsSearch className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10 shadow"
@@ -54,8 +54,8 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
             ))}
         </select>
       </div>
-      <div className="md:max-w-[14rem] h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsPerson className="dark:text-slate-400 text-slate-900 text-lg absolute h-10 left-3" />
+      <div className="md:max-w-[14rem] h-14 lg:h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+        <BsPerson className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10 shadow"
@@ -73,8 +73,8 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
               ))}
         </select>
       </div>
-      <div className="md:max-w-[14rem] h-10 dark:bg-slate-800 bg-white  border  dark:border-slate-700 border-slate-300  w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative shadow">
-        <BsShopWindow className="dark:text-slate-400 text-slate-900 text-lg absolute h-10 left-3" />
+      <div className="md:max-w-[14rem] h-14 lg:h-10 dark:bg-slate-800 bg-white  border  dark:border-slate-700 border-slate-300  w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative shadow">
+        <BsShopWindow className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <input
           type="search"
           autoComplete="off"
@@ -85,8 +85,8 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
           placeholder="Brand ..."
         />
       </div>
-      <div className="md:max-w-[14rem] h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsCheckSquare className="dark:text-slate-400 text-slate-900 text-lg absolute h-10 left-3" />
+      <div className="md:max-w-[14rem] h-14 lg:h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+        <BsCheckSquare className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10 shadow"
