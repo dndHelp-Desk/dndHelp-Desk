@@ -201,6 +201,18 @@ const ReportsComponent: FC = () => {
         <OverviewReport data={data} filters={filters} />
       </div>
       <Tables data={data} />
+
+      {/**Preloader =========================== */}
+      <div
+        className={`${
+          data.length >= 1 ? "hidden" : ""
+        } fixed z-[99] top-[2.5rem] bottom-0 left-0 right-0 bg-[#030d2769] before:content-[''] before:h-[0.25rem] before:w-full before:bg-[#93c4fd70] before:absolute`}
+      >
+        <div
+          id="reportsPreloader"
+          className="h-[0.25rem] w-2/5 bg-blue-600 absolute top-0 transition-all"
+        ></div>
+      </div>
     </div>
   );
 };

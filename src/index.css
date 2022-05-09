@@ -128,6 +128,20 @@
     @apply text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-[#182235] dark:hover:bg-slate-700 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800;
   }
 
+  /* Reports No data Preloader ======================*/
+  #reportsPreloader {
+    animation: reportsPreloader linear 1.5s infinite;
+  }
+
+  @keyframes reportsPreloader {
+    from {
+      left: 0;
+    }
+    to {
+      left: 100%;
+    }
+  }
+
   /*Tool Tip Bottom Cal*/
   .tooltip_bottom {
     bottom: -webkit-calc(

@@ -26,8 +26,8 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
   //Component ==============================
   return (
     <>
-      <div className="md:max-w-[14rem] h-14 lg:h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
-        <BsCalendar2Week className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-3 z-[999]" />
+      <div className="md:max-w-[14rem] h-14 lg:h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative z-[999]">
+        <BsCalendar2Week className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-3" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
 
