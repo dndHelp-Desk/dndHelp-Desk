@@ -6,6 +6,7 @@ const initialLocation =
 //Get Theme From Local Storage ==============
 const initialTheme = localStorage.getItem("theme");
 const initialAuth = localStorage.getItem("auth") || false;
+const initialUser = localStorage.getItem("user");
 
 interface InitialStateType {
   username: string;
@@ -21,22 +22,27 @@ interface InitialStateType {
 const initialState: InitialStateType = {
   username: "Unkown User",
   allMembers: [],
-  member_details: [
-    {
-      access: "none",
-      dept: "Unkown Dept",
-      email: "example@gmail.com",
-      id: false,
-      name: "User Loader",
-      status: "offline",
-      photoUrl: "",
-      uid: "none",
-    },
-  ],
+  member_details: initialUser
+    ? [JSON.parse(initialUser)]
+    : [
+        {
+          access: "none",
+          dept: "Unkown Dept",
+          email: "example@gmail.com",
+          id: false,
+          name: "User Loader",
+          status: "offline",
+          photoUrl: "",
+          uid: "none",
+        },
+      ],
   authenticated: initialAuth === "true" ? true : false,
   routeLocation: initialLocation,
   toDo: [],
-  theme: !initialTheme && window.matchMedia("(prefers-color-scheme: dark)").matches? "dark":(initialTheme && JSON.parse(initialTheme)),
+  theme:
+    !initialTheme && window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : initialTheme && JSON.parse(initialTheme),
   company_name: localStorage.getItem("organization_name"),
 };
 

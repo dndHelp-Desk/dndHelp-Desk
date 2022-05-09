@@ -6,8 +6,8 @@ const ProgressBars: FC = () => {
   const categories = useSelector(
     (state: RootState) => state.Tickets.categories
   );
-  const filteredTickets = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
+  const dashboardData = useSelector(
+    (state: RootState) => state.Tickets.dashboardData
   );
 
   const categoriesData = useMemo(() => {
@@ -17,7 +17,7 @@ const ProgressBars: FC = () => {
             return {
               name: element,
               value: (
-                (filteredTickets?.filter(
+                (dashboardData?.filter(
                   (ticket) =>
                     ticket.category?.toLowerCase() === element?.toLowerCase() &&
                     new Date(ticket.date).getTime() >=
@@ -33,7 +33,7 @@ const ProgressBars: FC = () => {
                         31
                       ).getTime()
                 ).length /
-                  filteredTickets?.filter(
+                  dashboardData?.filter(
                     (ticket) =>
                       new Date(ticket.date).getTime() >=
                         new Date(
@@ -55,7 +55,7 @@ const ProgressBars: FC = () => {
           .sort((a: any, b: any) => b.value - a.value)
           .splice(0, 5)
       : [];
-  }, [categories, filteredTickets]);
+  }, [categories, dashboardData]);
 
   const categoryPreloader = [1, 2, 3, 4, 5].map((index) => {
     return (

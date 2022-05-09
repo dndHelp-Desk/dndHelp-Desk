@@ -24,7 +24,6 @@ const Redirect: FC = () => {
           routeLocation === "dndHelp-Desk"
             ? navigate("/app")
             : navigate(routeLocation);
-          console.log(localStorage.getItem("organization_name"));
         } else {
           navigate("/login");
         }

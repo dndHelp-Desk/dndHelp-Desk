@@ -65,7 +65,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
   const scrollToNone = useRef<HTMLDivElement | any>();
 
   //Filter Thread Messages =====================================
-  const threadMessage = useMemo(() => {
+  const threadMessages = useMemo(() => {
     return allTickets
       .filter((ticket) => ticket.ticket_id === threadId)
       .sort((a, b) => {
@@ -80,11 +80,11 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
   const [reply, setReply] = useState<ReplyOptions>({
     message: "<p></p>",
     subject:
-      threadMessage.length >= 1 &&
-      threadMessage.filter((msg: any) => msg.message_position === 1)[0]
+      threadMessages.length >= 1 &&
+      threadMessages.filter((msg: any) => msg.message_position === 1)[0]
         ?.category,
     status: "Status",
-    message_position: threadMessage.length + 1,
+    message_position: threadMessages.length + 1,
     ticket_id: threadId,
   });
 
@@ -102,9 +102,9 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
       ...previous,
       ticket_id: threadId,
       status: firstMessage[0]?.status,
-      message_position: threadMessage.length + 1,
+      message_position: threadMessages.length + 1,
     }));
-  }, [firstMessage, threadId, threadMessage]);
+  }, [firstMessage, threadId, threadMessages]);
 
   //Message options ========================================gi
   const [msgOptions, setOptions] = useState<any>({
@@ -465,12 +465,12 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
   //Loop Through Each Message In a thread ====================
   const thread =
-    threadMessage &&
-    threadMessage.map((message, index) => {
+    threadMessages &&
+    threadMessages.map((message, index) => {
       return (
         <div
           ref={
-            threadMessage.length - 1 === index
+            threadMessages.length - 1 === index
               ? scrollToLastMessage
               : scrollToNone
           }
@@ -631,7 +631,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             <div className="dark:font-medium font-semibold dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
               <span className="uppercase text-[0.6rem] font-bold">
                 {firstMessage && firstMessage[0]?.category}
-                {(!threadId || threadMessage.length <= 0) &&
+                {(!threadId || threadMessages.length <= 0) &&
                   "Nothing is selected"}
               </span>{" "}
               {/**Scroll to Last Message ================== */}
@@ -708,7 +708,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             )
           }
           {/**Placeholders ======================== */}
-          {(!threadId || threadMessage.length <= 0) && (
+          {(!threadId || threadMessages.length <= 0) && (
             <>
               <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold">
                 select any ticket to start the conversation
@@ -761,7 +761,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                           className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-full w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
                         />
                       </div>
-                      <ul className="mt-1 h-full w-full flex flex-col p-2 space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-400 text-slate-700 text-xs font-semibold">
+                      <ul className="mt-1 min-h-full w-full flex flex-col p-2 space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-400 text-slate-700 text-xs font-semibold">
                         {templates.length >= 1 &&
                           templates.map((template, index) => {
                             return (
@@ -773,7 +773,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                                   });
                                   onChange(template.message);
                                 }}
-                                className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-700 p-1 cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap ${
+                                className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-700 p-1 overflow-hidden overflow-ellipsis whitespace-nowrap min-h-10 cursor-default ${
                                   template?.name
                                     ?.toLowerCase()
                                     .replace(/\s/g, "")
@@ -785,7 +785,6 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                                     ? ""
                                     : "hidden"
                                 }`}
-                                value={template}
                                 key={index}
                               >
                                 {index + 1}. {template.name}

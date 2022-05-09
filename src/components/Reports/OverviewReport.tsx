@@ -7,9 +7,9 @@ import TrafficChart from "./TrafficChart";
 
 export type data = any;
 
-const OverviewReport: FC<data> = ({ data }) => {
-  const allTickets = useSelector(
-    (state: RootState) => state.Tickets.allTickets
+const OverviewReport: FC<data> = ({ data, filters }) => {
+  const reportsData = useSelector(
+    (state: RootState) => state.Tickets.reportsData
   );
   const categories = useSelector(
     (state: RootState) => state.Tickets.categories
@@ -43,12 +43,12 @@ const OverviewReport: FC<data> = ({ data }) => {
 
   //Total Calls Incoming or Outgoing ===========================
   const totalAggregate = useMemo(() => {
-    return allTickets.length >= 1 && data.length >= 1
-      ? allTickets.filter((ticket: any) =>
+    return reportsData.length >= 1 && data.length >= 1
+      ? reportsData.filter((ticket: any) =>
           data.some((item: any) => item.ticket_id === ticket.ticket_id)
         ).length
       : 0;
-  }, [allTickets, data]);
+  }, [reportsData, data]);
 
   //Preping daily count  Data==============
   const solvedTickets =

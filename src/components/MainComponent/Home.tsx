@@ -18,20 +18,20 @@ const Home: FC = () => {
     (state: RootState) => state.UserInfo.allMembers
   );
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
-  const filteredTickets = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
+  const dashboardData = useSelector(
+    (state: RootState) => state.Tickets.dashboardData
   );
 
   const overDue = useMemo(() => {
     return (
-      filteredTickets &&
-      filteredTickets.filter(
+      dashboardData &&
+      dashboardData.filter(
         (firstMsg) =>
           new Date(firstMsg.due_date !== null && firstMsg.due_date).getTime() <=
             new Date().getTime() && firstMsg.status === "open"
       )
     );
-  }, [filteredTickets]);
+  }, [dashboardData]);
 
   //Loop Through All Users ================
   const users =
@@ -138,8 +138,8 @@ const Home: FC = () => {
                 <br /> currently you have{" "}
                 <span className="text-slate-900 dark:text-slate-300 font-semibold">
                   {" "}
-                  {(filteredTickets.length >= 1 &&
-                    filteredTickets.filter((ticket) => ticket.status === "open")
+                  {(dashboardData.length >= 1 &&
+                    dashboardData.filter((ticket) => ticket.status === "open")
                       ?.length) ||
                     0}
                 </span>{" "}
@@ -157,7 +157,7 @@ const Home: FC = () => {
                 <div
                   style={{
                     width: `${(
-                      (filteredTickets.filter(
+                      (dashboardData.filter(
                         (data) =>
                           new Date(data.date).getTime() >=
                             new Date(
@@ -173,7 +173,7 @@ const Home: FC = () => {
                             ).getTime() &&
                           data?.status?.toLowerCase() === "solved"
                       ).length /
-                        filteredTickets.filter(
+                        dashboardData.filter(
                           (data) =>
                             new Date(data.date).getTime() >=
                               new Date(

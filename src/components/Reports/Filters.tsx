@@ -5,7 +5,6 @@ import {
   BsShopWindow,
   BsCalendar2Week,
   BsCheckSquare,
-  BsFilter,
 } from "react-icons/bs";
 import DateFilter from "./DatePicker";
 import { useSelector } from "react-redux";
@@ -14,13 +13,9 @@ import { RootState } from "./../../Redux/store";
 interface Props {
   filters: any;
   setFilters: any;
-  setData: any;
 }
 
-const Filters: FC<Props> = ({ filters, setFilters, setData }) => {
-  const filteredTickets = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
-  );
+const Filters: FC<Props> = ({ filters, setFilters }) => {
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
@@ -35,6 +30,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setData }) => {
         <BsCalendar2Week className="dark:text-slate-400 text-slate-900 absolute h-10 left-3 z-[999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
+
       <div className="md:max-w-[14rem] h-10 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
         <BsSearch className="dark:text-slate-400 text-slate-900 text-lg absolute h-10 left-3" />
         <select
@@ -102,58 +98,6 @@ const Filters: FC<Props> = ({ filters, setFilters, setData }) => {
           <option value="solved">Resolved</option>
         </select>
       </div>
-
-      {/**Apply Filters =========================== */}
-      <button
-        onClick={() => {
-          setData(
-            filteredTickets.length >= 1
-              ? filteredTickets.filter(
-                  (ticket) =>
-                    ticket.status
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.status, "gi")) &&
-                    ticket.category
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.category, "gi")) &&
-                    ticket.agent_email
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.agent, "gi")) &&
-                    ticket.branch_company
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.brand, "gi")) &&
-                    ticket.status
-                      .replace(/\s/g, "")
-                      .replace(/\(/g, "")
-                      .replace(/\)/g, "")
-                      .match(new RegExp(filters.status, "gi")) &&
-                    Number(new Date(ticket.date).getTime()) >=
-                      Number(new Date(filters.startDate).getTime()) &&
-                    Number(new Date(ticket.date).getTime()) <=
-                      Number(
-                        new Date(
-                          new Date(filters.endDate).setDate(
-                            new Date(filters.endDate).getDate() + 1
-                          )
-                        ).getTime()
-                      )
-                )
-              : []
-          );
-        }}
-        className="md:max-w-[14rem] h-9 w-full min-w-[15rem] lg:min-w-0 bg-blue-700 text-slate-100  text-sm rounded outline-none focus:outline-none hover:opacity-90 transition-all flex justify-center items-center space-x-2"
-      >
-        <BsFilter className="text-lg" />
-        <span>Apply</span>
-      </button>
     </>
   );
 };

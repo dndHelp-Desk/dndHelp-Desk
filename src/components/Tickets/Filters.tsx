@@ -29,7 +29,7 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
     <>
       <div className="col-span-1 h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
         <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
-        <DateFilter filters={filters} setFilters={setFilters} />
+        <DateFilter />
       </div>
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
         <BsSearch className="text-slate-500 text-lg absolute h-10 left-3" />

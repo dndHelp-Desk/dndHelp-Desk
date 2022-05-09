@@ -1,20 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialId: string | null = window.localStorage.getItem("threadId");
+const initialTickestDate = window.localStorage.getItem("ticketsDate");
+const initialReportsDate = window.localStorage.getItem("reportsDate");
 
 interface InitialStateState {
   allTickets: any[];
-  threadId: string|null;
-  contacts: string[]|any[];
+  threadId: string | null;
+  contacts: string[] | any[];
   email_accounts: any[];
   email_templates: any[];
-  company_details:string[]|any;
-  categories:string[]|any[];
-  settings:string[]|any[];
-  unread:string[]|any[];
-  imageAttachments:string[]|any[];
-  filteredTickets:string[]|any[];
-  frequentlyAsked:string[]|any[];
+  company_details: string[] | any;
+  categories: string[] | any[];
+  settings: string[] | any[];
+  unread: string[] | any[];
+  imageAttachments: string[] | any[];
+  filterDates: Date | any;
+  ticketsComponentDates: Date | any;
+  dashboardData: string[] | any[];
+  reportsData: string[] | any[];
+  filteredTickets: string[] | any[];
+  frequentlyAsked: string[] | any[];
 }
 
 const initialState: InitialStateState = {
@@ -28,6 +34,36 @@ const initialState: InitialStateState = {
   settings: [],
   unread: [],
   imageAttachments: [],
+  ticketsComponentDates: initialTickestDate
+    ? JSON.parse(initialTickestDate)
+    : {
+        startDate: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          1
+        ).toLocaleDateString(),
+        endDate: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          31
+        ).toLocaleDateString(),
+      },
+  filterDates: initialReportsDate
+    ? JSON.parse(initialReportsDate)
+    : {
+        startDate: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          1
+        ).toLocaleDateString(),
+        endDate: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          31
+        ).toLocaleDateString(),
+      },
+  dashboardData: [],
+  reportsData: [],
   filteredTickets: [],
   frequentlyAsked: [],
 };
@@ -71,6 +107,24 @@ export const TicketsSlice = createSlice({
     setCompanyDetails: (state, action: PayloadAction<any[]>) => {
       state.company_details = action.payload;
     },
+    updateTicketsComponentDates: (state, action: PayloadAction<any>) => {
+      state.ticketsComponentDates = action.payload;
+    },
+    updateFilterDates: (state, action: PayloadAction<any>) => {
+      state.filterDates = action.payload;
+    },
+    updateReportsData: (state, action: PayloadAction<any[]>) => {
+      state.reportsData = action.payload.sort(
+        (a: any, b: any) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+    },
+    updateDashboardData: (state, action: PayloadAction<any[]>) => {
+      state.dashboardData = action.payload.sort(
+        (a: any, b: any) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+    },
     updateFilteredTickets: (state, action: PayloadAction<any[]>) => {
       state.filteredTickets = action.payload.sort(
         (a: any, b: any) =>
@@ -88,10 +142,15 @@ export const {
   loadFrequentlyAsked,
   loadTemplates,
   updateFilteredTickets,
-  setUnread,setImageArray,
+  setUnread,
+  setImageArray,
   loadAccounts,
   setCategories,
   setCompanyDetails,
+  updateFilterDates,
+  updateReportsData,
+  updateTicketsComponentDates,
+  updateDashboardData,
 } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;

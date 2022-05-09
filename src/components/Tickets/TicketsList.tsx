@@ -32,14 +32,15 @@ const TicketsList: FC<Props> = ({
     (state: RootState) => state.Tickets.filteredTickets
   );
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
+  const ticketsComponentDates = useSelector(
+    (state: RootState) => state.Tickets.ticketsComponentDates
+  );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
   const [isChatOpen, setChat] = useState<boolean>(false);
   const [audio, audioUrl] = useState<string | any>("");
   const [loadMore, setLimit] = useState<number | any>(50);
   //Filters =====================
   const [filters, setFilters] = useState({
-    startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-    endDate: new Date(new Date().getFullYear(), new Date().getMonth(), 31),
     brand: "",
     ticket_id: "",
     agent: "",
@@ -82,11 +83,11 @@ const TicketsList: FC<Props> = ({
               .replace(/\)/g, "")
               .match(new RegExp(filters.status, "gi")) &&
             Number(new Date(ticket.date).getTime()) >=
-              Number(new Date(filters.startDate).getTime()) &&
+              Number(new Date(ticketsComponentDates.startDate).getTime()) &&
             Number(new Date(ticket.date).getTime()) <=
               new Date(
-                new Date(filters.endDate).setDate(
-                  new Date(filters.endDate).getDate() + 1
+                new Date(ticketsComponentDates.endDate).setDate(
+                  new Date(ticketsComponentDates.endDate).getDate() + 1
                 )
               ).getTime() &&
             ticket?.complainant_number
@@ -108,8 +109,8 @@ const TicketsList: FC<Props> = ({
     filters.brand,
     filters.category,
     filters.complainant_number,
-    filters.endDate,
-    filters.startDate,
+    ticketsComponentDates.endDate,
+    ticketsComponentDates.startDate,
     filters.status,
     filters.ticket_id,
   ]);
@@ -153,7 +154,7 @@ const TicketsList: FC<Props> = ({
             )}
 
           {/**Ticket Details ========================================== */}
-          <div className="flex relative h-full w-full px-1 cursor-pointer overflow-hidden">
+          <div className="flex relative h-full w-full px-1 cursor-default overflow-hidden">
             {/**Mark or Unmark Ticket ========================================== */}
             <div className="h-full w-[9%] flex justify-between items-center px-2">
               <input

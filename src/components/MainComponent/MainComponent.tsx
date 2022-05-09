@@ -13,10 +13,7 @@ import lightLogo from "./logos/dndHelp-Desk_.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../Redux/Slices/UserSlice";
-import {
-  updateFilteredTickets,
-  setUnread,
-} from "../../Redux/Slices/Tickets_n_Settings_Slice";
+import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
@@ -90,46 +87,6 @@ const MainComponent: FC = () => {
         : "Dial n Dine Help-Desk" + routeLocation.split("/").join(" | ");
     dispatch(changeLocation(location.pathname));
   }, [routeLocation, dispatch, location]);
-
-  //FilterTckets Based on user's access ========
-  useEffect(() => {
-    if (user.length >= 1) {
-      if (allTickets.length >= 1 && user[0].access === "admin") {
-        dispatch(
-          updateFilteredTickets(
-            allTickets.filter((ticket) => ticket.message_position === 1)
-          )
-        );
-      } else if (allTickets.length >= 1 && user[0].access === "agent") {
-        dispatch(
-          updateFilteredTickets(
-            allTickets.filter(
-              (ticket) =>
-                ticket?.message_position === 1 &&
-                ticket?.agent_email === user[0]?.email
-            )
-          )
-        );
-      } else if (allTickets.length >= 1 && user[0].access === "client") {
-        dispatch(
-          updateFilteredTickets(
-            user[0].companies &&
-              allTickets.filter(
-                (ticket) =>
-                  ticket.message_position === 1 &&
-                  user[0].companies
-                    .split(",")
-                    .some(
-                      (msg: any) =>
-                        msg.toLowerCase().replace(/\s/g, "") ===
-                        ticket.branch_company.toLowerCase().replace(/\s/g, "")
-                    )
-              )
-          )
-        );
-      }
-    }
-  }, [allTickets, dispatch, user]);
 
   if (logged !== true) {
     return <Navigate to="/login" />;

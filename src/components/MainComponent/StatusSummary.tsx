@@ -3,16 +3,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
 const StatusSummary: FC = () => {
-  const filteredTickets = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
+  const dashboardData = useSelector(
+    (state: RootState) => state.Tickets.dashboardData
   );
 
   const data = useMemo(() => {
-    return filteredTickets.length >= 1
+    return dashboardData.length >= 1
       ? [
           {
             value: (
-              (filteredTickets.filter(
+              (dashboardData.filter(
                 (data) =>
                   new Date(data.date).getTime() >=
                     new Date(
@@ -28,7 +28,7 @@ const StatusSummary: FC = () => {
                     ).getTime() &&
                   data?.status?.toLowerCase() === "solved"
               ).length /
-                filteredTickets.filter(
+                dashboardData.filter(
                   (data) =>
                     new Date(data.date).getTime() >=
                       new Date(
@@ -49,7 +49,7 @@ const StatusSummary: FC = () => {
           },
           {
             value: (
-              (filteredTickets.filter(
+              (dashboardData.filter(
                 (data) =>
                   new Date(data.date).getTime() >=
                     new Date(
@@ -65,7 +65,7 @@ const StatusSummary: FC = () => {
                     ).getTime() &&
                   data.status === "reopened"
               ).length /
-                filteredTickets.filter(
+                dashboardData.filter(
                   (data) =>
                     new Date(data.date).getTime() >=
                       new Date(
@@ -86,7 +86,7 @@ const StatusSummary: FC = () => {
           },
           {
             value: (
-              (filteredTickets.filter(
+              (dashboardData.filter(
                 (data) =>
                   new Date(data.date).getTime() >=
                     new Date(
@@ -102,7 +102,7 @@ const StatusSummary: FC = () => {
                     ).getTime() &&
                   data?.status?.toLowerCase() === "on hold"
               ).length /
-                filteredTickets.filter(
+                dashboardData.filter(
                   (data) =>
                     new Date(data.date).getTime() >=
                       new Date(
@@ -123,7 +123,7 @@ const StatusSummary: FC = () => {
           },
           {
             value: (
-              (filteredTickets.filter(
+              (dashboardData.filter(
                 (data) =>
                   new Date(data.date).getTime() >=
                     new Date(
@@ -139,7 +139,7 @@ const StatusSummary: FC = () => {
                     ).getTime() &&
                   data?.status?.toLowerCase() === "open"
               ).length /
-                filteredTickets.filter(
+                dashboardData.filter(
                   (data) =>
                     new Date(data.date).getTime() >=
                       new Date(
@@ -162,14 +162,14 @@ const StatusSummary: FC = () => {
           return a.value - b.value;
         })
       : [];
-  }, [filteredTickets]);
+  }, [dashboardData]);
 
   //Component =========================
   return (
     <div className="row-span-3 flex flex-col justify-center items-center">
       <h2 className="text-center uppercase font-bold text-[0.7rem] dark:text-slate-300 text-slate-800">
         {
-          filteredTickets.filter(
+          dashboardData.filter(
             (data) =>
               new Date(data.date).getTime() >=
                 new Date(

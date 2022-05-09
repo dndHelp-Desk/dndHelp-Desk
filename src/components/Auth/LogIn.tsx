@@ -16,7 +16,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
 import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
-import { isAuthenticated, setCompany } from "../../Redux/Slices/UserSlice";
+import {
+  isAuthenticated,
+  setCompany,
+  updateUser,
+} from "../../Redux/Slices/UserSlice";
 import Alert from "../Others/Alert";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -96,6 +100,43 @@ const LogIn: FC = () => {
                     ])
                   );
                 }
+
+                //Add User Data =================
+                dispatch(
+                  updateUser(
+                    snapshot.docs
+                      .map((doc: any) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                      }))
+                      .filter(
+                        (member: { email: string }) =>
+                          currentUser.user?.email &&
+                          member?.email.toLowerCase().replace(/\s/g, "") ===
+                            currentUser.user?.email
+                              .toLowerCase()
+                              .replace(/\s/g, "")
+                      )
+                  )
+                );
+                window.localStorage.setItem(
+                  "user",
+                  JSON.stringify(
+                    snapshot.docs
+                      .map((doc: any) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                      }))
+                      .filter(
+                        (member: { email: string }) =>
+                          currentUser.user?.email &&
+                          member?.email.toLowerCase().replace(/\s/g, "") ===
+                            currentUser.user?.email
+                              .toLowerCase()
+                              .replace(/\s/g, "")
+                      )[0]
+                  )
+                );
 
                 //Login If All Set ==================
                 dispatch(

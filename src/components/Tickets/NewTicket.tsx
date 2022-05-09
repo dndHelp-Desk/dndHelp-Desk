@@ -83,7 +83,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const [inputValue, setValues] = useState<string | any>(initialDraft);
   const [value, onChange] = useState<string | any>("<p></p>");
 
-  //Check If Ticket Exists ===================
+  //Check If Ticket Exists ||Customer's history using their numbers ===================
   const numbersArray = useMemo(() => {
     return allTickets.length >= 1 && inputValue.complainant_number !== ""
       ? allTickets.filter(
@@ -102,19 +102,19 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       return (
         <li
           key={index}
-          className={`text-slate-800 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 dark:bg-slate-600 bg-slate-200 rounded capitalize leading-5`}
+          className={`text-slate-800 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 dark:bg-slate-600 bg-slate-200 rounded capitalize leading-5 space-y-2`}
         >
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>{data.branch_company} :</span> <span>{data.ticket_id}</span>
           </div>
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>Date : </span>
             <span>{new Date(data.date).toLocaleString()}</span>
           </div>
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>Agent Name :</span> <span>{data.agent_name}</span>
           </div>
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>Status :</span> <span>{data.status}</span>
           </div>
         </li>
@@ -969,7 +969,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-full w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
                     />
                   </div>
-                  <ul className="h-full w-full flex flex-col space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-xs font-semibold px-1 list-decimal">
+                  <ul className="min-h-full w-full flex flex-col space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-xs font-semibold px-1 list-decimal">
                     {templates.length >= 1 &&
                       templates.map((template, index) => {
                         return (
@@ -981,7 +981,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                               });
                               onChange(template.message);
                             }}
-                            className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-800 py-1  overflow-hidden overflow-ellipsis whitespace-nowrap ${
+                            className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-800 py-1  overflow-hidden overflow-ellipsis whitespace-nowrap cursor-default ${
                               template?.name
                                 ?.toLowerCase()
                                 .replace(/\s/g, "")

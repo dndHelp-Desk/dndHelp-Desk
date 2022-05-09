@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
 const MostRecent: FC = () => {
-  const filteredTickets = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
+  const dashboardData = useSelector(
+    (state: RootState) => state.Tickets.dashboardData
   );
-  let activities = filteredTickets;
+  let activities = dashboardData;
   const noData = [
     {
       category: "No Data",
