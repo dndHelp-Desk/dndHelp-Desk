@@ -133,7 +133,7 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-700 border-slate-400 relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-700 border-slate-300 relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -257,9 +257,9 @@ const TicketsList: FC<Props> = ({
       <NewTicket setModal={setModal} newTicketModal={newTicketModal} />
       {/**Tickets ========================================== */}
       <div
-        className={`flex flex-col lg:flex-row bg-transparent rounded-xl   ${
+        className={`flex flex-col lg:flex-row lg:space-y-0 lg:gap-2 space-x-0 ralative rounded-xl bg-transparent ${
           isChatOpen && "gap-4"
-        } lg:space-y-0 lg:space-x-2 space-x-0 ralative`}
+        }`}
       >
         {/**Back To Main List On Small Screens ====================== */}
         <div
@@ -306,7 +306,7 @@ const TicketsList: FC<Props> = ({
 
             {/**Pagination ================================ */}
             <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
-              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-slate-400">
+              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-slate-300">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);

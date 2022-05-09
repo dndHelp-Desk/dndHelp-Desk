@@ -190,7 +190,7 @@ const Navbar: FC<Props> = ({
         />
         <button
           onClick={() => setfiltersModal(true)}
-          className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-50 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-slate-700 border-slate-400"
+          className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-50 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-slate-700 border-slate-300"
         >
           <abbr title="filters" className="">
             <BiFilterAlt className="dark:text-slate-300 text-slate-800 font-bold" />
@@ -200,7 +200,7 @@ const Navbar: FC<Props> = ({
         {/**Assign Agent ================================= */}
         <button
           onClick={() => setPanel(true)}
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-400 ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -217,7 +217,7 @@ const Navbar: FC<Props> = ({
             let code = prompt("Enter Pin To Perform Action");
             code === "0001" ? deleteSelected() : alert("Wrong Pin");
           }}
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-slate-700 border-slate-400 ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-slate-700 border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -230,7 +230,7 @@ const Navbar: FC<Props> = ({
 
         {/**Mark All ================================= */}
         <button
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  flex items-center justify-center  border dark:border-slate-700 border-slate-400  ${
+          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  flex items-center justify-center  border dark:border-slate-700 border-slate-300  ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -257,11 +257,11 @@ const Navbar: FC<Props> = ({
         {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm p-2 border border-slate-400 dark:border-slate-700 rounded absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm p-2 border border-slate-300 dark:border-slate-700 rounded absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
-            <div className="flex sticky top-0 border-b border-slate-400 dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-8 items-center justify-center ">
+            <div className="flex sticky top-0 border-b border-slate-300 dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-8 items-center justify-center ">
               <BiSearch className="absolute left-3 text-slate-400 font-semibold" />
               <input
                 className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"

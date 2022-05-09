@@ -577,7 +577,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
         isChatOpen ? "flex" : "hidden"
       } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent`}
     >
-      <div className="h-[70%] w-full dark:bg-[#182235] bg-slate-50 border dark:border-slate-700 border-slate-400 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
+      <div className="h-[70%] w-full dark:bg-[#182235] bg-slate-50 border dark:border-slate-700 border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
         <div className="h-14 bg-slate-50 dark:bg-[#182235] sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
@@ -586,7 +586,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 Details
               </summary>
 
-              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-900 bg-white border border-slate-400 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
+              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-900 bg-white border border-slate-300 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
                 <div>
                   <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
                     <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
@@ -726,7 +726,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
-        <div className="h-full w-full relative shadow-sm rounded dark:bg-[#182235] bg-slate-50 border border-slate-400 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+        <div className="h-full w-full relative shadow-sm rounded dark:bg-[#182235] bg-slate-50 border border-slate-300 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"
@@ -749,8 +749,8 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                     <BiCommentDetail className="text-base hover:opacity-80" />
                   </abbr>
                   <div className="group-hover:flex hidden absolute bottom-[100%] left-0 w-[11rem] h-[9rem] pb-1">
-                    <div className="rounded bg-white dark:bg-slate-800 z-[999] border dark:border-slate-700 border-slate-400 p-2 w-full h-full overflow-hidden shadow-xl">
-                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-400 px-2 overflow-hidden">
+                    <div className="rounded bg-white dark:bg-slate-800 z-[999] border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden shadow-xl">
+                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-300 px-2 overflow-hidden">
                         <input
                           type="search"
                           onChange={(e) => {
@@ -825,7 +825,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
+                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
                   >
                     <option
                       className="p-2"
