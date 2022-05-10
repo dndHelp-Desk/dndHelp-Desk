@@ -10,6 +10,8 @@ import { RootState } from "../../Redux/store";
 import Connect from "./Connect";
 import ConnectModal from "./ConnectModal";
 import ProgressBars from "./ProgressBars";
+import BottomSection from "./BottomSection";
+import RadialBar from "./RadialBar";
 
 const Home: FC = () => {
   const [apiChannelModal, openAPIModal] = useState<boolean>(false);
@@ -40,7 +42,7 @@ const Home: FC = () => {
       return (
         <div
           key={user.id}
-          className="w-full snap_child h-13 rounded dark:bg-[#33415569] bg-[#e2e8f0bd] flex items-center space-x-4 p-2 border dark:border-slate-700 border-slate-300"
+          className="w-full snap_child h-13  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200"
         >
           <div
             className={`h-10 w-10 flex justify-center items-center rounded relative`}
@@ -118,7 +120,7 @@ const Home: FC = () => {
           </div>
         </section>
 
-        {/**Bottom Half ================================ */}
+        {/**Middle Half ================================ */}
         <section className="row-span-2 w-full h-fit lg:h-[18rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
           <div className="col-span-2 w-full h-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Connect Other Sources || Omni Channel Settings==================================== */}
@@ -129,7 +131,7 @@ const Home: FC = () => {
             />
 
             {/**Progress ============================== */}
-            <article className="col-span-5 md:col-span-2 min-h-[10rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-5">
+            <article className="col-span-5 md:col-span-2 min-h-[10rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-2">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
                 Progress
               </h3>
@@ -149,54 +151,12 @@ const Home: FC = () => {
                 </span>{" "}
                 overdue tickets.
               </p>
-              <div
-                role="progressbar"
-                aria-label="progressbas"
-                className="w-full h-2 rounded-full overflow-hidden dark:bg-slate-700 bg-slate-300 mb-4"
-              >
-                <div
-                  style={{
-                    width: `${(
-                      (dashboardData.filter(
-                        (data) =>
-                          new Date(data.date).getTime() >=
-                            new Date(
-                              new Date().getFullYear(),
-                              new Date().getMonth(),
-                              1
-                            ).getTime() &&
-                          new Date(data.date).getTime() <=
-                            new Date(
-                              new Date().getFullYear(),
-                              new Date().getMonth(),
-                              30
-                            ).getTime() &&
-                          data?.status?.toLowerCase() === "solved"
-                      ).length /
-                        dashboardData.filter(
-                          (data) =>
-                            new Date(data.date).getTime() >=
-                              new Date(
-                                new Date().getFullYear(),
-                                new Date().getMonth(),
-                                1
-                              ).getTime() &&
-                            new Date(data.date).getTime() <=
-                              new Date(
-                                new Date().getFullYear(),
-                                new Date().getMonth(),
-                                30
-                              ).getTime()
-                        ).length) *
-                      100
-                    ).toFixed(1)}%`,
-                  }}
-                  className="h-full bg-blue-600 rounded-full"
-                ></div>
+              <div className="w-full h-[7rem] overflow-hidden mb-4">
+                <RadialBar />
               </div>
               <Link
                 to="/app/tickets"
-                className="text-blue-600 text-sm font-medium flex items-center space-x-2"
+                className="text-blue-600 text-sm font-medium flex items-center justify-center space-x-2"
               >
                 <span>View all Your Tickets</span>
                 <BsArrowRight />
@@ -276,6 +236,9 @@ const Home: FC = () => {
             </div>
           </div>
         </section>
+
+        {/**Bottom Half ================================ */}
+        <BottomSection />
       </div>
     </div>
   );

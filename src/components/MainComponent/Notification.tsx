@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import noDataImg from "./images/no-notifications.svg";
-import { HiOutlineX } from "react-icons/hi";
+import { HiOutlineX, HiAdjustments } from "react-icons/hi";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { deleteNotification } from "../Data_Fetching/TicketsnUserData";
 import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
@@ -98,12 +98,13 @@ const Notification: FC<Props> = ({
         openNotifications === true ? "flex" : "hidden"
       }`}
     >
-      <header className="w-full">
-        <h1 className="text-center text-sm dark:text-slate-400 text-slate-900 font-bold uppercase">
+      <header className="w-full flex justify-between items-center py-2 border-b dark:border-slate-700 border-slate-300">
+        <h1 className="text-xs dark:text-slate-400 text-slate-900 font-bold uppercase">
           Notifications
         </h1>
+        <HiAdjustments className="text-lg dark:text-slate-400 text-slate-700 font-bold uppercase" />
       </header>
-      <div className="h-full w-full overflow-x-hidden overflow-y-scroll space-y-2 p-2">
+      <div className="mt-2 h-full w-full overflow-x-hidden overflow-y-scroll space-y-2 p-2">
         {notificationMsgs.length <= 0 && unread.length <= 0 && (
           <div className="h-full w-full items-center flex flex-col justify-center space-y-4">
             <img

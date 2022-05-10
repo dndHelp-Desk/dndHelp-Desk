@@ -958,7 +958,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   <BiFile />
                 </abbr>
                 <div className="fixed hidden group-hover:flex flex-col gap-2 p-2 bottom-14 h-[13rem] w-[13rem] rounded shadow-md dark:bg-slate-900 bg-white dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-900 after:border-white">
-                  <div className="w-full h-10 bg-inherit border-b dark:border-slate-700 border-slate-300 p-2 overflow-hidden">
+                  <div className="w-full h-fit flex-[1] bg-inherit border-b dark:border-slate-700 border-slate-300">
                     <input
                       type="search"
                       onChange={(e) => {
@@ -966,10 +966,10 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       }}
                       value={cannedSearch}
                       placeholder="Quick Search ..."
-                      className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-full w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
+                      className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-8 w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
                     />
                   </div>
-                  <ul className="min-h-full w-full flex flex-col space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-600 text-xs font-semibold px-1 list-decimal">
+                  <ul className="h-[8rem] flex-[5] w-full space-y-1 overflow-hidden dark:text-slate-300 text-slate-600 text-xs font-semibold px-1">
                     {templates.length >= 1 &&
                       templates.map((template, index) => {
                         return (
@@ -981,7 +981,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                               });
                               onChange(template.message);
                             }}
-                            className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-800 py-1  overflow-hidden overflow-ellipsis whitespace-nowrap cursor-default ${
+                            className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-800 py-1  overflow-hidden overflow-ellipsis whitespace-nowrap cursor-default  ${
                               template?.name
                                 ?.toLowerCase()
                                 .replace(/\s/g, "")
@@ -991,10 +991,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                                 ? ""
                                 : "hidden"
                             }`}
-                            value={template}
                             key={index}
                           >
-                            {template.name}
+                            {index + 1}. {template.name}
                           </li>
                         );
                       })}

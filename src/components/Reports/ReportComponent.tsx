@@ -205,7 +205,7 @@ const ReportsComponent: FC = () => {
       {/**Preloader =========================== */}
       <div
         className={`${
-          data.length >= 1 ? "hidden" : ""
+          reportsData.length >= 1 ? "hidden" : ""
         } fixed z-[99] top-[2.5rem] bottom-0 left-0 right-0 bg-[#030d2769] before:content-[''] before:h-[0.25rem] before:w-full before:bg-[#93c4fd70] before:absolute`}
       >
         <div

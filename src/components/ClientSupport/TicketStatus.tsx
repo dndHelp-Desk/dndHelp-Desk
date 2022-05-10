@@ -10,9 +10,6 @@ const TicketStatus:FC = () => {
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
   const location = useLocation();
 
-  console.log(location.search?.split(/[=&]/)[1]);
-  console.log(location.search?.split(/[=&]/)[3]);
-
   const newMessages:any =
     allTickets.length >= 1 &&
     allTickets.filter(

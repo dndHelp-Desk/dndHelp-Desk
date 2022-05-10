@@ -19,35 +19,9 @@ const ProgressBars: FC = () => {
               value: (
                 (dashboardData?.filter(
                   (ticket) =>
-                    ticket.category?.toLowerCase() === element?.toLowerCase() &&
-                    new Date(ticket.date).getTime() >=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        1
-                      ).getTime() &&
-                    new Date(ticket.date).getTime() <=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        31
-                      ).getTime()
+                    ticket.category?.toLowerCase() === element?.toLowerCase()
                 ).length /
-                  dashboardData?.filter(
-                    (ticket) =>
-                      new Date(ticket.date).getTime() >=
-                        new Date(
-                          new Date().getFullYear(),
-                          new Date().getMonth(),
-                          1
-                        ).getTime() &&
-                      new Date(ticket.date).getTime() <=
-                        new Date(
-                          new Date().getFullYear(),
-                          new Date().getMonth(),
-                          31
-                        ).getTime()
-                  ).length) *
+                  dashboardData?.length) *
                 100
               ).toFixed(1),
             };
@@ -67,7 +41,7 @@ const ProgressBars: FC = () => {
           <div
             role="progressbar"
             aria-label="progressbas"
-            className="h-2 w-full flex-[3] rounded-full animate-pulse bg-slate-400 dark:bg-slate-700 overflow-hidden"
+            className="h-2 w-full flex-[3] rounded bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-700"
           ></div>
           <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-semibold text-xs">
             <span>0.0%</span>
@@ -100,7 +74,7 @@ const ProgressBars: FC = () => {
                   <div
                     role="progressbar"
                     aria-label="progressbas"
-                    className="h-2 w-full flex-[3] rounded-full bg-slate-300 dark:bg-slate-700 overflow-hidden"
+                    className="h-2 w-full flex-[3] rounded bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-700"
                   >
                     <div
                       style={{
@@ -110,7 +84,7 @@ const ProgressBars: FC = () => {
                             : "0.0"
                         }%`,
                       }}
-                      className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full"
+                      className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded"
                     >
                       <abbr
                         title={`${element.name} : ${

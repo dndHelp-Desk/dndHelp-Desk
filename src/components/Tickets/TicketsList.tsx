@@ -133,7 +133,7 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-700 border-slate-300 relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] custom-shadow border dark:border-slate-700 border-[#94a3b8c7] relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
             ticket.ticket_id === threadId
               ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
               : ""
@@ -306,7 +306,7 @@ const TicketsList: FC<Props> = ({
 
             {/**Pagination ================================ */}
             <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
-              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-slate-300">
+              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-[#94a3b8c7]">
                 <button
                   onClick={() => {
                     setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
@@ -315,7 +315,7 @@ const TicketsList: FC<Props> = ({
                 >
                   <BiChevronLeft />
                 </button>
-                <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-300 overflow-hidden px-1">
+                <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-[#94a3b8c7] overflow-hidden px-1">
                   <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
                     {loadMore - 50 === 0 ? 1 : loadMore - 50}{" "}
                     <span className="text-slate-500">-</span> {loadMore}{" "}

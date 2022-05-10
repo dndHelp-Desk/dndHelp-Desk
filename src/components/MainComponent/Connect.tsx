@@ -28,7 +28,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             customers in a single thread.
           </p>
         </article>
-        <div className="w-full rounded border border-slate-300 dark:border-slate-700 flex-[5] grid grid-cols-4 grid-rows-2 gap-3 p-3">
+        <div className="w-full min-h-[15rem] sm:min-h-[8rem] rounded border border-slate-300 dark:border-slate-700 flex-[5] grid grid-cols-3 sm:grid-cols-4 grid-rows-3 sm:grid-rows-2 gap-3 p-3">
           {/**Slack =========================== */}
           <button
             onClick={() => {

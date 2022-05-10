@@ -45,7 +45,7 @@
 
   /*Connect Channels Styles ================================*/
   .connect_btn {
-    @apply col-span-1 rounded bg-slate-200 dark:bg-[#33415569] border border-slate-300 dark:border-slate-700 flex flex-col justify-center items-center gap-2 outline-none focus:outline-none focus:border-0 focus:ring-[1px] focus:ring-blue-600 hover:opacity-90 dark:hover:opacity-80 hover:shadow-lg transition-all relative;
+    @apply col-span-1 rounded bg-slate-100 dark:bg-[#33415569] border border-slate-300 dark:border-slate-700 flex flex-col justify-center items-center gap-2 outline-none focus:outline-none focus:border-0 focus:ring-[1px] focus:ring-blue-600 hover:opacity-90 dark:hover:opacity-80 hover:shadow-lg transition-all relative;
   }
 
   #connectModal {

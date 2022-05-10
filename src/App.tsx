@@ -40,6 +40,7 @@ const WorkSpaceSetUp = lazy(
 );
 
 const App: FC = () => {
+  //Component =================
   return (
     <div className="overflow-hidden">
       <BrowserRouter>
