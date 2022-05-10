@@ -35,7 +35,14 @@ const initialState: InitialStateState = {
   unread: [],
   imageAttachments: [],
   ticketsComponentDates: initialTickestDate
-    ? JSON.parse(initialTickestDate)
+    ? {
+        startDate: new Date(
+          JSON.parse(initialTickestDate).startDate
+        ).toLocaleDateString(),
+        endDate: new Date(
+          JSON.parse(initialTickestDate).endDate
+        ).toLocaleDateString(),
+      }
     : {
         startDate: new Date(
           new Date().getFullYear(),
@@ -49,7 +56,14 @@ const initialState: InitialStateState = {
         ).toLocaleDateString(),
       },
   filterDates: initialReportsDate
-    ? JSON.parse(initialReportsDate)
+    ? {
+        startDate: new Date(
+          JSON.parse(initialReportsDate).startDate
+        ).toLocaleDateString(),
+        endDate: new Date(
+          JSON.parse(initialReportsDate).endDate
+        ).toLocaleDateString(),
+      }
     : {
         startDate: new Date(
           new Date().getFullYear(),
