@@ -70,7 +70,7 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10"
         >
-          <option value="">All Agents ...</option>
+          <option value="">Agents ...</option>
           {allMembers.length >= 1 &&
             allMembers
               .map((agent) => agent.access === "agent" && agent)

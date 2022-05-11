@@ -27,15 +27,15 @@ const DateFilter: FC<Props> = () => {
         setDateRange(update);
         dispatch(
           updateFilterDates({
-            startDate: update[0] && update[0],
-            endDate: update[1] && update[1],
+            startDate: update[0] && update[0].getTime(),
+            endDate: update[1] && update[1].getTime(),
           })
         );
         localStorage.setItem(
           "reportsDate",
           JSON.stringify({
-            startDate: update[0] && update[0],
-            endDate: update[1] && update[1],
+            startDate: update[0] && update[0].getTime(),
+            endDate: update[1] && update[1].getTime(),
           })
         );
       }}

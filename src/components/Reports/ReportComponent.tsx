@@ -8,7 +8,7 @@ import { RootState } from "../../Redux/store";
 
 const ReportsComponent: FC = () => {
   const [data, setData] = useState<any>([]);
-  const [loading,setLoading]= useState<any>(false)
+  const [loading, setLoading] = useState<any>(false);
   //Filters =====================
   const [filters, setFilters] = useState<any>({
     brand: "",
@@ -186,13 +186,12 @@ const ReportsComponent: FC = () => {
     member_details,
   ]);
 
-  //Check if The data is loading 
+  //Check if The data is loading
   useEffect(() => {
-    reportsData.length <= 0 && setLoading(true);
-    setTimeout(() => setLoading(false), 10000);
+    reportsData.length <= 0 ? setLoading(true) : setLoading(false);
+    reportsData.length <= 0 && setTimeout(() => setLoading(false), 10000);
     return clearTimeout();
   }, [reportsData.length]);
-
 
   //Component =========================
   return (

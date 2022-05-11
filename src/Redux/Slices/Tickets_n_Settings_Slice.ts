@@ -36,45 +36,37 @@ const initialState: InitialStateState = {
   imageAttachments: [],
   ticketsComponentDates: initialTickestDate
     ? {
-        startDate: new Date(
-          JSON.parse(initialTickestDate).startDate
-        ).toLocaleDateString(),
-        endDate: new Date(
-          JSON.parse(initialTickestDate).endDate
-        ).toLocaleDateString(),
+        startDate: new Date(JSON.parse(initialTickestDate).startDate).getTime(),
+        endDate: new Date(JSON.parse(initialTickestDate).endDate).getTime(),
       }
     : {
         startDate: new Date(
           new Date().getFullYear(),
           new Date().getMonth(),
           1
-        ).toLocaleDateString(),
+        ).getTime(),
         endDate: new Date(
           new Date().getFullYear(),
           new Date().getMonth(),
           31
-        ).toLocaleDateString(),
+        ).getTime(),
       },
   filterDates: initialReportsDate
     ? {
-        startDate: new Date(
-          JSON.parse(initialReportsDate).startDate
-        ).toLocaleDateString(),
-        endDate: new Date(
-          JSON.parse(initialReportsDate).endDate
-        ).toLocaleDateString(),
+        startDate: new Date(JSON.parse(initialReportsDate).startDate).getTime(),
+        endDate: new Date(JSON.parse(initialReportsDate).endDate).getTime(),
       }
     : {
         startDate: new Date(
           new Date().getFullYear(),
           new Date().getMonth(),
           1
-        ).toLocaleDateString(),
+        ).getTime(),
         endDate: new Date(
           new Date().getFullYear(),
           new Date().getMonth(),
           31
-        ).toLocaleDateString(),
+        ).getTime(),
       },
   dashboardData: [],
   reportsData: [],
