@@ -666,7 +666,7 @@ const TicketsnUserData: FC = () => {
                           new Date().getFullYear(),
                           new Date().getMonth(),
                           1
-                        ).toLocaleDateString()
+                        )
                       ).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
@@ -675,14 +675,14 @@ const TicketsnUserData: FC = () => {
                             new Date().getFullYear(),
                             new Date().getMonth(),
                             31
-                          ).toLocaleDateString()
+                          )
                         ).setDate(
                           new Date(
                             new Date(
                               new Date().getFullYear(),
                               new Date().getMonth(),
                               31
-                            ).toLocaleDateString()
+                            )
                           ).getDate() + 1
                         )
                       ).getTime()
@@ -709,7 +709,7 @@ const TicketsnUserData: FC = () => {
                           new Date().getFullYear(),
                           new Date().getMonth(),
                           1
-                        ).toLocaleDateString()
+                        )
                       ).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
@@ -718,14 +718,14 @@ const TicketsnUserData: FC = () => {
                             new Date().getFullYear(),
                             new Date().getMonth(),
                             31
-                          ).toLocaleDateString()
+                          )
                         ).setDate(
                           new Date(
                             new Date(
                               new Date().getFullYear(),
                               new Date().getMonth(),
                               31
-                            ).toLocaleDateString()
+                            )
                           ).getDate() + 1
                         )
                       ).getTime() &&
@@ -760,7 +760,7 @@ const TicketsnUserData: FC = () => {
                           new Date().getFullYear(),
                           new Date().getMonth(),
                           1
-                        ).toLocaleDateString()
+                        )
                       ).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
@@ -769,14 +769,14 @@ const TicketsnUserData: FC = () => {
                             new Date().getFullYear(),
                             new Date().getMonth(),
                             31
-                          ).toLocaleDateString()
+                          )
                         ).setDate(
                           new Date(
                             new Date(
                               new Date().getFullYear(),
                               new Date().getMonth(),
                               31
-                            ).toLocaleDateString()
+                            )
                           ).getDate() + 1
                         )
                       ).getTime()

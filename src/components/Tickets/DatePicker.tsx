@@ -22,15 +22,15 @@ const DateFilter: FC = () => {
         setDateRange(update);
         dispatch(
           updateTicketsComponentDates({
-            startDate: update[0] && update[0].toLocaleDateString(),
-            endDate: update[1] && update[1].toLocaleDateString(),
+            startDate: update[0] && update[0],
+            endDate: update[1] && update[1],
           })
         );
         localStorage.setItem(
           "ticketsDate",
           JSON.stringify({
-            startDate: update[0] && update[0].toLocaleDateString(),
-            endDate: update[1] && update[1].toLocaleDateString(),
+            startDate: update[0] && update[0],
+            endDate: update[1] && update[1],
           })
         );
       }}
