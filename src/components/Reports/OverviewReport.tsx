@@ -172,7 +172,7 @@ const OverviewReport: FC<data> = ({ data}) => {
         >
           <h3 className="text-sm dark:text-slate-300 text-slate-700 font-sans dark:font-medium font-bold capitalize tracking-wider flex items-center space-x-2">
             <span>
-              Welcome back, {user[0].name && user[0].name.split(" ")[0]}
+              Welcome back, {user[0]?.name && user[0]?.name.split(" ")[0]}
             </span>{" "}
             <FaChartBar className="text-blue-700 text-lg" />
           </h3>
