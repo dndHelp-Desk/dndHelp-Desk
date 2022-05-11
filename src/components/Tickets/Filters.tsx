@@ -58,7 +58,7 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
         >
           <option value="">Status</option>
           <option value="open">Open</option>
-          <option value="on hold">On Hold</option>
+          <option value="onhold">On Hold</option>
           <option value="reopened">Reopened</option>
           <option value="solved">Resolved</option>
         </select>

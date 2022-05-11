@@ -35,6 +35,17 @@ const Home: FC = () => {
     );
   }, [dashboardData]);
 
+  const totalProgress =
+    dashboardData.length >= 1
+      ? (
+          (dashboardData.filter(
+            (data) => data?.status?.toLowerCase() === "solved"
+          ).length /
+            dashboardData?.length) *
+          100
+        )?.toFixed(0)
+      : 0;
+
   //Loop Through All Users ================
   const users =
     allMembers.length >= 1 &&
@@ -151,8 +162,11 @@ const Home: FC = () => {
                 </span>{" "}
                 overdue tickets.
               </p>
-              <div className="w-full h-[7rem] overflow-hidden mb-4">
+              <div className={`w-full h-[7rem] overflow-hidden mb-4 relative`}>
                 <RadialBar />
+                <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center font-semibold text-slate-800 dark:text-slate-300 pt-4 pl-2">
+                  {Number(totalProgress) + "%"}
+                </div>
               </div>
               <Link
                 to="/app/tickets"

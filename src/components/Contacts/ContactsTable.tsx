@@ -4,7 +4,7 @@ import {
   HiOutlinePencilAlt,
   HiOutlineTrash,
   HiOutlineSearch,
-  HiPlus,
+  HiUserAdd,
   HiOutlinePhone,
   HiOutlineMail,
 } from "react-icons/hi";
@@ -153,7 +153,7 @@ const Table: FC<Prop> = ({ setModal }) => {
                   let pin = prompt("Enter Admin Pin");
                   pin === "0001" ? deleteCont() : alert("Wrong Pin");
                 }}
-                className="text-red-500 p-2 border-slate-300 dark:border-slate-700 border bg-slate-200 dark:bg-[#182235] dark:hover:bg-slate-700 hover:bg-gray-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
+                className="text-red-500 p-2 border-slate-300 dark:border-slate-700 border bg-slate-200 dark:bg-[#182235] dark:hover:bg-slate-700 hover:bg-gray-300  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
               >
                 <HiOutlineTrash />
               </button>
@@ -176,9 +176,9 @@ const Table: FC<Prop> = ({ setModal }) => {
           </div>
           <button
             onClick={() => setModal(true)}
-            className="text-slate-100 cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 h-10 px-6 rounded flex items-center justify-center space-x-2"
+            className="text-slate-100 text-sm font-semibold cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 h-10 px-6 rounded flex items-center justify-center space-x-2"
           >
-            <HiPlus />
+            <HiUserAdd className="text-lg" />
             <span>Add New</span>
           </button>
         </div>

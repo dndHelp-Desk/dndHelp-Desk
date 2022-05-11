@@ -161,7 +161,7 @@ const Navbar: FC<Props> = ({
             assgn(member.name, member.email, member.id);
             setPanel(false);
           }}
-          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-800 bg-slate-50 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
+          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-800 bg-slate-100 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
             member.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -178,8 +178,7 @@ const Navbar: FC<Props> = ({
 
   //Component ======================
   return (
-    <nav className="flex flex-[1] pb-1.5 justify-between items-center w-full relative mt-[0.30rem]">
-      {/**Search Bar ============================== */}
+    <nav className="flex flex-[1] pb-1.5 justify-between items-center w-full relative">
       <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}
         <OffFilters
@@ -190,7 +189,7 @@ const Navbar: FC<Props> = ({
         />
         <button
           onClick={() => setfiltersModal(true)}
-          className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-50 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-slate-700 border-[#94a3b8c7]"
+          className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-slate-700 border-slate-300"
         >
           <abbr title="filters" className="">
             <BiFilterAlt className="dark:text-slate-300 text-slate-800 font-bold" />
@@ -200,7 +199,7 @@ const Navbar: FC<Props> = ({
         {/**Assign Agent ================================= */}
         <button
           onClick={() => setPanel(true)}
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-[#94a3b8c7] ${
+          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -217,7 +216,7 @@ const Navbar: FC<Props> = ({
             let code = prompt("Enter Pin To Perform Action");
             code === "0001" ? deleteSelected() : alert("Wrong Pin");
           }}
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-slate-700 border-[#94a3b8c7] ${
+          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-slate-700 border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -230,7 +229,7 @@ const Navbar: FC<Props> = ({
 
         {/**Mark All ================================= */}
         <button
-          className={`dark:bg-[#182235] bg-slate-50 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  flex items-center justify-center  border dark:border-slate-700 border-[#94a3b8c7]  ${
+          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  flex items-center justify-center  border dark:border-slate-700 border-slate-300  ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -257,11 +256,11 @@ const Navbar: FC<Props> = ({
         {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm p-2 border border-[#94a3b8c7] dark:border-slate-700 rounded absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm px-2 border border-slate-300 dark:border-slate-700 rounded absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
-            <div className="flex sticky top-0 border-b border-[#94a3b8c7] dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-8 items-center justify-center ">
+            <div className="flex sticky top-0 border-b border-slate-300 dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-8 items-center justify-center ">
               <BiSearch className="absolute left-3 text-slate-400 font-semibold" />
               <input
                 className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
@@ -281,7 +280,7 @@ const Navbar: FC<Props> = ({
           onClick={() =>
             setModal(user[0].name !== "User Loader" ? true : false)
           }
-          className="border-[#2564ebea] border text-[#2564ebe8] h-9 dark:bg-[#1e293b9c] bg-slate-50 px-6 space-x-2 rounded flex justify-center items-center text-sm font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold"
+          className="border-[#2564ebea] border text-[#2564ebe8] h-9 w-10 dark:bg-[#1e293b9c] bg-slate-100 px-6 space-x-2 rounded flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold"
         >
           <span>NEW</span>
         </button>

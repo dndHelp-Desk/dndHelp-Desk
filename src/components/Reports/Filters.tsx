@@ -27,7 +27,7 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
   return (
     <>
       <div className="md:max-w-[14rem] h-14 lg:h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative z-[999]">
-        <BsCalendar2Week className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-3" />
+        <BsCalendar2Week className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-3 z-[9999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
 
@@ -60,7 +60,7 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10 shadow"
         >
-          <option value="">All Agents</option>
+          <option value="">Agents</option>
           {allMembers.length >= 1 &&
             allMembers
               .map((agent) => agent?.access === "agent" && agent)
@@ -93,7 +93,7 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
         >
           <option value="">Status</option>
           <option value="open">Open</option>
-          <option value="on hold">On Hold</option>
+          <option value="onhold">On Hold</option>
           <option value="reopened">Reopened</option>
           <option value="solved">Resolved</option>
         </select>

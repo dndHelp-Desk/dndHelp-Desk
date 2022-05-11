@@ -5,7 +5,12 @@ import {
   BsThreeDotsVertical,
   BsChatRight,
 } from "react-icons/bs";
-import { BiPaperPlane, BiMicrophone, BiCommentDetail } from "react-icons/bi";
+import {
+  BiPaperPlane,
+  BiMicrophone,
+  BiCommentDetail,
+  BiArrowBack,
+} from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
 import {
@@ -23,6 +28,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 
 interface Props {
   isChatOpen: boolean;
+  setChat: any;
   audio: any;
 }
 
@@ -34,7 +40,7 @@ interface ReplyOptions {
   ticket_id: string | any;
 }
 
-const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
+const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const statusSelectionRef = useRef<HTMLSelectElement>(null);
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
   const allTickets = useSelector(
@@ -475,12 +481,12 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
               : scrollToNone
           }
           key={index}
-          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-slate-50 dark:bg-[#182235] rounded border border-slate-200 dark:border-[#3341553f]"
+          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-[#3341553f]"
         >
           {/**Message ====================== */}
           <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
-            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded border dark:border-[#3341553f] border-slate-200 dark:bg-[#182235] bg-slate-50 px-1 overflow-hidden">
-              <div className="w-full h-full dark:bg-[#182235] bg-slate-50 dark:text-gray-300 text-slate-800 flex justify-center items-center capitalize font-bold text-sm">
+            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded border dark:border-slate-700 border-slate-300 dark:bg-slate-800 bg-white px-1 overflow-hidden">
+              <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-gray-300 text-slate-800 flex justify-center items-center capitalize font-bold text-sm">
                 <BsChatRight />
               </div>
             </div>
@@ -572,60 +578,71 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
   //Component ======================================
   return (
-    <div
-      className={`h-[45rem] ${
-        isChatOpen ? "flex" : "hidden"
-      } lg:flex flex-col w-full lg:w-[60%] lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent`}
-    >
-      <div className="h-[70%] w-full dark:bg-[#182235] bg-slate-50 border dark:border-slate-700 border-[#94a3b8c7] rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
-        <div className="h-14 bg-slate-50 dark:bg-[#182235] sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
+    <div className="h-[47rem] flex flex-col w-full lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col shadow-md overflow-hidden">
+        <div className="h-14 dark:bg-[#182235] bg-slate-100 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-200 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
-            <details className="relative flex items-center space-x-2 outline-none focus:outline-none">
-              <summary className="text-[0.65rem] leading-6 dark:text-slate-300 text-slate-900 font-bold uppercase select-none cursor-pointer outline-none focus:outline-none">
-                Details
-              </summary>
+            <div className="flex items-center space-x-2">
+              {/**Back To Main List On Small Screens ====================== */}
+              <button
+                onClick={() => setChat(false)}
+                className={`dark:text-slate-300 text-slate-800 font-bold py-1 h-2 w-full text-xl hover:opacity-80 rounded flex lg:hidden items-center space-x-1 outline-none focus:outline-none  ${
+                  !isChatOpen && "hidden"
+                }`}
+              >
+                <abbr title="Back to list">
+                  <BiArrowBack />
+                </abbr>
+              </button>
 
-              <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-900 bg-white border border-[#94a3b8c7] dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
-                <div>
-                  <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
-                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b className="hidden sm:flex">Open Date : </b>
-                      {firstMessage &&
-                        new Date(firstMessage[0]?.date).toLocaleString()}{" "}
-                    </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b className="hidden sm:flex">Assigned To : </b>
-                      {firstMessage && firstMessage[0]?.agent_name}
-                    </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b className="hidden sm:flex">Brand/Company : </b>
-                      {firstMessage && firstMessage[0]?.branch_company}
-                    </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b className="hidden sm:flex">
-                        First Contact Resolution :{" "}
-                      </b>
-                      {firstMessage && firstMessage[0]?.fcr}{" "}
-                    </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b className="hidden sm:flex">Customer's Name : </b>
-                      {firstMessage && firstMessage[0]?.complainant_name}{" "}
-                    </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b className="hidden sm:flex">Customer's Number : </b>
-                      {firstMessage && firstMessage[0]?.complainant_number}{" "}
-                    </li>
-                    <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                      <b className="hidden sm:flex">Customer's Email : </b>
-                      <span className="lowercase">
-                        {firstMessage && firstMessage[0]?.complainant_email}{" "}
-                      </span>
-                    </li>
-                  </ul>
+              {/**Details  ====================== */}
+              <details className="relative flex items-center space-x-2 outline-none focus:outline-none lg:border-0 border-l border-slate-300 dark:border-slate-700">
+                <summary className="w-[4rem] pl-2 lg:p-0 text-[0.65rem] leading-6 dark:text-slate-300 text-slate-900 font-bold uppercase select-none cursor-pointer outline-none focus:outline-none">
+                  Details
+                </summary>
+                <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-900 bg-white border border-slate-300 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
+                  <div>
+                    <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Open Date : </b>
+                        {firstMessage &&
+                          new Date(firstMessage[0]?.date).toLocaleString()}{" "}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Assigned To : </b>
+                        {firstMessage && firstMessage[0]?.agent_name}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Brand/Company : </b>
+                        {firstMessage && firstMessage[0]?.branch_company}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">
+                          First Contact Resolution :{" "}
+                        </b>
+                        {firstMessage && firstMessage[0]?.fcr}{" "}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Customer's Name : </b>
+                        {firstMessage && firstMessage[0]?.complainant_name}{" "}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Customer's Number : </b>
+                        {firstMessage &&
+                          firstMessage[0]?.complainant_number}{" "}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Customer's Email : </b>
+                        <span className="lowercase">
+                          {firstMessage && firstMessage[0]?.complainant_email}{" "}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </details>
+              </details>
+            </div>
 
             {/**Subject And Scroll To Last Message Details =========================== */}
             <div className="dark:font-medium font-semibold dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
@@ -654,12 +671,12 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             firstMessage && firstMessage[0]?.status === "solved" && (
               <div
                 ref={scrollToLastMessage}
-                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-slate-50 dark:bg-[#182235] rounded border border-slate-200 dark:border-[#3341553f]"
+                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-[#3341553f]"
               >
                 {/**Message ====================== */}
                 <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
-                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded dark:bg-[#182235] bg-slate-50 border dark:border-[#3341553f] border-slate-200 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
-                    <div className="w-full h-full dark:bg-[#182235] bg-slate-50 rounded-[0.3rem]  dark:text-gray-300 text-slate-600 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
+                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
+                    <div className="w-full h-full dark:bg-slate-800 bg-white rounded-[0.3rem]  dark:text-gray-300 text-slate-600 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
                       Solution
                     </div>
                   </div>
@@ -726,7 +743,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
-        <div className="h-full w-full relative shadow-sm rounded dark:bg-[#182235] bg-slate-50 border border-[#94a3b8c7] dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+        <div className="h-full w-full relative shadow-md rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"
@@ -744,13 +761,13 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
             <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center">
                 {/**Canned Response ========================================= */}
-                <div className="group w-8 h-8 rounded-l-sm border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-500 relative">
+                <div className="group w-8 h-8 rounded-l-sm border border-r-0 border-slate-200 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-700 dark:text-slate-400 relative">
                   <abbr title="Canned Response">
                     <BiCommentDetail className="text-base hover:opacity-80" />
                   </abbr>
                   <div className="group-hover:flex hidden absolute bottom-[100%] left-0 w-[11rem] h-[9rem] pb-1">
-                    <div className="rounded bg-white dark:bg-slate-800 z-[999] border dark:border-slate-700 border-[#94a3b8c7] p-2 w-full h-full overflow-hidden shadow-xl">
-                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-[#94a3b8c7] px-2 overflow-hidden">
+                    <div className="rounded bg-white dark:bg-slate-800 z-[999] border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden shadow-xl">
+                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-300 px-2 overflow-hidden">
                         <input
                           type="search"
                           onChange={(e) => {
@@ -799,7 +816,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                 <abbr title="Upload Your Recording">
                   <label
                     htmlFor="replyRecording"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-500 cursor-pointer"
+                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer"
                   >
                     <BiMicrophone className="text-base" />
                     <input
@@ -825,7 +842,7 @@ const MessageThread: FC<Props> = ({ isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-slate-50 dark:bg-[#182235] flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-[#94a3b8c7] dark:focus:border-slate-800 hover:opacity-80 text-slate-500 text-xs capitalize pt-1"
+                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-200 dark:border-[#33415596] bg-white dark:bg-slate-800 flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1"
                   >
                     <option
                       className="p-2"

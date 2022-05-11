@@ -35,18 +35,14 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
         enabled: false,
       },
       labels: {
-        show: true,
+        show: false,
         rotate: 0,
       },
       axisTicks: {
         show: false,
       },
       axisBorder: {
-        show: true,
-        color: theme !== "dark" ? "#1e293b" : "#94a3b8",
-        height: 0.5,
-        width: "100%",
-        offsetY: 3,
+        show: false,
       },
     },
     yaxis: {
@@ -71,8 +67,17 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
     },
     fill: {
       colors: ["#3b82f6"],
-      opacity: 0.7,
-      type: "solid",
+      opacity: 0.9,
+      type: "gradient",
+      gradient: {
+        shade: "#3b82f6",
+        type: "vertical",
+        shadeIntensity: 1,
+        gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+        inverseColors: false,
+        opacityFrom: 1,
+        opacityTo: 0.3,
+      },
     },
     grid: {
       yaxis: {
@@ -93,9 +98,28 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
     },
     tooltip: {
       enabled: true,
-      x: {
-        show: false,
-        formatter: (val: any) => (option !== "day" ? val + ":00hrs" : val),
+      custom: function ({
+        series,
+        seriesIndex,
+        dataPointIndex,
+      }: {
+        series: any;
+        seriesIndex: any;
+        dataPointIndex: any;
+      }) {
+        return (
+          '<div class="text-xs font-semibold bg-slate-50 p-2">' +
+          "<span>" +
+          "&nbsp;" +
+          (option !== "hour" ? "Day " : "") +
+          chartData.map((data: any) => data.name)[dataPointIndex] +
+          (option === "hour" ? ":00hrs" : "") +
+          " &nbsp; - &nbsp;" +
+          series[seriesIndex][dataPointIndex] +
+          "&nbsp;" +
+          "</span>" +
+          "</div>"
+        );
       },
     },
   };

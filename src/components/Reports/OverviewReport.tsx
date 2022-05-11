@@ -7,7 +7,7 @@ import TrafficChart from "./TrafficChart";
 
 export type data = any;
 
-const OverviewReport: FC<data> = ({ data, filters }) => {
+const OverviewReport: FC<data> = ({ data}) => {
   const reportsData = useSelector(
     (state: RootState) => state.Tickets.reportsData
   );
@@ -254,7 +254,7 @@ const OverviewReport: FC<data> = ({ data, filters }) => {
             </h2>
             <select
               onChange={(e) => setOption(e.target.value)}
-              className="h-8 w-20 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2 dark:bg-slate-900 bg-slate-100 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-8 w-20 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2  pt-1 dark:bg-slate-900 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="hour">Hourly</option>
               <option value="day">Daily</option>

@@ -1,6 +1,7 @@
 import { FC, useState, useMemo } from "react";
 import { HiOutlineSwitchVertical } from "react-icons/hi";
 import { BsCloudDownload, BsPrinter } from "react-icons/bs";
+import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const Tables: FC<Props> = ({ data }) => {
+  const [loadMore, setLimit] = useState<number | any>(10);
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
@@ -52,7 +54,7 @@ const Tables: FC<Props> = ({ data }) => {
   );
 
   //Loop through each ticket and return a row of consolidated data
-  const rows = tableData.map((elem, index) => {
+  const rows = tableData.slice(loadMore - 10, loadMore).map((elem, index) => {
     return (
       <tr
         key={index}
@@ -106,7 +108,7 @@ const Tables: FC<Props> = ({ data }) => {
 
   //Component ==========================================
   return (
-    <div className="col-span-3 h-[32rem] lg:col-span-2 rounded-md flex flex-col gap-2">
+    <div className="col-span-3 h-[35rem] lg:col-span-2 rounded-md flex flex-col gap-2">
       <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-md overflow-hidden shadow p-1">
         <div className="h-12 flex justify-between items-center px-4">
           <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-wider">
@@ -116,7 +118,7 @@ const Tables: FC<Props> = ({ data }) => {
             {/**Select Report ================= */}
             <select
               onChange={(e) => setOption(e.target.value)}
-              className="h-8 w-40 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2 dark:bg-slate-900 bg-slate-100 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-8 w-40 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2 pt-1 dark:bg-slate-900 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="branch_company">Company</option>
               <option value="agent_email">Agents</option>
@@ -147,7 +149,7 @@ const Tables: FC<Props> = ({ data }) => {
           </div>
         </div>
         <table className="w-full h-[28rem] flex flex-col px-4 gap-1">
-          <thead className="w-full flex items-center  dark:bg-slate-700 bg-slate-200 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
+          <thead className="w-full flex items-center  dark:bg-slate-700 bg-slate-100 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
             <tr className="w-full h-10 grid grid-cols-5 md:grid-cols-7 text-left px-2">
               <th className="flex col-span-3 space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 Name
@@ -238,10 +240,42 @@ const Tables: FC<Props> = ({ data }) => {
               </th>
             </tr>
           </thead>
-          <tbody className="w-full pt-1 capitalize text-xs font-medium dark:text-slate-400 text-slate-600 overflow-hidden overflow-y-scroll px-1">
+          <tbody className="w-full pt-1 capitalize text-xs font-medium dark:text-slate-400 text-slate-600 overflow-hidden">
             {rows}
           </tbody>
         </table>
+        <div className="w-full h-14 flex justify-center items-center">
+          {" "}
+          {/**Pagination ================================ */}
+          <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
+            <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-slate-300">
+              <button
+                onClick={() => {
+                  setLimit(loadMore <= 19 ? loadMore - 0 : loadMore - 10);
+                }}
+                className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+              >
+                <BiChevronLeft />
+              </button>
+              <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-300 overflow-hidden px-1">
+                <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
+                  {loadMore - 10 === 0 ? 1 : loadMore - 10}{" "}
+                  <span className="text-slate-500">-</span> {loadMore}{" "}
+                  <span className="text-slate-500">of </span>
+                  {tableData.length}
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setLimit(tableData.length > loadMore ? loadMore + 10 : 10);
+                }}
+                className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+              >
+                <BiChevronRight />
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

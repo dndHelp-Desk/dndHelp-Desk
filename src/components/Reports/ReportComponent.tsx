@@ -7,6 +7,8 @@ import Filters from "./Filters";
 import { RootState } from "../../Redux/store";
 
 const ReportsComponent: FC = () => {
+  const [data, setData] = useState<any>([]);
+  const [loading,setLoading]= useState<any>(false)
   //Filters =====================
   const [filters, setFilters] = useState<any>({
     brand: "",
@@ -22,8 +24,6 @@ const ReportsComponent: FC = () => {
   const reportsData = useSelector(
     (state: RootState) => state.Tickets.reportsData
   );
-
-  const [data, setData] = useState<any>([]);
 
   //Filter Tickets Based On Acces Level ====
   useEffect(() => {
@@ -186,6 +186,14 @@ const ReportsComponent: FC = () => {
     member_details,
   ]);
 
+  //Check if The data is loading 
+  useEffect(() => {
+    reportsData.length <= 0 && setLoading(true);
+    setTimeout(() => setLoading(false), 10000);
+    return clearTimeout();
+  }, [reportsData.length]);
+
+
   //Component =========================
   return (
     <div className="bg-transparent mt-4 w-[95%] 2xl:w-[75rem] rounded-xl min-h-screen space-y-4 flex flex-col tracking-wider relative pb-4">
@@ -198,14 +206,14 @@ const ReportsComponent: FC = () => {
       <TopCards data={data} />
       {/** Overview Report ============================ */}
       <div className="w-full rounded-xl bg-transparent">
-        <OverviewReport data={data} filters={filters} />
+        <OverviewReport data={data} />
       </div>
       <Tables data={data} />
 
       {/**Preloader =========================== */}
       <div
         className={`${
-          reportsData.length >= 1 ? "hidden" : ""
+          !loading ? "hidden" : ""
         } fixed z-[99] top-[2.5rem] bottom-0 left-0 right-0 bg-[#030d2769] before:content-[''] before:h-[0.25rem] before:w-full before:bg-[#93c4fd70] before:absolute`}
       >
         <div

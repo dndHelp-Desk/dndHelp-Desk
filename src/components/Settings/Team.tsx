@@ -4,7 +4,8 @@ import defaultProfile from "./../../default.webp";
 import noUsers from "./../MainComponent/images/no-userss.svg";
 import { Navigate } from "react-router";
 import { deleteUser, activateUser } from "../Data_Fetching/TicketsnUserData";
-import { BsFillTrashFill, BsSearch, BsPlusLg } from "react-icons/bs";
+import { BsFillTrashFill, BsSearch } from "react-icons/bs";
+import { HiUserAdd } from "react-icons/hi";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import NewUser from "./NewUser";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -175,9 +176,9 @@ const Team: FC = () => {
           </label>
           <button
             onClick={() => setModal(true)}
-            className="h-10 w-10 rounded bg-blue-600 text-slate-300 font-bold text-sm flex items-center justify-center outline-none focus:outline-none"
+            className="h-10 w-10 rounded bg-blue-600 text-slate-100 font-bold text-lg flex items-center justify-center outline-none focus:outline-none"
           >
-            <BsPlusLg />
+            <HiUserAdd />
           </button>
         </div>
       </div>

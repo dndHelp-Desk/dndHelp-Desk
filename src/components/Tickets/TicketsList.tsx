@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { markAsSeen } from "../Data_Fetching/TicketsnUserData";
 import { BsStopFill } from "react-icons/bs";
-import { BiChevronRight, BiChevronLeft, BiArrowBack } from "react-icons/bi";
+import { BiChevronRight, BiChevronLeft, BiUser } from "react-icons/bi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
-import MessageThread from "./MessageThread";
 import Navbar from "./Navbar";
 import noTickets from "./images/no-userss.svg";
 import NewTicket from "./NewTicket";
@@ -15,6 +14,8 @@ interface Props {
   setDelete: any;
   deleteArray: any;
   setModal: any;
+  audioUrl: any;
+  setChat: any;
   newTicketModal: () => any;
 }
 
@@ -23,6 +24,8 @@ const TicketsList: FC<Props> = ({
   deleteArray,
   setModal,
   newTicketModal,
+  setChat,
+  audioUrl,
 }) => {
   const dispatch: AppDispatch = useDispatch();
   const company_details = useSelector(
@@ -36,8 +39,6 @@ const TicketsList: FC<Props> = ({
     (state: RootState) => state.Tickets.ticketsComponentDates
   );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
-  const [isChatOpen, setChat] = useState<boolean>(false);
-  const [audio, audioUrl] = useState<string | any>("");
   const [loadMore, setLimit] = useState<number | any>(50);
   //Filters =====================
   const [filters, setFilters] = useState({
@@ -133,10 +134,10 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] custom-shadow border dark:border-slate-700 border-[#94a3b8c7] relative rounded-l dark:bg-[#182235] bg-slate-50 p-2 space-x-2 flex shadow-sm snap_childTwo  ${
+          className={`w-full h-[5rem] border-b dark:border-[#33415583] border-slate-300 relative  p-2 space-x-2 flex snap_childTwo ${
             ticket.ticket_id === threadId
-              ? "border-r-2 dark:border-r-blue-600 border-r-blue-600"
-              : ""
+              ? "bg-slate-100 dark:bg-[#182235]"
+              : "bg-inherit"
           }`}
         >
           {/**Indicate if it's new messsage ================*/}
@@ -154,7 +155,7 @@ const TicketsList: FC<Props> = ({
             )}
 
           {/**Ticket Details ========================================== */}
-          <div className="flex relative h-full w-full px-1 cursor-default overflow-hidden">
+          <div className="flex relative h-full w-full px-1 cursor-pointer overflow-hidden">
             {/**Mark or Unmark Ticket ========================================== */}
             <div className="h-full w-[9%] flex justify-between items-center px-2">
               <input
@@ -215,11 +216,12 @@ const TicketsList: FC<Props> = ({
                   </span>
                 </p>
               </abbr>
-              <p className="dark:text-slate-400 max-w-[15rem] text-slate-700 text-xs tracking-wide font-base capitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
+              <div className="dark:text-slate-400 max-w-[80%] flex flex-row items-center space-x-2 text-slate-700 text-xs tracking-wide font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <abbr title={ticket.branch_company}>
-                  &rArr; {ticket.branch_company}
+                  <BiUser className="inline" />{" "}
+                  <span>{ticket.branch_company}</span>
                 </abbr>
-              </p>
+              </div>
               {/**Indicate The ticket that is solved or  overdue and open ================*/}
               <small className="dark:text-slate-400 text-slate-500 flex items-center space-x-1 text-[0.6rem] whitespace-nowrap">
                 <span
@@ -255,89 +257,68 @@ const TicketsList: FC<Props> = ({
     <div className="relative">
       {/**New Ticket Form ====================================== */}
       <NewTicket setModal={setModal} newTicketModal={newTicketModal} />
+
       {/**Tickets ========================================== */}
-      <div
-        className={`flex flex-col lg:flex-row lg:space-y-0 lg:gap-2 space-x-0 ralative rounded-xl bg-transparent ${
-          isChatOpen && "gap-4"
-        }`}
-      >
-        {/**Back To Main List On Small Screens ====================== */}
-        <div
-          onClick={() => setChat(false)}
-          className={`dark:text-slate-400 text-slate-800 font-bold mt-2 py-1 h-2 w-full text-xl hover:opacity-80 rounded flex lg:hidden items-center space-x-1 cursor-pointer ${
-            !isChatOpen && "hidden"
-          }`}
-        >
-          <BiArrowBack />
-          <span className="text-xs">Back</span>
-        </div>
+      <div className="w-full h-[47rem] flex flex-col justify-between p-1">
+        <Navbar
+          deleteArray={deleteArray}
+          setDelete={setDelete}
+          setModal={setModal}
+          filters={filters}
+          setFilters={setFilters}
+        />
+        <div className="w-full flex-[15] flex flex-col overflow-hidden">
+          <div
+            role="table"
+            className="w-full h-[92%] overflow-hidden overflow-y-scroll scroll-snap pr-1"
+          >
+            {tickets}
+            {filteredTickets.length <= 0 && (
+              <>
+                <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-[4.5rem] uppercase text-xs font-sans font-bold mb-20">
+                  There are no tickets
+                </h2>
+                <img
+                  src={noTickets}
+                  alt="No Ticket"
+                  className="w-full h-[10rem] object-contain object-center"
+                />
+              </>
+            )}
+          </div>
 
-        <div
-          className={`w-full lg:w-[40%] h-[45rem] flex flex-col justify-between ${
-            isChatOpen ? "hidden lg:flex lg:opacity-100 opacity-0" : ""
-          }`}
-        >
-          <Navbar
-            deleteArray={deleteArray}
-            setDelete={setDelete}
-            setModal={setModal}
-            filters={filters}
-            setFilters={setFilters}
-          />
-          <div className="w-full flex-[15] flex flex-col overflow-hidden">
-            <div
-              role="table"
-              className="w-full h-[92%] space-y-2 overflow-hidden overflow-y-scroll scroll-snap pr-1"
-            >
-              {tickets}
-              {filteredTickets.length <= 0 && (
-                <>
-                  <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-[4.5rem] uppercase text-xs font-sans font-bold mb-20">
-                    There are no tickets
-                  </h2>
-                  <img
-                    src={noTickets}
-                    alt="No Ticket"
-                    className="w-full h-[10rem] object-contain object-center"
-                  />
-                </>
-              )}
-            </div>
-
-            {/**Pagination ================================ */}
-            <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
-              <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-[#94a3b8c7]">
-                <button
-                  onClick={() => {
-                    setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
-                  }}
-                  className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
-                >
-                  <BiChevronLeft />
-                </button>
-                <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-[#94a3b8c7] overflow-hidden px-1">
-                  <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
-                    {loadMore - 50 === 0 ? 1 : loadMore - 50}{" "}
-                    <span className="text-slate-500">-</span> {loadMore}{" "}
-                    <span className="text-slate-500">of </span>
-                    {filteredTickets.length}
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    setLimit(
-                      fetchedTickets.length > loadMore ? loadMore + 50 : 50
-                    );
-                  }}
-                  className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
-                >
-                  <BiChevronRight />
-                </button>
+          {/**Pagination ================================ */}
+          <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
+            <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-100 py-1 rounded border dark:border-slate-700 border-slate-300">
+              <button
+                onClick={() => {
+                  setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
+                }}
+                className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+              >
+                <BiChevronLeft />
+              </button>
+              <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-300 overflow-hidden px-1">
+                <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
+                  {loadMore - 50 === 0 ? 1 : loadMore - 50}{" "}
+                  <span className="text-slate-500">-</span> {loadMore}{" "}
+                  <span className="text-slate-500">of </span>
+                  {filteredTickets.length}
+                </p>
               </div>
+              <button
+                onClick={() => {
+                  setLimit(
+                    fetchedTickets.length > loadMore ? loadMore + 50 : 50
+                  );
+                }}
+                className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+              >
+                <BiChevronRight />
+              </button>
             </div>
           </div>
         </div>
-        <MessageThread isChatOpen={isChatOpen} audio={audio} />
       </div>
     </div>
   );
