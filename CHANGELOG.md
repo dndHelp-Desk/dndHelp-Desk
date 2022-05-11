@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.11](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.10...v0.6.11) (2022-05-11)
+
+
+### Bug Fixes
+
+* **filters:** tickets and repors can  now be filtered using onhold status ([07a39cc](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/07a39cc03aafc66acd226b07f7d4112ba2e2bd52))
+
 ### [0.6.10](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.9...v0.6.10) (2022-05-09)
 
 
