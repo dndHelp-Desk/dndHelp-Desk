@@ -392,6 +392,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       Resolved
     </li>
   </ul>
+  <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
+        <b>Customer's Details:</b>
+      </p>
+      <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;">
+        <li><b>Full Name:</b> ${inputValue.complainant_name}</li>
+        <li><b>Email Address:</b> ${inputValue.complainant_email} </li>
+        <li><b>Phone Number:</b> ${inputValue.complainant_number}</li>
+        </ul>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
     <b>Resolution:</b>

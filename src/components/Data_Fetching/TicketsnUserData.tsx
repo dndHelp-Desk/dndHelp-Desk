@@ -437,9 +437,9 @@ const TicketsnUserData: FC = () => {
                 }))
                 .filter(
                   (member: { email: string }) =>
-                    currentUser.email &&
+                    currentUser?.email &&
                     member?.email.toLowerCase().replace(/\s/g, "") ===
-                      currentUser?.email.toLowerCase().replace(/\s/g, "")
+                      currentUser?.email?.toLowerCase()?.replace(/\s/g, "")
                 )
             )
           );
@@ -528,18 +528,13 @@ const TicketsnUserData: FC = () => {
                   (data) =>
                     data?.message_position === 1 &&
                     new Date(data.date).getTime() >=
-                      Number(
-                        new Date(ticketsComponentDates.startDate).getTime()
-                      ) &&
+                      new Date(ticketsComponentDates.startDate).getTime() &&
                     new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(ticketsComponentDates.endDate).setDate(
-                            new Date(ticketsComponentDates.endDate).getDate() +
-                              1
-                          )
-                        ).getTime()
-                      )
+                      new Date(
+                        new Date(ticketsComponentDates.endDate).setDate(
+                          new Date(ticketsComponentDates.endDate).getDate() + 1
+                        )
+                      ).getTime()
                 )
             )
           );
@@ -558,18 +553,13 @@ const TicketsnUserData: FC = () => {
                   (data) =>
                     data?.message_position === 1 &&
                     new Date(data.date).getTime() >=
-                      Number(
-                        new Date(ticketsComponentDates.startDate).getTime()
-                      ) &&
+                      new Date(ticketsComponentDates.startDate).getTime() &&
                     new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(ticketsComponentDates.endDate).setDate(
-                            new Date(ticketsComponentDates.endDate).getDate() +
-                              1
-                          )
-                        ).getTime()
-                      ) &&
+                      new Date(
+                        new Date(ticketsComponentDates.endDate).setDate(
+                          new Date(ticketsComponentDates.endDate).getDate() + 1
+                        )
+                      ).getTime() &&
                     member_details[0]?.companies
                       .split(",")
                       .some(
@@ -596,18 +586,13 @@ const TicketsnUserData: FC = () => {
                     data?.agent_email === member_details[0]?.email &&
                     data?.message_position === 1 &&
                     new Date(data.date).getTime() >=
-                      Number(
-                        new Date(ticketsComponentDates.startDate).getTime()
-                      ) &&
+                      new Date(ticketsComponentDates.startDate).getTime() &&
                     new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
-                          new Date(ticketsComponentDates.endDate).setDate(
-                            new Date(ticketsComponentDates.endDate).getDate() +
-                              1
-                          )
-                        ).getTime()
-                      )
+                      new Date(
+                        new Date(ticketsComponentDates.endDate).setDate(
+                          new Date(ticketsComponentDates.endDate).getDate() + 1
+                        )
+                      ).getTime()
                 )
             )
           );
@@ -637,17 +622,13 @@ const TicketsnUserData: FC = () => {
               .filter(
                 (data) =>
                   new Date(data.date).getTime() >=
-                    Number(
-                      new Date(ticketsComponentDates.startDate).getTime()
-                    ) &&
+                    new Date(ticketsComponentDates.startDate).getTime() &&
                   new Date(data.date).getTime() <=
-                    Number(
-                      new Date(
-                        new Date(ticketsComponentDates.endDate).setDate(
-                          new Date(ticketsComponentDates.endDate).getDate() + 1
-                        )
-                      ).getTime()
-                    )
+                    new Date(
+                      new Date(ticketsComponentDates.endDate).setDate(
+                        new Date(ticketsComponentDates.endDate).getDate() + 1
+                      )
+                    ).getTime()
               )
           )
         );
@@ -680,35 +661,31 @@ const TicketsnUserData: FC = () => {
                   (data) =>
                     data?.message_position === 1 &&
                     new Date(data.date).getTime() >=
-                      Number(
+                      new Date(
+                        new Date(
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
+                          1
+                        ).toLocaleDateString()
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
                         new Date(
                           new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            1
+                            31
                           ).toLocaleDateString()
-                        ).getTime()
-                      ) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
+                        ).setDate(
                           new Date(
                             new Date(
                               new Date().getFullYear(),
                               new Date().getMonth(),
                               31
                             ).toLocaleDateString()
-                          ).setDate(
-                            new Date(
-                              new Date(
-                                new Date().getFullYear(),
-                                new Date().getMonth(),
-                                31
-                              ).toLocaleDateString()
-                            ).getDate() + 1
-                          )
-                        ).getTime()
-                      )
+                          ).getDate() + 1
+                        )
+                      ).getTime()
                 )
             )
           );
@@ -727,35 +704,31 @@ const TicketsnUserData: FC = () => {
                   (data) =>
                     data?.message_position === 1 &&
                     new Date(data.date).getTime() >=
-                      Number(
+                      new Date(
+                        new Date(
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
+                          1
+                        ).toLocaleDateString()
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
                         new Date(
                           new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            1
+                            31
                           ).toLocaleDateString()
-                        ).getTime()
-                      ) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
+                        ).setDate(
                           new Date(
                             new Date(
                               new Date().getFullYear(),
                               new Date().getMonth(),
                               31
                             ).toLocaleDateString()
-                          ).setDate(
-                            new Date(
-                              new Date(
-                                new Date().getFullYear(),
-                                new Date().getMonth(),
-                                31
-                              ).toLocaleDateString()
-                            ).getDate() + 1
-                          )
-                        ).getTime()
-                      ) &&
+                          ).getDate() + 1
+                        )
+                      ).getTime() &&
                     member_details[0]?.companies
                       .split(",")
                       .some(
@@ -782,35 +755,31 @@ const TicketsnUserData: FC = () => {
                     data?.agent_email === member_details[0]?.email &&
                     data?.message_position === 1 &&
                     new Date(data.date).getTime() >=
-                      Number(
+                      new Date(
+                        new Date(
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
+                          1
+                        ).toLocaleDateString()
+                      ).getTime() &&
+                    new Date(data.date).getTime() <=
+                      new Date(
                         new Date(
                           new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            1
+                            31
                           ).toLocaleDateString()
-                        ).getTime()
-                      ) &&
-                    new Date(data.date).getTime() <=
-                      Number(
-                        new Date(
+                        ).setDate(
                           new Date(
                             new Date(
                               new Date().getFullYear(),
                               new Date().getMonth(),
                               31
                             ).toLocaleDateString()
-                          ).setDate(
-                            new Date(
-                              new Date(
-                                new Date().getFullYear(),
-                                new Date().getMonth(),
-                                31
-                              ).toLocaleDateString()
-                            ).getDate() + 1
-                          )
-                        ).getTime()
-                      )
+                          ).getDate() + 1
+                        )
+                      ).getTime()
                 )
             )
           );
@@ -835,15 +804,13 @@ const TicketsnUserData: FC = () => {
               .filter(
                 (data) =>
                   new Date(data.date).getTime() >=
-                    Number(new Date(dates.startDate).getTime()) &&
+                    new Date(dates.startDate).getTime() &&
                   new Date(data.date).getTime() <=
-                    Number(
-                      new Date(
-                        new Date(dates.endDate).setDate(
-                          new Date(dates.endDate).getDate() + 1
-                        )
-                      ).getTime()
-                    )
+                    new Date(
+                      new Date(dates.endDate).setDate(
+                        new Date(dates.endDate).getDate() + 1
+                      )
+                    ).getTime()
               )
           )
         );

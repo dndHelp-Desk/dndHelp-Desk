@@ -7,7 +7,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import Help from "../Others/Help";
 import Footer from "./Footer";
 
-const Pricing: FC = () => {
+const Pricing:FC = () => {
   const [menu, setMenu] = useState<boolean | null>(false);
   const smallMenuRef = useOnClickOutside(() => {
     setMenu(false);

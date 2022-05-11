@@ -115,7 +115,7 @@ const Footer: FC = () => {
         </div>
         <div className="w-full flex justify-between items-center p-2 border-t border-[#94a3b869] text-xs text-slate-600">
           <p>
-            &copy; {new Date().getFullYear} dndhelp-desk. All rights reserved.
+            &copy; {new Date().getFullYear()} dndhelp-desk. All rights reserved.
           </p>
           <div className="flex item-center gap-2">
             <Link
