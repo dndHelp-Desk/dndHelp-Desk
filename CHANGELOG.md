@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.12](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.11...v0.6.12) (2022-05-11)
+
+
+### Bug Fixes
+
+* add customers details when sending an email ([77f9997](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/77f99978ecceb55c2b5f3ce436bb29b89ff563c5))
+* **date picker and datafetching:** changed toLocaleDateString on date filters to normal ([0d5a56e](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/0d5a56edd58bf17ba9e08fd90bf9deb0c271f07e)), closes [#23](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/23)
+
 ### [0.6.11](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.10...v0.6.11) (2022-05-11)
 
 
