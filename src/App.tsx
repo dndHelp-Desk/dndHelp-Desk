@@ -1,5 +1,5 @@
 import { FC, Suspense, lazy } from "react";
-import Redirect from "./Components/Auth/Redirects";
+import Redirect from "./Components/Auth/LogRedirect";
 import SetUpRedirect from "./Components/Landing Page/SetUpRedirect";
 import ReportsComponent from "./Components/Reports/ReportComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
