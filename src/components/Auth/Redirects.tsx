@@ -6,7 +6,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import redirect_img from "./images/redirect_img.webp";
 import { setCompany } from "../../Redux/Slices/UserSlice";
 
-const Redirect: FC = () => {
+const Redirects: FC = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -50,4 +50,4 @@ const Redirect: FC = () => {
   );
 };
 
-export default Redirect;
+export default Redirects;

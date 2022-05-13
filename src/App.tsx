@@ -1,5 +1,5 @@
 import { FC, Suspense, lazy } from "react";
-import Redirect from "./Components/Auth/LogRedirect";
+import Redirects from "./Components/Auth/Redirects";
 import SetUpRedirect from "./Components/Landing Page/SetUpRedirect";
 import ReportsComponent from "./Components/Reports/ReportComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -80,7 +80,7 @@ const App: FC = () => {
             <Route path="/error-page" element={<ErrorPage />} />
 
             {/**LogIn ======================== */}
-            <Route path="/redirect" element={<Redirect />} />
+            <Route path="/redirect" element={<Redirects />} />
             <Route path="/setup-redirect" element={<SetUpRedirect />} />
             <Route path="/logIn" element={<LogIn />} />
 
