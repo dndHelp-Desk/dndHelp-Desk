@@ -842,7 +842,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-200 dark:border-[#33415596] bg-white dark:bg-slate-800 flex justify-center items-center outline-none focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-800 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1"
+                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-200 dark:border-[#33415596] bg-white dark:bg-slate-800 flex justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1"
                   >
                     <option
                       className="p-2"

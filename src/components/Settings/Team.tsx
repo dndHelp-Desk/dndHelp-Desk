@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
 import noUsers from "./../MainComponent/images/no-userss.svg";
 import { Navigate } from "react-router";
-import { deleteUser, activateUser } from "../Data_Fetching/TicketsnUserData";
-import { BsFillTrashFill, BsSearch } from "react-icons/bs";
+import { deleteUser } from "../Data_Fetching/TicketsnUserData";
+import { BsFillTrashFill, BsPencilSquare, BsSearch } from "react-icons/bs";
 import { HiUserAdd } from "react-icons/hi";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import NewUser from "./NewUser";
 import { AppDispatch, RootState } from "../../Redux/store";
+import EditUser from "./EditUser";
 
 const Team: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -22,6 +23,8 @@ const Team: FC = () => {
     (state: RootState) => state.UserInfo.member_details
   );
   const [newUserModal, setModal] = useState<boolean | any>(false);
+  const [editUserModal, setEditModal] = useState<boolean | any>(false);
+  const [editId, setId] = useState<any>({});
   const [search, setSearch] = useState<string | any>(" ");
 
   //Delete User ================
@@ -108,44 +111,47 @@ const Team: FC = () => {
             </p>
           </td>
           <td className="col-span-1 text-xs items-right flex justify-end items-center space-x-4">
-            <div className="cursor-pointer rounded-full bg-slate-400 relative shadow-sm">
-              <abbr title="Activate / Deactivate">
-                <input
-                  onChange={(e) => activateUser(id, e.target.checked)}
-                  type="checkbox"
-                  name="toggle"
-                  id="toggle1"
-                  checked={Boolean(user.active)}
-                  className={`focus:outline-none checkbox w-4 h-4 rounded-full bg-white absolute shadow-sm appearance-none cursor-pointer border border-transparent top-0 bottom-0 m-auto ${
-                    user.active && "right-0"
-                  }`}
-                />
-                <label
-                  htmlFor="toggle1"
-                  className="toggle-label dark:bg-slate-700 block w-8 h-3 overflow-hidden rounded-full bg-slate-400 cursor-pointer"
-                />
+            {/**Edit Account */}
+            <button
+              onClick={() => {
+                setEditModal(true);
+                setId({
+                  id: user.id,
+                  name: user.name,
+                  dept: user.dept,
+                  access: user.access,
+                  active: user.active,
+                  companies: user.companies,
+                });
+              }}
+              className="h-8 w-8 rounded border border-slate-200 dark:border-slate-700 outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
+            >
+              <abbr title="Edit User">
+                <BsPencilSquare className="text-slate-700 dark:text-slate-400 text-base" />
               </abbr>
-            </div>
-            <abbr title="Delete Account">
-              <button
-                onClick={() => {
-                  let code = prompt("Enter Pin To Perform Action");
-                  code === "0001"
-                    ? deleteMember(user.id, user.uid)
-                    : alert("Wrong Pin");
-                }}
-                className="h-8 w-8 rounded outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
-              >
-                <BsFillTrashFill className="text-red-500 cursor-pointer text-base" />
-              </button>
-            </abbr>
+            </button>
+
+            {/**Delete Account */}
+            <button
+              onClick={() => {
+                let code = prompt("Enter Pin To Perform Action");
+                code === "0001"
+                  ? deleteMember(user.id, user.uid)
+                  : alert("Wrong Pin");
+              }}
+              className="h-8 w-8 rounded border border-slate-200 dark:border-slate-700 outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
+            >
+              <abbr title="Delete Account">
+                <BsFillTrashFill className="text-red-500  text-base" />
+              </abbr>
+            </button>
           </td>
         </tr>
       );
     });
 
   //Allow Admin Only ==========================
-  if (member_details[0].access !== "admin") {
+  if (member_details[0]?.access !== "admin") {
     return <Navigate to="/app" />;
   }
 
@@ -215,6 +221,13 @@ const Team: FC = () => {
 
       {/**Add New User ============================= */}
       <NewUser newUserModal={newUserModal} setModal={setModal} />
+      {/**Edit User =============================== */}
+      <EditUser
+        editUserModal={editUserModal}
+        setEditModal={setEditModal}
+        editId={editId}
+        setId={setId}
+      />
     </div>
   );
 };

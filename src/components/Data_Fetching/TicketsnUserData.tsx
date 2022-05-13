@@ -104,6 +104,25 @@ export const activateUser = (id: string, state: boolean) => {
   });
 };
 
+// Edit user ================
+export const editUser = (
+  id: string,
+  name:string,
+  dept:string,
+  access:string,
+  active: boolean,
+  companies:string
+) => {
+  let docRef = doc(db, `companies/${org}/members`, id);
+  updateDoc(docRef, {
+    name: name,
+    dept: dept,
+    access: access,
+    active: active,
+    companies: companies,
+  });
+};
+
 // Delete User ================
 export const deleteUser = (id: string) => {
   let docRef = doc(db, `companies/${org}/members`, id);
@@ -873,3 +892,4 @@ const TicketsnUserData: FC = () => {
 };
 
 export default TicketsnUserData;
+

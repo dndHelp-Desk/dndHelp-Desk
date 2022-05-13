@@ -24,12 +24,12 @@ const OffCanvasMenu: FC<Props> = ({
     <div
       ref={closeCanvasRef}
       className={`fixed left-0 top-0 bottom-0 flex justify-center h-full dark:bg-[#1e293bde] bg-slate-50 backdrop-blur-sm shadow-2xl pt-28 p-4 ${
-        filtersModal ? "z-[999]" : "hidden z-[-999]"
+        filtersModal ? "z-[999] w-[18rem]" : "w-0 z-[-999]"
       } transition-all`}
     >
       <div
-        className={`h-full flex flex-col items-center gap-2 w-full  ${
-          filtersModal ? "" : "hidden"
+        className={`h-full flex flex-col items-center gap-2   ${
+          filtersModal ? "w-full z-[999]" : "w-0 z-[-99]"
         } transition-all`}
       >
         <Filters filters={filters} setFilters={setFilters} />

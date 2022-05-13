@@ -134,7 +134,7 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] border-b dark:border-[#33415583] border-slate-300 relative  p-2 space-x-2 flex snap_childTwo ${
+          className={`w-full h-[5rem] border-t dark:border-[#33415583] border-slate-300 relative  p-2 space-x-2 flex snap_childTwo hover:bg-slate-100 dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
               ? "bg-slate-100 dark:bg-[#182235]"
               : "bg-inherit"

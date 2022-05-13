@@ -7,7 +7,7 @@ import TrafficChart from "./TrafficChart";
 
 export type data = any;
 
-const OverviewReport: FC<data> = ({ data}) => {
+const OverviewReport: FC<data> = ({ data }) => {
   const reportsData = useSelector(
     (state: RootState) => state.Tickets.reportsData
   );
