@@ -102,24 +102,24 @@ const OverviewReport: FC<data> = ({ data }) => {
           Tickets Statistics
         </h2>
         <div className="mt-6 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
-          <div className="dark:text-slate-300 text-slate-700">
-            <h4 className="text-base font-semibold text-center uppercase">
+          <div className="dark:text-slate-300 text-slate-900">
+            <h4 className="text-base font-bold text-center uppercase">
               {data.length}
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
               Total Tickets
             </h4>
           </div>
-          <div className="dark:text-slate-300 text-slate-700">
-            <h4 className="text-base font-semibold text-center uppercase">
+          <div className="dark:text-slate-300 text-slate-800">
+            <h4 className="text-base font-bold text-center uppercase">
               {totalAggregate}
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
               Aggregate
             </h4>
           </div>
-          <div className="dark:text-slate-300 text-slate-700">
-            <h4 className="text-base font-semibold text-center">
+          <div className="dark:text-slate-300 text-slate-800">
+            <h4 className="text-base font-bold text-center">
               {`${
                 solvedTickets.length >= 1
                   ? (
@@ -161,7 +161,7 @@ const OverviewReport: FC<data> = ({ data }) => {
               }`}
               <span className="text-xs">min</span>
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-500 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
               AV Age of Query
             </h4>
           </div>
@@ -170,22 +170,11 @@ const OverviewReport: FC<data> = ({ data }) => {
           className="flex flex-col mt-2 h-44 space-y-2 w-full overflow-hidden rounded-md 
         p-2"
         >
-          <h3 className="text-sm dark:text-slate-300 text-slate-700 font-sans dark:font-medium font-bold capitalize tracking-wider flex items-center space-x-2">
-            <span>
-              Welcome back, {user[0]?.name && user[0]?.name.split(" ")[0]}
-            </span>{" "}
-            <FaChartBar className="text-blue-700 text-lg" />
-          </h3>
-          <p className="text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
-            More features will be added soon in the meantime explore the reports
-            by making use of filters. You can find your current satisfaction
-            rating below.
-          </p>
           <div className="">
-            <h4 className="dark:text-slate-300 text-slate-700 font-semibold text-sm">
+            <h4 className="dark:text-slate-300 text-slate-800 font-bold text-sm text-center">
               {ratings !== "NaN" ? ratings : "0.0"}%
             </h4>
-            <div className="flex w-full items-center text-2xl">
+            <div className="flex w-full items-center justify-center text-2xl">
               <span
                 className={`${
                   ratings > 20
@@ -233,6 +222,11 @@ const OverviewReport: FC<data> = ({ data }) => {
               </span>{" "}
             </div>
           </div>
+          <p className=" text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
+            More features will be added soon in the meantime explore the reports
+            by making use of filters. You can find your current satisfaction
+            rating above.
+          </p>
         </div>
       </div>
 
