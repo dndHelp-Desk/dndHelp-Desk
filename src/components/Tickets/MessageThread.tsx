@@ -579,7 +579,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   //Component ======================================
   return (
     <div className="h-[47rem] flex flex-col w-full lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent">
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col shadow-md overflow-hidden">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
         <div className="h-14 dark:bg-[#182235] bg-slate-100 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-200 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
@@ -743,7 +743,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
-        <div className="h-full w-full relative shadow-md rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+        <div className="h-full w-full relative rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"

@@ -109,7 +109,7 @@ const Tables: FC<Props> = ({ data }) => {
   //Component ==========================================
   return (
     <div className="col-span-3 h-[35rem] lg:col-span-2 rounded-md flex flex-col gap-2">
-      <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-md overflow-hidden shadow p-1">
+      <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-md overflow-hidden p-1">
         <div className="h-12 flex justify-between items-center px-4">
           <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-wider">
             {option === "agent_email" ? "Agents" : "Company"}

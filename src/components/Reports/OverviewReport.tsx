@@ -97,7 +97,7 @@ const OverviewReport: FC<data> = ({ data }) => {
   //Component =============================
   return (
     <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md shadow">
+      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Statistics
         </h2>
@@ -236,7 +236,7 @@ const OverviewReport: FC<data> = ({ data }) => {
         </div>
       </div>
 
-      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md shadow flex flex-col gap-2 px-4 h-[20rem]">
+      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col gap-2 px-4 h-[20rem]">
         <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider flex-[2]">
           Tickets Per Category
         </h2>
@@ -246,7 +246,7 @@ const OverviewReport: FC<data> = ({ data }) => {
       </div>
 
       {/**Traffic trend chart ======================== */}
-      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md shadow">
+      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider">

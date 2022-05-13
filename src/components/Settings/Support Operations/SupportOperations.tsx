@@ -48,7 +48,7 @@ const SupportOperations: FC = () => {
         className={`text-sm dark:text-slate-300 text-slate-800 font-semibold p-2 w-32 border-b-2 outline-none focus:outline-none  ${
           item.active
             ? "border-slate-800 dark:border-slate-300"
-            : "border-slate-300 dark:border-slate-700"
+            : "border-slate-400 dark:border-slate-700"
         } text-center`}
       >
         {item.name}

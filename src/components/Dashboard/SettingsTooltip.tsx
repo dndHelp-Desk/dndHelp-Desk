@@ -120,8 +120,8 @@ const SettingsTooltip: FC = () => {
                 <span>Sign Out</span>
               </button>
             </li>
-            <small className="text-slate-500 text-xs font-light italic">
-              version: {packageJson.version}
+            <small className="text-slate-500 font-semibold text-xs italic">
+              Version: {packageJson.version}
             </small>
           </ul>
         </div>

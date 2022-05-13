@@ -95,7 +95,7 @@ const Dashboard: FC = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="w-full dark:bg-slate-900 bg-slate-200 flex flex-col selection:bg-blue-600 selection:text-slate-100">
+      <div className="w-full dark:bg-slate-900 bg-slate-300 flex flex-col selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
 

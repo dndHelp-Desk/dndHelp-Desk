@@ -15,7 +15,7 @@ const TicketsComponent: FC = () => {
         <div
           className={`${
             isChatOpen ? "hidden" : "col-span-5"
-          } lg:grid lg:col-span-2 w-full h-[47rem] rounded bg-white dark:bg-slate-800 border dark:border-slate-700 border-slate-300 overflow-hidden shadow-md`}
+          } lg:grid lg:col-span-2 w-full h-[47rem] rounded bg-white dark:bg-slate-800 border dark:border-slate-700 border-slate-300 overflow-hidden`}
         >
           <TicketsList
             deleteArray={deleteArray}

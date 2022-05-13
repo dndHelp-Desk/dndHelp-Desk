@@ -17,7 +17,7 @@ const TopCards: FC<Props> = ({ data }) => {
   return (
     <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
       {/**First Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
+      <div className="col-span-1 h-[7rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 grid grid-cols-2 p-4">
         <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
@@ -77,7 +77,7 @@ const TopCards: FC<Props> = ({ data }) => {
       </div>
 
       {/**Second Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
+      <div className="col-span-1 h-[7rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 grid grid-cols-2 p-4">
         <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
@@ -145,7 +145,7 @@ const TopCards: FC<Props> = ({ data }) => {
       </div>
 
       {/**Third Pair Of Stats ==================================================== */}
-      <div className="col-span-1 h-[7rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 shadow grid grid-cols-2 p-4">
+      <div className="col-span-1 h-[7rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 grid grid-cols-2 p-4">
         <div className="col-span-1 border-r dark:border-slate-700 border-slate-300">
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
