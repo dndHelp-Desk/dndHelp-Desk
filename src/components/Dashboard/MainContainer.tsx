@@ -25,7 +25,7 @@ import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";
 import VoicexVideoCall from "./VoicexVideoCall";
 
-const MainComponent: FC = () => {
+const Dashboard: FC = () => {
   const logged = useSelector(
     (state: RootState) => state.UserInfo.authenticated
   );
@@ -335,4 +335,4 @@ const MainComponent: FC = () => {
   );
 };
 
-export default MainComponent;
+export default Dashboard;

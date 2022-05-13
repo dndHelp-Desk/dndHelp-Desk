@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
-import noUsers from "./../MainComponent/images/no-userss.svg";
+import noUsers from "./../Dashboard/images/no-userss.svg";
 import { Navigate } from "react-router";
 import { deleteUser } from "../Data_Fetching/TicketsnUserData";
 import { BsFillTrashFill, BsPencilSquare, BsSearch } from "react-icons/bs";
@@ -198,7 +198,7 @@ const Team: FC = () => {
                 <th className="col-span-1 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="w-full h-[45rem] overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
+            <tbody className="w-full h-[45rem] overflow-hidden overflow-y-scroll scroll-snap space-y-2 pr-2">
               {users}
             </tbody>
           </table>

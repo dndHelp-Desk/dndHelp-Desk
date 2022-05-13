@@ -107,11 +107,11 @@ export const activateUser = (id: string, state: boolean) => {
 // Edit user ================
 export const editUser = (
   id: string,
-  name:string,
-  dept:string,
-  access:string,
+  name: string,
+  dept: string,
+  access: string,
   active: boolean,
-  companies:string
+  companies: string
 ) => {
   let docRef = doc(db, `companies/${org}/members`, id);
   updateDoc(docRef, {
@@ -892,4 +892,3 @@ const TicketsnUserData: FC = () => {
 };
 
 export default TicketsnUserData;
-

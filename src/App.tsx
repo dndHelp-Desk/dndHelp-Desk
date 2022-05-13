@@ -1,42 +1,40 @@
 import { FC, Suspense, lazy } from "react";
-import Redirect from "./components/Auth/Redirect";
-import SetUpRedirect from "./components/Landing Page/SetUpRedirect";
-import ReportsComponent from "./components/Reports/ReportComponent";
+import Redirect from "./Components/Auth/Redirect";
+import SetUpRedirect from "./Components/Landing Page/SetUpRedirect";
+import ReportsComponent from "./Components/Reports/ReportComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from "./components/Landing Page/Landing";
-import LogIn from "./components/Auth/LogIn";
-import TicketsComponent from "./components/Tickets/TicketsComponent";
-import ContactsComponent from "./components/Contacts/ContactsComponent";
-import ErrorPage from "./components/Landing Page/ErrorPage";
+import Landing from "./Components/Landing Page/Landing";
+import LogIn from "./Components/Auth/LogIn";
+import TicketsComponent from "./Components/Tickets/TicketsComponent";
+import ContactsComponent from "./Components/Contacts/ContactsComponent";
+import ErrorPage from "./Components/Landing Page/ErrorPage";
 
 //Lazy Loading Components || Code Splitting ====================
-const MainComponent = lazy(
-  () => import("./components/MainComponent/MainComponent")
-);
+const Dashboard = lazy(() => import("./Components/Dashboard/MainContainer"));
 const SettingsComponent = lazy(
-  () => import("./components/Settings/SettingsComponents")
+  () => import("./Components/Settings/SettingsComponents")
 );
 const SupportHome = lazy(
-  () => import("./components/ClientSupport/SupportHome")
+  () => import("./Components/ClientSupport/SupportHome")
 );
-const NewTicket = lazy(() => import("./components/ClientSupport/NewTicket"));
+const NewTicket = lazy(() => import("./Components/ClientSupport/NewTicket"));
 const KnowledgeBase = lazy(
-  () => import("./components/ClientSupport/KnowledgeBase")
+  () => import("./Components/ClientSupport/KnowledgeBase")
 );
-const Account = lazy(() => import("./components/Settings/Account"));
-const Team = lazy(() => import("./components/Settings/Team"));
+const Account = lazy(() => import("./Components/Settings/Account"));
+const Team = lazy(() => import("./Components/Settings/Team"));
 const SupportOperations = lazy(
-  () => import("./components/Settings/Support Operations/SupportOperations")
+  () => import("./Components/Settings/Support Operations/SupportOperations")
 );
 const AutomatedReports = lazy(
-  () => import("./components/Settings/AutomatedReports")
+  () => import("./Components/Settings/AutomatedReports")
 );
-const Solutions = lazy(() => import("./components/Settings/Solutions"));
+const Solutions = lazy(() => import("./Components/Settings/Solutions"));
 
 //Getting Started Or Setting Up An Account ========================
-const Pricing = lazy(() => import("./components/Landing Page/Pricing"));
+const Pricing = lazy(() => import("./Components/Landing Page/Pricing"));
 const WorkSpaceSetUp = lazy(
-  () => import("./components/Landing Page/WorkSpaceSetUp")
+  () => import("./Components/Landing Page/WorkSpaceSetUp")
 );
 
 const App: FC = () => {
@@ -93,7 +91,7 @@ const App: FC = () => {
             </Route>
 
             {/**App======================== */}
-            <Route path="/app" element={<MainComponent />}>
+            <Route path="/app" element={<Dashboard />}>
               <Route path="tickets" element={<TicketsComponent />} />
               <Route path="reports" element={<ReportsComponent />} />
               <Route path="contacts" element={<ContactsComponent />} />
