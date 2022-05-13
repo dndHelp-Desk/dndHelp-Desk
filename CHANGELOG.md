@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.13](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.12...v0.6.13) (2022-05-13)
+
+
+### Features
+
+* **settings:** admin Can now edit user info like name, access, department and companies ([20c6e38](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/20c6e38c296d1a6675850ef62a51a6743bf5e2c7))
+
+
+### Bug Fixes
+
+* **foilters:** initial date doesn't render any tickes on Mac ([a4dffef](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/a4dffef3ecf25de2b5e090566622305882fe6c7e))
+
 ### [0.6.12](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.11...v0.6.12) (2022-05-11)
 
 
