@@ -911,7 +911,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
                   toolbarControl:
                     "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
-                  root: "h-fulloverflow-hidden overflow-y-scroll text-slate-800 dark:text-slate-400",
+                  root: "replyEditor h-full overflow-hidden overflow-y-scroll text-slate-800 dark:text-slate-400",
                 }}
                 controls={[
                   ["bold", "italic", "underline", "code", "blockquote"],

@@ -82,18 +82,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       });
   }, [allTickets, threadId]);
 
-  //Reply State and value ==================================
-  const [reply, setReply] = useState<ReplyOptions>({
-    message: "<p></p>",
-    subject:
-      threadMessages.length >= 1 &&
-      threadMessages.filter((msg: any) => msg.message_position === 1)[0]
-        ?.category,
-    status: "Status",
-    message_position: threadMessages.length + 1,
-    ticket_id: threadId,
-  });
-
   //Thread First Message =====================
   const firstMessage = useMemo(() => {
     return (
@@ -134,6 +122,15 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   let brand: string = firstMessage && firstMessage[0]?.branch_company;
   let ticket_status: string = firstMessage && firstMessage[0]?.status;
   let date: any = firstMessage && firstMessage[0]?.due_date;
+
+  //Reply State and value ==================================
+  const [reply, setReply] = useState<ReplyOptions>({
+    message: "<p></p>",
+    subject: firstMessage && firstMessage[0]?.category,
+    status: "Status",
+    message_position: threadMessages.length + 1,
+    ticket_id: threadId,
+  });
 
   //Scroll to last message Function
   const lastMessage = () => {
@@ -494,7 +491,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             <div className="w-full bg-transparent rounded-lg">
               <div className="font-semibold dark:font-medium dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
                 <div className="flex items-center dark:text-slate-300 text-slate-900 text-xs">
-                  <span className="tracking-normal capitalize">
+                  <span className="tracking-normal font-bold capitalize">
                     {message.agent_name}
                     {message.user}
                   </span>
@@ -601,7 +598,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 <summary className="w-[4rem] pl-2 lg:p-0 text-[0.65rem] leading-6 dark:text-slate-300 text-slate-900 font-bold uppercase select-none cursor-pointer outline-none focus:outline-none">
                   Details
                 </summary>
-                <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-slate-900 bg-white border border-slate-300 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
+                <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-[#182235] bg-white border border-slate-300 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
                   <div>
                     <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
                       <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
@@ -761,7 +758,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center">
                 {/**Canned Response ========================================= */}
-                <div className="group w-8 h-8 rounded-l-sm border border-r-0 border-slate-200 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-700 dark:text-slate-400 relative">
+                <div className="group w-8 h-8 rounded-l-sm border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-700 dark:text-slate-400 relative">
                   <abbr title="Canned Response">
                     <BiCommentDetail className="text-base hover:opacity-80" />
                   </abbr>
@@ -816,7 +813,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 <abbr title="Upload Your Recording">
                   <label
                     htmlFor="replyRecording"
-                    className="w-8 h-8 border border-r-0 border-slate-200 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer"
+                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer"
                   >
                     <BiMicrophone className="text-base" />
                     <input
@@ -840,9 +837,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     ref={statusSelectionRef}
                     onChange={(e) => {
                       setReply({ ...reply, status: e.target.value });
+                      console.log(e.target.value);
                     }}
                     required
-                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-200 dark:border-[#33415596] bg-white dark:bg-slate-800 flex justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1"
+                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-white dark:bg-slate-800 flex justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1"
                   >
                     <option
                       className="p-2"

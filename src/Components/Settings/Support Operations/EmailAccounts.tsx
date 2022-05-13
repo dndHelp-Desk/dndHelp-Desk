@@ -54,7 +54,7 @@ const EmailAccounts: FC = () => {
       updateAlert([
         ...alerts,
         {
-          message: "New Contact Has Been Added Successfully",
+          message: "New Account Added Successfully",
           color: "bg-green-200",
         },
       ])

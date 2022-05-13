@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { markAsSeen } from "../Data_Fetching/TicketsnUserData";
 import { BsStopFill } from "react-icons/bs";
-import { BiChevronRight, BiChevronLeft, BiUser } from "react-icons/bi";
+import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import Navbar from "./Navbar";
 import noTickets from "./images/no-userss.svg";
@@ -134,7 +134,7 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[5rem] border-t last:border-b dark:border-[#33415583] border-slate-300 relative  p-2 space-x-2 flex snap_childTwo hover:bg-slate-100 dark:hover:bg-[#182235] transition-all ${
+          className={`w-full h-[4.9rem] border-t last:border-b dark:border-[#33415583] border-slate-300 relative  p-2 space-x-2 flex snap_childTwo hover:bg-slate-100 dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
               ? "bg-slate-100 dark:bg-[#182235]"
               : "bg-inherit"
@@ -160,7 +160,7 @@ const TicketsList: FC<Props> = ({
             <div className="h-full w-[9%] flex justify-between items-center px-2">
               <input
                 type="checkbox"
-                className="rounded-[0.18rem]  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-800 border-slate-500 dark:bg-slate-400 dark:checked:bg-blue-600 bg-slate-200 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
+                className="rounded-[0.18rem]  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-600 border-slate-400 dark:checked:bg-blue-600 bg-slate-50 dark:bg-slate-700 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
                 name="mark"
                 id="mark"
                 checked={
@@ -207,45 +207,53 @@ const TicketsList: FC<Props> = ({
                   });
                 }
               }}
-              className="h-full w-[90%] flex flex-col justify-center space-y-1 relative"
+              className="h-full w-[90%] flex items-center space-x-4 relative"
             >
-              <abbr title={ticket.ticket_id}>
-                <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis">
-                  <span className="">
-                    {ticket.category} | {ticket.ticket_id}
-                  </span>
-                </p>
-              </abbr>
-              <div className="dark:text-slate-400 max-w-[80%] flex flex-row items-center space-x-2 text-slate-700 text-xs tracking-wide font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <abbr title={ticket.branch_company}>
-                  <BiUser className="inline" />{" "}
-                  <span>{ticket.branch_company}</span>
+              <div className="h-8 w-8 rounded border border-slate-400 dark:border-slate-600 dark:bg-slate-700 bg-slate-50 flex justify-center items-center text-sm uppercase font-bold text-slate-800 dark:text-slate-300">
+                <abbr title={ticket?.recipient_name}>
+                  {ticket?.recipient_name?.trim()?.charAt(0)}
                 </abbr>
               </div>
-              {/**Indicate The ticket that is solved or  overdue and open ================*/}
-              <small className="dark:text-slate-400 text-slate-500 flex items-center space-x-1 text-[0.6rem] whitespace-nowrap">
-                <span
-                  className={`${
-                    new Date(ticket.due_date).getTime() <=
-                      new Date().getTime() &&
-                    ticket.status &&
-                    ticket.status.toLowerCase() === "open"
-                      ? "text-red-600"
-                      : (ticket.status.toLowerCase() === "open" &&
-                          new Date(ticket.due_date).getTime() >
-                            new Date().getTime()) ||
-                        ticket.status.toLowerCase() === "on hold"
-                      ? "text-slate-500"
-                      : ticket.status &&
-                        ticket.status.toLowerCase() === "solved"
-                      ? "text-blue-600"
-                      : ""
-                  } `}
-                >
-                  <BsStopFill />
-                </span>{" "}
-                <span>Due on {new Date(ticket.due_date).toLocaleString()}</span>
-              </small>
+              <div className="h-full flex flex-col justify-center space-y-1">
+                <abbr title={ticket.ticket_id}>
+                  <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis tracking-normal">
+                    <span className="">
+                      {ticket.category} | {ticket.ticket_id}
+                    </span>
+                  </p>
+                </abbr>
+                <div className="dark:text-slate-400 w-full pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
+                  <abbr title={ticket.branch_company}>
+                    <span>{ticket.branch_company}</span>
+                  </abbr>
+                </div>
+                {/**Indicate The ticket that is solved or  overdue and open ================*/}
+                <small className="dark:text-slate-400 text-slate-500 flex items-center space-x-1 text-[0.6rem] whitespace-nowrap">
+                  <span
+                    className={`${
+                      new Date(ticket.due_date).getTime() <=
+                        new Date().getTime() &&
+                      ticket.status &&
+                      ticket.status.toLowerCase() === "open"
+                        ? "text-red-600"
+                        : (ticket.status.toLowerCase() === "open" &&
+                            new Date(ticket.due_date).getTime() >
+                              new Date().getTime()) ||
+                          ticket.status.toLowerCase() === "on hold"
+                        ? "text-slate-500"
+                        : ticket.status &&
+                          ticket.status.toLowerCase() === "solved"
+                        ? "text-blue-600"
+                        : ""
+                    } `}
+                  >
+                    <BsStopFill />
+                  </span>{" "}
+                  <span>
+                    Due on {new Date(ticket.due_date).toLocaleString()}
+                  </span>
+                </small>
+              </div>
             </div>
           </div>
         </div>
@@ -288,7 +296,7 @@ const TicketsList: FC<Props> = ({
           </div>
 
           {/**Pagination ================================ */}
-          <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
+          <div className="h-[7%] w-full bottom-0 flex flex-col justify-center items-center">
             <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-100 py-1 rounded border dark:border-slate-700 border-slate-300">
               <button
                 onClick={() => {
