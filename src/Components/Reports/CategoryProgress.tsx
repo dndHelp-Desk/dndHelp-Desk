@@ -51,7 +51,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
                           : "0.0"
                       }%`,
                     }}
-                    className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80"
+                    className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 transition-all duration-200"
                   >
                     <abbr
                       title={`${element.name} : ${

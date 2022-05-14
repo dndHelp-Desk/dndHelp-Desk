@@ -43,6 +43,7 @@ const Dashboard: FC = () => {
   );
   const [openNotifications, setOpenNotification] = useState<boolean>(false);
   const [phoneToolTip, openPhone] = useState<boolean>(false);
+  const [loading, setLoading] = useState<any>(false);
   const location = useLocation();
   const dispatch: AppDispatch = useDispatch();
 
@@ -88,6 +89,13 @@ const Dashboard: FC = () => {
     dispatch(changeLocation(location.pathname));
   }, [routeLocation, dispatch, location]);
 
+  //Check if The data is loading
+  useEffect(() => {
+    dashboardData.length <= 0 ? setLoading(true) : setLoading(false);
+    dashboardData.length <= 0 && setTimeout(() => setLoading(false), 10000);
+    return clearTimeout();
+  }, [dashboardData.length]);
+
   if (logged !== true) {
     return <Navigate to="/login" />;
   }
@@ -98,6 +106,18 @@ const Dashboard: FC = () => {
       <div className="w-full dark:bg-slate-900 bg-slate-300 flex flex-col selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
+
+        {/**Preloader =========================== */}
+        <div
+          className={`${
+            !loading ? "hidden" : ""
+          } fixed z-[9999] top-0 bottom-0 left-0 right-0 bg-[#030d2769] before:content-[''] before:h-[0.25rem] before:w-full before:bg-[#93c4fd70] before:absolute`}
+        >
+          <div
+            id="reportsPreloader"
+            className="h-[0.25rem] w-2/5 bg-blue-600 absolute top-0 transition-all"
+          ></div>
+        </div>
 
         {/**NavBar ============== */}
         <nav className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide">

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import NewTemplate from "./NewTemplate";
 import { RootState } from "./../../../Redux/store";
 import { BiTrash } from "react-icons/bi";
-import { deleteTemplate } from "./../../Data_Fetching/TicketsnUserData";
+import { deleteTemplate } from "../../Data_Fetching/TicketsnUserData";
 
 const Templates: FC = () => {
   const templates = useSelector(

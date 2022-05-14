@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { BiDetail } from "react-icons/bi";
 import { RichTextEditor } from "@mantine/rte";
-import { newTemplate } from "./../../Data_Fetching/TicketsnUserData";
+import { newTemplate } from "../../Data_Fetching/TicketsnUserData";
 
 const NewTemplate: FC = () => {
   const [value, onChange] = useState("");
