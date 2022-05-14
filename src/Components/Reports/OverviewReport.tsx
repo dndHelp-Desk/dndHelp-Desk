@@ -1,5 +1,4 @@
 import { FC, useState, useMemo } from "react";
-import { FaChartBar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 import CategoryProgress from "./CategoryProgress";
@@ -14,7 +13,6 @@ const OverviewReport: FC<data> = ({ data }) => {
   const categories = useSelector(
     (state: RootState) => state.Tickets.categories
   );
-  const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const [option, setOption] = useState<string>("hour");
   const categoriesData = useMemo(() => {
     return (
