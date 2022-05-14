@@ -217,9 +217,9 @@ const Dashboard: FC = () => {
             {/**Small Screens Menu ====================== */}
             <div
               ref={menuModalRef}
-              className={`flex lg:hidden fixed top-12 left-0 w-[10rem] z-[99999] shadow-2xl rounded backdrop-blur-lg bg-white dark:bg-slate-900 border dark:border-slate-700 border-slate-400 ${
-                showMenu ? "h-[10rem]" : "h-0 opacity-0"
-              } transition-scale duration-300 dark:text-gray-400 text-slate-600 flex flex-col gap-4 p-4 justify-center overflow-hidden`}
+              className={`flex lg:hidden fixed top-12 left-2 w-[12rem] shadow-2xl rounded backdrop-blur-lg bg-white dark:bg-slate-900 border dark:border-slate-700 border-slate-400 ${
+                showMenu ? "h-[10rem] z-[9999]" : "h-0 opacity-0  z-[-99]"
+              } transition-scale duration-300 dark:text-gray-400 text-slate-600 flex flex-col gap-4 p-4 overflow-hidden`}
             >
               <NavLink
                 to="/app"

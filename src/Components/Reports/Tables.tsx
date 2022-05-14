@@ -75,7 +75,7 @@ const Tables: FC<Props> = ({ data }) => {
         <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.solved}
         </td>
-        <td className="px-2 flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+        <td className="px-2 flex items-center justify-end sm:justify-center overflow-hidden text-ellipsis whitespace-nowrap">
           {elem.total}
         </td>
       </tr>
@@ -118,7 +118,7 @@ const Tables: FC<Props> = ({ data }) => {
             {/**Select Report ================= */}
             <select
               onChange={(e) => setOption(e.target.value)}
-              className="h-8 w-40 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2 pt-1 dark:bg-slate-900 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-8 w-28 md:w-40 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2 pt-1 dark:bg-slate-900 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="branch_company">Company</option>
               <option value="agent_email">Agents</option>
@@ -128,7 +128,7 @@ const Tables: FC<Props> = ({ data }) => {
                 let code = prompt("Enter Admin Pin");
                 code === "0001" ? window.print() : alert("Wrong Pin");
               }}
-              className="h-8 w-20 rounded text-xs p-2 bg-blue-700  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded text-xs p-2 bg-blue-700  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
             >
               <span>Print</span>
               <BsPrinter className="text-sm text-white" />
