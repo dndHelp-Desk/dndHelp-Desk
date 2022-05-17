@@ -43,7 +43,7 @@ const Home: FC = () => {
           ).length /
             dashboardData?.length) *
           100
-        )?.toFixed(0)
+        )?.toFixed(1)
       : 0;
 
   //Loop Through All Users ================
@@ -164,7 +164,7 @@ const Home: FC = () => {
               </p>
               <div className={`w-full h-[7rem] overflow-hidden mb-4 relative`}>
                 <RadialBar />
-                <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center font-semibold text-slate-800 dark:text-slate-300 pt-4 pl-2">
+                <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center font-semibold text-slate-800 dark:text-slate-300 text-sm pt-4 pl-2">
                   {Number(totalProgress) + "%"}
                 </div>
               </div>

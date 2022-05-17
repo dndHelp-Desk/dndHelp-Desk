@@ -85,7 +85,7 @@ const TopCards: FC<Props> = ({ data }) => {
                 {data.length >= 1
                   ? data.filter(
                       (data: any) =>
-                        new Date(data.due_date).getTime() >=
+                        new Date(data.due_date).getTime() <=
                           new Date().getTime() && data.status === "open"
                     ).length
                   : 0}
@@ -95,7 +95,7 @@ const TopCards: FC<Props> = ({ data }) => {
                   ? (
                       (data.filter(
                         (data: any) =>
-                          new Date(data.due_date).getTime() >=
+                          new Date(data.due_date).getTime() <=
                             new Date().getTime() && data.status === "open"
                       ).length /
                         data.length) *

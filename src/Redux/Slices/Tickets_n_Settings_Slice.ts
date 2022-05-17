@@ -2,8 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialId: string | null = window.localStorage.getItem("threadId");
 const initialTickestDate = window.localStorage.getItem("ticketsDate");
-const initialReportsDate = window.localStorage.getItem("reportsDate");
-
 interface InitialStateState {
   allTickets: any[];
   threadId: string | null;
@@ -15,7 +13,6 @@ interface InitialStateState {
   settings: string[] | any[];
   unread: string[] | any[];
   imageAttachments: string[] | any[];
-  filterDates: Date | any;
   ticketsComponentDates: Date | any;
   dashboardData: string[] | any[];
   reportsData: string[] | any[];
@@ -38,23 +35,6 @@ const initialState: InitialStateState = {
     ? {
         startDate: new Date(JSON.parse(initialTickestDate).startDate).getTime(),
         endDate: new Date(JSON.parse(initialTickestDate).endDate).getTime(),
-      }
-    : {
-        startDate: new Date(
-          new Date().getFullYear(),
-          new Date().getMonth(),
-          1
-        ).getTime(),
-        endDate: new Date(
-          new Date().getFullYear(),
-          new Date().getMonth(),
-          31
-        ).getTime(),
-      },
-  filterDates: initialReportsDate
-    ? {
-        startDate: new Date(JSON.parse(initialReportsDate).startDate).getTime(),
-        endDate: new Date(JSON.parse(initialReportsDate).endDate).getTime(),
       }
     : {
         startDate: new Date(
@@ -116,9 +96,6 @@ export const TicketsSlice = createSlice({
     updateTicketsComponentDates: (state, action: PayloadAction<any>) => {
       state.ticketsComponentDates = action.payload;
     },
-    updateFilterDates: (state, action: PayloadAction<any>) => {
-      state.filterDates = action.payload;
-    },
     updateReportsData: (state, action: PayloadAction<any[]>) => {
       state.reportsData = action.payload.sort(
         (a: any, b: any) =>
@@ -153,7 +130,6 @@ export const {
   loadAccounts,
   setCategories,
   setCompanyDetails,
-  updateFilterDates,
   updateReportsData,
   updateTicketsComponentDates,
   updateDashboardData,

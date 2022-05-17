@@ -70,7 +70,7 @@ const NewTemplate: FC = () => {
               "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
             toolbarControl:
               "bg-inherit text-inherit border-slate-300 dark:border-slate-700 leading-2",
-            root: "h-[30rem] overflow-hidden overflow-y-scroll",
+            root: "replyEditor h-[30rem] overflow-hidden overflow-y-scroll",
           }}
           controls={[
             ["bold", "italic", "underline", "code", "blockquote"],

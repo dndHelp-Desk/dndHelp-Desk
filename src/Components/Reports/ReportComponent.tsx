@@ -22,7 +22,7 @@ const ReportsComponent: FC = () => {
   );
 
   const reportsData = useSelector(
-    (state: RootState) => state.Tickets.reportsData
+    (state: RootState) => state.Tickets.allTickets
   );
 
   //Filter Tickets Based On Acces Level ====

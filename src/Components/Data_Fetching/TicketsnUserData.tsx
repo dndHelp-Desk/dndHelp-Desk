@@ -11,7 +11,6 @@ import {
   addAllTickets,
   updateFilteredTickets,
   updateDashboardData,
-  updateReportsData,
   setContacts,
   loadSettings,
   loadTemplates,
@@ -420,7 +419,6 @@ const TicketsnUserData: FC = () => {
   const ticketsComponentDates = useSelector(
     (state: RootState) => state.Tickets.ticketsComponentDates
   );
-  const dates = useSelector((state: RootState) => state.Tickets.filterDates);
 
   //Data Loading =====================================
   useEffect((): any => {
@@ -806,36 +804,6 @@ const TicketsnUserData: FC = () => {
       })
     );
   }, [dispatch, member_details]);
-
-  //Load Reports Data =========
-  useEffect((): any => {
-    return (
-      //Tickects Data Fetching ======================
-      org &&
-      onSnapshot(ticketsRef, (snapshot: { docs: any[] }) => {
-        dispatch(
-          updateReportsData(
-            snapshot.docs
-              .map((doc: { data: () => any; id: any }) => ({
-                ...doc.data(),
-                id: doc.id,
-              }))
-              .filter(
-                (data) =>
-                  new Date(data.date).getTime() >=
-                    new Date(dates.startDate).getTime() &&
-                  new Date(data.date).getTime() <=
-                    new Date(
-                      new Date(dates.endDate).setDate(
-                        new Date(dates.endDate).getDate() + 1
-                      )
-                    ).getTime()
-              )
-          )
-        );
-      })
-    );
-  }, [dispatch, member_details, dates.endDate, dates.startDate]);
 
   //Load Email_Accounts ====================
   useEffect(() => {

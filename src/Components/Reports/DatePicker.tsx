@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./../../Redux/store";
-import { updateFilterDates } from "./../../Redux/Slices/Tickets_n_Settings_Slice";
+import { updateTicketsComponentDates } from "./../../Redux/Slices/Tickets_n_Settings_Slice";
 
 interface Props {
   filters: any;
@@ -26,13 +26,13 @@ const DateFilter: FC<Props> = () => {
       onChange={(update) => {
         setDateRange(update);
         dispatch(
-          updateFilterDates({
+          updateTicketsComponentDates({
             startDate: update[0] && update[0].getTime(),
             endDate: update[1] && update[1].getTime(),
           })
         );
         localStorage.setItem(
-          "reportsDate",
+          "ticketsDate",
           JSON.stringify({
             startDate: update[0] && update[0].getTime(),
             endDate: update[1] && update[1].getTime(),

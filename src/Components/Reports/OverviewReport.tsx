@@ -8,7 +8,7 @@ export type data = any;
 
 const OverviewReport: FC<data> = ({ data }) => {
   const reportsData = useSelector(
-    (state: RootState) => state.Tickets.reportsData
+    (state: RootState) => state.Tickets.allTickets
   );
   const categories = useSelector(
     (state: RootState) => state.Tickets.categories

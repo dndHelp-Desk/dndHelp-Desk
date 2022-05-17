@@ -28,7 +28,7 @@ const SupportOperations: FC = () => {
   ]);
 
   //Allow Admin Only ==========================
-  if (member_details[0].access !== "admin") {
+  if (member_details[0]?.access !== "admin") {
     return <Navigate to="/app" />;
   }
   //Tabs ========================

@@ -97,6 +97,14 @@
     @apply inline h-[3.5rem] w-[3.5rem] rounded mx-1 object-center object-cover;
   }
 
+  .replyEditor ul {
+    @apply list-disc
+  }
+
+  .replyEditor ol {
+    @apply list-decimal
+  }
+
   .messageContainer h1,
   .template h1 {
     @apply text-sm font-bold;
