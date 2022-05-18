@@ -358,9 +358,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         <i>In order to update or respond to this issue please click the button below,</i>
       </p>
   <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-       <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>You can alternatively click here.</a></i>
+       <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>
       </p>
-      <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>Update or Respond Here</a></button>
+      <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button>
 <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
         <b>Disclaimer</b>
       </p>
@@ -420,9 +420,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     <i>In order to update or respond to this issue please click the button below,</i>
   </p>
   <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>You can alternatively click here.</a></i>
+    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>
   </p>
-  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>Update or Respond Here</a></button>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button>
   <p
     style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
     <b>Disclaimer</b>
