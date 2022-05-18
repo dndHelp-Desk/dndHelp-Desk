@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.15](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.14...v0.6.15) (2022-05-18)
+
+
+### Features
+
+* **maincomponent:** added A preloader for the main component on initial load ([53318f3](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/53318f3ef6ec26a8905a58a85b47f88ce85865ab))
+
+
+### Bug Fixes
+
+* **tickets:** when adding image there now minimized allowing you to type and review ([011d0f6](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/011d0f6d34535130180ceff382e169907e35f21a))
+
 ### [0.6.14](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.13...v0.6.14) (2022-05-13)
 
 ### [0.6.13](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.12...v0.6.13) (2022-05-13)
