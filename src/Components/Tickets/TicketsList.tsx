@@ -40,9 +40,10 @@ const TicketsList: FC<Props> = ({
   );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
   const [loadMore, setLimit] = useState<number | any>(50);
+
   //Filters =====================
+  const [contactsList, setList] = useState<string[]>([]);
   const [filters, setFilters] = useState({
-    brand: "",
     ticket_id: "",
     agent: "",
     category: "",
@@ -56,64 +57,68 @@ const TicketsList: FC<Props> = ({
 
   const filteredTickets: any = useMemo(() => {
     return fetchedTickets.length >= 1
-      ? fetchedTickets?.filter(
-          (ticket) =>
-            ticket?.status
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.status, "gi")) &&
-            ticket?.category
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.category, "gi")) &&
-            ticket?.agent_email
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.agent, "gi")) &&
-            ticket?.branch_company
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.brand, "gi")) &&
-            ticket?.status
-              .replace(/\s/g, "")
-              .replace(/\(/g, "")
-              .replace(/\)/g, "")
-              .match(new RegExp(filters.status, "gi")) &&
-            Number(new Date(ticket.date).getTime()) >=
-              Number(new Date(ticketsComponentDates.startDate).getTime()) &&
-            Number(new Date(ticket.date).getTime()) <=
-              new Date(
-                new Date(ticketsComponentDates.endDate).setDate(
-                  new Date(ticketsComponentDates.endDate).getDate() + 1
-                )
-              ).getTime() &&
-            ticket?.complainant_number
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(
-                filters.complainant_number.toLowerCase().replace(/\s/g, "")
-              ) === true &&
-            ticket?.ticket_id
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(filters.ticket_id?.toLowerCase().replace(/\s/g, "")) ===
-              true
-        )
+      ? fetchedTickets
+          ?.filter((row) =>
+            contactsList?.every(
+              (item) =>
+                item.toLowerCase()?.replace(/\s/g, "") !==
+                row.branch_company?.toLowerCase()?.replace(/\s/g, "")
+            )
+          )
+          ?.filter(
+            (ticket) =>
+              ticket?.status
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.status, "gi")) &&
+              ticket?.category
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.category, "gi")) &&
+              ticket?.agent_email
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.agent, "gi")) &&
+              ticket?.status
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.status, "gi")) &&
+              Number(new Date(ticket.date).getTime()) >=
+                Number(new Date(ticketsComponentDates.startDate).getTime()) &&
+              Number(new Date(ticket.date).getTime()) <=
+                new Date(
+                  new Date(ticketsComponentDates.endDate).setDate(
+                    new Date(ticketsComponentDates.endDate).getDate() + 1
+                  )
+                ).getTime() &&
+              ticket?.complainant_number
+                .toLowerCase()
+                .replace(/\s/g, "")
+                .includes(
+                  filters.complainant_number.toLowerCase().replace(/\s/g, "")
+                ) === true &&
+              ticket?.ticket_id
+                .toLowerCase()
+                .replace(/\s/g, "")
+                .includes(
+                  filters.ticket_id?.toLowerCase().replace(/\s/g, "")
+                ) === true
+          )
       : [];
   }, [
     fetchedTickets,
     filters.agent,
-    filters.brand,
     filters.category,
     filters.complainant_number,
     ticketsComponentDates.endDate,
     ticketsComponentDates.startDate,
     filters.status,
     filters.ticket_id,
+    contactsList,
   ]);
 
   //Loop Through Each Tickects =================
@@ -274,6 +279,8 @@ const TicketsList: FC<Props> = ({
           setModal={setModal}
           filters={filters}
           setFilters={setFilters}
+          setList={setList}
+          contactsList={contactsList}
         />
         <div className="w-full flex-[15] flex flex-col overflow-hidden">
           <div

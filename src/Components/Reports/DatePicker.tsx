@@ -22,7 +22,7 @@ const DateFilter: FC<Props> = () => {
       startDate={startDate}
       endDate={endDate}
       placeholderText="Date ..."
-      className="dark:bg-slate-800 bg-white  border  dark:border-slate-700 border-slate-300  w-full h-14 lg:h-10 z-[999] rounded text-xs pl-10 dark:text-slate-400 text-slate-900 placeholder:text-slate-900 dark:placeholder:text-slate-400 cursor-pointer"
+      className="dark:bg-slate-800 bg-white font-medium border  dark:border-slate-700 border-slate-300  w-full h-14 lg:h-10 z-[999] rounded text-xs pl-10 dark:text-slate-400 text-slate-900 placeholder:text-slate-900 dark:placeholder:text-slate-400 cursor-pointer"
       onChange={(update) => {
         setDateRange(update);
         dispatch(

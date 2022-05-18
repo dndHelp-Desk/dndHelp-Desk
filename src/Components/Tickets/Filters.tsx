@@ -1,22 +1,25 @@
 import { FC } from "react";
 import {
-  BsSearch,
-  BsPerson,
-  BsShopWindow,
-  BsReceiptCutoff,
-  BsCalendar2Week,
-  BsCheckSquare,
-} from "react-icons/bs";
+  BiCategoryAlt,
+  BiUser,
+  BiSpreadsheet,
+  BiCalendarWeek,
+  BiPulse,
+  BiUserPin,
+} from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
+import CompanyFilter from "./CompanyFilter";
 import DateFilter from "./DatePicker";
 
 interface Props {
   filters: any;
   setFilters: (filetrs: any) => any;
+  setList: any;
+  contactsList: any;
 }
 
-const Filters: FC<Props> = ({ filters, setFilters }) => {
+const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
@@ -28,14 +31,14 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
   return (
     <>
       <div className="col-span-1 h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative">
-        <BsCalendar2Week className="text-slate-500 absolute h-10 left-3 z-[999]" />
+        <BiCalendarWeek className="text-slate-800 dark:text-slate-400 absolute h-10 left-3 z-[999]" />
         <DateFilter />
       </div>
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsSearch className="text-slate-500 text-lg absolute h-10 left-3" />
+        <BiCategoryAlt className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-medium"
         >
           <option value="">Category</option>
           {categories.length >= 1 &&
@@ -51,10 +54,10 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
         </select>
       </div>
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsCheckSquare className="text-slate-500 text-lg absolute h-10 left-3" />
+        <BiPulse className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-medium"
         >
           <option value="">Status</option>
           <option value="open">Open</option>
@@ -65,10 +68,10 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
       </div>
 
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
+        <BiUser className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 dark:text-slate-500 text-slate-500 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-medium"
         >
           <option value="">Agents ...</option>
           {allMembers.length >= 1 &&
@@ -83,21 +86,9 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
               ))}
         </select>
       </div>
+      <CompanyFilter setList={setList} contactsList={contactsList} />
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsShopWindow className="text-slate-500 text-lg absolute h-10 left-3" />
-        <input
-          type="search"
-          autoComplete="off"
-          name="brand"
-          id="brand"
-          onChange={(e) => setFilters({ ...filters, brand: e.target.value })}
-          value={filters.brand}
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
-          placeholder="Brand ..."
-        />
-      </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsReceiptCutoff className="text-slate-500 text-lg absolute h-10 left-3" />
+        <BiSpreadsheet className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <input
           type="search"
           autoComplete="off"
@@ -106,12 +97,12 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
           onChange={(e) =>
             setFilters({ ...filters, ticket_id: e.target.value })
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 text-slate-400 placeholder:text-slate-800 dark:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
           placeholder="Ticket-ID ..."
         />
       </div>
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BsPerson className="text-slate-500 text-lg absolute h-10 left-3" />
+        <BiUserPin className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <input
           type="search"
           autoComplete="off"
@@ -120,7 +111,7 @@ const Filters: FC<Props> = ({ filters, setFilters }) => {
           onChange={(e) =>
             setFilters({ ...filters, complainant_number: e.target.value })
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 text-slate-400 placeholder:text-slate-500 placeholder:text-xs text-sm pl-10"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 text-slate-400 placeholder:text-slate-800 dark:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
           placeholder="Customer's Number ..."
         />
       </div>
