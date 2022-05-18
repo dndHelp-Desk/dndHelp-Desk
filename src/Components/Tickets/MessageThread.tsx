@@ -43,6 +43,7 @@ interface ReplyOptions {
 const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const statusSelectionRef = useRef<HTMLSelectElement>(null);
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
+  const [subject, setSubject] = useState<string>("");
   const allTickets = useSelector(
     (state: RootState) => state.Tickets.allTickets
   );
@@ -72,6 +73,13 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
   //Filter Thread Messages =====================================
   const threadMessages = useMemo(() => {
+    allTickets &&
+      setSubject(
+        allTickets.filter(
+          (ticket) =>
+            ticket.ticket_id === threadId && ticket.message_position === 1
+        )[0]?.category
+      );
     return allTickets
       .filter((ticket) => ticket.ticket_id === threadId)
       .sort((a, b) => {
@@ -126,7 +134,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   //Reply State and value ==================================
   const [reply, setReply] = useState<ReplyOptions>({
     message: "<p></p>",
-    subject: firstMessage && firstMessage[0]?.category,
+    subject: subject,
     status: "Status",
     message_position: threadMessages.length + 1,
     ticket_id: threadId,
@@ -178,7 +186,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         host: sendingAccount.host,
         port: sendingAccount.port,
         email: clientEmail,
-        subject: firstMessage && firstMessage[0]?.category,
+        subject: `New Issue Reported Ragarding ${subject} || Ticket-ID: ${threadId}`,
         ticket_id: threadId,
         email_body: `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
@@ -319,7 +327,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           host: sendingAccount.host,
           port: sendingAccount.port,
           email: clientEmail,
-          subject: reply.subject,
+          subject: subject,
           ticket_id: threadId,
           email_body: `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">

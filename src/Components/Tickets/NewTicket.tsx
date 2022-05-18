@@ -85,17 +85,17 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
 
   //Check If Ticket Exists ||Customer's history using their numbers ===================
   const numbersArray = useMemo(() => {
-    return allTickets.length >= 1 && inputValue.complainant_number !== ""
+    return allTickets.length >= 1 && inputValue?.complainant_number !== ""
       ? allTickets.filter(
           (ticket) =>
             ticket.message_position === 1 &&
             ticket.complainant_number.includes(
-              inputValue.complainant_number
+              inputValue?.complainant_number
             ) === true &&
-            inputValue.complainant_number.split("").length >= 9
+            inputValue?.complainant_number.split("").length >= 9
         )
       : [];
-  }, [allTickets, inputValue.complainant_number]);
+  }, [allTickets, inputValue?.complainant_number]);
   const exist =
     numbersArray.length >= 1 &&
     numbersArray.map((data, index) => {
@@ -182,7 +182,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         ref(
           storage,
           `/${company_details.name}/${
-            inputValue.ticket_id
+            inputValue?.ticket_id
           }+${new Date().getTime()}`
         ),
         file
@@ -207,12 +207,12 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           {
             channel: "whatsapp",
             to: "27732341215",
-            content: `${inputValue.message}`,
+            content: `${inputValue?.message}`,
           },
           {
             channel: "sms",
             to: "27732341215",
-            content: `${inputValue.message}`,
+            content: `${inputValue?.message}`,
           },
         ],
       });
@@ -230,14 +230,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     recordingFile &&
       addRecording(
         recordingFile,
-        `/${company_details.name}/${inputValue.ticket_id}`
+        `/${company_details.name}/${inputValue?.ticket_id}`
       );
 
-    let dueDate = `${new Date(inputValue.date).toLocaleString()}`;
+    let dueDate = `${new Date(inputValue?.date).toLocaleString()}`;
     let openDate = `${new Date().toLocaleString()}`;
 
     //Alert if Due Date is Empty =============
-    inputValue.date === "" &&
+    inputValue?.date === "" &&
       dispatch(
         updateAlert([
           ...alerts,
@@ -249,7 +249,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       );
 
     //Send Mail and Open Ticket If values are not empty
-    /*if (!recordingFile && inputValue.state === "solved") {
+    /*if (!recordingFile && inputValue?.state === "solved") {
       dispatch(
         updateAlert([
           ...alerts,
@@ -264,39 +264,39 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     //Sending Account =============================
     let sendingAccount = email_accounts.filter(
       (account) =>
-        account.name.toLowerCase() === inputValue.send_as.toLowerCase()
+        account.name.toLowerCase() === inputValue?.send_as.toLowerCase()
     )[0];
 
     if (
-      inputValue.date !== "" &&
+      inputValue?.date !== "" &&
       sendingAccount !== undefined &&
-      inputValue.branch_company !== "" &&
+      inputValue?.branch_company !== "" &&
       member_details.id !== false &&
       allTickets.length >= 1 &&
-      allTickets.filter((ticket) => ticket.ticket_id === inputValue.ticket_id)
+      allTickets.filter((ticket) => ticket.ticket_id === inputValue?.ticket_id)
         .length <= 0
     ) {
       //Open New Ticket ========================
       addTicket(
-        inputValue.recipient_name,
-        inputValue.recipient_email,
-        inputValue.agent,
-        inputValue.priority,
-        inputValue.category,
-        inputValue.branch_company,
-        inputValue.message,
-        inputValue.state,
-        inputValue.date,
-        inputValue.ticket_id,
-        inputValue.agent_email,
-        inputValue.complainant_name,
-        inputValue.complainant_email === "" ||
-          inputValue.complainant_email === undefined ||
-          inputValue.complainant_email?.length < 4
+        inputValue?.recipient_name,
+        inputValue?.recipient_email,
+        inputValue?.agent,
+        inputValue?.priority,
+        inputValue?.category,
+        inputValue?.branch_company,
+        inputValue?.message,
+        inputValue?.state,
+        inputValue?.date,
+        inputValue?.ticket_id,
+        inputValue?.agent_email,
+        inputValue?.complainant_name,
+        inputValue?.complainant_email === "" ||
+          inputValue?.complainant_email === undefined ||
+          inputValue?.complainant_email?.length < 4
           ? "none"
-          : inputValue.complainant_email,
-        inputValue.complainant_number,
-        inputValue.send_as,
+          : inputValue?.complainant_email,
+        inputValue?.complainant_number,
+        inputValue?.send_as,
         `${recordingFile && inputValue?.state === "solved" ? true : false}`
       );
       setShowOpen(true);
@@ -312,51 +312,55 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           password: sendingAccount.password,
           host: sendingAccount.host,
           port: sendingAccount.port,
-          email: inputValue.recipient_email,
-          subject: inputValue.category,
-          ticket_id: inputValue.ticket_id,
+          email: inputValue?.recipient_email,
+          subject: `New Issue Reported Ragarding ${inputValue?.category} || Ticket-ID: ${inputValue?.ticket_id}`,
+          ticket_id: inputValue?.ticket_id,
           email_body:
-            inputValue.state !== "solved"
+            inputValue?.state !== "solved"
               ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-        Hi ${inputValue.recipient_name},
+        Hi ${inputValue?.recipient_name},
       </p>
       <h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;font-size:15px">
         <b>Dial & Dine has opened a new ticket regarding ${
-          inputValue.category
+          inputValue?.category
         }. The case details are as follows:</b>
       </h1>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
         <b>Tickect Details:</b>
       </p>
       <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
-        <li><b>Brand:</b> ${inputValue.branch_company} </li>
-        <li><b>Tickect-ID:</b> ${inputValue.ticket_id} </li>
+        <li><b>Brand:</b> ${inputValue?.branch_company} </li>
+        <li><b>Tickect-ID:</b> ${inputValue?.ticket_id} </li>
         <li><b>Due Date:</b> ${dueDate} </li>
         <li><b>Case Origin:</b> dndHelp-Desk </li>
-        <li><b>Priority:</b> ${inputValue.priority} </li>
-        <li><b>Opened By:</b> ${inputValue.agent} </li>
+        <li><b>Priority:</b> ${inputValue?.priority} </li>
+        <li><b>Opened By:</b> ${inputValue?.agent} </li>
         </ul>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
         <b>Customer's Details:</b>
       </p>
       <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;">
-        <li><b>Full Name:</b> ${inputValue.complainant_name}</li>
-        <li><b>Email Address:</b> ${inputValue.complainant_email} </li>
-        <li><b>Phone Number:</b> ${inputValue.complainant_number}</li>
+        <li><b>Full Name:</b> ${inputValue?.complainant_name}</li>
+        <li><b>Email Address:</b> ${
+          inputValue?.complainant_email.length <= 3
+            ? "none"
+            : inputValue?.complainant_email
+        } </li>
+        <li><b>Phone Number:</b> ${inputValue?.complainant_number}</li>
         </ul>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
         <b>Case Detail:</b>
       </p>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-        ${inputValue.message}
+        ${inputValue?.message}
       </p>
       <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
         <i>In order to update or respond to this issue please click the button below,</i>
       </p>
   <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-       <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue.ticket_id}`}>You can alternatively click here.</a></i>
+       <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>You can alternatively click here.</a></i>
       </p>
-      <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue.ticket_id}`}>Update or Respond Here</a></button>
+      <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>Update or Respond Here</a></button>
 <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
         <b>Disclaimer</b>
       </p>
@@ -365,12 +369,12 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       </p>`
               : `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-     Hi ${inputValue.recipient_name},
+     Hi ${inputValue?.recipient_name},
   </p>
   <h1
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
     <b>Dial & Dine has opened a new ticket with ID: ${
-      inputValue.ticket_id
+      inputValue?.ticket_id
     } which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
   </h1>
   <p
@@ -380,10 +384,10 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   <ul
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
     <li><b>Brand:</b>
-      ${inputValue.branch_company}
+      ${inputValue?.branch_company}
     </li>
     <li><b>Tickect-ID:</b>
-      ${inputValue.ticket_id}
+      ${inputValue?.ticket_id}
     </li>
     <li><b>Closed On:</b>
       ${openDate}
@@ -396,9 +400,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         <b>Customer's Details:</b>
       </p>
       <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;">
-        <li><b>Full Name:</b> ${inputValue.complainant_name}</li>
-        <li><b>Email Address:</b> ${inputValue.complainant_email} </li>
-        <li><b>Phone Number:</b> ${inputValue.complainant_number}</li>
+        <li><b>Full Name:</b> ${inputValue?.complainant_name}</li>
+        <li><b>Email Address:</b> ${
+          inputValue?.complainant_email.length <= 3
+            ? "none"
+            : inputValue?.complainant_email
+        } </li>
+        <li><b>Phone Number:</b> ${inputValue?.complainant_number}</li>
         </ul>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
@@ -406,15 +414,15 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   </p>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-    ${inputValue.message}
+    ${inputValue?.message}
   </p>
   <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
     <i>In order to update or respond to this issue please click the button below,</i>
   </p>
   <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue.ticket_id}`}>You can alternatively click here.</a></i>
+    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>You can alternatively click here.</a></i>
   </p>
-  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue.ticket_id}`}>Update or Respond Here</a></button>
+  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${inputValue?.ticket_id}`}>Update or Respond Here</a></button>
   <p
     style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
     <b>Disclaimer</b>
@@ -626,7 +634,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs capitalize"
                     id="subject"
                     name="subject"
-                    value={inputValue.category}
+                    value={inputValue?.category}
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -656,7 +664,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="priority"
                     name="priority"
-                    value={inputValue.priority}
+                    value={inputValue?.priority}
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -686,7 +694,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsisp-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="status"
                     name="status"
-                    value={inputValue.state}
+                    value={inputValue?.state}
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -726,7 +734,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     id="email"
                     title="Enter A valid Email"
                     name="email"
-                    value={inputValue.complainant_email}
+                    value={inputValue?.complainant_email}
                     autoComplete="nope"
                     placeholder="Customer's Email"
                     onChange={(e) =>
@@ -757,7 +765,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     placeholder="073 5698 625"
                     required={true}
                     pattern="^[0-9]{10}$"
-                    value={inputValue.complainant_number}
+                    value={inputValue?.complainant_number}
                     onChange={(e) => {
                       setValues({
                         ...inputValue,
@@ -842,7 +850,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     name="name"
                     type="text"
                     placeholder="Customer's Name ..."
-                    value={inputValue.complainant_name}
+                    value={inputValue?.complainant_name}
                     required={true}
                     onChange={(e) =>
                       setValues({
@@ -867,7 +875,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="priority"
                     name="priority"
-                    value={inputValue.send_as}
+                    value={inputValue?.send_as}
                     required={true}
                     onChange={(e) =>
                       setValues({
