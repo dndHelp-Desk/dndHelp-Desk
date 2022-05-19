@@ -16,10 +16,7 @@ if (isSafariBrowser()) {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {!isSafariBrowser() && <App />}
-      {isSafariBrowser() && (
-        <p>Please use a browser that supports Webp formats like Chrome</p>
-      )}
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
