@@ -57,7 +57,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         <BiPulse className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-medium"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-medium"
         >
           <option value="">Status</option>
           <option value="open">Open</option>
@@ -97,7 +97,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
           onChange={(e) =>
             setFilters({ ...filters, ticket_id: e.target.value })
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 text-slate-400 placeholder:text-slate-800 dark:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
           placeholder="Ticket-ID ..."
         />
       </div>
@@ -111,7 +111,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
           onChange={(e) =>
             setFilters({ ...filters, complainant_number: e.target.value })
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 text-slate-400 placeholder:text-slate-800 dark:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
           placeholder="Customer's Number ..."
         />
       </div>

@@ -54,11 +54,11 @@ const Tables: FC<Props> = ({ data }) => {
   );
 
   //Loop through each ticket and return a row of consolidated data
-  const rows = tableData.slice(loadMore - 10, loadMore).map((elem, index) => {
+  const rows = tableData?.map((elem, index) => {
     return (
       <tr
         key={index}
-        className="w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize"
+        className={`w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize ${((loadMore-10) <= index+1 && (index+1)<= loadMore)?"":"hidden"}`}
       >
         <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
           {index + 1}.{" "}
@@ -128,7 +128,7 @@ const Tables: FC<Props> = ({ data }) => {
                 let code = prompt("Enter Admin Pin");
                 code === "0001" ? window.print() : alert("Wrong Pin");
               }}
-              className="h-8 w-20 rounded text-xs p-2 bg-blue-700  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded text-xs font-semibold p-2 bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
             >
               <span>Print</span>
               <BsPrinter className="text-sm text-white" />
@@ -141,7 +141,7 @@ const Tables: FC<Props> = ({ data }) => {
                   ? downloadFile("Tickects Report.csv", csv)
                   : alert("Wrong Pin");
               }}
-              className="h-8 w-20 rounded text-xs p-2 bg-blue-700  hover:opacity-80 text-slate-200 dark:border-slate-700 border border-slate-300 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded text-xs font-semibold p-2 bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >
               <span>CSV</span>
               <BsCloudDownload className="text-sm text-white" />
