@@ -57,7 +57,7 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
         toolbarGroup:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
         toolbarControl:
-          "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
+          "bg-inherit text-inherit border-slate-300 dark:border-slate-700  dark:hover:bg-slate-700 hover:bg-slate-100",
         root: "replyEditor h-[9.8rem] py-2 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar border",
       }}
       controls={[

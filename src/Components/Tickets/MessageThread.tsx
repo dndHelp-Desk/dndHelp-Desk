@@ -71,24 +71,24 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const scrollToLastMessage = useRef<HTMLDivElement | any>();
   const scrollToNone = useRef<HTMLDivElement | any>();
 
-  //Filter Thread Messages =====================================
-  const threadMessages = useMemo(() => {
-    allTickets &&
-      setSubject(
-        allTickets.filter(
-          (ticket) =>
-            ticket.ticket_id === threadId && ticket.message_position === 1
-        )[0]?.category
-      );
-    return allTickets
-      .filter((ticket) => ticket.ticket_id === threadId)
-      .sort((a, b) => {
-        return (
-          Number(new Date(a.date).getTime()) -
-          Number(new Date(b.date).getTime())
+    //Filter Thread Messages =====================================
+    const threadMessages = useMemo(() => {
+      allTickets &&
+        setSubject(
+          allTickets.filter(
+            (ticket) =>
+              ticket.ticket_id === threadId && ticket.message_position === 1
+          )[0]?.category
         );
-      });
-  }, [allTickets, threadId]);
+      return allTickets
+        .filter((ticket) => ticket.ticket_id === threadId)
+        .sort((a, b) => {
+          return (
+            Number(new Date(a.date).getTime()) -
+            Number(new Date(b.date).getTime())
+          );
+        });
+    }, [allTickets, threadId]);
 
   //Thread First Message =====================
   const firstMessage = useMemo(() => {

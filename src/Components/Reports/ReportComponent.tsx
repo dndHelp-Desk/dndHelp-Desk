@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect,useMemo, useState } from "react";
 import Tables from "./Tables";
 import OverviewReport from "./OverviewReport";
 import TopCards from "./TopCards";
@@ -7,7 +7,7 @@ import Filters from "./Filters";
 import { RootState } from "../../Redux/store";
 
 const ReportsComponent: FC = () => {
-  const [data, setData] = useState<any>([]);
+ // const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState<any>(false);
   //Filters =====================
   const [contactsList, setList] = useState<string[]>([]);
@@ -26,45 +26,9 @@ const ReportsComponent: FC = () => {
   );
 
   //Filter Tickets Based On Acces Level ====
-  useEffect(() => {
-    setData(
-      reportsData.length >= 1
-        ? reportsData
-            ?.filter((row) =>
-              contactsList?.every(
-                (item) =>
-                  item.toLowerCase()?.replace(/\s/g, "") !==
-                  row.branch_company?.toLowerCase()?.replace(/\s/g, "")
-              )
-            )
-            ?.filter(
-              (data) =>
-                data.message_position === 1 &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi")) &&
-                data.category
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.category, "gi")) &&
-                data.agent_email
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.agent, "gi")) &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi"))
-            )
-        : []
-    );
+  const data = useMemo(() => {
     if (member_details.length >= 1 && member_details[0]?.access === "admin") {
-      setData(
+      return(
         reportsData.length >= 1
           ? reportsData
               ?.filter((row) =>
@@ -104,7 +68,7 @@ const ReportsComponent: FC = () => {
       member_details.length >= 1 &&
       member_details[0].access === "client"
     ) {
-      setData(
+      return(
         reportsData.length >= 1
           ? reportsData
               ?.filter((row) =>
@@ -151,7 +115,7 @@ const ReportsComponent: FC = () => {
       member_details.length >= 1 &&
       member_details[0].access === "agent"
     ) {
-      setData(
+      return(
         reportsData.length >= 1
           ? reportsData
               ?.filter((row) =>

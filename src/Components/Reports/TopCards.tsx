@@ -22,16 +22,17 @@ const TopCards: FC<Props> = ({ data }) => {
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
               <span>
-                {data.length >= 1
-                  ? data.filter((data: any) => data.status === "solved").length
+                {data?.length >= 1
+                  ? data?.filter((data: any) => data.status === "solved")
+                      ?.length
                   : 0}
               </span>
               <span className="pb-[0.4rem] text-[0.65rem] dark:text-slate-400 text-slate-600">
-                {data.length >= 1
+                {data?.length >= 1
                   ? (
-                      (data.filter((data: any) => data.status === "solved")
+                      (data?.filter((data: any) => data.status === "solved")
                         .length /
-                        data.length) *
+                        data?.length) *
                       100
                     ).toFixed(1)
                   : 0}
@@ -51,15 +52,15 @@ const TopCards: FC<Props> = ({ data }) => {
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
               <span>
-                {data.length >= 1
-                  ? data.filter((data: any) => data.fcr === "yes").length
+                {data?.length >= 1
+                  ? data?.filter((data: any) => data.fcr === "yes")?.length
                   : 0}
               </span>
               <span className="pb-[0.4rem] text-[0.65rem] dark:text-slate-400 text-slate-600">
-                {data.length >= 1
+                {data?.length >= 1
                   ? (
-                      (data.filter((data: any) => data.fcr === "yes").length /
-                        data.length) *
+                      (data?.filter((data: any) => data.fcr === "yes")?.length /
+                        data?.length) *
                       100
                     ).toFixed(1)
                   : 0}
@@ -82,23 +83,23 @@ const TopCards: FC<Props> = ({ data }) => {
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
               <span>
-                {data.length >= 1
-                  ? data.filter(
+                {data?.length >= 1
+                  ? data?.filter(
                       (data: any) =>
                         new Date(data.due_date).getTime() <=
                           new Date().getTime() && data.status === "open"
-                    ).length
+                    )?.length
                   : 0}
               </span>
               <span className="pb-[0.4rem] text-[0.65rem] dark:text-slate-400 text-slate-600">
-                {data.length >= 1
+                {data?.length >= 1
                   ? (
-                      (data.filter(
+                      (data?.filter(
                         (data: any) =>
                           new Date(data.due_date).getTime() <=
                             new Date().getTime() && data.status === "open"
-                      ).length /
-                        data.length) *
+                      )?.length /
+                        data?.length) *
                       100
                     ).toFixed(1)
                   : 0}
@@ -118,16 +119,16 @@ const TopCards: FC<Props> = ({ data }) => {
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
               <span>
-                {data.length >= 1
-                  ? data.filter((data: any) => data.reopened === true).length
+                {data?.length >= 1
+                  ? data?.filter((data: any) => data.reopened === true)?.length
                   : 0}
               </span>
               <span className="pb-[0.4rem] text-[0.65rem] dark:text-slate-400 text-slate-600">
-                {data.length >= 1
+                {data?.length >= 1
                   ? (
-                      (data.filter((data: any) => data.reopened === true)
+                      (data?.filter((data: any) => data.reopened === true)
                         .length /
-                        data.length) *
+                        data?.length) *
                       100
                     ).toFixed(1)
                   : 0}
@@ -150,16 +151,16 @@ const TopCards: FC<Props> = ({ data }) => {
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
               <span>
-                {data.length >= 1
-                  ? data.filter((data: any) => data.status === "open").length
+                {data?.length >= 1
+                  ? data?.filter((data: any) => data.status === "open")?.length
                   : 0}
               </span>
               <span className="pb-[0.4rem] text-[0.65rem] dark:text-slate-400 text-slate-600">
-                {data.length >= 1
+                {data?.length >= 1
                   ? (
-                      (data.filter((data: any) => data.status === "open")
+                      (data?.filter((data: any) => data.status === "open")
                         .length /
-                        data.length) *
+                        data?.length) *
                       100
                     ).toFixed(1)
                   : 0}
@@ -179,16 +180,17 @@ const TopCards: FC<Props> = ({ data }) => {
           <div className="w-full h-full flex flex-col justify-center items-center space-y-1">
             <h1 className="dark:text-slate-300 text-slate-900 font-bold font-sans leading-1 text-[1.7rem] flex items-end justify-center space-x-2 w-full">
               <span>
-                {data.length >= 1
-                  ? data.filter((data: any) => data.status === "on hold").length
+                {data?.length >= 1
+                  ? data?.filter((data: any) => data.status === "on hold")
+                      ?.length
                   : 0}
               </span>
               <span className="pb-[0.4rem] text-[0.65rem] dark:text-slate-400 text-slate-600">
-                {data.length >= 1
+                {data?.length >= 1
                   ? (
-                      (data.filter((data: any) => data.status === "on hold")
+                      (data?.filter((data: any) => data.status === "on hold")
                         .length /
-                        data.length) *
+                        data?.length) *
                       100
                     ).toFixed(1)
                   : 0}

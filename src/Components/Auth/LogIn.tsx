@@ -54,7 +54,8 @@ interface InputInter {
 const LogIn: FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const logged = useSelector(
     (state: RootState) => state.UserInfo.authenticated
   );
@@ -70,6 +71,7 @@ const LogIn: FC = () => {
 
   //Log in User =====================
   const handleSubmit = (e: React.SyntheticEvent) => {
+    setLoading(true);
     e.preventDefault();
     setPersistence(auth, browserLocalPersistence).then(() => {
       signInWithEmailAndPassword(auth, inputValues.email, inputValues.password)
@@ -151,8 +153,10 @@ const LogIn: FC = () => {
                 window.localStorage.setItem("auth", "true");
                 dispatch(isAuthenticated(true));
                 navigate("/redirect");
+                setLoading(false);
                 window.location.reload();
               } else {
+                setLoading(false);
                 dispatch(
                   updateAlert([
                     ...alerts,
@@ -167,10 +171,12 @@ const LogIn: FC = () => {
               }
             })
             .catch((err) => {
+              setLoading(false);
               console.log(err.message);
             });
         })
         .catch((error) => {
+          setLoading(false);
           dispatch(
             updateAlert([
               ...alerts,
@@ -408,10 +414,14 @@ const LogIn: FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="group relative w-full flex items-center justify-center space-x-4 py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-blue-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
-                  Sign in
+                  <span>Sign in</span>
+                  <div
+                    className={`spinner h-4 w-4 rounded-full border-2 border-slate-400 border-l-white animate-spin ${
+                      loading ? "" : "hidden"
+                    }`}
+                  ></div>
                 </button>
               </div>
             </form>

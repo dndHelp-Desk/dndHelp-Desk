@@ -93,6 +93,12 @@
   .messageContainer img:hover {
     box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.3);
   }
+
+ .messageContainer p span,.messageContainer p *,.messageContainer *,.replyEditor p *,.replyEditor p span,.replyEditor h1 *,.replyEditor h2 *, .replyEditor h3 *,.replyEditor ul,.replyEditor ol{
+    background:inherit !important;
+    color:inherit !important;
+  }
+
   .replyEditor img {
     @apply inline h-[3.5rem] w-[3.5rem] rounded mx-1 object-center object-cover;
   }

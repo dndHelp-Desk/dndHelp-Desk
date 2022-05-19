@@ -2,8 +2,7 @@ import { FC, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { markAsSeen } from "../Data_Fetching/TicketsnUserData";
-import { BsStopFill } from "react-icons/bs";
-import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
+import { BiChevronRight, BiChevronLeft, BiPulse } from "react-icons/bi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import Navbar from "./Navbar";
 import noTickets from "./images/no-userss.svg";
@@ -214,28 +213,27 @@ const TicketsList: FC<Props> = ({
               }}
               className="h-full w-[90%] flex items-center space-x-4 relative"
             >
-              <div className="h-8 w-8 rounded border border-slate-400 dark:border-slate-600 dark:bg-slate-700 bg-slate-50 flex justify-center items-center text-sm uppercase font-bold text-slate-800 dark:text-slate-300">
+              <div className="h-8 w-9 rounded-sm border border-slate-400 dark:border-slate-600 dark:bg-slate-700 bg-slate-50 flex justify-center items-center text-sm uppercase font-bold text-slate-800 dark:text-slate-300">
                 <abbr title={ticket?.recipient_name}>
                   {ticket?.recipient_name?.trim()?.charAt(0)}
                 </abbr>
               </div>
-              <div className="h-full flex flex-col justify-center space-y-1">
-                <abbr title={ticket.ticket_id}>
-                  <p className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis tracking-normal">
-                    <span className="">
-                      {ticket.category} | {ticket.ticket_id}
-                    </span>
-                  </p>
-                </abbr>
-                <div className="dark:text-slate-400 w-full pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
+              <div className="h-full w-full flex flex-col justify-center space-y-0">
+                <div className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis tracking-normal flex justify-between">
+                  <span className="capitalize">{ticket.category}</span>
+                  <span>{ticket.ticket_id}</span>
+                </div>
+                <div className="dark:text-slate-400 w-[60%] pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
                   <abbr title={ticket.branch_company}>
-                    <span>{ticket.branch_company}</span>
+                    <span className="overflow-hidden overflow-ellipsis whitespace-nowrap w-full">
+                      {ticket.branch_company}
+                    </span>
                   </abbr>
                 </div>
                 {/**Indicate The ticket that is solved or  overdue and open ================*/}
-                <small className="dark:text-slate-400 text-slate-500 flex items-center space-x-1 text-[0.6rem] whitespace-nowrap">
+                <small className="dark:text-slate-400 text-slate-500 flex items-center space-x-[0.15rem] text-[0.6rem] whitespace-nowrap">
                   <span
-                    className={`${
+                    className={`text-sm ${
                       new Date(ticket.due_date).getTime() <=
                         new Date().getTime() &&
                       ticket.status &&
@@ -252,7 +250,7 @@ const TicketsList: FC<Props> = ({
                         : ""
                     } `}
                   >
-                    <BsStopFill />
+                    <BiPulse />
                   </span>{" "}
                   <span>
                     Due on {new Date(ticket.due_date).toLocaleString()}

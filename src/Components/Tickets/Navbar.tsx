@@ -165,7 +165,7 @@ const Navbar: FC<Props> = ({
             assgn(member.name, member.email, member.id);
             setPanel(false);
           }}
-          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-800 bg-slate-100 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded capitalize flex items-center p-2 space-x-2 ${
+          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-800 bg-slate-100 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded-sm capitalize flex items-center p-2 space-x-2 ${
             member.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -195,7 +195,7 @@ const Navbar: FC<Props> = ({
         />
         <button
           onClick={() => setfiltersModal(true)}
-          className="h-9 w-11 rounded flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-slate-700 border-slate-300"
+          className="h-9 w-11 rounded-sm flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:opacity-80 hover:bg-slate-200 duration-300 transition-bg text-lg font-semibold  border dark:border-slate-700 border-slate-300"
         >
           <abbr title="filters" className="">
             <BiFilterAlt className="dark:text-slate-300 text-slate-800 font-bold" />
@@ -205,7 +205,7 @@ const Navbar: FC<Props> = ({
         {/**Assign Agent ================================= */}
         <button
           onClick={() => setPanel(true)}
-          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-300 ${
+          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-sm  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -222,7 +222,7 @@ const Navbar: FC<Props> = ({
             let code = prompt("Enter Pin To Perform Action");
             code === "0001" ? deleteSelected() : alert("Wrong Pin");
           }}
-          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  text-red-600  font-semibold  border dark:border-slate-700 border-slate-300 ${
+          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-sm  text-red-600  font-semibold  border dark:border-slate-700 border-slate-300 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -235,7 +235,7 @@ const Navbar: FC<Props> = ({
 
         {/**Mark All ================================= */}
         <button
-          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded  flex items-center justify-center  border dark:border-slate-700 border-slate-300  ${
+          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-9 w-11 rounded-sm  flex items-center justify-center  border dark:border-slate-700 border-slate-300  ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -249,7 +249,7 @@ const Navbar: FC<Props> = ({
               onChange={(e) =>
                 e.target?.checked === true ? markAll() : setDelete([])
               }
-              className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
+              className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-sm  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
               type="checkbox"
               name="selectAll"
               id="selectAll"
@@ -262,7 +262,7 @@ const Navbar: FC<Props> = ({
         {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm px-2 border border-slate-300 dark:border-slate-700 rounded absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm px-2 border border-slate-300 dark:border-slate-700 rounded-sm absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
@@ -286,9 +286,9 @@ const Navbar: FC<Props> = ({
           onClick={() =>
             setModal(user[0].name !== "User Loader" ? true : false)
           }
-          className="border-[#2564ebea] border text-[#2564ebe8] h-9 w-10 dark:bg-[#1e293b9c] bg-slate-100 px-6 space-x-2 rounded flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold"
+          className="bg-slate-800 dark:bg-blue-600 capitalize text-slate-100 h-9 px-4 space-x-1 rounded-sm flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold"
         >
-          <span>NEW</span>
+          <span>open new</span>
         </button>
       </abbr>
     </nav>

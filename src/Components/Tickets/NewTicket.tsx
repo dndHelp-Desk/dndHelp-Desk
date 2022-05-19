@@ -13,7 +13,8 @@ import {
   BiFile,
   BiMinus,
   BiMicrophone,
-  BiXCircle,
+  BiCollapse,
+  BiUser,
 } from "react-icons/bi";
 import { AppDispatch, RootState } from "../../Redux/store";
 
@@ -102,19 +103,19 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       return (
         <li
           key={index}
-          className={`text-slate-800 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 dark:bg-slate-600 bg-slate-200 rounded capitalize leading-5 space-y-2`}
+          className={`text-slate-800 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 border-b dark:border-slate-600 border-slate-400 capitalize leading-5 space-y-1 tracking-tight`}
         >
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>{data.branch_company} :</span> <span>{data.ticket_id}</span>
           </div>
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>Date : </span>
             <span>{new Date(data.date).toLocaleString()}</span>
           </div>
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>Agent Name :</span> <span>{data.agent_name}</span>
           </div>
-          <div className="flex justify-between border-b border-slate-400 dark:border-slate-500 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <span>Status :</span> <span>{data.status}</span>
           </div>
         </li>
@@ -148,8 +149,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               .includes(recepient.toLowerCase().replace(/\s/g, "")) === true
               ? ""
               : "hidden"
-          } text-xs dark:text-slate-300 text-slate-800 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 border-b  dark:border-slate-700 border-slate-300 capitalize`}
+          } text-xs dark:text-slate-300 text-slate-800 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 dark:hover:bg-slate-700 hover:bg-slate-200 capitalize flex items-center space-x-2 transition-all duration-150 px-2`}
         >
+          <BiUser />
           <abbr title={contact.branch_company}>{contact.branch_company}</abbr>
         </li>
       );
@@ -617,9 +619,11 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     ref={closeSuggestionsRef}
                     className={`${
                       searchResults ? "" : "hidden"
-                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md overflow-y-scroll no-scrollbar z-[999] no-scrollbar::-webkit-scrollbar px-4 p-2 space-y-2 border dark:border-slate-600 border-slate-400 list-decimal`}
+                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md z-[999] p-2 px-1 space-y-1 border dark:border-slate-600 border-slate-400`}
                   >
-                    {contactsList}
+                    <ul className="h-full w-full overflow-y-scroll overflow-hidden px-1">
+                      {contactsList}
+                    </ul>
                   </div>{" "}
                 </label>
                 {/**Subject ============================= */}
@@ -821,15 +825,17 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       numbersArray.length >= 1 && showOpenedTickets
                         ? ""
                         : "hidden"
-                    } absolute top-12 left-0 h-[16rem] w-full shadow-2xl bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-4 space-y-2`}
+                    } absolute top-12 left-0 h-[18.5rem] w-full shadow-2xl bg-slate-200 dark:bg-slate-900 border border-slate-400 dark:border-slate-600 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2`}
                   >
                     {exist}
                     <button
                       type="button"
                       onClick={() => setShowOpen(false)}
-                      className="absolute bg-transparent top-[-0.5rem] right-0 outline-none focus:outline-none hover:opacity-80 cursor-pointer"
+                      className="absolute  top-[-0.25rem] right-1 bg-transparent outline-none focus:outline-none hover:opacity-80 rounded border dark:border-slate-700 border-slate-500"
                     >
-                      <BiXCircle className="text-lg dark:text-slate-400 text-slate-600" />
+                      <abbr title="close">
+                        <BiCollapse className="text-lg dark:text-slate-400 text-slate-600" />
+                      </abbr>
                     </button>
                   </ul>
                 </label>
@@ -918,7 +924,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   toolbarGroup:
                     "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
                   toolbarControl:
-                    "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
+                    "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100",
                   root: "replyEditor h-full overflow-hidden overflow-y-scroll text-slate-800 dark:text-slate-400",
                 }}
                 controls={[

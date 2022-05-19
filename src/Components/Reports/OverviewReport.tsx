@@ -41,9 +41,9 @@ const OverviewReport: FC<data> = ({ data }) => {
 
   //Total Calls Incoming or Outgoing ===========================
   const totalAggregate = useMemo(() => {
-    return reportsData.length >= 1 && data.length >= 1
-      ? reportsData.filter((ticket: any) =>
-          data.some((item: any) => item.ticket_id === ticket.ticket_id)
+    return reportsData?.length >= 1 && data?.length >= 1
+      ? reportsData?.filter((ticket: any) =>
+          data?.some((item: any) => item.ticket_id === ticket.ticket_id)
         ).length
       : 0;
   }, [reportsData, data]);
@@ -84,7 +84,7 @@ const OverviewReport: FC<data> = ({ data }) => {
   //Calculate The resolution Rate ==========
   const ratings: any = useMemo(() => {
     return (
-      (data.filter(
+      (data?.filter(
         (ticket: any) => ticket.status === "solved" && ticket.reopened === false
       ).length /
         data.length) *
