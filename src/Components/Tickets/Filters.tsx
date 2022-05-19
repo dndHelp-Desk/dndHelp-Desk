@@ -2,10 +2,11 @@ import { FC } from "react";
 import {
   BiCategoryAlt,
   BiUser,
-  BiSpreadsheet,
+  BiHash,
   BiCalendarWeek,
   BiPulse,
   BiUserPin,
+  BiTagAlt,
 } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -66,6 +67,19 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
           <option value="solved">Resolved</option>
         </select>
       </div>
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+        <BiTagAlt className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
+        <select
+          onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-medium"
+        >
+          <option value="">Priority</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </div>
 
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
         <BiUser className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
@@ -88,7 +102,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
       </div>
       <CompanyFilter setList={setList} contactsList={contactsList} />
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
-        <BiSpreadsheet className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
+        <BiHash className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <input
           type="search"
           autoComplete="off"

@@ -48,6 +48,7 @@ const TicketsList: FC<Props> = ({
     category: "",
     complainant_number: "",
     status: "",
+    priority: "",
     fcr: "no",
     reopened: false,
     overdue: false,
@@ -86,6 +87,11 @@ const TicketsList: FC<Props> = ({
                 .replace(/\(/g, "")
                 .replace(/\)/g, "")
                 .match(new RegExp(filters.status, "gi")) &&
+              ticket?.priority
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters?.priority, "gi")) &&
               Number(new Date(ticket.date).getTime()) >=
                 Number(new Date(ticketsComponentDates.startDate).getTime()) &&
               Number(new Date(ticket.date).getTime()) <=
@@ -117,6 +123,7 @@ const TicketsList: FC<Props> = ({
     ticketsComponentDates.startDate,
     filters.status,
     filters.ticket_id,
+    filters?.priority,
     contactsList,
   ]);
 
@@ -138,7 +145,7 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-[4.9rem] border-t last:border-b dark:border-[#33415583] border-slate-300 relative  p-2 space-x-2 flex snap_childTwo hover:bg-slate-100 dark:hover:bg-[#182235] transition-all ${
+          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-4 p-2 space-x-2 flex snap_childTwo hover:bg-slate-100 dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
               ? "bg-slate-100 dark:bg-[#182235]"
               : "bg-inherit"
@@ -280,10 +287,10 @@ const TicketsList: FC<Props> = ({
           setList={setList}
           contactsList={contactsList}
         />
-        <div className="w-full flex-[15] flex flex-col overflow-hidden">
+        <div className="w-full h-[43.5rem] flex flex-col justify-between overflow-hidden">
           <div
             role="table"
-            className="w-full h-[92%] overflow-hidden overflow-y-scroll scroll-snap pr-1"
+            className="w-full h-[40.5rem] flex flex-col overflow-hidden overflow-y-scroll scroll-snap pr-1"
           >
             {tickets}
             {filteredTickets.length <= 0 && (
@@ -301,7 +308,7 @@ const TicketsList: FC<Props> = ({
           </div>
 
           {/**Pagination ================================ */}
-          <div className="h-[7%] w-full bottom-0 flex flex-col justify-center items-center">
+          <div className="h-[3rem] bg-inherit w-full z-[9] bottom-0 flex flex-col justify-center items-center overflow-hidden">
             <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-100 py-1 rounded border dark:border-slate-700 border-slate-300">
               <button
                 onClick={() => {

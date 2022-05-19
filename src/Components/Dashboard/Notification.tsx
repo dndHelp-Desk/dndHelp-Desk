@@ -60,7 +60,7 @@ const Notification: FC<Props> = ({
       return (
         <div
           key={msg.id}
-          className="w-full rounded dark:bg-slate-700 bg-slate-50 p-2 px-4 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 space-y-1 relative"
+          className="w-full rounded dark:bg-slate-700 bg-slate-50 p-2 px-4 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 space-y-1 relative tracking-tight"
         >
           <h4 className="dark text-xs uppercase font-bold">
             You have a new message !

@@ -122,6 +122,10 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
         );
       },
     },
+    markers: {
+      size: [4, 7],
+      strokeColors: theme !== "dark" ? ["#f8fafc"] : ["#1e293b"],
+    },
   };
 
   return (

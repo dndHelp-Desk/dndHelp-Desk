@@ -8,7 +8,7 @@ import {
 import {
   BiPaperPlane,
   BiMicrophone,
-  BiCommentDetail,
+  BiCopyAlt,
   BiArrowBack,
 } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
@@ -71,24 +71,24 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const scrollToLastMessage = useRef<HTMLDivElement | any>();
   const scrollToNone = useRef<HTMLDivElement | any>();
 
-    //Filter Thread Messages =====================================
-    const threadMessages = useMemo(() => {
-      allTickets &&
-        setSubject(
-          allTickets.filter(
-            (ticket) =>
-              ticket.ticket_id === threadId && ticket.message_position === 1
-          )[0]?.category
+  //Filter Thread Messages =====================================
+  const threadMessages = useMemo(() => {
+    allTickets &&
+      setSubject(
+        allTickets.filter(
+          (ticket) =>
+            ticket.ticket_id === threadId && ticket.message_position === 1
+        )[0]?.category
+      );
+    return allTickets
+      .filter((ticket) => ticket.ticket_id === threadId)
+      .sort((a, b) => {
+        return (
+          Number(new Date(a.date).getTime()) -
+          Number(new Date(b.date).getTime())
         );
-      return allTickets
-        .filter((ticket) => ticket.ticket_id === threadId)
-        .sort((a, b) => {
-          return (
-            Number(new Date(a.date).getTime()) -
-            Number(new Date(b.date).getTime())
-          );
-        });
-    }, [allTickets, threadId]);
+      });
+  }, [allTickets, threadId]);
 
   //Thread First Message =====================
   const firstMessage = useMemo(() => {
@@ -486,7 +486,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               : scrollToNone
           }
           key={index}
-          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-[#3341553f]"
+          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded border border-slate-300 dark:border-slate-700"
         >
           {/**Message ====================== */}
           <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
@@ -496,7 +496,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>
             </div>
             {/**Contents ======================= */}
-            <div className="w-full bg-transparent rounded-lg">
+            <div className="w-full bg-transparent rounded-lg pt-2 md:pt-0">
               <div className="font-semibold dark:font-medium dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
                 <div className="flex items-center dark:text-slate-300 text-slate-900 text-xs">
                   <span className="tracking-normal font-bold capitalize">
@@ -534,9 +534,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                         threadId: message.ticket_id,
                       })
                     }
-                    className="h-8 w-8 rounded-xl dark:hover:bg-slate-700 hover:bg-slate-300 dark:text-slate-400 text-slate-700 flex items-center justify-center outline-none focus:outline-none"
+                    className="h-8 w-8 rounded-sm dark:hover:opacity-80 hover:opacity-80 dark:text-slate-400 text-slate-700 flex items-center justify-center outline-none focus:outline-none"
                   >
-                    <BsThreeDotsVertical className="inline  cursor-pointer" />
+                    <BsThreeDotsVertical className="inline" />
                   </button>
 
                   {/**Message Options =========================== */}
@@ -606,7 +606,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 <summary className="w-[4rem] pl-2 lg:p-0 text-[0.65rem] leading-6 dark:text-slate-300 text-slate-900 font-bold uppercase select-none cursor-pointer outline-none focus:outline-none">
                   Details
                 </summary>
-                <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[18rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-[#182235] bg-white border border-slate-300 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
+                <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[21rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-[#182235] bg-white border border-slate-300 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
                   <div>
                     <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
                       <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
@@ -617,6 +617,14 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                         <b className="hidden sm:flex">Assigned To : </b>
                         {firstMessage && firstMessage[0]?.agent_name}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Status : </b>
+                        {firstMessage && firstMessage[0]?.status}
+                      </li>
+                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
+                        <b className="hidden sm:flex">Priority : </b>
+                        {firstMessage && firstMessage[0]?.priority}
                       </li>
                       <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
                         <b className="hidden sm:flex">Brand/Company : </b>
@@ -669,14 +677,14 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         </div>
 
         {/**Thread Messages ============================ */}
-        <div className="h-full w-[98%] m-auto p-6 flex flex-col gap-3 overflow-y-scroll bg-inherit">
+        <div className="h-full w-[98%] m-auto p-6 flex flex-col gap-3 overflow-y-scroll bg-inherit relative">
           {thread}
           {
             //Final Solution If there is one =====================
             firstMessage && firstMessage[0]?.status === "solved" && (
               <div
                 ref={scrollToLastMessage}
-                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-[#3341553f]"
+                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded border border-slate-300 dark:border-slate-700"
               >
                 {/**Message ====================== */}
                 <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
@@ -768,7 +776,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 {/**Canned Response ========================================= */}
                 <div className="group w-8 h-8 rounded-l-sm border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-700 dark:text-slate-400 relative">
                   <abbr title="Canned Response">
-                    <BiCommentDetail className="text-base hover:opacity-80" />
+                    <BiCopyAlt className="text-base hover:opacity-80" />
                   </abbr>
                   <div className="group-hover:flex hidden absolute bottom-[100%] left-0 w-[11rem] h-[9rem] pb-1">
                     <div className="rounded bg-white dark:bg-slate-800 z-[999] border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden shadow-xl">

@@ -3,9 +3,10 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import {
   BiTrash,
   BiUser,
+  BiUserCheck,
   BiFilterAlt,
   BiSelectMultiple,
-  BiSearch,
+  BiSearchAlt,
 } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
@@ -138,7 +139,7 @@ const Navbar: FC<Props> = ({
               id,
               "You've got a new Ticket",
               `You've been assigned a ticket with id: ${ticket.ticket_id} 
-              By:${user[0].name}`
+              Assigned by : ${user[0].name}`
             );
           });
     }
@@ -165,7 +166,7 @@ const Navbar: FC<Props> = ({
             assgn(member.name, member.email, member.id);
             setPanel(false);
           }}
-          className={`border border-slate-200 dark:border-slate-700 dark:bg-slate-800 bg-slate-100 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-600 rounded-sm capitalize flex items-center p-2 space-x-2 ${
+          className={`border border-slate-300 dark:border-slate-700 dark:bg-slate-800 bg-slate-100 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-700 rounded-sm capitalize flex items-center p-2 space-x-2 ${
             member.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -182,7 +183,7 @@ const Navbar: FC<Props> = ({
 
   //Component ======================
   return (
-    <nav className="flex flex-[1] pb-1.5 justify-between items-center w-full relative">
+    <nav className="flex h-[3rem] bg-transparent justify-between items-center w-full relative">
       <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}
         <OffFilters
@@ -212,7 +213,7 @@ const Navbar: FC<Props> = ({
           } items-center justify-center text-lg`}
         >
           <abbr title="Assign">
-            <BiUser />
+            <BiUserCheck className="text-xl" />
           </abbr>
         </button>
 
@@ -262,14 +263,14 @@ const Navbar: FC<Props> = ({
         {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm px-2 border border-slate-300 dark:border-slate-700 rounded-sm absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
+            className={`h-[15.5rem] w-[12rem] dark:bg-slate-900 bg-white shadow-2xl backdrop-blur-sm px-2 border border-slate-400 dark:border-slate-700 rounded-sm absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 pt-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
             <div className="flex sticky top-0 border-b border-slate-300 dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-8 items-center justify-center ">
-              <BiSearch className="absolute left-3 text-slate-400 font-semibold" />
+              <BiSearchAlt className="absolute left-3 dark:text-slate-400 text-slate-700 font-semibold" />
               <input
-                className="w-full h-8 bg-transparent rounded-lg text-slate-400 text-sm md:px-10  placeholder-slate-400 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
+                className="w-full h-8 bg-transparent rounded-lg dark:text-slate-400 text-slate-700 text-sm md:px-10  dark:placeholder-slate-400 placeholder:text-slate-700 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"
                 type="search"
                 placeholder="Search ..."
                 onChange={(e) => setSearch(e.target.value)}
@@ -286,7 +287,7 @@ const Navbar: FC<Props> = ({
           onClick={() =>
             setModal(user[0].name !== "User Loader" ? true : false)
           }
-          className="bg-slate-800 dark:bg-blue-600 capitalize text-slate-100 h-9 px-4 space-x-1 rounded-sm flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold"
+          className="bg-slate-800 dark:bg-blue-700 capitalize text-white h-9 px-4 space-x-1 rounded-sm flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold hover:opacity-80 transition-all"
         >
           <span>open new</span>
         </button>

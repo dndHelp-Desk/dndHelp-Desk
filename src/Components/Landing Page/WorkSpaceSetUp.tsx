@@ -15,6 +15,7 @@ import {
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore";
 
 const WorkSpaceSetUp: FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const auth = getAuth();
   const [setUpValues, setValues] = useState<any | null>({
@@ -87,6 +88,7 @@ const WorkSpaceSetUp: FC = () => {
     email: string,
     password: string
   ) => {
+    setLoading(true);
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((data) => {
@@ -105,6 +107,7 @@ const WorkSpaceSetUp: FC = () => {
                 uid: data.user.uid,
               }),
             });
+            setLoading(false);
           } else {
             // New User =================================
             addDoc(membersRef, {
@@ -183,6 +186,7 @@ const WorkSpaceSetUp: FC = () => {
             });
 
             //Sign-Out  and Redirect to login ================================
+            setLoading(false);
             setTimeout(() => {
               signOut(auth).then(() => {
                 //Redirect To LogIn ================================
@@ -194,6 +198,7 @@ const WorkSpaceSetUp: FC = () => {
       })
       .catch((err) => {
         setUserExistError(err.message.split(":")[1]);
+        setLoading(false);
       });
   };
 
@@ -244,7 +249,7 @@ const WorkSpaceSetUp: FC = () => {
           </small>
           <hr className="bg-slate-400 border-0 h-[1px]" />
           {/**Name & Email Address ========================= */}
-          <div className="flex w-full justify-between items-center gap-4">
+          <div className="flex w-full justify-between items-center space-x-4">
             <label
               htmlFor="user_name"
               className="w-2/4 text-xs font-medium text-slate-800"
@@ -288,7 +293,7 @@ const WorkSpaceSetUp: FC = () => {
           </div>
 
           {/**Password & Home Address ========================= */}
-          <div className="flex w-full justify-between items-center gap-4">
+          <div className="flex w-full justify-between items-center space-x-4">
             <label
               htmlFor="user_password"
               className="w-2/4 text-xs font-medium text-slate-800"
@@ -346,7 +351,7 @@ const WorkSpaceSetUp: FC = () => {
           <hr className="bg-slate-400 border-0 h-[1px]" />
 
           {/**Company Name & Company Address ========================= */}
-          <div className="flex w-full justify-between items-center gap-4">
+          <div className="flex w-full justify-between items-center space-x-4">
             <label
               htmlFor="company_name"
               className="w-2/4 text-xs font-medium text-slate-800"
@@ -395,7 +400,7 @@ const WorkSpaceSetUp: FC = () => {
           </div>
 
           {/**Company Outgoing Email & Server host ========================= */}
-          <div className="flex w-full justify-between items-center gap-4">
+          <div className="flex w-full justify-between items-center space-x-4">
             <label
               htmlFor="sending_email"
               className="w-2/4 text-xs font-medium text-slate-800"
@@ -442,7 +447,7 @@ const WorkSpaceSetUp: FC = () => {
           </div>
 
           {/**Port  & password ========================= */}
-          <div className="flex w-full justify-between items-center gap-4">
+          <div className="flex w-full justify-between items-center space-x-4">
             <label
               htmlFor="port"
               className="w-2/4 text-xs font-medium text-slate-800"
@@ -489,9 +494,14 @@ const WorkSpaceSetUp: FC = () => {
           </div>
 
           {/**Create Account */}
-          <div className="flex w-full justify-center items-center gap-4">
-            <button className="mt-2 h-10 w-40 bg-slate-900 rounded text-slate-100 font-bold hover:opacity-90 outliq focus:outline-none transition-all uppercase text-sm">
-              SignUp
+          <div className="w-full flex justify-center items-center space-x-4">
+            <button className="mt-2 h-10 px-10 bg-slate-900 rounded text-slate-100 font-bold hover:opacity-90 outliq focus:outline-none transition-all uppercase text-sm  flex justify-center items-center space-x-2">
+              <span>SignUp</span>
+              <div
+                className={`h-5 w-5 rounded-full border-2 border-slate-200 border-l-blue-600 animate-spin  ${
+                  loading ? "" : "hidden"
+                }`}
+              ></div>
             </button>
           </div>
 

@@ -1,4 +1,4 @@
-import { FC, useEffect,useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import Tables from "./Tables";
 import OverviewReport from "./OverviewReport";
 import TopCards from "./TopCards";
@@ -7,7 +7,7 @@ import Filters from "./Filters";
 import { RootState } from "../../Redux/store";
 
 const ReportsComponent: FC = () => {
- // const [data, setData] = useState<any>([]);
+  // const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState<any>(false);
   //Filters =====================
   const [contactsList, setList] = useState<string[]>([]);
@@ -28,130 +28,124 @@ const ReportsComponent: FC = () => {
   //Filter Tickets Based On Acces Level ====
   const data = useMemo(() => {
     if (member_details.length >= 1 && member_details[0]?.access === "admin") {
-      return(
-        reportsData.length >= 1
-          ? reportsData
-              ?.filter((row) =>
-                contactsList?.every(
-                  (item) =>
-                    item.toLowerCase()?.replace(/\s/g, "") !==
-                    row.branch_company?.toLowerCase()?.replace(/\s/g, "")
-                )
+      return reportsData.length >= 1
+        ? reportsData
+            ?.filter((row) =>
+              contactsList?.every(
+                (item) =>
+                  item.toLowerCase()?.replace(/\s/g, "") !==
+                  row.branch_company?.toLowerCase()?.replace(/\s/g, "")
               )
-              ?.filter(
-                (data) =>
-                  data.message_position === 1 &&
-                  data.status
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.status, "gi")) &&
-                  data.category
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.category, "gi")) &&
-                  data.agent_email
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.agent, "gi")) &&
-                  data.status
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.status, "gi"))
-              )
-          : []
-      );
+            )
+            ?.filter(
+              (data) =>
+                data.message_position === 1 &&
+                data.status
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.status, "gi")) &&
+                data.category
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.category, "gi")) &&
+                data.agent_email
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.agent, "gi")) &&
+                data.status
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.status, "gi"))
+            )
+        : [];
     } else if (
       member_details.length >= 1 &&
       member_details[0].access === "client"
     ) {
-      return(
-        reportsData.length >= 1
-          ? reportsData
-              ?.filter((row) =>
-                contactsList?.every(
-                  (item) =>
-                    item.toLowerCase()?.replace(/\s/g, "") !==
-                    row.branch_company?.toLowerCase()?.replace(/\s/g, "")
-                )
+      return reportsData.length >= 1
+        ? reportsData
+            ?.filter((row) =>
+              contactsList?.every(
+                (item) =>
+                  item.toLowerCase()?.replace(/\s/g, "") !==
+                  row.branch_company?.toLowerCase()?.replace(/\s/g, "")
               )
-              ?.filter(
-                (data) =>
-                  data.message_position === 1 &&
-                  data.status
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.status, "gi")) &&
-                  data.category
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.category, "gi")) &&
-                  data.agent_email
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.agent, "gi")) &&
-                  data.status
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.status, "gi")) &&
-                  member_details[0]?.companies
-                    .split(",")
-                    .some(
-                      (msg: any) =>
-                        msg?.toLowerCase().replace(/\s/g, "") ===
-                        data.branch_company?.toLowerCase().replace(/\s/g, "")
-                    )
-              )
-          : []
-      );
+            )
+            ?.filter(
+              (data) =>
+                data.message_position === 1 &&
+                data.status
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.status, "gi")) &&
+                data.category
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.category, "gi")) &&
+                data.agent_email
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.agent, "gi")) &&
+                data.status
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.status, "gi")) &&
+                member_details[0]?.companies
+                  .split(",")
+                  .some(
+                    (msg: any) =>
+                      msg?.toLowerCase().replace(/\s/g, "") ===
+                      data.branch_company?.toLowerCase().replace(/\s/g, "")
+                  )
+            )
+        : [];
     } else if (
       member_details.length >= 1 &&
       member_details[0].access === "agent"
     ) {
-      return(
-        reportsData.length >= 1
-          ? reportsData
-              ?.filter((row) =>
-                contactsList?.every(
-                  (item) =>
-                    item.toLowerCase()?.replace(/\s/g, "") !==
-                    row.branch_company?.toLowerCase()?.replace(/\s/g, "")
-                )
+      return reportsData.length >= 1
+        ? reportsData
+            ?.filter((row) =>
+              contactsList?.every(
+                (item) =>
+                  item.toLowerCase()?.replace(/\s/g, "") !==
+                  row.branch_company?.toLowerCase()?.replace(/\s/g, "")
               )
-              ?.filter(
-                (data) =>
-                  data?.agent_email === member_details[0]?.email &&
-                  data.message_position === 1 &&
-                  data.status
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.status, "gi")) &&
-                  data.category
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.category, "gi")) &&
-                  data.agent_email
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.agent, "gi")) &&
-                  data.status
-                    .replace(/\s/g, "")
-                    .replace(/\(/g, "")
-                    .replace(/\)/g, "")
-                    .match(new RegExp(filters.status, "gi"))
-              )
-          : []
-      );
+            )
+            ?.filter(
+              (data) =>
+                data?.agent_email === member_details[0]?.email &&
+                data.message_position === 1 &&
+                data.status
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.status, "gi")) &&
+                data.category
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.category, "gi")) &&
+                data.agent_email
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.agent, "gi")) &&
+                data.status
+                  .replace(/\s/g, "")
+                  .replace(/\(/g, "")
+                  .replace(/\)/g, "")
+                  .match(new RegExp(filters.status, "gi"))
+            )
+        : [];
     }
   }, [
     reportsData,

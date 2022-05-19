@@ -56,7 +56,8 @@ const Dashboard: FC = () => {
             dashboardData?.filter(
               (ticket) =>
                 ticket?.readStatus !== "read" &&
-                ticket?.recipient_email === user[0]?.email
+                ticket?.recipient_email?.replace(/\s/g, "").toLowerCase() ===
+                  user[0]?.email?.replace(/\s/g, "").toLowerCase()
             )
         )
       );
@@ -67,7 +68,7 @@ const Dashboard: FC = () => {
             dashboardData?.filter(
               (ticket) =>
                 ticket.readStatus !== "read" &&
-                user[0].companies.includes(ticket.branch_company)
+                user[0]?.companies.includes(ticket.branch_company)
             )
         )
       );
@@ -91,10 +92,13 @@ const Dashboard: FC = () => {
 
   //Check if The data is loading
   useEffect(() => {
-    dashboardData.length <= 0 ? setLoading(true) : setLoading(false);
-    dashboardData.length <= 0 && setTimeout(() => setLoading(false), 10000);
+    dashboardData.length <= 0 || user?.length <= 0
+      ? setLoading(true)
+      : setLoading(false);
+    (dashboardData.length <= 0 || user?.length <= 0) &&
+      setTimeout(() => setLoading(false), 10000);
     return clearTimeout();
-  }, [dashboardData.length]);
+  }, [dashboardData.length, user?.length]);
 
   if (logged !== true) {
     return <Navigate to="/login" />;
