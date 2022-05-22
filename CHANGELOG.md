@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.16](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.15...v0.6.16) (2022-05-22)
+
+
+### Bug Fixes
+
+* **alerts:** updated the alert component with unique id and ui ([a0b64ee](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/a0b64eeca88ae639cf5487fff6fd6614db2753b0))
+* **reports/table:** fixed the reports table indexing when using pagination and filters update ([24f1b41](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/24f1b41feef37a3a4ef86f1028e3f39f8d0f92cd))
+
 ### [0.6.15](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.14...v0.6.15) (2022-05-18)
 
 
