@@ -7,6 +7,7 @@ import {
   HiOutlinePhone,
   HiOutlineCog,
   HiOutlineBell,
+  HiOutlineChatAlt2,
 } from "react-icons/hi";
 import darkLogo from "./logos/dndHelp-Desk.webp";
 import lightLogo from "./logos/dndHelp-Desk_.webp";
@@ -310,6 +311,13 @@ const Dashboard: FC = () => {
                   phoneToolTip={phoneToolTip}
                   openPhone={openPhone}
                 />
+              </div>
+
+              {/**Chat =================================== */}
+              <div className="relative">
+                <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold">
+                  <HiOutlineChatAlt2 />
+                </button>
               </div>
 
               {/**Notifications ================================================ */}

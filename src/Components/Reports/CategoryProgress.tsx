@@ -41,7 +41,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
                 <div
                   role="progressbar"
                   aria-label="progressbas"
-                  className="h-3 w-full flex-[3] rounded-sm border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 overflow-hidden"
+                  className="h-2.5 w-full flex-[3] rounded-full border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 overflow-hidden"
                 >
                   <div
                     style={{
@@ -51,7 +51,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
                           : "0.0"
                       }%`,
                     }}
-                    className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 transition-all duration-200"
+                    className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 transition-all duration-200 rounded-full"
                   >
                     <abbr
                       title={`${element.name} : ${
@@ -84,7 +84,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
                 <div
                   role="progressbar"
                   aria-label="progressbas"
-                  className="h-3 w-full flex-[3] rounded-sm border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 overflow-hidden"
+                  className="h-2.5 w-full flex-[3] rounded-full border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 overflow-hidden"
                 ></div>
                 <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-bold text-xs">
                   <span>0.0%</span>

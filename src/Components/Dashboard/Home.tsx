@@ -53,10 +53,10 @@ const Home: FC = () => {
       return (
         <div
           key={user.id}
-          className="w-full snap_child h-13  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200"
+          className="w-full snap_child h-14  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200"
         >
           <div
-            className={`h-10 w-10 flex justify-center items-center rounded relative`}
+            className={`h-9 w-9 flex justify-center items-center rounded relative`}
           >
             <img
               src={
@@ -79,10 +79,10 @@ const Home: FC = () => {
           </div>
           <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-bold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
             <abbr title={user.name}>
-              <p>{user.name}</p>
+              <p className="italic">{user.name}</p>
             </abbr>
             <abbr title={user.email}>
-              <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase">
+              <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic">
                 {user.email}
               </p>
             </abbr>
