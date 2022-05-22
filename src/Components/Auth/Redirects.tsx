@@ -42,7 +42,7 @@ const Redirects: FC = () => {
           navigate("/login");
         }
       });
-    }, 3000);
+    }, 2000);
   }, [alerts, auth, dispatch, navigate, routeLocation, workspace]);
 
   //component ========

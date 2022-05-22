@@ -402,10 +402,11 @@ export const addTicket = (
     hasRecording: hasRecording,
     solution: state === "solved" ? message : "",
     reopened: false,
-    assigned: false,
-    assignee: "",
-    assigner: "",
+    assigned: true,
+    assignee: agent,
+    assigner: agent,
     team: team,
+    origin: "Help Desk",
   });
 };
 

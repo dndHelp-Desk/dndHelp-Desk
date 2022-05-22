@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { markAsSeen } from "../Data_Fetching/TicketsnUserData";
 import { BiChevronRight, BiChevronLeft, BiPulse } from "react-icons/bi";
+import { HiOutlineMail } from "react-icons/hi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import Navbar from "./Navbar";
 import noTickets from "./images/no-userss.svg";
@@ -145,9 +146,9 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-4 p-2 space-x-2 flex snap_childTwo hover:bg-slate-100 dark:hover:bg-[#182235] transition-all ${
+          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-4 p-2 space-x-2 flex snap_childTwo hover:bg-slate-200/[0.6] dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
-              ? "bg-slate-100 dark:bg-[#182235]"
+              ? "bg-slate-200/[0.6] dark:bg-[#182235]"
               : "bg-inherit"
           }`}
         >
@@ -155,7 +156,7 @@ const TicketsList: FC<Props> = ({
           {unread.length >= 1 &&
             unread.filter((data) => data.ticket_id === ticket.ticket_id)
               .length >= 1 && (
-              <div className="absolute left-[0.15rem] top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm w-12 bg-blue-600 text-[0.6rem] text-slate-200">
+              <div className="absolute left-[0.15rem] top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm h-5 w-12 bg-blue-600 text-[0.65rem] font-medium text-white overflow-hidden">
                 <span>
                   New :{" "}
                   {unread.length >= 1 &&
@@ -221,8 +222,12 @@ const TicketsList: FC<Props> = ({
               className="h-full w-[90%] flex items-center space-x-4 relative"
             >
               <div className="h-8 w-9 rounded-sm border border-slate-400 dark:border-slate-600 dark:bg-slate-700 bg-slate-50 flex justify-center items-center text-sm uppercase font-bold text-slate-800 dark:text-slate-300">
-                <abbr title={ticket?.recipient_name}>
-                  {ticket?.recipient_name?.trim()?.charAt(0)}
+                <abbr title="Origin">
+                  {ticket?.origin === "Help Desk" ? (
+                    <HiOutlineMail />
+                  ) : (
+                    <HiOutlineMail />
+                  )}
                 </abbr>
               </div>
               <div className="h-full w-full flex flex-col justify-center space-y-0">
@@ -309,7 +314,7 @@ const TicketsList: FC<Props> = ({
 
           {/**Pagination ================================ */}
           <div className="h-[3rem] bg-inherit w-full z-[9] bottom-0 flex flex-col justify-center items-center overflow-hidden">
-            <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-100 py-1 rounded border dark:border-slate-700 border-slate-300">
+            <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded-sm border dark:border-slate-700 border-slate-400">
               <button
                 onClick={() => {
                   setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
@@ -318,7 +323,7 @@ const TicketsList: FC<Props> = ({
               >
                 <BiChevronLeft />
               </button>
-              <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-300 overflow-hidden px-1">
+              <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-400 overflow-hidden px-1">
                 <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
                   {loadMore - 50 === 0 ? 1 : loadMore - 50}{" "}
                   <span className="text-slate-500">-</span> {loadMore}{" "}

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillTrashFill,
   BsThreeDotsVertical,
-  BsChatRight,
+  BsChatRightText,
 } from "react-icons/bs";
 import {
   BiPaperPlane,
@@ -491,13 +491,13 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               : scrollToNone
           }
           key={index}
-          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded border border-slate-300 dark:border-slate-700"
+          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583]"
         >
           {/**Message ====================== */}
           <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
-            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded border dark:border-slate-700 border-slate-300 dark:bg-slate-800 bg-white px-1 overflow-hidden">
-              <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-gray-300 text-slate-800 flex justify-center items-center capitalize font-bold text-sm">
-                <BsChatRight />
+            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded-sm border dark:border-slate-700 border-slate-400 dark:bg-slate-800 bg-white px-1 overflow-hidden">
+              <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
+                <BsChatRightText />
               </div>
             </div>
             {/**Contents ======================= */}
@@ -509,9 +509,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     {message.user}
                   </span>
                   <span
-                    className={`justify-end space-x-2 px-2 capitalize text-xs text-blue-600 italic ${
-                      message.user_email === user[0].email ||
-                      message.agent_email === user[0].email
+                    className={`justify-center items-center space-x-[-0.4rem] ml-1 capitalize text-[0.75rem] text-blue-600 italic h-4 w-6 bg-inherit ${
+                      message?.user_email === user[0]?.email ||
+                      message?.agent_email === user[0]?.email
                         ? "flex"
                         : "hidden"
                     }`}
@@ -519,7 +519,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     <HiCheck />
                     <HiCheck
                       className={`${
-                        message.readStatus !== "read" ? "text-slate-500" : ""
+                        message?.readStatus !== "read"
+                          ? "text-slate-700 dark:text-slate-300"
+                          : ""
                       }`}
                     />
                   </span>
@@ -589,8 +591,8 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   //Component ======================================
   return (
     <div className="h-[47rem] flex flex-col w-full lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent">
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
-        <div className="h-14 dark:bg-[#182235] bg-slate-100 sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-200 px-2">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-400 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
+        <div className="h-14 bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
             <div className="flex items-center space-x-2">
@@ -689,12 +691,12 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             firstMessage && firstMessage[0]?.status === "solved" && (
               <div
                 ref={scrollToLastMessage}
-                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded border border-slate-300 dark:border-slate-700"
+                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583]"
               >
                 {/**Message ====================== */}
                 <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
-                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
-                    <div className="w-full h-full dark:bg-slate-800 bg-white rounded-[0.3rem]  dark:text-gray-300 text-slate-600 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
+                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded-sm dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-400 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
+                    <div className="w-full h-full dark:bg-slate-800 bg-white rounded-sm  dark:text-gray-300 text-slate-900 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
                       Solution
                     </div>
                   </div>
@@ -761,7 +763,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
-        <div className="h-full w-full relative rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+        <div className="h-full w-full relative rounded dark:bg-slate-800 bg-white border border-slate-400 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"

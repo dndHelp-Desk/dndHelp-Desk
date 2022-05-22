@@ -24,10 +24,10 @@
   }
 
   .TabsLinks {
-    @apply flex items-center space-x-1 hover:opacity-80 text-xs outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wide transition-opacity duration-300;
+    @apply flex lg:justify-center items-center space-x-1 w-[5rem] hover:text-blue-600 text-[0.7rem] outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wider overflow-hidden transition-colors duration-200;
   }
   .navlinks.active {
-    @apply text-blue-600 lg:dark:text-gray-300 lg:text-slate-900 lg:border-b border-slate-400;
+    @apply text-blue-600 border-blue-600 border-b-2 font-bold;
   }
   .supportlinks.active {
     @apply border-t-2 border-blue-600;

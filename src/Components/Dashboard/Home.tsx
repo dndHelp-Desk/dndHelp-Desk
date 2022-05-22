@@ -53,10 +53,10 @@ const Home: FC = () => {
       return (
         <div
           key={user.id}
-          className="w-full snap_child h-14  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200"
+          className="w-full snap_child h-14  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200 overflow-hidden"
         >
           <div
-            className={`h-9 w-9 flex justify-center items-center rounded relative`}
+            className={`h-9 w-9 flex justify-center items-center rounded-full relative`}
           >
             <img
               src={
@@ -65,10 +65,10 @@ const Home: FC = () => {
                   : defaultProfile
               }
               alt="profile"
-              className={`object-cover w-full h-full object-center rounded border-2 border-slate-500 dark:border-slate-300`}
+              className={`object-cover w-full h-full object-center rounded-full border-2 border-slate-500 dark:border-slate-300`}
             />
             <div
-              className={`absolute right-[-0.25rem] top-[-0.1rem] h-2.5 w-2.5 rounded-full border-2 dark:border-slate-700 border-slate-200 ${
+              className={`absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white ${
                 user.status === "available"
                   ? "bg-green-600"
                   : user.status === "unavailable"
@@ -77,9 +77,9 @@ const Home: FC = () => {
               }`}
             ></div>
           </div>
-          <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-bold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
+          <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
             <abbr title={user.name}>
-              <p className="italic">{user.name}</p>
+              <p className="tracking-normal">{user.name}</p>
             </abbr>
             <abbr title={user.email}>
               <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic">

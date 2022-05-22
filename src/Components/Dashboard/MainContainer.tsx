@@ -3,11 +3,11 @@ import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
 import { BsJustifyLeft } from "react-icons/bs";
 import {
   HiOutlineSun,
-  HiOutlineMoon,
+  HiOutlineSparkles,
   HiOutlinePhone,
   HiOutlineCog,
   HiOutlineBell,
-  HiOutlineChatAlt2,
+  HiOutlineSupport,
 } from "react-icons/hi";
 import darkLogo from "./logos/dndHelp-Desk.webp";
 import lightLogo from "./logos/dndHelp-Desk_.webp";
@@ -125,7 +125,7 @@ const Dashboard: FC = () => {
         <nav className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide">
           {/**AlertsWrapper */}
           <AlertsWrapper />
-          <div className="w-[95%] 2xl:w-[75rem] py-2 flex justify-between items-center relative z-[999]">
+          <div className="w-[95%] 2xl:w-[75rem] h-14 flex justify-between items-center relative z-[999]">
             {/**Other Controls and logo ================ */}
             <div className="h-full flex items-center gap-2">
               {/**Small Screen Menu Btn ================ */}
@@ -158,8 +158,15 @@ const Dashboard: FC = () => {
                 )}
               </Link>
 
+              {/**Support =================================== */}
+              <div className="relative">
+                <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold">
+                  <HiOutlineSupport />
+                </button>
+              </div>
+
               {/**Change Theme =========================== */}
-              <div className="h-9 w-32 p-[0.2rem] rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 overflow-hidden relative">
+              <div className="h-9 w-20 p-[0.2rem] rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 overflow-hidden relative">
                 <div className="w-full h-full flex">
                   <div
                     className={`h-full w-2/4 bg-white dark:bg-[#33415569] border dark:border-slate-600 border-slate-300 rounded-sm shadow transition-all duration-500 ${
@@ -176,10 +183,9 @@ const Dashboard: FC = () => {
                         JSON.stringify("light")
                       );
                     }}
-                    className="flex-[1] bg-transparent outline-none focus:outline-none flex items-center justify-center space-x-1 p-1 px-1 text-xs text-slate-900 dark:text-slate-300 font-medium"
+                    className="flex-[1] bg-transparent outline-none focus:outline-none flex items-center justify-center text-xs text-slate-900 dark:text-slate-300 font-medium"
                   >
-                    <HiOutlineSun className="text-sm" />
-                    <span>Light</span>
+                    <HiOutlineSun className="text-base" />
                   </button>
                   <button
                     onClick={() => {
@@ -189,17 +195,16 @@ const Dashboard: FC = () => {
                         JSON.stringify("dark")
                       );
                     }}
-                    className="flex-[1] bg-tranparent outline-none focus:outline-none flex items-center justify-center space-x-1 p-1 px-2 text-xs text-slate-900 dark:text-slate-300 font-medium"
+                    className="flex-[1] bg-tranparent outline-none focus:outline-none flex items-center justify-center text-xs text-slate-900 dark:text-slate-300 font-medium"
                   >
-                    <HiOutlineMoon className="text-sm" />
-                    <span>Dark</span>
+                    <HiOutlineSparkles className="text-base" />
                   </button>
                 </div>
               </div>
             </div>
 
             {/**Large Screens Menu Items===================== */}
-            <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-5">
+            <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-2 h-full">
               <NavLink
                 to="/app"
                 className={`TabsLinks  ${
@@ -311,13 +316,6 @@ const Dashboard: FC = () => {
                   phoneToolTip={phoneToolTip}
                   openPhone={openPhone}
                 />
-              </div>
-
-              {/**Chat =================================== */}
-              <div className="relative">
-                <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold">
-                  <HiOutlineChatAlt2 />
-                </button>
               </div>
 
               {/**Notifications ================================================ */}
