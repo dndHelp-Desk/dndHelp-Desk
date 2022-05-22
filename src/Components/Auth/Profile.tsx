@@ -62,6 +62,7 @@ const Profile = () => {
           {
             message: "Profile Changed Successfully",
             color: "bg-green-200",
+            id: alerts?.length + 1,
           },
         ])
       );
@@ -165,6 +166,7 @@ const Profile = () => {
                           {
                             message: "Status Changed",
                             color: "bg-green-200",
+                            id: alerts?.length + 1,
                           },
                         ])
                       );
@@ -193,6 +195,7 @@ const Profile = () => {
                           {
                             message: "Status Changed",
                             color: "bg-green-200",
+                            id: alerts?.length + 1,
                           },
                         ])
                       );
@@ -221,6 +224,7 @@ const Profile = () => {
                           {
                             message: "Status Changed",
                             color: "bg-green-200",
+                            id: alerts?.length + 1,
                           },
                         ])
                       );

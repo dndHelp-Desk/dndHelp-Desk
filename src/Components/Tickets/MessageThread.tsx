@@ -253,6 +253,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               {
                 message: "Ticket has been resolved",
                 color: "bg-green-200",
+                id: "id" + Math.random().toString(16).slice(2),
               },
             ])
           );
@@ -269,6 +270,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               {
                 message: "Ticket Failed To Resolve",
                 color: "bg-red-200",
+                id: "id" + Math.random().toString(16).slice(2),
               },
             ])
           );
@@ -403,6 +405,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 {
                   message: "Response Has Been Sent.",
                   color: "bg-green-200",
+                  id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
@@ -419,6 +422,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 {
                   message: "Email Failed To Send",
                   color: "bg-red-200",
+                  id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
@@ -468,6 +472,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {
             message: "Please Select A Proper Status",
             color: "bg-yellow-200",
+            id: "id" + Math.random().toString(16).slice(2),
           },
         ])
       );
@@ -740,14 +745,14 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {/**Placeholders ======================== */}
           {(!threadId || threadMessages.length <= 0) && (
             <>
-              <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-10 uppercase text-xs font-sans font-bold">
-                select any ticket to start the conversation
-              </h2>
               <img
                 src={noChatImg}
                 alt="No Ticket"
                 className="w-full h-[15rem] mt-10 object-contain object-center"
               />
+              <h2 className="dark:text-slate-400 text-slate-800 tracking-wide text-center mt-8 capitalize italic text-xs font-sans font-bold">
+                select any ticket to start the conversation
+              </h2>
             </>
           )}
           {/**End of Messages ============================ */}

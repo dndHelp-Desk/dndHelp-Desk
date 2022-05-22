@@ -33,6 +33,15 @@ const RadialBar: FC = () => {
         label: "Progress",
       },
     },
+    chart: {
+      dropShadow: {
+        enabled: true,
+        top: 3,
+        left: 3,
+        blur: 1,
+        opacity: 0.1,
+      },
+    },
     colors: ["#2563eb"],
     tooltip: {
       enabled: true,

@@ -46,6 +46,7 @@ const Team: FC = () => {
             {
               message: "Deleted User Successfully",
               color: "bg-green-200",
+              id: "id" + Math.random().toString(16).slice(2),
             },
           ])
         );
@@ -57,6 +58,7 @@ const Team: FC = () => {
             {
               message: error.status,
               color: "bg-red-200",
+              id: "id" + Math.random().toString(16).slice(2),
             },
           ])
         );
@@ -97,16 +99,16 @@ const Team: FC = () => {
                 className="object-cover w-full h-full object-center rounded-sm"
               />
             </div>
-            <p className="text-sm whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-400 text-slate-600">
+            <p className="text-sm whitespace-nowrap tracking-tight overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-300 text-slate-800">
               <abbr title={user.name}>{user.name}</abbr>
               <br />
-              <small className="capitalize col-span-1 dark:text-slate-500 text-slate-500">
+              <small className="capitalize col-span-1 dark:text-slate-400 text-slate-700 tracking-tight">
                 {user.dept} / {user.access}
               </small>
             </p>
           </td>
           <td className="col-span-4 h-full">
-            <p className=" h-full text-xs lowercase whitespace-nowrap overflow-hidden text-ellipsis dark:text-slate-400 text-slate-600 flex items-center">
+            <p className=" h-full text-xs lowercase font-medium italic whitespace-nowrap overflow-hidden text-ellipsis dark:text-slate-400 text-slate-700 flex items-center">
               <abbr title={user.email}>{user.email}</abbr>
             </p>
           </td>

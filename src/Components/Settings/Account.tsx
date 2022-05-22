@@ -61,6 +61,7 @@ const Account: FC = () => {
                 {
                   message: "Password Update Successfully",
                   color: "bg-green-200",
+                  id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
@@ -72,6 +73,7 @@ const Account: FC = () => {
                 {
                   message: error.message,
                   color: "bg-red-200",
+                  id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
@@ -84,6 +86,7 @@ const Account: FC = () => {
             {
               message: error.message,
               color: "bg-red-200",
+              id: "id" + Math.random().toString(16).slice(2),
             },
           ])
         );
@@ -178,6 +181,7 @@ const Account: FC = () => {
                               message:
                                 "Check Your Email To Verify The Account.",
                               color: "bg-green-200",
+                              id: "id" + Math.random().toString(16).slice(2),
                             })
                           );
                         })
@@ -187,6 +191,7 @@ const Account: FC = () => {
                               ...alerts,
                               message: error.message,
                               color: "bg-red-200",
+                              id: "id" + Math.random().toString(16).slice(2),
                             })
                           );
                         });

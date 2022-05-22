@@ -246,6 +246,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           {
             message: "Add The Due Date to Proceed",
             color: "bg-yellow-200",
+            id: "id" + Math.random().toString(16).slice(2),
           },
         ])
       );
@@ -448,6 +449,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {
                   message: "Email sent Successfully",
                   color: "bg-green-200",
+                  id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
@@ -460,6 +462,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {
                   message: "Email Failed To Send",
                   color: "bg-red-200",
+                  id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
@@ -494,6 +497,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           {
             message: "New Ticket Created Successfully",
             color: "bg-green-200",
+            id: "id" + Math.random().toString(16).slice(2),
           },
         ])
       );

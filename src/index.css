@@ -94,9 +94,18 @@
     box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.3);
   }
 
- .messageContainer p span,.messageContainer p *,.messageContainer *,.replyEditor p *,.replyEditor p span,.replyEditor h1 *,.replyEditor h2 *, .replyEditor h3 *,.replyEditor ul,.replyEditor ol{
-    background:inherit !important;
-    color:inherit !important;
+  .messageContainer p span,
+  .messageContainer p *,
+  .messageContainer *,
+  .replyEditor p *,
+  .replyEditor p span,
+  .replyEditor h1 *,
+  .replyEditor h2 *,
+  .replyEditor h3 *,
+  .replyEditor ul,
+  .replyEditor ol {
+    background: inherit !important;
+    color: inherit !important;
   }
 
   .replyEditor img {
@@ -104,11 +113,11 @@
   }
 
   .replyEditor ul {
-    @apply list-disc
+    @apply list-disc;
   }
 
   .replyEditor ol {
-    @apply list-decimal
+    @apply list-decimal;
   }
 
   .messageContainer h1,
@@ -156,6 +165,33 @@
     }
     to {
       left: 100%;
+    }
+  }
+
+  /** Alerts Animation || Toast Notification*/
+  .alert {
+    animation: alert ease-in-out 0.3s forwards;
+  }
+
+  .deleteExit {
+    animation: deleteExit ease-in-out 0.3s forwards;
+  }
+
+  @keyframes alert {
+    from {
+      margin-left:200%;
+    }
+    to {
+      margin-left:0;
+    }
+  }
+
+  @keyframes deleteExit {
+    from {
+      margin-left:0;
+    }
+    to {
+      margin-left:200%;
     }
   }
 

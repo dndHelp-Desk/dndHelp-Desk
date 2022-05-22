@@ -46,6 +46,7 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
         {
           message: "New Contact Has Been Added Successfully",
           color: "bg-green-200",
+          id: "id" + Math.random().toString(16).slice(2),
         },
       ])
     );

@@ -21,7 +21,7 @@ import {
   setCompany,
   updateUser,
 } from "../../Redux/Slices/UserSlice";
-import Alert from "../Others/Alert";
+import AlertsWrapper from "../Others/AlertsWrapper";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import { AppDispatch, RootState } from "../../Redux/store";
 import Help from "../Others/Help";
@@ -98,6 +98,7 @@ const LogIn: FC = () => {
                       {
                         message: "Please Verify your account",
                         color: "bg-green-200",
+                        id: "id" + Math.random().toString(16).slice(2),
                       },
                     ])
                   );
@@ -141,14 +142,14 @@ const LogIn: FC = () => {
                 );
 
                 //Login If All Set ==================
+                window.localStorage.setItem(
+                  "organization_name",
+                  `${inputValues.company?.toLowerCase().replace(/\s/g, "")}`
+                );
                 dispatch(
-                  updateAlert([
-                    ...alerts,
-                    {
-                      message: "Logged In Succesfully",
-                      color: "bg-green-200",
-                    },
-                  ])
+                  setCompany(
+                    inputValues.company?.toLowerCase().replace(/\s/g, "")
+                  )
                 );
                 window.localStorage.setItem("auth", "true");
                 dispatch(isAuthenticated(true));
@@ -164,6 +165,7 @@ const LogIn: FC = () => {
                       message:
                         "The Workspace You Tyring To Access Doesn't Exist",
                       color: "bg-red-200",
+                      id: "id" + Math.random().toString(16).slice(2),
                     },
                   ])
                 );
@@ -186,6 +188,7 @@ const LogIn: FC = () => {
                     ? error.message.split(":")[1].replace("Error", "")
                     : error.message,
                 color: "bg-red-200",
+                id: "id" + Math.random().toString(16).slice(2),
               },
             ])
           );
@@ -203,7 +206,7 @@ const LogIn: FC = () => {
       {/**Top Nav ================= */}
       <nav
         role="navigation"
-        className="absolute bg-slate-200 w-[75%] h-[4rem] backdrop-blur-lg rounded-lg border border-slate-300 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
+        className="absolute bg-slate-200 w-[75%] h-[3.5rem] backdrop-blur-lg rounded border border-slate-300 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
       >
         {/**Logo ==================== */}
         <Link
@@ -224,7 +227,7 @@ const LogIn: FC = () => {
         />
         <div
           role="navigation"
-          className={`flex lg:hidden absolute top-14 right-2 w-[16rem] border border-slate-400 shadow-2xl rounded-lg bg-slate-300 ${
+          className={`flex lg:hidden absolute top-14 right-2 w-[16rem] border border-slate-400 shadow-2xl rounded bg-slate-300 ${
             menu ? "h-[10rem]" : "h-0 opacity-0"
           } transition-scale duration-300 flex flex-col space-y-2 p-4 justify-center overflow-hidden`}
         >
@@ -233,7 +236,7 @@ const LogIn: FC = () => {
               href="https://call-center-erp.netlify.app"
               target={"_blank"}
               rel="noreferrer"
-              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
+              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
             >
               <FaSellsy
                 className="inline-block
@@ -243,7 +246,7 @@ const LogIn: FC = () => {
             </a>
             <Link
               to="/support"
-              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
+              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
             >
               <FaHeadset
                 className="inline-block
@@ -256,10 +259,10 @@ const LogIn: FC = () => {
             href="https://join.slack.com/t/dialndine/signup"
             target={"_blank"}
             rel="noreferrer"
-            className="lg:hidden flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-md p-2 px-4"
+            className="lg:hidden flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-sm p-2 px-4"
           >
             <FaSlack className="text-lg inline-block" />
-            <span>Our Workspace</span>
+            <span className="text-xs font-semibold">Our Workspace</span>
           </a>
         </div>
 
@@ -269,13 +272,13 @@ const LogIn: FC = () => {
             href="https://call-center-erp.netlify.app"
             target={"_blank"}
             rel="noreferrer"
-            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
+            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
           >
             <span>Dashboard</span>
           </a>
           <Link
             to="/support"
-            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-semibold uppercase text-sm transition-all duration-300 hover:border-b hover:border-slate-700"
+            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
           >
             <span>Support</span>
           </Link>
@@ -284,10 +287,10 @@ const LogIn: FC = () => {
           href="https://join.slack.com/t/dialndine/signup"
           target={"_blank"}
           rel="noreferrer"
-          className="hidden lg:flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-md p-2 px-4"
+          className="hidden lg:flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-sm p-2 px-4"
         >
-          <FaSlack className="text-lg inline-block" />
-          <span>Our Workspace</span>
+          <FaSlack className="text-base inline-block" />
+          <span className="text-xs font-semibold">Our Workspace</span>
         </a>
       </nav>
 
@@ -330,7 +333,7 @@ const LogIn: FC = () => {
                       setValues({ ...inputValues, company: e.target.value });
                     }}
                     value={inputValues.company}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Company name"
                   />
                 </div>
@@ -349,7 +352,7 @@ const LogIn: FC = () => {
                       setValues({ ...inputValues, email: e.target.value })
                     }
                     value={inputValues.email}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Email address"
                   />
                 </div>
@@ -369,7 +372,7 @@ const LogIn: FC = () => {
                       setValues({ ...inputValues, password: e.target.value })
                     }
                     value={inputValues.password}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Password"
                   />
                 </div>
@@ -388,6 +391,7 @@ const LogIn: FC = () => {
                               {
                                 message: "Password reset email sent!",
                                 color: "bg-green-200",
+                                id: "id" + Math.random().toString(16).slice(2),
                               },
                             ])
                           );
@@ -399,6 +403,7 @@ const LogIn: FC = () => {
                               {
                                 message: error.message,
                                 color: "bg-red-200",
+                                id: "id" + Math.random().toString(16).slice(2),
                               },
                             ])
                           );
@@ -414,7 +419,7 @@ const LogIn: FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full flex items-center justify-center space-x-4 py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-blue-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="group relative w-full flex items-center justify-center space-x-4 py-2 px-4 border border-transparent text-sm font-medium rounded text-white bg-blue-700 hover:bg-blue-800 focus:outline-none outline-none"
                 >
                   <span>Sign in</span>
                   <div
@@ -430,7 +435,7 @@ const LogIn: FC = () => {
       </>
 
       {/**Alert */}
-      <Alert />
+      <AlertsWrapper />
       <Help />
     </div>
   );

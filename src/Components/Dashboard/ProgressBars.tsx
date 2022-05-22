@@ -48,7 +48,7 @@ const ProgressBars: FC = () => {
           Actual figures can be found on the reports page.
         </p>
       </div>
-      <div className="flex flex-col mt-2 w-full justify-center gap-1 overflow-hidden rounded-lg px-4">
+      <div className="flex flex-col mt-2 w-full justify-center gap-1 rounded-lg px-4">
         {categoriesData?.map((element: any, index) => {
           return (
             <div key={index} className="w-full">
@@ -59,7 +59,7 @@ const ProgressBars: FC = () => {
                 <div
                   role="progressbar"
                   aria-label="progressbas"
-                  className="h-2 w-full flex-[3] rounded bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-700"
+                  className="h-2.5 w-full flex-[3] rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-700 shadow-md"
                 >
                   <div
                     style={{
@@ -69,7 +69,7 @@ const ProgressBars: FC = () => {
                           : "0.0"
                       }%`,
                     }}
-                    className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded transition-all duration-200"
+                    className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full transition-all duration-200"
                   >
                     <abbr
                       title={`${element.name} : ${
@@ -82,7 +82,7 @@ const ProgressBars: FC = () => {
                     </abbr>
                   </div>
                 </div>
-                <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-semibold text-xs">
+                <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-semibold text-xs">
                   <span>{element.value >= 0.1 ? element.value : "0.0"}%</span>
                 </div>
               </div>

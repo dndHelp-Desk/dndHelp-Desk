@@ -10,6 +10,7 @@ const ReportsComponent: FC = () => {
   // const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState<any>(false);
   //Filters =====================
+  const [option, setOption] = useState<string | any>("branch_company");
   const [contactsList, setList] = useState<string[]>([]);
   const [filters, setFilters] = useState<any>({
     ticket_id: "",
@@ -163,9 +164,38 @@ const ReportsComponent: FC = () => {
     return clearTimeout();
   }, [reportsData.length]);
 
+  const tableData = useMemo(
+    () =>
+      Array.from(new Set(data?.map((data: any) => data[option])))?.map(
+        (elem): any => ({
+          name: elem,
+          open: data
+            ? data?.filter(
+                (data: any) => data[option] === elem && data.status === "open"
+              ).length
+            : 0,
+          solved: data
+            ? data?.filter(
+                (data: any) => data[option] === elem && data.status === "solved"
+              ).length
+            : 0,
+          reopened: data
+            ? data?.filter(
+                (data: any) => data[option] === elem && data.reopened === true
+              ).length
+            : 0,
+          total: data
+            ? data?.filter((data: any) => data[option] === elem).length
+            : 0,
+        })
+      ),
+    [data, option]
+  );
+
   //Component =========================
   return (
     <div className="bg-transparent mt-4 w-[95%] 2xl:w-[75rem] rounded-xl min-h-screen space-y-4 flex flex-col tracking-wider relative pb-4">
+
       {/**Filters ============= */}
       <div className="w-full bg-transparent flex flex-wrap lg:flex-nowrap justify-between items-center gap-2 print:hidden">
         <Filters
@@ -182,7 +212,12 @@ const ReportsComponent: FC = () => {
       <div className="w-full rounded-xl bg-transparent">
         <OverviewReport data={data} />
       </div>
-      <Tables data={data} />
+      <Tables
+        data={data}
+        option={option}
+        setOption={setOption}
+        tableData={tableData}
+      />
 
       {/**Preloader =========================== */}
       <div

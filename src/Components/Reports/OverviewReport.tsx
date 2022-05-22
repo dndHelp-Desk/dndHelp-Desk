@@ -16,17 +16,17 @@ const OverviewReport: FC<data> = ({ data }) => {
   const [option, setOption] = useState<string>("hour");
   const categoriesData = useMemo(() => {
     return (
-      categories.length >= 1 &&
-      categories.map((element) => {
+      categories?.length >= 1 &&
+      categories?.map((element) => {
         return {
           name: element,
           value: (
-            ((data.length >= 1 &&
-              data.filter(
+            ((data?.length >= 1 &&
+              data?.filter(
                 (ticket: any) =>
                   ticket.category.toLowerCase() === element.toLowerCase()
-              ).length) /
-              data.length) *
+              )?.length) /
+              data?.length) *
             100
           ).toFixed(1),
         };
@@ -35,7 +35,7 @@ const OverviewReport: FC<data> = ({ data }) => {
   }, [categories, data]);
 
   categoriesData &&
-    categoriesData.sort((a, b) => {
+    categoriesData?.sort((a, b) => {
       return Number(b.value) - Number(a.value);
     });
 
@@ -50,8 +50,8 @@ const OverviewReport: FC<data> = ({ data }) => {
 
   //Preping daily count  Data==============
   const solvedTickets =
-    data.length >= 1 &&
-    data.filter(
+    data?.length >= 1 &&
+    data?.filter(
       (ticket: any) => ticket.status === "solved" && ticket.fcr === "no"
     );
 
@@ -59,25 +59,25 @@ const OverviewReport: FC<data> = ({ data }) => {
   const chartData = useMemo(() => {
     return Array.from(
       new Set(
-        data.map((data: any) =>
+        data?.map((data: any) =>
           option === "day"
             ? new Date(data.date).getDate()
             : new Date(data.date).getHours() + 1
         )
       )
-    ).map((elem) => ({
+    )?.map((elem) => ({
       name: elem,
       value:
         option === "day"
-          ? data.filter((data: any) => new Date(data.date).getDate() === elem)
-              .length
-          : data.filter((data: any) => new Date(data.date).getHours() === elem)
-              .length,
+          ? data?.filter((data: any) => new Date(data.date).getDate() === elem)
+              ?.length
+          : data?.filter((data: any) => new Date(data.date).getHours() === elem)
+              ?.length,
     }));
   }, [data, option]);
 
   //Sort data =========
-  chartData.sort((a, b) => {
+  chartData?.sort((a, b) => {
     return Number(a.name) - Number(b.name);
   });
 
@@ -86,8 +86,8 @@ const OverviewReport: FC<data> = ({ data }) => {
     return (
       (data?.filter(
         (ticket: any) => ticket.status === "solved" && ticket.reopened === false
-      ).length /
-        data.length) *
+      )?.length /
+        data?.length) *
       100
     ).toFixed(1);
   }, [data]);
@@ -102,7 +102,7 @@ const OverviewReport: FC<data> = ({ data }) => {
         <div className="mt-6 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
           <div className="dark:text-slate-300 text-slate-900">
             <h4 className="text-base font-bold text-center uppercase">
-              {data.length}
+              {data?.length}
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
               Total Tickets

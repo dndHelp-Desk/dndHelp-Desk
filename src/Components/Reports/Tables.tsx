@@ -1,4 +1,4 @@
-import { FC, useState, useMemo } from "react";
+import { FC, useState } from "react";
 import { HiOutlineSwitchVertical } from "react-icons/hi";
 import { BsCloudDownload, BsPrinter } from "react-icons/bs";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
@@ -7,80 +7,55 @@ import { RootState } from "../../Redux/store";
 
 interface Props {
   data: any;
+  option: any;
+  setOption: any;
+  tableData:any;
 }
 
-const Tables: FC<Props> = ({ data }) => {
+const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
   const [loadMore, setLimit] = useState<number | any>(10);
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
-  const [option, setOption] = useState<string | any>("branch_company");
   const [sortBy, setSort] = useState<any>(["total", 1]);
-  const tableData = useMemo(
-    () =>
-      Array.from(new Set(data.map((data: any) => data[option])))
-        .map((elem): any => ({
-          name: elem,
-          open:
-            data.length >= 1
-              ? data.filter(
-                  (data: any) => data[option] === elem && data.status === "open"
-                ).length
-              : 0,
-          solved:
-            data.length >= 1
-              ? data.filter(
-                  (data: any) =>
-                    data[option] === elem && data.status === "solved"
-                ).length
-              : 0,
-          reopened:
-            data.length >= 1
-              ? data.filter(
-                  (data: any) => data[option] === elem && data.reopened === true
-                ).length
-              : 0,
-          total:
-            data.length >= 1
-              ? data.filter((data: any) => data[option] === elem).length
-              : 0,
-        }))
-        .sort((a, b) => {
-          return sortBy[1] === 1
-            ? b[sortBy[0]] - a[sortBy[0]]
-            : a[sortBy[0]] - b[sortBy[0]];
-        }),
-    [data, option, sortBy]
-  );
 
   //Loop through each ticket and return a row of consolidated data
-  const rows = tableData?.map((elem, index) => {
-    return (
-      <tr
-        key={index}
-        className={`w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize ${((loadMore-10) <= index+1 && (index+1)<= loadMore)?"":"hidden"}`}
-      >
-        <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
-          {index + 1}.{" "}
-          {allMembers.length >= 1 && option === "agent_email"
-            ? allMembers.filter((agent) => agent?.email === elem?.name)[0]?.name
-            : elem?.name}
-        </td>
-        <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-          {elem.open}
-        </td>
-        <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-          {elem.reopened}
-        </td>
-        <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-          {elem.solved}
-        </td>
-        <td className="px-2 flex items-center justify-end sm:justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-          {elem.total}
-        </td>
-      </tr>
-    );
-  });
+  const rows = tableData
+    ?.sort((a: any, b: any) => {
+      return sortBy[1] === 1
+        ? b[sortBy[0]] - a[sortBy[0]]
+        : a[sortBy[0]] - b[sortBy[0]];
+    })
+    ?.map((elem: any, index: any) => {
+      return (
+        <tr
+          key={index}
+          className={`w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize ${
+            loadMore - 10 <= index + 1 && index + 1 <= loadMore ? "" : "hidden"
+          }`}
+        >
+          <td className="px-2 col-span-3 flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
+            {index + 1}.{" "}
+            {allMembers.length >= 1 && option === "agent_email"
+              ? allMembers.filter((agent) => agent?.email === elem?.name)[0]
+                  ?.name
+              : elem?.name}
+          </td>
+          <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+            {elem.open}
+          </td>
+          <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+            {elem.reopened}
+          </td>
+          <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+            {elem.solved}
+          </td>
+          <td className="px-2 flex items-center justify-end sm:justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+            {elem.total}
+          </td>
+        </tr>
+      );
+    });
 
   //Download Csv Fuctions ======================
   const convertToCsv = (arr: any) => {

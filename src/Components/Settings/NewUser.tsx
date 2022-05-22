@@ -201,7 +201,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
               name="company"
               id="company"
               autoComplete="nope"
-              placeholder="Companies / Restuarants ..."
+              placeholder="Companies ..."
               onChange={(e) =>
                 setValues({ ...inputValues, companies: e.target.value })
               }

@@ -17,7 +17,7 @@ import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
-import Alert from "../Others/Alert";
+import AlertsWrapper from "../Others/AlertsWrapper";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 import Profile from "../Auth/Profile";
 import Notification from "./Notification";
@@ -92,13 +92,10 @@ const Dashboard: FC = () => {
 
   //Check if The data is loading
   useEffect(() => {
-    dashboardData.length <= 0 || user?.length <= 0
-      ? setLoading(true)
-      : setLoading(false);
-    (dashboardData.length <= 0 || user?.length <= 0) &&
-      setTimeout(() => setLoading(false), 10000);
+    dashboardData.length <= 0 ? setLoading(true) : setLoading(false);
+    dashboardData.length <= 0 && setTimeout(() => setLoading(false), 10000);
     return clearTimeout();
-  }, [dashboardData.length, user?.length]);
+  }, [dashboardData.length]);
 
   if (logged !== true) {
     return <Navigate to="/login" />;
@@ -125,8 +122,8 @@ const Dashboard: FC = () => {
 
         {/**NavBar ============== */}
         <nav className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide">
-          {/**Alert */}
-          <Alert />
+          {/**AlertsWrapper */}
+          <AlertsWrapper />
           <div className="w-[95%] 2xl:w-[75rem] py-2 flex justify-between items-center relative z-[999]">
             {/**Other Controls and logo ================ */}
             <div className="h-full flex items-center gap-2">

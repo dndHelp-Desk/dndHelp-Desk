@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "../../Redux/store";
 import redirect_img from "./images/redirect_img.webp";
 import { setCompany } from "../../Redux/Slices/UserSlice";
+import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 
 const Redirects: FC = () => {
   const auth = getAuth();
@@ -14,6 +15,9 @@ const Redirects: FC = () => {
   const routeLocation = useSelector(
     (state: RootState) => state.UserInfo.routeLocation
   );
+  const alerts = useSelector(
+    (state: RootState) => state.NotificationsData.alerts
+  );
 
   //Rederect User If logged ==============
   useEffect(() => {
@@ -21,6 +25,16 @@ const Redirects: FC = () => {
       onAuthStateChanged(auth, (user) => {
         if (workspace && user) {
           dispatch(setCompany(workspace?.toLowerCase().replace(/\s/g, "")));
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "Logged In Succesfully",
+                color: "bg-green-200",
+                id: "id" + Math.random().toString(16).slice(2),
+              },
+            ])
+          );
           routeLocation === "dndHelp-Desk"
             ? navigate("/app")
             : navigate(routeLocation);
@@ -29,7 +43,7 @@ const Redirects: FC = () => {
         }
       });
     }, 3000);
-  }, [auth, dispatch, navigate, routeLocation, workspace]);
+  }, [alerts, auth, dispatch, navigate, routeLocation, workspace]);
 
   //component ========
   return (

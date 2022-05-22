@@ -97,6 +97,7 @@ const Navbar: FC<Props> = ({
                       {
                         message: "Recording Deleted Successfully",
                         color: "bg-green-200",
+                        id: "id" + Math.random().toString(16).slice(2),
                       },
                     ])
                   );
@@ -108,6 +109,7 @@ const Navbar: FC<Props> = ({
                       {
                         message: error.message,
                         color: "bg-red-200",
+                        id: "id" + Math.random().toString(16).slice(2),
                       },
                     ])
                   );
@@ -122,6 +124,7 @@ const Navbar: FC<Props> = ({
         {
           message: "Tickets Deleted Successfully",
           color: "bg-green-200",
+          id: "id" + Math.random().toString(16).slice(2),
         },
       ])
     );
@@ -150,6 +153,7 @@ const Navbar: FC<Props> = ({
         {
           message: `Tickets Assigned to ${name} Successfully`,
           color: "bg-green-200",
+          id: "id" + Math.random().toString(16).slice(2),
         },
       ])
     );

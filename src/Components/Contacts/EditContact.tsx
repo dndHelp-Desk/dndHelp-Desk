@@ -6,8 +6,9 @@ import {
 } from "react-icons/bs";
 import { editContact } from "../Data_Fetching/TicketsnUserData";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../Redux/store";
+import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 
 interface Props {
   edit: any;
@@ -16,6 +17,10 @@ interface Props {
 }
 
 const EditContact: FC<Props> = ({ edit, setEdit, selectedArray }) => {
+  const dispatch: AppDispatch = useDispatch();
+  const alerts = useSelector(
+    (state: RootState) => state.NotificationsData.alerts
+  );
   const allContacts = useSelector((state: RootState) => state.Tickets.contacts);
   const closeCanvasRef = useOnClickOutside(() => {
     setEdit(false);
@@ -51,6 +56,16 @@ const EditContact: FC<Props> = ({ edit, setEdit, selectedArray }) => {
       newContactValue.name,
       newContactValue.phoneNumber,
       newContactValue.email
+    );
+    dispatch(
+      updateAlert([
+        ...alerts,
+        {
+          message: "Contact Edited Successfully",
+          color: "bg-green-200",
+          id: "id" + Math.random().toString(16).slice(2),
+        },
+      ])
     );
     setValue({
       name: "",

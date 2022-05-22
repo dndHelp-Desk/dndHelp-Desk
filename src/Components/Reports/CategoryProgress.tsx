@@ -9,7 +9,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
   );
 
   const categoriesData = useMemo(() => {
-    return categories.length >= 1
+    return categories?.length >= 1
       ? categories
           .map((element) => {
             return {
@@ -18,8 +18,8 @@ const CategoryProgress: FC<data> = ({ data }) => {
                 (data?.filter(
                   (ticket: any) =>
                     ticket?.category?.toLowerCase() === element?.toLowerCase()
-                ).length /
-                  data.length) *
+                )?.length /
+                  data?.length) *
                 100
               ).toFixed(1),
             };
