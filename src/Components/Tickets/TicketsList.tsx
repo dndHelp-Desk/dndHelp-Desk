@@ -265,7 +265,9 @@ const TicketsList: FC<Props> = ({
                     <BiPulse />
                   </span>{" "}
                   <span>
-                    Due on {new Date(ticket.due_date).toLocaleString()}
+                    Due by{" "}
+                    {new Date(ticket.due_date).toLocaleString()?.split(",")[1]},{" "}
+                    {new Date(ticket.due_date).toLocaleString()?.split(",")[0]}
                   </span>
                 </small>
               </div>

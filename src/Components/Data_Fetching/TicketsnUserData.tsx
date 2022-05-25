@@ -30,6 +30,8 @@ import {
   deleteDoc,
   updateDoc,
   enableIndexedDbPersistence,
+  where,
+  query,
 } from "firebase/firestore";
 
 // init services for firestore =========================
@@ -158,7 +160,7 @@ export const addNotification = (id: any, title: string, message: string) => {
   addDoc(collection(db, `companies/${org}/members/${id}/notifications`), {
     title: title,
     message: message,
-    date: new Date().toLocaleString(),
+    date: Number(new Date().getTime()),
   });
 };
 
@@ -276,7 +278,7 @@ export const resolveTicket = (
   updateDoc(docRef, {
     status: "solved",
     solution: solution,
-    closed_time: new Date().toLocaleString(),
+    closed_time: Number(new Date().getTime()),
     hasRecording: hasRecording,
   });
 };
@@ -334,7 +336,7 @@ export const addReply = (
   team: any
 ) => {
   addDoc(ticketsRef, {
-    date: new Date().toLocaleString(),
+    date: Number(new Date().getTime()),
     from: from,
     user: user,
     user_email: email,
@@ -343,7 +345,7 @@ export const addReply = (
     message: message,
     message_position: message_position,
     ticket_id: ticket_id,
-    time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+    time: new Date().getTime(),
     readStatus: "delivered",
     team: team,
   });
@@ -382,14 +384,14 @@ export const addTicket = (
     message_position: 1,
     priority: priority,
     agent_name: agent,
-    date: new Date().toLocaleString(),
+    date: Number(new Date().getTime()),
     category: category,
     branch_company: branch_company,
     message: message,
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     ticket_id: ticket_id,
     status: state,
-    due_date: date,
+    due_date: new Date(date).getTime(),
     from: "agent",
     agent_email: agent_email,
     readStatus: "delivered",
@@ -397,7 +399,7 @@ export const addTicket = (
     complainant_email:
       c_email === "" || c_email === undefined || !c_email ? "none" : c_email,
     complainant_number: c_number,
-    closed_time: state === "solved" ? new Date().toLocaleString() : "",
+    closed_time: state === "solved" ? Number(new Date().getTime()) : "",
     fcr: state === "solved" ? "yes" : "no",
     hasRecording: hasRecording,
     solution: state === "solved" ? message : "",
@@ -659,39 +661,43 @@ const TicketsnUserData: FC = () => {
   ]);
 
   //Load All Messages Based On Acess Level =========
-  // useEffect((): any => {
-  //   return (
-  //     //Tickects Data Fetching ======================
-  //     org &&
-  //     onSnapshot(
-  //       query(ticketsRef, where("message_position", "==", 1)),
-  //       (snapshot: { docs: any[] }) => {
-  //        console.log(
-  //             snapshot.docs
-  //               .map((doc: { data: () => any; id: any }) => ({
-  //                 ...doc.data(),
-  //                 id: doc.id,
-  //               }))
-  //               .filter(
-  //                 (data) =>
-  //                   new Date(data.date).getTime() >=
-  //                     new Date(ticketsComponentDates.startDate).getTime() &&
-  //                   new Date(data.date).getTime() <=
-  //                     new Date(
-  //                       new Date(ticketsComponentDates.endDate).setDate(
-  //                         new Date(ticketsComponentDates.endDate).getDate() + 1
-  //                       )
-  //                     ).getTime()
-  //               )
-  //           )
-  //       }
-  //     )
-  //   );
-  // }, [
-  //   ticketsComponentDates.endDate,
-  //   ticketsComponentDates.startDate,
-  //   dispatch,
-  // ]);
+  useEffect((): any => {
+    return (
+      //Tickects Data Fetching ======================
+      org &&
+      onSnapshot(
+        query(
+          ticketsRef,
+          where("message_position", "==", 1),
+          where("date", ">=", new Date("5/15/2022"))
+        ),
+        (snapshot: { docs: any[] }) => {
+          console.log(
+            snapshot.docs
+              .map((doc: { data: () => any; id: any }) => ({
+                ...doc.data(),
+                id: doc.id,
+              }))
+              .filter(
+                (data) =>
+                  new Date(data.date).getTime() >=
+                    new Date(ticketsComponentDates.startDate).getTime() &&
+                  new Date(data.date).getTime() <=
+                    new Date(
+                      new Date(ticketsComponentDates.endDate).setDate(
+                        new Date(ticketsComponentDates.endDate).getDate() + 1
+                      )
+                    ).getTime()
+              )
+          );
+        }
+      )
+    );
+  }, [
+    ticketsComponentDates.endDate,
+    ticketsComponentDates.startDate,
+    dispatch,
+  ]);
 
   //Load Dashboard Data Based On Acess Level =========
   useEffect((): any => {
