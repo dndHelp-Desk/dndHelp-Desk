@@ -48,7 +48,7 @@ const RadialBar: FC = () => {
     },
   };
   return (
-    <Chart type="radialBar" series={series} options={options} height="150px" />
+    <Chart type="radialBar" series={series} options={options} height="140px" />
   );
 };
 

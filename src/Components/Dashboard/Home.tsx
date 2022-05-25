@@ -132,7 +132,7 @@ const Home: FC = () => {
         </section>
 
         {/**Middle Half ================================ */}
-        <section className="row-span-2 w-full h-fit lg:h-[18rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4">
+        <section className="row-span-2 w-full h-fit lg:min-h-[18rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4 overflow-hidden">
           <div className="col-span-2 w-full h-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Connect Other Sources || Omni Channel Settings==================================== */}
             <Connect openAPIModal={openAPIModal} />
@@ -142,7 +142,7 @@ const Home: FC = () => {
             />
 
             {/**Progress ============================== */}
-            <article className="col-span-5 md:col-span-2 min-h-[10rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-2">
+            <article className="col-span-5 md:col-span-2 min-h-[10rem]  max-h-[18rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-2">
               <h3 className="dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
                 Progress
               </h3>
@@ -162,7 +162,9 @@ const Home: FC = () => {
                 </span>{" "}
                 overdue tickets.
               </p>
-              <div className={`w-full h-[7rem] overflow-hidden mb-4 relative`}>
+              <div
+                className={`w-full h-[6.5rem] overflow-hidden mb-4 relative`}
+              >
                 <RadialBar />
                 <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center font-semibold text-slate-800 dark:text-slate-300 text-sm pt-4 pl-2">
                   {Number(totalProgress) + "%"}
@@ -170,7 +172,7 @@ const Home: FC = () => {
               </div>
               <Link
                 to="/app/tickets"
-                className="text-blue-600 text-sm font-medium flex items-center justify-center space-x-2"
+                className="text-blue-600 text-sm font-medium flex md:hidden xl:flex items-center justify-center space-x-2"
               >
                 <span>View all Your Tickets</span>
                 <BsArrowRight />

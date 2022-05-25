@@ -30,6 +30,8 @@ import {
   deleteDoc,
   updateDoc,
   enableIndexedDbPersistence,
+  where,
+  query,
 } from "firebase/firestore";
 
 // init services for firestore =========================
@@ -657,6 +659,41 @@ const TicketsnUserData: FC = () => {
     ticketsComponentDates.startDate,
     dispatch,
   ]);
+
+  //Load All Messages Based On Acess Level =========
+  // useEffect((): any => {
+  //   return (
+  //     //Tickects Data Fetching ======================
+  //     org &&
+  //     onSnapshot(
+  //       query(ticketsRef, where("message_position", "==", 1)),
+  //       (snapshot: { docs: any[] }) => {
+  //        console.log(
+  //             snapshot.docs
+  //               .map((doc: { data: () => any; id: any }) => ({
+  //                 ...doc.data(),
+  //                 id: doc.id,
+  //               }))
+  //               .filter(
+  //                 (data) =>
+  //                   new Date(data.date).getTime() >=
+  //                     new Date(ticketsComponentDates.startDate).getTime() &&
+  //                   new Date(data.date).getTime() <=
+  //                     new Date(
+  //                       new Date(ticketsComponentDates.endDate).setDate(
+  //                         new Date(ticketsComponentDates.endDate).getDate() + 1
+  //                       )
+  //                     ).getTime()
+  //               )
+  //           )
+  //       }
+  //     )
+  //   );
+  // }, [
+  //   ticketsComponentDates.endDate,
+  //   ticketsComponentDates.startDate,
+  //   dispatch,
+  // ]);
 
   //Load Dashboard Data Based On Acess Level =========
   useEffect((): any => {
