@@ -30,8 +30,6 @@ import {
   deleteDoc,
   updateDoc,
   enableIndexedDbPersistence,
-  where,
-  query,
 } from "firebase/firestore";
 
 // init services for firestore =========================
