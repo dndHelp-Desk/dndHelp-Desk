@@ -5,7 +5,7 @@ import { RootState } from "../../Redux/store";
 
 const MostRecent: FC = () => {
   const dashboardData = useSelector(
-    (state: RootState) => state.Tickets.dashboardData
+    (state: RootState) => state.Tickets.filteredTickets
   );
   let activities = dashboardData;
   const noData = [

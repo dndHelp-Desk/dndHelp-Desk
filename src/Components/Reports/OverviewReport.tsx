@@ -41,18 +41,19 @@ const OverviewReport: FC<data> = ({ data }) => {
 
   //Total Calls Incoming or Outgoing ===========================
   const totalAggregate = useMemo(() => {
-    return reportsData?.length >= 1 && data?.length >= 1
-      ? reportsData?.filter((ticket: any) =>
-          data?.some((item: any) => item.ticket_id === ticket.ticket_id)
-        ).length
-      : 0;
+    let ids = reportsData?.map((data) => data.ticket_id);
+    let idsTwo = data?.map((ticket: any) => ticket.ticket_id);
+    return ids?.filter((item) => idsTwo?.includes(item))?.length;
   }, [reportsData, data]);
 
   //Preping daily count  Data==============
   const solvedTickets =
     data?.length >= 1 &&
     data?.filter(
-      (ticket: any) => ticket.status === "solved" && ticket.fcr === "no"
+      (ticket: any) =>
+        ticket.status === "solved" &&
+        ticket.fcr === "no" &&
+        ticket.closed_time?.toString().length === 13
     );
 
   //Trafiic Chart Data ===============
@@ -124,11 +125,7 @@ const OverviewReport: FC<data> = ({ data }) => {
                       Number(
                         (
                           solvedTickets
-                            .map(
-                              (data: any) =>
-                                new Date(data.closed_time).getTime() -
-                                new Date(data.date).getTime()
-                            )
+                            .map((data: any) => data.closed_time - data.date)
                             .reduce((acc: any, value: any) => acc + value, 0) /
                           solvedTickets.length /
                           60000

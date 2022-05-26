@@ -4,7 +4,7 @@ import { RootState } from "../../Redux/store";
 
 const StatusSummary: FC = () => {
   const dashboardData = useSelector(
-    (state: RootState) => state.Tickets.dashboardData
+    (state: RootState) => state.Tickets.filteredTickets
   );
 
   const data = useMemo(() => {

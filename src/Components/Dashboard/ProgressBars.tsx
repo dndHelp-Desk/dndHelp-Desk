@@ -7,7 +7,7 @@ const ProgressBars: FC = () => {
     (state: RootState) => state.Tickets.categories
   );
   const dashboardData = useSelector(
-    (state: RootState) => state.Tickets.dashboardData
+    (state: RootState) => state.Tickets.filteredTickets
   );
 
   const categoriesData = useMemo(() => {

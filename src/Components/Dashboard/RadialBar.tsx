@@ -5,7 +5,7 @@ import { RootState } from "../../Redux/store";
 
 const RadialBar: FC = () => {
   const dashboardData = useSelector(
-    (state: RootState) => state.Tickets.dashboardData
+    (state: RootState) => state.Tickets.filteredTickets
   );
   const theme = useSelector((state: RootState) => state.UserInfo.theme);
   const data =

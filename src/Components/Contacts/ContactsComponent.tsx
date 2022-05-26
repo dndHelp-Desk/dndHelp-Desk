@@ -10,7 +10,7 @@ const ContactsComponent:FC = () => {
   const member_details = useSelector((state:RootState) => state.UserInfo.member_details);
 
   //Block Clients From accessing ==========================
-  if (member_details[0].access === "client") {
+  if (member_details[0]?.access === "client") {
     return <Navigate to="/app/tickets" />;
   }
   //Component ======================================

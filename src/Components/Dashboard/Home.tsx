@@ -21,7 +21,7 @@ const Home: FC = () => {
   );
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const dashboardData = useSelector(
-    (state: RootState) => state.Tickets.dashboardData
+    (state: RootState) => state.Tickets.filteredTickets
   );
 
   const overDue = useMemo(() => {

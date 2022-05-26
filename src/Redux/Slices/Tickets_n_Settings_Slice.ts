@@ -14,8 +14,6 @@ interface InitialStateState {
   unread: string[] | any[];
   imageAttachments: string[] | any[];
   ticketsComponentDates: Date | any;
-  dashboardData: string[] | any[];
-  reportsData: string[] | any[];
   filteredTickets: string[] | any[];
   frequentlyAsked: string[] | any[];
 }
@@ -48,8 +46,6 @@ const initialState: InitialStateState = {
           31
         ).getTime(),
       },
-  dashboardData: [],
-  reportsData: [],
   filteredTickets: [],
   frequentlyAsked: [],
 };
@@ -96,18 +92,6 @@ export const TicketsSlice = createSlice({
     updateTicketsComponentDates: (state, action: PayloadAction<any>) => {
       state.ticketsComponentDates = action.payload;
     },
-    updateReportsData: (state, action: PayloadAction<any[]>) => {
-      state.reportsData = action.payload.sort(
-        (a: any, b: any) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-    },
-    updateDashboardData: (state, action: PayloadAction<any[]>) => {
-      state.dashboardData = action.payload.sort(
-        (a: any, b: any) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-    },
     updateFilteredTickets: (state, action: PayloadAction<any[]>) => {
       state.filteredTickets = action.payload.sort(
         (a: any, b: any) =>
@@ -130,9 +114,7 @@ export const {
   loadAccounts,
   setCategories,
   setCompanyDetails,
-  updateReportsData,
   updateTicketsComponentDates,
-  updateDashboardData,
 } = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;

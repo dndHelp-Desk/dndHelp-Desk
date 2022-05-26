@@ -36,7 +36,7 @@ const Dashboard: FC = () => {
   const theme = useSelector((state: RootState) => state.UserInfo.theme);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const dashboardData = useSelector(
-    (state: RootState) => state.Tickets.dashboardData
+    (state: RootState) => state.Tickets.filteredTickets
   );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
   const notificationMsgs = useSelector(
