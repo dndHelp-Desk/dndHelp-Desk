@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.16...v0.7.0) (2022-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **data fetching:** added firestore compound queries and reports data filtering for better perf which
+might affect user with older version by being restricted
+
+* **data fetching:** added firestore compound queries and reports data filtering for better perf ([9297118](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/92971185d3e6c2b167d56793f41bbfd5ad2d4278))
+
 ### [0.6.16](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.15...v0.6.16) (2022-05-22)
 
 
