@@ -628,16 +628,21 @@ const TicketsnUserData: FC = () => {
             "date",
             "<=",
             new Date(Number(ticketsComponentDates.endDate) + 86400000).getTime()
-          ),
-          where("agent_email", "==", member_details[0]?.email)
+          )
         ),
         (snapshot: { docs: any[] }) => {
           dispatch(
             updateFilteredTickets(
-              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                ...doc.data(),
-                id: doc.id,
-              }))
+              snapshot.docs
+                .map((doc: { data: () => any; id: any }) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }))
+                ?.filter(
+                  (data) =>
+                    data.agent_email?.replace(/\s/g, "")?.toLowerCase() ===
+                    member_details[0]?.email?.replace(/\s/g, "")?.toLowerCase()
+                )
             )
           );
         }

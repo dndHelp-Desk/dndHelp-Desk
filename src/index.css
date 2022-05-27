@@ -147,7 +147,7 @@
   }
 
   .contact_Option {
-    @apply h-10 w-10 rounded border border-slate-300 dark:border-slate-700 hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-600 dark:hover:text-blue-600 transition-all flex justify-center items-center text-slate-800 dark:text-slate-400 cursor-pointer relative;
+    @apply h-10 w-10 rounded hover:border hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-600 dark:hover:text-blue-600 transition-all flex justify-center items-center text-slate-800 dark:text-slate-400 cursor-pointer relative;
   }
 
   .contacts-control {

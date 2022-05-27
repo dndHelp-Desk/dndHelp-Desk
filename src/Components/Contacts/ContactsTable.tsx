@@ -82,12 +82,15 @@ const Table: FC<Prop> = ({ setModal }) => {
                     selectedArray.filter((data: any) => data !== contact.id)
                   )
             }
-            className="cursor-pointer w-3 h-3 border rounded-sm border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none absolute right-2 top-2"
+            className="cursor-pointer w-3 h-3 border rounded-sm border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none absolute right-2 top-2 hidden md:flex"
           />
           {/**End of Mark Contact ======================== */}
           <h3 className="flex-[4] tracking-tight flex items-center space-x-1 px-2 text-sm capitalize font-semibold text-slate-800 dark:text-slate-300 whitespace-nowrap overflow-hidden">
             <span>{contact.name?.split("/")[0]}</span>
           </h3>
+          <h4 className="flex-[8] tracking-normal hidden md:flex px-2 text-[0.65rem] uppercase font-semibold text-slate-800 dark:text-slate-400 whitespace-nowrap overflow-hidden overflow-ellipsis">
+            {contact.branch_company}
+          </h4>
           <div className="h-12 flex-[4] flex items-center gap-2">
             {" "}
             <div className="contact_Option group">
@@ -127,9 +130,6 @@ const Table: FC<Prop> = ({ setModal }) => {
               </div>
             </div>
           </div>
-          <h4 className="flex-[8] tracking-normal hidden md:flex px-2 text-[0.65rem] uppercase font-semibold text-slate-800 dark:text-slate-400 whitespace-nowrap overflow-hidden overflow-ellipsis">
-            {contact.branch_company}
-          </h4>
         </div>
       );
     });
