@@ -166,7 +166,7 @@ export const createUser = (
   addDoc(membersRef, {
     name: name,
     dept: dept,
-    email: email,
+    email: email?.replace(/\s/g, "")?.toLowerCase(),
     access: access,
     bio: bio,
     active: active,

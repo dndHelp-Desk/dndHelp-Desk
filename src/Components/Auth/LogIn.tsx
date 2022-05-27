@@ -92,7 +92,11 @@ const LogIn: FC = () => {
                   .toLowerCase()
                   .replace(/\s/g, "")}/members`
               ),
-              where("email", "==", currentUser.user.email)
+              where(
+                "email",
+                "==",
+                currentUser.user.email?.replace(/\s/g, "")?.toLowerCase()
+              )
             );
 
           //Check if the workspace exist or not ============
@@ -275,7 +279,7 @@ const LogIn: FC = () => {
         </div>
 
         {/**Large Screens Menu Items===================== */}
-        <div className="text-gray-900 hidden lg:flex space-x-10">
+        {/* <div className="text-gray-900 hidden lg:flex space-x-10">
           <a
             href="https://call-center-erp.netlify.app"
             target={"_blank"}
@@ -290,7 +294,7 @@ const LogIn: FC = () => {
           >
             <span>Support</span>
           </Link>
-        </div>
+        </div> */}
         <a
           href="https://join.slack.com/t/dialndine/signup"
           target={"_blank"}

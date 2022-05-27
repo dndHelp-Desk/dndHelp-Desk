@@ -14,13 +14,13 @@ const Dashboard = lazy(() => import("./Components/Dashboard/MainContainer"));
 const SettingsComponent = lazy(
   () => import("./Components/Settings/SettingsComponents")
 );
-const SupportHome = lazy(
-  () => import("./Components/ClientSupport/SupportHome")
-);
-const NewTicket = lazy(() => import("./Components/ClientSupport/NewTicket"));
-const KnowledgeBase = lazy(
-  () => import("./Components/ClientSupport/KnowledgeBase")
-);
+// const SupportHome = lazy(
+//   () => import("./Components/ClientSupport/SupportHome")
+// );
+//const NewTicket = lazy(() => import("./Components/ClientSupport/NewTicket"));
+//const KnowledgeBase = lazy(
+//  () => import("./Components/ClientSupport/KnowledgeBase")
+//);
 const Account = lazy(() => import("./Components/Settings/Account"));
 const Team = lazy(() => import("./Components/Settings/Team"));
 const SupportOperations = lazy(
@@ -85,10 +85,10 @@ const App: FC = () => {
             <Route path="/logIn" element={<LogIn />} />
 
             {/**Support ======================== */}
-            <Route path="/support" element={<SupportHome />}>
+            {/* <Route path="/support" element={<SupportHome />}>
               <Route path="new-ticket" element={<NewTicket />} />
               <Route path="knowledge_base" element={<KnowledgeBase />} />
-            </Route>
+            </Route> */}
 
             {/**App======================== */}
             <Route path="/app" element={<Dashboard />}>
