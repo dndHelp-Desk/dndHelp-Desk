@@ -7,7 +7,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **tickets:** new ticket id generation algorithim which avoids duplicates ([b28c243](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/b28c24326307732dd24ceac4923b1e5bf8a36662)), closes [#25](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/25)
+* **tickets:** A new algorithm or generating tickets id's to avoid duplicates with up to 259 947 different
+possibilities ([b28c243](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/b28c24326307732dd24ceac4923b1e5bf8a36662)), closes [#25](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/25)
 
 ## [0.7.0](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.6.16...v0.7.0) (2022-05-26)
 
