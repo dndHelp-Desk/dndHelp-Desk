@@ -8,7 +8,13 @@ import {
   browserLocalPersistence,
 } from "firebase/auth";
 //Firestore ===================
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
 
 import darkLogo from "./images/dndHelp-Desk_Dark.webp";
 import minidarkLogo from "./images/dndHelp-Desk.webp";
@@ -79,11 +85,14 @@ const LogIn: FC = () => {
           //Check If Workspace or Company Exists ===============
           let companiesRef: any =
             inputValues.company &&
-            collection(
-              db,
-              `companies/${inputValues.company
-                .toLowerCase()
-                .replace(/\s/g, "")}/members`
+            query(
+              collection(
+                db,
+                `companies/${inputValues.company
+                  .toLowerCase()
+                  .replace(/\s/g, "")}/members`
+              ),
+              where("email", "==", currentUser.user.email)
             );
 
           //Check if the workspace exist or not ============
@@ -153,17 +162,16 @@ const LogIn: FC = () => {
                 );
                 window.localStorage.setItem("auth", "true");
                 dispatch(isAuthenticated(true));
-                navigate("/redirect");
                 setLoading(false);
                 window.location.reload();
+                navigate("/redirect");
               } else {
                 setLoading(false);
                 dispatch(
                   updateAlert([
                     ...alerts,
                     {
-                      message:
-                        "The Workspace You Tyring To Access Doesn't Exist",
+                      message: "Workspace / Account Doesn't Exist",
                       color: "bg-red-200",
                       id: "id" + Math.random().toString(16).slice(2),
                     },

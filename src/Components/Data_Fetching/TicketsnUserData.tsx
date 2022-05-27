@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import {
-  updateUser,
-  addAllMembers,
-  setToDo,
-} from "../../Redux/Slices/UserSlice";
+import { addAllMembers, setToDo } from "../../Redux/Slices/UserSlice";
 import {
   addAllTickets,
   updateFilteredTickets,
@@ -54,6 +50,19 @@ const db = getFirestore();
 // Subsequent queries will use persistence, if it was enabled successfully
 enableIndexedDbPersistence(db);
 let org = localStorage.getItem("organization_name");
+
+// const loadWorkSpace = setInterval(()=>{
+//   if (
+//     window.location.pathname === "/login" ||
+//     window.location.pathname === "/logIn"
+//   ){
+//     org = localStorage.getItem("organization_name");
+//     console.log("running")
+//   }else{
+//     clearInterval(loadWorkSpace);
+//     console.log("terminated");
+//   }
+// },1000)
 
 // collection ref
 let membersRef: any = org && collection(db, `companies/${org}/members`);
@@ -443,76 +452,65 @@ const TicketsnUserData: FC = () => {
       //Members Data Fetching
       org &&
         onSnapshot(membersRef, (snapshot: { docs: any[] }) => {
-          dispatch(
-            addAllMembers(
-              snapshot.docs
-                .map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .sort(
-                  (
-                    a: { name: string | number },
-                    b: { name: string | number }
-                  ) => (a.name < b.name ? -1 : 1)
-                )
-            )
-          );
-        }),
-      //Add User Details ==============
-      org &&
-        onSnapshot(membersRef, (snapshot: any) => {
-          dispatch(
-            updateUser(
-              snapshot.docs
-                .map((doc: any) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-                .filter(
-                  (member: { email: string }) =>
-                    currentUser?.email &&
-                    member?.email.toLowerCase().replace(/\s/g, "") ===
-                      currentUser?.email?.toLowerCase()?.replace(/\s/g, "")
-                )
-            )
-          );
+          if (member_details[0]?.access !== "client") {
+            dispatch(
+              addAllMembers(
+                snapshot.docs
+                  .map((doc: { data: () => any; id: any }) => ({
+                    ...doc.data(),
+                    id: doc.id,
+                  }))
+                  .sort(
+                    (
+                      a: { name: string | number },
+                      b: { name: string | number }
+                    ) => (a.name < b.name ? -1 : 1)
+                  )
+              )
+            );
+          }
         }),
       //Contacts Data Fetching ======================
       org &&
         onSnapshot(contactsRef, (snapshot: { docs: any[] }) => {
-          dispatch(
-            setContacts(
-              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                ...doc.data(),
-                id: doc.id,
-              }))
-            )
-          );
+          if (member_details[0]?.access !== "client") {
+            dispatch(
+              setContacts(
+                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }))
+              )
+            );
+          }
         }),
       //Settings Data Fetching ======================
       org &&
         onSnapshot(settingsRef, (snapshot: { docs: any[] }) => {
-          dispatch(
-            loadSettings(
-              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                ...doc.data(),
-                id: doc.id,
-              }))
-            )
-          );
+          if (member_details[0]?.access !== "client") {
+            dispatch(
+              loadSettings(
+                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }))
+              )
+            );
+          }
         }),
       //Email Tenplates Data Fetching ======================
       org &&
         onSnapshot(email_TemplatesRef, (snapshot: { docs: any[] }) => {
-          dispatch(
-            loadTemplates(
-              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                ...doc.data(),
-                id: doc.id,
-              }))
-            )
-          );
+          if (member_details[0]?.access !== "client") {
+            dispatch(
+              loadTemplates(
+                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }))
+              )
+            );
+          }
         }),
       //Categories Data Fetching ======================
       org &&
@@ -529,17 +527,19 @@ const TicketsnUserData: FC = () => {
       //Company Details Data Fetching ======================
       org &&
         onSnapshot(companyDetailsRef, (snapshot: { docs: any[] }) => {
-          dispatch(
-            setCompanyDetails(
-              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                ...doc.data(),
-                id: doc.id,
-              }))[0]
-            )
-          );
+          if (member_details[0]?.access !== "client") {
+            dispatch(
+              setCompanyDetails(
+                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }))[0]
+              )
+            );
+          }
         })
     );
-  }, [dispatch, currentUser?.email]);
+  }, [dispatch, member_details, currentUser?.email]);
 
   //Load Tickets Based On Acess Level =========
   useEffect((): any => {
@@ -554,7 +554,11 @@ const TicketsnUserData: FC = () => {
             ">=",
             new Date(ticketsComponentDates.startDate).getTime()
           ),
-          where("date", "<=", new Date(ticketsComponentDates.endDate).getTime())
+          where(
+            "date",
+            "<=",
+            new Date(Number(ticketsComponentDates.endDate) + 86400000).getTime()
+          )
         ),
         (snapshot: { docs: any[] }) => {
           dispatch(
@@ -580,7 +584,11 @@ const TicketsnUserData: FC = () => {
             ">=",
             new Date(ticketsComponentDates.startDate).getTime()
           ),
-          where("date", "<=", new Date(ticketsComponentDates.endDate).getTime())
+          where(
+            "date",
+            "<=",
+            new Date(Number(ticketsComponentDates.endDate) + 86400000).getTime()
+          )
         ),
         (snapshot: { docs: any[] }) => {
           dispatch(
@@ -619,7 +627,7 @@ const TicketsnUserData: FC = () => {
           where(
             "date",
             "<=",
-            new Date(ticketsComponentDates.endDate).getTime()
+            new Date(Number(ticketsComponentDates.endDate) + 86400000).getTime()
           ),
           where("agent_email", "==", member_details[0]?.email)
         ),
@@ -655,7 +663,11 @@ const TicketsnUserData: FC = () => {
             ">=",
             new Date(ticketsComponentDates.startDate).getTime()
           ),
-          where("date", "<=", new Date(ticketsComponentDates.endDate).getTime())
+          where(
+            "date",
+            "<=",
+            new Date(Number(ticketsComponentDates.endDate) + 86400000).getTime()
+          )
         ),
         (snapshot: { docs: any[] }) => {
           dispatch(
@@ -671,8 +683,12 @@ const TicketsnUserData: FC = () => {
                       new Date(ticketsComponentDates.startDate).getTime() &&
                     new Date(data.date).getTime() <=
                       new Date(
-                        new Date(ticketsComponentDates.endDate).setDate(
-                          new Date(ticketsComponentDates.endDate).getDate() + 1
+                        new Date(
+                          Number(ticketsComponentDates.endDate) + 86400000
+                        ).setDate(
+                          new Date(
+                            Number(ticketsComponentDates.endDate) + 86400000
+                          ).getDate() + 1
                         )
                       ).getTime()
                 )
@@ -690,14 +706,16 @@ const TicketsnUserData: FC = () => {
   //Load Email_Accounts ====================
   useEffect(() => {
     return onSnapshot(emailAccountsRef, (snapshot: { docs: any[] }) => {
-      dispatch(
-        loadAccounts(
-          snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
-        )
-      );
+      if (member_details[0]?.access !== "client") {
+        dispatch(
+          loadAccounts(
+            snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+              ...doc.data(),
+              id: doc.id,
+            }))
+          )
+        );
+      }
     });
   }, [dispatch, member_details]);
 

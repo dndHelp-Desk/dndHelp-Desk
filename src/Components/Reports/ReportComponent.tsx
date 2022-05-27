@@ -9,153 +9,73 @@ import { RootState } from "../../Redux/store";
 const ReportsComponent: FC = () => {
   // const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState<any>(false);
+  const ticketsComponentDates = useSelector(
+    (state: RootState) => state.Tickets.ticketsComponentDates
+  );
   //Filters =====================
   const [option, setOption] = useState<string | any>("branch_company");
   const [contactsList, setList] = useState<string[]>([]);
+  const [reportsData, setReportsData] = useState<string[]>([]);
   const [filters, setFilters] = useState<any>({
     ticket_id: "",
     agent: "",
     category: "",
     status: "",
   });
-  const member_details = useSelector(
-    (state: RootState) => state.UserInfo.member_details
+  const fetchedTickets = useSelector(
+    (state: RootState) => state.Tickets.filteredTickets
   );
 
-  const reportsData = useSelector(
-    (state: RootState) => state.Tickets.allTickets
-  );
+  //Filter Tickets ====
+  useEffect(() => {
+    fetchedTickets &&
+      setReportsData(
+        fetchedTickets?.filter(
+          (data: any) =>
+            data?.date >= Number(ticketsComponentDates?.startDate) &&
+            data?.date <=
+              new Date(Number(ticketsComponentDates?.endDate) + 86400000)
+        )
+      );
+  }, [fetchedTickets, ticketsComponentDates]);
 
   //Filter Tickets Based On Acces Level ====
   const data = useMemo(() => {
-    if (member_details.length >= 1 && member_details[0]?.access === "admin") {
-      return reportsData.length >= 1
-        ? reportsData
-            ?.filter((row) =>
-              contactsList?.every(
-                (item) =>
-                  item.toLowerCase()?.replace(/\s/g, "") !==
-                  row.branch_company?.toLowerCase()?.replace(/\s/g, "")
-              )
+    return reportsData?.length >= 1
+      ? reportsData
+          ?.filter((row: any) =>
+            contactsList?.every(
+              (item: any) =>
+                item.toLowerCase()?.replace(/\s/g, "") !==
+                row.branch_company?.toLowerCase()?.replace(/\s/g, "")
             )
-            ?.filter(
-              (data) =>
-                data.message_position === 1 &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi")) &&
-                data.category
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.category, "gi")) &&
-                data.agent_email
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.agent, "gi")) &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi"))
-            )
-        : [];
-    } else if (
-      member_details.length >= 1 &&
-      member_details[0].access === "client"
-    ) {
-      return reportsData.length >= 1
-        ? reportsData
-            ?.filter((row) =>
-              contactsList?.every(
-                (item) =>
-                  item.toLowerCase()?.replace(/\s/g, "") !==
-                  row.branch_company?.toLowerCase()?.replace(/\s/g, "")
-              )
-            )
-            ?.filter(
-              (data) =>
-                data.message_position === 1 &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi")) &&
-                data.category
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.category, "gi")) &&
-                data.agent_email
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.agent, "gi")) &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi")) &&
-                member_details[0]?.companies
-                  .split(",")
-                  .some(
-                    (msg: any) =>
-                      msg?.toLowerCase().replace(/\s/g, "") ===
-                      data.branch_company?.toLowerCase().replace(/\s/g, "")
-                  )
-            )
-        : [];
-    } else if (
-      member_details.length >= 1 &&
-      member_details[0].access === "agent"
-    ) {
-      return reportsData.length >= 1
-        ? reportsData
-            ?.filter((row) =>
-              contactsList?.every(
-                (item) =>
-                  item.toLowerCase()?.replace(/\s/g, "") !==
-                  row.branch_company?.toLowerCase()?.replace(/\s/g, "")
-              )
-            )
-            ?.filter(
-              (data) =>
-                data?.agent_email === member_details[0]?.email &&
-                data.message_position === 1 &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi")) &&
-                data.category
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.category, "gi")) &&
-                data.agent_email
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.agent, "gi")) &&
-                data.status
-                  .replace(/\s/g, "")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")
-                  .match(new RegExp(filters.status, "gi"))
-            )
-        : [];
-    }
-  }, [
-    reportsData,
-    filters.agent,
-    filters.category,
-    filters.status,
-    member_details,
-    contactsList,
-  ]);
+          )
+          ?.filter(
+            (data: any) =>
+              data.message_position === 1 &&
+              data.status
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.status, "gi")) &&
+              data.category
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.category, "gi")) &&
+              data.agent_email
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.agent, "gi")) &&
+              data.status
+                .replace(/\s/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "")
+                .match(new RegExp(filters.status, "gi"))
+          )
+      : [];
+  }, [reportsData, filters, contactsList]);
 
   //Check if The data is loading
   useEffect(() => {
@@ -166,16 +86,16 @@ const ReportsComponent: FC = () => {
 
   const tableData = useMemo(() => {
     let names = Array.from(new Set(data?.map((data: any) => data[option])));
-    const calcuFunction = (elem:any,param:any,opt:string|boolean)=>{
-     return data?.filter(
-       (data: any) => data[option] === elem && data[param] === opt
-     )?.length;
-    }
+    const calcuFunction = (elem: any, param: any, opt: string | boolean) => {
+      return data?.filter(
+        (data: any) => data[option] === elem && data[param] === opt
+      )?.length;
+    };
     return names?.map((elem): any => ({
       name: elem,
-      open: calcuFunction(elem,"status", "open"),
-      solved: calcuFunction(elem,"status", "solved"),
-      reopened:calcuFunction(elem,"reopened", true),
+      open: calcuFunction(elem, "status", "open"),
+      solved: calcuFunction(elem, "status", "solved"),
+      reopened: calcuFunction(elem, "reopened", true),
       total: data?.filter((data: any) => data[option] === elem)?.length,
     }));
   }, [data, option]);

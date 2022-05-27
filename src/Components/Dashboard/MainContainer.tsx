@@ -96,7 +96,7 @@ const Dashboard: FC = () => {
     dashboardData.length <= 0 ? setLoading(true) : setLoading(false);
     dashboardData.length <= 0 && setTimeout(() => setLoading(false), 10000);
     return clearTimeout();
-  }, [dashboardData.length]);
+  }, [dashboardData]);
 
   if (logged !== true) {
     return <Navigate to="/login" />;

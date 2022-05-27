@@ -16,6 +16,7 @@ import {
 } from "../Data_Fetching/TicketsnUserData";
 import defaultProfile from "./../../default.webp";
 import { AppDispatch, RootState } from "../../Redux/store";
+import { updateUser } from "../../Redux/Slices/UserSlice";
 
 const Profile = () => {
   const currentUser: any = useAuth();
@@ -159,6 +160,18 @@ const Profile = () => {
                       member_details.length >= 1 && member_details[0].id,
                       "available"
                     );
+                    dispatch(
+                      updateUser([
+                        { ...member_details[0], status: "available" },
+                      ])
+                    );
+                    window.localStorage.setItem(
+                      "user",
+                      JSON.stringify({
+                        ...member_details[0],
+                        status: "available",
+                      })
+                    );
                     setTimeout(() => {
                       dispatch(
                         updateAlert([
@@ -170,7 +183,7 @@ const Profile = () => {
                           },
                         ])
                       );
-                    }, 3000);
+                    }, 1500);
                   }}
                   className="h-8 border-b border-t hover:opacity-80 dark:border-slate-800 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-green-500 cursor-pointer font-semibold"
                 >
@@ -188,6 +201,16 @@ const Profile = () => {
                       member_details.length >= 1 && member_details[0].id,
                       "busy"
                     );
+                    dispatch(
+                      updateUser([{ ...member_details[0], status: "busy" }])
+                    );
+                    window.localStorage.setItem(
+                      "user",
+                      JSON.stringify({
+                        ...member_details[0],
+                        status: "busy",
+                      })
+                    );
                     setTimeout(() => {
                       dispatch(
                         updateAlert([
@@ -199,7 +222,7 @@ const Profile = () => {
                           },
                         ])
                       );
-                    }, 3000);
+                    }, 1500);
                   }}
                   className="h-8 border-b hover:opacity-80 dark:border-slate-800 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-yellow-500 cursor-pointer font-semibold"
                 >
@@ -217,6 +240,18 @@ const Profile = () => {
                       member_details.length >= 1 && member_details[0].id,
                       "unavailable"
                     );
+                    dispatch(
+                      updateUser([
+                        { ...member_details[0], status: "unavailable" },
+                      ])
+                    );
+                    window.localStorage.setItem(
+                      "user",
+                      JSON.stringify({
+                        ...member_details[0],
+                        status: "unavailable",
+                      })
+                    );
                     setTimeout(() => {
                       dispatch(
                         updateAlert([
@@ -228,7 +263,7 @@ const Profile = () => {
                           },
                         ])
                       );
-                    }, 3000);
+                    }, 1500);
                   }}
                   className="h-8 border-b hover:opacity-80 dark:border-slate-800 border-slate-200 flex justify-between px-6 items-center space-x-2 text-xs text-red-500 cursor-pointer font-semibold"
                 >

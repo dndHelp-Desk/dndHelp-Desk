@@ -1,4 +1,12 @@
 import React, { FC, useMemo, useState, useEffect } from "react";
+//Firestore ===================
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
 import { RichTextEditor } from "@mantine/rte";
 import DueDate from "./DueDate";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,6 +30,9 @@ interface Props {
   newTicketModal: any;
   setModal: any;
 }
+
+// init services for firestore =========================
+const db = getFirestore();
 
 const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const contacts = useSelector((state: RootState) => state.Tickets.contacts);
@@ -48,6 +59,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   );
   const [recepient, setRecipient] = useState<string | any>("");
   const [searchResults, setResults] = useState<boolean | any>(false);
+  const [isSubmiting, setSubmit] = useState<boolean | any>(false);
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
   const [recordingFile, setFile] = useState<boolean | any>(false);
   const [cannedSearch, setCannedSearch] = useState<string>("");
@@ -64,14 +76,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         recipient_name: "",
         recipient_email: "",
         agent: "",
+        agent_email: "",
         priority: "",
         category: "",
         branch_company: "",
         message: "<p></p>",
         state: "",
         date: "",
-        ticket_id: "",
-        agent_email: "",
         complainant_name: "",
         complainant_email: "none",
         complainant_number: "",
@@ -184,7 +195,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         ref(
           storage,
           `/${company_details.name}/${
-            inputValue?.ticket_id
+            inputValue?.recipient_name
           }+${new Date().getTime()}`
         ),
         file
@@ -201,9 +212,12 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   //Submit New Ticket ===============
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setSubmit(true);
 
-    //Send SMS ===========================================
-    /*var xhr = new XMLHttpRequest(),
+    //New Tickets Function ============
+    const openTicket = (id: any) => {
+      //Send SMS ===========================================
+      /*var xhr = new XMLHttpRequest(),
       body = JSON.stringify({
         messages: [
           {
@@ -228,31 +242,29 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     };
     xhr.send(body);*/
 
-    // Upload Recordings
-    recordingFile &&
-      addRecording(
-        recordingFile,
-        `/${company_details.name}/${inputValue?.ticket_id}`
-      );
+      // Upload Recordings
+      recordingFile &&
+        addRecording(recordingFile, `/${company_details.name}/${id}`);
 
-    let dueDate = `${new Date(inputValue?.date).toLocaleString()}`;
-    let openDate = `${new Date().toLocaleString()}`;
+      let dueDate = `${new Date(inputValue?.date).toLocaleString()}`;
+      let openDate = `${new Date().toLocaleString()}`;
 
-    //Alert if Due Date is Empty =============
-    inputValue?.date === "" &&
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "Add The Due Date to Proceed",
-            color: "bg-yellow-200",
-            id: "id" + Math.random().toString(16).slice(2),
-          },
-        ])
-      );
+      //Alert if Due Date is Empty =============
+      inputValue?.date === "" &&
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Add The Due Date to Proceed",
+              color: "bg-yellow-200",
+              id: "id" + Math.random().toString(16).slice(2),
+            },
+          ])
+        );
+      inputValue?.date === "" && setSubmit(false);
 
-    //Send Mail and Open Ticket If values are not empty
-    /*if (!recordingFile && inputValue?.state === "solved") {
+      //Send Mail and Open Ticket If values are not empty
+      /*if (!recordingFile && inputValue?.state === "solved") {
       dispatch(
         updateAlert([
           ...alerts,
@@ -264,63 +276,63 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       );
     } */
 
-    //Sending Account =============================
-    let sendingAccount = email_accounts.filter(
-      (account) =>
-        account.name.toLowerCase() === inputValue?.send_as.toLowerCase()
-    )[0];
+      //Sending Account =============================
+      let sendingAccount = email_accounts.filter(
+        (account) =>
+          account.name.toLowerCase() === inputValue?.send_as.toLowerCase()
+      )[0];
 
-    if (
-      inputValue?.date !== "" &&
-      sendingAccount !== undefined &&
-      inputValue?.branch_company !== "" &&
-      member_details.id !== false &&
-      allTickets.length >= 1 &&
-      allTickets.filter((ticket) => ticket.ticket_id === inputValue?.ticket_id)
-        .length <= 0
-    ) {
-      //Open New Ticket ========================
-      addTicket(
-        inputValue?.recipient_name,
-        inputValue?.recipient_email,
-        inputValue?.agent,
-        inputValue?.priority,
-        inputValue?.category,
-        inputValue?.branch_company,
-        inputValue?.message,
-        inputValue?.state,
-        inputValue?.date,
-        inputValue?.ticket_id,
-        inputValue?.agent_email,
-        inputValue?.complainant_name,
-        inputValue?.complainant_email === "" ||
-          inputValue?.complainant_email === undefined ||
-          inputValue?.complainant_email?.length < 4
-          ? "none"
-          : inputValue?.complainant_email,
-        inputValue?.complainant_number,
-        inputValue?.send_as,
-        `${recordingFile && inputValue?.state === "solved" ? true : false}`
-      );
-      setShowOpen(true);
-      //Send Email Using Nodemailer ===================
-      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          from: `${sendingAccount.email}`,
-          company: `${company_details.name} ${sendingAccount.name}`,
-          password: sendingAccount.password,
-          host: sendingAccount.host,
-          port: sendingAccount.port,
-          email: inputValue?.recipient_email,
-          subject: `New Issue Reported Ragarding ${inputValue?.category} || Ticket-ID: ${inputValue?.ticket_id}`,
-          ticket_id: inputValue?.ticket_id,
-          email_body:
-            inputValue?.state !== "solved"
-              ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+      if (
+        inputValue?.date !== "" &&
+        sendingAccount !== undefined &&
+        inputValue?.branch_company !== "" &&
+        member_details.id !== false &&
+        allTickets.length >= 1 &&
+        allTickets.filter((ticket) => ticket.ticket_id === id).length <= 0
+      ) {
+        //Open New Ticket ========================
+        addTicket(
+          inputValue?.recipient_name,
+          inputValue?.recipient_email,
+          inputValue?.agent,
+          inputValue?.priority,
+          inputValue?.category,
+          inputValue?.branch_company,
+          inputValue?.message,
+          inputValue?.state,
+          inputValue?.date,
+          id,
+          inputValue?.agent_email,
+          inputValue?.complainant_name,
+          inputValue?.complainant_email === "" ||
+            inputValue?.complainant_email === undefined ||
+            inputValue?.complainant_email?.length < 4
+            ? "none"
+            : inputValue?.complainant_email,
+          inputValue?.complainant_number,
+          inputValue?.send_as,
+          `${recordingFile && inputValue?.state === "solved" ? true : false}`
+        );
+        setSubmit(false);
+        setShowOpen(true);
+        //Send Email Using Nodemailer ===================
+        fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            from: `${sendingAccount.email}`,
+            company: `${company_details.name} ${sendingAccount.name}`,
+            password: sendingAccount.password,
+            host: sendingAccount.host,
+            port: sendingAccount.port,
+            email: inputValue?.recipient_email,
+            subject: `New Issue Reported Ragarding ${inputValue?.category} || Ticket-ID: ${id}`,
+            ticket_id: id,
+            email_body:
+              inputValue?.state !== "solved"
+                ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
         Hi ${inputValue?.recipient_name},
       </p>
       <h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;font-size:15px">
@@ -333,7 +345,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       </p>
       <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
         <li><b>Brand:</b> ${inputValue?.branch_company} </li>
-        <li><b>Tickect-ID:</b> ${inputValue?.ticket_id} </li>
+        <li><b>Tickect-ID:</b> ${id} </li>
         <li><b>Due Date:</b> ${dueDate} </li>
         <li><b>Case Origin:</b> dndHelp-Desk </li>
         <li><b>Priority:</b> ${inputValue?.priority} </li>
@@ -370,15 +382,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
         The information contained in this communication from the sender is confidential. It is intended solely for use by the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful. 
       </p>`
-              : `<p
+                : `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
      Hi ${inputValue?.recipient_name},
   </p>
   <h1
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-    <b>Dial & Dine has opened a new ticket with ID: ${
-      inputValue?.ticket_id
-    } which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
+    <b>Dial & Dine has opened a new ticket with ID: ${id} which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
   </h1>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
@@ -390,7 +400,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       ${inputValue?.branch_company}
     </li>
     <li><b>Tickect-ID:</b>
-      ${inputValue?.ticket_id}
+      ${id}
     </li>
     <li><b>Closed On:</b>
       ${openDate}
@@ -437,71 +447,130 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
     prohibited and may be unlawful.
   </p>`,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const resData = data;
-          if (resData.status === "success") {
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const resData = data;
+            if (resData.status === "success") {
+              dispatch(
+                updateAlert([
+                  ...alerts,
+                  {
+                    message: "Email sent Successfully",
+                    color: "bg-green-200",
+                    id: "id" + Math.random().toString(16).slice(2),
+                  },
+                ])
+              );
+              onChange("<p></p>");
+              setSubmit(false);
+              setShowOpen(true);
+            } else if (resData.status === "fail") {
+              setSubmit(false);
+              dispatch(
+                updateAlert([
+                  ...alerts,
+                  {
+                    message: "Email Failed To Send",
+                    color: "bg-red-200",
+                    id: "id" + Math.random().toString(16).slice(2),
+                  },
+                ])
+              );
+            }
+          })
+          .catch((error) => {
             dispatch(
               updateAlert([
                 ...alerts,
                 {
-                  message: "Email sent Successfully",
-                  color: "bg-green-200",
-                  id: "id" + Math.random().toString(16).slice(2),
-                },
-              ])
-            );
-            onChange("<p></p>");
-            setShowOpen(true);
-          } else if (resData.status === "fail") {
-            dispatch(
-              updateAlert([
-                ...alerts,
-                {
-                  message: "Email Failed To Send",
+                  message: error,
                   color: "bg-red-200",
                   id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
-          }
+            setSubmit(false);
+            setShowOpen(true);
+          });
+        setSubmit(false);
+        setShowOpen(true);
+        setValues({
+          recipient_name: "",
+          recipient_email: "",
+          agent: "",
+          priority: "",
+          category: "",
+          branch_company: "",
+          message: "",
+          state: "",
+          date: "",
+          agent_email: "",
+          complainant_name: "",
+          complainant_email: "none",
+          complainant_number: "",
+          send_as: "",
         });
-      setValues({
-        recipient_name: "",
-        recipient_email: "",
-        agent: "",
-        priority: "",
-        category: "",
-        branch_company: "",
-        message: "",
-        state: "",
-        date: "",
-        ticket_id: "",
-        agent_email: "",
-        complainant_name: "",
-        complainant_email: "none",
-        complainant_number: "",
-        send_as: "",
-      });
-      setFile("");
-      setShowOpen(true);
-      setRecipient("");
-      onChange("<p></p>");
-      setShowOpen(true);
-      setModal(false);
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "New Ticket Created Successfully",
-            color: "bg-green-200",
-            id: "id" + Math.random().toString(16).slice(2),
-          },
-        ])
-      );
-    }
+        setFile("");
+        setRecipient("");
+        onChange("<p></p>");
+        setShowOpen(true);
+        !isSubmiting && setModal(false);
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "New Ticket Created Successfully",
+              color: "bg-green-200",
+              id: "id" + Math.random().toString(16).slice(2),
+            },
+          ])
+        );
+      }
+    };
+
+    //Check If Ticket Exists ===============
+    let ticketsRef: any = collection(
+      db,
+      `companies/${company_details?.name
+        .toLowerCase()
+        .replace(/\s/g, "")}/tickets`
+    );
+    const generateID = () => {
+      //Generate unique Id =========================
+      let generatedId = `#${inputValue?.recipient_name
+        ?.charAt(0)
+        ?.toUpperCase()}${new Date()
+        .getTime()
+        .toString()
+        ?.split("")
+        ?.slice(8, 12)
+        ?.join("")}`;
+      getDocs(query(ticketsRef, where("ticket_id", "==", generatedId)))
+        .then((snapshot) => {
+          if (snapshot.docs?.length <= 0) {
+            openTicket(generatedId);
+          } else if (snapshot.docs?.length >= 1) {
+            generateID();
+          }
+        })
+        .catch(() => {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: "There was an error please try again",
+                color: "bg-red-200",
+                id: "id" + Math.random().toString(16).slice(2),
+              },
+            ])
+          );
+          setSubmit(false);
+        });
+    };
+
+    generateID();
   };
 
   //Component =====================================
@@ -525,7 +594,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               <button
                 type="button"
                 onClick={() => {
-                  setModal(false);
+                  !isSubmiting && setModal(false);
                   window.localStorage.setItem(
                     "draftMsg",
                     JSON.stringify(inputValue)
@@ -541,7 +610,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               <button
                 type="button"
                 onClick={() => {
-                  setModal(false);
+                  !isSubmiting && setModal(false);
                   window.localStorage.setItem(
                     "draftMsg",
                     JSON.stringify({
@@ -554,7 +623,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       message: "",
                       state: "",
                       date: "",
-                      ticket_id: "",
                       agent_email: "",
                       complainant_name: "",
                       complainant_email: "none",
@@ -572,7 +640,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     message: "",
                     state: "",
                     date: "",
-                    ticket_id: "",
                     agent_email: "",
                     complainant_name: "",
                     complainant_email: "none",
@@ -778,47 +845,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       setValues({
                         ...inputValue,
                         complainant_number: e.target.value,
-                        ticket_id:
-                          allTickets.length >= 1 &&
-                          allTickets.filter(
-                            (ticket) =>
-                              ticket.ticket_id ===
-                              `#${(
-                                new Date().getSeconds() +
-                                (new Date().getTime() +
-                                  e.target.value
-                                    .split("")
-                                    .splice(3, 5)
-                                    .join(""))
-                              )
-                                .split("")
-                                .slice(9, 14)
-                                .join("")}`
-                          ).length <= 0
-                            ? `#${(
-                                new Date().getSeconds() +
-                                (new Date().getTime() +
-                                  e.target.value
-                                    .split("")
-                                    .splice(3, 5)
-                                    .join(""))
-                              )
-                                .split("")
-                                .slice(9, 14)
-                                .join("")}`
-                            : `#${
-                                (
-                                  new Date().getSeconds() +
-                                  (new Date().getTime() +
-                                    e.target.value
-                                      .split("")
-                                      .splice(3, 5)
-                                      .join(""))
-                                )
-                                  .split("")
-                                  .slice(9, 14)
-                                  .join("") + 1
-                              }`,
                         agent: member_details[0].name,
                         agent_email: member_details[0].email,
                       });
@@ -958,7 +984,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                       message: "",
                       state: "",
                       date: "",
-                      ticket_id: "",
                       agent_email: "",
                       complainant_name: "",
                       complainant_email: "none",
@@ -1061,10 +1086,16 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Send ========================================= */}
               <abbr title="Open Ticket">
                 <button
+                  disabled={isSubmiting ? true : false}
                   type="submit"
-                  className="h-8 w-28 flex justify-center items-center outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded text-slate-100 dark:text-slate-100 font-medium text-xs font-sans transition-all"
+                  className="h-8 w-32 flex justify-center items-center space-x-2 outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded text-slate-100 dark:text-slate-100 font-medium text-xs font-sans transition-all disabled:cursor-not-allowed"
                 >
-                  Submit now
+                  <span>Submit now</span>
+                  <div
+                    className={`h-4 w-4 rounded-full border-2 border-blue-500 border-l-white animate-spin ${
+                      isSubmiting ? "" : "hidden"
+                    }`}
+                  ></div>{" "}
                 </button>
               </abbr>
             </div>

@@ -194,9 +194,9 @@ const StatusSummary: FC = () => {
               <div
                 style={{ height: `calc(${status.value}% + 8px)` }}
                 key={index}
-                className={`bg-inherit transition-all duration-200 hover:bg-blue-800 last:rounded-b  first:border-t-0 border-t border-slate-300 dark:border-slate-700 relative group shadow-md`}
+                className={`bg-inherit transition-all duration-200 hover:bg-blue-800 last:rounded-b  first:border-t-0 border-t border-slate-300 dark:border-slate-700 relative group`}
               >
-                <div className="absolute h-6 w-28 p-2 bottom-[40%] right-[-90%] rounded-sm bg-blue-200 text-[0.65rem] font-semibold hidden group-hover:flex justify-between items-center">
+                <div className="absolute h-6 w-28 p-2 bottom-[40%] right-[-90%] rounded-sm bg-blue-200 text-[0.65rem] font-semibold hidden group-hover:flex justify-between items-center shadow-xl drop-shadow-xl">
                   <span>{status.name} :</span>
                   <span>{status.value}%</span>
                 </div>

@@ -786,7 +786,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     <BiCopyAlt className="text-base hover:opacity-80" />
                   </abbr>
                   <div className="group-hover:flex hidden absolute bottom-[100%] left-0 w-[11rem] h-[9rem] pb-1">
-                    <div className="rounded bg-white dark:bg-slate-800 z-[999] border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden shadow-xl">
+                    <div className="rounded bg-white dark:bg-slate-900 z-[999] border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden shadow-xl">
                       <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-300 px-2 overflow-hidden">
                         <input
                           type="search"

@@ -57,6 +57,7 @@ const TicketsList: FC<Props> = ({
   });
 
   const filteredTickets: any = useMemo(() => {
+    setLimit(50);
     return fetchedTickets.length >= 1
       ? fetchedTickets
           ?.filter((row) =>
@@ -93,14 +94,8 @@ const TicketsList: FC<Props> = ({
                 .replace(/\(/g, "")
                 .replace(/\)/g, "")
                 .match(new RegExp(filters?.priority, "gi")) &&
-              Number(new Date(ticket.date).getTime()) >=
-                Number(new Date(ticketsComponentDates.startDate).getTime()) &&
-              Number(new Date(ticket.date).getTime()) <=
-                new Date(
-                  new Date(ticketsComponentDates.endDate).setDate(
-                    new Date(ticketsComponentDates.endDate).getDate() + 1
-                  )
-                ).getTime() &&
+              ticket.date >= Number(ticketsComponentDates.startDate) &&
+              ticket.date <= Number(ticketsComponentDates.endDate) + 86400000 &&
               ticket?.complainant_number
                 .toLowerCase()
                 .replace(/\s/g, "")
@@ -115,18 +110,7 @@ const TicketsList: FC<Props> = ({
                 ) === true
           )
       : [];
-  }, [
-    fetchedTickets,
-    filters.agent,
-    filters.category,
-    filters.complainant_number,
-    ticketsComponentDates.endDate,
-    ticketsComponentDates.startDate,
-    filters.status,
-    filters.ticket_id,
-    filters?.priority,
-    contactsList,
-  ]);
+  }, [fetchedTickets, ticketsComponentDates, filters, contactsList]);
 
   //Loop Through Each Tickects =================
   const tickets =

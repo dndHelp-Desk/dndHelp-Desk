@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const BottomSection: FC = () => {
   return (
-    <section className="w-full h-fit  rounded-md grid grid-col-1 md:grid-cols-2 gap-4">
-      <article className="col-span-1 h-[13rem]  rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
+    <section className="w-full h-fit  rounded-md grid grid-col-1 gap-4">
+      <article className="col-span-1 h-[12.5rem]  rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
         <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize tracking-normal py-2 border-b border-slate-200 dark:border-slate-700">
           Knowledge Base
         </h3>
@@ -27,7 +27,7 @@ const BottomSection: FC = () => {
       </article>
 
       {/**Getting Started =========== */}
-      <div className="col-span-1 h-[13rem]  rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
+      <div className="hidden col-span-1 h-[13rem]  rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
         <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize tracking-normal">
           Getting Started
         </h3>
