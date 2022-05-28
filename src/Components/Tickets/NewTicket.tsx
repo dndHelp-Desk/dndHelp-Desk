@@ -214,6 +214,12 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     e.preventDefault();
     setSubmit(true);
 
+    //Sending Account =============================
+    let sendingAccount = email_accounts.filter(
+      (account) =>
+        account.name.toLowerCase() === inputValue?.send_as.toLowerCase()
+    )[0];
+
     //New Tickets Function ============
     const openTicket = (id: any) => {
       //Send SMS ===========================================
@@ -249,20 +255,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       let dueDate = `${new Date(inputValue?.date).toLocaleString()}`;
       let openDate = `${new Date().toLocaleString()}`;
 
-      //Alert if Due Date is Empty =============
-      inputValue?.date === "" &&
-        dispatch(
-          updateAlert([
-            ...alerts,
-            {
-              message: "Add The Due Date to Proceed",
-              color: "bg-yellow-200",
-              id: "id" + Math.random().toString(16).slice(2),
-            },
-          ])
-        );
-      inputValue?.date === "" && setSubmit(false);
-
       //Send Mail and Open Ticket If values are not empty
       /*if (!recordingFile && inputValue?.state === "solved") {
       dispatch(
@@ -276,63 +268,49 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       );
     } */
 
-      //Sending Account =============================
-      let sendingAccount = email_accounts.filter(
-        (account) =>
-          account.name.toLowerCase() === inputValue?.send_as.toLowerCase()
-      )[0];
-
-      if (
-        inputValue?.date !== "" &&
-        sendingAccount !== undefined &&
-        inputValue?.branch_company !== "" &&
-        member_details.id !== false &&
-        allTickets.length >= 1 &&
-        allTickets.filter((ticket) => ticket.ticket_id === id).length <= 0
-      ) {
-        //Open New Ticket ========================
-        addTicket(
-          inputValue?.recipient_name,
-          inputValue?.recipient_email,
-          inputValue?.agent,
-          inputValue?.priority,
-          inputValue?.category,
-          inputValue?.branch_company,
-          inputValue?.message,
-          inputValue?.state,
-          inputValue?.date,
-          id,
-          inputValue?.agent_email,
-          inputValue?.complainant_name,
-          inputValue?.complainant_email === "" ||
-            inputValue?.complainant_email === undefined ||
-            inputValue?.complainant_email?.length < 4
-            ? "none"
-            : inputValue?.complainant_email,
-          inputValue?.complainant_number,
-          inputValue?.send_as,
-          `${recordingFile && inputValue?.state === "solved" ? true : false}`
-        );
-        setSubmit(false);
-        setShowOpen(true);
-        //Send Email Using Nodemailer ===================
-        fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            from: `${sendingAccount.email}`,
-            company: `${company_details.name} ${sendingAccount.name}`,
-            password: sendingAccount.password,
-            host: sendingAccount.host,
-            port: sendingAccount.port,
-            email: inputValue?.recipient_email,
-            subject: `New Issue Reported Ragarding ${inputValue?.category} || Ticket-ID: ${id}`,
-            ticket_id: id,
-            email_body:
-              inputValue?.state !== "solved"
-                ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
+      //Open New Ticket ========================
+      addTicket(
+        inputValue?.recipient_name,
+        inputValue?.recipient_email,
+        inputValue?.agent,
+        inputValue?.priority,
+        inputValue?.category,
+        inputValue?.branch_company,
+        inputValue?.message,
+        inputValue?.state,
+        inputValue?.date,
+        id,
+        inputValue?.agent_email,
+        inputValue?.complainant_name,
+        inputValue?.complainant_email === "" ||
+          inputValue?.complainant_email === undefined ||
+          inputValue?.complainant_email?.length < 4
+          ? "none"
+          : inputValue?.complainant_email,
+        inputValue?.complainant_number,
+        inputValue?.send_as,
+        `${recordingFile && inputValue?.state === "solved" ? true : false}`
+      );
+      setSubmit(false);
+      setShowOpen(true);
+      //Send Email Using Nodemailer ===================
+      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          from: `${sendingAccount.email}`,
+          company: `${company_details.name} ${sendingAccount.name}`,
+          password: sendingAccount.password,
+          host: sendingAccount.host,
+          port: sendingAccount.port,
+          email: inputValue?.recipient_email,
+          subject: `New Issue Reported Ragarding ${inputValue?.category} || Ticket-ID: ${id}`,
+          ticket_id: id,
+          email_body:
+            inputValue?.state !== "solved"
+              ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
         Hi ${inputValue?.recipient_name},
       </p>
       <h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;font-size:15px">
@@ -382,7 +360,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
         The information contained in this communication from the sender is confidential. It is intended solely for use by the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful. 
       </p>`
-                : `<p
+              : `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
      Hi ${inputValue?.recipient_name},
   </p>
@@ -447,112 +425,125 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
     prohibited and may be unlawful.
   </p>`,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            const resData = data;
-            if (resData.status === "success") {
-              dispatch(
-                updateAlert([
-                  ...alerts,
-                  {
-                    message: "Email sent Successfully",
-                    color: "bg-green-200",
-                    id: "id" + Math.random().toString(16).slice(2),
-                  },
-                ])
-              );
-              onChange("<p></p>");
-              setSubmit(false);
-              setShowOpen(true);
-            } else if (resData.status === "fail") {
-              setSubmit(false);
-              dispatch(
-                updateAlert([
-                  ...alerts,
-                  {
-                    message: "Email Failed To Send",
-                    color: "bg-red-200",
-                    id: "id" + Math.random().toString(16).slice(2),
-                  },
-                ])
-              );
-            }
-          })
-          .catch((error) => {
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const resData = data;
+          if (resData.status === "success") {
             dispatch(
               updateAlert([
                 ...alerts,
                 {
-                  message: error,
+                  message: "Email sent Successfully",
+                  color: "bg-green-200",
+                  id: "id" + Math.random().toString(16).slice(2),
+                },
+              ])
+            );
+            onChange("<p></p>");
+            setSubmit(false);
+            setShowOpen(true);
+          } else if (resData.status === "fail") {
+            setSubmit(false);
+            dispatch(
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Email Failed To Send",
                   color: "bg-red-200",
                   id: "id" + Math.random().toString(16).slice(2),
                 },
               ])
             );
-            setSubmit(false);
-            setShowOpen(true);
-          });
-        setSubmit(false);
-        setShowOpen(true);
-        setValues({
-          recipient_name: "",
-          recipient_email: "",
-          agent: "",
-          priority: "",
-          category: "",
-          branch_company: "",
-          message: "",
-          state: "",
-          date: "",
-          agent_email: "",
-          complainant_name: "",
-          complainant_email: "none",
-          complainant_number: "",
-          send_as: "",
+          }
+        })
+        .catch((error) => {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: error,
+                color: "bg-red-200",
+                id: "id" + Math.random().toString(16).slice(2),
+              },
+            ])
+          );
+          setSubmit(false);
+          setShowOpen(true);
         });
-        setFile("");
-        setRecipient("");
-        onChange("<p></p>");
-        setShowOpen(true);
-        !isSubmiting && setModal(false);
-        dispatch(
-          updateAlert([
-            ...alerts,
-            {
-              message: "New Ticket Created Successfully",
-              color: "bg-green-200",
-              id: "id" + Math.random().toString(16).slice(2),
-            },
-          ])
-        );
-      }
+      setSubmit(false);
+      setShowOpen(true);
+      setValues({
+        recipient_name: "",
+        recipient_email: "",
+        agent: "",
+        priority: "",
+        category: "",
+        branch_company: "",
+        message: "",
+        state: "",
+        date: "",
+        agent_email: "",
+        complainant_name: "",
+        complainant_email: "none",
+        complainant_number: "",
+        send_as: "",
+      });
+      setFile("");
+      setRecipient("");
+      onChange("<p></p>");
+      setShowOpen(true);
+      !isSubmiting && setModal(false);
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "New Ticket Created Successfully",
+            color: "bg-green-200",
+            id: "id" + Math.random().toString(16).slice(2),
+          },
+        ])
+      );
     };
 
     //Check If Ticket Exists ===============
     let ticketsRef: any = collection(
       db,
-      `companies/${company_details?.name
-        .toLowerCase()
-        .replace(/\s/g, "")}/tickets`
+      `companies/${localStorage
+        .getItem("organization_name")
+        ?.replace(/\s/g, "")
+        ?.toLowerCase()}/tickets`
     );
-    const generateID = () => {
-      //Generate unique Id =========================
-      let generatedId = `#${inputValue?.recipient_name
-        ?.charAt(0)
-        ?.toUpperCase()}${new Date()
-        .getTime()
-        .toString()
-        ?.split("")
-        ?.slice(8, 12)
-        ?.join("")}`;
-      getDocs(query(ticketsRef, where("ticket_id", "==", generatedId)))
+    //Generate unique Id =========================
+    let generatedId = () => {
+      let combined = `#${
+        inputValue?.branch_company?.toUpperCase()?.charAt(2) +
+        new Date().getFullYear().toString().slice(2, 4) +
+        new Date().toISOString().slice(5, 7) +
+        new Date().toISOString().slice(8, 10) +
+        "-" +
+        member_details[0]?.name?.toUpperCase()?.charAt(0) +
+        new Date().toISOString().slice(11, 13) +
+        new Date().toISOString().slice(14, 16) +
+        new Date().toISOString().slice(17, 19)
+      }`;
+      return combined;
+    };
+
+    const sendNow = () => {
+      getDocs(
+        query(
+          ticketsRef,
+          where("message_position", "==", 1),
+          where("ticket_id", "==", generatedId())
+        )
+      )
         .then((snapshot) => {
-          if (snapshot.docs?.length <= 0) {
-            openTicket(generatedId);
-          } else if (snapshot.docs?.length >= 1) {
-            generateID();
+          if (snapshot.docs.length <= 0) {
+            openTicket(generatedId());
+          } else if (snapshot.docs.length >= 1) {
+            sendNow();
           }
         })
         .catch(() => {
@@ -567,10 +558,32 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
             ])
           );
           setSubmit(false);
+          !isSubmiting && setModal(false);
         });
     };
 
-    generateID();
+    //Alert if Due Date is Empty ============
+    if (
+      inputValue?.date?.length >= 4 &&
+      inputValue?.date !== "" &&
+      sendingAccount !== undefined &&
+      inputValue?.branch_company !== "" &&
+      member_details[0]?.id !== false
+    ) {
+      sendNow();
+    } else if (inputValue?.date === "") {
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Add The Due Date to Proceed",
+            color: "bg-yellow-200",
+            id: "id" + Math.random().toString(16).slice(2),
+          },
+        ])
+      );
+      inputValue?.date === "" && setSubmit(false);
+    }
   };
 
   //Component =====================================
@@ -594,11 +607,11 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               <button
                 type="button"
                 onClick={() => {
-                  !isSubmiting && setModal(false);
                   window.localStorage.setItem(
                     "draftMsg",
                     JSON.stringify(inputValue)
                   );
+                  setModal(false);
                 }}
                 className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all outline-none focus:outline-none border border-slate-500 dark:border-slate-6"
               >
@@ -610,7 +623,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               <button
                 type="button"
                 onClick={() => {
-                  !isSubmiting && setModal(false);
                   window.localStorage.setItem(
                     "draftMsg",
                     JSON.stringify({
@@ -650,6 +662,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   setFile(false);
                   onChange("<p></p>");
                   setShowOpen(true);
+                  setModal(false);
                 }}
                 className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-600"
               >

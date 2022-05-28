@@ -216,8 +216,10 @@ const TicketsList: FC<Props> = ({
               </div>
               <div className="h-full w-full flex flex-col justify-center space-y-0">
                 <div className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis tracking-normal flex justify-between">
-                  <span className="capitalize">{ticket.category}</span>
-                  <span>{ticket.ticket_id}</span>
+                  <p className="capitalize  w-[60%] overflow-hidden">
+                    {ticket.category}
+                  </p>
+                  <p className=" text-[0.65rem]">{ticket.ticket_id}</p>
                 </div>
                 <div className="dark:text-slate-400 w-[60%] pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
                   <abbr title={ticket.branch_company}>

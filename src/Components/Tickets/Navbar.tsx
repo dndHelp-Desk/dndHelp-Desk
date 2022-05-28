@@ -4,10 +4,10 @@ import {
   BiTrash,
   BiUser,
   BiUserCheck,
-  BiFilterAlt,
   BiSelectMultiple,
   BiSearchAlt,
 } from "react-icons/bi";
+import { HiFilter } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import {
@@ -203,7 +203,7 @@ const Navbar: FC<Props> = ({
           className="h-9 w-11 rounded-sm flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:translate-y-[-1px] duration-300 transition-all text-lg font-semibold  border dark:border-slate-700 border-slate-400"
         >
           <abbr title="filters" className="">
-            <BiFilterAlt className="dark:text-slate-300 text-slate-800 font-bold" />
+            <HiFilter className="dark:text-slate-300 text-slate-800 font-bold" />
           </abbr>
         </button>
 

@@ -43,7 +43,7 @@ const Alerts: FC<Props> = ({ alert }) => {
         dispatch(
           updateAlert(alerts?.filter((data: any) => data.id !== alert?.id))
         );
-      }, 350);
+      }, 150);
     }
   }, [counter, alerts, dispatch, alert?.id]);
 
