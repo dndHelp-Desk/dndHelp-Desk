@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.2](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.1...v0.7.2) (2022-05-28)
+
+
+### Bug Fixes
+
+* **new ticket:** ticket IDs are now generated using date and intials ([c881d29](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/c881d291235c6fd1f6ff11016eaca574ffaece62))
+
 ### [0.7.1](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.0...v0.7.1) (2022-05-27)
 
 
