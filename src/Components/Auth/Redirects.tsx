@@ -29,9 +29,9 @@ const Redirects: FC = () => {
             updateAlert([
               ...alerts,
               {
-                message: "Logged In Succesfully",
+                message: "Logged in successful",
                 color: "bg-green-200",
-                id: "id" + Math.random().toString(16).slice(2),
+                id: new Date().getTime(),
               },
             ])
           );

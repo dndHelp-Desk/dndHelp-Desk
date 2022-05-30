@@ -63,7 +63,7 @@ const EditContact: FC<Props> = ({ edit, setEdit, selectedArray }) => {
         {
           message: "Contact Edited Successfully",
           color: "bg-green-200",
-          id: "id" + Math.random().toString(16).slice(2),
+          id: new Date().getTime(),
         },
       ])
     );

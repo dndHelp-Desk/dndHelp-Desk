@@ -10,7 +10,7 @@ const TicketsComponent: FC = () => {
 
   //Component ======================
   return (
-    <div className="w-[95%] 2xl:w-[75rem] mt-4 min-h-screen">
+    <div className="w-[95%] 2xl:w-[75rem] mt-4 min-h-screen pb-6">
       <div className="w-full grid grid-cols-5 gap-4">
         <div
           className={`${

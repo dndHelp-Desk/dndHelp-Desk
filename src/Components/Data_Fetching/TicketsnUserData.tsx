@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { addAllMembers, setToDo } from "../../Redux/Slices/UserSlice";
+import {
+  addAllMembers,
+  setToDo,
+  updateCannedRes,
+} from "../../Redux/Slices/UserSlice";
 import {
   addAllTickets,
   updateFilteredTickets,
   setContacts,
   loadSettings,
-  loadTemplates,
   loadAccounts,
   setCategories,
   setCompanyDetails,
@@ -71,9 +74,9 @@ let contactsRef: any = org && collection(db, `companies/${org}/contacts`);
 let settingsRef: any = org && collection(db, `companies/${org}/settings`);
 let emailAccountsRef: any =
   org && collection(db, `companies/${org}/email_accounts`);
-let email_TemplatesRef: any =
-  org &&
-  collection(db, `companies/${org}/settings/all_settings/email_templates`);
+// let email_TemplatesRef: any =
+//   org &&
+//   collection(db, `companies/${org}/settings/all_settings/email_templates`);
 let categoriesRef: any =
   org && collection(db, `companies/${org}/settings/all_settings/categories`);
 let companyDetailsRef: any =
@@ -271,20 +274,20 @@ export const deleteEmailAccount = (id: string) => {
   deleteDoc(docRef);
 };
 
-//===================================Templates || Canned Responses===========================================
+//=================================== Canned Responses===========================================
 //New Template ==========================
-export const newTemplate = (name: string, message: string) => {
-  addDoc(email_TemplatesRef, {
+export const newCannedRes = (id: string, name: string, message: string) => {
+  addDoc(collection(db, `companies/${org}/members/${id}/canned_responses`), {
     name: name,
     message: message,
   });
 };
 
 // Delete Template ================
-export const deleteTemplate = (id: string) => {
+export const deleteCannedRes = (id: string, userId: string) => {
   let docRef = doc(
     db,
-    `companies/${org}/settings/all_settings/email_templates`,
+    `companies/${org}/members/${userId}/canned_responses`,
     id
   );
   deleteDoc(docRef);
@@ -490,20 +493,6 @@ const TicketsnUserData: FC = () => {
           if (member_details[0]?.access !== "client") {
             dispatch(
               loadSettings(
-                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-              )
-            );
-          }
-        }),
-      //Email Tenplates Data Fetching ======================
-      org &&
-        onSnapshot(email_TemplatesRef, (snapshot: { docs: any[] }) => {
-          if (member_details[0]?.access !== "client") {
-            dispatch(
-              loadTemplates(
                 snapshot.docs.map((doc: { data: () => any; id: any }) => ({
                   ...doc.data(),
                   id: doc.id,
@@ -723,6 +712,31 @@ const TicketsnUserData: FC = () => {
       }
     });
   }, [dispatch, member_details]);
+
+  //Canned Responses ================
+  useEffect(() => {
+    return (
+      //Email Tenplates Data Fetching ======================
+      onSnapshot(
+        collection(
+          db,
+          `companies/${org}/members/${member_details[0]?.id}/canned_responses`
+        ),
+        (snapshot: { docs: any[] }) => {
+          if (member_details[0]?.access !== "client") {
+            dispatch(
+              updateCannedRes(
+                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }))
+              )
+            );
+          }
+        }
+      )
+    );
+  }, [member_details, dispatch]);
 
   //Todo CollectionRef and Notifications ====================
   useEffect(() => {

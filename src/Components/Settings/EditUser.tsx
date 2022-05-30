@@ -57,7 +57,7 @@ const EditUser: FC<Props> = ({
         {
           message: "User Detail Edited Successfully",
           color: "bg-green-200",
-          id: "id" + Math.random().toString(16).slice(2),
+          id: new Date().getTime(),
         },
       ])
     );

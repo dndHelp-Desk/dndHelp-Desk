@@ -1,15 +1,12 @@
 import React, { FC, useState, useRef, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  BsFillTrashFill,
-  BsThreeDotsVertical,
-  BsChatRightText,
-} from "react-icons/bs";
+import { BsFillTrashFill, BsThreeDotsVertical } from "react-icons/bs";
 import {
   BiPaperPlane,
   BiMicrophone,
   BiCopyAlt,
   BiArrowBack,
+  BiConversation,
 } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import noChatImg from "./images/email-open.svg";
@@ -25,6 +22,8 @@ import { addRecording } from "../Auth/Firebase";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import TextEditor from "./TextEditor";
 import { AppDispatch, RootState } from "../../Redux/store";
+import CannedResponses from "./CannedResponses";
+import ZoomedImg from "./ZoomedImg";
 
 interface Props {
   isChatOpen: boolean;
@@ -42,7 +41,12 @@ interface ReplyOptions {
 
 const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const statusSelectionRef = useRef<HTMLSelectElement>(null);
+  const [zoomImg, setZoomed] = useState({
+    open: false,
+    src: "",
+  });
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
+  const [showCanned, setCanned] = useState<boolean>(false);
   const [subject, setSubject] = useState<string>("");
   const allTickets = useSelector(
     (state: RootState) => state.Tickets.allTickets
@@ -59,13 +63,8 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
-  const templates = useSelector(
-    (state: RootState) => state.Tickets.email_templates
-  );
   const [recordingFile, setFile] = useState<boolean>(false);
-  const [cannedSearch, setCannedSearch] = useState<string>("");
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
-
   const [value, onChange] = useState<string | any>("<p></p>");
   const dispatch: AppDispatch = useDispatch();
   const scrollToLastMessage = useRef<HTMLDivElement | any>();
@@ -253,7 +252,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               {
                 message: "Ticket has been resolved",
                 color: "bg-green-200",
-                id: "id" + Math.random().toString(16).slice(2),
+                id: new Date().getTime(),
               },
             ])
           );
@@ -270,7 +269,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               {
                 message: "Ticket Failed To Resolve",
                 color: "bg-red-200",
-                id: "id" + Math.random().toString(16).slice(2),
+                id: new Date().getTime(),
               },
             ])
           );
@@ -296,13 +295,14 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           account.name.toLowerCase() === firstMessage[0]?.team.toLowerCase()
       )[0];
 
-    //Check if field are then send ======================
+    //Check if field are filled then send ======================
     if (
       user[0].name !== "User Loader" &&
       reply.ticket_id !== "none" &&
       reply.status !== "Status" &&
       reply.status !== "" &&
-      reply.status !== "solved"
+      reply.status !== "solved" &&
+      reply.message?.length >= 8
     ) {
       addReply(
         reply.message,
@@ -405,7 +405,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 {
                   message: "Response Has Been Sent.",
                   color: "bg-green-200",
-                  id: "id" + Math.random().toString(16).slice(2),
+                  id: new Date().getTime(),
                 },
               ])
             );
@@ -422,17 +422,28 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 {
                   message: "Email Failed To Send",
                   color: "bg-red-200",
-                  id: "id" + Math.random().toString(16).slice(2),
+                  id: new Date().getTime(),
                 },
               ])
             );
           }
         });
       onChange("<p></p>");
+    } else if (reply.message?.length < 8) {
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Make sure all fields are filled properly",
+            color: "bg-yellow-200",
+            id: new Date().getTime(),
+          },
+        ])
+      );
     }
 
     //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
-    if (reply.status === "solved") {
+    if (reply.status === "solved" && reply.message?.length >= 9) {
       sendSolution();
       setReply({
         ...reply,
@@ -440,7 +451,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         status: firstMessage[0] ? firstMessage[0]?.status : "Status",
       });
       onChange("<p></p>");
-    } else if (reply.status === "reopened") {
+    } else if (reply.status === "reopened" && reply.message?.length >= 9) {
       reOpenTicket(firstMessage[0]?.id);
       setReply({
         ...reply,
@@ -452,7 +463,8 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       reply.status !== "" &&
       reply.status !== "Status" &&
       reply.status !== "solved" &&
-      reply.status !== "reopened"
+      reply.status !== "reopened" &&
+      reply.message?.length >= 8
     ) {
       changeStatus(firstMessage[0]?.id, reply.status);
       setReply({
@@ -460,6 +472,17 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         message: "<p></p>",
         status: firstMessage[0] ? firstMessage[0]?.status : "Status",
       });
+    } else if (reply.message?.length < 8) {
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Make sure all fields are filled properly",
+            color: "bg-yellow-200",
+            id: new Date().getTime(),
+          },
+        ])
+      );
     }
     onChange("<p></p>");
     if (statusSelectionRef && statusSelectionRef.current) {
@@ -472,10 +495,18 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {
             message: "Please Select A Proper Status",
             color: "bg-yellow-200",
-            id: "id" + Math.random().toString(16).slice(2),
+            id: new Date().getTime(),
           },
         ])
       );
+    }
+  };
+
+  //Zoom AttachMent ========================
+  const zoomImage = (e: any) => {
+    if (e.target?.tagName === "IMG") {
+      setZoomed((prev) => ({ ...prev, open: true, src: e.target?.src }));
+      document.body.style.overflow = "hidden";
     }
   };
 
@@ -497,7 +528,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
             <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded-sm border dark:border-slate-700 border-slate-400 dark:bg-slate-800 bg-white px-1 overflow-hidden">
               <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
-                <BsChatRightText />
+                <BiConversation />
               </div>
             </div>
             {/**Contents ======================= */}
@@ -577,6 +608,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               <div className="py-2 dark:text-slate-400 text-slate-700 p-2 text-[13px]">
                 {message.message && (
                   <div
+                    onClick={(e) => zoomImage(e)}
                     dangerouslySetInnerHTML={{ __html: message?.message }}
                     className="messageContainer dark:marker:text-slate-400 marker:text-slate-800 list-disc"
                   ></div>
@@ -591,6 +623,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   //Component ======================================
   return (
     <div className="h-[47rem] flex flex-col w-full lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent">
+      {/**Zoomed Imag Modal */}
+      <ZoomedImg zoomImg={zoomImg} setZoomed={setZoomed} />
+      {/**Zoomed Imag Modal */}
+
       <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-400 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
         <div className="h-14 bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
@@ -715,6 +751,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     </div>
                     <div className="w-full">
                       <div
+                        onClick={(e) => zoomImage(e)}
                         dangerouslySetInnerHTML={{
                           __html: firstMessage && firstMessage[0]?.solution,
                         }}
@@ -766,10 +803,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         <div className="h-full w-full relative rounded dark:bg-slate-800 bg-white border border-slate-400 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
           <form
             onSubmit={(e) => sendReply(e)}
-            className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999]"
+            className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999] pt-0"
           >
             <div className="w-full h-[70%]">
-              <div className="h-[9.5rem] w-full bg-transparent rounded resize-none text-sm dark:text-slate-400 text-slate-700 transition-all  dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden">
+              <div className="h-full w-full bg-transparent rounded resize-none text-sm dark:text-slate-400 text-slate-700 transition-all  dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden pt-0">
                 <TextEditor
                   setReply={setReply}
                   value={value}
@@ -781,56 +818,32 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center">
                 {/**Canned Response ========================================= */}
-                <div className="group w-8 h-8 rounded-l-sm border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none text-slate-700 dark:text-slate-400 relative">
+                <div className="w-8 h-8 rounded-l-sm border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
                   <abbr title="Canned Response">
-                    <BiCopyAlt className="text-base hover:opacity-80" />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCanned((prev) => {
+                          if (prev === true) {
+                            return false;
+                          } else {
+                            return true;
+                          }
+                        });
+                      }}
+                      className="h-full w-full flex items-center justify-center outline-none focus:outline-none"
+                    >
+                      <BiCopyAlt className="text-base hover:opacity-80" />
+                    </button>
                   </abbr>
-                  <div className="group-hover:flex hidden absolute bottom-[100%] left-0 w-[11rem] h-[9rem] pb-1">
-                    <div className="rounded bg-white dark:bg-slate-900 z-[999] border dark:border-slate-700 border-slate-300 p-2 w-full h-full overflow-hidden shadow-xl">
-                      <div className="w-full h-6 bg-inherit border-b dark:border-slate-700 border-slate-300 px-2 overflow-hidden">
-                        <input
-                          type="search"
-                          onChange={(e) => {
-                            setCannedSearch(e.target.value);
-                          }}
-                          value={cannedSearch}
-                          placeholder="Quick Search ..."
-                          className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-full w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
-                        />
-                      </div>
-                      <ul className="mt-1 min-h-full w-full flex flex-col p-2 space-y-1 overflow-hidden dark:text-slate-400 text-slate-700 text-xs font-semibold">
-                        {templates.length >= 1 &&
-                          templates.map((template, index) => {
-                            return (
-                              <li
-                                onClick={() => {
-                                  setReply({
-                                    ...reply,
-                                    message: template.message,
-                                  });
-                                  onChange(template.message);
-                                }}
-                                className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-700 p-1 overflow-hidden overflow-ellipsis whitespace-nowrap min-h-10 cursor-default ${
-                                  template?.name
-                                    ?.toLowerCase()
-                                    .replace(/\s/g, "")
-                                    .includes(
-                                      cannedSearch
-                                        ?.toLowerCase()
-                                        .replace(/\s/g, "")
-                                    )
-                                    ? ""
-                                    : "hidden"
-                                }`}
-                                key={index}
-                              >
-                                {index + 1}. {template.name}
-                              </li>
-                            );
-                          })}
-                      </ul>
-                    </div>
-                  </div>
+                  <CannedResponses
+                    setReply={setReply}
+                    onChange={onChange}
+                    showCanned={showCanned}
+                    setCanned={setCanned}
+                    position={0.7}
+                    tooltipPosition={5}
+                  />
                 </div>
                 {/**Upload Recordings ========================================= */}
                 <abbr title="Upload Your Recording">

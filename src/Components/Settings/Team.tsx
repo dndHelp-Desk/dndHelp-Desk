@@ -46,7 +46,7 @@ const Team: FC = () => {
             {
               message: "Deleted User Successfully",
               color: "bg-green-200",
-              id: "id" + Math.random().toString(16).slice(2),
+              id: new Date().getTime(),
             },
           ])
         );
@@ -58,7 +58,7 @@ const Team: FC = () => {
             {
               message: error.status,
               color: "bg-red-200",
-              id: "id" + Math.random().toString(16).slice(2),
+              id: new Date().getTime(),
             },
           ])
         );

@@ -111,7 +111,7 @@ const LogIn: FC = () => {
                       {
                         message: "Please Verify your account",
                         color: "bg-green-200",
-                        id: "id" + Math.random().toString(16).slice(2),
+                        id: new Date().getTime(),
                       },
                     ])
                   );
@@ -154,6 +154,17 @@ const LogIn: FC = () => {
                   )
                 );
 
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: "Logged In Succesfully",
+                      color: "bg-green-200",
+                      id: new Date().getTime(),
+                    },
+                  ])
+                );
+
                 //Login If All Set ==================
                 window.localStorage.setItem(
                   "organization_name",
@@ -177,7 +188,7 @@ const LogIn: FC = () => {
                     {
                       message: "Workspace / Account Doesn't Exist",
                       color: "bg-red-200",
-                      id: "id" + Math.random().toString(16).slice(2),
+                      id: new Date().getTime(),
                     },
                   ])
                 );
@@ -200,7 +211,7 @@ const LogIn: FC = () => {
                     ? error.message.split(":")[1].replace("Error", "")
                     : error.message,
                 color: "bg-red-200",
-                id: "id" + Math.random().toString(16).slice(2),
+                id: new Date().getTime(),
               },
             ])
           );
@@ -403,7 +414,7 @@ const LogIn: FC = () => {
                               {
                                 message: "Password reset email sent!",
                                 color: "bg-green-200",
-                                id: "id" + Math.random().toString(16).slice(2),
+                                id: new Date().getTime(),
                               },
                             ])
                           );
@@ -415,7 +426,7 @@ const LogIn: FC = () => {
                               {
                                 message: error.message,
                                 color: "bg-red-200",
-                                id: "id" + Math.random().toString(16).slice(2),
+                                id: new Date().getTime(),
                               },
                             ])
                           );

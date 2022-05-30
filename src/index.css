@@ -48,7 +48,8 @@
     @apply min-h-[4rem] col-span-1 rounded bg-slate-100 dark:bg-[#33415569] border border-slate-300 dark:border-slate-700 flex flex-col justify-center items-center gap-2 outline-none focus:outline-none focus:border-0 focus:ring-[1px] focus:ring-blue-600 hover:opacity-90 dark:hover:opacity-80 hover:shadow-lg hover:border-blue-600 dark:hover:border-blue-600 transition-all relative;
   }
 
-  #connectModal {
+  #connectModal,
+  #newCannedResponse {
     box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.3);
   }
   /*End of Connect Channels Styles ================================*/
@@ -85,13 +86,22 @@
 
   /** chat Images And Styling===========================================================*/
   .messageContainer * img {
-    @apply m-1 h-[5rem] w-[5rem] border-2 border-slate-500 dark:border-slate-400 rounded  mx-1 object-center  inline bg-white dark:bg-slate-700;
+    @apply m-1 h-[5rem] w-[5rem] border-2 border-slate-500 dark:border-slate-400 rounded  mx-1 object-center object-cover inline bg-slate-100 dark:bg-slate-700;
   }
-  .messageContainer * img:hover {
-    @apply fixed clear-both backdrop-blur-2xl bg-white dark:bg-slate-700 object-scale-down object-center cursor-zoom-in h-[80vh] w-[80vw] min-h-[10rem] z-[999] left-[10%]  top-[10%];
+
+  .messageContainer img {
+    @apply cursor-pointer;
   }
-  .messageContainer img:hover {
-    box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.3);
+
+  .messageContainer p a,
+  .messageContainer a,
+  .messageContainer p span a {
+    @apply text-blue-600 italic;
+  }
+  .messageContainer p a,
+  .messageContainer a,
+  .messageContainer p span a {
+    color: #2563eb !important;
   }
 
   .messageContainer p span,
@@ -108,6 +118,25 @@
     color: inherit !important;
   }
 
+  .replyEditor h1,
+  .replyEditor h2,
+  .replyEditor h3,
+  .replyEditor p h1,
+  .replyEditor p h2,
+  .replyEditor p h3 {
+    font-size: 1.2rem !important;
+    line-height: 1.3rem !important;
+  }
+
+  .replyEditor p {
+    line-height: 1rem !important;
+  }
+  .replyEditor a,
+  .replyEditor p a {
+    font-style: italic !important;
+    color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
+  }
+
   .replyEditor img {
     @apply inline h-[3.5rem] w-[3.5rem] rounded mx-1 object-center object-cover;
   }
@@ -118,6 +147,10 @@
 
   .replyEditor ol {
     @apply list-decimal;
+  }
+
+  .ql-blank {
+    min-height: 5rem !important;
   }
 
   .messageContainer h1,
@@ -141,9 +174,14 @@
     @apply list-decimal;
   }
 
+  /** Canned Response List ==================*/
+  .cannedResponseList:hover button {
+    @apply flex;
+  }
+
   /* Contacts Tooltip ===================================*/
   .contact_Tooltip {
-    @apply flex flex-col items-center min-w-[12rem] min-h-[5rem] p-4 dark:bg-slate-800 bg-white border dark:border-slate-600 border-slate-300 shadow-2xl rounded transition-all duration-500 text-sm text-slate-800 dark:text-slate-300 overflow-hidden z-[9999] tracking-tight;
+    @apply flex flex-col items-center min-w-[12rem] min-h-[5rem] p-4 dark:bg-slate-800 bg-slate-100 border dark:border-slate-600 border-slate-300 shadow-2xl rounded transition-all duration-500 text-sm text-slate-800 dark:text-slate-300 overflow-hidden z-[9999] tracking-tight;
   }
 
   .contact_Option {

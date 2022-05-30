@@ -207,7 +207,7 @@ const Dashboard: FC = () => {
             <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-2 h-full">
               <NavLink
                 to="/app"
-                className={`TabsLinks  ${
+                className={`TabsLinks flex ${
                   location.pathname === "/app" ? "navlinks" : ""
                 }`}
               >

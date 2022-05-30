@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import NewTemplate from "./NewTemplate";
 import { RootState } from "./../../../Redux/store";
 import { BiTrash } from "react-icons/bi";
-import { deleteTemplate } from "../../Data_Fetching/TicketsnUserData";
 
 const Templates: FC = () => {
   const templates = useSelector(
@@ -28,11 +27,6 @@ const Templates: FC = () => {
                     <span>{template?.name} Template</span>
                   </div>
                   <button
-                    onClick={() => {
-                      prompt("Enter Pin To Perform Action") === "0001"
-                        ? deleteTemplate(template.id)
-                        : alert("Wrong Pin");
-                    }}
                     className="w-10 h-10 rounded outline-none focus:outline-none hover:text-red-600 transition-all"
                   >
                     <BiTrash />

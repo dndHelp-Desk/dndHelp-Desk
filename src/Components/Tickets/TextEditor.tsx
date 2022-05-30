@@ -48,25 +48,38 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
       onImageUpload={handleImageUpload}
       onChange={onChange}
       id=""
-      className="h-full w-full border-0 bg-inherit text-inherit rounded-none relative overflow-hidden"
+      className="h-full w-full border-0 bg-white dark:bg-slate-800 text-inherit rounded-none relative overflow-hidden"
       classNames={{
         toolbar:
-          "bg-white dark:bg-slate-800 flex justify-center items-center w-full text-slate-700 dark:text-slate-400 border-slate-200 dark:border-slate-700 rounded-none sticky top-0",
+          "bg-white dark:bg-slate-800 flex justify-center items-center w-full text-slate-700 dark:text-slate-400 border-slate-200 dark:border-slate-700 rounded-none sticky p-0 pb-1 overflow-hidden",
         toolbarInner:
-          "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
+          "bg-white dark:bg-slate-800 text-inherit border-slate-300 dark:border-slate-700",
         toolbarGroup:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
         toolbarControl:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700  dark:hover:bg-slate-700 hover:bg-slate-100",
-        root: "replyEditor h-[9.8rem] py-2 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar border",
+        root: "replyEditor h-full py-2 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800 pt-1",
       }}
       controls={[
-        ["bold", "italic", "underline", "code", "blockquote"],
-        ["unorderedList", "orderedList", "h1", "h2", "h3"],
-        ["sup", "sub", "strike", "image"],
-        ["alignLeft", "alignCenter", "alignRight", "link"],
+        [
+          "bold",
+          "italic",
+          "underline",
+          "code",
+          "blockquote",
+          "unorderedList",
+          "orderedList",
+          "h1",
+          "strike",
+          "image",
+          "alignLeft",
+          "alignCenter",
+          "alignRight",
+          "link",
+        ],
       ]}
     />
   );
 };
 export default TextEditor;
+

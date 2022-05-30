@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { BiDetail } from "react-icons/bi";
 import { RichTextEditor } from "@mantine/rte";
-import { newTemplate } from "../../Data_Fetching/TicketsnUserData";
 
 const NewTemplate: FC = () => {
   const [value, onChange] = useState("");
@@ -19,7 +18,6 @@ const NewTemplate: FC = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        newTemplate(input.name, input.message);
         onChange("");
         setInput({
           name: "",

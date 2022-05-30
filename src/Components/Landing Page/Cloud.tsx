@@ -18,21 +18,21 @@ const Cloud: FC = () => {
       </div>
       <div className="flex items-center justify-center mt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-center items-center px-6 md:px-28 w-full">
-          <div className="col-span-1 w-full h-32 bg-slate-200 border border-slate-300 rounded flex items-center justify-center">
+          <div className="col-span-1 w-full h-32 shadow-lg drop-shadow-lg bg-slate-100 border border-slate-300 rounded flex items-center justify-center">
             <img
               src={debonairs}
               alt="debonairs"
               className="w-[70%] object-cover object-center"
             />
           </div>
-          <div className="col-span-1 w-full h-32 bg-slate-200 border border-slate-300 rounded flex items-center justify-center">
+          <div className="col-span-1 w-full h-32 shadow-lg drop-shadow-lg bg-slate-100 border border-slate-300 rounded flex items-center justify-center">
             <img
               src={steers}
               alt="debonairs"
               className="h-[90%] object-cover object-center"
             />
           </div>
-          <div className="col-span-1 w-full h-32 bg-slate-200 border border-slate-300 rounded flex items-center justify-center">
+          <div className="col-span-1 w-full h-32 shadow-lg drop-shadow-lg bg-slate-100 border border-slate-300 rounded flex items-center justify-center">
             <img
               src={fishaways}
               alt="debonairs"

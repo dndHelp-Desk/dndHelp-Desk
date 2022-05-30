@@ -10,7 +10,6 @@ import {
   BsFillCreditCard2BackFill,
 } from "react-icons/bs";
 import { signOut, getAuth } from "firebase/auth";
-import { updateUserStatus } from "../Data_Fetching/TicketsnUserData";
 import { changeLocation, isAuthenticated } from "../../Redux/Slices/UserSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -102,7 +101,6 @@ const SettingsTooltip: FC = () => {
               <button
                 onClick={() => {
                   const logOut = async () => {
-                    updateUserStatus(user[0].id, "unavailable");
                     signOut(auth).then(() => {
                       dispatch(isAuthenticated(false));
                       window.localStorage.clear();

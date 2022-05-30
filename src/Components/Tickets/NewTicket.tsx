@@ -25,6 +25,7 @@ import {
   BiUser,
 } from "react-icons/bi";
 import { AppDispatch, RootState } from "../../Redux/store";
+import CannedResponses from "./CannedResponses";
 
 interface Props {
   newTicketModal: any;
@@ -37,7 +38,7 @@ const db = getFirestore();
 const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const contacts = useSelector((state: RootState) => state.Tickets.contacts);
   const allTickets = useSelector(
-    (state: RootState) => state.Tickets.allTickets
+    (state: RootState) => state.Tickets.filteredTickets
   );
   const email_accounts = useSelector(
     (state: RootState) => state.Tickets.email_accounts
@@ -47,9 +48,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   );
   const categories = useSelector(
     (state: RootState) => state.Tickets.categories
-  );
-  const templates = useSelector(
-    (state: RootState) => state.Tickets.email_templates
   );
   const member_details = useSelector(
     (state: RootState) => state.UserInfo.member_details
@@ -62,7 +60,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const [isSubmiting, setSubmit] = useState<boolean | any>(false);
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
   const [recordingFile, setFile] = useState<boolean | any>(false);
-  const [cannedSearch, setCannedSearch] = useState<string>("");
+  const [showCanned, setCanned] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
@@ -437,7 +435,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {
                   message: "Email sent Successfully",
                   color: "bg-green-200",
-                  id: "id" + Math.random().toString(16).slice(2),
+                  id: new Date().getTime(),
                 },
               ])
             );
@@ -452,7 +450,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 {
                   message: "Email Failed To Send",
                   color: "bg-red-200",
-                  id: "id" + Math.random().toString(16).slice(2),
+                  id: new Date().getTime(),
                 },
               ])
             );
@@ -465,7 +463,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {
                 message: error,
                 color: "bg-red-200",
-                id: "id" + Math.random().toString(16).slice(2),
+                id: new Date().getTime(),
               },
             ])
           );
@@ -501,7 +499,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           {
             message: "New Ticket Created Successfully",
             color: "bg-green-200",
-            id: "id" + Math.random().toString(16).slice(2),
+            id: new Date().getTime(),
           },
         ])
       );
@@ -553,7 +551,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {
                 message: "There was an error please try again",
                 color: "bg-red-200",
-                id: "id" + Math.random().toString(16).slice(2),
+                id: new Date().getTime(),
               },
             ])
           );
@@ -578,7 +576,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           {
             message: "Add The Due Date to Proceed",
             color: "bg-yellow-200",
-            id: "id" + Math.random().toString(16).slice(2),
+            id: new Date().getTime(),
           },
         ])
       );
@@ -981,7 +979,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           </div>
 
           {/**Bottom Controls ========================================= */}
-          <div className="dark:bg-slate-700 bg-slate-200 min-h-[3rem] h-[9%] md:h-[8%] w-full p-2 px-4 flex justify-between items-center overflow-hidden select-none">
+          <div className="dark:bg-slate-700 bg-slate-200 min-h-[3rem] h-[9%] md:h-[8%] w-full p-2 px-4 flex justify-between items-center  select-none">
             <div className="flex justify-center items-center">
               {/**Reset Input ========================================= */}
               <abbr title="Clear Inputs">
@@ -1013,56 +1011,33 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               </abbr>
             </div>
             <div className="flex items-center space-x-2">
-              {/**Templates ========================================= */}
-              <div
-                id="email"
-                className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border dark:border-slate-600 border-slate-300"
-              >
-                <abbr title="Templates">
-                  <BiFile />
-                </abbr>
-                <div className="fixed hidden group-hover:flex flex-col gap-2 p-2 bottom-14 h-[13rem] w-[13rem] rounded shadow-md dark:bg-slate-900 bg-white dark:border-slate-700 border-slate-200 after:content-[''] after:absolute after:bottom-[-0.5rem] after:left-[5.6rem] after:mb-[-17px] after:border-[13px] after:border-r-transparent after:border-b-transparent after:border-l-transparent dark:after:border-t-slate-900 after:border-white">
-                  <div className="w-full h-fit flex-[1] bg-inherit border-b dark:border-slate-700 border-slate-300">
-                    <input
-                      type="search"
-                      onChange={(e) => {
-                        setCannedSearch(e.target.value);
-                      }}
-                      value={cannedSearch}
-                      placeholder="Quick Search ..."
-                      className="outline-none focus:outline-none focus:border-0 focus:ring-0 h-8 w-full bg-inherit border-0 text-xs text-center placeholder:text-slate-600 dark:placeholder:text-slate-500 dark:text-slate-400 text-slate-800"
-                    />
-                  </div>
-                  <ul className="h-[8rem] flex-[5] w-full space-y-1 overflow-hidden dark:text-slate-300 text-slate-600 text-xs font-semibold px-1">
-                    {templates.length >= 1 &&
-                      templates.map((template, index) => {
-                        return (
-                          <li
-                            onClick={() => {
-                              setValues({
-                                ...inputValue,
-                                message: template.message,
-                              });
-                              onChange(template.message);
-                            }}
-                            className={`capitalize hover:opacity-80 border-b border-slate-200 dark:border-slate-800 py-1  overflow-hidden overflow-ellipsis whitespace-nowrap cursor-default  ${
-                              template?.name
-                                ?.toLowerCase()
-                                .replace(/\s/g, "")
-                                .includes(
-                                  cannedSearch?.toLowerCase().replace(/\s/g, "")
-                                )
-                                ? ""
-                                : "hidden"
-                            }`}
-                            key={index}
-                          >
-                            {index + 1}. {template.name}
-                          </li>
-                        );
-                      })}
-                  </ul>
+              {/**Canned Responses ========================================= */}
+              <div className="relative">
+                <div
+                  onClick={() => {
+                    setCanned((prev) => {
+                      if (prev === true) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    });
+                  }}
+                  id="email"
+                  className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border dark:border-slate-600 border-slate-300 outline-none focus:outline-none "
+                >
+                  <abbr title="Macros">
+                    <BiFile />
+                  </abbr>
                 </div>
+                <CannedResponses
+                  setReply={setValues}
+                  onChange={onChange}
+                  showCanned={showCanned}
+                  setCanned={setCanned}
+                  position={4}
+                  tooltipPosition={`[9.4rem]`}
+                />
               </div>
               {/**Upload Recordings ========================================= */}
               <abbr title="Upload Your Recording">

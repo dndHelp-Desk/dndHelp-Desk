@@ -56,7 +56,7 @@ const EmailAccounts: FC = () => {
         {
           message: "New Account Added Successfully",
           color: "bg-green-200",
-          id: "id" + Math.random().toString(16).slice(2),
+          id: new Date().getTime(),
         },
       ])
     );
@@ -264,7 +264,7 @@ const EmailAccounts: FC = () => {
                       {
                         message: "Account Updated Successfully",
                         color: "bg-green-200",
-                        id: "id" + Math.random().toString(16).slice(2),
+                        id: new Date().getTime(),
                       },
                     ])
                   );
@@ -403,7 +403,7 @@ const EmailAccounts: FC = () => {
                             {
                               message: "Account Deleted Successfully",
                               color: "bg-green-200",
-                              id: "id" + Math.random().toString(16).slice(2),
+                              id: new Date().getTime(),
                             },
                           ])
                         );

@@ -63,7 +63,7 @@ const Profile = () => {
           {
             message: "Profile Changed Successfully",
             color: "bg-green-200",
-            id: alerts?.length + 1,
+            id: new Date().getTime(),
           },
         ])
       );
@@ -106,7 +106,7 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-10 w-10  rounded flex justify-center items-center cursor-pointer"
+            className="h-10 w-10  rounded flex justify-center items-center cursor-pointer overflow-hidden"
           >
             <img
               className="rounded bg-slate-500 h-full w-full object-cover object-center border-2 dark:border-blue-300 border-slate-900"
@@ -179,7 +179,7 @@ const Profile = () => {
                           {
                             message: "Status Changed",
                             color: "bg-green-200",
-                            id: alerts?.length + 1,
+                            id: new Date().getTime(),
                           },
                         ])
                       );
@@ -218,7 +218,7 @@ const Profile = () => {
                           {
                             message: "Status Changed",
                             color: "bg-green-200",
-                            id: alerts?.length + 1,
+                            id: new Date().getTime(),
                           },
                         ])
                       );
@@ -259,7 +259,7 @@ const Profile = () => {
                           {
                             message: "Status Changed",
                             color: "bg-green-200",
-                            id: alerts?.length + 1,
+                            id: new Date().getTime(),
                           },
                         ])
                       );
