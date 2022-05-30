@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.3](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.2...v0.7.3) (2022-05-30)
+
+
+### Features
+
+* **tickets:** macros are now available for individual agents plus click image zoom ([2287fec](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/2287fecff9640d3009e5cda59bf1f925ac39ae67))
+
 ### [0.7.2](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.1...v0.7.2) (2022-05-28)
 
 
