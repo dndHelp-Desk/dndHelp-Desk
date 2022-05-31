@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.4](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.3...v0.7.4) (2022-05-31)
+
+
+### Features
+
+* **settings:** now admins are able to add different categories and the due date picker is now more ([af8a473](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/af8a4739bb8a99ab406941ceb505682f6506bb63))
+
 ### [0.7.3](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.2...v0.7.3) (2022-05-30)
 
 
