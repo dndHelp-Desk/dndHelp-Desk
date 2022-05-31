@@ -552,7 +552,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           onSubmit={(e) => handleSubmit(e)}
           className={`w-[98%] lg:w-[58%] min-h-[25rem] h-[32rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
             newTicketModal === true ? "flex" : "hidden"
-          } flex-col justify-between space-y-1`}
+          } flex-col justify-between space-y-1 relative`}
         >
           {/**Close Modal or Minimize and save window ============= */}
           <div className="absolute right-1 top-1 flex space-x-1 items-center z-[999]">
