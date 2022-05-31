@@ -85,7 +85,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
 
   //Check If Ticket Exists ||Customer's history using their numbers ===================
   const numbersArray = useMemo(() => {
-    return allTickets.length >= 1 && inputValue?.complainant_number !== ""
+    return allTickets?.length >= 1 && inputValue?.complainant_number !== ""
       ? allTickets.filter(
           (ticket) =>
             ticket.message_position === 1 &&
@@ -97,7 +97,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       : [];
   }, [allTickets, inputValue?.complainant_number]);
   const exist =
-    numbersArray.length >= 1 &&
+    numbersArray?.length >= 1 &&
     numbersArray.map((data, index) => {
       return (
         <li
@@ -123,7 +123,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
 
   //Reciepents or contacts list suggetions =================================
   const contactsList =
-    contacts.length >= 1 &&
+    contacts?.length >= 1 &&
     contacts.map((contact, index) => {
       let clientName = contact.name;
       let clientEmail = contact.email;
@@ -323,7 +323,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;">
         <li><b>Full Name:</b> ${inputValue?.complainant_name}</li>
         <li><b>Email Address:</b> ${
-          inputValue?.complainant_email.length <= 3
+          inputValue?.complainant_email?.length <= 3
             ? "none"
             : inputValue?.complainant_email
         } </li>
@@ -381,7 +381,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       <ul style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;">
         <li><b>Full Name:</b> ${inputValue?.complainant_name}</li>
         <li><b>Email Address:</b> ${
-          inputValue?.complainant_email.length <= 3
+          inputValue?.complainant_email?.length <= 3
             ? "none"
             : inputValue?.complainant_email
         } </li>
@@ -514,18 +514,27 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
 
     const sendNow = () => {
       openTicket(generatedId());
+      setFile("");
+      setRecipient("");
+      onChange("<p></p>");
+      setShowOpen(true);
+      !isSubmiting && setModal(false);
+      document.body.style.overflow = "";
     };
 
     //Alert if Due Date is Empty ============
     if (
-      inputValue?.date?.length >= 4 &&
-      inputValue?.date !== "" &&
+      new Date(inputValue?.date).toString() !== "Invalid Date" &&
       sendingAccount !== undefined &&
       inputValue?.branch_company !== "" &&
       member_details[0]?.id !== false
     ) {
-      sendNow();
-    } else if (inputValue?.date === "") {
+      console.log(new Date(inputValue?.date));
+      setTimeout(() => {
+        sendNow();
+      }, 500);
+    } else if (new Date(inputValue?.date).toString() === "Invalid Date") {
+      console.log(new Date(inputValue?.date));
       dispatch(
         updateAlert([
           ...alerts,
@@ -536,7 +545,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           },
         ])
       );
-      inputValue?.date === "" && setSubmit(false);
+      setSubmit(false);
     }
   };
 
@@ -618,6 +627,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   onChange("<p></p>");
                   setShowOpen(true);
                   setModal(false);
+                  !isSubmiting && setModal(false);
                   document.body.style.overflow = "";
                 }}
                 className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-600"
