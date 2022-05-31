@@ -109,7 +109,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
           '<div class="text-xs font-semibold bg-slate-50 p-2">' +
           "<span>" +
           "&nbsp;" +
-          (option !== "hour" ? "Day " : "Time|") +
+          (option !== "hour" ? "Day " : "Hour | ") +
           chartData.map((data: any) => data.name)[dataPointIndex] +
           (option === "hour" ? ":00" : "") +
           " &nbsp; - &nbsp;" +

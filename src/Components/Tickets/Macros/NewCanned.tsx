@@ -82,9 +82,9 @@ const NewCanned: FC<Props> = ({
           setModal(false);
           document.body.style.overflow = "";
         }}
-        className="absolute top-4 right-4 bg-blue-700 hover:bg-red-600 transition-all duration-200 text-slate-100 text-sm rounded h-6 w-6 flex justify-center items-center outlinenone focus:outline-none z-[999]"
+        className="absolute top-4 right-4 bg-blue-700 hover:bg-red-600 transition-all duration-200 text-slate-100 text-sm rounded h-5 w-5 flex justify-center items-center outlinenone focus:outline-none z-[999]"
       >
-        <span>x</span>
+        <span>&times;</span>
       </button>
       {/**Close Modal Btn */}
 

@@ -30,9 +30,9 @@ const ZoomedImg: FC<Props> = ({ zoomImg, setZoomed }) => {
             setZoomed((prev: any) => ({ ...prev, open: false, scr: "" }));
             document.body.style.overflow = "";
           }}
-          className="absolute top-2 right-2 bg-red-700 hover:bg-red-700 transition-all duration-200 text-slate-100 text-sm rounded h-6 w-6 flex justify-center items-center outlinenone focus:outline-none z-[999]"
+          className="absolute top-1 right-1 bg-red-700 hover:bg-red-700 transition-all duration-200 text-slate-100 text-sm rounded h-5 w-5 flex justify-center items-center outlinenone focus:outline-none z-[999]"
         >
-          <span>x</span>
+          <span>&times;</span>
         </button>
         {/**Close Modal Btn */}
         <img
