@@ -1,12 +1,4 @@
 import React, { FC, useMemo, useState, useEffect } from "react";
-//Firestore ===================
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  where,
-  query,
-} from "firebase/firestore";
 import { RichTextEditor } from "@mantine/rte";
 import DueDate from "./DueDate";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,9 +23,6 @@ interface Props {
   newTicketModal: any;
   setModal: any;
 }
-
-// init services for firestore =========================
-const db = getFirestore();
 
 const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const contacts = useSelector((state: RootState) => state.Tickets.contacts);
@@ -507,14 +496,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       );
     };
 
-    //Check If Ticket Exists ===============
-    let ticketsRef: any = collection(
-      db,
-      `companies/${localStorage
-        .getItem("organization_name")
-        ?.replace(/\s/g, "")
-        ?.toLowerCase()}/tickets`
-    );
     //Generate unique Id =========================
     let generatedId = () => {
       let combined = `#${
@@ -523,7 +504,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
         new Date().toISOString().slice(5, 7) +
         new Date().toISOString().slice(8, 10) +
         "-" +
-        member_details[0]?.name?.toUpperCase()?.charAt(0) +
+        new Date().getMilliseconds()?.toString()?.charAt(0) +
         new Date().toISOString().slice(11, 13) +
         new Date().toISOString().slice(14, 16) +
         new Date().toISOString().slice(17, 19)
@@ -532,35 +513,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     };
 
     const sendNow = () => {
-      getDocs(
-        query(
-          ticketsRef,
-          where("message_position", "==", 1),
-          where("ticket_id", "==", generatedId())
-        )
-      )
-        .then((snapshot) => {
-          if (snapshot.docs.length <= 0) {
-            openTicket(generatedId());
-          } else if (snapshot.docs.length >= 1) {
-            sendNow();
-          }
-        })
-        .catch(() => {
-          dispatch(
-            updateAlert([
-              ...alerts,
-              {
-                message: "There was an error please try again",
-                color: "bg-red-200",
-                id: new Date().getTime(),
-              },
-            ])
-          );
-          setSubmit(false);
-          !isSubmiting && setModal(false);
-          document.body.style.overflow = "";
-        });
+      openTicket(generatedId());
     };
 
     //Alert if Due Date is Empty ============
@@ -601,7 +554,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1`}
         >
-          {/**Close Modal or Minimuze and save window ============= */}
+          {/**Close Modal or Minimize and save window ============= */}
           <div className="absolute right-1 top-1 flex space-x-1 items-center z-[999]">
             {/**Minimize and save */}
             <abbr title="minimize and save">
