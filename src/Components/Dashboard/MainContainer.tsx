@@ -38,6 +38,9 @@ const Dashboard: FC = () => {
   const dashboardData = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
   );
+  const ticketsComponentDates = useSelector(
+    (state: RootState) => state.Tickets.ticketsComponentDates
+  );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
   const notificationMsgs = useSelector(
     (state: RootState) => state.NotificationsData.messages
@@ -93,10 +96,20 @@ const Dashboard: FC = () => {
 
   //Check if The data is loading
   useEffect(() => {
-    dashboardData.length <= 0 ? setLoading(true) : setLoading(false);
-    dashboardData.length <= 0 && setTimeout(() => setLoading(false), 10000);
+    dashboardData?.filter(
+      (data) =>
+        data.date >= new Date(ticketsComponentDates?.startDate).getTime() &&
+        data.date <= new Date(ticketsComponentDates?.endDate).getTime()
+    ).length <= 0
+      ? setLoading(true)
+      : setLoading(false);
+    dashboardData?.filter(
+      (data) =>
+        data.date >= new Date(ticketsComponentDates?.startDate).getTime() &&
+        data.date <= new Date(ticketsComponentDates?.endDate).getTime()
+    ).length <= 0 && setTimeout(() => setLoading(false), 10000);
     return clearTimeout();
-  }, [dashboardData]);
+  }, [dashboardData, ticketsComponentDates]);
 
   if (logged !== true) {
     return <Navigate to="/login" />;
