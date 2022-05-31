@@ -288,9 +288,10 @@ const Navbar: FC<Props> = ({
       {/*** New Ticket ======================== */}
       <abbr title="New Ticket">
         <button
-          onClick={() =>
-            setModal(user[0].name !== "User Loader" ? true : false)
-          }
+          onClick={() => {
+            setModal(user[0]?.name !== "User Loader" ? true : false);
+            document.body.style.overflow = "hidden";
+          }}
           className="bg-slate-800 dark:bg-blue-700 capitalize text-white h-9 px-4 space-x-1 rounded-sm flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold hover:opacity-80 transition-all"
         >
           <span>open new</span>

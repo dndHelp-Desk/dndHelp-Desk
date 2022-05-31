@@ -23,7 +23,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
   //Component ==============================
   return (
     <>
-      <div className="md:max-w-[14rem] h-14 lg:h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative z-[99]">
+      <div className="md:max-w-[14rem] h-14 lg:h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center z-[9999]">
         <BiCalendarWeek className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-3 z-[9999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
@@ -36,17 +36,17 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         >
           <option value="">Category</option>
           {categories.length >= 1 &&
-            categories.map((category, index) => (
+            categories?.map((category, index) => (
               <option
                 key={index}
                 className="capitalize"
-                value={category
+                value={category?.name
                   .split(" ")
                   .join("")
                   .replace(/\(/g, "")
                   .replace(/\)/g, "")}
               >
-                {category}
+                {category?.name}
               </option>
             ))}
         </select>

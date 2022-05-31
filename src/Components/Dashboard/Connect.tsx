@@ -33,6 +33,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
           <button
             onClick={() => {
               openAPIModal(true);
+              document.body.style.overflow = "hidden";
             }}
             className="connect_btn"
           >
@@ -47,6 +48,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
           <button
             onClick={() => {
               openAPIModal(true);
+              document.body.style.overflow = "hidden";
             }}
             className="connect_btn"
           >
@@ -61,6 +63,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
           <button
             onClick={() => {
               openAPIModal(true);
+              document.body.style.overflow = "hidden";
             }}
             className="connect_btn"
           >
@@ -75,6 +78,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
           <button
             onClick={() => {
               openAPIModal(true);
+              document.body.style.overflow = "hidden";
             }}
             className="connect_btn"
           >
@@ -89,6 +93,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
           <button
             onClick={() => {
               openAPIModal(true);
+              document.body.style.overflow = "hidden";
             }}
             className="connect_btn"
           >
@@ -103,6 +108,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
           <button
             onClick={() => {
               openAPIModal(true);
+              document.body.style.overflow = "hidden";
             }}
             className="connect_btn"
           >
@@ -126,6 +132,7 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
           <button
             onClick={() => {
               openAPIModal(true);
+              document.body.style.overflow = "hidden";
             }}
             className="connect_btn"
           >

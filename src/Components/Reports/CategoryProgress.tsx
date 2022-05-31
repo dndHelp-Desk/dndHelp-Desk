@@ -11,13 +11,14 @@ const CategoryProgress: FC<data> = ({ data }) => {
   const categoriesData = useMemo(() => {
     return categories?.length >= 1
       ? categories
-          .map((element) => {
+          ?.map((element) => {
             return {
-              name: element,
+              name: element?.name,
               value: (
                 (data?.filter(
                   (ticket: any) =>
-                    ticket?.category?.toLowerCase() === element?.toLowerCase()
+                    ticket?.category?.toLowerCase() ===
+                    element?.name?.toLowerCase()
                 )?.length /
                   data?.length) *
                 100
@@ -73,12 +74,12 @@ const CategoryProgress: FC<data> = ({ data }) => {
         })}
 
       {/**Preloaders=== */}
-      {categoriesData.length <= 0 &&
+      {categoriesData.length <= 4 &&
         [0, 1, 2, 3, 4, 5].map((index) => {
           return (
             <div key={index} className="w-full">
               <small className="text-slate-700 dark:text-slate-400 text-[0.65rem] font-medium tracking-normal uppercase">
-                No Data
+                N/A
               </small>
               <div className="w-full flex items-center justify-between">
                 <div

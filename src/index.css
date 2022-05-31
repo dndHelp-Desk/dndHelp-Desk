@@ -90,7 +90,7 @@
   }
 
   .messageContainer img {
-    @apply cursor-pointer;
+    @apply cursor-zoom-in;
   }
 
   .messageContainer p a,
@@ -231,6 +231,11 @@
     to {
       margin-left: 200%;
     }
+  }
+
+  /**HIde Date picker*/
+  .DueDatePicker {
+    display: none !important;
   }
 
   /*Tool Tip Bottom Cal*/

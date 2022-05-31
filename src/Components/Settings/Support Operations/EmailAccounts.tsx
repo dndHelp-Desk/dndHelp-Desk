@@ -71,7 +71,7 @@ const EmailAccounts: FC = () => {
 
   //Componet  =======================
   return (
-    <section className="w-full h-full py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
+    <section className="w-full h-fit md:h-[47rem] py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
       {/**New Account ============================================ */}
       <div className="col-span-1 p-6 h-full flex flex-col min-h-[45rem] overflow-hidden bg-white dark:bg-slate-800 ">
         <form
@@ -87,7 +87,7 @@ const EmailAccounts: FC = () => {
               type="text"
               name="name"
               id="name"
-              autoComplete="nope"
+              autoComplete="off"
               placeholder="Name ..."
               onChange={(e) =>
                 setValue({ ...newAccountValue, name: e.target.value })
@@ -102,7 +102,7 @@ const EmailAccounts: FC = () => {
               type="email"
               name="email"
               id="email"
-              autoComplete="nope"
+              autoComplete="off"
               placeholder="Valid Email ..."
               onChange={(e) =>
                 setValue({ ...newAccountValue, email: e.target.value })
@@ -117,7 +117,7 @@ const EmailAccounts: FC = () => {
               type="text"
               name="host"
               id="host"
-              autoComplete="nope"
+              autoComplete="off"
               placeholder="Host ..."
               onChange={(e) =>
                 setValue({ ...newAccountValue, host: e.target.value })
@@ -132,7 +132,7 @@ const EmailAccounts: FC = () => {
               type="number"
               name="port"
               id="port"
-              autoComplete="nope"
+              autoComplete="off"
               placeholder="Port ..."
               onChange={(e) =>
                 setValue({ ...newAccountValue, port: e.target.value })
@@ -147,7 +147,7 @@ const EmailAccounts: FC = () => {
               type="password"
               name="password"
               id="password"
-              autoComplete="nope"
+              autoComplete="off"
               placeholder="Password "
               onChange={(e) =>
                 setValue({ ...newAccountValue, password: e.target.value })
@@ -159,7 +159,7 @@ const EmailAccounts: FC = () => {
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
+            className="bg-blue-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
           >
             Add Account
           </button>
@@ -188,7 +188,9 @@ const EmailAccounts: FC = () => {
               What is a valid email ?
             </summary>
             <div className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
-              <p>This is an email address you wish to add fr sending emails.</p>
+              <p>
+                This is an email address you wish to add for sending emails.
+              </p>
             </div>
           </details>
           <details className="open:bg-white dark:open:bg-slate-800 open:border-b open:border-slate-200 dark:open:border-slate-700 p-2">
@@ -273,7 +275,7 @@ const EmailAccounts: FC = () => {
               >
                 <fieldset className="border dark:border-slate-700 border-slate-300 rounded p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
                   {" "}
-                  <legend className="px-2 bg-slate-200 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
+                  <legend className="px-2 bg-slate-300 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
                     {account.name}
                   </legend>
                   <label

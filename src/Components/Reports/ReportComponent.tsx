@@ -8,7 +8,6 @@ import { RootState } from "../../Redux/store";
 
 const ReportsComponent: FC = () => {
   // const [data, setData] = useState<any>([]);
-  const [loading, setLoading] = useState<any>(false);
   const ticketsComponentDates = useSelector(
     (state: RootState) => state.Tickets.ticketsComponentDates
   );
@@ -77,13 +76,6 @@ const ReportsComponent: FC = () => {
       : [];
   }, [reportsData, filters, contactsList]);
 
-  //Check if The data is loading
-  useEffect(() => {
-    reportsData.length <= 0 ? setLoading(true) : setLoading(false);
-    reportsData.length <= 0 && setTimeout(() => setLoading(false), 10000);
-    return clearTimeout();
-  }, [reportsData.length]);
-
   const tableData = useMemo(() => {
     let names = Array.from(new Set(data?.map((data: any) => data[option])));
     const calcuFunction = (elem: any, param: any, opt: string | boolean) => {
@@ -125,18 +117,6 @@ const ReportsComponent: FC = () => {
         setOption={setOption}
         tableData={tableData}
       />
-
-      {/**Preloader =========================== */}
-      <div
-        className={`${
-          !loading ? "hidden" : ""
-        } fixed z-[9] top-[2.5rem] bottom-0 left-0 right-0 bg-[#030d2769] before:content-[''] before:h-[0.25rem] before:w-full before:bg-[#93c4fd70] before:absolute`}
-      >
-        <div
-          id="reportsPreloader"
-          className="h-[0.25rem] w-2/5 bg-blue-600 absolute top-0 transition-all"
-        ></div>
-      </div>
     </div>
   );
 };

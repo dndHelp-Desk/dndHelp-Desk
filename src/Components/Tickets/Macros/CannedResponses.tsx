@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { BiSearchAlt, BiTrash } from "react-icons/bi";
-import { deleteCannedRes } from "../Data_Fetching/TicketsnUserData";
+import { deleteCannedRes } from "../../Data_Fetching/TicketsnUserData";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../Redux/store";
-import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
+import { AppDispatch, RootState } from "../../../Redux/store";
+import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
+import useOnClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
 import NewCanned from "./NewCanned";
 
 type Props = {
@@ -54,8 +54,16 @@ const CannedResponses: FC<Props> = ({
           position === 4 ? "after:left-[9.7rem]" : "after:left-5"
         } after:rotate-45`}
       >
-        <div className="row-span-1 grid grid-cols-10 place-content-center">
-          <div className="col-span-2 flex items-center">
+        <div
+          className={`row-span-1 grid ${
+            position === 4 ? "grid-cols-8" : "grid-cols-10"
+          } place-content-center`}
+        >
+          <div
+            className={`col-span-2 flex items-center ${
+              position === 4 && "hidden"
+            }`}
+          >
             <button
               type="button"
               onClick={() => {
@@ -115,7 +123,7 @@ const CannedResponses: FC<Props> = ({
                           updateAlert([
                             ...alerts,
                             {
-                              message: "Deleted added succesfully",
+                              message: "Macro Deleted succesfully",
                               color: "bg-green-200",
                               id: new Date().getTime(),
                             },

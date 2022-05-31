@@ -58,7 +58,7 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700",
         toolbarControl:
           "bg-inherit text-inherit border-slate-300 dark:border-slate-700  dark:hover:bg-slate-700 hover:bg-slate-100",
-        root: "replyEditor h-full py-2 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800 pt-1",
+        root: "replyEditor h-full py-2 pt-1 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800",
       }}
       controls={[
         [
@@ -82,4 +82,3 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
   );
 };
 export default TextEditor;
-

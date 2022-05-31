@@ -24,7 +24,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             ((data?.length >= 1 &&
               data?.filter(
                 (ticket: any) =>
-                  ticket.category.toLowerCase() === element.toLowerCase()
+                  ticket.category.toLowerCase() === element?.name?.toLowerCase()
               )?.length) /
               data?.length) *
             100
@@ -239,7 +239,7 @@ const OverviewReport: FC<data> = ({ data }) => {
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
             <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider">
-              AVG Traffic
+              Traffic Trend
             </h2>
             <select
               onChange={(e) => setOption(e.target.value)}

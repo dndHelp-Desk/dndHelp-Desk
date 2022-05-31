@@ -17,7 +17,7 @@ import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { addRecording } from "../Auth/Firebase";
 import {
   BiTrash,
-  BiCalendar,
+  BiAlarm,
   BiFile,
   BiMinus,
   BiMicrophone,
@@ -25,7 +25,7 @@ import {
   BiUser,
 } from "react-icons/bi";
 import { AppDispatch, RootState } from "../../Redux/store";
-import CannedResponses from "./CannedResponses";
+import CannedResponses from "./Macros/CannedResponses";
 
 interface Props {
   newTicketModal: any;
@@ -61,6 +61,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
   const [recordingFile, setFile] = useState<boolean | any>(false);
   const [showCanned, setCanned] = useState<boolean>(false);
+  const [showTimePicker, setTimePicker] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
@@ -168,14 +169,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
 
   const categoriesList =
     categories &&
-    categories.map((catagory, index) => {
+    categories?.map((category, index) => {
       return (
         <option
           className="capitalize hover:opacity-80"
-          value={catagory}
+          value={category?.name}
           key={index}
         >
-          {catagory}
+          {category?.name}
         </option>
       );
     });
@@ -493,6 +494,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       onChange("<p></p>");
       setShowOpen(true);
       !isSubmiting && setModal(false);
+      document.body.style.overflow = "";
       dispatch(
         updateAlert([
           ...alerts,
@@ -557,6 +559,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           );
           setSubmit(false);
           !isSubmiting && setModal(false);
+          document.body.style.overflow = "";
         });
     };
 
@@ -594,7 +597,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-screen max-h-[45rem] flex justify-end px-6 pt-[6.8rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-[32rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden relative ${
+          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-[32rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1`}
         >
@@ -610,6 +613,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     JSON.stringify(inputValue)
                   );
                   setModal(false);
+                  document.body.style.overflow = "";
                 }}
                 className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all outline-none focus:outline-none border border-slate-500 dark:border-slate-6"
               >
@@ -661,6 +665,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   onChange("<p></p>");
                   setShowOpen(true);
                   setModal(false);
+                  document.body.style.overflow = "";
                 }}
                 className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-600"
               >
@@ -969,10 +974,22 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   root: "replyEditor h-full overflow-hidden overflow-y-scroll text-slate-800 dark:text-slate-400",
                 }}
                 controls={[
-                  ["bold", "italic", "underline", "code", "blockquote"],
-                  ["unorderedList", "orderedList", "h1", "h2", "h3"],
-                  ["sup", "sub", "strike", "image"],
-                  ["alignLeft", "alignCenter", "alignRight", "link"],
+                  [
+                    "bold",
+                    "italic",
+                    "underline",
+                    "code",
+                    "blockquote",
+                    "unorderedList",
+                    "orderedList",
+                    "h1",
+                    "strike",
+                    "image",
+                    "alignLeft",
+                    "alignCenter",
+                    "alignRight",
+                    "link",
+                  ],
                 ]}
               />
             </div>
@@ -1024,7 +1041,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     });
                   }}
                   id="email"
-                  className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border dark:border-slate-600 border-slate-300 outline-none focus:outline-none "
+                  className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300 outline-none focus:outline-none"
                 >
                   <abbr title="Macros">
                     <BiFile />
@@ -1041,7 +1058,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               </div>
               {/**Upload Recordings ========================================= */}
               <abbr title="Upload Your Recording">
-                <div className="w-8 h-8 border border-slate-300 dark:border-slate-600 rounded flex justify-center items-center">
+                <div className="w-8 h-8 border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 border-slate-300 dark:border-slate-600 rounded flex justify-center items-center">
                   <label
                     htmlFor="recording"
                     className="w-full h-full flex justify-center items-center text-base text-slate-600 dark:text-slate-400 cursor-pointer"
@@ -1065,12 +1082,21 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 </div>
               </abbr>
               {/**Due date ========================================= */}
-              <abbr title="Due Time">
-                <div className="w-8 h-8 rounded flex items-center justify-center text-slate-600 dark:text-slate-400 border dark:border-slate-600 border-slate-300">
-                  <BiCalendar className="absolute" />
-                  <DueDate setValues={setValues} inputValue={inputValue} />
+              <div className="w-8 h-8 rounded text-slate-600 dark:text-slate-400 border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300">
+                <div
+                  onClick={() => {
+                    setTimePicker(true);
+                  }}
+                  className="h-full w-full flex items-center justify-center"
+                >
+                  <BiAlarm className="absolute text-lg cursor-pointer" />
                 </div>
-              </abbr>
+                <DueDate
+                  setValues={setValues}
+                  showTimePicker={showTimePicker}
+                  setTimePicker={setTimePicker}
+                />
+              </div>
               {/**Send ========================================= */}
               <abbr title="Open Ticket">
                 <button

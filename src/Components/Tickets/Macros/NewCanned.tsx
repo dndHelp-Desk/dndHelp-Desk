@@ -1,18 +1,21 @@
 import { FC, useEffect, useState } from "react";
 import { RichTextEditor } from "@mantine/rte";
 import { BiDetail } from "react-icons/bi";
-import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
-import { newCannedRes } from "../Data_Fetching/TicketsnUserData";
+import useOnClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
+import { newCannedRes } from "../../Data_Fetching/TicketsnUserData";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../Redux/store";
-import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
+import { AppDispatch, RootState } from "../../../Redux/store";
+import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
 
 type Props = {
   newResponseModal: boolean;
   setModal: any;
 };
 
-const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
+const NewCanned: FC<Props> = ({
+  newResponseModal,
+  setModal,
+}) => {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const alerts = useSelector(
@@ -42,15 +45,15 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
         updateAlert([
           ...alerts,
           {
-            message: "Response added succesfully",
+            message: "Macro added succesfully",
             color: "bg-green-200",
             id: new Date().getTime(),
           },
         ])
       );
-      setInput({ name: "", message: "<p>Type your response here ...</p>" });
-	   setModal(false);
-     document.body.style.overflow = "";
+      setInput({ name: "", message: "<p>Type your template here ...</p>" });
+      setModal(false);
+      document.body.style.overflow = "";
     } else {
       dispatch(
         updateAlert([

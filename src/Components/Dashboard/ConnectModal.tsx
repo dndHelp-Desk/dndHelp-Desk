@@ -9,6 +9,7 @@ type Props = {
 const ConnectModal: FC<Props> = ({ apiChannelModal, openAPIModal }) => {
   const modalRef = useClickOutside(() => {
     openAPIModal(false);
+    document.body.style.overflow = "";
   });
 
   //Component =============================
@@ -46,7 +47,10 @@ const ConnectModal: FC<Props> = ({ apiChannelModal, openAPIModal }) => {
         </section>
         <footer className="w-full min-h-16 flex justify-between px-6">
           <button
-            onClick={() => openAPIModal(false)}
+            onClick={() => {
+              openAPIModal(false);
+              document.body.style.overflow = "";
+            }}
             className="bg-inherit outline-none focus:outline-none border-2 border-blue-600 p-2 px-6 rounded text-blue-700 text-sm font-semibold hover:opacity-90 transition-all"
           >
             Cancel

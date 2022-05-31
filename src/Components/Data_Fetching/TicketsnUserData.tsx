@@ -293,6 +293,31 @@ export const deleteCannedRes = (id: string, userId: string) => {
   deleteDoc(docRef);
 };
 
+//=================================== Categories ===========================================
+//New Category ==========================
+export const newCategory = (name: string, turnaround_time: string) => {
+  addDoc(collection(db, `companies/${org}/settings/all_settings/categories`), {
+    name: name,
+    turnaround_time: turnaround_time,
+  });
+};
+
+// Edit Category ================
+export const editCategory = (
+  id: string,
+  name: string,
+  turnaround_time: string
+) => {
+  let docRef = doc(db, `companies/${org}/settings/all_settings/categories`, id);
+  updateDoc(docRef, { name: name, turnaround_time: turnaround_time });
+};
+
+// Delete Category ================
+export const deleteCategory = (id: string) => {
+  let docRef = doc(db, `companies/${org}/settings/all_settings/categories`, id);
+  deleteDoc(docRef);
+};
+
 //===================================TICKETS===========================================
 // Resolve Ticket Ticket  ================
 export const resolveTicket = (
@@ -509,7 +534,7 @@ const TicketsnUserData: FC = () => {
               snapshot.docs.map((doc: { data: () => any; id: any }) => ({
                 ...doc.data(),
                 id: doc.id,
-              }))[0]?.categories || []
+              }))
             )
           );
         }),

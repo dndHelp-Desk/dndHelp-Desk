@@ -38,7 +38,7 @@ const ZoomedImg: FC<Props> = ({ zoomImg, setZoomed }) => {
         <img
           src={zoomImg?.src}
           alt="zoomedImg"
-          className="object-center object-scale-down h-full cursor-zoom-in"
+          className="object-center object-scale-down h-full cursor-default"
         />
       </div>
     </div>

@@ -113,7 +113,7 @@ const WorkSpaceSetUp: FC = () => {
             addDoc(membersRef, {
               name: setUpValues.user_name,
               dept: setUpValues.department,
-              email: setUpValues.user_email,
+              email: setUpValues.user_email?.toLowerCase(),
               access: "admin",
               bio: "",
               active: true,
@@ -137,19 +137,21 @@ const WorkSpaceSetUp: FC = () => {
               name: setUpValues.company_name,
               address: setUpValues.companany_address,
               subscription: window.localStorage.getItem("plan"),
+              creationDate: new Date().getTime(),
             });
 
             //Support Categories ==========================
-            addDoc(categoriesRef, {
-              categories: [
-                "Late Delivery",
-                "Failed Order",
-                "Incorrect Order",
-                "Refund",
-                "Poor Service (Driver)",
-                "Poor Service (Agent)",
-                "Poor Service (Store)",
-              ],
+            let defaultCategories = [
+              { name: "Late Delivery", turnaround_time: 90000 },
+              { name: "Failed Order", turnaround_time: 90000 },
+              { name: "Incorrect Order", turnaround_time: 90000 },
+              { name: "Refund", turnaround_time: 90000 },
+              { name: "Poor Service (Driver)", turnaround_time: 90000 },
+              { name: "Poor Service (Agent)", turnaround_time: 90000 },
+              { name: "Poor Service (Store)", turnaround_time: 90000 },
+            ];
+            defaultCategories?.forEach((cat) => {
+              addDoc(categoriesRef, cat);
             });
 
             // New Tickects ==============================
@@ -179,10 +181,11 @@ const WorkSpaceSetUp: FC = () => {
               hasRecording: false,
               solution: "",
               reopened: false,
-              assigned: false,
-              assignee: "",
-              assigner: "",
-              team: "support",
+              assigned: true,
+              assignee: "Help Desk Support",
+              assigner: "Help Desk Support",
+              team: "dndHelpDesk",
+              origin: "Help Desk",
             });
 
             //Sign-Out  and Redirect to login ================================

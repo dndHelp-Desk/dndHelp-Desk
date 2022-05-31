@@ -3,6 +3,7 @@ import { Navigate } from "react-router";
 import { useSelector } from "react-redux";
 import EmailAccounts from "./EmailAccounts";
 import Templates from "./Templates";
+import Categories from "./Categories";
 import { RootState } from "../../../Redux/store";
 
 const SupportOperations: FC = () => {
@@ -11,18 +12,18 @@ const SupportOperations: FC = () => {
   );
   const [menuItems, setTab] = useState<any>([
     {
+      id: 3,
+      name: "Categories",
+      active: true,
+    },
+    {
       id: 1,
       name: "Email Accounts",
-      active: true,
+      active: false,
     },
     {
       id: 2,
       name: "Templates",
-      active: false,
-    },
-    {
-      id: 3,
-      name: "Others",
       active: false,
     },
   ]);
@@ -69,6 +70,9 @@ const SupportOperations: FC = () => {
         {menuItems.filter(
           (item: any) => item.name === "Templates" && item.active === true
         ).length >= 1 && <Templates />}
+        {menuItems.filter(
+          (item: any) => item.name === "Categories" && item.active === true
+        ).length >= 1 && <Categories />}
       </div>
     </section>
   );

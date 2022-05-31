@@ -31,7 +31,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
   //Component ==============================
   return (
     <>
-      <div className="col-span-1 h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative z-[9999]">
+      <div className="col-span-1 h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative z-[99]">
         <BiCalendarWeek className="text-slate-800 dark:text-slate-400 absolute h-10 left-3 z-[999]" />
         <DateFilter />
       </div>
@@ -43,13 +43,13 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         >
           <option value="">Category</option>
           {categories.length >= 1 &&
-            categories.map((category, index) => (
+            categories?.map((category, index) => (
               <option
                 key={index}
                 className="capitalize"
-                value={category.split(" ").join("")}
+                value={category?.name?.split(" ").join("")}
               >
-                {category}
+                {category?.name}
               </option>
             ))}
         </select>

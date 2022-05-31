@@ -74,7 +74,7 @@ const Alerts: FC<Props> = ({ alert }) => {
             ? "Warning"
             : "Error"}
         </span>
-        <span className="text-xs dark:text-slate-400 text-slate-700 font-medium w-full whitespace-nowrap overflow-hidden overflow-ellipsis">
+        <span className="text-xs dark:text-slate-400 text-slate-700 font-medium w-full whitespace-nowrap overflow-hidden overflow-ellipsis capitalize">
           {alert?.message}
         </span>
       </div>

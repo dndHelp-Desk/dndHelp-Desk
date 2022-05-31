@@ -11,9 +11,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
   const series = [
     {
       name: "Tickets Per Hour/Day ",
-      data: chartData.map((data: any) =>
-        (data.value / chartData.length).toFixed(0)
-      ),
+      data: chartData.map((data: any) => data.value),
     },
   ];
 
@@ -111,12 +109,13 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
           '<div class="text-xs font-semibold bg-slate-50 p-2">' +
           "<span>" +
           "&nbsp;" +
-          (option !== "hour" ? "Day " : "") +
+          (option !== "hour" ? "Day " : "Time|") +
           chartData.map((data: any) => data.name)[dataPointIndex] +
-          (option === "hour" ? ":00hrs" : "") +
+          (option === "hour" ? ":00" : "") +
           " &nbsp; - &nbsp;" +
           series[seriesIndex][dataPointIndex] +
           "&nbsp;" +
+          "Ticket/s" +
           "</span>" +
           "</div>"
         );

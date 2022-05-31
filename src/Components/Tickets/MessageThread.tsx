@@ -22,7 +22,7 @@ import { addRecording } from "../Auth/Firebase";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import TextEditor from "./TextEditor";
 import { AppDispatch, RootState } from "../../Redux/store";
-import CannedResponses from "./CannedResponses";
+import CannedResponses from "./Macros/CannedResponses";
 import ZoomedImg from "./ZoomedImg";
 
 interface Props {

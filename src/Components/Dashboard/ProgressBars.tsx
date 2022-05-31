@@ -11,15 +11,15 @@ const ProgressBars: FC = () => {
   );
 
   const categoriesData = useMemo(() => {
-    return categories.length >= 1
-      ? categories
-          .map((element) => {
+    return categories?.length >= 1
+      ? categories?.map((element) => {
             return {
-              name: element,
+              name: element?.name,
               value: (
                 (dashboardData?.filter(
                   (ticket) =>
-                    ticket.category?.toLowerCase() === element?.toLowerCase()
+                    ticket.category?.toLowerCase() ===
+                    element?.name?.toLowerCase()
                 ).length /
                   dashboardData?.length) *
                 100
@@ -48,7 +48,7 @@ const ProgressBars: FC = () => {
           Actual figures can be found on the reports page.
         </p>
       </div>
-      <div className="flex flex-col mt-2 w-full justify-center gap-1 rounded-lg px-4">
+      <div className="flex flex-col mt-2 w-full gap-1 rounded-lg px-4 pb-6 overflow-hidden">
         {categoriesData?.map((element: any, index) => {
           return (
             <div key={index} className="w-full">
@@ -89,6 +89,28 @@ const ProgressBars: FC = () => {
             </div>
           );
         })}
+
+        {/**Preloaders=== */}
+        {categoriesData.length <= 4 &&
+          [0, 1, 2, 3, 4, 5].map((index) => {
+            return (
+              <div key={index} className="w-full">
+                <small className="text-slate-700 dark:text-slate-400 text-[0.65rem] font-medium tracking-normal uppercase">
+                  N/A
+                </small>
+                <div className="w-full flex items-center justify-between">
+                  <div
+                    role="progressbar"
+                    aria-label="progressbas"
+                    className="h-2.5 w-full flex-[3] rounded-full border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 overflow-hidden shadow-md"
+                  ></div>
+                  <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-bold text-xs">
+                    <span>0.0%</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
