@@ -251,9 +251,34 @@ const TicketsList: FC<Props> = ({
                     <BiPulse />
                   </span>{" "}
                   <span>
-                    Due by{" "}
-                    {new Date(ticket.due_date).toLocaleString()?.split(",")[1]},{" "}
-                    {new Date(ticket.due_date).toLocaleString()?.split(",")[0]}
+                    {ticket?.status === "solved"
+                      ? `Solved within  [ ${
+                          (
+                            Number(
+                              Number(
+                                Number(ticket?.closed_time) -
+                                  Number(ticket?.date)
+                              ) / 60000
+                            ) / 60
+                          )
+                            ?.toString()
+                            ?.split(".")[0]
+                        }hr : ${(
+                          Number(
+                            Number(
+                              Number(ticket?.closed_time) - Number(ticket?.date)
+                            ) / 60000
+                          ) % 60
+                        )?.toFixed(0)}min ]`
+                      : `Due by ${
+                          new Date(ticket.due_date)
+                            .toLocaleString()
+                            ?.split(",")[1]
+                        }, ${
+                          new Date(ticket.due_date)
+                            .toLocaleString()
+                            ?.split(",")[0]
+                        }`}
                   </span>
                 </small>
               </div>

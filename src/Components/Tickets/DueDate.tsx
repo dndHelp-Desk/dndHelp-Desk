@@ -159,21 +159,14 @@ const DueDate: FC<Props> = ({ setValues, showTimePicker, setTimePicker }) => {
             </div>
           </div>
           {/***Set Time ======================== */}
-          <div className="flex justify-between w-full mt-4">
+          <div className="flex justify-center w-full mt-4">
             <button
               type="button"
               onClick={() => handleSubmit()}
               className="px-6 py-2 rounded bg-slate-800 dark:bg-blue-700 text-slate-50 text-xs uppercase flex justify-center items-center space-x-2 hover:opacity-80 transition-all duration-200"
             >
-              <span>set time</span>
               <BiAlarm className="text-lg" />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSubmit()}
-              className="px-6 py-2 rounded bg-slate-800 dark:bg-blue-700 text-slate-50 text-xs uppercase flex justify-center items-center space-x-2 hover:opacity-80 transition-all duration-200"
-            >
-              <span>set reminder</span>
+              <span>set due time</span>
             </button>
           </div>
         </div>
