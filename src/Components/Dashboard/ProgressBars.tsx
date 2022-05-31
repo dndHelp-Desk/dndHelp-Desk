@@ -102,7 +102,7 @@ const ProgressBars: FC = () => {
                   <div
                     role="progressbar"
                     aria-label="progressbas"
-                    className="h-2.5 w-full flex-[3] rounded-full border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 overflow-hidden shadow-md"
+                    className="h-2.5 w-full flex-[3] rounded-full border border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-slate-700 overflow-hidden shadow-md"
                   ></div>
                   <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-bold text-xs">
                     <span>0.0%</span>
