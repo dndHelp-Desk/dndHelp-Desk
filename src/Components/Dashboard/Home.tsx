@@ -190,7 +190,7 @@ const Home: FC = () => {
                   <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                     <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
                       <h3 className="flex-[2] text-base font-medium font-sans tracking-wide capitalize">
-                        All Agents
+                        Members
                       </h3>
                       <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize">
                         <div className="col-span-1 flex flex-col justify-center items-center">

@@ -139,7 +139,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               branch_company: brand,
             });
             setRecipient(brand);
-            setResults(false);
           }}
           className={`${
             contact.branch_company
@@ -151,7 +150,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           } text-xs dark:text-slate-300 text-slate-800 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 dark:hover:bg-slate-700 hover:bg-slate-200 capitalize flex items-center space-x-2 transition-all duration-150 px-2`}
         >
           <BiUser />
-          <abbr title={contact.branch_company}>{contact.branch_company}</abbr>
+          <div>{contact.branch_company}</div>
         </li>
       );
     });
@@ -558,7 +557,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-screen max-h-[45rem] flex justify-end px-6 pt-[6.8rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-[32rem] lg:h-full dark:bg-slate-800 bg-slate-100 border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
+          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-[32rem] lg:h-full dark:bg-slate-800 bg-white border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1 relative`}
         >
@@ -637,8 +636,8 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           </div>
 
           {/**Top Section ============================= */}
-          <div className="w-full h-[90%] flex flex-col p-4">
-            <div className="w-full flex-[2] flex md:flex-col flex-row justify-between md:items-center">
+          <div className="w-full h-[90%] grid grid-rows-6 gap-1 p-4">
+            <div className="w-full row-span-2 flex md:flex-col flex-row justify-between md:items-center pt-2">
               <div className="w-full md:h-10 flex flex-col md:flex-row gap-4 md:justify-between md:items-center">
                 {/**Recipient Name ============================= */}
                 <label
@@ -684,7 +683,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     Subject :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs capitalize"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs capitalize"
                     id="subject"
                     name="subject"
                     value={inputValue?.category}
@@ -714,7 +713,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     Priority :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="priority"
                     name="priority"
                     value={inputValue?.priority}
@@ -744,7 +743,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     Status :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsisp-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsisp-2 pt-1 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="status"
                     name="status"
                     value={inputValue?.state}
@@ -886,7 +885,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     Send As :
                   </span>
                   <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-slate-100 dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
+                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
                     id="priority"
                     name="priority"
                     value={inputValue?.send_as}
@@ -918,7 +917,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               </div>
             </div>
             {/**Message ====================================== */}
-            <div className="w-full h-full flex-[5] md:h-[65%] lg:h-[70%] mt-4 rounded overflow-hidden">
+            <div className="w-full h-full row-span-4 mt-2 rounded overflow-hidden">
               <RichTextEditor
                 value={value}
                 onImageUpload={handleImageUpload}
