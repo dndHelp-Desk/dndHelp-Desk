@@ -187,7 +187,7 @@ const Navbar: FC<Props> = ({
 
   //Component ======================
   return (
-    <nav className="flex h-[3rem] bg-transparent justify-between items-center w-full relative">
+    <nav className="flex h-14 bg-transparent justify-between items-center w-full relative px-1">
       <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}
         <OffFilters

@@ -49,47 +49,49 @@ const Home: FC = () => {
   //Loop Through All Users ================
   const users =
     allMembers.length >= 1 &&
-    allMembers.map((user) => {
-      return (
-        <div
-          key={user.id}
-          className="w-full snap_child h-14  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200 overflow-hidden"
-        >
+    allMembers
+      ?.filter((user) => user.access?.toLowerCase() === "agent")
+      ?.map((user) => {
+        return (
           <div
-            className={`h-9 w-9 flex justify-center items-center rounded-full relative`}
+            key={user.id}
+            className="w-full snap_child h-14  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200 overflow-hidden"
           >
-            <img
-              src={
-                user.photoUrl !== null && user.photoUrl !== ""
-                  ? user.photoUrl
-                  : defaultProfile
-              }
-              alt="profile"
-              className={`object-cover w-full h-full object-center rounded-full border-2 border-slate-500 dark:border-slate-300`}
-            />
             <div
-              className={`absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white ${
-                user.status === "available"
-                  ? "bg-green-600"
-                  : user.status === "unavailable"
-                  ? "bg-red-600"
-                  : "bg-yellow-500"
-              }`}
-            ></div>
+              className={`h-9 w-9 flex justify-center items-center rounded-full relative`}
+            >
+              <img
+                src={
+                  user.photoUrl !== null && user.photoUrl !== ""
+                    ? user.photoUrl
+                    : defaultProfile
+                }
+                alt="profile"
+                className={`object-cover w-full h-full object-center rounded-full border-2 border-slate-500 dark:border-slate-300`}
+              />
+              <div
+                className={`absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white ${
+                  user.status === "available"
+                    ? "bg-green-600"
+                    : user.status === "unavailable"
+                    ? "bg-red-600"
+                    : "bg-yellow-500"
+                }`}
+              ></div>
+            </div>
+            <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
+              <abbr title={user.name}>
+                <p className="tracking-normal">{user.name}</p>
+              </abbr>
+              <abbr title={user.email}>
+                <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic">
+                  {user.email}
+                </p>
+              </abbr>
+            </div>
           </div>
-          <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
-            <abbr title={user.name}>
-              <p className="tracking-normal">{user.name}</p>
-            </abbr>
-            <abbr title={user.email}>
-              <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic">
-                {user.email}
-              </p>
-            </abbr>
-          </div>
-        </div>
-      );
-    });
+        );
+      });
 
   //Component ========================
   return (
@@ -188,14 +190,16 @@ const Home: FC = () => {
                   <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                     <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
                       <h3 className="flex-[2] text-base font-medium font-sans tracking-wide capitalize">
-                        Members
+                        All Agents
                       </h3>
                       <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize">
                         <div className="col-span-1 flex flex-col justify-center items-center">
                           <p className="dark:text-slate-300 text-slate-700 text-xs font-bold">
                             {
                               allMembers.filter(
-                                (user) => user.status === "available"
+                                (user) =>
+                                  user.access?.toLowerCase() === "agent" &&
+                                  user.status === "available"
                               ).length
                             }
                           </p>
@@ -207,7 +211,9 @@ const Home: FC = () => {
                           <p className="dark:text-slate-300 text-slate-700  text-xs font-bold">
                             {
                               allMembers.filter(
-                                (user) => user.status === "busy"
+                                (user) =>
+                                  user.access?.toLowerCase() === "agent" &&
+                                  user.status === "busy"
                               ).length
                             }
                           </p>
@@ -219,7 +225,9 @@ const Home: FC = () => {
                           <p className="dark:text-slate-300 text-slate-700  text-xs font-bold">
                             {
                               allMembers.filter(
-                                (user) => user.status === "unavailable"
+                                (user) =>
+                                  user.access?.toLowerCase() === "agent" &&
+                                  user.status === "unavailable"
                               ).length
                             }
                           </p>

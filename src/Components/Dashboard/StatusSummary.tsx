@@ -9,158 +9,28 @@ const StatusSummary: FC = () => {
 
   const data = useMemo(() => {
     return dashboardData.length >= 1
-      ? [
-          {
+      ? ["Solved", "Open", "On-hold", "Re-opened"]
+          .map((status) => ({
             value: (
-              (dashboardData.filter(
+              (dashboardData?.filter(
                 (data) =>
-                  new Date(data.date).getTime() >=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      1
-                    ).getTime() &&
-                  new Date(data.date).getTime() <=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      31
-                    ).getTime() &&
-                  data?.status?.toLowerCase() === "solved"
+                  data?.status
+                    ?.toLowerCase()
+                    ?.replace(/[^a-zA-Z0-9]/g, "")
+                    ?.replace(/\s/g, "") ===
+                  status
+                    ?.toLowerCase()
+                    ?.replace(/[^a-zA-Z0-9]/g, "")
+                    ?.replace(/\s/g, "")
               ).length /
-                dashboardData.filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        1
-                      ).getTime() &&
-                    new Date(data.date).getTime() <=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        31
-                      ).getTime()
-                ).length) *
+                dashboardData.length) *
               100
-            ).toFixed(1),
-            name: "Solved",
-          },
-          {
-            value: (
-              (dashboardData.filter(
-                (data) =>
-                  new Date(data.date).getTime() >=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      1
-                    ).getTime() &&
-                  new Date(data.date).getTime() <=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      31
-                    ).getTime() &&
-                  data.status === "reopened"
-              ).length /
-                dashboardData.filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        1
-                      ).getTime() &&
-                    new Date(data.date).getTime() <=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        31
-                      ).getTime()
-                ).length) *
-              100
-            ).toFixed(1),
-            name: "Re-Opened",
-          },
-          {
-            value: (
-              (dashboardData.filter(
-                (data) =>
-                  new Date(data.date).getTime() >=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      1
-                    ).getTime() &&
-                  new Date(data.date).getTime() <=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      31
-                    ).getTime() &&
-                  data?.status?.toLowerCase() === "on hold"
-              ).length /
-                dashboardData.filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        1
-                      ).getTime() &&
-                    new Date(data.date).getTime() <=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        31
-                      ).getTime()
-                ).length) *
-              100
-            ).toFixed(1),
-            name: "On-Hold",
-          },
-          {
-            value: (
-              (dashboardData.filter(
-                (data) =>
-                  new Date(data.date).getTime() >=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      1
-                    ).getTime() &&
-                  new Date(data.date).getTime() <=
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      31
-                    ).getTime() &&
-                  data?.status?.toLowerCase() === "open"
-              ).length /
-                dashboardData.filter(
-                  (data) =>
-                    new Date(data.date).getTime() >=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        1
-                      ).getTime() &&
-                    new Date(data.date).getTime() <=
-                      new Date(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        31
-                      ).getTime()
-                ).length) *
-              100
-            ).toFixed(1),
-            name: "Open",
-          },
-        ].sort((a: any, b: any) => {
-          return a.value - b.value;
-        })
+            ).toFixed(0),
+            name: status,
+          }))
+          ?.sort((a: any, b: any) => {
+            return a.value - b.value;
+          })
       : [];
   }, [dashboardData]);
 
@@ -168,24 +38,7 @@ const StatusSummary: FC = () => {
   return (
     <div className="row-span-3 flex flex-col justify-center items-center relative">
       <h2 className="text-center uppercase font-bold text-[0.7rem] dark:text-slate-300 text-slate-800">
-        {
-          dashboardData.filter(
-            (data) =>
-              new Date(data.date).getTime() >=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  1
-                ).getTime() &&
-              new Date(data.date).getTime() <=
-                new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  31
-                ).getTime()
-          ).length
-        }{" "}
-        tickets
+        {dashboardData?.length} tickets
       </h2>
       <div className="w-[7rem] h-[8rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t from-blue-700 to-blue-500 rounded-b-md shadow-lg z-[99]">
         {data.length >= 1 &&

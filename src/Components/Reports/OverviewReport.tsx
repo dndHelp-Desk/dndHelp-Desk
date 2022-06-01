@@ -157,7 +157,7 @@ const OverviewReport: FC<data> = ({ data }) => {
               <span className="text-xs">min</span>
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
-              AV Age of Query
+              Resolution Time
             </h4>
           </div>
         </div>
@@ -218,9 +218,9 @@ const OverviewReport: FC<data> = ({ data }) => {
             </div>
           </div>
           <p className=" text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
-            More features will be added soon in the meantime explore the reports
-            by making use of filters. You can find your current satisfaction
-            rating above.
+            Real-time report allows you to check the current status of your team's
+            workload , availability and valuable insights or statistics
+            about your team's performance.
           </p>
         </div>
       </div>

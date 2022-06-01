@@ -30,7 +30,7 @@ const ZoomedImg: FC<Props> = ({ zoomImg, setZoomed }) => {
             setZoomed((prev: any) => ({ ...prev, open: false, scr: "" }));
             document.body.style.overflow = "";
           }}
-          className="absolute top-1 right-1 bg-red-700 hover:bg-red-700 transition-all duration-200 text-slate-100 text-sm rounded h-5 w-5 flex justify-center items-center outlinenone focus:outline-none z-[999]"
+          className="absolute  top-1 right-1 h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border-2 border-slate-500 dark:border-slate-500 z-[999]"
         >
           <span>&times;</span>
         </button>

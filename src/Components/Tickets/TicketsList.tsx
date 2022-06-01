@@ -130,7 +130,7 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-4 p-2 space-x-2 flex snap_childTwo hover:bg-slate-200/[0.6] dark:hover:bg-[#182235] transition-all ${
+          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-[0.9rem] p-2 space-x-2 flex snap_childTwo hover:bg-slate-200/[0.6] dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
               ? "bg-slate-200/[0.6] dark:bg-[#182235]"
               : "bg-inherit"
@@ -229,30 +229,10 @@ const TicketsList: FC<Props> = ({
                   </abbr>
                 </div>
                 {/**Indicate The ticket that is solved or  overdue and open ================*/}
-                <small className="dark:text-slate-400 text-slate-500 flex items-center space-x-[0.15rem] text-[0.6rem] whitespace-nowrap">
-                  <span
-                    className={`text-sm ${
-                      new Date(ticket.due_date).getTime() <=
-                        new Date().getTime() &&
-                      ticket.status &&
-                      ticket.status.toLowerCase() === "open"
-                        ? "text-red-600"
-                        : (ticket.status.toLowerCase() === "open" &&
-                            new Date(ticket.due_date).getTime() >
-                              new Date().getTime()) ||
-                          ticket.status.toLowerCase() === "on hold"
-                        ? "text-slate-500"
-                        : ticket.status &&
-                          ticket.status.toLowerCase() === "solved"
-                        ? "text-blue-600"
-                        : ""
-                    } `}
-                  >
-                    <BiPulse />
-                  </span>{" "}
+                <div className="dark:text-slate-400 text-slate-600 flex items-center justify-between space-x-[0.15rem] text-[0.7rem] font-medium whitespace-nowrap w-full">
                   <span>
                     {ticket?.status === "solved"
-                      ? `Solved within  [ ${
+                      ? `Resolution Time  [ ${
                           (
                             Number(
                               Number(
@@ -280,7 +260,30 @@ const TicketsList: FC<Props> = ({
                             ?.split(",")[0]
                         }`}
                   </span>
-                </small>
+                  <div
+                    className={`text-base relative group ${
+                      new Date(ticket.due_date).getTime() <=
+                        new Date().getTime() &&
+                      ticket.status &&
+                      ticket.status.toLowerCase() === "open"
+                        ? "text-red-600"
+                        : (ticket.status.toLowerCase() === "open" &&
+                            new Date(ticket.due_date).getTime() >
+                              new Date().getTime()) ||
+                          ticket.status.toLowerCase() === "on hold"
+                        ? "text-slate-500"
+                        : ticket.status &&
+                          ticket.status.toLowerCase() === "solved"
+                        ? "text-blue-600"
+                        : ""
+                    } `}
+                  >
+                    <BiPulse />
+                    <div className="absolute right-0 top-[-1.7rem] h-6 w-24 dark:bg-slate-500 bg-slate-600 rounded-sm after:contents-[''] after:bg-inherit after:h-2 after:w-2 after:rotate-45 after:absolute after:bottom-[-0.25rem] after:right-1.5 text-[0.7rem] text-slate-50 font-semibold hidden group-hover:flex justify-center items-center capitalize">
+                      {ticket?.status}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

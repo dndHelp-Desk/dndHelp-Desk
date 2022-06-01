@@ -529,7 +529,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       inputValue?.branch_company !== "" &&
       member_details[0]?.id !== false
     ) {
-      console.log(new Date(inputValue?.date));
       setTimeout(() => {
         sendNow();
       }, 500);

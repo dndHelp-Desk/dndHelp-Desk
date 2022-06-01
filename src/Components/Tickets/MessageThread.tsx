@@ -1,4 +1,5 @@
 import React, { FC, useState, useRef, useMemo, useEffect } from "react";
+import { useScrollIntoView } from "@mantine/hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillTrashFill, BsThreeDotsVertical } from "react-icons/bs";
 import {
@@ -24,6 +25,7 @@ import TextEditor from "./TextEditor";
 import { AppDispatch, RootState } from "../../Redux/store";
 import CannedResponses from "./Macros/CannedResponses";
 import ZoomedImg from "./ZoomedImg";
+import Details from "./Details";
 
 interface Props {
   isChatOpen: boolean;
@@ -40,6 +42,10 @@ interface ReplyOptions {
 }
 
 const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
+  const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView<
+    HTMLDivElement | any
+  >();
+  const [showDetails, setDetails] = useState<boolean>(false);
   const statusSelectionRef = useRef<HTMLSelectElement>(null);
   const [zoomImg, setZoomed] = useState({
     open: false,
@@ -67,7 +73,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const [value, onChange] = useState<string | any>("<p></p>");
   const dispatch: AppDispatch = useDispatch();
-  const scrollToLastMessage = useRef<HTMLDivElement | any>();
   const scrollToNone = useRef<HTMLDivElement | any>();
 
   //Filter Thread Messages =====================================
@@ -138,13 +143,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     message_position: threadMessages.length + 1,
     ticket_id: threadId,
   });
-
-  //Scroll to last message Function
-  const lastMessage = () => {
-    if (scrollToLastMessage && scrollToLastMessage.current) {
-      scrollToLastMessage.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   //Send Solution send Solution ====================
   const sendSolution = () => {
@@ -516,11 +514,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     threadMessages.map((message, index) => {
       return (
         <div
-          ref={
-            threadMessages.length - 1 === index
-              ? scrollToLastMessage
-              : scrollToNone
-          }
+          ref={threadMessages.length - 1 === index ? targetRef : scrollToNone}
           key={index}
           className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583]"
         >
@@ -628,9 +622,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       {/**Zoomed Imag Modal */}
 
       <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-400 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
-        <div className="h-14 bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
+        <div className="h-[3.75rem] bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
-          <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3">
+          <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3 pl-0">
             <div className="flex items-center space-x-2">
               {/**Back To Main List On Small Screens ====================== */}
               <button
@@ -644,60 +638,36 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 </abbr>
               </button>
 
-              {/**Details  ====================== */}
-              <details className="relative flex items-center space-x-2 outline-none focus:outline-none lg:border-0 border-l border-slate-300 dark:border-slate-700">
-                <summary className="w-[4rem] pl-2 lg:p-0 text-[0.65rem] leading-6 dark:text-slate-300 text-slate-900 font-bold uppercase select-none cursor-pointer outline-none focus:outline-none">
-                  Details
-                </summary>
-                <div className="absolute flex flex-col justify-between rounded-md top-8 left-[-1.5rem] h-[21rem] w-[15rem] sm:w-[28rem] shadow-2xl drop-shadow-2xl dark:bg-[#182235] bg-white border border-slate-300 dark:border-slate-700 p-4  before:content-[''] before:absolute before:tooltip_bottom before:left-[0.6rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 transition-all duration-500">
-                  <div>
-                    <ul className="dark:text-slate-400 text-slate-800 mt-2 space-y-4 capitalize">
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Open Date : </b>
-                        {firstMessage &&
-                          new Date(firstMessage[0]?.date).toLocaleString()}{" "}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Assigned To : </b>
-                        {firstMessage && firstMessage[0]?.agent_name}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Status : </b>
-                        {firstMessage && firstMessage[0]?.status}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Priority : </b>
-                        {firstMessage && firstMessage[0]?.priority}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Brand/Company : </b>
-                        {firstMessage && firstMessage[0]?.branch_company}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">
-                          First Contact Resolution :{" "}
-                        </b>
-                        {firstMessage && firstMessage[0]?.fcr}{" "}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Customer's Name : </b>
-                        {firstMessage && firstMessage[0]?.complainant_name}{" "}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Customer's Number : </b>
-                        {firstMessage &&
-                          firstMessage[0]?.complainant_number}{" "}
-                      </li>
-                      <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-700">
-                        <b className="hidden sm:flex">Customer's Email : </b>
-                        <span className="lowercase">
-                          {firstMessage && firstMessage[0]?.complainant_email}{" "}
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
+              <div className="hidden relative lg:flex items-center space-x-2 h-[3.5rem]">
+                {/**Details  ====================== */}
+                <Details
+                  showDetails={showDetails}
+                  setDetails={setDetails}
+                  firstMessage={firstMessage}
+                />
+                <button
+                  onClick={() => setDetails(true)}
+                  className="h-6 w-6 outline-none focus:outline-none border border-slate-300 dark:border-slate-600 rounded italic font-bold dark:text-slate-300 text-slate-800 bg-gray-100 dark:bg-[#182235] flex justify-center items-center"
+                >
+                  i
+                </button>
+                <div className="hidden md:flex flex-col justify-center space-y-0 h-full">
+                  <h2 className="text-slate-800 dark:text-slate-300 text-[0.7rem] tracking-wide font-bold dark:font-semibold">
+                    Assignee{" "}
+                    <span className="font-medium text-slate-600 dark:text-slate-400">
+                      {firstMessage[0]?.agent_name}
+                    </span>
+                  </h2>
+                  <h3 className="text-slate-800 dark:text-slate-300 text-[0.68rem] tracking-wide font-bold dark:font-semibold">
+                    Open Date{" "}
+                    <span className="font-medium text-slate-600 dark:text-slate-400">
+                      {firstMessage[0]?.date
+                        ? new Date(firstMessage[0]?.date).toLocaleString()
+                        : "No Date"}
+                    </span>
+                  </h3>
                 </div>
-              </details>
+              </div>
             </div>
 
             {/**Subject And Scroll To Last Message Details =========================== */}
@@ -709,7 +679,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </span>{" "}
               {/**Scroll to Last Message ================== */}
               <button
-                onClick={() => lastMessage()}
+                onClick={() => scrollIntoView()}
                 className="outline-none focus:outline-none text-lg dark:text-slate-400 text-slate-700 capitalize flex items-center justify-end space-x-1"
               >
                 <HiOutlineArrowSmDown />
@@ -720,13 +690,16 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         </div>
 
         {/**Thread Messages ============================ */}
-        <div className="h-full w-[98%] m-auto p-6 flex flex-col gap-3 overflow-y-scroll bg-inherit relative">
+        <div
+          ref={scrollableRef}
+          className="h-full w-[98%] m-auto p-6 flex flex-col gap-3 overflow-y-scroll bg-inherit relative"
+        >
           {thread}
           {
             //Final Solution If there is one =====================
             firstMessage && firstMessage[0]?.status === "solved" && (
               <div
-                ref={scrollToLastMessage}
+                ref={targetRef}
                 className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583]"
               >
                 {/**Message ====================== */}
