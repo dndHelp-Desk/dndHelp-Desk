@@ -97,7 +97,7 @@ const Dashboard: FC = () => {
             company_details?.name ? company_details?.name : ""
           } ${routeLocation.split("/").join(" | ")}`;
     dispatch(changeLocation(location.pathname));
-  }, [routeLocation, dispatch, location]);
+  }, [routeLocation, dispatch, location, company_details]);
 
   //Check if The data is loading
   useEffect(() => {

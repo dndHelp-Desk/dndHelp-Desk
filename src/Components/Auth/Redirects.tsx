@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "../../Redux/store";
 import redirect_img from "./images/redirect_img.webp";
 import { setCompany } from "../../Redux/Slices/UserSlice";
@@ -10,6 +10,7 @@ import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 const Redirects: FC = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch: AppDispatch = useDispatch();
   const workspace = localStorage.getItem("organization_name");
   const routeLocation = useSelector(
@@ -28,6 +29,10 @@ const Redirects: FC = () => {
           routeLocation === "dndHelp-Desk"
             ? navigate("/app")
             : navigate(routeLocation);
+          document.title =
+            location.pathname === "/app"
+              ? `dndHelp-Desk | ${workspace} | ${location.pathname}`
+              : location.pathname;
           dispatch(
             updateAlert([
               ...alerts,
@@ -43,7 +48,7 @@ const Redirects: FC = () => {
         }
       });
     }, 2000);
-  }, [alerts, auth, dispatch, navigate, routeLocation, workspace]);
+  }, [alerts, auth, dispatch, navigate, routeLocation, workspace, location]);
 
   //component ========
   return (
