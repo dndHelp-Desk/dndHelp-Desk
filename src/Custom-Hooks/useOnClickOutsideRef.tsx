@@ -6,10 +6,11 @@ let useClickOutside = (handler: any, restrict?: string) => {
   useEffect(() => {
     let maybeHandler = (event: any) => {
       if (dropDownRef && dropDownRef.current) {
-        if (
-          (event.target && !dropDownRef.current.contains(event.target)) ||
-          (event.target &&
-            event?.target.tagName?.toLowerCase() === restrict?.toLowerCase())
+        if (event.target && !dropDownRef.current.contains(event.target)) {
+          handler();
+        } else if (
+          event.target &&
+          event?.target.tagName?.toLowerCase() === restrict?.toLowerCase()
         ) {
           handler();
         }

@@ -25,6 +25,9 @@ const Redirects: FC = () => {
       onAuthStateChanged(auth, (user) => {
         if (workspace && user) {
           dispatch(setCompany(workspace?.toLowerCase().replace(/\s/g, "")));
+          routeLocation === "dndHelp-Desk"
+            ? navigate("/app")
+            : navigate(routeLocation);
           dispatch(
             updateAlert([
               ...alerts,
@@ -35,9 +38,6 @@ const Redirects: FC = () => {
               },
             ])
           );
-          routeLocation === "dndHelp-Desk"
-            ? navigate("/app")
-            : navigate(routeLocation);
         } else {
           navigate("/login");
         }

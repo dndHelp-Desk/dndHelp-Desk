@@ -45,6 +45,9 @@ const Dashboard: FC = () => {
   const notificationMsgs = useSelector(
     (state: RootState) => state.NotificationsData.messages
   );
+  const company_details = useSelector(
+    (state: RootState) => state.Tickets.company_details
+  );
   const [openNotifications, setOpenNotification] = useState<boolean>(false);
   const [phoneToolTip, openPhone] = useState<boolean>(false);
   const [loading, setLoading] = useState<any>(false);
@@ -89,8 +92,10 @@ const Dashboard: FC = () => {
     window.localStorage.setItem("locationPath", routeLocation);
     document.title =
       location.pathname === "/"
-        ? "Dial n Dine Help-Desk"
-        : "Dial n Dine Help-Desk" + routeLocation.split("/").join(" | ");
+        ? `dndHelp-Desk | ${company_details?.name ? company_details?.name : ""}`
+        : `dndHelp-Desk | ${
+            company_details?.name ? company_details?.name : ""
+          } ${routeLocation.split("/").join(" | ")}`;
     dispatch(changeLocation(location.pathname));
   }, [routeLocation, dispatch, location]);
 
