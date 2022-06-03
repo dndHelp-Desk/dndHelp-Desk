@@ -177,6 +177,7 @@ export const createUser = (
     photoUrl: "",
     companies: companies,
     uid: "",
+    createdAt: new Date().getTime(),
   });
 };
 

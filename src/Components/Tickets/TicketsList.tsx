@@ -219,7 +219,7 @@ const TicketsList: FC<Props> = ({
                   <p className="capitalize  w-[60%] overflow-hidden">
                     {ticket.category}
                   </p>
-                  <p className=" text-[0.65rem]">{ticket.ticket_id}</p>
+                  <p className=" text-[0.65rem]">{ticket.ticket_id?.replace(/\s/g,"")}</p>
                 </div>
                 <div className="dark:text-slate-400 w-[60%] pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
                   <abbr title={ticket.branch_company}>

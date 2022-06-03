@@ -512,7 +512,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     };
 
     const sendNow = () => {
-      openTicket(generatedId());
+      openTicket(generatedId()?.replace(/\s/g, ""));
       setFile("");
       setRecipient("");
       onChange("<p></p>");

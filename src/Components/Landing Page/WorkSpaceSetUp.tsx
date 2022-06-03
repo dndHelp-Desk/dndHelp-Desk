@@ -121,6 +121,8 @@ const WorkSpaceSetUp: FC = () => {
               photoUrl: "",
               companies: "",
               uid: auth.currentUser?.uid,
+              createdAt: new Date().getTime(),
+              workspace_owner: true,
             });
 
             //New  Email Account ==========================
