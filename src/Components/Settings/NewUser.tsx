@@ -8,6 +8,7 @@ import {
   BsPersonLinesFill,
   BsLockFill,
 } from "react-icons/bs";
+import { BiShowAlt } from "react-icons/bi";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -36,6 +37,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
     password: "",
     companies: "",
   });
+  const [revealPass, setReveal] = useState<boolean>(false);
 
   //Create User ===========================
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -131,7 +133,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, name: e.target.value })
               }
               value={inputValues.name}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -147,13 +149,13 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, email: e.target.value })
               }
               value={inputValues.email}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <input
-              type="password"
+              type={revealPass ? "text" : "password"}
               name="password"
               id="password"
               autoComplete="nope"
@@ -164,9 +166,23 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, password: e.target.value })
               }
               value={inputValues.password}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
             />
             <BsLockFill className="absolute text-slate-500 text-lg top-3 left-4" />
+            <BiShowAlt
+              onClick={() => {
+                setReveal((prev: boolean) => {
+                  if (prev) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                });
+              }}
+              className={`absolute right-2 top-3 text-slate-700 dark:text-slate-400 ${
+                inputValues.password?.length >= 2 ? "" : "hidden"
+              }`}
+            />
           </div>
           <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
             <select
@@ -174,7 +190,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
               onChange={(e) =>
                 setValues({ ...inputValues, access: e.target.value })
               }
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200 "
             >
               <option className="capitalize p-2" value="">
                 Access
@@ -206,7 +222,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, companies: e.target.value })
               }
               value={inputValues.companies}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -222,7 +238,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, dept: e.target.value })
               }
               value={inputValues.dept}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>

@@ -355,7 +355,7 @@ const EmailAccounts: FC = () => {
                       Account Password
                     </span>
                     <input
-                      type="password"
+                      type={editable === account.id ? "text" : "password"}
                       name={`${account.id}password"`}
                       id={`${account.id}password"`}
                       readOnly={editable === account.id ? false : true}
