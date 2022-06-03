@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.5](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.4...v0.7.5) (2022-06-03)
+
+
+### Features
+
+* **auth:** when logging and adding new user or  in you can now reveal password ([8529f7d](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/8529f7dcef8c683862867fed21c8ecfb699cb9d1))
+* **tickets:** now agents are able to delete messages sent by them excluding the ticket ([89b12be](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/89b12be3ba86a20f3b9001b3796bfdfc2215bf05))
+
 ### [0.7.4](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.3...v0.7.4) (2022-05-31)
 
 
