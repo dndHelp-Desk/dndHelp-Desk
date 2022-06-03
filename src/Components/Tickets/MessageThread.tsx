@@ -20,7 +20,6 @@ import {
 } from "../Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import { addRecording } from "../Auth/Firebase";
-import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import TextEditor from "./TextEditor";
 import { AppDispatch, RootState } from "../../Redux/store";
 import CannedResponses from "./Macros/CannedResponses";
@@ -69,6 +68,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const [recordingFile, setFile] = useState<boolean>(false);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const [value, onChange] = useState<string | any>("<p></p>");
+  const [firstMessage, setFirstMesssage] = useState<any>([]);
   const dispatch: AppDispatch = useDispatch();
   const scrollToNone = useRef<HTMLDivElement | any>();
   const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView<
@@ -95,12 +95,12 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   }, [allTickets, threadId]);
 
   //Thread First Message =====================
-  const firstMessage = useMemo(() => {
-    return (
-      filteredTickets &&
-      filteredTickets.filter((ticket) => ticket.ticket_id === threadId) &&
-      filteredTickets.filter((ticket) => ticket.ticket_id === threadId)
-    );
+  useEffect(() => {
+    threadId && filteredTickets.length >= 1
+      ? setFirstMesssage(
+          filteredTickets.filter((ticket) => ticket.ticket_id === threadId)
+        )
+      : setFirstMesssage([]);
   }, [filteredTickets, threadId]);
 
   useEffect(() => {
@@ -111,16 +111,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       message_position: threadMessages.length + 1,
     }));
   }, [firstMessage, threadId, threadMessages]);
-
-  //Message options ========================================gi
-  const [msgOptions, setOptions] = useState<any>({
-    status: false,
-    id: "",
-    threadId: "",
-  });
-  const msgOptionsRef = useOnClickOutside(() =>
-    setOptions({ status: false, id: "", threadId: "" })
-  );
 
   //Get Name of Reciepent and Agent and email ===============
   let clientName: string =
@@ -555,7 +545,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583]"
         >
           {/**Message ====================== */}
-          <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
+          <div className="w-full 2xl:w-full bg-tranparent pl-6 pb-2 relative">
             <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded-sm border dark:border-slate-700 border-slate-400 dark:bg-slate-800 bg-white px-1 overflow-hidden">
               <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
                 <BiConversation />
@@ -593,46 +583,31 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       {`${new Date(message.date).toLocaleString()}`}
                     </span>
                   </span>
-                  <button
-                    onClick={() =>
-                      user[0].access === "admin" &&
-                      setOptions({
-                        status: true,
-                        id: message.message_position,
-                        threadId: message.ticket_id,
-                      })
-                    }
-                    className="h-8 w-8 rounded-sm dark:hover:opacity-80 hover:opacity-80 dark:text-slate-400 text-slate-700 flex items-center justify-center outline-none focus:outline-none"
-                  >
-                    <BsThreeDotsVertical className="inline" />
-                  </button>
-
                   {/**Message Options =========================== */}
-                  <div
-                    ref={msgOptionsRef}
-                    className={`w-[10rem] ${
-                      msgOptions.status === true &&
-                      msgOptions.id === message.message_position &&
-                      msgOptions.threadId === message.ticket_id
-                        ? ""
-                        : "hidden"
-                    } z-[99] shadow-lg border dark:border-slate-800 border-slate-100 dark:bg-slate-700 bg-white backdrop-blur-sm rounded-lg absolute right-0 top-8 p-4`}
-                  >
-                    <h5 className="dark:text-slate-300 text-slate-500 font-semibold text-sm flex justify-between items-center">
-                      <span>Delete</span>
-                      <BsFillTrashFill
-                        onClick={() => {
-                          deleteTicket(message.id);
-                          setOptions({
-                            status: false,
-                            id: "",
-                            threadId: "",
-                          });
-                        }}
-                        className="hover:text-red-500 cursor-pointer"
-                      />
-                    </h5>
+                  <div className="group relative h-8 w-8 dark:text-slate-400 text-slate-700 flex items-center justify-center cursor-pointer rounded">
+                    <BsThreeDotsVertical className="inline" />
+                    <div
+                      className={`w-[10rem] group-hover:flex flex-col items-center hidden z-[99] shadow-lg border dark:border-slate-800 border-slate-300 dark:bg-slate-700 bg-slate-200 backdrop-blur-sm rounded absolute right-[-0.5rem] top-9 after:contents-[''] after:absolute after:right-3.5 after:top-[-0.5rem] after:bg-inherit after:rotate-45 after:h-4 after:w-4 after:border after:border-inherit after:border-r-0 after:border-b-0`}
+                    >
+                      <div className="bg-inherit w-full h-full z-[99]  p-4 overflow-hidden rounded">
+                        <button className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none">
+                          <span>Delete</span>
+                          <BsFillTrashFill
+                            onClick={() => {
+                              if (
+                                message?.message_position !== 1 &&
+                                message?.user_email === user[0]?.email
+                              ) {
+                                deleteTicket(message.id);
+                              }
+                            }}
+                            className="hover:text-red-500 cursor-pointer"
+                          />
+                        </button>
+                      </div>
+                    </div>
                   </div>
+                  {/**Message Options =========================== */}
                 </div>
               </div>
               <div className="py-2 dark:text-slate-400 text-slate-700 p-2 text-[13px]">
