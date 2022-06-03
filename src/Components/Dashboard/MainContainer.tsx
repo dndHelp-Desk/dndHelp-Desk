@@ -38,6 +38,9 @@ const Dashboard: FC = () => {
   const dashboardData = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
   );
+  const allTickets = useSelector(
+    (state: RootState) => state.Tickets.allTickets
+  );
   const ticketsComponentDates = useSelector(
     (state: RootState) => state.Tickets.ticketsComponentDates
   );
@@ -59,8 +62,8 @@ const Dashboard: FC = () => {
     if (user[0]?.access !== "client") {
       dispatch(
         setUnread(
-          dashboardData &&
-            dashboardData?.filter(
+          allTickets &&
+            allTickets?.filter(
               (ticket) =>
                 ticket?.readStatus !== "read" &&
                 ticket?.recipient_email?.replace(/\s/g, "").toLowerCase() ===
@@ -71,16 +74,21 @@ const Dashboard: FC = () => {
     } else if (user[0]?.companies.length >= 1 && user[0]?.access === "client") {
       dispatch(
         setUnread(
-          dashboardData &&
-            dashboardData?.filter(
+          allTickets &&
+            allTickets?.filter(
               (ticket) =>
                 ticket.readStatus !== "read" &&
-                user[0]?.companies.includes(ticket.branch_company)
+                ticket?.recipient_email
+                  .split(",")
+                  .map((email: string) =>
+                    email?.replace(/\s/g, "").toLowerCase()
+                  )
+                  .includes(user[0]?.email?.replace(/\s/g, "").toLowerCase())
             )
         )
       );
     }
-  }, [dashboardData, dispatch, user]);
+  }, [allTickets, dispatch, user]);
 
   //Small Screen Menu ===================
   const [showMenu, setShowMenu] = useState<boolean>(false);

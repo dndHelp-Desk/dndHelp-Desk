@@ -42,9 +42,6 @@ interface ReplyOptions {
 }
 
 const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
-  const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView<
-    HTMLDivElement | any
-  >();
   const [showDetails, setDetails] = useState<boolean>(false);
   const statusSelectionRef = useRef<HTMLSelectElement>(null);
   const [zoomImg, setZoomed] = useState({
@@ -74,6 +71,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const [value, onChange] = useState<string | any>("<p></p>");
   const dispatch: AppDispatch = useDispatch();
   const scrollToNone = useRef<HTMLDivElement | any>();
+  const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView<
+    HTMLDivElement | any
+  >();
 
   //Filter Thread Messages =====================================
   const threadMessages = useMemo(() => {
@@ -146,46 +146,46 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
   //Send Solution send Solution ====================
   const sendSolution = () => {
-    // Upload Recordings
-    recordingFile !== false &&
-      addRecording(recordingFile, `/${company_details?.name}/${threadId}`);
+      // Upload Recordings
+      recordingFile !== false &&
+        addRecording(recordingFile, `/${company_details?.name}/${threadId}`);
 
-    //Add ticket recording on firebase storage =============================
-    resolveTicket(
-      firstMessage && firstMessage[0]?.id,
-      reply.message,
-      recordingFile !== false ? true : false
-    );
+      //Add ticket recording on firebase storage =============================
+      resolveTicket(
+        firstMessage && firstMessage[0]?.id,
+        reply.message,
+        recordingFile !== false ? true : false
+      );
 
-    //Sending Account =============================
-    let sendingAccount: any =
-      firstMessage &&
-      email_accounts.filter(
-        (account) =>
-          account.name.toLowerCase() === firstMessage[0]?.team.toLowerCase()
-      )[0];
+      //Sending Account =============================
+      let sendingAccount: any =
+        firstMessage &&
+        email_accounts.filter(
+          (account) =>
+            account.name.toLowerCase() === firstMessage[0]?.team.toLowerCase()
+        )[0];
 
-    //Relpy Using Nodemailer ===================
-    let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
-      new Date().getMinutes() + 1
-    } hrs`;
+      //Relpy Using Nodemailer ===================
+      let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
+        new Date().getMinutes() + 1
+      } hrs`;
 
-    fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        from: `${sendingAccount.email}`,
-        company: `${company_details.name} ${sendingAccount.name}`,
-        password: sendingAccount.password,
-        host: sendingAccount.host,
-        port: sendingAccount.port,
-        email: clientEmail,
-        subject: `New Issue Reported Ragarding ${subject} || Ticket-ID: ${threadId}`,
-        ticket_id: threadId,
-        email_body: `<p
+      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          from: `${sendingAccount.email}`,
+          company: `${company_details.name} ${sendingAccount.name}`,
+          password: sendingAccount.password,
+          host: sendingAccount.host,
+          port: sendingAccount.port,
+          email: clientEmail,
+          subject: `New Issue Reported Ragarding ${subject} || Ticket-ID: ${threadId}`,
+          ticket_id: threadId,
+          email_body: `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
      Hi ${clientName},
   </p>
@@ -238,47 +238,47 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
     prohibited and may be unlawful.
   </p>`,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const resData = data;
-        if (resData.status === "success") {
-          dispatch(
-            updateAlert([
-              ...alerts,
-              {
-                message: "Ticket has been resolved",
-                color: "bg-green-200",
-                id: new Date().getTime(),
-              },
-            ])
-          );
-          onChange("<p></p>");
-          setReply({
-            ...reply,
-            message: "<p></p>",
-            status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-          });
-        } else if (resData.status === "fail") {
-          dispatch(
-            updateAlert([
-              ...alerts,
-              {
-                message: "Ticket Failed To Resolve",
-                color: "bg-red-200",
-                id: new Date().getTime(),
-              },
-            ])
-          );
-        }
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const resData = data;
+          if (resData.status === "success") {
+            dispatch(
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Ticket has been resolved",
+                  color: "bg-green-200",
+                  id: new Date().getTime(),
+                },
+              ])
+            );
+            onChange("<p></p>");
+            setReply({
+              ...reply,
+              message: "<p></p>",
+              status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+            });
+          } else if (resData.status === "fail") {
+            dispatch(
+              updateAlert([
+                ...alerts,
+                {
+                  message: "Ticket Failed To Resolve",
+                  color: "bg-red-200",
+                  id: new Date().getTime(),
+                },
+              ])
+            );
+          }
+        });
+      setReply({
+        ...reply,
+        message: "<p></p>",
+        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
       });
-    setReply({
-      ...reply,
-      message: "<p></p>",
-      status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-    });
-    onChange("<p></p>");
+      onChange("<p></p>");
   };
 
   //Send Reply Function ========================
@@ -314,22 +314,22 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         firstMessage && firstMessage[0]?.team
       );
 
-      //Send Using Nodemailer ===================
-      fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          from: `${sendingAccount.email}`,
-          company: `${company_details.name} ${sendingAccount.name}`,
-          password: sendingAccount.password,
-          host: sendingAccount.host,
-          port: sendingAccount.port,
-          email: clientEmail,
-          subject: `New Issue Reported Ragarding ${subject} || Ticket-ID: ${threadId}`,
-          ticket_id: threadId,
-          email_body: `<p
+        //Send Using Nodemailer ===================
+        fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            from: `${sendingAccount.email}`,
+            company: `${company_details.name} ${sendingAccount.name}`,
+            password: sendingAccount.password,
+            host: sendingAccount.host,
+            port: sendingAccount.port,
+            email: clientEmail,
+            subject: `New Issue Reported Ragarding ${subject} || Ticket-ID: ${threadId}`,
+            ticket_id: threadId,
+            email_body: `<p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
     Hi ${clientName},
   </p>
@@ -391,41 +391,41 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
     prohibited and may be unlawful.
   </p>`,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const resData = data;
-          if (resData.status === "success") {
-            dispatch(
-              updateAlert([
-                ...alerts,
-                {
-                  message: "Response Has Been Sent.",
-                  color: "bg-green-200",
-                  id: new Date().getTime(),
-                },
-              ])
-            );
-            setReply({
-              ...reply,
-              message: "<p></p>",
-              status: "Status",
-            });
-            onChange("<p></p>");
-          } else if (resData.status === "fail") {
-            dispatch(
-              updateAlert([
-                ...alerts,
-                {
-                  message: "Email Failed To Send",
-                  color: "bg-red-200",
-                  id: new Date().getTime(),
-                },
-              ])
-            );
-          }
-        });
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const resData = data;
+            if (resData.status === "success") {
+              dispatch(
+                updateAlert([
+                  ...alerts,
+                  {
+                    message: "Response Has Been Sent.",
+                    color: "bg-green-200",
+                    id: new Date().getTime(),
+                  },
+                ])
+              );
+              setReply({
+                ...reply,
+                message: "<p></p>",
+                status: "Status",
+              });
+              onChange("<p></p>");
+            } else if (resData.status === "fail") {
+              dispatch(
+                updateAlert([
+                  ...alerts,
+                  {
+                    message: "Email Failed To Send",
+                    color: "bg-red-200",
+                    id: new Date().getTime(),
+                  },
+                ])
+              );
+            }
+          });
       onChange("<p></p>");
     } else if (reply.message?.length < 8) {
       dispatch(
@@ -441,7 +441,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     }
 
     //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
-    if (reply.status === "solved" && reply.message?.length >= 9) {
+    if (
+      reply.status === "solved" &&
+      user[0]?.access !== "client"
+    ) {
       sendSolution();
       setReply({
         ...reply,
@@ -477,6 +480,35 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {
             message: "Make sure all fields are filled properly",
             color: "bg-yellow-200",
+            id: new Date().getTime(),
+          },
+        ])
+      );
+    } else if (reply.status === "solved" && user[0]?.access === "client") {
+      changeStatus(firstMessage[0]?.id, "reopened");
+      reOpenTicket(firstMessage[0]?.id);
+      addReply(
+        reply.message,
+        reply.message_position,
+        reply.ticket_id,
+        user[0].name,
+        user[0].email,
+        user[0].access,
+        clientName,
+        clientEmail,
+        firstMessage && firstMessage[0]?.team
+      );
+      setReply({
+        ...reply,
+        message: "<p></p>",
+        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+      });
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Response Has Been Sent.",
+            color: "bg-green-200",
             id: new Date().getTime(),
           },
         ])
@@ -822,7 +854,11 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 <abbr title="Upload Your Recording">
                   <label
                     htmlFor="replyRecording"
-                    className="w-8 h-8 border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer"
+                    className={`w-8 h-8 border ${
+                      user[0]?.access === "client"
+                        ? "rounded-r-sm"
+                        : "border-r-0"
+                    }  border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer`}
                   >
                     <BiMicrophone className="text-base" />
                     <input
@@ -849,7 +885,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       console.log(e.target.value);
                     }}
                     required
-                    className="w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-white dark:bg-slate-800 flex justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1"
+                    className={`w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-white dark:bg-slate-800 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1 ${
+                      user[0]?.access === "client" ? "hidden" : "flex"
+                    }`}
                   >
                     <option
                       className="p-2"
@@ -875,7 +913,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               <div className="flex space-x-2 items-center">
                 <button
                   type="submit"
-                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm"
+                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm disabled:cursor-not-allowed disabled:opacity-80"
                 >
                   <span className="text-xs">Send now</span>
                   <BiPaperPlane />

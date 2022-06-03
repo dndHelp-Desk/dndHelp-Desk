@@ -41,6 +41,11 @@ const Table: FC<Prop> = ({ setModal }) => {
                 .toLowerCase()
                 .replace(/\s/g, "")
                 .includes(searchResults.toLowerCase().replace(/\s/g, "")) ===
+                true ||
+              contact?.phone
+                .toLowerCase()
+                .replace(/\s/g, "")
+                .includes(searchResults.toLowerCase().replace(/\s/g, "")) ===
                 true
           )
         )

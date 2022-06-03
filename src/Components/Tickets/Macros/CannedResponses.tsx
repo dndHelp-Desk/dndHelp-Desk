@@ -41,6 +41,7 @@ const CannedResponses: FC<Props> = ({
   //component ==========
   return (
     <div
+      ref={modRef}
       className={`absolute bottom-[2.9rem] ${
         tooltipPosition === "[9.4rem]" ? "left-[-9.4rem]" : "left-[-0.7rem]"
       } w-[23rem] h-[23rem] pb-1 ${showCanned ? "flex" : "hidden"}`}
@@ -49,22 +50,10 @@ const CannedResponses: FC<Props> = ({
       <NewCanned newResponseModal={newResponseModal} setModal={setModal} />
       {/**New Canned Response Modal */}
       <div
-        ref={modRef}
-        className={`rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-500 dark:border-slate-600 p-2 w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
+        className={`rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-500 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
           position === 4 ? "after:left-[9.7rem]" : "after:left-5"
-        } after:rotate-45 p-5 relative`}
+        } after:rotate-45 p-2 relative`}
       >
-        {/**Close Button */}
-        <button
-          type="button"
-          onClick={() => {
-            setCanned(false);
-          }}
-          className="absolute  top-[0.15rem] right-[0.1rem] h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border-2 border-slate-500 dark:border-slate-500"
-        >
-          <span>&times;</span>
-        </button>
-        {/**Close Button */}
         <div
           className={`row-span-1 grid ${
             position === 4 ? "grid-cols-8" : "grid-cols-10"

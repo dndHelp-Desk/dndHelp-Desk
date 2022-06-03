@@ -41,7 +41,7 @@ const EditUser: FC<Props> = ({
       editId.dept,
       editId.access,
       editId.active,
-      editId.companies
+      editId?.companies ? editId?.companies : ""
     );
     setId({
       name: "",
@@ -55,7 +55,7 @@ const EditUser: FC<Props> = ({
       updateAlert([
         ...alerts,
         {
-          message: "User Detail Edited Successfully",
+          message: "User Detail Updated Successfully",
           color: "bg-green-200",
           id: new Date().getTime(),
         },
