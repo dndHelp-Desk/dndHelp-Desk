@@ -9,7 +9,7 @@ interface Props {
   data: any;
   option: any;
   setOption: any;
-  tableData:any;
+  tableData: any;
 }
 
 const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
@@ -235,7 +235,8 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
               <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-300 overflow-hidden px-1">
                 <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
                   {loadMore - 10 === 0 ? 1 : loadMore - 10}{" "}
-                  <span className="text-slate-500">-</span> {loadMore}{" "}
+                  <span className="text-slate-500">-</span>{" "}
+                  {loadMore > tableData.length ? tableData.length : loadMore}{" "}
                   <span className="text-slate-500">of </span>
                   {tableData.length}
                 </p>

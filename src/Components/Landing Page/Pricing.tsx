@@ -16,7 +16,7 @@ const Pricing: FC = () => {
   //Coimponent ==============================
   return (
     <>
-      <section className="bg-slate-300 pt-28 h-screen w-screen min-h-[40rem] overflow-hidden overflow-y-scroll">
+      <section className="bg-slate-300 pt-28 h-screen w-screen min-h-[40rem] overflow-hidden">
         {/**Help Chat ============ */}
         <Help />
         {/**Navigation ========================== */}
@@ -97,9 +97,9 @@ const Pricing: FC = () => {
           </div>
         </nav>
 
-        <div className="bg-slate-300 dark:bg-gray-900">
-          <div className="container px-6 py-8 mx-auto">
-            <div className="xl:items-center xl:-mx-8 xl:flex">
+        <div className="bg-slate-300 dark:bg-gray-900 overflow-hidden">
+          <div className="container px-6 py-8 mx-auto overflow-hidden">
+            <div className="xl:items-center xl:-mx-8 xl:flex overflow-hidden">
               <div className="flex flex-col items-center xl:items-start xl:mx-8">
                 <h1 className="text-3xl font-medium text-gray-800 capitalize lg:text-4xl dark:text-white">
                   Our Pricing Plan
@@ -159,14 +159,14 @@ const Pricing: FC = () => {
 
                       <button
                         role="link"
-                        className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                        className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                       >
                         <Link
                           onClick={() => {
                             window.localStorage.setItem("plan", "free");
                           }}
                           to="/workspace-setup"
-                          className="outline-none focus:outline-none"
+                          className="outline-none focus:outline-none font-medium"
                         >
                           Start Now
                         </Link>
@@ -252,14 +252,14 @@ const Pricing: FC = () => {
 
                       <button
                         role="link"
-                        className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                        className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                       >
                         <Link
                           onClick={() => {
                             window.localStorage.setItem("plan", "pro");
                           }}
                           to="/workspace-setup"
-                          className="outline-none focus:outline-none"
+                          className="outline-none focus:outline-none font-medium"
                         >
                           Start Now
                         </Link>

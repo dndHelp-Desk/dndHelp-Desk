@@ -219,7 +219,9 @@ const TicketsList: FC<Props> = ({
                   <p className="capitalize  w-[60%] overflow-hidden">
                     {ticket.category}
                   </p>
-                  <p className=" text-[0.65rem]">{ticket.ticket_id?.replace(/\s/g,"")}</p>
+                  <p className=" text-[0.65rem]">
+                    {ticket.ticket_id?.replace(/\s/g, "")}
+                  </p>
                 </div>
                 <div className="dark:text-slate-400 w-[60%] pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
                   <abbr title={ticket.branch_company}>
@@ -342,7 +344,10 @@ const TicketsList: FC<Props> = ({
               <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-400 overflow-hidden px-1">
                 <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
                   {loadMore - 50 === 0 ? 1 : loadMore - 50}{" "}
-                  <span className="text-slate-500">-</span> {loadMore}{" "}
+                  <span className="text-slate-500">-</span>{" "}
+                  {loadMore > fetchedTickets.length
+                    ? fetchedTickets.length
+                    : loadMore}{" "}
                   <span className="text-slate-500">of </span>
                   {filteredTickets.length}
                 </p>
