@@ -44,14 +44,14 @@ const App: FC = () => {
       <BrowserRouter>
         <Suspense
           fallback={
-            <div className="h-screen w-screen bg-slate-500 gap-4 flex flex-col items-center justify-center">
+            <div className="h-screen w-screen bg-slate-800 gap-4 flex flex-col items-center justify-center">
               {/* <!--card--> */}
-              <div className="w-64 bg-slate-200 rounded shadow-2xl">
+              <div className="w-64 bg-slate-600 rounded shadow-2xl">
                 {/* <!--image--> */}
-                <div className="h-32 bg-slate-400 rounded-tr rounded-tl flex gap-2 flex-col justify-center items-center p-2"></div>
+                <div className="h-32 bg-slate-700 rounded-tr rounded-tl flex gap-2 flex-col justify-center items-center p-2"></div>
                 <div className="p-5">
                   {/* <!--title--> */}
-                  <div className="h-6 rounded-sm bg-slate-400 animate-pulse mb-4"></div>
+                  <div className="h-6 rounded-sm bg-slate-700 animate-pulse mb-4"></div>
                   {/* <!--content--> */}
                   <div className="grid grid-cols-4 gap-1">
                     <div className="col-span-3 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>

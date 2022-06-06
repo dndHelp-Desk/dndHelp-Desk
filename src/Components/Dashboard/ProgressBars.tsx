@@ -82,7 +82,7 @@ const ProgressBars: FC = () => {
                     </abbr>
                   </div>
                 </div>
-                <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-semibold text-xs">
+                <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-bold text-xs">
                   <span>{element.value >= 0.1 ? element.value : "0.0"}%</span>
                 </div>
               </div>
@@ -104,7 +104,7 @@ const ProgressBars: FC = () => {
                     aria-label="progressbas"
                     className="h-2.5 w-full flex-[3] rounded-full border border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-slate-700 overflow-hidden shadow-md"
                   ></div>
-                  <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-400 font-bold text-xs">
+                  <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-bold text-xs">
                     <span>0.0%</span>
                   </div>
                 </div>

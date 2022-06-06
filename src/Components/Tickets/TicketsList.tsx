@@ -224,11 +224,11 @@ const TicketsList: FC<Props> = ({
                   </p>
                 </div>
                 <div className="dark:text-slate-400 w-[60%] pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
-                  <abbr title={ticket.branch_company}>
-                    <span className="overflow-hidden overflow-ellipsis whitespace-nowrap w-full">
+                  <p className="overflow-hidden whitespace-nowrap overflow-ellipsis text-xs">
+                    <abbr title={ticket.branch_company}>
                       {ticket.branch_company}
-                    </span>
-                  </abbr>
+                    </abbr>
+                  </p>
                 </div>
                 {/**Indicate The ticket that is solved or  overdue and open ================*/}
                 <div className="dark:text-slate-400 text-slate-600 flex items-center justify-between space-x-[0.15rem] text-[0.7rem] font-medium whitespace-nowrap w-full">
@@ -256,11 +256,7 @@ const TicketsList: FC<Props> = ({
                           new Date(ticket.due_date)
                             .toLocaleString()
                             ?.split(",")[1]
-                        }, ${
-                          new Date(ticket.due_date)
-                            .toLocaleString()
-                            ?.split(",")[0]
-                        }`}
+                        }, ${new Date(ticket.due_date)?.toDateString()}`}
                   </span>
                   <div
                     className={`text-base relative group ${
