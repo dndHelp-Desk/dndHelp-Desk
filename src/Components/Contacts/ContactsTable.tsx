@@ -13,6 +13,7 @@ import { BsTwitter, BsWhatsapp } from "react-icons/bs";
 import { deleteContact } from "../Data_Fetching/TicketsnUserData";
 import EditContact from "./EditContact";
 import { RootState } from "../../Redux/store";
+import ActionPanel from "../Others/ActionPanel";
 
 interface Prop {
   setModal: any;
@@ -25,6 +26,7 @@ const Table: FC<Prop> = ({ setModal }) => {
   const [searchResults, setResults] = useState<string | any>("");
   const [selectedArray, select] = useState<any>([]);
   const [filteredContacts, setContacts] = useState<any>([]);
+  const [openPanel, setActionPanel] = useState<boolean>(false);
 
   //Filter Contacts ============
   useEffect(() => {
@@ -149,6 +151,15 @@ const Table: FC<Prop> = ({ setModal }) => {
         selectedArray={selectedArray}
       />
 
+      {/**Delete Contact Action Panel */}
+      <ActionPanel
+        openPanel={openPanel}
+        setActionPanel={setActionPanel}
+        deleteSelected={deleteCont}
+        option="contact"
+      />
+      {/**Delete Contact Action Panel */}
+
       <div className="flex flex-row p-4 px-2 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99]">
         <div className="flex flex-col md:flex-row items-start lg:items-center">
           <div className="flex items-center gap-2">
@@ -163,8 +174,7 @@ const Table: FC<Prop> = ({ setModal }) => {
             <abbr title="Delete">
               <button
                 onClick={() => {
-                  let pin = prompt("Enter Admin Pin");
-                  pin === "0001" ? deleteCont() : alert("Wrong Pin");
+                  setActionPanel(true);
                 }}
                 className="text-red-500 p-2 border-slate-300 dark:border-slate-700 border bg-slate-200 dark:bg-[#182235] dark:hover:bg-slate-700 hover:bg-gray-300  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
               >

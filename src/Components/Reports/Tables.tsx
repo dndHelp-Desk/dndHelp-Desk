@@ -100,8 +100,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
             </select>
             <button
               onClick={() => {
-                let code = prompt("Enter Admin Pin");
-                code === "0001" ? window.print() : alert("Wrong Pin");
+                window.print();
               }}
               className="h-8 w-20 rounded text-xs font-semibold p-2 bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
             >
@@ -111,10 +110,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
             <button
               onClick={() => {
                 let csv = convertToCsv(data);
-                let code = prompt("Enter Admin Pin");
-                code === "0001"
-                  ? downloadFile("Tickects Report.csv", csv)
-                  : alert("Wrong Pin");
+                downloadFile("Tickects Report.csv", csv);
               }}
               className="h-8 w-20 rounded text-xs font-semibold p-2 bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >

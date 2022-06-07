@@ -18,6 +18,7 @@ import {
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import OffFilters from "./OffFilters";
 import { AppDispatch, RootState } from "../../Redux/store";
+import ActionPanel from "../Others/ActionPanel";
 
 interface Props {
   deleteArray: any;
@@ -43,6 +44,7 @@ const Navbar: FC<Props> = ({
     (state: RootState) => state.UserInfo.member_details
   );
   const [contactsPanel, setPanel] = useState<boolean | any>(false);
+  const [openPanel, setActionPanel] = useState<boolean>(false);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const allTickets = useSelector(
     (state: RootState) => state.Tickets.allTickets
@@ -188,6 +190,15 @@ const Navbar: FC<Props> = ({
   //Component ======================
   return (
     <nav className="flex h-14 bg-transparent justify-between items-center w-full relative px-1">
+      {/**Delele Ticket Action Panel ====== */}
+      <ActionPanel
+        openPanel={openPanel}
+        setActionPanel={setActionPanel}
+        deleteSelected={deleteSelected}
+        option="ticket"
+      />
+      {/**Delele Ticket Action Panel ====== */}
+
       <div className="flex items-center h-full gap-2 relative">
         {/**Filter Btn ============================== */}
         <OffFilters
@@ -224,8 +235,7 @@ const Navbar: FC<Props> = ({
         {/**Delete Ticket ================================= */}
         <button
           onClick={() => {
-            let code = prompt("Enter Pin To Perform Action");
-            code === "0001" ? deleteSelected() : alert("Wrong Pin");
+            setActionPanel(true);
           }}
           className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  text-red-600  font-semibold  border dark:border-slate-700 border-slate-400 ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"

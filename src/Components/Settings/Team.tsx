@@ -10,6 +10,7 @@ import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import NewUser from "./NewUser";
 import { AppDispatch, RootState } from "../../Redux/store";
 import EditUser from "./EditUser";
+import ActionPanel from "../Others/ActionPanel";
 
 const Team: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -26,16 +27,18 @@ const Team: FC = () => {
   const [editUserModal, setEditModal] = useState<boolean | any>(false);
   const [editId, setId] = useState<any>({});
   const [search, setSearch] = useState<string | any>(" ");
+  const [openPanel, setActionPanel] = useState<boolean>(false);
+  const [argument, setArg] = useState<any[]>([]);
 
   //Delete User ================
-  const deleteMember = (id: any, uid: any) => {
+  const deleteMember = () => {
     fetch("https://dndhelp-desk-first.herokuapp.com/delete", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        uid: uid,
+        uid: argument[1],
       }),
     })
       .then((req) => req.json())
@@ -63,7 +66,8 @@ const Team: FC = () => {
           ])
         );
       });
-    deleteUser(id);
+    deleteUser(argument[0]);
+    setArg([]);
   };
 
   //Loop Through All Users ================
@@ -87,7 +91,7 @@ const Team: FC = () => {
               : "hidden"
           }`}
         >
-          <td className="col-span-4 space-x-1 items-center flex">
+          <td className="col-span-4 space-x-4 items-center flex">
             <div className="h-10 w-10 rounded border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
               <img
                 src={
@@ -136,10 +140,8 @@ const Team: FC = () => {
             {/**Delete Account */}
             <button
               onClick={() => {
-                let code = prompt("Enter Pin To Perform Action");
-                code === "0001"
-                  ? deleteMember(user.id, user.uid)
-                  : alert("Wrong Pin");
+                setArg([user.id, user.uid]);
+                setActionPanel(true);
               }}
               className="h-8 w-8 rounded border border-slate-200 dark:border-slate-700 outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
             >
@@ -160,6 +162,15 @@ const Team: FC = () => {
   //Component ==================
   return (
     <div className="h-full w-full">
+      {/**Delele Ticket Action Panel ====== */}
+      <ActionPanel
+        openPanel={openPanel}
+        setActionPanel={setActionPanel}
+        deleteSelected={deleteMember}
+        option="user"
+      />
+      {/**Delele Ticket Action Panel ====== */}
+
       <div className="flex items-center justify-between">
         <h1 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
           All Members

@@ -184,8 +184,10 @@ const Home: FC = () => {
 
           {/**Online Users ================================ */}
           <div className="col-span-2 lg:col-span-1 h-[18rem] w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2">
-            <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-4 py-2 overflow-hidden">
-              {allMembers.length >= 1 &&
+            <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-2 overflow-hidden">
+              {allMembers?.filter(
+                (user) => user.access?.toLowerCase() === "agent"
+              ).length >= 1 &&
                 (user[0]?.access && user[0]?.access) !== "client" && (
                   <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                     <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
@@ -242,10 +244,12 @@ const Home: FC = () => {
                 )}
 
               {/**Placeholders ||Preloader ====================== */}
-              {(allMembers.length <= 0 ||
+              {(allMembers?.filter(
+                (user) => user.access?.toLowerCase() === "agent"
+              ).length <= 0 ||
                 (user[0]?.access && user[0]?.access) === "client") && (
                 <div className="h-full w-full">
-                  <div className="h-full w-full rounded-lg dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 p-6 space-y-4">
+                  <div className="h-full w-full rounded dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 p-6 space-y-4">
                     <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
                       add your team members
                     </h2>

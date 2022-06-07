@@ -49,7 +49,7 @@
   }
 
   #connectModal,
-  #newCannedResponse {
+  #newCannedResponse,#actionPanel {
     box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.3);
   }
   /*End of Connect Channels Styles ================================*/

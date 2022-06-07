@@ -32,18 +32,18 @@ const EditContact: FC<Props> = ({ edit, setEdit, selectedArray }) => {
   });
 
   useEffect(() => {
-    allContacts.length >= 1 &&
+    allContacts?.length >= 1 &&
       selectedArray.length >= 1 &&
       setValue({
-        name: allContacts.filter(
+        name: allContacts?.filter(
           (contact) => contact.id === selectedArray[0]
-        )[0].name,
-        email: allContacts.filter(
+        )[0]?.name,
+        email: allContacts?.filter(
           (contact) => contact.id === selectedArray[0]
-        )[0].email,
-        phoneNumber: allContacts.filter(
+        )[0]?.email,
+        phoneNumber: allContacts?.filter(
           (contact) => contact.id === selectedArray[0]
-        )[0].phone,
+        )[0]?.phone,
       });
   }, [allContacts, selectedArray]);
 

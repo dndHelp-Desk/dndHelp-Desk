@@ -120,7 +120,7 @@ const Dashboard: FC = () => {
       (data) =>
         data.date >= new Date(ticketsComponentDates?.startDate).getTime() &&
         data.date <= new Date(ticketsComponentDates?.endDate).getTime()
-    ).length <= 0 && setTimeout(() => setLoading(false), 10000);
+    ).length <= 0 && setTimeout(() => setLoading(false), 60000);
     return clearTimeout();
   }, [dashboardData, ticketsComponentDates]);
 
