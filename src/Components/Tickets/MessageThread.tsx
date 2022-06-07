@@ -768,9 +768,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   </h3>
                   <div className="text-slate-600 dark:text-slate-400 text-sm tracking-tight font-medium text-center whitespace-nowrap leading-5">
                     <p>Pick a ticket from your left list </p>
-                    <p>
-                      to start <abbr title=""></abbr> conversation
-                    </p>
+                    <p>to start a conversation</p>
                   </div>
                 </div>
               </div>
