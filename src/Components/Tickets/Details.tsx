@@ -57,35 +57,41 @@ const Details: FC<Props> = ({ showDetails, setDetails, firstMessage }) => {
           } last:w-full mt-2 dark:text-slate-300 text-slate-800 space-y-4 capitalize`}
         >
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">Assigned To : </b>
+            <b className="hidden sm:flex">Assigned To</b>
             {firstMessage && firstMessage[0]?.agent_name}
           </li>
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">Status : </b>
+            <b className="hidden sm:flex">Open Date</b>
+            {firstMessage[0]?.date
+              ? new Date(firstMessage[0]?.date).toLocaleString()
+              : "No Date"}
+          </li>
+          <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
+            <b className="hidden sm:flex">Status</b>
             {firstMessage && firstMessage[0]?.status}
           </li>
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">Priority : </b>
+            <b className="hidden sm:flex">Priority</b>
             {firstMessage && firstMessage[0]?.priority}
           </li>
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">Company : </b>
+            <b className="hidden sm:flex">Company</b>
             {firstMessage && firstMessage[0]?.branch_company}
           </li>
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">First Contact Resolution : </b>
+            <b className="hidden sm:flex">First Contact Resolution</b>
             {firstMessage && firstMessage[0]?.fcr}{" "}
           </li>
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">Customer's Name : </b>
+            <b className="hidden sm:flex">Customer's Name</b>
             {firstMessage && firstMessage[0]?.complainant_name}{" "}
           </li>
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">Customer's Number : </b>
+            <b className="hidden sm:flex">Customer's Number</b>
             {firstMessage && firstMessage[0]?.complainant_number}{" "}
           </li>
           <li className="text-xs flex items-center justify-between border-b border-slate-200 dark:border-slate-400/10">
-            <b className="hidden sm:flex">Customer's Email : </b>
+            <b className="hidden sm:flex">Customer's Email</b>
             <span className="lowercase">
               {firstMessage && firstMessage[0]?.complainant_email}{" "}
             </span>

@@ -45,7 +45,7 @@ const ActionPanel: FC<Props> = ({
             onClick={() => {
               setActionPanel(false);
             }}
-            className="h-8 rounded text-xs font-normal hover:opacity-80 transition-all duration-200 px-6 bg-blue-700 text-slate-50 outline-none focus:outline-none"
+            className="h-8 rounded-sm text-xs font-normal hover:opacity-80 transition-all duration-200 px-6 bg-blue-700 text-slate-50 outline-none focus:outline-none"
           >
             Cancel action
           </button>
@@ -54,7 +54,7 @@ const ActionPanel: FC<Props> = ({
               deleteSelected();
               setActionPanel(false);
             }}
-            className="h-8 rounded text-xs font-normal hover:opacity-80 transition-all duration-200 px-6 bg-red-600 text-slate-50 outline-none focus:outline-none"
+            className="h-8 rounded-sm text-xs font-normal hover:opacity-80 transition-all duration-200 px-6 bg-red-600 text-slate-50 outline-none focus:outline-none"
           >
             {`Delete ${option}`}
           </button>

@@ -130,9 +130,9 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-[0.9rem] p-2 space-x-2 flex snap_childTwo hover:bg-slate-200/[0.6] dark:hover:bg-[#182235] transition-all ${
+          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-[0.9rem] p-2 space-x-2 flex snap_childTwo hover:bg-slate-50 dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
-              ? "bg-slate-200/[0.6] dark:bg-[#182235]"
+              ? "bg-slate-50 dark:bg-[#182235] border-r-slate-800 dark:border-r-blue-700 border-r-2"
               : "bg-inherit"
           }`}
         >
@@ -296,7 +296,7 @@ const TicketsList: FC<Props> = ({
       <NewTicket setModal={setModal} newTicketModal={newTicketModal} />
 
       {/**Tickets ========================================== */}
-      <div className="w-full h-[47rem] flex flex-col justify-between p-1">
+      <div className="w-full h-[47rem] flex flex-col justify-between p-1 pb-0">
         <Navbar
           deleteArray={deleteArray}
           setDelete={setDelete}

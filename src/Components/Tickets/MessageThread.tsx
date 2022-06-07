@@ -5,7 +5,7 @@ import { BsFillTrashFill, BsThreeDotsVertical } from "react-icons/bs";
 import {
   BiPaperPlane,
   BiMicrophone,
-  BiCopyAlt,
+  BiNotepad,
   BiArrowBack,
   BiConversation,
 } from "react-icons/bi";
@@ -657,26 +657,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 />
                 <button
                   onClick={() => setDetails(true)}
-                  className="h-6 w-6 outline-none focus:outline-none border border-slate-300 dark:border-slate-600 rounded italic font-bold dark:text-slate-300 text-slate-800 bg-gray-100 dark:bg-[#182235] flex justify-center items-center"
+                  className="h-7 px-4 outline-none focus:outline-none border border-slate-400 dark:border-slate-700 rounded-sm font-bold dark:text-slate-300 text-slate-800 text-xs bg-gray-100 dark:bg-[#182235] flex justify-center items-center"
                 >
-                  i
+                  Details
                 </button>
-                <div className="hidden md:flex flex-col justify-center space-y-0 h-full">
-                  <h2 className="text-slate-800 dark:text-slate-300 text-[0.7rem] tracking-wide font-bold dark:font-semibold">
-                    Assignee{" "}
-                    <span className="font-medium text-slate-600 dark:text-slate-400">
-                      {firstMessage[0]?.agent_name}
-                    </span>
-                  </h2>
-                  <h3 className="text-slate-800 dark:text-slate-300 text-[0.68rem] tracking-wide font-bold dark:font-semibold">
-                    Open Date{" "}
-                    <span className="font-medium text-slate-600 dark:text-slate-400">
-                      {firstMessage[0]?.date
-                        ? new Date(firstMessage[0]?.date).toLocaleString()
-                        : "No Date"}
-                    </span>
-                  </h3>
-                </div>
               </div>
             </div>
 
@@ -784,10 +768,17 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   </h3>
                   <div className="text-slate-600 dark:text-slate-400 text-sm tracking-tight font-medium text-center whitespace-nowrap leading-5">
                     <p>Pick a ticket from your left list </p>
-                    <p>and start your conversation</p>
+                    <p>
+                      to start <abbr title=""></abbr> conversation
+                    </p>
                   </div>
                 </div>
               </div>
+
+              {/**Deco boxes ================================ */}
+              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#33415569] rotate-12 left-10 bottom-10"></div>
+              <div className="absolute h-8 w-8 rounded bg-slate-100 dark:bg-[#33415569] rotate-12 left-10 bottom-40"></div>
+              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#33415569] rotate-45 right-14 bottom-24"></div>
             </>
           )}
           {/**End of Messages ============================ */}
@@ -796,7 +787,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
-        <div className="h-full w-full relative rounded dark:bg-slate-800 bg-white border border-slate-400 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-inherit before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45">
+        <div className="h-full w-full relative rounded dark:bg-slate-800 bg-white border border-slate-400 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-slate-50 dark:before:bg-[#182235] before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 pb-[0.07rem]">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999] pt-0"
@@ -812,9 +803,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             </div>
             {/**Reply options ======================= */}
             <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
-              <div className="h-full flex items-center">
+              <div className="h-full flex items-center pr-[0.08rem]">
                 {/**Canned Response ========================================= */}
-                <div className="w-8 h-8 rounded-l-sm border border-r-0 border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
+                <div className="w-8 h-8 rounded-l-sm bg-slate-50 dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
                   <abbr title="Canned Response">
                     <button
                       type="button"
@@ -829,7 +820,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       }}
                       className="h-full w-full flex items-center justify-center outline-none focus:outline-none"
                     >
-                      <BiCopyAlt className="text-base hover:opacity-80" />
+                      <BiNotepad className="text-base hover:opacity-80" />
                     </button>
                   </abbr>
                   <CannedResponses
@@ -849,7 +840,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       user[0]?.access === "client"
                         ? "rounded-r-sm"
                         : "border-r-0"
-                    }  border-slate-300 dark:border-[#33415596] flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer`}
+                    } bg-slate-50 dark:bg-[#182235]  border-slate-400 dark:border-slate-700 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer`}
                   >
                     <BiMicrophone className="text-base" />
                     <input
@@ -876,7 +867,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       console.log(e.target.value);
                     }}
                     required
-                    className={`w-24 md:w-28 h-8 rounded-r-sm border border-slate-300 dark:border-[#33415596] bg-white dark:bg-slate-800 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1 ${
+                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-slate-50 dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1 ${
                       user[0]?.access === "client" ? "hidden" : "flex"
                     }`}
                   >
@@ -901,10 +892,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   </select>
                 </abbr>
               </div>
-              <div className="flex space-x-2 items-center">
+              <div className="flex items-center pr-[0.08rem]">
                 <button
                   type="submit"
-                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all shadow-sm disabled:cursor-not-allowed disabled:opacity-80"
+                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80 shadow-lg"
                 >
                   <span className="text-xs">Send now</span>
                   <BiPaperPlane />

@@ -91,7 +91,7 @@
   }
 
   .messageContainer img {
-    @apply cursor-zoom-in;
+    @apply cursor-zoom-in block;
   }
 
   .messageContainer p a,
