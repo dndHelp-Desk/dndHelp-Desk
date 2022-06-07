@@ -1,12 +1,21 @@
-import {FC} from "react";
+import { FC } from "react";
 
-const AutomatedReports:FC = () => {
-
+const AutomatedReports: FC = () => {
   return (
-    <div className=" dark:marker:text-slate-400 marker:text-slate-800 list-disc">
-      <div
-        className=" dark:marker:text-slate-400 marker:text-slate-800 list-disc"
-      ></div>
+    <div className=" h-48 w-full building-blocks p-10 bg-inherit">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
   );
 };

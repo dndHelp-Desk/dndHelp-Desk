@@ -52,7 +52,7 @@ const Redirects: FC = () => {
 
   //component ========
   return (
-    <div className="bg-gradient-to-b from-slate-50 to-slate-200 h-screen w-screen flex flex-col gap-6 justify-center items-center">
+    <div className="bg-gradient-to-b from-slate-100 to-slate-200 h-screen w-screen flex flex-col gap-6 justify-center items-center">
       <section>
         <img src={redirect_img} alt="redirect" className="h-[12rem]" />
         <h1 className="text-2xl font-bold text-slate-800 text-center tracking-normal">

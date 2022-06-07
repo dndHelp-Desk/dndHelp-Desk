@@ -17,12 +17,10 @@ import {
   query,
 } from "firebase/firestore";
 
-import darkLogo from "./images/dndHelp-Desk_Dark.webp";
 import minidarkLogo from "./images/dndHelp-Desk.webp";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import { FaSellsy, FaHeadset, FaSlack, FaAlignRight } from "react-icons/fa";
 import {
   isAuthenticated,
   setCompany,
@@ -61,7 +59,6 @@ interface InputInter {
 const LogIn: FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const [menu, setMenu] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [revealPass, setReveal] = useState<boolean>(false);
   const logged = useSelector(
@@ -227,107 +224,18 @@ const LogIn: FC = () => {
 
   //React Component =====================================================================================
   return (
-    <div className="bg-slate-100 w-screen h-screen min-h-[45rem] flex relative overflow-hidden">
-      {/**Top Nav ================= */}
-      <nav
-        role="navigation"
-        className="absolute bg-slate-200 w-[75%] h-[3.5rem] backdrop-blur-lg rounded border border-slate-300 top-4 left-[12%] p-2 px-4 flex justify-between items-center"
-      >
-        {/**Logo ==================== */}
-        <Link
-          to="/"
-          className="h-full flex items-center justify-center overflow-hidden pt-1"
-        >
-          <img
-            src={darkLogo}
-            alt="logo"
-            className="object-cover object-center w-[12rem]"
-          />
-        </Link>
-
-        {/**Small Screen Menu ================ */}
-        <FaAlignRight
-          onClick={() => setMenu(menu === false ? true : false)}
-          className="font-semibold text-xl text-gray-900 lg:hidden flex cursor-pointer"
-        />
-        <div
-          role="navigation"
-          className={`flex lg:hidden absolute top-14 right-2 w-[16rem] border border-slate-400 shadow-2xl rounded bg-slate-300 ${
-            menu ? "h-[10rem]" : "h-0 opacity-0"
-          } transition-scale duration-300 flex flex-col space-y-2 p-4 justify-center overflow-hidden`}
-        >
-          <div className="text-gray-900 md-hidden flex flex-col space-y-2">
-            <a
-              href="https://call-center-erp.netlify.app"
-              target={"_blank"}
-              rel="noreferrer"
-              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
-            >
-              <FaSellsy
-                className="inline-block
-			  "
-              />
-              <span>Dashboard</span>
-            </a>
-            <Link
-              to="/support"
-              className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
-            >
-              <FaHeadset
-                className="inline-block
-			  "
-              />
-              <span>Support</span>
-            </Link>
-          </div>
-          <a
-            href="https://join.slack.com/t/dialndine/signup"
-            target={"_blank"}
-            rel="noreferrer"
-            className="lg:hidden flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-sm p-2 px-4"
-          >
-            <FaSlack className="text-lg inline-block" />
-            <span className="text-xs font-semibold">Our Workspace</span>
-          </a>
-        </div>
-
-        {/**Large Screens Menu Items===================== */}
-        {/* <div className="text-gray-900 hidden lg:flex space-x-10">
-          <a
-            href="https://call-center-erp.netlify.app"
-            target={"_blank"}
-            rel="noreferrer"
-            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
-          >
-            <span>Dashboard</span>
-          </a>
-          <Link
-            to="/support"
-            className="flex items-center space-x-1 hover:opacity-80 outline-none focus:outline-none font-bold tracking-tight uppercase text-xs transition-all duration-300 hover:border-b hover:border-slate-700"
-          >
-            <span>Support</span>
-          </Link>
-        </div> */}
-        <a
-          href="https://join.slack.com/t/dialndine/signup"
-          target={"_blank"}
-          rel="noreferrer"
-          className="hidden lg:flex items-center space-x-1 bg-blue-700 cursor-pointer outline-none focus:outline-none transition-bg duration-300 hover:bg-blue-800 text-gray-100 rounded-sm p-2 px-4"
-        >
-          <FaSlack className="text-base inline-block" />
-          <span className="text-xs font-semibold">Our Workspace</span>
-        </a>
-      </nav>
-
+    <div className="bg-slate-200 w-screen h-screen min-h-[40rem] flex relative overflow-hidden">
       <>
-        <div className="min-h-full w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-full w-full flex items-center justify-center pt-4 py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md w-full space-y-8">
             <div>
-              <img
-                className="mx-auto h-16 w-auto"
-                src={minidarkLogo}
-                alt="dndHelp-Desk"
-              />
+              <Link to="/">
+                <img
+                  className="mx-auto h-16 w-auto"
+                  src={minidarkLogo}
+                  alt="dndHelp-Desk"
+                />
+              </Link>
               <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
                 Sign in to your account
               </h2>
@@ -358,7 +266,7 @@ const LogIn: FC = () => {
                       setValues({ ...inputValues, company: e.target.value });
                     }}
                     value={inputValues.company}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-t focus:outline-none focus:ring-0 focus:border-blue-800 focus:z-10 sm:text-sm"
                     placeholder="Company name"
                   />
                 </div>
@@ -377,7 +285,7 @@ const LogIn: FC = () => {
                       setValues({ ...inputValues, email: e.target.value })
                     }
                     value={inputValues.email}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-800 text-gray-800 font-medium focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-y-slate-300 border-slate-400 placeholder-gray-800 text-gray-800 font-medium focus:outline-none focus:ring-0 focus:border-blue-800 focus:z-10 sm:text-sm"
                     placeholder="Email address"
                   />
                 </div>
@@ -397,7 +305,7 @@ const LogIn: FC = () => {
                       setValues({ ...inputValues, password: e.target.value })
                     }
                     value={inputValues.password}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-t-slate-300 border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-b focus:outline-none focus:ring-0 focus:border-blue-800 focus:z-10 sm:text-sm"
                     placeholder="Password"
                   />
                   <BiShowAlt
@@ -448,7 +356,7 @@ const LogIn: FC = () => {
                           );
                         });
                     }}
-                    className="font-medium text-blue-600 hover:text-blue-500 outline-none focus:outline-none cursor-pointer"
+                    className="font-medium text-blue-800 hover:text-blue-700 outline-none focus:outline-none cursor-pointer"
                   >
                     Forgot your password?
                   </button>
@@ -458,7 +366,7 @@ const LogIn: FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full flex items-center justify-center space-x-4 py-2 px-4 border border-transparent text-sm font-medium rounded text-white bg-blue-700 hover:bg-blue-800 focus:outline-none outline-none"
+                  className="group relative w-full flex items-center justify-center space-x-4 py-2 px-4 border border-transparent text-sm font-medium rounded text-white bg-slate-900 hover:bg-slate-800 focus:outline-none outline-none"
                 >
                   <span>Sign in</span>
                   <div

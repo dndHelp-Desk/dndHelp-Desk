@@ -10,7 +10,6 @@ import {
   BiConversation,
 } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
-import noChatImg from "./images/email-open.svg";
 import {
   addReply,
   deleteTicket,
@@ -542,10 +541,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         <div
           ref={threadMessages.length - 1 === index ? targetRef : scrollToNone}
           key={index}
-          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583]"
+          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded border border-slate-300 dark:border-[#33415583]"
         >
           {/**Message ====================== */}
-          <div className="w-full 2xl:w-full bg-tranparent pl-6 pb-2 relative">
+          <div className="w-full 2xl:w-full bg-tranparent pl-6  relative">
             <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded-sm border dark:border-slate-700 border-slate-400 dark:bg-slate-800 bg-white px-1 overflow-hidden">
               <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
                 <BiConversation />
@@ -768,14 +767,27 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {/**Placeholders ======================== */}
           {(!threadId || threadMessages.length <= 0) && (
             <>
-              <img
-                src={noChatImg}
-                alt="No Ticket"
-                className="w-full h-[15rem] mt-10 object-contain object-center"
-              />
-              <h2 className="dark:text-slate-400 text-slate-800 tracking-wide text-center mt-8 capitalize italic text-xs font-sans font-bold">
-                select any ticket to start the conversation
-              </h2>
+              <div className="m-auto mt-6 w-[80%] h-[20rem] grid grid-rows-6">
+                <div className="row-span-4 flex justify-center pt-6 relative">
+                  <div className="ml-4 w-[15rem] h-[6.5rem] rounded bg-slate-300 dark:bg-slate-700 flex flex-col space-y-2 justify-center p-6">
+                    <div className="h-2 w-2/5 rounded dark:bg-slate-500 bg-slate-700"></div>
+                    <div className="h-2 w-full rounded dark:bg-slate-900 bg-slate-100"></div>
+                  </div>
+                  <div className="absolute bottom-[8%] left-[20%] w-[15rem] h-[6.5rem] rounded bg-slate-200 dark:bg-slate-600 flex flex-col space-y-2 justify-center p-6 shadow-2xl drop-shadow-2xl">
+                    <div className="h-2 w-2/5 rounded dark:bg-slate-800 bg-slate-400"></div>
+                    <div className="h-2 w-full rounded dark:bg-slate-400 bg-slate-400"></div>
+                  </div>
+                </div>
+                <div className="row-span-2 flex flex-col space-y-2 justify-center items-center">
+                  <h3 className="text-slate-800 dark:text-slate-300 text-xl text-center whitespace-nowrap font-semibold">
+                    It's nice to see you again
+                  </h3>
+                  <div className="text-slate-600 dark:text-slate-400 text-sm tracking-tight font-medium text-center whitespace-nowrap leading-5">
+                    <p>Pick a ticket from your left list </p>
+                    <p>and start your conversation</p>
+                  </div>
+                </div>
+              </div>
             </>
           )}
           {/**End of Messages ============================ */}
