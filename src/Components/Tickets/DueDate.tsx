@@ -63,7 +63,7 @@ const DueDate: FC<Props> = ({ setValues, showTimePicker, setTimePicker }) => {
     <div
       className={`${
         showTimePicker ? "" : "hidden"
-      } absolute bottom-14 right-3 w-[22rem] h-[10rem] rounded bg-slate-50 dark:bg-slate-700 z-[999] border-2 border-slate-400 dark:border-slate-500 shadow-2xl drop-shadow-2xl after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border-2 after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] after:left-[11.6rem] after:rotate-45`}
+      } absolute bottom-14 right-3 w-[22rem] h-[10rem] rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-400 dark:border-slate-500 shadow-2xl drop-shadow-2xl after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border-2 after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] after:left-[11.6rem] after:rotate-45`}
     >
       {/**Close Button */}
       <abbr title="Close">
@@ -72,15 +72,15 @@ const DueDate: FC<Props> = ({ setValues, showTimePicker, setTimePicker }) => {
           onClick={() => {
             setTimePicker(false);
           }}
-          className="absolute  top-1 right-1 h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border-2 border-slate-500 dark:border-slate-500"
+          className="absolute  top-1 right-1 h-5 w-5 rounded-sm flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-500"
         >
           <span>&times;</span>
         </button>
       </abbr>
       {/**Close Button */}
       <div className="w-full h-full overflow-hidden p-4">
-        <h4 className="text-xs uppercase text-slate-800 dark:text-slate-300 font-bold">
-          Max time allowed is 8HRS
+        <h4 className="text-[0.7rem] uppercase text-slate-800 dark:text-slate-300 font-bold">
+          Max time allowed is 8 Hours
         </h4>
         <div>
           <div
@@ -163,7 +163,7 @@ const DueDate: FC<Props> = ({ setValues, showTimePicker, setTimePicker }) => {
             <button
               type="button"
               onClick={() => handleSubmit()}
-              className="px-6 py-2 rounded bg-slate-800 dark:bg-blue-700 text-slate-50 text-xs uppercase flex justify-center items-center space-x-2 hover:opacity-80 transition-all duration-200"
+              className="px-6 py-2 rounded-sm bg-slate-800 dark:bg-blue-700 text-slate-50 text-[0.65rem] uppercase flex justify-center items-center space-x-2 hover:opacity-80 transition-all duration-200"
             >
               <BiAlarm className="text-lg" />
               <span>set due time</span>

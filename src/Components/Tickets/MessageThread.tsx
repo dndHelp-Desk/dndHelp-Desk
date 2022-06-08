@@ -790,7 +790,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999] pt-0"
           >
-            <div className="w-full h-[70%]">
+            <div className="w-full h-[78%]">
               <div className="h-full w-full bg-transparent rounded resize-none text-sm dark:text-slate-400 text-slate-700 transition-all  dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden pt-0">
                 <TextEditor
                   setReply={setReply}

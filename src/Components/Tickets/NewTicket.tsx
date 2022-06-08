@@ -13,7 +13,6 @@ import {
   BiFile,
   BiMinus,
   BiMicrophone,
-  BiCollapse,
   BiUser,
 } from "react-icons/bi";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -550,14 +549,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   //Component =====================================
   return (
     <div
-      className={`fixed top-[-0.5rem] left-[-0.5rem] bottom-[-0.5rem] right-[-0.5rem] bg-[#030d2769] rounded-md justify-center ${
+      className={`fixed top-0 left-0 bottom-0 right-0 h-screen bg-[#030d2769] rounded-md justify-center overflow-x-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar ${
         newTicketModal === true ? "flex z-[999]" : "hidden"
       }`}
     >
-      <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-screen max-h-[45rem] flex justify-end px-6 pt-[6.8rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
+      <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-[50rem] flex justify-end px-6 pt-[5.5rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-[32rem] lg:h-full dark:bg-slate-800 bg-white border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
+          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-fit dark:bg-slate-800 bg-white border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1 relative`}
         >
@@ -575,7 +574,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   setModal(false);
                   document.body.style.overflow = "";
                 }}
-                className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all outline-none focus:outline-none border border-slate-500 dark:border-slate-6"
+                className="h-5 w-5 rounded-sm flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all outline-none focus:outline-none border border-slate-500 dark:border-slate-600"
               >
                 <BiMinus className="dark:text-slate-300 text-slate-700 text-base" />
               </button>
@@ -628,7 +627,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   !isSubmiting && setModal(false);
                   document.body.style.overflow = "";
                 }}
-                className="h-5 w-5 rounded flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-600"
+                className="h-5 w-5 rounded-sm flex items-center justify-center dark:bg-slate-700  bg-slate-200 hover:bg-red-300 dark:hover:bg-red-500 transition-all outline-none focus:outline-none dark:text-slate-300 text-slate-700 text-sm border border-slate-500 dark:border-slate-600"
               >
                 <span>&times;</span>
               </button>
@@ -636,293 +635,327 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           </div>
 
           {/**Top Section ============================= */}
-          <div className="w-full h-[90%] grid grid-rows-6 gap-1 p-4">
-            <div className="w-full row-span-2 flex md:flex-col flex-row justify-between md:items-center pt-2">
-              <div className="w-full md:h-10 flex flex-col md:flex-row gap-4 md:justify-between md:items-center">
-                {/**Recipient Name ============================= */}
-                <label
-                  htmlFor="to"
-                  className="flex-[1] h-8 flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    To :{" "}
-                  </span>
-                  <input
-                    type="text"
-                    id="to"
-                    name="to"
-                    placeholder="Search Contact ..."
-                    required={true}
-                    autoComplete="off"
-                    value={recepient}
-                    onKeyPress={() => setResults(true)}
-                    onKeyDown={() => setResults(true)}
-                    onFocus={() => setResults(true)}
-                    onChange={(e) => {
-                      setRecipient(e.target.value);
-                    }}
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 dark:placeholder:text-slate-400 placeholder:text-slate-700 focus:ring-0 focus:border-0 text-xs"
-                  />
-                  <div
-                    ref={closeSuggestionsRef}
-                    className={`${
-                      searchResults ? "" : "hidden"
-                    } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md z-[999] p-2 px-1 space-y-1 border dark:border-slate-600 border-slate-400`}
+          <div className="w-full h-fit p-4">
+            <div className="w-full h-fit flex flex-col space-y-2 mt-2">
+              {/**Contact and Subject ============================================== */}
+              <div className="w-full h-12 grid grid-cols-2 gap-4">
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    To
+                  </legend>
+                  <label
+                    htmlFor="to"
+                    className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                   >
-                    <ul className="h-full w-full overflow-y-scroll overflow-hidden px-1">
-                      {contactsList}
-                    </ul>
-                  </div>{" "}
-                </label>
-                {/**Subject ============================= */}
-                <label
-                  htmlFor="subject"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    Subject :
-                  </span>
-                  <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs capitalize"
-                    id="subject"
-                    name="subject"
-                    value={inputValue?.category}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        category: e.target.value,
-                      })
-                    }
-                  >
-                    <option className="capitalize" value="">
-                      Subject ...
-                    </option>
-                    {categoriesList}
-                  </select>
-                </label>
-              </div>
-              {/**Priority & Status ============================= */}
-              <div className="w-full md:h-10 flex flex-col md:flex-row gap-4 md:justify-between md:items-center">
-                {/**Priority  ======================================== */}
-                <label
-                  htmlFor="priority"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    Priority :
-                  </span>
-                  <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
-                    id="priority"
-                    name="priority"
-                    value={inputValue?.priority}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        priority: e.target.value,
-                      })
-                    }
-                  >
-                    <option className="capitalize" value="">
-                      Priority ...
-                    </option>
-                    <option className="capitalize">Low</option>
-                    <option className="capitalize">Medium</option>
-                    <option className="capitalize">High</option>
-                    <option className="capitalize">Urgent</option>
-                  </select>
-                </label>
-                {/**Status  ======================================== */}
-                <label
-                  htmlFor="status"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    Status :
-                  </span>
-                  <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsisp-2 pt-1 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
-                    id="status"
-                    name="status"
-                    value={inputValue?.state}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        state: e.target.value,
-                      })
-                    }
-                  >
-                    <option className="capitalize" value="">
-                      Status ...
-                    </option>
-                    <option className="capitalize" value="open">
-                      open
-                    </option>
-                    <option className="capitalize" value="on hold">
-                      on hold
-                    </option>
-                    <option className="capitalize" value="solved">
-                      first Contact Resolution
-                    </option>
-                  </select>
-                </label>
-              </div>
-              {/**Customer's Email And Number ============================= */}
-              <div className="w-full md:h-10 flex flex-col md:flex-row gap-4 md:justify-between md:items-center">
-                {/**Client Email  ======================================== */}
-                <label
-                  htmlFor="email"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    Email :
-                  </span>
-                  <input
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs dark:placeholder:text-slate-400 placeholder:text-slate-700 capitalize"
-                    type="text"
-                    id="email"
-                    title="Enter A valid Email"
-                    name="email"
-                    value={inputValue?.complainant_email}
-                    autoComplete="nope"
-                    placeholder="Customer's Email"
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        complainant_email:
-                          e.target.value?.replace(/\s/g, "") === ""
-                            ? "none"
-                            : e.target.value,
-                      })
-                    }
-                  />
-                </label>
-                {/**Complainant Number  ======================================== */}
-                <label
-                  htmlFor="numbers"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    Phone :
-                  </span>
-                  <input
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs dark:placeholder:text-slate-400 placeholder:text-slate-700"
-                    id="numbers"
-                    name="numbers"
-                    type="text"
-                    autoComplete="nope"
-                    placeholder="073 5698 625"
-                    required={true}
-                    pattern="^[0-9]{10}$"
-                    value={inputValue?.complainant_number}
-                    onChange={(e) => {
-                      setValues({
-                        ...inputValue,
-                        complainant_number: e.target.value,
-                        agent: member_details[0].name,
-                        agent_email: member_details[0].email,
-                      });
-                    }}
-                  />
-                  <ul
-                    className={`${
-                      numbersArray.length >= 1 && showOpenedTickets
-                        ? ""
-                        : "hidden"
-                    } absolute top-12 left-0 h-[18.5rem] w-full shadow-2xl bg-slate-200 dark:bg-slate-900 border border-slate-400 dark:border-slate-600 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2`}
-                  >
-                    {exist}
-                    <button
-                      type="button"
-                      onClick={() => setShowOpen(false)}
-                      className="absolute  top-[-0.25rem] right-1 bg-transparent outline-none focus:outline-none hover:opacity-80 rounded border dark:border-slate-700 border-slate-500"
+                    <input
+                      type="text"
+                      id="to"
+                      name="to"
+                      placeholder="Search Contact ..."
+                      required={true}
+                      autoComplete="off"
+                      value={recepient}
+                      onKeyPress={() => setResults(true)}
+                      onKeyDown={() => setResults(true)}
+                      onFocus={() => setResults(true)}
+                      onChange={(e) => {
+                        setRecipient(e.target.value);
+                      }}
+                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 outline-none focus:outline-none dark:placeholder:text-slate-600 placeholder:text-slate-400 focus:ring-0 focus:border-0 text-xs font-semibold"
+                    />
+                    <div
+                      ref={closeSuggestionsRef}
+                      className={`${
+                        searchResults ? "" : "hidden"
+                      } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md z-[999] p-2 px-1 space-y-1 border dark:border-slate-700 border-slate-400`}
                     >
-                      <abbr title="close">
-                        <BiCollapse className="text-lg dark:text-slate-400 text-slate-600" />
-                      </abbr>
-                    </button>
-                  </ul>
-                </label>
-              </div>
-              {/**Customer's Name And Send As ============================= */}
-              <div className="w-full md:h-10 flex flex-col md:flex-row gap-4 md:justify-between md:items-center">
-                {/**Complainant Name =========================================== */}
-                <label
-                  htmlFor="name"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    Name :
-                  </span>
-                  <input
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs dark:placeholder:text-slate-400 placeholder:text-slate-700"
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Customer's Name ..."
-                    value={inputValue?.complainant_name}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        complainant_name: e.target.value,
-                        agent: member_details[0].name,
-                        agent_email: member_details[0].email,
-                      })
-                    }
-                  />
-                </label>
-                {/**Select Team */}
-                {/**Send AS  ======================================== */}
-                <label
-                  htmlFor="priority"
-                  className="flex-[1] flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
-                >
-                  <span className="flex-[1] overflow-hidden whitespace-nowrap text-ellipsis uppercase  text-slate-800 dark:text-slate-300 text-[0.6rem] font-bold dark:font-semibold">
-                    Send As :
-                  </span>
-                  <select
-                    className="h-8 flex-[2] overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-700 border-0 border-b dark:border-slate-700 border-slate-300 outline-none focus:outline-none focus:border-b focus:border-slate-400 focus:ring-0 focus:border-0 text-xs"
-                    id="priority"
-                    name="priority"
-                    value={inputValue?.send_as}
-                    required={true}
-                    onChange={(e) =>
-                      setValues({
-                        ...inputValue,
-                        send_as: e.target.value,
-                      })
-                    }
+                      <ul className="h-full w-full overflow-y-scroll overflow-hidden px-1">
+                        {contactsList}
+                      </ul>
+                    </div>{" "}
+                  </label>
+                </fieldset>
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    subject
+                  </legend>
+                  <label
+                    htmlFor="subject"
+                    className="w-full h-full flex items-center dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
                   >
-                    <option className="capitalize" value="">
-                      Send As ...
-                    </option>
-                    {email_accounts.length >= 1 &&
-                      email_accounts.map((team) => {
-                        return (
-                          <option
-                            key={team.id}
-                            className="capitalize"
-                            value={team.name}
-                          >
-                            {team.name}
-                          </option>
-                        );
-                      })}
-                  </select>
-                </label>
+                    <select
+                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold capitalize  ${
+                        !inputValue?.category
+                          ? "dark:text-slate-600 text-slate-400"
+                          : "dark:text-slate-400 text-slate-700"
+                      }`}
+                      id="subject"
+                      name="subject"
+                      value={inputValue?.category}
+                      required={true}
+                      onChange={(e) =>
+                        setValues({
+                          ...inputValue,
+                          category: e.target.value,
+                        })
+                      }
+                    >
+                      <option className="capitalize" value="">
+                        Subject ...
+                      </option>
+                      {categoriesList}
+                    </select>
+                  </label>
+                </fieldset>
+              </div>
+              {/**Contact and Subject ============================================== */}
+
+              {/**Priority and Status =============================================== */}
+              <div className="overflow-hidden w-full h-14 grid grid-cols-2 gap-4">
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    Priority
+                  </legend>
+                  <label
+                    htmlFor="priority"
+                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                  >
+                    <select
+                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold  ${
+                        !inputValue?.priority
+                          ? "dark:text-slate-600 text-slate-400"
+                          : "dark:text-slate-400 text-slate-700"
+                      }`}
+                      id="priority"
+                      name="priority"
+                      value={inputValue?.priority}
+                      required={true}
+                      onChange={(e) =>
+                        setValues({
+                          ...inputValue,
+                          priority: e.target.value,
+                        })
+                      }
+                    >
+                      <option className="capitalize" value="">
+                        Priority ...
+                      </option>
+                      <option className="capitalize">Low</option>
+                      <option className="capitalize">Medium</option>
+                      <option className="capitalize">High</option>
+                      <option className="capitalize">Urgent</option>
+                    </select>
+                  </label>
+                </fieldset>
+
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    Status
+                  </legend>
+                  <label
+                    htmlFor="status"
+                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                  >
+                    <select
+                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold capitalize  ${
+                        !inputValue?.state
+                          ? "dark:text-slate-600 text-slate-400"
+                          : "dark:text-slate-400 text-slate-700"
+                      }`}
+                      id="status"
+                      name="status"
+                      value={inputValue?.state}
+                      required={true}
+                      onChange={(e) =>
+                        setValues({
+                          ...inputValue,
+                          state: e.target.value,
+                        })
+                      }
+                    >
+                      <option className="capitalize" value="">
+                        Status ...
+                      </option>
+                      <option className="capitalize" value="open">
+                        open
+                      </option>
+                      <option className="capitalize" value="on hold">
+                        on hold
+                      </option>
+                      <option className="capitalize" value="solved">
+                        first Contact Resolution
+                      </option>
+                    </select>
+                  </label>
+                </fieldset>
+              </div>
+              {/**Priority and Status =============================================== */}
+
+              {/**Email and Numbers =============================================== */}
+              <div className="w-full h-14 grid grid-cols-2 gap-4">
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    Email
+                  </legend>
+                  <label
+                    htmlFor="email"
+                    className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                  >
+                    <input
+                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold dark:placeholder:text-slate-600 placeholder:text-slate-400 capitalize"
+                      type="text"
+                      id="email"
+                      title="Enter A valid Email"
+                      name="email"
+                      value={inputValue?.complainant_email}
+                      autoComplete="nope"
+                      placeholder="Customer's Email"
+                      onChange={(e) =>
+                        setValues({
+                          ...inputValue,
+                          complainant_email:
+                            e.target.value?.replace(/\s/g, "") === ""
+                              ? "none"
+                              : e.target.value,
+                        })
+                      }
+                    />
+                  </label>
+                </fieldset>
+
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    Phone
+                  </legend>
+                  <label
+                    htmlFor="numbers"
+                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                  >
+                    <input
+                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold dark:placeholder:text-slate-600 placeholder:text-slate-400"
+                      id="numbers"
+                      name="numbers"
+                      type="text"
+                      autoComplete="nope"
+                      placeholder="073 5698 625"
+                      required={true}
+                      pattern="^[0-9]{10}$"
+                      value={inputValue?.complainant_number}
+                      onChange={(e) => {
+                        setValues({
+                          ...inputValue,
+                          complainant_number: e.target.value,
+                          agent: member_details[0].name,
+                          agent_email: member_details[0].email,
+                        });
+                      }}
+                    />
+                    <ul
+                      className={`${
+                        numbersArray.length >= 1 && showOpenedTickets
+                          ? ""
+                          : "hidden"
+                      } absolute top-10 left-0 h-[18.5rem] w-full shadow-2xl bg-slate-100 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2`}
+                    >
+                      {exist}
+                      <button
+                        type="button"
+                        onClick={() => setShowOpen(false)}
+                        className="absolute top-[-0.25rem] right-1 bg-red-600 h-5 w-5 outline-none focus:outline-none hover:opacity-80 rounded-sm border border-slate-400 text-sm font-semibold text-slate-50"
+                      >
+                        &times;
+                      </button>
+                    </ul>
+                  </label>
+                </fieldset>
+              </div>
+              {/**Email and Numbers =============================================== */}
+
+              {/**Name And Team =============================================== */}
+              <div className="overflow-hidden w-full h-14 grid grid-cols-2 gap-4">
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    Name
+                  </legend>
+                  <label
+                    htmlFor="name"
+                    className="h-full w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                  >
+                    <input
+                      className="h-full w-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-800 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold dark:placeholder:text-slate-600 placeholder:text-slate-400"
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Customer's Name ..."
+                      value={inputValue?.complainant_name}
+                      required={true}
+                      onChange={(e) =>
+                        setValues({
+                          ...inputValue,
+                          complainant_name: e.target.value,
+                          agent: member_details[0].name,
+                          agent_email: member_details[0].email,
+                        })
+                      }
+                    />
+                  </label>
+                </fieldset>
+
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                    Team
+                  </legend>
+                  <label
+                    htmlFor="priority"
+                    className="h-full w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                  >
+                    <select
+                      className={`h-full w-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white  border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold ${
+                        !inputValue?.send_as
+                          ? "dark:text-slate-600 text-slate-400"
+                          : "dark:text-slate-400 text-slate-700"
+                      }`}
+                      id="priority"
+                      name="priority"
+                      value={inputValue?.send_as}
+                      required={true}
+                      onChange={(e) =>
+                        setValues({
+                          ...inputValue,
+                          send_as: e.target.value,
+                        })
+                      }
+                    >
+                      <option
+                        className="capitalize dark:text-slate-600 text-slate-400"
+                        value=""
+                      >
+                        Send As ...
+                      </option>
+                      {email_accounts.length >= 1 &&
+                        email_accounts.map((team) => {
+                          return (
+                            <option
+                              key={team.id}
+                              className="capitalize"
+                              value={team.name}
+                            >
+                              {team.name}
+                            </option>
+                          );
+                        })}
+                    </select>
+                  </label>
+                </fieldset>
               </div>
             </div>
             {/**Message ====================================== */}
-            <div className="w-full h-full row-span-4 mt-2 rounded overflow-hidden">
+            <div className="w-full h-[18rem] mt-2 rounded overflow-hidden">
               <RichTextEditor
                 value={value}
                 onImageUpload={handleImageUpload}
                 onChange={onChange}
-                className="`replyEditor h-full w-full border border-slate-300 dark:border-slate-700 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar"
+                className="`replyEditor h-full w-full border border-slate-400 dark:border-slate-700 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar"
                 classNames={{
                   toolbar:
                     "dark:bg-[#182235] bg-slate-200 flex justify-center items-center w-full text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
@@ -957,7 +990,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           </div>
 
           {/**Bottom Controls ========================================= */}
-          <div className="dark:bg-slate-700 bg-slate-200 min-h-[3rem] h-[9%] md:h-[8%] w-full p-2 px-4 flex justify-between items-center  select-none">
+          <div className="dark:bg-slate-700 bg-slate-200 h-[3rem] w-full p-2 px-4 flex justify-between items-center  select-none">
             <div className="flex justify-center items-center">
               {/**Reset Input ========================================= */}
               <abbr title="Clear Inputs">
@@ -1063,7 +1096,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 <button
                   disabled={isSubmiting ? true : false}
                   type="submit"
-                  className="h-8 w-32 flex justify-center items-center space-x-2 outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded text-slate-100 dark:text-slate-100 font-medium text-xs font-sans transition-all disabled:cursor-not-allowed"
+                  className="h-8 w-32 flex justify-center items-center space-x-2 outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded-sm text-slate-100 dark:text-slate-100 font-medium text-xs font-sans transition-all disabled:cursor-not-allowed"
                 >
                   <span>Submit now</span>
                   <div
