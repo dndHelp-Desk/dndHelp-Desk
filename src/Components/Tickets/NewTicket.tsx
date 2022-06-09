@@ -159,7 +159,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     categories?.map((category, index) => {
       return (
         <option
-          className="capitalize hover:opacity-80"
+          className="capitalize hover:opacity-80 dark:text-slate-400 text-slate-700"
           value={category?.name}
           key={index}
         >
@@ -700,7 +700,10 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                         })
                       }
                     >
-                      <option className="capitalize" value="">
+                      <option
+                        className="capitalize dark:text-slate-400 text-slate-700"
+                        value=""
+                      >
                         Subject ...
                       </option>
                       {categoriesList}
@@ -737,13 +740,24 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                         })
                       }
                     >
-                      <option className="capitalize" value="">
+                      <option
+                        className="capitalize dark:text-slate-400 text-slate-700"
+                        value=""
+                      >
                         Priority ...
                       </option>
-                      <option className="capitalize">Low</option>
-                      <option className="capitalize">Medium</option>
-                      <option className="capitalize">High</option>
-                      <option className="capitalize">Urgent</option>
+                      <option className="capitalize dark:text-slate-400 text-slate-700">
+                        Low
+                      </option>
+                      <option className="capitalize dark:text-slate-400 text-slate-700">
+                        Medium
+                      </option>
+                      <option className="capitalize dark:text-slate-400 text-slate-700">
+                        High
+                      </option>
+                      <option className="capitalize dark:text-slate-400 text-slate-700">
+                        Urgent
+                      </option>
                     </select>
                   </label>
                 </fieldset>
@@ -773,16 +787,28 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                         })
                       }
                     >
-                      <option className="capitalize" value="">
+                      <option
+                        className="capitalize dark:text-slate-400 text-slate-700"
+                        value=""
+                      >
                         Status ...
                       </option>
-                      <option className="capitalize" value="open">
+                      <option
+                        className="capitalize dark:text-slate-400 text-slate-700"
+                        value="open"
+                      >
                         open
                       </option>
-                      <option className="capitalize" value="on hold">
+                      <option
+                        className="capitalize dark:text-slate-400 text-slate-700"
+                        value="on hold"
+                      >
                         on hold
                       </option>
-                      <option className="capitalize" value="solved">
+                      <option
+                        className="capitalize dark:text-slate-400 text-slate-700"
+                        value="solved"
+                      >
                         first Contact Resolution
                       </option>
                     </select>
@@ -937,7 +963,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                           return (
                             <option
                               key={team.id}
-                              className="capitalize"
+                              className="capitalize dark:text-slate-400 text-slate-700"
                               value={team.name}
                             >
                               {team.name}

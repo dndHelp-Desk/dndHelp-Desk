@@ -116,11 +116,7 @@ const Dashboard: FC = () => {
     ).length <= 0
       ? setLoading(true)
       : setLoading(false);
-    dashboardData?.filter(
-      (data) =>
-        data.date >= new Date(ticketsComponentDates?.startDate).getTime() &&
-        data.date <= new Date(ticketsComponentDates?.endDate).getTime()
-    ).length <= 0 && setTimeout(() => setLoading(false), 60000);
+    setTimeout(() => setLoading(false), 30000);
     return clearTimeout();
   }, [dashboardData, ticketsComponentDates]);
 

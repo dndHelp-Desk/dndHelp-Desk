@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
-import noUsers from "./../Dashboard/images/no-userss.svg";
+import noUsers from "./../Main_Dashboard/images/no-userss.svg";
 import { Navigate } from "react-router";
 import { deleteUser } from "../Data_Fetching/TicketsnUserData";
 import { BsFillTrashFill, BsPencilSquare, BsSearch } from "react-icons/bs";

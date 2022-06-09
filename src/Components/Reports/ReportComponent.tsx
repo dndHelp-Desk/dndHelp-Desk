@@ -20,6 +20,7 @@ const ReportsComponent: FC = () => {
     agent: "",
     category: "",
     status: "",
+    time: { from: 1, to: 24 },
   });
   const fetchedTickets = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
@@ -71,7 +72,9 @@ const ReportsComponent: FC = () => {
                 .replace(/\s/g, "")
                 .replace(/\(/g, "")
                 .replace(/\)/g, "")
-                .match(new RegExp(filters.status, "gi"))
+                .match(new RegExp(filters.status, "gi")) &&
+              new Date(data.date).getHours() >= Number(filters?.time?.from) &&
+              new Date(data.date).getHours() <= Number(filters?.time?.to)
           )
       : [];
   }, [reportsData, filters, contactsList]);
@@ -96,7 +99,7 @@ const ReportsComponent: FC = () => {
   return (
     <div className="bg-transparent mt-4 w-[95%] 2xl:w-[75rem] rounded-xl min-h-screen space-y-4 flex flex-col tracking-wider relative pb-4">
       {/**Filters ============= */}
-      <div className="w-full bg-transparent flex flex-wrap lg:flex-nowrap justify-between items-center gap-2 print:hidden">
+      <div className="w-full bg-transparent grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 print:hidden">
         <Filters
           setFilters={setFilters}
           filters={filters}

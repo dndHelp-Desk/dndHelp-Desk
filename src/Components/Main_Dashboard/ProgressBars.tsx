@@ -12,7 +12,8 @@ const ProgressBars: FC = () => {
 
   const categoriesData = useMemo(() => {
     return categories?.length >= 1
-      ? categories?.map((element) => {
+      ? categories
+          ?.map((element) => {
             return {
               name: element?.name,
               value: (
@@ -69,7 +70,7 @@ const ProgressBars: FC = () => {
                           : "0.0"
                       }%`,
                     }}
-                    className="h-full bg-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full transition-all duration-200"
+                    className="h-full bg-gradient-to-r from-blue-600 to-indigo-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full transition-all duration-200"
                   >
                     <abbr
                       title={`${element.name} : ${

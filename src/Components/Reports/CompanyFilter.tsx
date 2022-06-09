@@ -35,8 +35,8 @@ const CompanyFilter: FC<Props> = ({ setList, contactsList }) => {
 
   //Component ==================
   return (
-    <div ref={modalRef} className="relative">
-      <div className="md:w-[14rem] h-14 lg:h-10 w-full min-w-[15rem] lg:min-w-0 flex justify-center items-center dark:bg-slate-800 bg-white overflow-hidden relative rounded border dark:border-slate-700 border-slate-300">
+    <div ref={modalRef} className="relative w-full col-span-1">
+      <div className="w-full h-14 lg:h-10 flex items-center dark:bg-slate-800 bg-white overflow-hidden relative rounded border dark:border-slate-700 border-slate-300 pl-8">
         <BiBuilding className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <label htmlFor="company" className="">
           <input
@@ -61,7 +61,7 @@ const CompanyFilter: FC<Props> = ({ setList, contactsList }) => {
       <div
         className={`${
           modal ? "flex" : "hidden"
-        } flex-col items-center p-2 absolute top-12 left-[-0.5rem] w-[15rem] h-[20rem] bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 shadow-xl drop-shadow-xl z-[999] text-xs font-semibold dark:text-slate-400 text-slate-800 overflow-hidden rounded`}
+        } flex-col items-center p-2 absolute top-[110%] left-0 w-full h-[20rem] bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 shadow-xl drop-shadow-xl z-[999] text-xs font-semibold dark:text-slate-400 text-slate-800 overflow-hidden rounded`}
       >
         <div className="mt-2 w-full h-full p-2 space-y-2 overflow-hidden overflow-y-scroll">
           <label

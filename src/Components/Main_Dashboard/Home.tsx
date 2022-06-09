@@ -165,10 +165,10 @@ const Home: FC = () => {
                 overdue tickets.
               </p>
               <div
-                className={`w-full h-[6.5rem] overflow-hidden mb-4 relative`}
+                className={`w-full h-[6.5rem] overflow-hidden flex justify-center items-center mb-4 relative`}
               >
                 <RadialBar />
-                <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center font-semibold text-slate-800 dark:text-slate-300 text-sm pt-4 pl-2">
+                <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center font-semibold text-slate-800 dark:text-slate-300 text-sm pl-2">
                   {Number(totalProgress) + "%"}
                 </div>
               </div>

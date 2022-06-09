@@ -54,6 +54,7 @@ const TicketsList: FC<Props> = ({
     reopened: false,
     overdue: false,
     hasRecording: false,
+    time: { from: 1, to: 24 },
   });
 
   const filteredTickets: any = useMemo(() => {
@@ -107,7 +108,10 @@ const TicketsList: FC<Props> = ({
                 .replace(/\s/g, "")
                 .includes(
                   filters.ticket_id?.toLowerCase().replace(/\s/g, "")
-                ) === true
+                ) === true &&
+              new Date(ticket?.date).getHours() >=
+                Number(filters?.time?.from) &&
+              new Date(ticket?.date).getHours() <= Number(filters?.time?.to)
           )
       : [];
   }, [fetchedTickets, ticketsComponentDates, filters, contactsList]);

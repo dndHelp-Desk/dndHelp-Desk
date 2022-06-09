@@ -7,6 +7,7 @@ import {
   BiPulse,
   BiUserPin,
   BiTagAlt,
+  BiAlarm,
 } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -35,6 +36,59 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         <BiCalendarWeek className="text-slate-800 dark:text-slate-400 absolute h-10 left-3 z-[999]" />
         <DateFilter />
       </div>
+
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative font-semibold text-xs text-slate-700 dark:text-slate-400 border dark:border-slate-700 border-slate-400 group">
+        <BiAlarm className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
+        <span className="pl-10 capitalize">time</span>
+        <div className="absolute top-[105%] left-0 z-[99] hidden group-hover:flex w-full h-fit rounded-sm  text-xs font-medium p-2 py-4 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-600 border-slate-300 focus:ring-0 focus:outline-none shadow-2xl drop-shadow-2xl space-y-4 overflow-hidden">
+          {" "}
+          <div className="w-full flex justify-between items-center space-x-2">
+            <select
+              onChange={(e) =>
+                setFilters({
+                  ...filters,
+                  time: { ...filters.time, from: e.target.value },
+                })
+              }
+              className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+            >
+              <option value="1">From</option>
+              {[
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                19, 20, 21, 22, 23, 24,
+              ].map((hour) => {
+                return (
+                  <option key={hour} value={hour}>
+                    {hour}:00 HR
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              onChange={(e) =>
+                setFilters({
+                  ...filters,
+                  time: { ...filters.time, to: e.target.value },
+                })
+              }
+              className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+            >
+              <option value="24">To</option>
+              {[
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                19, 20, 21, 22, 23, 24,
+              ].map((hour) => {
+                return (
+                  <option key={hour} value={hour}>
+                    {hour}:00 HR
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
         <BiCategoryAlt className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select

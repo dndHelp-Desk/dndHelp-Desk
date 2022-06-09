@@ -10,7 +10,9 @@ import ContactsComponent from "./Components/Contacts/ContactsComponent";
 import ErrorPage from "./Components/Landing Page/ErrorPage";
 
 //Lazy Loading Components || Code Splitting ====================
-const Dashboard = lazy(() => import("./Components/Dashboard/MainContainer"));
+const Dashboard = lazy(
+  () => import("./Components/Main_Dashboard/MainContainer")
+);
 const SettingsComponent = lazy(
   () => import("./Components/Settings/SettingsComponents")
 );

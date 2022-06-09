@@ -79,7 +79,7 @@ const DueDate: FC<Props> = ({ setValues, showTimePicker, setTimePicker }) => {
       </abbr>
       {/**Close Button */}
       <div className="w-full h-full overflow-hidden p-4">
-        <h4 className="text-[0.7rem] uppercase text-slate-800 dark:text-slate-300 font-bold">
+        <h4 className="text-[0.7rem] text-center uppercase text-slate-800 dark:text-slate-300 font-bold">
           Max time allowed is 8 Hours
         </h4>
         <div>
@@ -163,7 +163,7 @@ const DueDate: FC<Props> = ({ setValues, showTimePicker, setTimePicker }) => {
             <button
               type="button"
               onClick={() => handleSubmit()}
-              className="px-6 py-2 rounded-sm bg-slate-800 dark:bg-blue-700 text-slate-50 text-[0.65rem] uppercase flex justify-center items-center space-x-2 hover:opacity-80 transition-all duration-200"
+              className="px-6 py-2 rounded-sm bg-slate-800 dark:bg-blue-700 text-slate-50 text-[0.7rem] uppercase flex justify-center items-center space-x-2 hover:opacity-80 transition-all duration-200"
             >
               <BiAlarm className="text-lg" />
               <span>set due time</span>
