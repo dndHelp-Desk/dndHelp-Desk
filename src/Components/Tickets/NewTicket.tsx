@@ -638,7 +638,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           <div className="w-full h-fit p-4">
             <div className="w-full h-fit flex flex-col space-y-2 mt-2">
               {/**Contact and Subject ============================================== */}
-              <div className="w-full h-12 grid grid-cols-2 gap-4">
+              <div className="w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
                   <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
                     To
@@ -714,7 +714,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Contact and Subject ============================================== */}
 
               {/**Priority and Status =============================================== */}
-              <div className="overflow-hidden w-full h-14 grid grid-cols-2 gap-4">
+              <div className="overflow-hidden w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
                   <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
                     Priority
@@ -818,7 +818,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Priority and Status =============================================== */}
 
               {/**Email and Numbers =============================================== */}
-              <div className="w-full h-14 grid grid-cols-2 gap-4">
+              <div className="w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
                   <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
                     Email
@@ -898,7 +898,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Email and Numbers =============================================== */}
 
               {/**Name And Team =============================================== */}
-              <div className="overflow-hidden w-full h-14 grid grid-cols-2 gap-4">
+              <div className="overflow-hidden w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
                   <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
                     Name
@@ -976,7 +976,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               </div>
             </div>
             {/**Message ====================================== */}
-            <div className="w-full h-[18rem] mt-2 rounded overflow-hidden">
+            <div className="w-full h-[18rem] mt-4 rounded overflow-hidden">
               <RichTextEditor
                 value={value}
                 onImageUpload={handleImageUpload}
@@ -984,14 +984,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 className="`replyEditor h-full w-full border border-slate-400 dark:border-slate-700 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar"
                 classNames={{
                   toolbar:
-                    "dark:bg-[#182235] bg-slate-200 flex justify-center items-center w-full text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
+                    "bg-white dark:bg-slate-800 flex justify-center items-center  flex-nowrap w-full text-slate-700 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700 rounded-none sticky p-0  overflow-hidden",
                   toolbarInner:
-                    "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
+                    "bg-slate-50 dark:bg-[#182235] text-inherit border-b border-slate-300 dark:border-slate-700 w-full h-[3.25rem] flex justify-center flex-nowrap overflow-hidden py-1",
                   toolbarGroup:
-                    "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700",
+                    "bg-inherit text-inherit border-0 border-slate-300 dark:border-slate-600 rounded-sm flex justify-between w-full",
                   toolbarControl:
-                    "bg-inherit  text-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100",
-                  root: "replyEditor h-full overflow-hidden overflow-y-scroll text-slate-800 dark:text-slate-400",
+                    "bg-inherit text-inherit border-0  dark:hover:bg-slate-600 hover:bg-white rounded-sm",
+                  root: "replyEditor h-full py-0 pl-0 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800",
                 }}
                 controls={[
                   [

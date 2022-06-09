@@ -51,11 +51,11 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
       className="h-full w-full border-0 bg-white dark:bg-slate-800 text-inherit rounded-none relative overflow-hidden pl-0"
       classNames={{
         toolbar:
-          "bg-white dark:bg-slate-800 flex justify-center items-center w-full text-slate-700 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700 rounded-none sticky p-0 py-1  overflow-hidden",
+          "bg-white dark:bg-slate-800 flex justify-center items-center  flex-nowrap w-full text-slate-700 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700 rounded-none sticky p-0  overflow-hidden",
         toolbarInner:
-          "bg-slate-50 dark:bg-[#182235] text-inherit border-b border-slate-300 dark:border-slate-700 w-full h-full flex justify-center pl-0",
+          "bg-slate-50 dark:bg-[#182235] text-inherit border-b border-slate-300 dark:border-slate-700 w-full h-[3.25rem] flex justify-center flex-nowrap overflow-hidden py-1",
         toolbarGroup:
-          "bg-inherit text-inherit border-0 border-slate-300 dark:border-slate-600 rounded-sm",
+          "bg-inherit text-inherit border-0 border-slate-300 dark:border-slate-600 rounded-sm flex justify-between w-full",
         toolbarControl:
           "bg-inherit text-inherit border-0  dark:hover:bg-slate-600 hover:bg-white rounded-sm",
         root: "replyEditor h-full py-0 pl-0 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800",
@@ -64,19 +64,23 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
         [
           "bold",
           "italic",
-          "h1",
-          "unorderedList",
-          "blockquote",
-          "orderedList",
-          "code",
           "strike",
           "underline",
+          "h1",
+          "h2",
+          "unorderedList",
+          "orderedList",
+          "blockquote",
+          "code",
+          "codeBlock",
           "alignLeft",
           "alignCenter",
           "alignRight",
           "image",
           "video",
           "link",
+          "sub",
+          "sup",
           "clean",
         ],
       ]}

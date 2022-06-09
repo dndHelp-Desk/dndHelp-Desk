@@ -39,7 +39,7 @@ const TicketsList: FC<Props> = ({
     (state: RootState) => state.Tickets.ticketsComponentDates
   );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
-  const [loadMore, setLimit] = useState<number | any>(50);
+  const [loadMore, setLimit] = useState<number | any>(8);
 
   //Filters =====================
   const [contactsList, setList] = useState<string[]>([]);
@@ -58,7 +58,7 @@ const TicketsList: FC<Props> = ({
   });
 
   const filteredTickets: any = useMemo(() => {
-    setLimit(50);
+    setLimit(8);
     return fetchedTickets.length >= 1
       ? fetchedTickets
           ?.filter((row) =>
@@ -119,7 +119,7 @@ const TicketsList: FC<Props> = ({
   //Loop Through Each Tickects =================
   const tickets =
     filteredTickets.length >= 1 &&
-    filteredTickets.slice(loadMore - 50, loadMore).map((ticket: any) => {
+    filteredTickets.slice(loadMore - 8, loadMore).map((ticket: any) => {
       /**Mark As read if thread is Active ========== */
       threadId === ticket.ticket_id &&
         unread.length >= 1 &&
@@ -313,7 +313,7 @@ const TicketsList: FC<Props> = ({
         <div className="w-full h-[43.5rem] flex flex-col justify-between overflow-hidden">
           <div
             role="table"
-            className="w-full h-[40.5rem] flex flex-col overflow-hidden overflow-y-scroll scroll-snap pr-1"
+            className="w-full h-[40.5rem] flex flex-col overflow-hidden scroll-snap px-1"
           >
             {tickets}
             {filteredTickets.length <= 0 && (
@@ -335,7 +335,7 @@ const TicketsList: FC<Props> = ({
             <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded-sm border dark:border-slate-700 border-slate-400">
               <button
                 onClick={() => {
-                  setLimit(loadMore <= 99 ? loadMore - 0 : loadMore - 50);
+                  setLimit(loadMore <= 7 ? loadMore - 0 : loadMore - 8);
                 }}
                 className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
               >
@@ -343,7 +343,7 @@ const TicketsList: FC<Props> = ({
               </button>
               <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-400 overflow-hidden px-1">
                 <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
-                  {loadMore - 50 === 0 ? 1 : loadMore - 50}{" "}
+                  {loadMore - 8 === 0 ? 1 : loadMore - 8}{" "}
                   <span className="text-slate-500">-</span>{" "}
                   {loadMore > fetchedTickets.length
                     ? fetchedTickets.length
@@ -355,7 +355,7 @@ const TicketsList: FC<Props> = ({
               <button
                 onClick={() => {
                   setLimit(
-                    fetchedTickets.length > loadMore ? loadMore + 50 : 50
+                    fetchedTickets.length > loadMore ? loadMore + 8 : 8
                   );
                 }}
                 className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
