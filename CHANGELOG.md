@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.8](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.7...v0.7.8) (2022-06-09)
+
+
+### Features
+
+* **canned responses:** canned responses now have a scope to choose from ([b9eac8f](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/b9eac8f7f457b9104d1bd9da5a4264ebe2c1128d))
+
 ### [0.7.7](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.6...v0.7.7) (2022-06-09)
 
 
