@@ -16,7 +16,7 @@ const Pricing: FC = () => {
   //Coimponent ==============================
   return (
     <>
-      <section className="bg-slate-300 pt-28 h-screen w-screen min-h-[40rem] overflow-hidden">
+      <section className="bg-slate-300 py-28 h-screen w-screen min-h-[40rem] overflow-hidden">
         {/**Help Chat ============ */}
         <Help />
         {/**Navigation ========================== */}

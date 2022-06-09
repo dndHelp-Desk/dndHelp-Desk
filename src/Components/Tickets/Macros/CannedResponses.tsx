@@ -4,7 +4,7 @@ import { deleteCannedRes } from "../../Data_Fetching/TicketsnUserData";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
-import useOnClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
+import useClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
 import NewCanned from "./NewCanned";
 
 type Props = {
@@ -32,25 +32,29 @@ const CannedResponses: FC<Props> = ({
   const allCannedRes = useSelector(
     (state: RootState) => state.UserInfo.cannedResponses
   );
-  const modRef = useOnClickOutside(() => {
-    setCanned(false);
-  });
   const [cannedSearch, setCannedSearch] = useState<string>("");
   const [newResponseModal, setModal] = useState<boolean>(false);
+  const modRef = useClickOutside(() => {
+    setCanned(false);
+  });
 
   //component ==========
   return (
     <div
       ref={modRef}
-      className={`absolute bottom-[2.9rem] ${
-        tooltipPosition === "[9.4rem]" ? "left-[-9.4rem]" : "left-[-0.7rem]"
-      } w-[23rem] h-[23rem] pb-1 ${showCanned ? "flex" : "hidden"}`}
+      className={`absolute ${
+        tooltipPosition === "[9.4rem]"
+          ? "left-[-9.4rem] bottom-[2.5rem]"
+          : "left-[-0.7rem] bottom-[2.9rem]"
+      } w-[23rem] h-[23rem] pb-1 ${
+        showCanned ? "group-hover:flex" : "group-hover:hidden"
+      } hidden`}
     >
       {/**New Canned Response Modal */}
       <NewCanned newResponseModal={newResponseModal} setModal={setModal} />
       {/**New Canned Response Modal */}
       <div
-        className={`rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-500 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
+        className={`rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-400 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
           position === 4 ? "after:left-[9.7rem]" : "after:left-5"
         } after:rotate-45 p-2 relative`}
       >

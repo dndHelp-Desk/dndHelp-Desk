@@ -2,9 +2,7 @@ import { FC, useState } from "react";
 
 import Help from "../Others/Help";
 import darkLogo from "./images/dndHelp-Desk.webp";
-import lightLogo from "./images/dndHelp-Desk_Light.webp";
 import { Link, useNavigate } from "react-router-dom";
-import supportImage from "./images/support-image.svg";
 import {
   getAuth,
   signOut,
@@ -13,6 +11,7 @@ import {
 
 //Firestore ===================
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore";
+import SignUp from "./SignUp";
 
 const WorkSpaceSetUp: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,9 +25,9 @@ const WorkSpaceSetUp: FC = () => {
     companany_address: "",
     department: "",
     sending_email: "",
-    password: "",
-    port: "",
-    host: "",
+    password: "njix454%425..0303",
+    port: 465,
+    host: "serv24.registerdomain.co.za",
   });
   const [companyNameError, setCompanyError] = useState<string>("");
   const [userExistError, setUserExistError] = useState<string>("");
@@ -209,17 +208,39 @@ const WorkSpaceSetUp: FC = () => {
 
   //Component  =================================
   return (
-    <div className="h-screen w-screen min-h-[40rem] bg-slate-300 grid grid-cols-3 lg:grid-cols-5 overflow-hidden overflow-y-scroll relative">
+    <div className="h-screen w-screen min-h-[40rem] bg-slate-300 grid grid-cols-3 2xl:grid-cols-5 overflow-hidden overflow-y-scroll relative">
       {/**Contents Fist Half ================================= */}
-      <div className="col-span-2 bg-slate-900 hidden lg:flex flex-col items-center justify-center p-4">
-        <div className="relative w-full flex justify-center">
-          <img src={lightLogo} alt="welcome" className="w-[50%]" />
+      <div className="col-span-2 bg-slate-900 hidden 2xl:flex items-center justify-center p-4 relative">
+        <div className="w-[80%] h-[20rem] grid grid-rows-6">
+          <div className="row-span-4 flex justify-center pt-6 relative">
+            <div className="ml-4 w-[15rem] h-[6.5rem] rounded bg-slate-300 dark:bg-slate-700 flex flex-col space-y-2 justify-center p-6">
+              <div className="h-2 w-2/5 rounded dark:bg-slate-500 bg-slate-700"></div>
+              <div className="h-2 w-full rounded dark:bg-slate-900 bg-slate-100"></div>
+            </div>
+            <div className="absolute bottom-[8%] left-[20%] w-[15rem] h-[6.5rem] rounded bg-slate-200 dark:bg-slate-600 flex flex-col space-y-2 justify-center p-6 shadow-2xl drop-shadow-2xl">
+              <div className="h-2 w-2/5 rounded dark:bg-slate-800 bg-slate-400"></div>
+              <div className="h-2 w-full rounded dark:bg-slate-400 bg-slate-400"></div>
+            </div>
+          </div>
+          <div className="row-span-2 flex flex-col space-y-2 justify-center items-center">
+            <h3 className="text-slate-300 text-xl text-center whitespace-nowrap font-semibold">
+              It's nice to see you
+            </h3>
+            <div className="text-slate-400 text-sm tracking-tight font-medium text-center whitespace-nowrap leading-5">
+              <p> We build software to meet customer needs,</p>
+              <p>set your team up for success, </p>
+              <p>and keep your business in sync.</p>
+            </div>
+          </div>
         </div>
-        <img src={supportImage} alt="welcome" className="w-[70%]" />
+        {/**Deco boxes ================================ */}
+        <div className="absolute h-14 w-14 rounded bg-slate-300 dark:bg-[#33415569] rotate-12 left-10 bottom-10"></div>
+        <div className="absolute h-8 w-8 rounded bg-slate-300 dark:bg-[#33415569] rotate-12 left-10 bottom-40"></div>
+        <div className="absolute h-14 w-14 rounded bg-slate-300 dark:bg-[#33415569] rotate-45 right-14 bottom-24"></div>
       </div>
 
       {/**Contents Second Half ================================= */}
-      <div className="col-span-3 bg-inherit flex items-center justify-center p-4 relative">
+      <div className="col-span-3 bg-inherit flex flex-col items-center justify-center p-4 pt-28 relative">
         <div className="absolute top-2 2xl:top-8 right-6 text-slate-800 text-sm font-semibold">
           Already have an account ?{" "}
           <Link to="/logIn" className="text-blue-600">
@@ -227,20 +248,22 @@ const WorkSpaceSetUp: FC = () => {
           </Link>
         </div>
 
+        <div className="flex justify-center w-full">
+          <img src={darkLogo} alt="logo" className="w-24 mt-auto" />
+        </div>
+        <h1 className="text-xl font-bold text-center capitalize text-slate-800">
+          Create Your Account
+        </h1>
+
+        <SignUp setValues={setValues} setUpValues={setUpValues} />
+
         {/**Form ============================================== */}
         <form
           onSubmit={(e) =>
             handleSubmit(e, setUpValues.user_email, setUpValues.user_password)
           }
-          className="w-full max-w-[40rem] gap-4 flex flex-col p-2"
+          className="w-full max-w-[40rem] gap-4 hflex flex-col p-2 hidden"
         >
-          <div className="flex justify-center w-full">
-            <img src={darkLogo} alt="logo" className="w-24 mt-auto" />
-          </div>
-          <h1 className="text-xl font-semibold text-center capitalize text-slate-800">
-            Create Your Account
-          </h1>
-
           {/**Start =========================== */}
           <h2 className="mt-4 text-sm font-semibold text-center uppercase text-slate-600">
             Personal Info

@@ -1049,7 +1049,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
             </div>
             <div className="flex items-center space-x-2">
               {/**Canned Responses ========================================= */}
-              <div className="relative">
+              <div className="relative group">
                 <div
                   onClick={() => {
                     setCanned((prev) => {

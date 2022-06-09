@@ -803,7 +803,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center pr-[0.08rem]">
                 {/**Canned Response ========================================= */}
-                <div className="w-8 h-8 rounded-l-sm bg-slate-50 dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
+                <div className="w-8 h-8 group rounded-l-sm bg-slate-50 dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
                   <abbr title="Canned Response">
                     <button
                       type="button"

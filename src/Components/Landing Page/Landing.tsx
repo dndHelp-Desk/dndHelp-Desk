@@ -144,7 +144,7 @@ const Landing: FC = () => {
             <img
               src={heroTop}
               alt="showcase"
-              className="object-fit object-center object-cover rounded shadow-2xl drop-shadow-2xl hidden md:flex"
+              className="object-fit object-center object-cover rounded shadow-2xl drop-shadow-2xl hidden md:flex max-w-[90%] xl:max-w-full"
             />
             <img
               src={heroTopSm}
