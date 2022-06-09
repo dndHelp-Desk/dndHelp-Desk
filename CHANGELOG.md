@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.7](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.6...v0.7.7) (2022-06-09)
+
+
+### Features
+
+* **filters:** now you can filter by time of the day ([8ad2caa](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/8ad2caacf6311aaede029775a739b1755cd00f1a))
+
+
+### Bug Fixes
+
+* **new ticket:** changed the new ticket styles to prevent hiding "to" field ([535895a](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/535895acee762401f875f20d661ff60155285f9d))
+
 ### [0.7.6](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.5...v0.7.6) (2022-06-07)
 
 ### [0.7.5](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.4...v0.7.5) (2022-06-03)
