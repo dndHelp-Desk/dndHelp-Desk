@@ -40,7 +40,7 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
 
   //Save New Canned Response =========
   const openNew = () => {
-    if (input.name?.length >= 1 && input.name?.length >= 9) {
+    if (input?.name.length >= 1 && input?.message?.length >= 9) {
       if (input.scope === "private") {
         newCannedRes(user[0]?.id, input?.name, input?.message);
       } else if (input.scope === "public") {
