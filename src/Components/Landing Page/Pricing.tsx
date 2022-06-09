@@ -16,7 +16,7 @@ const Pricing: FC = () => {
   //Coimponent ==============================
   return (
     <>
-      <section className="bg-slate-300 py-28 h-screen w-screen min-h-[40rem] overflow-hidden">
+      <section className="bg-slate-300 pt-28 w-screen min-h-[70rem] overflow-hidden">
         {/**Help Chat ============ */}
         <Help />
         {/**Navigation ========================== */}
@@ -137,7 +137,7 @@ const Pricing: FC = () => {
 
               <div className="flex-1 xl:mx-8">
                 <div className="mt-8 space-y-8 md:-mx-4 md:flex md:items-center md:justify-center md:space-y-0 xl:mt-0">
-                  <div className="max-w-sm mx-auto border border-slate-400 rounded-lg md:mx-4">
+                  <div className="max-w-sm mx-auto border border-slate-400 bg-[#c4d1dd] rounded-lg md:mx-4">
                     <div className="p-6">
                       <h1 className="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
                         Free
@@ -157,20 +157,21 @@ const Pricing: FC = () => {
                         Yearly payment
                       </p>
 
-                      <button
-                        role="link"
-                        className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                      <Link
+                        onClick={() => {
+                          window.localStorage.setItem("plan", "free");
+                        }}
+                        to="/workspace-setup"
+                        className="outline-none focus:outline-none font-medium"
                       >
-                        <Link
-                          onClick={() => {
-                            window.localStorage.setItem("plan", "free");
-                          }}
-                          to="/workspace-setup"
-                          className="outline-none focus:outline-none font-medium"
+                        {" "}
+                        <button
+                          role="link"
+                          className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                         >
                           Start Now
-                        </Link>
-                      </button>
+                        </button>
+                      </Link>
                     </div>
 
                     <hr className="border-slate-400" />
@@ -229,7 +230,7 @@ const Pricing: FC = () => {
                     </div>
                   </div>
 
-                  <div className="max-w-sm mx-auto border border-slate-400 rounded-lg md:mx-4">
+                  <div className="max-w-sm mx-auto border border-slate-400 bg-[#c4d1dd] rounded-lg md:mx-4">
                     <div className="p-6">
                       <h1 className="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
                         Premium
@@ -250,20 +251,20 @@ const Pricing: FC = () => {
                         Pay as you go
                       </p>
 
-                      <button
-                        role="link"
-                        className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                      <Link
+                        onClick={() => {
+                          window.localStorage.setItem("plan", "pro");
+                        }}
+                        to="/workspace-setup"
+                        className="outline-none focus:outline-none font-medium"
                       >
-                        <Link
-                          onClick={() => {
-                            window.localStorage.setItem("plan", "pro");
-                          }}
-                          to="/workspace-setup"
-                          className="outline-none focus:outline-none font-medium"
+                        <button
+                          role="link"
+                          className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                         >
                           Start Now
-                        </Link>
-                      </button>
+                        </button>
+                      </Link>
                     </div>
 
                     <hr className="border-slate-400" />

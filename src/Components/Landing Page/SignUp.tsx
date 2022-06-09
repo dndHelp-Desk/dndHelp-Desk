@@ -1,17 +1,31 @@
-import { FC, useState } from "react";
-import { Stepper, Button} from "@mantine/core";
+import { FC } from "react";
+import { BiRocket } from "react-icons/bi";
+import { Stepper, Button } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 type Props = {
   setValues: any;
   setUpValues: any;
+  handleSubmit: any;
+  loading: boolean;
+  logged: boolean;
+  active: number;
+  setActive: any;
 };
 
-const SignUp: FC<Props> = ({ setValues, setUpValues }) => {
-  const [active, setActive] = useState(1);
+const SignUp: FC<Props> = ({
+  setValues,
+  setUpValues,
+  handleSubmit,
+  loading,
+  logged,
+  active,
+  setActive,
+}) => {
   const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
+    setActive((current: number) => (current < 2 ? current + 1 : current));
   const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current));
+    setActive((current: number) => (current > 0 ? current - 1 : current));
 
   return (
     <div className="h-[20rem] w-[85%] mt-10 px-6">
@@ -179,31 +193,53 @@ const SignUp: FC<Props> = ({ setValues, setUpValues }) => {
                 <span className="uppercase text-[0.7rem] font-bold">
                   Email Account
                 </span>
-                <input
-                  type="text"
-                  name="sending_email"
-                  id="sending_email"
-                  placeholder="support@company.com"
-                  required
-                  value={setUpValues.sending_email}
-                  onChange={(e) =>
-                    setValues({ ...setUpValues, sending_email: e.target.value })
-                  }
-                  className="outline-none focus:outline-none rounded placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
-                />
+                <div className="rounded bg-slate-200 border-slate-400 border flex justify-between flex-nowrap overflow-hidden">
+                  <input
+                    type="text"
+                    name="sending_email"
+                    id="sending_email"
+                    placeholder="support"
+                    required
+                    value={setUpValues.sending_email}
+                    onChange={(e) =>
+                      setValues({
+                        ...setUpValues,
+                        sending_email: e.target.value,
+                      })
+                    }
+                    className="outline-none focus:outline-none placeholder:text-xs text-sm border-0 focus:ring-0 focus:border-slate-400 h-10 bg-inherit w-3/5"
+                  />
+                  <div className="h-10 w-2/5 border-l border-slate-400 flex items-center px-4">
+                    <span>@dndhelp-desk.co.za</span>
+                  </div>
+                </div>
               </label>
             </div>
           </div>
         </Stepper.Step>
-        <Stepper.Step
-          label="Final step"
-          description="Get full access"
-          allowStepSelect={active > 2}
-        >
-          Step 3 content: Get full access
-        </Stepper.Step>
         <Stepper.Completed>
-          Completed, click back button to get to previous step
+          <div className="w-full flex flex-col justify-center items-center p-4 py-12 px-10 space-y-6">
+            {loading ? (
+              <>
+                <h3 className="text-center font-semibold text-slate-800">
+                  Please wait we still Processing ...
+                </h3>
+                <div className="h-2 w-40 rounded bg-slate-600 overflow-hidden relative">
+                  <div
+                    id="setUpLoading"
+                    className="w-2/5 h-full bg-blue-700 absolute"
+                  ></div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 className="text-center font-semibold text-slate-800">
+                  Account created succesfully, Press login to get started.
+                </h3>
+                <BiRocket className="text-3xl fill-slate-800" />
+              </>
+            )}
+          </div>
         </Stepper.Completed>
       </Stepper>
 
@@ -214,12 +250,19 @@ const SignUp: FC<Props> = ({ setValues, setUpValues }) => {
         >
           Back
         </Button>
-        <Button
-          className="px-2 h-10 w-36 rounded-sm bg-blue-700 text-slate-50"
-          onClick={nextStep}
-        >
-          {active === 2?"Finish":"Continue"}
-        </Button>
+        <Link to={logged && active === 2 ? "/login" : "/workspace-setup"}>
+          <Button
+            disabled={active === 2 && loading ? true : false}
+            className="px-2 h-10 w-36 rounded-sm bg-blue-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
+            onClick={() => {
+              active === 1 &&
+                handleSubmit(setUpValues.user_email, setUpValues.user_password);
+              nextStep();
+            }}
+          >
+            {active === 1 ? "Submit" : active === 2 ? "Login" : "Continue"}
+          </Button>
+        </Link>
       </div>
     </div>
   );

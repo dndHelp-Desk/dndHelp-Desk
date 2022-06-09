@@ -89,7 +89,7 @@ const Landing: FC = () => {
               <div className="flex space-x-2 items-center relative px-4">
                 {/**Logiin button ================== */}
                 <Link to="/logIn">
-                  <button className="bg-slate-900 h-9 w-[8rem] rounded-sm text-slate-300 font-bold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800 flex justify-between items-center px-5">
+                  <button className="bg-slate-900 h-10 w-[8rem] rounded text-slate-300 font-bold tracking-wide outline-none uppercase text-sm focus:outline-none focus:ring focus:ring-slate-500 hover:bg-slate-800 flex justify-between items-center px-4">
                     <span>Log In</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ const Landing: FC = () => {
             <div className="h-12 w-full justify-center gap-6 hidden md:flex">
               <NavLink
                 to="/pricing"
-                className="hidden sm:inline-block bg-blue-700 h-10 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-900 hover:bg-blue-600 transition-all duration-200 font-medium"
+                className="hidden sm:inline-block bg-blue-700 h-12 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none border-2 border-slate-800 focus:ring focus:ring-slate-900 hover:bg-blue-600 transition-all duration-200 font-medium"
               >
                 <div className="h-full w-full flex justify-center items-center ">
                   Get started free

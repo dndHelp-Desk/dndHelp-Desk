@@ -234,6 +234,20 @@
     }
   }
 
+  /* SetUp New Account Loading Bar ===========================*/
+  #setUpLoading{
+    animation: loading linear 1s infinite alternate;
+  }
+
+   @keyframes loading {
+    from {
+      left: -50%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+
   /**HIde Date picker*/
   .DueDatePicker {
     display: none !important;
