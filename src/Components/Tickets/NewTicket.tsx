@@ -981,16 +981,16 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 value={value}
                 onImageUpload={handleImageUpload}
                 onChange={onChange}
-                className="`replyEditor h-full w-full border border-slate-400 dark:border-slate-700 bg-inherit text-inherit overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar"
+                className="`replyEditor h-full w-full border border-slate-400 dark:border-slate-700 bg-inherit text-slate-700 dark:text-slate-400 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar"
                 classNames={{
                   toolbar:
                     "bg-white dark:bg-slate-800 flex justify-center items-center  flex-nowrap w-full text-slate-700 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700 rounded-none sticky p-0  overflow-hidden",
                   toolbarInner:
-                    "bg-slate-50 dark:bg-[#182235] text-inherit border-b border-slate-300 dark:border-slate-700 w-full h-[3.25rem] flex justify-center flex-nowrap overflow-hidden py-1",
+                    "bg-slate-50 dark:bg-[#182235] text-slate-700 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700 w-full h-[3.25rem] flex justify-center flex-nowrap overflow-hidden py-1",
                   toolbarGroup:
-                    "bg-inherit text-inherit border-0 border-slate-300 dark:border-slate-600 rounded-sm flex justify-between w-full",
+                    "bg-inherit text-slate-700 dark:text-slate-400 border-0 border-slate-300 dark:border-slate-600 rounded-sm flex justify-between w-full",
                   toolbarControl:
-                    "bg-inherit text-inherit border-0  dark:hover:bg-slate-600 hover:bg-white rounded-sm",
+                    "bg-inherit text-slate-700 dark:text-slate-400 border-0  dark:hover:bg-slate-600 hover:bg-white rounded-sm",
                   root: "replyEditor h-full py-0 pl-0 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800",
                 }}
                 controls={[

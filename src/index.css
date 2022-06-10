@@ -18,10 +18,11 @@
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
     border: 2px solid inherit;
-    -webkit-text-fill-color: #64748b;
+    -webkit-text-fill-color:#94a3b8;
     -webkit-box-shadow: 0 0 0px 1000px inherit inset;
     transition: background-color 5000s ease-in-out 0s;
   }
+
 
   .TabsLinks {
     @apply flex lg:justify-center items-center space-x-1 w-[5rem] hover:text-blue-600 text-[0.7rem] outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wider overflow-hidden transition-colors duration-200;
