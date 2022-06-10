@@ -277,7 +277,7 @@ const Navbar: FC<Props> = ({
         {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15.5rem] w-[12.5rem] dark:bg-slate-900 bg-white shadow-2xl drop-shadow-2xl backdrop-blur-sm px-2 border border-slate-400 dark:border-slate-700 rounded-sm absolute left-0 top-11 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 pt-2 ${
+            className={`h-[15.5rem] w-[12.5rem] dark:bg-slate-900 bg-white shadow-2xl drop-shadow-2xl backdrop-blur-sm px-2 border border-slate-400 dark:border-slate-700 rounded-sm absolute left-0 top-12 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 pt-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
