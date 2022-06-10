@@ -18,11 +18,11 @@
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
     border: 2px solid inherit;
-    -webkit-text-fill-color:#94a3b8;
+    -webkit-text-fill-color: #64748b;
+    color: inherit;
     -webkit-box-shadow: 0 0 0px 1000px inherit inset;
     transition: background-color 5000s ease-in-out 0s;
   }
-
 
   .TabsLinks {
     @apply flex lg:justify-center items-center space-x-1 w-[5rem] hover:text-blue-600 text-[0.7rem] outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wider overflow-hidden transition-colors duration-200;
@@ -236,11 +236,11 @@
   }
 
   /* SetUp New Account Loading Bar ===========================*/
-  #setUpLoading{
+  #setUpLoading {
     animation: loading linear 1s infinite alternate;
   }
 
-   @keyframes loading {
+  @keyframes loading {
     from {
       left: -50%;
     }
@@ -371,9 +371,9 @@
   .building-blocks div {
     height: 20px;
     position: absolute;
-    left:50%;
-    top:45%;
-    border-radius:5px;
+    left: 50%;
+    top: 45%;
+    border-radius: 5px;
     width: 20px;
   }
   .building-blocks div:after {

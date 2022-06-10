@@ -260,7 +260,7 @@ const WorkSpaceSetUp: FC = () => {
       </div>
 
       {/**Contents Second Half ================================= */}
-      <div className="col-span-3 bg-inherit flex flex-col items-center justify-center p-4 pt-28 relative">
+      <div className="col-span-3 bg-inherit flex flex-col items-center justify-center p-4 py-28 relative">
         <div className="absolute top-2 2xl:top-4 right-4 text-slate-800 text-sm font-bold flex items-center space-x-4 w-fit h-fil">
           <span>Already have an account ? </span>
           <Link to="/login" className="flex">

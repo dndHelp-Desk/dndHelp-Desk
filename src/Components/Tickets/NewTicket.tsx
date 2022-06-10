@@ -640,7 +640,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Contact and Subject ============================================== */}
               <div className="w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     To
                   </legend>
                   <label
@@ -676,7 +676,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   </label>
                 </fieldset>
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     subject
                   </legend>
                   <label
@@ -716,7 +716,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Priority and Status =============================================== */}
               <div className="overflow-hidden w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     Priority
                   </legend>
                   <label
@@ -763,7 +763,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 </fieldset>
 
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     Status
                   </legend>
                   <label
@@ -820,7 +820,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Email and Numbers =============================================== */}
               <div className="w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     Email
                   </legend>
                   <label
@@ -850,7 +850,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 </fieldset>
 
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     Phone
                   </legend>
                   <label
@@ -900,7 +900,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
               {/**Name And Team =============================================== */}
               <div className="overflow-hidden w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     Name
                   </legend>
                   <label
@@ -928,7 +928,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 </fieldset>
 
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
                     Team
                   </legend>
                   <label
