@@ -497,7 +497,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     //Generate unique Id =========================
     let generatedId = () => {
       let combined = `#${
-        inputValue?.branch_company?.toUpperCase()?.charAt(2) +
+        inputValue?.branch_company
+          ?.toUpperCase()
+          ?.charAt(inputValue?.branch_company?.length - 1) +
         new Date().getFullYear().toString().slice(2, 4) +
         new Date().toISOString().slice(5, 7) +
         new Date().toISOString().slice(8, 10) +
