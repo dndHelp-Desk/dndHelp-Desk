@@ -499,7 +499,9 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       let combined = `#${
         inputValue?.branch_company
           ?.toUpperCase()
-          ?.charAt(inputValue?.branch_company?.length - 1) +
+          ?.replace(/\s/g, "")
+          ?.charAt(inputValue?.branch_company?.length - 1)
+          ?.replace(/\W/g, "X") +
         new Date().getFullYear().toString().slice(2, 4) +
         new Date().toISOString().slice(5, 7) +
         new Date().toISOString().slice(8, 10) +
@@ -574,6 +576,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     JSON.stringify(inputValue)
                   );
                   setModal(false);
+                  setSubmit(false);
                   document.body.style.overflow = "";
                 }}
                 className="h-5 w-5 rounded-sm flex items-center justify-center dark:bg-slate-700  bg-slate-200  hover:opacity-80 transition-all outline-none focus:outline-none border border-slate-500 dark:border-slate-600"
@@ -626,6 +629,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   onChange("<p></p>");
                   setShowOpen(true);
                   setModal(false);
+                  setSubmit(false);
                   !isSubmiting && setModal(false);
                   document.body.style.overflow = "";
                 }}

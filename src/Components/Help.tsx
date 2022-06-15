@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { BsFillChatSquareTextFill, BsXSquareFill } from "react-icons/bs";
-import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
+import useClickOutside from "../Custom-Hooks/useOnClickOutsideRef";
 import lightLogo from "./images/dndHelp-Desk_Light.png";
 
 const Help: FC = () => {

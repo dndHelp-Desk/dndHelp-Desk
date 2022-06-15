@@ -1,41 +1,41 @@
 import { FC, Suspense, lazy } from "react";
-import Redirects from "./Components/Auth/Redirects";
-import ReportsComponent from "./Components/Reports/ReportComponent";
+import Redirects from "./Pages/Auth/Redirects";
+import ReportsComponent from "./Pages/Reports/ReportComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from "./Components/Landing Page/Landing";
-import LogIn from "./Components/Auth/LogIn";
-import TicketsComponent from "./Components/Tickets/TicketsComponent";
-import ContactsComponent from "./Components/Contacts/ContactsComponent";
-import ErrorPage from "./Components/Landing Page/ErrorPage";
+import Landing from "./Pages/Landing Page/Landing";
+import LogIn from "./Pages/Auth/LogIn";
+import TicketsComponent from "./Pages/Tickets/TicketsComponent";
+import ContactsComponent from "./Pages/Contacts/ContactsComponent";
+import ErrorPage from "./Pages/Landing Page/ErrorPage";
 
 //Lazy Loading Components || Code Splitting ====================
 const Dashboard = lazy(
-  () => import("./Components/Main_Dashboard/MainContainer")
+  () => import("./Pages/Main_Dashboard/MainContainer")
 );
 const SettingsComponent = lazy(
-  () => import("./Components/Settings/SettingsComponents")
+  () => import("./Pages/Settings/SettingsComponents")
 );
 // const SupportHome = lazy(
-//   () => import("./Components/ClientSupport/SupportHome")
+//   () => import("./Pages/ClientSupport/SupportHome")
 // );
-//const NewTicket = lazy(() => import("./Components/ClientSupport/NewTicket"));
+//const NewTicket = lazy(() => import("./Pages/ClientSupport/NewTicket"));
 //const KnowledgeBase = lazy(
-//  () => import("./Components/ClientSupport/KnowledgeBase")
+//  () => import("./Pages/ClientSupport/KnowledgeBase")
 //);
-const Account = lazy(() => import("./Components/Settings/Account"));
-const Team = lazy(() => import("./Components/Settings/Team"));
+const Account = lazy(() => import("./Pages/Settings/Account"));
+const Team = lazy(() => import("./Pages/Settings/Team"));
 const SupportOperations = lazy(
-  () => import("./Components/Settings/Support Operations/SupportOperations")
+  () => import("./Pages/Settings/Support Operations/SupportOperations")
 );
 const AutomatedReports = lazy(
-  () => import("./Components/Settings/AutomatedReports")
+  () => import("./Pages/Settings/AutomatedReports")
 );
-const Solutions = lazy(() => import("./Components/Settings/Solutions"));
+const Solutions = lazy(() => import("./Pages/Settings/Solutions"));
 
 //Getting Started Or Setting Up An Account ========================
-const Pricing = lazy(() => import("./Components/Landing Page/Pricing"));
+const Pricing = lazy(() => import("./Pages/Landing Page/Pricing"));
 const WorkSpaceSetUp = lazy(
-  () => import("./Components/Landing Page/WorkSpaceSetUp")
+  () => import("./Pages/Landing Page/WorkSpaceSetUp")
 );
 
 const App: FC = () => {

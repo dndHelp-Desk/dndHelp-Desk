@@ -4,7 +4,7 @@ import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import darkLogo from "./images/dndHelp-Desk_Dark.webp";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { BsFillCheckCircleFill } from "react-icons/bs";
-import Help from "../Others/Help";
+import Help from "../../Components/Help";
 import Footer from "./Footer";
 
 const Pricing: FC = () => {

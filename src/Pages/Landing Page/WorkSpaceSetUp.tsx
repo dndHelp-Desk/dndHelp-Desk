@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
-
-import Help from "../Others/Help";
+import Help from "../../Components/Help";
 import darkLogo from "./images/dndHelp-Desk.webp";
 import { Link } from "react-router-dom";
 import {
@@ -13,7 +12,7 @@ import {
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore";
 import SignUp from "./SignUp";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import AlertsWrapper from "../Others/AlertsWrapper";
+import AlertsWrapper from "../../Components/AlertsWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 

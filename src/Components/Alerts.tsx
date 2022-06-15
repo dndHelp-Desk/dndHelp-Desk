@@ -1,8 +1,8 @@
 import { FC, useState, useEffect } from "react";
 import { BiX } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import { AppDispatch, RootState } from "../../Redux/store";
+import { updateAlert } from "../Redux/Slices/NotificationsSlice";
+import { AppDispatch, RootState } from "../Redux/store";
 
 type Props = {
   alert: any;

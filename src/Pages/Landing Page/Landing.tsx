@@ -9,7 +9,7 @@ import reportImg from "./images/report.webp";
 import reportImg2 from "./images/report2.webp";
 import Footer from "./Footer";
 import useOnClickOutside from "./../../Custom-Hooks/useOnClickOutsideRef";
-import Help from "../Others/Help";
+import Help from "../../Components/Help";
 import Cookies from "./Cookies";
 
 const Landing: FC = () => {

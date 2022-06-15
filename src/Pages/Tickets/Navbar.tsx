@@ -18,7 +18,7 @@ import {
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import OffFilters from "./OffFilters";
 import { AppDispatch, RootState } from "../../Redux/store";
-import ActionPanel from "../Others/ActionPanel";
+import ActionPanel from "../../Components/ActionPanel";
 
 interface Props {
   deleteArray: any;

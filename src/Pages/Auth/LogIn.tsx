@@ -26,10 +26,10 @@ import {
   setCompany,
   updateUser,
 } from "../../Redux/Slices/UserSlice";
-import AlertsWrapper from "../Others/AlertsWrapper";
+import AlertsWrapper from "../../Components/AlertsWrapper";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import { AppDispatch, RootState } from "../../Redux/store";
-import Help from "../Others/Help";
+import Help from "../../Components/Help";
 
 //Config Firebase ==================================
 const firebaseConfig = {

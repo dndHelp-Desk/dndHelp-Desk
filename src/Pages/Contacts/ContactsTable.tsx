@@ -13,7 +13,7 @@ import { BsTwitter, BsWhatsapp } from "react-icons/bs";
 import { deleteContact } from "../Data_Fetching/TicketsnUserData";
 import EditContact from "./EditContact";
 import { RootState } from "../../Redux/store";
-import ActionPanel from "../Others/ActionPanel";
+import ActionPanel from "../../Components/ActionPanel";
 
 interface Prop {
   setModal: any;

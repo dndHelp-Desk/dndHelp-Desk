@@ -18,7 +18,7 @@ import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
-import AlertsWrapper from "../Others/AlertsWrapper";
+import AlertsWrapper from "../../Components/AlertsWrapper";
 import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
 import Profile from "../Auth/Profile";
 import Notification from "./Notification";

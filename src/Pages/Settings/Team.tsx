@@ -10,7 +10,7 @@ import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import NewUser from "./NewUser";
 import { AppDispatch, RootState } from "../../Redux/store";
 import EditUser from "./EditUser";
-import ActionPanel from "../Others/ActionPanel";
+import ActionPanel from "../../Components/ActionPanel";
 
 const Team: FC = () => {
   const dispatch: AppDispatch = useDispatch();
