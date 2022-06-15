@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.9](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.8...v0.7.9) (2022-06-15)
+
+
+### Bug Fixes
+
+* **new ticket:** removed a non alphabetic character from the ticket id and replace with X ([245bcab](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/245bcabdca1faf5abadf6eb3d0687a457b709d10))
+
 ### [0.7.8](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.7...v0.7.8) (2022-06-09)
 
 
