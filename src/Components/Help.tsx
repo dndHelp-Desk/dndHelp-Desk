@@ -57,7 +57,7 @@ const Help: FC = () => {
           <div className="w-full h-[90%] rounded"></div>
           <textarea
             placeholder="Type here ...."
-            className="w-full h-[10%] bg-slate-900 placeholder:text-xs placeholder:text-slate-300 text-slate-300 outline-none focus:outline-none focus:border-none border-slate-800 resize-none rounded"
+            className="w-full h-[10%] bg-slate-900 placeholder:text-xs placeholder:text-slate-300 text-slate-300 outline-none focus:outline-none focus:border-none border-slate-800 resize-none rounded no-scrollbar no-scrollbar::-webkit-scrollbar"
           ></textarea>
         </form>
       </div>
