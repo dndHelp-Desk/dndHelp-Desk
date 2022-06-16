@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.10](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.9...v0.7.10) (2022-06-16)
+
+
+### Bug Fixes
+
+* **tickets:** fixed messages which gets sent to a wrong thread when updating a ticket ([3d89a34](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/3d89a3481598f2afafa867d323970e1c975a5578)), closes [#29](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/29)
+* **tickets:** fixed messages which gets sent to a wrong thread when updating a ticket ([cdc18b5](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/cdc18b5648353cd75ccd4d7df935e10911967b70))
+
 ### [0.7.9](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.8...v0.7.9) (2022-06-15)
 
 
