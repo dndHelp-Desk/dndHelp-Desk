@@ -4,7 +4,7 @@ import {
   updateEmailAccount,
   newEmailAccount,
   deleteEmailAccount,
-} from "../../Data_Fetching/TicketsnUserData";
+} from "../../../Adapters/Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
 import {
   BsFillPersonFill,

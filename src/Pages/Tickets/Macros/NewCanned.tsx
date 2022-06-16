@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { RichTextEditor } from "@mantine/rte";
 import { BiDetail } from "react-icons/bi";
 import useOnClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
-import { newCannedRes } from "../../Data_Fetching/TicketsnUserData";
+import { newCannedRes } from "../../../Adapters/Data_Fetching/TicketsnUserData";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";

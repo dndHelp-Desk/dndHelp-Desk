@@ -70,7 +70,7 @@ const Home: FC = () => {
                 className={`object-cover w-full h-full object-center rounded-full border-2 border-slate-500 dark:border-slate-300`}
               />
               <div
-                className={`absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white ${
+                className={`absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white font-sans ${
                   user.status === "available"
                     ? "bg-green-600"
                     : user.status === "unavailable"
@@ -81,10 +81,10 @@ const Home: FC = () => {
             </div>
             <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
               <abbr title={user.name}>
-                <p className="tracking-normal">{user.name}</p>
+                <p className="tracking-normal font-sans">{user.name}</p>
               </abbr>
               <abbr title={user.email}>
-                <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic">
+                <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic font-sans">
                   {user.email}
                 </p>
               </abbr>
@@ -101,18 +101,18 @@ const Home: FC = () => {
       } dark:bg-transparent bg-transparent w-[95%] 2xl:w-[75rem] min-h-screen mt-4 select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit tracking-wide">
-        <section className="row-span-3 rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <section className="row-span-3 rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/**Top 5 Categories  ========================= */}
           <ProgressBars />
           {/**Todo List ================================ */}
           {/* <ToDo />*/}
           {/**Tickets Per Status Summary ================================ */}
-          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded-md px-4 pb-4">
+          <div className="col-span-1 h-[20rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded px-4 pb-4">
             <div className="row-span-2 bg-no-repeat bg-center bg-contain flex flex-col justify-center items-center px-4">
-              <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-1">
-                Tickets Per Status
+              <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase font-sans">
+                Tickets Status
               </h1>
-              <p className="dark:text-slate-400 text-slate-600 text-center text-xs font-medium tracking-normal mt-2 px-2">
+              <p className="dark:text-slate-400 text-slate-600 text-center text-xs font-medium tracking-normal mt-2 px-2 font-sans">
                 Hover your mouse on top of each slice below to see the
                 percentages, for more analytics please visit the reports page.
               </p>
@@ -120,12 +120,12 @@ const Home: FC = () => {
             <StatusSummary />
           </div>
           {/**MostRecent ================================= */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-800 bg-white  border dark:border-slate-800 border-slate-300 rounded-md p-4 pt-3 pb-4 flex flex-col justify-between items-center">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-[20rem] dark:bg-slate-800 bg-white  border dark:border-slate-800 border-slate-300 rounded p-4 pt-3 pb-4 flex flex-col justify-between items-center">
             <article className="text-center">
-              <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-3">
+              <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold uppercase mt-3 font-sans">
                 Recent Activities
               </h1>
-              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600 mt-2">
+              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600 mt-2 font-sans">
                 Your most recent activities.
               </p>
             </article>
@@ -134,8 +134,8 @@ const Home: FC = () => {
         </section>
 
         {/**Middle Half ================================ */}
-        <section className="row-span-2 w-full h-fit lg:min-h-[18rem] rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4 overflow-hidden">
-          <div className="col-span-2 w-full h-full rounded-md grid grid-cols-2 md:grid-cols-7 gap-4">
+        <section className="row-span-2 w-full h-fit lg:min-h-[18rem] rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center space-y-4 lg:space-y-0 lg:gap-4 overflow-hidden">
+          <div className="col-span-2 w-full h-full rounded grid grid-cols-2 md:grid-cols-7 gap-4">
             {/**Connect Other Sources || Omni Channel Settings==================================== */}
             <Connect openAPIModal={openAPIModal} />
             <ConnectModal
@@ -144,11 +144,11 @@ const Home: FC = () => {
             />
 
             {/**Progress ============================== */}
-            <article className="col-span-5 md:col-span-2 min-h-[10rem]  max-h-[18rem] h-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-2">
-              <h3 className="dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
+            <article className="col-span-5 md:col-span-2 min-h-[10rem]  max-h-[18rem] h-full rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-2">
+              <h3 className="dark:text-slate-300 text-slate-900 text-base font-medium font-sans capitalize">
                 Progress
               </h3>
-              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600">
+              <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600 font-sans">
                 Manage all tickets in one place
                 <br /> currently you have{" "}
                 <span className="text-slate-900 dark:text-slate-300 font-semibold">
@@ -174,7 +174,7 @@ const Home: FC = () => {
               </div>
               <Link
                 to="/app/tickets"
-                className="text-blue-600 text-sm font-medium flex md:hidden xl:flex items-center justify-center space-x-2"
+                className="text-blue-600 text-sm font-medium font-sans flex md:hidden xl:flex items-center justify-center space-x-2"
               >
                 <span>View all Your Tickets</span>
                 <BsArrowRight />
@@ -183,7 +183,7 @@ const Home: FC = () => {
           </div>
 
           {/**Online Users ================================ */}
-          <div className="col-span-2 lg:col-span-1 h-[18rem] w-full rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2">
+          <div className="col-span-2 lg:col-span-1 h-[18rem] w-full rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2">
             <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-2 overflow-hidden">
               {allMembers?.filter(
                 (user) => user.access?.toLowerCase() === "agent"
@@ -191,9 +191,9 @@ const Home: FC = () => {
                 (user[0]?.access && user[0]?.access) !== "client" && (
                   <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
                     <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
-                      <h3 className="flex-[2] text-base font-medium font-sans tracking-wide capitalize">
+                      <h2 className="flex-[2] text-base font-medium font-sans tracking-wide capitalize">
                         Members
-                      </h3>
+                      </h2>
                       <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize">
                         <div className="col-span-1 flex flex-col justify-center items-center">
                           <p className="dark:text-slate-300 text-slate-700 text-xs font-bold">
@@ -249,7 +249,7 @@ const Home: FC = () => {
               ).length <= 0 ||
                 (user[0]?.access && user[0]?.access) === "client") && (
                 <div className="h-full w-full">
-                  <div className="h-full w-full rounded dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 p-6 space-y-4">
+                  <div className="h-full w-full rounded-sm dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 p-6 space-y-4">
                     <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center uppercase text-xs font-sans font-bold">
                       add your team members
                     </h2>

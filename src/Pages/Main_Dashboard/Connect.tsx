@@ -17,10 +17,10 @@ type Props = {
 
 const Connect: FC<Props> = ({ openAPIModal }) => {
   return (
-    <div className="col-span-5 h-full min-h-[18rem] rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 overflow-hidden relative">
+    <div className="col-span-5 h-full min-h-[18rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 overflow-hidden relative">
       <div className="rounded w-full h-full p-2 flex-col flex justify-between gap-4">
         <article>
-          <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize">
+          <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-base font-medium font-sans capitalize">
             Connect
           </h3>
           <p className="text-xs text-slate-600 dark:text-slate-400 font-medium tracking-normal">

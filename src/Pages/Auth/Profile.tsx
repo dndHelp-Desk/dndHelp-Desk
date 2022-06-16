@@ -13,7 +13,7 @@ import {
   updateUserStatus,
   updateProfileUrl,
   updateUID,
-} from "../Data_Fetching/TicketsnUserData";
+} from "../../Adapters/Data_Fetching/TicketsnUserData";
 import defaultProfile from "./../../default.webp";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { updateUser } from "../../Redux/Slices/UserSlice";

@@ -3,20 +3,22 @@ import { RichTextEditor } from "@mantine/rte";
 import DueDate from "./DueDate";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { addTicket } from "../Data_Fetching/TicketsnUserData";
+import { addTicket } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { addRecording } from "../Auth/Firebase";
 import {
   BiTrash,
   BiAlarm,
-  BiFile,
+  BiCalendarCheck,
+  BiCollection,
   BiMinus,
   BiMicrophone,
   BiUser,
 } from "react-icons/bi";
 import { AppDispatch, RootState } from "../../Redux/store";
 import CannedResponses from "./Macros/CannedResponses";
+import HintTooltip from "../../Components/HintTooltip";
 
 interface Props {
   newTicketModal: any;
@@ -1025,7 +1027,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
           <div className="dark:bg-slate-700 bg-slate-200 h-[3rem] w-full p-2 px-4 flex justify-between items-center  select-none">
             <div className="flex justify-center items-center">
               {/**Reset Input ========================================= */}
-              <abbr title="Clear Inputs">
+              <div className="relative group">
+                <HintTooltip
+                  details={"Clear All Data"}
+                  positions={{
+                    horizontal: `left-0`,
+                    vertical: `top-[-70%]`,
+                  }}
+                />
                 <span
                   onClick={() => {
                     setValues({
@@ -1047,11 +1056,11 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     onChange("");
                     setFile(false);
                   }}
-                  className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded text-slate-600 dark:text-slate-400 cursor-pointer"
+                  className="h-10 w-10 flex justify-center items-center outline-none focus:outline-none hover:opacity-80 rounded text-red-500 cursor-pointer"
                 >
                   <BiTrash />
                 </span>
-              </abbr>
+              </div>
             </div>
             <div className="flex items-center space-x-2">
               {/**Canned Responses ========================================= */}
@@ -1070,7 +1079,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300 outline-none focus:outline-none"
                 >
                   <abbr title="Macros">
-                    <BiFile />
+                    <BiCollection />
                   </abbr>
                 </div>
                 <CannedResponses
@@ -1083,7 +1092,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 />
               </div>
               {/**Upload Recordings ========================================= */}
-              <abbr title="Upload Your Recording">
+              <div className="relative group">
+                <HintTooltip
+                  details={"Upload an audio"}
+                  positions={{
+                    horizontal: `right-0`,
+                    vertical: `top-[-115%]`,
+                  }}
+                />
                 <div className="w-8 h-8 border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 border-slate-300 dark:border-slate-600 rounded flex justify-center items-center">
                   <label
                     htmlFor="recording"
@@ -1106,16 +1122,23 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     />
                   </label>
                 </div>
-              </abbr>
+              </div>
               {/**Due date ========================================= */}
               <div className="w-8 h-8 rounded text-slate-600 dark:text-slate-400 border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300">
                 <div
                   onClick={() => {
                     setTimePicker(true);
                   }}
-                  className="h-full w-full flex items-center justify-center"
+                  className="h-full w-full flex items-center justify-center group relative"
                 >
-                  <BiAlarm className="absolute text-lg cursor-pointer" />
+                  <BiCalendarCheck className="absolute text-lg cursor-pointer" />
+                  <HintTooltip
+                    details={"Estimated resolution time"}
+                    positions={{
+                      horizontal: `right-0`,
+                      vertical: `top-[-130%]`,
+                    }}
+                  />
                 </div>
                 <DueDate
                   setValues={setValues}
@@ -1124,11 +1147,11 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 />
               </div>
               {/**Send ========================================= */}
-              <abbr title="Open Ticket">
+              <div className="flex items-center bg-slate-800 dark:bg-blue-700 text-slate-100 dark:text-slate-100 rounded-sm">
                 <button
                   disabled={isSubmiting ? true : false}
                   type="submit"
-                  className="h-8 w-32 flex justify-center items-center space-x-2 outline-none focus:outline-none bg-slate-800 dark:bg-blue-700 hover:opacity-80 rounded-sm text-slate-100 dark:text-slate-100 font-medium text-xs font-sans transition-all disabled:cursor-not-allowed"
+                  className="h-8 px-4 flex justify-center items-center space-x-2 outline-none focus:outline-none hover:opacity-80 rounded font-medium text-xs font-sans transition-all disabled:cursor-not-allowed"
                 >
                   <span>Submit now</span>
                   <div
@@ -1137,7 +1160,22 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     }`}
                   ></div>{" "}
                 </button>
-              </abbr>
+                <div className="h-full flex items-center relative group">
+                  <button
+                    type="button"
+                    className="h-[80%] px-2 bg-inherit text-inherit border-0 outline-none focus:outline-none border-l border-slate-400 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
+                  >
+                    <BiAlarm className="text-lg" />
+                  </button>
+                  <HintTooltip
+                    details={"Schedule for later"}
+                    positions={{
+                      horizontal: `right-0`,
+                      vertical: `top-[-240%]`,
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </form>

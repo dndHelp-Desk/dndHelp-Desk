@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import defaultProfile from "./../../default.webp";
 import noUsers from "./../Main_Dashboard/images/no-userss.svg";
 import { Navigate } from "react-router";
-import { deleteUser } from "../Data_Fetching/TicketsnUserData";
+import { deleteUser } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { BsFillTrashFill, BsPencilSquare, BsSearch } from "react-icons/bs";
 import { HiUserAdd } from "react-icons/hi";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";

@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "../Data_Fetching/TicketsnUserData";
+import { createUser } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import {
   BsFillPersonFill,
   BsFillEnvelopeFill,

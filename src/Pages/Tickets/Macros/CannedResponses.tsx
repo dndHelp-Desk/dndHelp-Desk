@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { BiSearchAlt, BiTrash } from "react-icons/bi";
-import { deleteCannedRes } from "../../Data_Fetching/TicketsnUserData";
+import { deleteCannedRes } from "../../../Adapters/Data_Fetching/TicketsnUserData";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";

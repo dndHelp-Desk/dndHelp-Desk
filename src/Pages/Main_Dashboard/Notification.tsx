@@ -8,7 +8,7 @@ import {
   HiOutlineBell,
 } from "react-icons/hi";
 import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
-import { deleteNotification } from "../Data_Fetching/TicketsnUserData";
+import { deleteNotification } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import { RootState } from "../../Redux/store";
 

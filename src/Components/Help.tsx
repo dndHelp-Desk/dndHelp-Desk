@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
-import { BsFillChatSquareTextFill, BsXSquareFill } from "react-icons/bs";
+import { BsXSquareFill } from "react-icons/bs";
+import { BiChat } from "react-icons/bi";
 import useClickOutside from "../Custom-Hooks/useOnClickOutsideRef";
 import lightLogo from "./images/dndHelp-Desk_Light.png";
 
@@ -15,12 +16,14 @@ const Help: FC = () => {
       ref={closeChatRef}
       className={`${
         chatStatus === true
-          ? "h-[30rem] w-[22rem]"
-          : "cursor-pointer hover:bg-slate-800 h-14 w-20"
-      } transition-all flex bg-gradient-to-r from-indigo-900 to-slate-800 rounded overflow-hidden fixed right-2 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl z-[999]`}
+          ? "h-[30rem] w-[22rem] bg-slate-700"
+          : "cursor-pointer hover:bg-slate-800 bg-blue-700 h-14 w-20"
+      } transition-all flex rounded  fixed right-2 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl z-[999] after:contents-[''] after:absolute after:bottom-[-0.5rem] after:h-5 after:w-5 after:bg-inherit after:rotate-45 after:hover:bg-inherit`}
     >
-      <BsFillChatSquareTextFill
-        className={`text-2xl text-slate-300 ${chatStatus ? "hidden" : "flex"}`}
+      <BiChat
+        className={`text-2xl text-slate-300 rotate-12 ${
+          chatStatus ? "hidden" : "flex"
+        }`}
       />
       {/**Open Chat =========================================== */}
       <div

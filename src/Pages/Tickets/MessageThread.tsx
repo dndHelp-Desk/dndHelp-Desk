@@ -3,11 +3,11 @@ import { useScrollIntoView } from "@mantine/hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillTrashFill, BsThreeDotsVertical } from "react-icons/bs";
 import {
-  BiPaperPlane,
   BiMicrophone,
-  BiNotepad,
+  BiCollection,
   BiArrowBack,
   BiConversation,
+  BiAlarm,
 } from "react-icons/bi";
 import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
 import {
@@ -16,7 +16,7 @@ import {
   resolveTicket,
   changeStatus,
   reOpenTicket,
-} from "../Data_Fetching/TicketsnUserData";
+} from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import { addRecording } from "../Auth/Firebase";
 import TextEditor from "./TextEditor";
@@ -24,6 +24,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import CannedResponses from "./Macros/CannedResponses";
 import ZoomedImg from "./ZoomedImg";
 import Details from "./Details";
+import HintTooltip from "../../Components/HintTooltip";
 
 interface Props {
   isChatOpen: boolean;
@@ -294,7 +295,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       addReply(
         reply.message,
         reply.message_position,
-        reply.ticket_id,
+        threadId,
         user[0].name,
         user[0].email,
         user[0].access,
@@ -818,7 +819,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       }}
                       className="h-full w-full flex items-center justify-center outline-none focus:outline-none"
                     >
-                      <BiNotepad className="text-base hover:opacity-80" />
+                      <BiCollection className="text-base hover:opacity-80" />
                     </button>
                   </abbr>
                   <CannedResponses
@@ -831,7 +832,14 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   />
                 </div>
                 {/**Upload Recordings ========================================= */}
-                <abbr title="Upload Your Recording">
+                <div className="relative group">
+                  <HintTooltip
+                    details={"Upload an audio"}
+                    positions={{
+                      horizontal: `left-[0%]`,
+                      vertical: `top-[-115%]`,
+                    }}
+                  />
                   <label
                     htmlFor="replyRecording"
                     className={`w-8 h-8 border ${
@@ -855,14 +863,20 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       className="outline-none focus:outline-none hidden"
                     />
                   </label>
-                </abbr>
+                </div>
                 {/**Change Status ========================================= */}
-                <abbr title="Change Status">
+                <div className="h-8 relative group">
+                  <HintTooltip
+                    details={"Change Status"}
+                    positions={{
+                      horizontal: `right-0`,
+                      vertical: `top-[-115%]`,
+                    }}
+                  />
                   <select
                     ref={statusSelectionRef}
                     onChange={(e) => {
                       setReply({ ...reply, status: e.target.value });
-                      console.log(e.target.value);
                     }}
                     required
                     className={`w-24 md:w-28 h-8 rounded-r-sm bg-slate-50 dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1 ${
@@ -888,16 +902,32 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       reopened
                     </option>
                   </select>
-                </abbr>
+                </div>
               </div>
               <div className="flex items-center pr-[0.08rem]">
-                <button
-                  type="submit"
-                  className="h-8 outline-none focus:outline-none focus:ring-1 focus:ring-blue-700 rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80 shadow-lg"
-                >
-                  <span className="text-xs">Send now</span>
-                  <BiPaperPlane />
-                </button>
+                <div className="flex items-center h-8 py-1 rounded-sm text-slate-100 bg-slate-800 dark:bg-blue-700 shadow-lg">
+                  <button
+                    type="submit"
+                    className="h-full outline-none focus:outline-none rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
+                  >
+                    <span className="text-xs capitalize">Send now</span>
+                  </button>
+                  <div className="h-full flex items-center relative group">
+                    <button
+                      type="button"
+                      className="h-[80%] px-2 bg-inherit text-inherit border-0 outline-none focus:outline-none border-l border-slate-400 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
+                    >
+                      <BiAlarm className="text-lg" />
+                    </button>
+                    <HintTooltip
+                      details={"Schedule for later"}
+                      positions={{
+                        horizontal: `right-0`,
+                        vertical: `top-[-170%]`,
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </form>

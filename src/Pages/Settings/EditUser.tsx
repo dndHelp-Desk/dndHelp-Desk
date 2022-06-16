@@ -1,6 +1,6 @@
 import React, { FC, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUser } from "../Data_Fetching/TicketsnUserData";
+import { editUser } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import {
   BsFillPersonFill,
   BsBuilding,

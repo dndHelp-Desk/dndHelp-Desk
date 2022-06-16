@@ -13,11 +13,9 @@ import {
   BsFillPatchCheckFill,
   BsFillPatchExclamationFill,
   BsFillPersonFill,
-  BsBuilding,
   BsFillKeyFill,
 } from "react-icons/bs";
-import defaultProfile from "./../../default.webp";
-import { updateUserDetails } from "../Data_Fetching/TicketsnUserData";
+import { updateUserDetails } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { AppDispatch, RootState } from "../../Redux/store";
 
 const Account: FC = () => {
@@ -30,17 +28,14 @@ const Account: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [inputValues, setValues] = useState<any>({
     name: "",
-    dept: "",
     password: "",
     old_password: "",
     bio: "",
   });
   const auth: any = getAuth();
   const user: any = auth.currentUser;
-  let photoUrl = defaultProfile;
   let emailStatus = false;
   if (user !== null) {
-    user.photoURL && (photoUrl = user.photoURL);
     emailStatus = user.emailVerified;
   }
 
@@ -96,12 +91,7 @@ const Account: FC = () => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    updateUserDetails(
-      member_details[0].id,
-      inputValues.name,
-      inputValues.dept,
-      inputValues.bio
-    );
+    updateUserDetails(member_details[0].id, inputValues.name, inputValues.bio);
     setValues({ ...inputValues, name: "", dept: "", bio: "" });
   };
 
@@ -109,58 +99,21 @@ const Account: FC = () => {
   return (
     <div className="w-full">
       {/**Profile Datils ======================= */}
-      <div className="w-full h-[15rem] rounded dark:bg-slate-800 bg-white flex flex-col relative overflow-hidden">
-        <div
-          style={{
-            backgroundImage: `url(
-              "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1544&q=80"
-            )`,
-          }}
-          className="w-full h-[70%] bg-slate-800 pl-10 bg-no-repeat bg-center  backdrop-hue-rotate-60"
-        ></div>
-        <div className="h-28 w-28 mt-[8rem] dark:bg-slate-700 bg-slate-200 border-2 border-slate-300 p-[2px] rounded-full overflow-hidden absolute left-8 bottom-[10%]">
-          <img
-            src={
-              member_details[0].photoUrl !== null &&
-              member_details[0].photoUrl !== ""
-                ? member_details[0].photoUrl
-                : photoUrl
-            }
-            alt="profile"
-            className="object-cover object-center rounded-full h-full w-full"
-          />
-          <p className="absolute ">pp</p>
-        </div>
-        {/**User Name & Time ================= */}
-        <div className="mt-[.25rem] w-full pr-10">
-          <h1 className="dark:text-slate-300 text-slate-800 text-right text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+      <div className="w-full h-[8rem] rounded dark:bg-slate-800 bg-white flex items-center relative overflow-hidden">
+        <div className="h-full rounded flex flex-col justify-center space-y-1 p-4">
+          {/**User Name & Time ================= */}
+          <h1 className="dark:text-slate-300 text-slate-800 text-base font-bold whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].name}
           </h1>
-          <h2 className="dark:text-slate-400 text-slate-700 text-right text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+          <h2 className="dark:text-slate-400 text-slate-700 text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].dept}
           </h2>
-        </div>
-      </div>
-      <div className="flex flex-col py-4 space-y-2">
-        {/**Bio ====================== */}
-        <div className=" mt-[1rem] border-0 bg-white dark:bg-slate-800 p-4 w-full h-[15rem] rounded leading-12 overflow-hidden">
-          <h3 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide">
-            About Me
-          </h3>
-          <p className="dark:text-slate-400 text-slate-700 text-xs capitalize font-medium flex items-center justify-center space-x-1 overflow-hidden overflow-y-scroll h-[5rem] p-2 mt-2">
-            {member_details.length !== undefined
-              ? member_details[0].bio
-              : "Write some details about yourself here ... Like your ambitionss, aspirations, profession and so on , might be useful for your collegues 😉"}
-          </p>
-          <h4 className="dark:text-slate-300 text-slate-800 text-base font-bold tracking-wide mt-4">
-            Contact Info
-          </h4>
-          <p className="dark:text-slate-400 text-slate-700 text-sm lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden px-2">
+          <p className="dark:text-slate-400 text-slate-700 text-sm lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             <BsEnvelope className="inline" />{" "}
             {member_details.length !== undefined && member_details[0].email}
           </p>
           {emailStatus && (
-            <p className="dark:text-slate-400 text-slate-700 text-sm capitalize font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden px-2">
+            <p className="dark:text-slate-400 text-slate-700 text-sm capitalize font-medium whitespace-nowrap text-ellipsis flex items-center space-x-1 overflow-hidden">
               <BsFillPatchCheckFill className="inline text-green-600" />{" "}
               <span>Your email is verified.</span>
             </p>
@@ -176,23 +129,27 @@ const Account: FC = () => {
                       sendEmailVerification(auth.currentUser)
                         .then(() => {
                           dispatch(
-                            updateAlert({
+                            updateAlert([
                               ...alerts,
-                              message:
-                                "Check Your Email To Verify The Account.",
-                              color: "bg-green-200",
-                              id: new Date().getTime(),
-                            })
+                              {
+                                message:
+                                  "Check Your Email To Verify The Account.",
+                                color: "bg-green-200",
+                                id: new Date().getTime(),
+                              },
+                            ])
                           );
                         })
                         .catch((error) => {
                           dispatch(
-                            updateAlert({
+                            updateAlert([
                               ...alerts,
-                              message: error.message,
-                              color: "bg-red-200",
-                              id: new Date().getTime(),
-                            })
+                              {
+                                message: error.message,
+                                color: "bg-red-200",
+                                id: new Date().getTime(),
+                              },
+                            ])
                           );
                         });
                     }
@@ -207,126 +164,120 @@ const Account: FC = () => {
         </div>
       </div>
 
+      <div className="flex flex-col py-4 space-y-2">
+        {/**Bio ====================== */}
+        <div className="border-0 bg-white dark:bg-slate-800 p-4 w-full h-[10rem] rounded leading-12 overflow-hidden">
+          <h3 className="dark:text-slate-300 text-slate-800 text-sm font-bold font-sans uppercase tracking-wide">
+            Bio
+          </h3>
+          <p className="dark:text-slate-400 text-slate-700 text-xs capitalize font-medium flex space-x-1 overflow-hidden overflow-y-scroll h-[6rem] p-2 mt-2 border-l-2 dark:border-slate-700 border-slate-300">
+            {member_details.length !== undefined
+              ? member_details[0].bio
+              : "Write some details about yourself here ... Like your ambitionss, aspirations, profession and so on , might be useful for your collegues 😉"}
+          </p>
+        </div>
+      </div>
+
       {/**Update Details =========================== */}
-      <div className="col-span-1 py-4">
-        <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
-          Edit Information
-        </h2>
-        <form
-          action=""
-          onSubmit={(e) => handleSubmit(e)}
-          className="mt-2 space-y-3 pb-5 border-b dark:border-slate-800 border-slate-300"
-        >
-          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              autoComplete="nope"
-              placeholder="Fullname ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, name: e.target.value })
-              }
-              value={inputValues.name}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
-            />
-            <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="text"
-              name="department"
-              id="department"
-              autoComplete="nope"
-              placeholder="Department ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, dept: e.target.value })
-              }
-              value={inputValues.dept}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
-            />
-            <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-20 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
-            <textarea
-              name="bio"
-              id="bio"
-              autoComplete="nope"
-              placeholder="About / Bio ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, bio: e.target.value })
-              }
-              value={inputValues.bio}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white resize-none"
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
+      <div className="col-span-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="col-span-1 bg-white dark:bg-slate-800 p-4 h-[20rem] rounded">
+          <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold uppercase whitespace-nowrap text-ellipsis overflow-hidden">
+            Edit Information
+          </h2>
+          <form
+            action=""
+            onSubmit={(e) => handleSubmit(e)}
+            className="mt-2 space-y-3 pb-5"
           >
-            Save Changes
-          </button>
-        </form>
+            <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
+              <input
+                type="text"
+                name="name"
+                id="name"
+                autoComplete="nope"
+                placeholder="Fullname ..."
+                required
+                onChange={(e) =>
+                  setValues({ ...inputValues, name: e.target.value })
+                }
+                value={inputValues.name}
+                className="bg-transparent w-full h-full rounded outline-none focus:outline-none focus:ring-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-50 border dark:border-slate-700 border-slate-300 focus:border-slate-600 dark:focus:border-slate-600"
+              />
+              <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
+            </div>
+            <div className="h-20 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
+              <textarea
+                name="bio"
+                id="bio"
+                autoComplete="nope"
+                placeholder="About / Bio ..."
+                required
+                onChange={(e) =>
+                  setValues({ ...inputValues, bio: e.target.value })
+                }
+                value={inputValues.bio}
+                className="bg-transparent w-full h-full resize-none rounded outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 placeholder:text-slate-500 text-slate-500  dark:bg-slate-800 bg-slate-50 border dark:border-slate-700 border-slate-300 focus:border-slate-600 dark:focus:border-slate-600"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-700 px-4 p-2 text-slate-50 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
+            >
+              Save Changes
+            </button>
+          </form>
+        </div>
 
         {/**Change password =============================== */}
-        <h2 className="dark:text-slate-300 mt-5 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden">
-          Change Password
-        </h2>
-        <form
-          onSubmit={(e) => newPassword(e)}
-          className="mt-2 space-y-3 pb-5 border-b dark:border-slate-800 border-slate-300"
-        >
-          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="password"
-              name="old_password"
-              id="old_password"
-              autoComplete="off"
-              placeholder="Old Password ..."
-              required
-              onChange={(e) =>
-                setValues({ ...inputValues, old_password: e.target.value })
-              }
-              value={inputValues.old_password}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
-            />
-            <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              autoComplete="off"
-              placeholder="New Password ..."
-              required
-              minLength={6}
-              onChange={(e) =>
-                setValues({ ...inputValues, password: e.target.value })
-              }
-              value={inputValues.password}
-              className="bg-transparent w-full h-full rounded border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
-            />
-            <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
-          >
+        <div className="col-span-1 bg-white dark:bg-slate-800 p-4 rounded h-[20rem]">
+          <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold uppercase whitespace-nowrap text-ellipsis overflow-hidden">
             Change Password
-          </button>
-        </form>
-
-        {/**Delete Account ================================ */}
-        <h2 className="dark:text-slate-300 text-slate-800 text-sm font-sans font-bold whitespace-nowrap text-ellipsis overflow-hidden mt-4">
-          Danger Zone
-        </h2>
-        <button className=" w-[9rem] px-4 p-2 mt-4 dark:bg-red-800 bg-red-600 text-slate-300 font-semibold text-xs rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0 uppercase flex space-x-1 items-center justify-center">
-          <span>Delete Account</span>
-        </button>
+          </h2>
+          <form
+            onSubmit={(e) => newPassword(e)}
+            className="mt-2 space-y-3 pb-5"
+          >
+            <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
+              <input
+                type="password"
+                name="old_password"
+                id="old_password"
+                autoComplete="off"
+                placeholder="Old Password ..."
+                required
+                onChange={(e) =>
+                  setValues({ ...inputValues, old_password: e.target.value })
+                }
+                value={inputValues.old_password}
+                className="bg-transparent w-full h-full rounded outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500  dark:bg-slate-800 bg-slate-50 border dark:border-slate-700 border-slate-300 focus:border-slate-600 dark:focus:border-slate-600"
+              />
+              <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
+            </div>
+            <div className="h-11 w-full min-w-[15rem] rounded dark:bg-slate-900 bg-slate-100 relative">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                autoComplete="off"
+                placeholder="New Password ..."
+                required
+                minLength={6}
+                onChange={(e) =>
+                  setValues({ ...inputValues, password: e.target.value })
+                }
+                value={inputValues.password}
+                className="bg-transparent w-full h-full rounded outline-none focus:outline-none focus:ring-0 focus:border-0 text-sm px-4 pl-11 placeholder:text-slate-500 text-slate-500  dark:bg-slate-800 bg-slate-50 border dark:border-slate-700 border-slate-300 focus:border-slate-600 dark:focus:border-slate-600"
+              />
+              <BsFillKeyFill className="absolute text-slate-500 text-lg top-3 left-4" />
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-700 px-4 p-2 text-slate-50 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
+            >
+              Change Password
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

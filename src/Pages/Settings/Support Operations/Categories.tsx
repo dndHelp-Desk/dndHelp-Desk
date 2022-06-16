@@ -6,7 +6,7 @@ import {
   newCategory,
   deleteCategory,
   editCategory,
-} from "../../Data_Fetching/TicketsnUserData";
+} from "../../../Adapters/Data_Fetching/TicketsnUserData";
 
 const Categories: FC = () => {
   const dispatch: AppDispatch = useDispatch();

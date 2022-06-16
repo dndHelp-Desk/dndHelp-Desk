@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { FaChartBar, FaReceipt, FaHeadset, FaUserTie } from "react-icons/fa";
+import { FaChartBar, FaReceipt, FaPoll, FaUserTie } from "react-icons/fa";
 import { BsJustifyLeft } from "react-icons/bs";
 import {
   HiOutlineSun,
@@ -19,7 +19,7 @@ import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
 import AlertsWrapper from "../../Components/AlertsWrapper";
-import TicketsnUserData from "../Data_Fetching/TicketsnUserData";
+import TicketsnUserData from "../../Adapters/Data_Fetching/TicketsnUserData";
 import Profile from "../Auth/Profile";
 import Notification from "./Notification";
 import SettingsTooltip from "./SettingsTooltip";
@@ -144,10 +144,10 @@ const Dashboard: FC = () => {
         </div>
 
         {/**NavBar ============== */}
-        <nav className="flex justify-center flex-[1] max-h-[4.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide">
+        <nav className="flex justify-center flex-[1] h-[5.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide">
           {/**AlertsWrapper */}
           <AlertsWrapper />
-          <div className="w-[95%] 2xl:w-[75rem] h-14 flex justify-between items-center relative z-[999]">
+          <div className="w-[95%] 2xl:w-[75rem] h-[3.5rem] flex justify-between items-center relative z-[999]">
             {/**Other Controls and logo ================ */}
             <div className="h-full flex items-center gap-2">
               {/**Small Screen Menu Btn ================ */}
@@ -181,7 +181,7 @@ const Dashboard: FC = () => {
               </Link>
 
               {/**Support =================================== */}
-              <div className="relative">
+              <div className="relative hidden md:flex">
                 <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold">
                   <HiOutlineSupport />
                 </button>
@@ -268,64 +268,64 @@ const Dashboard: FC = () => {
               ref={menuModalRef}
               className={`flex lg:hidden fixed top-12 left-2 w-[12rem] shadow-2xl rounded backdrop-blur-lg bg-white dark:bg-slate-900 border dark:border-slate-700 border-slate-400 ${
                 showMenu ? "h-[10rem] z-[9999]" : "h-0 opacity-0  z-[-99]"
-              } transition-scale duration-300 dark:text-gray-400 text-slate-600 flex flex-col gap-4 p-4 overflow-hidden`}
+              } transition-scale duration-300 dark:text-gray-400 text-slate-600 flex flex-col space-y-4 p-4 overflow-hidden`}
             >
               <NavLink
                 to="/app"
-                className={`TabsLinks ${
+                className={`TabsLinks py-2 ${
                   location.pathname === "/app" ? "navlinks" : ""
                 }`}
               >
-                <FaHeadset
-                  className="inline-block
+                <FaPoll
+                  className="inline-block text-lg
               "
                 />
-                <span>Dashboard</span>
+                <span className="py-2">Dashboard</span>
               </NavLink>
               <NavLink
                 to="/app/tickets"
                 end={true}
-                className={`TabsLinks ${
+                className={`TabsLinks py-2 ${
                   location.pathname === "/app/tickets" ? "navlinks" : ""
                 }`}
               >
                 <FaReceipt
-                  className="inline-block
+                  className="inline-block text-lg
               "
                 />
-                <span>Tickets</span>
+                <span className="py-2">Tickets</span>
               </NavLink>
               <NavLink
                 to="/app/contacts"
                 end={true}
-                className={`TabsLinks ${
+                className={`TabsLinks py-2 ${
                   user.length >= 1 && user[0].access === "client" && "hidden"
                 } ${location.pathname === "/app/contacts" ? "navlinks" : ""}`}
               >
                 <FaUserTie
-                  className="inline-block
+                  className="inline-block text-lg
               "
                 />
-                <span>Contacts</span>
+                <span className="py-2">Contacts</span>
               </NavLink>
               <NavLink
                 to="/app/reports"
-                className={`TabsLinks ${
+                className={`TabsLinks py-2 ${
                   location.pathname === "/app/reports" ? "navlinks" : ""
                 }`}
               >
                 <FaChartBar
-                  className="inline-block
+                  className="inline-block text-lg
               "
                 />
-                <span>Reports</span>
+                <span className="py-2">Reports</span>
               </NavLink>
             </div>
 
             {/*Notifications , Controls & Calls ====================*/}
             <div className="flex items-center h-full space-x-2">
               {/**Voice & Video Call =================================== */}
-              <div className="relative">
+              <div className="relative hidden md:flex">
                 <button
                   onClick={() => {
                     openPhone(true);

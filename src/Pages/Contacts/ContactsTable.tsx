@@ -10,7 +10,7 @@ import {
 } from "react-icons/hi";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { BsTwitter, BsWhatsapp } from "react-icons/bs";
-import { deleteContact } from "../Data_Fetching/TicketsnUserData";
+import { deleteContact } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import EditContact from "./EditContact";
 import { RootState } from "../../Redux/store";
 import ActionPanel from "../../Components/ActionPanel";

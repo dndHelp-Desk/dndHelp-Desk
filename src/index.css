@@ -25,10 +25,10 @@
   }
 
   .TabsLinks {
-    @apply flex lg:justify-center items-center space-x-1 w-[5rem] hover:text-blue-600 text-[0.7rem] outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wider overflow-hidden transition-colors duration-200;
+    @apply flex lg:justify-center items-center space-x-1 min-w-[5rem] hover:text-blue-600 text-xs outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wider overflow-hidden transition-colors duration-200;
   }
   .navlinks.active {
-    @apply text-blue-600 border-blue-600 border-b-2 font-bold;
+    @apply text-blue-600 border-blue-600 lg:border-b-2 font-bold;
   }
   .supportlinks.active {
     @apply border-t-2 border-blue-600;
@@ -72,17 +72,19 @@
 
   .delayDisplay {
     opacity: 0;
-    transtion: opacity 0.3s;
-    animation: animated linear 0.3s forwards;
-    animation-delay: 1s;
+    transtion: opacity 0.2s;
+    animation: animated linear 0.2s forwards;
+    animation-delay: 0.3s;
   }
 
   @keyframes animated {
     from {
       opacity: 0;
+      transform: scale(0);
     }
     to {
       opacity: 1;
+      transform: scale(1);
     }
   }
 

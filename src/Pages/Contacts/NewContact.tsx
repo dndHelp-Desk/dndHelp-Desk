@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { newContact } from "../Data_Fetching/TicketsnUserData";
+import { newContact } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import {
   BsFillTelephoneFill,

@@ -63,7 +63,7 @@ const DueDate: FC<Props> = ({ setValues, showTimePicker, setTimePicker }) => {
     <div
       className={`${
         showTimePicker ? "" : "hidden"
-      } absolute bottom-14 right-3 w-[22rem] h-[10rem] rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-400 dark:border-slate-500 shadow-2xl drop-shadow-2xl after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border-2 after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] after:left-[11.6rem] after:rotate-45`}
+      } absolute bottom-14 right-4 w-[22rem] h-[10rem] rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-400 dark:border-slate-500 shadow-2xl drop-shadow-2xl after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] after:left-[11.6rem] after:rotate-45`}
     >
       {/**Close Button */}
       <abbr title="Close">

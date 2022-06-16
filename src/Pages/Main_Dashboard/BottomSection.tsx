@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 const BottomSection: FC = () => {
   return (
-    <section className="w-full h-fit  rounded-md grid grid-col-1 gap-4">
-      <article className="col-span-1 h-[12.5rem]  rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
-        <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize tracking-normal py-2 border-b border-slate-200 dark:border-slate-700">
+    <section className="w-full h-fit  rounded grid grid-col-1 gap-4">
+      <article className="col-span-1 h-[12.5rem]  rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
+        <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-base font-medium font-sans capitalize tracking-normal py-2 border-b border-slate-200 dark:border-slate-700">
           Knowledge Base
         </h3>
         <p className="my-3 text-xs text-slate-600 dark:text-slate-400 font-medium tracking-normal overflow-hidden overflow-ellipsis leading-5 max-h-[5rem]">
@@ -27,7 +27,7 @@ const BottomSection: FC = () => {
       </article>
 
       {/**Getting Started =========== */}
-      <div className="hidden col-span-1 h-[13rem]  rounded-md dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
+      <div className="hidden col-span-1 h-[13rem]  rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
         <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-lg font-medium font-sans capitalize tracking-normal">
           Getting Started
         </h3>

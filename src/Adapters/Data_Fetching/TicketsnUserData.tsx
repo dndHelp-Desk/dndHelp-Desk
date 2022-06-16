@@ -85,16 +85,10 @@ let companyDetailsRef: any =
 
 //===================================USER===========================================
 // Update User Details ================
-export const updateUserDetails = (
-  id: string,
-  name: string,
-  dept: string,
-  bio: string
-) => {
+export const updateUserDetails = (id: string, name: string, bio: string) => {
   let docRef = doc(db, `companies/${org}/members`, id);
   updateDoc(docRef, {
     name: name,
-    dept: dept,
     bio: bio,
   });
 };

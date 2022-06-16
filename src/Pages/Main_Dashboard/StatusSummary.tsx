@@ -37,8 +37,8 @@ const StatusSummary: FC = () => {
   //Component =========================
   return (
     <div className="row-span-3 flex flex-col justify-center items-center relative">
-      <h2 className="text-center uppercase font-bold text-[0.7rem] dark:text-slate-300 text-slate-800">
-        {dashboardData?.length} tickets
+      <h2 className="text-center uppercase font-bold text-[0.65rem] dark:text-slate-300 text-slate-800 font-sans">
+        {dashboardData?.length} total
       </h2>
       <div className="w-[7rem] h-[8rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t to-blue-600 from-indigo-700 dark:bg-gradient-to-t dark:to-blue-600 dark:from-indigo-700 rounded-b-md shadow-lg z-[99]">
         {data.length >= 1 &&
@@ -59,9 +59,9 @@ const StatusSummary: FC = () => {
       </div>
 
       {/**Deco boxes ================================ */}
-      <div className="absolute h-12 w-12 rounded-md bg-slate-100 dark:bg-[#33415569] rotate-12 left-4 bottom-10"></div>
-      <div className="absolute h-6 w-6 rounded-md bg-slate-100 dark:bg-[#33415569] rotate-12 left-10 bottom-28"></div>
-      <div className="absolute h-12 w-12 rounded-md bg-slate-100 dark:bg-[#33415569] rotate-45 right-4 bottom-24"></div>
+      <div className="absolute h-12 w-12 rounded bg-slate-100 dark:bg-[#33415569] rotate-12 left-4 bottom-10"></div>
+      <div className="absolute h-6 w-6 rounded bg-slate-100 dark:bg-[#33415569] rotate-12 left-10 bottom-28"></div>
+      <div className="absolute h-12 w-12 rounded bg-slate-100 dark:bg-[#33415569] rotate-45 right-4 bottom-24"></div>
     </div>
   );
 };

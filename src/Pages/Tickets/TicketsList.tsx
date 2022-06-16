@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { markAsSeen } from "../Data_Fetching/TicketsnUserData";
+import { markAsSeen } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { BiChevronRight, BiChevronLeft, BiPulse } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";

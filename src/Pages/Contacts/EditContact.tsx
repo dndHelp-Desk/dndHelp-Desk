@@ -4,7 +4,7 @@ import {
   BsFillPersonFill,
   BsFillEnvelopeFill,
 } from "react-icons/bs";
-import { editContact } from "../Data_Fetching/TicketsnUserData";
+import { editContact } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../Redux/store";

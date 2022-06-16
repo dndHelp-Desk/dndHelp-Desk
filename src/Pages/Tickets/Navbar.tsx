@@ -14,11 +14,12 @@ import {
   deleteTicket,
   assignAgent,
   addNotification,
-} from "../Data_Fetching/TicketsnUserData";
+} from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import OffFilters from "./OffFilters";
 import { AppDispatch, RootState } from "../../Redux/store";
 import ActionPanel from "../../Components/ActionPanel";
+import HintTooltip from "../../Components/HintTooltip";
 
 interface Props {
   deleteArray: any;
@@ -209,44 +210,65 @@ const Navbar: FC<Props> = ({
           setList={setList}
           contactsList={contactsList}
         />
-        <button
-          onClick={() => setfiltersModal(true)}
-          className="h-9 w-11 rounded-sm flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:translate-y-[-1px] duration-300 transition-all text-lg font-semibold  border dark:border-slate-700 border-slate-400"
-        >
-          <abbr title="filters" className="">
+        <div className="relative group">
+          <button
+            onClick={() => setfiltersModal(true)}
+            className="h-9 w-11 rounded-sm flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:translate-y-[-1px] duration-300 transition-all text-lg font-semibold  border dark:border-slate-700 border-slate-400"
+          >
             <HiFilter className="dark:text-slate-300 text-slate-800 font-bold" />
-          </abbr>
-        </button>
+          </button>
+          <HintTooltip
+            details={"Open filters"}
+            positions={{
+              horizontal: `left-0`,
+              vertical: `bottom-[-100%]`,
+            }}
+          />
+        </div>
 
         {/**Assign Agent ================================= */}
-        <button
-          onClick={() => setPanel(true)}
-          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-400 ${
-            deleteArray.length >= 1 && activeUser[0]?.access === "admin"
-              ? "flex"
-              : "hidden"
-          } items-center justify-center text-lg`}
-        >
-          <abbr title="Assign">
+        <div className="relative group">
+          <button
+            onClick={() => setPanel(true)}
+            className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-400 ${
+              deleteArray.length >= 1 && activeUser[0]?.access === "admin"
+                ? "flex"
+                : "hidden"
+            } items-center justify-center text-lg`}
+          >
             <BiUserCheck className="text-xl" />
-          </abbr>
-        </button>
+          </button>
+          <HintTooltip
+            details={"Assign Ticket/s"}
+            positions={{
+              horizontal: `left-0`,
+              vertical: `bottom-[-100%]`,
+            }}
+          />
+        </div>
 
         {/**Delete Ticket ================================= */}
-        <button
-          onClick={() => {
-            setActionPanel(true);
-          }}
-          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  text-red-600  font-semibold  border dark:border-slate-700 border-slate-400 ${
-            deleteArray.length >= 1 && activeUser[0]?.access === "admin"
-              ? "flex"
-              : "hidden"
-          } items-center justify-center text-lg`}
-        >
-          <abbr title="delete">
+        <div className="relative group">
+          <button
+            onClick={() => {
+              setActionPanel(true);
+            }}
+            className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  text-red-600  font-semibold  border dark:border-slate-700 border-slate-400 ${
+              deleteArray.length >= 1 && activeUser[0]?.access === "admin"
+                ? "flex"
+                : "hidden"
+            } items-center justify-center text-lg`}
+          >
             <BiTrash />
-          </abbr>
-        </button>
+          </button>
+          <HintTooltip
+            details={"Delete ticket/s"}
+            positions={{
+              horizontal: `left-0`,
+              vertical: `bottom-[-100%]`,
+            }}
+          />
+        </div>
 
         {/**Mark All ================================= */}
         <button
@@ -296,7 +318,7 @@ const Navbar: FC<Props> = ({
       </div>
 
       {/*** New Ticket ======================== */}
-      <abbr title="New Ticket">
+      <div className="relative group">
         <button
           onClick={() => {
             setModal(user[0]?.name !== "User Loader" ? true : false);
@@ -306,7 +328,14 @@ const Navbar: FC<Props> = ({
         >
           <span>open new</span>
         </button>
-      </abbr>
+        <HintTooltip
+          details={"Open a new ticket"}
+          positions={{
+            horizontal: `right-0`,
+            vertical: `bottom-[-100%]`,
+          }}
+        />
+      </div>
     </nav>
   );
 };
