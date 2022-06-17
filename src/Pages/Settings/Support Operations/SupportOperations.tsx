@@ -26,6 +26,11 @@ const SupportOperations: FC = () => {
       name: "Templates",
       active: false,
     },
+    {
+      id: 4,
+      name: "Intergrations",
+      active: false,
+    },
   ]);
 
   //Allow Admin Only ==========================

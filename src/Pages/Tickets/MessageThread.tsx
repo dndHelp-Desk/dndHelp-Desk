@@ -1,15 +1,22 @@
 import React, { FC, useState, useRef, useMemo, useEffect } from "react";
 import { useScrollIntoView } from "@mantine/hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { BsFillTrashFill, BsThreeDotsVertical } from "react-icons/bs";
 import {
   BiMicrophone,
   BiCollection,
   BiArrowBack,
   BiConversation,
   BiAlarm,
+  BiTrash,
+  BiShare,
+  BiDotsVertical,
 } from "react-icons/bi";
-import { HiCheck, HiOutlineArrowSmDown } from "react-icons/hi";
+import {
+  HiCheck,
+  HiOutlineArrowSmDown,
+  HiThumbUp,
+  HiThumbDown,
+} from "react-icons/hi";
 import {
   addReply,
   deleteTicket,
@@ -546,7 +553,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         >
           {/**Message ====================== */}
           <div className="w-full 2xl:w-full bg-tranparent pl-6  relative">
-            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded-sm border dark:border-slate-700 border-slate-400 dark:bg-slate-800 bg-white px-1 overflow-hidden">
+            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white px-1 overflow-hidden">
               <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
                 <BiConversation />
               </div>
@@ -585,24 +592,30 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   </span>
                   {/**Message Options =========================== */}
                   <div className="group relative h-8 w-8 dark:text-slate-400 text-slate-700 flex items-center justify-center cursor-pointer rounded">
-                    <BsThreeDotsVertical className="inline" />
+                    <BiDotsVertical className="inline" />
                     <div
-                      className={`w-[10rem] group-hover:flex flex-col items-center hidden z-[99] shadow-lg border dark:border-slate-800 border-slate-300 dark:bg-slate-700 bg-slate-200 backdrop-blur-sm rounded absolute right-[-0.5rem] top-9 after:contents-[''] after:absolute after:right-3.5 after:top-[-0.5rem] after:bg-inherit after:rotate-45 after:h-4 after:w-4 after:border after:border-inherit after:border-r-0 after:border-b-0`}
+                      className={`w-[10rem] group-hover:flex flex-col items-center hidden z-[99] shadow-lg border dark:border-slate-800 border-slate-300 dark:bg-slate-900 bg-slate-200 backdrop-blur-sm rounded absolute right-[-0.5rem] top-9 after:contents-[''] after:absolute after:right-3.5 after:top-[-0.5rem] after:bg-inherit after:rotate-45 after:h-4 after:w-4 after:border after:border-inherit after:border-r-0 after:border-b-0 p-1 divide-y divide-slate-300 dark:divide-slate-600`}
                     >
-                      <div className="bg-inherit w-full h-full z-[99]  p-4 overflow-hidden rounded">
+                      <div className="bg-inherit hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full h-full z-[99]  px-4 py-2 overflow-hidden">
                         <button className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none">
+                          <span>Reply</span>
+                          <BiShare className="cursor-pointer" />
+                        </button>
+                      </div>
+                      <div className="bg-inherit hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full h-full z-[99]  px-4 py-2 overflow-hidden">
+                        <button
+                          onClick={() => {
+                            if (
+                              message?.message_position !== 1 &&
+                              message?.user_email === user[0]?.email
+                            ) {
+                              deleteTicket(message.id);
+                            }
+                          }}
+                          className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none"
+                        >
                           <span>Delete</span>
-                          <BsFillTrashFill
-                            onClick={() => {
-                              if (
-                                message?.message_position !== 1 &&
-                                message?.user_email === user[0]?.email
-                              ) {
-                                deleteTicket(message.id);
-                              }
-                            }}
-                            className="hover:text-red-500 cursor-pointer"
-                          />
+                          <BiTrash className="hover:text-red-500 cursor-pointer" />
                         </button>
                       </div>
                     </div>
@@ -695,11 +708,11 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             firstMessage && firstMessage[0]?.status === "solved" && (
               <div
                 ref={targetRef}
-                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583]"
+                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583] relative"
               >
                 {/**Message ====================== */}
                 <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
-                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded-sm dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-400 dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
+                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-[#33415583] dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
                     <div className="w-full h-full dark:bg-slate-800 bg-white rounded-sm  dark:text-gray-300 text-slate-900 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
                       Solution
                     </div>
@@ -744,6 +757,34 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                         </audio>
                       )}
                     </div>
+                  </div>
+                </div>
+
+                {/**Ratings =================== */}
+                <div className="flex items-center space-x-2 h-8 w-28 absolute bottom-[-1rem] left-4 text-slate-500 dark:text-slate-400">
+                  <div className="relative group">
+                    <button className="h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all">
+                      <HiThumbUp />
+                    </button>
+                    <HintTooltip
+                      details={"Helpful"}
+                      positions={{
+                        horizontal: `left-0`,
+                        vertical: `bottom-[-150%]`,
+                      }}
+                    />
+                  </div>
+                  <div className="relative group">
+                    <button className="h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all">
+                      <HiThumbDown />
+                    </button>
+                    <HintTooltip
+                      details={"Not helpful"}
+                      positions={{
+                        horizontal: `left-0`,
+                        vertical: `bottom-[-150%]`,
+                      }}
+                    />
                   </div>
                 </div>
               </div>

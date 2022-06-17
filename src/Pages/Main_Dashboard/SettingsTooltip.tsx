@@ -34,7 +34,7 @@ const SettingsTooltip: FC = () => {
           </h2>
           <ul className="flex w-full px-2 space-y-4 mt-4 flex-col">
             <li>
-              <NavLink to="/app/settings/account" className="settingsNav">
+              <NavLink to="/app/settings/account/general" className="settingsNav">
                 <BsFillGearFill />
                 <span>Account</span>
               </NavLink>

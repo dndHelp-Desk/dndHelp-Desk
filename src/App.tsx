@@ -9,9 +9,7 @@ import ContactsComponent from "./Pages/Contacts/ContactsComponent";
 import ErrorPage from "./Pages/Landing Page/ErrorPage";
 
 //Lazy Loading Components || Code Splitting ====================
-const Dashboard = lazy(
-  () => import("./Pages/Main_Dashboard/MainContainer")
-);
+const Dashboard = lazy(() => import("./Pages/Main_Dashboard/MainContainer"));
 const SettingsComponent = lazy(
   () => import("./Pages/Settings/SettingsComponents")
 );
@@ -22,7 +20,12 @@ const SettingsComponent = lazy(
 //const KnowledgeBase = lazy(
 //  () => import("./Pages/ClientSupport/KnowledgeBase")
 //);
-const Account = lazy(() => import("./Pages/Settings/Account"));
+const Account = lazy(() => import("./Pages/Settings/User Account/Account"));
+const General = lazy(() => import("./Pages/Settings/User Account/General"));
+const Security = lazy(() => import("./Pages/Settings/User Account/Security"));
+const Applications = lazy(
+  () => import("./Pages/Settings/User Account/Applications")
+);
 const Team = lazy(() => import("./Pages/Settings/Team"));
 const SupportOperations = lazy(
   () => import("./Pages/Settings/Support Operations/SupportOperations")
@@ -96,7 +99,11 @@ const App: FC = () => {
               <Route path="reports" element={<ReportsComponent />} />
               <Route path="contacts" element={<ContactsComponent />} />
               <Route path="settings" element={<SettingsComponent />}>
-                <Route path="account" element={<Account />} />
+                <Route path="account" element={<Account />}>
+                  <Route path="general" element={<General />} />
+                  <Route path="security" element={<Security />} />
+                  <Route path="applications" element={<Applications />} />
+                </Route>
                 <Route path="team" element={<Team />} />
                 <Route
                   path="support-operations"

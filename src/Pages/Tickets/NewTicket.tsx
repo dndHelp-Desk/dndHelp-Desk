@@ -1151,7 +1151,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                 <button
                   disabled={isSubmiting ? true : false}
                   type="submit"
-                  className="h-8 px-4 flex justify-center items-center space-x-2 outline-none focus:outline-none hover:opacity-80 rounded font-medium text-xs font-sans transition-all disabled:cursor-not-allowed"
+                  className="h-8 px-4 flex justify-center items-center space-x-2 outline-none focus:outline-none hover:opacity-80 rounded font-medium text-xs font-sans transition-all disabled:cursor-not-allowed capitalize"
                 >
                   <span>Submit now</span>
                   <div
