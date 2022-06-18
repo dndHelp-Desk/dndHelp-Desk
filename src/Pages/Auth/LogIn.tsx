@@ -17,7 +17,7 @@ import {
   query,
 } from "firebase/firestore";
 
-import minidarkLogo from "./images/dndHelp-Desk.webp";
+import minidarkLogo from "../../Assets/logos/dndHelp-desk_ShortDark.webp";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
@@ -239,7 +239,7 @@ const LogIn: FC = () => {
           <div>
             <Link to="/">
               <img
-                className="mx-auto h-16 w-auto"
+                className="mx-auto h-12 w-auto"
                 src={minidarkLogo}
                 alt="dndHelp-Desk"
               />

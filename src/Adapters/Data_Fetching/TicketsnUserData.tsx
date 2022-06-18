@@ -290,7 +290,7 @@ export const deleteCannedRes = (id: string, userId: string) => {
 
 //=================================== Categories ===========================================
 //New Category ==========================
-export const newCategory = (name: string, turnaround_time: string) => {
+export const newCategory = (name: string, turnaround_time: number) => {
   addDoc(collection(db, `companies/${org}/settings/all_settings/categories`), {
     name: name,
     turnaround_time: turnaround_time,

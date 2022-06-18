@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import Help from "../../Components/Help";
-import darkLogo from "./images/dndHelp-Desk.webp";
+import darkLogo from "../../Assets/logos/dndHelp-desk_ShortDark.webp";
 import { Link } from "react-router-dom";
 import {
   getAuth,
@@ -270,7 +270,7 @@ const WorkSpaceSetUp: FC = () => {
         </div>
 
         <div className="flex justify-center w-full">
-          <img src={darkLogo} alt="logo" className="w-24 mt-auto" />
+          <img src={darkLogo} alt="logo" className="w-16 mt-auto" />
         </div>
         <h1 className="text-xl font-bold text-center capitalize text-slate-800">
           Create Your Account

@@ -28,7 +28,7 @@ const SupportOperations: FC = () => {
     },
     {
       id: 4,
-      name: "Intergrations",
+      name: "Integrations",
       active: false,
     },
   ]);

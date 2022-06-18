@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
-import darkLogo from "./images/dndHelp-Desk_Dark.webp";
+import darkLogo from "../../Assets/logos/dndHelp-desk_Dark.webp";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import Help from "../../Components/Help";
@@ -31,7 +31,7 @@ const Pricing: FC = () => {
                 <img
                   src={darkLogo}
                   alt="logo"
-                  className="object-cover object-center w-[14rem]"
+                  className="object-cover object-center w-48"
                 />
               </Link>
               {/**Small Menu Options =================== */}

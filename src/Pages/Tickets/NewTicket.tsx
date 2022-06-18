@@ -1,6 +1,5 @@
 import React, { FC, useMemo, useState, useEffect } from "react";
 import { RichTextEditor } from "@mantine/rte";
-import DueDate from "./DueDate";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addTicket } from "../../Adapters/Data_Fetching/TicketsnUserData";
@@ -9,8 +8,7 @@ import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { addRecording } from "../Auth/Firebase";
 import {
   BiTrash,
-  BiAlarm,
-  BiCalendarCheck,
+  BiChevronDown,
   BiCollection,
   BiMinus,
   BiMicrophone,
@@ -51,7 +49,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
   const [recordingFile, setFile] = useState<boolean | any>(false);
   const [showCanned, setCanned] = useState<boolean>(false);
-  const [showTimePicker, setTimePicker] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
@@ -103,20 +100,39 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       return (
         <li
           key={index}
-          className={`text-slate-800 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 border-b dark:border-slate-600 border-slate-400 capitalize leading-5 space-y-1 tracking-tight`}
+          className={`text-slate-900 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 capitalize leading-5 space-y-1 tracking-tight`}
         >
-          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
-            <span>{data.branch_company} :</span> <span>{data.ticket_id}</span>
+          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              {data.branch_company}
+            </p>{" "}
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              {data.ticket_id}
+            </p>
           </div>
-          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
-            <span>Date : </span>
-            <span>{new Date(data.date).toLocaleString()}</span>
+          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              Date{" "}
+            </p>
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              {new Date(data.date).toLocaleString()}
+            </p>
           </div>
-          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
-            <span>Agent Name :</span> <span>{data.agent_name}</span>
+          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              Agent Name
+            </p>{" "}
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              {data.agent_name}
+            </p>
           </div>
-          <div className="flex justify-between border-b border-slate-300 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
-            <span>Status :</span> <span>{data.status}</span>
+          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              Status
+            </p>{" "}
+            <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
+              {data.status}
+            </p>
           </div>
         </li>
       );
@@ -500,10 +516,10 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     let generatedId = () => {
       let combined = `#${
         inputValue?.branch_company
-          ?.toUpperCase()
-          ?.replace(/\s/g, "")
+          ?.replace(/[^\w\s]/gi, "X")
+          ?.replace(/[0-9]/g, "X")
           ?.charAt(inputValue?.branch_company?.length - 1)
-          ?.replace(/\W/g, "X") +
+          ?.toUpperCase() +
         new Date().getFullYear().toString().slice(2, 4) +
         new Date().toISOString().slice(5, 7) +
         new Date().toISOString().slice(8, 10) +
@@ -562,7 +578,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
       <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-[50rem] flex justify-end px-6 pt-[5.5rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-fit dark:bg-slate-800 bg-white border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
+          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-fit dark:bg-slate-800 bg-white border-2 border-slate-500 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1 relative`}
         >
@@ -705,6 +721,14 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                         setValues({
                           ...inputValue,
                           category: e.target.value,
+                          date: new Date(
+                            new Date().getTime() +
+                              Number(
+                                categories?.filter(
+                                  (data) => data?.name === e.target.value
+                                )[0]?.turnaround_time
+                              )
+                          ).toLocaleString(),
                         })
                       }
                     >
@@ -889,13 +913,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                         numbersArray.length >= 1 && showOpenedTickets
                           ? ""
                           : "hidden"
-                      } absolute top-10 left-0 h-[18.5rem] w-full shadow-2xl bg-slate-100 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2`}
+                      } absolute top-10 right-[-0.5rem] h-[18.5rem] w-[25rem] bg-slate-400 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2 shadow-2xl drop-shadow-2xl`}
                     >
                       {exist}
                       <button
                         type="button"
                         onClick={() => setShowOpen(false)}
-                        className="absolute top-[-0.25rem] right-1 bg-red-600 h-5 w-5 outline-none focus:outline-none hover:opacity-80 rounded-sm border border-slate-400 text-sm font-semibold text-slate-50"
+                        className="absolute top-[-0.25rem] right-1 bg-slate-800 h-6 w-6 outline-none focus:outline-none hover:opacity-80 rounded text-sm font-semibold text-slate-50"
                       >
                         &times;
                       </button>
@@ -1078,9 +1102,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   id="email"
                   className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300 outline-none focus:outline-none"
                 >
-                  <abbr title="Macros">
-                    <BiCollection />
-                  </abbr>
+                  <BiCollection />
                 </div>
                 <CannedResponses
                   setReply={setValues}
@@ -1089,6 +1111,13 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   setCanned={setCanned}
                   position={4}
                   tooltipPosition={`[9.4rem]`}
+                />
+                <HintTooltip
+                  details={"Canned Responses"}
+                  positions={{
+                    horizontal: `right-[110%]`,
+                    vertical: `bottom-0`,
+                  }}
                 />
               </div>
               {/**Upload Recordings ========================================= */}
@@ -1123,29 +1152,6 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                   </label>
                 </div>
               </div>
-              {/**Due date ========================================= */}
-              <div className="w-8 h-8 rounded text-slate-600 dark:text-slate-400 border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300">
-                <div
-                  onClick={() => {
-                    setTimePicker(true);
-                  }}
-                  className="h-full w-full flex items-center justify-center group relative"
-                >
-                  <BiCalendarCheck className="absolute text-lg cursor-pointer" />
-                  <HintTooltip
-                    details={"Estimated resolution time"}
-                    positions={{
-                      horizontal: `right-0`,
-                      vertical: `top-[-130%]`,
-                    }}
-                  />
-                </div>
-                <DueDate
-                  setValues={setValues}
-                  showTimePicker={showTimePicker}
-                  setTimePicker={setTimePicker}
-                />
-              </div>
               {/**Send ========================================= */}
               <div className="flex items-center bg-slate-800 dark:bg-blue-700 text-slate-100 dark:text-slate-100 rounded-sm">
                 <button
@@ -1165,7 +1171,7 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
                     type="button"
                     className="h-[80%] px-2 bg-inherit text-inherit border-0 outline-none focus:outline-none border-l border-slate-400 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
                   >
-                    <BiAlarm className="text-lg" />
+                    <BiChevronDown className="text-lg" />
                   </button>
                   <HintTooltip
                     details={"Schedule for later"}

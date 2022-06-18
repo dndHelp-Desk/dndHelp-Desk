@@ -6,7 +6,7 @@ import {
   BiCollection,
   BiArrowBack,
   BiConversation,
-  BiAlarm,
+  BiChevronDown,
   BiTrash,
   BiShare,
   BiDotsVertical,
@@ -846,7 +846,14 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               <div className="h-full flex items-center pr-[0.08rem]">
                 {/**Canned Response ========================================= */}
                 <div className="w-8 h-8 group rounded-l-sm bg-slate-50 dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
-                  <abbr title="Canned Response">
+                  <div className="relative group">
+                    <HintTooltip
+                      details={"Canned responses"}
+                      positions={{
+                        horizontal: `left-0`,
+                        vertical: `top-[-280%]`,
+                      }}
+                    />
                     <button
                       type="button"
                       onClick={() => {
@@ -862,7 +869,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     >
                       <BiCollection className="text-base hover:opacity-80" />
                     </button>
-                  </abbr>
+                  </div>
                   <CannedResponses
                     setReply={setReply}
                     onChange={onChange}
@@ -958,7 +965,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       type="button"
                       className="h-[80%] px-2 bg-inherit text-inherit border-0 outline-none focus:outline-none border-l border-slate-400 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
                     >
-                      <BiAlarm className="text-lg" />
+                      <BiChevronDown className="text-lg" />
                     </button>
                     <HintTooltip
                       details={"Schedule for later"}

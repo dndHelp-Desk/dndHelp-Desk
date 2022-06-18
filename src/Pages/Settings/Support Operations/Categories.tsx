@@ -22,16 +22,50 @@ const Categories: FC = () => {
     turnaround_time: "",
   });
 
-  //New Account Values
+  //New Category Values
   const [newCategoryValue, setValue] = useState<any>({
     name: "",
     turnaround_time: "",
   });
 
-  //Add new Account  =======================
+  //Turnaround time in millisecods =========
+  const [values, setDue] = useState<{
+    day: number | string;
+    hour: number | string;
+    min: number | string;
+  }>({
+    day: "",
+    hour: "",
+    min: "",
+  });
+
+  //Add new subject or category  =======================
   const handleNewCategory = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    newCategory(newCategoryValue?.name, newCategoryValue?.turnaround_time);
+
+    const day = Number(values?.day) >= 1 ? Number(values?.day) * 86400000 : 0;
+    const hour = Number(values?.hour) >= 1 ? Number(values?.hour) * 3600000 : 0;
+    const min = Number(values?.min) >= 1 ? Number(values?.min) * 60000 : 0;
+    const milliseconds = day + hour + min;
+    if (milliseconds >= 60000) {
+      newCategory(newCategoryValue?.name, milliseconds);
+      setDue({
+        day: "",
+        hour: "",
+        min: "",
+      });
+    } else if (milliseconds < 60000) {
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Please enter proper time",
+            color: "bg-yellow-200",
+            id: new Date().getTime(),
+          },
+        ])
+      );
+    }
     dispatch(
       updateAlert([
         ...alerts,
@@ -50,15 +84,15 @@ const Categories: FC = () => {
 
   //Componet  =======================
   return (
-    <section className="w-full h-fit md:h-[47rem] py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
+    <section className="w-full h-fit md:h-[50rem] py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
       {/**New Category ============================================ */}
-      <div className="col-span-1 p-6 h-full flex flex-col min-h-[45rem] overflow-hidden bg-white dark:bg-slate-800 ">
+      <div className="col-span-1 p-6 h-full flex flex-col min-h-[45rem] overflow-hidden bg-white dark:bg-slate-800 rounded ">
         <form
           action=""
           onSubmit={(e) => handleNewCategory(e)}
           className="space-y-6 flex-[1] w-full flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
         >
-          <h1 className="text-base text-center dark:text-slate-400 text-slate-800 uppercase font-bold font-sans">
+          <h1 className="text-base text-center dark:text-slate-300 text-slate-800 uppercase font-bold font-sans">
             Category / Subject
           </h1>
           <p className="text-sm leading-6 text-slate-800 dark:text-slate-300">
@@ -80,30 +114,91 @@ const Categories: FC = () => {
               }
               value={newCategoryValue.name}
               required
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-6 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-600 border-slate-400 outline-none focus:outline-none text-sm px-6 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
-            <input
-              type="number"
-              name="time"
-              id="time"
-              autoComplete="off"
-              required
-              placeholder="Allowed turn-around time in hours..."
-              onChange={(e) =>
-                setValue({
-                  ...newCategoryValue,
-                  turnaround_time: e.target.value,
-                })
-              }
-              value={newCategoryValue.turnaround_time}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-6 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
-            />
+          <p className="dark:text-slate-400 text-slate-700 text-sm font-sans font-medium">
+            Max allowed resolution time
+          </p>
+          <div
+            className={`h-10 w-full border border-slate-400 dark:border-slate-600 mt-4 m-auto grid grid-cols-3 rounded text-xs uppercase text-slate-800 dark:text-slate-300 font-semibold`}
+          >
+            {/**Days ========= */}
+            <div className="col-span-1 grid grid-cols-5 overflow-hidden">
+              <div className="col-span-3 overflow-hidden">
+                <label htmlFor="day">
+                  <input
+                    type="text"
+                    name="day"
+                    id="day"
+                    value={values?.day}
+                    onChange={(e) => {
+                      setDue((prev: any) => ({ ...prev, day: e.target.value }));
+                    }}
+                    placeholder="00"
+                    autoComplete="off"
+                    required
+                    className="h-full w-full outline-none focus:outline-none focus:border-0 focus:ring-0 border-0 bg-inherit text-inherit text-right tracking-wider px-2"
+                  />
+                </label>
+              </div>
+              <div className="col-span-2 border-x border-slate-400 dark:border-slate-600 flex justify-center items-center text-inherit">
+                <span>DAY</span>
+              </div>
+            </div>
+            {/**Hours ========= */}
+            <div className="col-span-1 grid grid-cols-5 overflow-hidden">
+              <div className="col-span-3 overflow-hidden">
+                <label htmlFor="hours">
+                  <input
+                    type="text"
+                    name="hours"
+                    id="hours"
+                    value={values?.hour}
+                    onChange={(e) => {
+                      setDue((prev: any) => ({
+                        ...prev,
+                        hour: e.target.value,
+                      }));
+                    }}
+                    placeholder="00"
+                    autoComplete="off"
+                    required
+                    className="h-full w-full outline-none focus:outline-none focus:border-0 focus:ring-0 border-0 bg-inherit text-inherit text-right tracking-wider px-2"
+                  />
+                </label>
+              </div>
+              <div className="col-span-2 border-x border-slate-400 dark:border-slate-600 flex justify-center items-center text-inherit">
+                <span>HRS</span>
+              </div>
+            </div>
+            {/**Minutes ========= */}
+            <div className="col-span-1 grid grid-cols-5 overflow-hidden">
+              <div className="col-span-3 overflow-hidden">
+                <label htmlFor="minutes">
+                  <input
+                    type="text"
+                    name="minutes"
+                    id="minutes"
+                    value={values?.min}
+                    onChange={(e) => {
+                      setDue((prev: any) => ({ ...prev, min: e.target.value }));
+                    }}
+                    placeholder="00"
+                    autoComplete="off"
+                    required
+                    className="h-full w-full outline-none focus:outline-none focus:border-0 focus:ring-0 border-0 bg-inherit text-inherit text-right tracking-wider px-2"
+                  />
+                </label>
+              </div>
+              <div className="col-span-2 border-l border-slate-400 dark:border-slate-600 flex justify-center items-center text-inherit">
+                <span>MIN</span>
+              </div>
+            </div>
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
+            className="bg-blue-700 min-w-[8rem] h-9 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
           >
             Add Category
           </button>
@@ -111,7 +206,7 @@ const Categories: FC = () => {
 
         {/**Guide ======================================== */}
         <div className="flex-[1] mt-4 py-4 text-slate-800 dark:text-slate-400 text-sm border-t border-slate-300 dark:border-slate-600">
-          <h3 className="text-base text-center dark:text-slate-400 text-slate-800 uppercase font-bold font-sans mb-4">
+          <h3 className="text-base text-center dark:text-slate-300 text-slate-800 uppercase font-bold font-sans mb-4">
             Need Help ?
           </h3>
           <details className="open:bg-white dark:open:bg-slate-800 open:border-b open:border-slate-200 dark:open:border-slate-700 p-2">
@@ -134,17 +229,14 @@ const Categories: FC = () => {
             className="open:bg-white dark:open:bg-slate-800 open:border-b open:border-slate-200 dark:open:border-slate-700 p-2"
           >
             <summary className="text-sm leading-6 text-slate-800 dark:text-slate-300 font-semibold select-none">
-              How does it work ?
+              What is allowed max time ?
             </summary>
             <div className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
               <p>
-                Your support team will select a category on every single request
-                that comes in. Selecting a category should be fast and obvious.
-                It can only be fast and obvious if you limit the number of
-                categories you have. It’s simply impossible to quickly choose
-                the correct option from a list that contains hundreds of
-                categories. In most cases, I recommend keeping the number under
-                20 if possible. In some
+                Allowed max resolution time will help you monitor the amount of
+                time each ticket is allowed to live before getting resolved. All
+                overdue ticket will be indicated by red or fou can use filters
+                to check overdue tickets.
               </p>
             </div>
           </details>
@@ -212,7 +304,7 @@ const Categories: FC = () => {
                     className="text-sm text-slate-600 dark:text-slate-400"
                   >
                     <span className="text-slate-800 dark:text-slate-300 font-semibold">
-                      Turn-around Time
+                      Turn-around Time in Milliseconds
                     </span>
                     <input
                       type="text"

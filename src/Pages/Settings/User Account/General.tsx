@@ -173,7 +173,7 @@ const General: FC = () => {
           <img
             src={auth?.currentUser?.photoURL}
             alt="profile"
-            className="h-full w-full rounded-full"
+            className="h-full w-full rounded-full object-cover object-center"
           />
         </div>
       </div>

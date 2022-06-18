@@ -9,8 +9,8 @@ import {
   HiOutlineBell,
   HiOutlineSupport,
 } from "react-icons/hi";
-import darkLogo from "./logos/dndHelp-Desk.webp";
-import lightLogo from "./logos/dndHelp-Desk_.webp";
+import darkLogo from "../../Assets/logos/dndHelp-desk_ShortDark.webp";
+import lightLogo from "../../Assets/logos/dndHelp-desk_ShortLight.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../Redux/Slices/UserSlice";
@@ -116,7 +116,7 @@ const Dashboard: FC = () => {
     ).length <= 0
       ? setLoading(true)
       : setLoading(false);
-    setTimeout(() => setLoading(false), 30000);
+    setTimeout(() => setLoading(false), 20000);
     return clearTimeout();
   }, [dashboardData, ticketsComponentDates]);
 
@@ -175,7 +175,7 @@ const Dashboard: FC = () => {
                   <img
                     src={lightLogo}
                     alt="logo"
-                    className="object-cover object-center w-9 h-9"
+                    className="object-cover object-center w-9 h-9 dark:w-8 dark:h-8"
                   />
                 )}
               </Link>

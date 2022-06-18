@@ -3,28 +3,28 @@
   "short_name": "dndHelp-Desk",
   "icons": [
     {
-      "images": "/images/android-chrome-144x144.png",
+      "images": "../src/Assets/favicon/android-icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "images": "/images/android-chrome-192x192.png",
+      "images": "../src/Assets/favicon/android-icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/images/android-chrome-512x512.png",
+      "src": "../src/Assets/favicon/android-icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "/images/maskable_icon.png",
+      "src": "../src/Assets/favicon/android-icon-192x192.png",
       "sizes": "196x196",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "start_url":".",
+  "start_url": ".",
   "theme_color": "#0f172a",
   "background_color": "#0f172a",
   "display": "standalone"

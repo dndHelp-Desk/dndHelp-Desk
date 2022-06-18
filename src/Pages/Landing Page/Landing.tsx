@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import heroTop from "./images/heroTop.webp";
 import heroTopSm from "./images/heroTop_sm.webp";
-import darkLogo from "./images/dndHelp-Desk_Dark.webp";
+import darkLogo from "../../Assets/logos/dndHelp-desk_Dark.webp";
 import Cloud from "./Cloud";
 import reportImg from "./images/report.webp";
 import reportImg2 from "./images/report2.webp";
@@ -42,7 +42,7 @@ const Landing: FC = () => {
                 <img
                   src={darkLogo}
                   alt="logo"
-                  className="object-cover object-center w-[14rem]"
+                  className="object-cover object-center w-48"
                 />
               </Link>
               {/**Small Menu Options =================== */}
@@ -132,7 +132,7 @@ const Landing: FC = () => {
             <div className="h-12 w-full justify-center gap-6 hidden md:flex">
               <NavLink
                 to="/pricing"
-                className="hidden sm:inline-block bg-blue-700 h-12 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none border-2 border-slate-800 focus:ring focus:ring-slate-900 hover:bg-blue-600 transition-all duration-200 font-medium"
+                className="hidden sm:inline-block bg-blue-700 h-12 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none border-2 border-slate-500 focus:ring focus:ring-slate-900 hover:bg-blue-600 transition-all duration-200 font-medium"
               >
                 <div className="h-full w-full flex justify-center items-center ">
                   Get started free
