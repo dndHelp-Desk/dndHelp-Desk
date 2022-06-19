@@ -315,6 +315,13 @@ export const deleteCategory = (id: string) => {
 
 //===================================TICKETS===========================================
 // Resolve Ticket Ticket  ================
+export const feedBack = (id: string, feedback: string) => {
+  let docRef = doc(db, `companies/${org}/tickets`, id);
+  updateDoc(docRef, {
+    feedback: feedback,
+  });
+};
+
 export const resolveTicket = (
   id: string,
   solution: string,

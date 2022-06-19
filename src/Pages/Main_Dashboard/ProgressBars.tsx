@@ -24,7 +24,7 @@ const ProgressBars: FC = () => {
                 ).length /
                   dashboardData?.length) *
                 100
-              ).toFixed(1),
+              ).toFixed(0),
             };
           })
           .sort((a: any, b: any) => b.value - a.value)
@@ -66,8 +66,8 @@ const ProgressBars: FC = () => {
                     style={{
                       width: `${
                         Number(element.value)
-                          ? parseFloat(element.value).toFixed(1)
-                          : "0.0"
+                          ? parseFloat(element.value).toFixed(0)
+                          : "0"
                       }%`,
                     }}
                     className="h-full bg-gradient-to-r from-blue-600 to-indigo-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full transition-all duration-200"
@@ -76,15 +76,15 @@ const ProgressBars: FC = () => {
                       title={`${element.name} : ${
                         Number(element.value)
                           ? parseFloat(element.value).toFixed(0)
-                          : 0.0
+                          : 0
                       }%`}
                     >
                       <div className="w-full h-full"></div>
                     </abbr>
                   </div>
                 </div>
-                <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-bold text-xs">
-                  <span>{element.value >= 0.1 ? element.value : "0.0"}%</span>
+                <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-bold text-[0.7rem]">
+                  <span>{element.value >= 0.1 ? element.value : "0"}%</span>
                 </div>
               </div>
             </div>
@@ -105,8 +105,8 @@ const ProgressBars: FC = () => {
                     aria-label="progressbas"
                     className="h-2.5 w-full flex-[3] rounded-full border border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-slate-700 overflow-hidden shadow-md"
                   ></div>
-                  <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-bold text-xs">
-                    <span>0.0%</span>
+                  <div className="flex-[1] flex justify-end text-slate-700 dark:text-slate-300 font-bold text-[0.7rem]">
+                    <span>0%</span>
                   </div>
                 </div>
               </div>

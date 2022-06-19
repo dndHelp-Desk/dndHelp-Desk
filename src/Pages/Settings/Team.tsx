@@ -172,7 +172,7 @@ const Team: FC = () => {
       {/**Delele Ticket Action Panel ====== */}
 
       <div className="flex items-center justify-between">
-        <h1 className="dark:text-slate-300 text-slate-800  text-base font-bold tracking-wide">
+        <h1 className="dark:text-slate-300 text-slate-800  text-xl font-bold tracking-wide">
           All Members
         </h1>
         <div className="flex items-center gap-4">

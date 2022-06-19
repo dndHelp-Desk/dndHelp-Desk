@@ -82,17 +82,6 @@ const OverviewReport: FC<data> = ({ data }) => {
     return Number(a.name) - Number(b.name);
   });
 
-  //Calculate The resolution Rate ==========
-  const ratings: any = useMemo(() => {
-    return (
-      (data?.filter(
-        (ticket: any) => ticket.status === "solved" && ticket.reopened === false
-      )?.length /
-        data?.length) *
-      100
-    ).toFixed(1);
-  }, [data]);
-
   //Component =============================
   return (
     <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -114,7 +103,7 @@ const OverviewReport: FC<data> = ({ data }) => {
               {totalAggregate}
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
-              Aggregate
+              Total Messages
             </h4>
           </div>
           <div className="dark:text-slate-300 text-slate-800">
@@ -136,7 +125,7 @@ const OverviewReport: FC<data> = ({ data }) => {
                       .split(".")[0]
                   : 0
               }`}
-              <span className="text-xs">hr</span>{" "}
+              <span className="text-xs lowercase">Hr</span>{" "}
               {`${
                 solvedTickets.length >= 1
                   ? Number(
@@ -154,10 +143,44 @@ const OverviewReport: FC<data> = ({ data }) => {
                     ) % 60
                   : 0
               }`}
-              <span className="text-xs">min</span>
+              <span className="text-xs lowercase">Mn</span>
             </h4>
             <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
               Resolution Time
+            </h4>
+          </div>
+        </div>
+        <div className="mt-6 flex space-x-4 px-2 min-h-14 w-full justify-between">
+          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-900 rounded p-4 border border-slate-300 dark:border-slate-700">
+            <h4 className="text-base font-bold text-center uppercase">
+              {data?.filter((data: any) => data?.feedback === "like")?.length}
+            </h4>
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+              Positive
+            </h4>
+          </div>
+          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-900 rounded p-4 border border-slate-300 dark:border-slate-700">
+            <h4 className="text-base font-bold text-center uppercase">
+              {
+                data?.filter(
+                  (data: any) =>
+                    data?.feedback !== "like" && data?.feedback !== "dislike"
+                )?.length
+              }
+            </h4>
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+              Neutral
+            </h4>
+          </div>
+          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-900 rounded p-4 border border-slate-300 dark:border-slate-700">
+            <h4 className="text-base font-bold text-center">
+              {
+                data?.filter((data: any) => data?.feedback === "dislike")
+                  ?.length
+              }
+            </h4>
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+              Negative
             </h4>
           </div>
         </div>
@@ -165,61 +188,9 @@ const OverviewReport: FC<data> = ({ data }) => {
           className="flex flex-col mt-2 h-44 space-y-2 w-full overflow-hidden rounded-md 
         p-2"
         >
-          <div className="">
-            <h4 className="dark:text-slate-300 text-slate-800 font-bold text-sm text-center">
-              {ratings !== "NaN" ? ratings : "0.0"}%
-            </h4>
-            <div className="flex w-full items-center justify-center text-2xl">
-              <span
-                className={`${
-                  ratings > 20
-                    ? "text-yellow-600"
-                    : "text-slate-700 dark:text-slate-300"
-                }`}
-              >
-                <abbr title="Bad Performer">&#9733;</abbr>
-              </span>{" "}
-              <span
-                className={`${
-                  ratings > 40
-                    ? "text-yellow-600"
-                    : "text-slate-700 dark:text-slate-300"
-                }`}
-              >
-                <abbr title="Poor Performer">&#9733;</abbr>
-              </span>{" "}
-              <span
-                className={`${
-                  ratings > 60
-                    ? "text-yellow-600"
-                    : "text-slate-700 dark:text-slate-300"
-                }`}
-              >
-                <abbr title="Under Performer">&#9733;</abbr>
-              </span>{" "}
-              <span
-                className={`${
-                  ratings > 80
-                    ? "text-yellow-600"
-                    : "text-slate-700 dark:text-slate-300"
-                }`}
-              >
-                <abbr title="Good Performer">&#9733;</abbr>
-              </span>{" "}
-              <span
-                className={`${
-                  ratings > 95
-                    ? "text-yellow-600"
-                    : "text-slate-700 dark:text-slate-300"
-                }`}
-              >
-                <abbr title="Excellent Performer">&#9733;</abbr>
-              </span>{" "}
-            </div>
-          </div>
           <p className=" text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
-            Real-time report allows you to check the current status of your team's
-            workload , availability and valuable insights or statistics
+            Real-time report allows you to check the current status of your
+            team's workload , availability and valuable insights or statistics
             about your team's performance.
           </p>
         </div>

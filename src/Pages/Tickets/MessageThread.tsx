@@ -23,6 +23,7 @@ import {
   resolveTicket,
   changeStatus,
   reOpenTicket,
+  feedBack,
 } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import { addRecording } from "../Auth/Firebase";
@@ -763,7 +764,17 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 {/**Ratings =================== */}
                 <div className="flex items-center space-x-2 h-8 w-28 absolute bottom-[-1rem] left-4 text-slate-500 dark:text-slate-400">
                   <div className="relative group">
-                    <button className="h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all">
+                    <button
+                      onClick={() => {
+                        user[0]?.email === firstMessage[0]?.recipient_email &&
+                          feedBack(firstMessage[0]?.id, "like");
+                      }}
+                      className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all ${
+                        firstMessage[0]?.feedback === "like"
+                          ? "text-blue-700"
+                          : ""
+                      }`}
+                    >
                       <HiThumbUp />
                     </button>
                     <HintTooltip
@@ -775,7 +786,17 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     />
                   </div>
                   <div className="relative group">
-                    <button className="h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all">
+                    <button
+                      onClick={() => {
+                        user[0]?.email === firstMessage[0]?.recipient_email &&
+                          feedBack(firstMessage[0]?.id, "dislike");
+                      }}
+                      className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all ${
+                        firstMessage[0]?.feedback === "dislike"
+                          ? "text-red-600"
+                          : ""
+                      }`}
+                    >
                       <HiThumbDown />
                     </button>
                     <HintTooltip

@@ -73,7 +73,7 @@ const EmailAccounts: FC = () => {
   return (
     <section className="w-full h-fit md:h-[47rem] py-2 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
       {/**New Account ============================================ */}
-      <div className="col-span-1 p-6 h-full flex flex-col min-h-[45rem] overflow-hidden bg-white dark:bg-slate-800 ">
+      <div className="col-span-1 p-6 h-full flex flex-col min-h-[45rem] overflow-hidden bg-white dark:bg-slate-800 rounded">
         <form
           action=""
           onSubmit={(e) => handleNewContact(e)}

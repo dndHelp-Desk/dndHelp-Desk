@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Chart from "react-apexcharts";
+import { RingProgress, Text } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
@@ -7,7 +7,6 @@ const RadialBar: FC = () => {
   const dashboardData = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
   );
-  const theme = useSelector((state: RootState) => state.UserInfo.theme);
   const data =
     dashboardData.length >= 1
       ? (
@@ -19,36 +18,18 @@ const RadialBar: FC = () => {
         )?.toFixed(0)
       : 0;
 
-  const series = [Number(data)];
-
-  const options = {
-    plotOptions: {
-      radialBar: {
-        dataLabels: {
-          show: false,
-        },
-        track: {
-          background: theme === "dark" ? "#334155" : "#e2e8f0",
-        },
-        label: "Progress",
-      },
-    },
-    chart: {
-      dropShadow: {
-        enabled: true,
-        top: 3,
-        left: 3,
-        blur: 1,
-        opacity: 0.1,
-      },
-    },
-    colors: ["#2563eb"],
-    tooltip: {
-      enabled: true,
-    },
-  };
   return (
-    <Chart type="radialBar" series={series} options={options} height="140px" />
+    <RingProgress
+      size={90}
+      thickness={8}
+      roundCaps
+      sections={[{ value: Number(data), color: "#2563eb" }]}
+      label={
+        <Text color="#1d4ed8" weight={700} align="center" size="sm">
+          {Number(data)}%
+        </Text>
+      }
+    />
   );
 };
 
