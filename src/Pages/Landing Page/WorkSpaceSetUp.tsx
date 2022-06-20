@@ -32,7 +32,7 @@ const WorkSpaceSetUp: FC = () => {
     company_name: "",
     companany_address: "",
     department: "",
-    sending_email: "",
+    company_url: "",
     password: "njix454%425..0303",
     port: 465,
     host: "serv24.registerdomain.co.za",
@@ -47,8 +47,9 @@ const WorkSpaceSetUp: FC = () => {
     collection(
       db,
       `companies/${setUpValues.company_name
-        .toLowerCase()
-        .replace(/\s/g, "")}/members`
+        ?.replace(/[^a-zA-Z0-9]/g, "")
+        ?.replace(/\s/g, "")
+        ?.toLowerCase()}/members`
     );
 
   let ticketsRef =
@@ -56,8 +57,9 @@ const WorkSpaceSetUp: FC = () => {
     collection(
       db,
       `companies/${setUpValues.company_name
-        .toLowerCase()
-        .replace(/\s/g, "")}/tickets`
+        ?.replace(/[^a-zA-Z0-9]/g, "")
+        ?.replace(/\s/g, "")
+        ?.toLowerCase()}/tickets`
     );
 
   let emailAccountsRef =
@@ -65,8 +67,9 @@ const WorkSpaceSetUp: FC = () => {
     collection(
       db,
       `companies/${setUpValues.company_name
-        .toLowerCase()
-        .replace(/\s/g, "")}/email_accounts`
+        ?.replace(/[^a-zA-Z0-9]/g, "")
+        ?.replace(/\s/g, "")
+        ?.toLowerCase()}/email_accounts`
     );
 
   let companyDetailsRef =
@@ -74,8 +77,9 @@ const WorkSpaceSetUp: FC = () => {
     collection(
       db,
       `companies/${setUpValues.company_name
-        .toLowerCase()
-        .replace(/\s/g, "")}/settings/all_settings/company_details`
+        ?.replace(/[^a-zA-Z0-9]/g, "")
+        ?.replace(/\s/g, "")
+        ?.toLowerCase()}/settings/all_settings/company_details`
     );
 
   let categoriesRef =
@@ -83,146 +87,177 @@ const WorkSpaceSetUp: FC = () => {
     collection(
       db,
       `companies/${setUpValues.company_name
-        .toLowerCase()
-        .replace(/\s/g, "")}/settings/all_settings/categories`
+        ?.replace(/[^a-zA-Z0-9]/g, "")
+        ?.replace(/\s/g, "")
+        ?.toLowerCase()}/settings/all_settings/categories`
     );
 
   //Sing Up Or Create New Accouunt
   const handleSubmit = (email: string, password: string) => {
     setLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((data) => {
-        //Check if the workspace exist or not ============
-        getDocs(membersRef).then((snapshot) => {
-          if (snapshot.docs?.length >= 1) {
-            dispatch(
-              updateAlert([
-                ...alerts,
-                {
-                  message:
-                    "Company already exists, please try a different company name",
-                  color: "bg-red-200",
-                  id: new Date().getTime(),
+    if (
+      setUpValues.company_name?.length >= 3 &&
+      setUpValues?.user_email?.length >= 3 &&
+      setUpValues?.user_name?.length >= 3
+    ) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((data) => {
+          //Check if the workspace exist or not ============
+          getDocs(membersRef).then((snapshot) => {
+            if (snapshot.docs?.length >= 1) {
+              dispatch(
+                updateAlert([
+                  ...alerts,
+                  {
+                    message:
+                      "Company already exists, please try a different company name",
+                    color: "bg-red-200",
+                    id: new Date().getTime(),
+                  },
+                ])
+              );
+              setActive(1);
+              fetch("https://dndhelp-desk-first.herokuapp.com/delete", {
+                method: "POST",
+                headers: {
+                  "Content-type": "application/json",
                 },
-              ])
-            );
-            setActive(1);
-            fetch("https://dndhelp-desk-first.herokuapp.com/delete", {
-              method: "POST",
-              headers: {
-                "Content-type": "application/json",
-              },
-              body: JSON.stringify({
-                uid: data.user.uid,
-              }),
-            });
-            setLoading(false);
-          } else {
-            // New User =================================
-            addDoc(membersRef, {
-              name: setUpValues.user_name,
-              dept: setUpValues.department,
-              email: setUpValues.user_email?.toLowerCase(),
-              access: "admin",
-              bio: "",
-              active: true,
-              status: "unavailable",
-              photoUrl: "",
-              companies: "",
-              uid: auth.currentUser?.uid,
-              createdAt: new Date().getTime(),
-              workspace_owner: true,
-            });
-
-            //New  Email Account ==========================
-            addDoc(emailAccountsRef, {
-              name: "Support",
-              email: setUpValues.sending_email + "@dndhelp-desk.co.za",
-              password: setUpValues.password,
-              host: setUpValues.host,
-              port: setUpValues.port,
-            });
-
-            //Company Details ==========================
-            addDoc(companyDetailsRef, {
-              name: setUpValues.company_name,
-              address: setUpValues.companany_address,
-              subscription: window.localStorage.getItem("plan"),
-              creationDate: new Date().getTime(),
-            });
-
-            //Support Categories ==========================
-            let defaultCategories = [
-              { name: "Late Delivery", turnaround_time: 90000 },
-              { name: "Failed Order", turnaround_time: 90000 },
-              { name: "Incorrect Order", turnaround_time: 90000 },
-              { name: "Refund", turnaround_time: 90000 },
-              { name: "Poor Service (Driver)", turnaround_time: 90000 },
-              { name: "Poor Service (Agent)", turnaround_time: 90000 },
-              { name: "Poor Service (Store)", turnaround_time: 90000 },
-            ];
-            defaultCategories?.forEach((cat) => {
-              addDoc(categoriesRef, cat);
-            });
-
-            // New Tickects ==============================
-            addDoc(ticketsRef, {
-              recipient_name: "dndHelp-Desk",
-              recipient_email: "support@dndhelpdesk.co.za",
-              message_position: 1,
-              priority: "Medium",
-              agent_name: "dndHelpDesk",
-              date: new Date().getTime(),
-              category: "Welcome, Get Started",
-              branch_company: setUpValues.company_name,
-              message:
-                '<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple</h2><br/> <p>Please watch the video below to get started. We have set default settings for you but there can be adjusted, before changing anything please watch the video to make informed changes.</p><br/> <video width="400" controls><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/mp4"><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/ogg">Your browser does not support HTML video.</video>',
-              time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-              ticket_id: "#123456",
-              status: "open",
-              due_date: new Date().getTime(),
-              from: "agent",
-              agent_email: "support@dndhelpdesk.co.za",
-              readStatus: "delivered",
-              complainant_name: "test user",
-              complainant_email: "testuser@example.com",
-              complainant_number: "0123457892",
-              closed_time: "",
-              fcr: "no",
-              hasRecording: false,
-              solution: "",
-              reopened: false,
-              assigned: true,
-              assignee: "Help Desk Support",
-              assigner: "Help Desk Support",
-              team: "dndHelpDesk",
-              origin: "Help Desk",
-            });
-
-            //Sign-Out  and Redirect to login ================================
-            setTimeout(() => {
-              signOut(auth).then(() => {
-                setLogged(true);
+                body: JSON.stringify({
+                  uid: data.user.uid,
+                }),
               });
               setLoading(false);
-            }, 5000);
-          }
+            } else {
+              // New User =================================
+              addDoc(membersRef, {
+                name: setUpValues.user_name,
+                dept: setUpValues.department,
+                email: setUpValues.user_email?.toLowerCase(),
+                access: "admin",
+                bio: "",
+                active: true,
+                status: "unavailable",
+                photoUrl: "",
+                companies: "",
+                uid: auth.currentUser?.uid,
+                createdAt: new Date().getTime(),
+                workspace_owner: true,
+              });
+
+              //New  Email Account ==========================
+              addDoc(emailAccountsRef, {
+                name: "Support",
+                email:
+                  "support@" +
+                  setUpValues.company_name
+                    ?.replace(/[^a-zA-Z0-9]/g, "")
+                    ?.replace(/\s/g, "")
+                    ?.toLowerCase() +
+                  ".dndhelp-desk.co.za",
+                password: setUpValues.password,
+                host: setUpValues.host,
+                port: setUpValues.port,
+              });
+
+              //Company Details ==========================
+              addDoc(companyDetailsRef, {
+                name: setUpValues.company_name,
+                address: setUpValues.companany_address,
+                company_url:
+                  setUpValues?.company_url
+                    ?.replace(/[^a-zA-Z0-9]/g, "")
+                    ?.replace(/\s/g, "")
+                    ?.toLowerCase() + ".dndhelp-desk.co.za",
+                favicon_url: "",
+                logo_url: "",
+                subscription: window.localStorage.getItem("plan"),
+                creationDate: new Date().getTime(),
+              });
+
+              //Support Categories ==========================
+              let defaultCategories = [
+                { name: "Late Delivery", turnaround_time: 90000 },
+                { name: "Failed Order", turnaround_time: 90000 },
+                { name: "Incorrect Order", turnaround_time: 90000 },
+                { name: "Refund", turnaround_time: 90000 },
+                { name: "Poor Service (Driver)", turnaround_time: 90000 },
+                { name: "Poor Service (Agent)", turnaround_time: 90000 },
+                { name: "Poor Service (Store)", turnaround_time: 90000 },
+              ];
+              defaultCategories?.forEach((cat) => {
+                addDoc(categoriesRef, cat);
+              });
+
+              // New Tickects ==============================
+              addDoc(ticketsRef, {
+                recipient_name: "dndHelp-Desk",
+                recipient_email: "support@dndhelpdesk.co.za",
+                message_position: 1,
+                priority: "Medium",
+                agent_name: "dndHelpDesk",
+                date: new Date().getTime(),
+                category: "Welcome, Get Started",
+                branch_company: setUpValues.company_name,
+                message:
+                  '<h1>Great to have you on board!</h1><br/> <h2>The next step is crucial, yet simple</h2><br/> <p>Please watch the video below to get started. We have set default settings for you but there can be adjusted, before changing anything please watch the video to make informed changes.</p><br/> <video width="400" controls><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/mp4"><source src="https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/ICON_VERSION9.mp4?alt=media&token=f13b1e17-1909-4aae-9803-6b7e4c8b70ee" type="video/ogg">Your browser does not support HTML video.</video>',
+                time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+                ticket_id: "#123456",
+                status: "open",
+                due_date: new Date().getTime(),
+                from: "agent",
+                agent_email: "support@dndhelpdesk.co.za",
+                readStatus: "delivered",
+                complainant_name: "test user",
+                complainant_email: "testuser@example.com",
+                complainant_number: "0123457892",
+                closed_time: "",
+                fcr: "no",
+                hasRecording: false,
+                solution: "",
+                reopened: false,
+                assigned: true,
+                assignee: "Help Desk Support",
+                assigner: "Help Desk Support",
+                team: "dndHelpDesk",
+                origin: "Help Desk",
+              });
+
+              //Sign-Out  and Redirect to login ================================
+              setTimeout(() => {
+                signOut(auth).then(() => {
+                  setLogged(true);
+                });
+                setLoading(false);
+              }, 5000);
+            }
+          });
+        })
+        .catch((err) => {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: err.message.split(":")[1],
+                color: "bg-red-200",
+                id: new Date().getTime(),
+              },
+            ])
+          );
+          setLoading(false);
+          setActive(0);
         });
-      })
-      .catch((err) => {
-        dispatch(
-          updateAlert([
-            ...alerts,
-            {
-              message: err.message.split(":")[1],
-              color: "bg-red-200",
-              id: new Date().getTime(),
-            },
-          ])
-        );
-        setLoading(false);
-        setActive(0);
-      });
+    } else {
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Please make sure all details are filled correctly",
+            color: "bg-red-200",
+            id: new Date().getTime(),
+          },
+        ])
+      );
+    }
   };
 
   //Component  =================================

@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { BiRocket } from "react-icons/bi";
 import { Stepper, Button } from "@mantine/core";
-import { Link } from "react-router-dom";
 
 type Props = {
   setValues: any;
@@ -154,7 +153,14 @@ const SignUp: FC<Props> = ({
                   required
                   value={setUpValues.company_name}
                   onChange={(e) =>
-                    setValues({ ...setUpValues, company_name: e.target.value })
+                    setValues({
+                      ...setUpValues,
+                      company_name: e.target.value,
+                      company_url: e.target.value
+                        ?.replace(/[^a-zA-Z0-9]/g, "")
+                        ?.replace(/\s/g, "")
+                        ?.toLowerCase(),
+                    })
                   }
                   className="outline-none focus:outline-none rounded placeholder:text-xs text-sm w-full bg-slate-200 border-slate-400 focus:ring-0 focus:border-slate-400 h-10"
                 />
@@ -187,30 +193,41 @@ const SignUp: FC<Props> = ({
             {/**Company Outgoing Email & Server host ========================= */}
             <div className="flex w-full justify-between items-center space-x-4">
               <label
-                htmlFor="sending_email"
+                htmlFor="company_url"
                 className="w-full text-xs font-medium text-slate-700"
               >
                 <span className="uppercase text-[0.7rem] font-bold">
-                  Email Account
+                  Sub Domain
                 </span>
                 <div className="rounded bg-slate-200 border-slate-400 border flex justify-between flex-nowrap overflow-hidden">
                   <input
                     type="text"
-                    name="sending_email"
-                    id="sending_email"
+                    name="company_url"
+                    id="company_url"
                     placeholder="support"
+                    pattern="/[^a-zA-Z0-9]/g"
                     required
-                    value={setUpValues.sending_email}
+                    value={
+                      setUpValues.company_url?.length <= 0
+                        ? setUpValues?.company_name
+                            ?.replace(/[^a-zA-Z0-9]/g, "")
+                            ?.replace(/\s/g, "")
+                            ?.toLowerCase()
+                        : setUpValues.company_url
+                    }
                     onChange={(e) =>
                       setValues({
                         ...setUpValues,
-                        sending_email: e.target.value,
+                        company_url: e.target.value
+                          ?.replace(/[^a-zA-Z0-9]/g, "")
+                          ?.replace(/\s/g, "")
+                          ?.toLowerCase(),
                       })
                     }
                     className="outline-none focus:outline-none placeholder:text-xs text-sm border-0 focus:ring-0 focus:border-slate-400 h-10 bg-inherit w-3/5"
                   />
                   <div className="h-10 w-2/5 border-l border-slate-400 flex items-center px-4">
-                    <span>@dndhelp-desk.co.za</span>
+                    <span>.dndhelp-desk.co.za</span>
                   </div>
                 </div>
               </label>
@@ -250,7 +267,16 @@ const SignUp: FC<Props> = ({
         >
           Back
         </Button>
-        <Link to={logged && active === 2 ? "/login" : "/workspace-setup"}>
+        {logged && active === 2 ? (
+          <a href={`${setUpValues?.company_url + ".dndhelp-desk.co.za"}/login`}>
+            <Button
+              disabled={active === 2 && loading ? true : false}
+              className="px-2 h-10 w-36 rounded-sm bg-blue-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
+            >
+              Login
+            </Button>
+          </a>
+        ) : (
           <Button
             disabled={active === 2 && loading ? true : false}
             className="px-2 h-10 w-36 rounded-sm bg-blue-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
@@ -262,7 +288,7 @@ const SignUp: FC<Props> = ({
           >
             {active === 1 ? "Submit" : active === 2 ? "Login" : "Continue"}
           </Button>
-        </Link>
+        )}
       </div>
     </div>
   );
