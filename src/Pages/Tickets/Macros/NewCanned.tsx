@@ -143,7 +143,7 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
             Create new
           </button>
         </div>
-        <div className="h-[10rem] w-full">
+        <div className="min-h-[10rem] w-full">
           <RichTextEditor
             value={value}
             onChange={onChange}
@@ -158,7 +158,7 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
                 "bg-inherit text-inherit border-0 border-slate-300 dark:border-slate-600 rounded-sm flex justify-between w-full",
               toolbarControl:
                 "bg-inherit text-inherit border-0  dark:hover:bg-slate-600 hover:bg-white rounded-sm",
-              root: "replyEditor h-full py-0 pl-0 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800",
+              root: "replyEditor h-full min-h-[20rem] py-0 pl-0 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar bg-white dark:bg-slate-800",
             }}
             controls={[
               [

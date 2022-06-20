@@ -92,7 +92,7 @@ const CannedResponses: FC<Props> = ({
             </div>
           </div>
           <div className="w-full row-span-5 overflow-hidden z-[9] bg-inherit">
-            <ul className="mt-1 h-full w-full flex flex-col p-2 space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-700 text-xs font-semibold ">
+            <ul className="mt-1 h-[15rem] w-full p-2 space-y-1 overflow-hidden overflow-y-scroll dark:text-slate-300 text-slate-700 text-xs font-semibold ">
               {allCannedRes.length >= 1 &&
                 allCannedRes.map((template, index) => {
                   return (
