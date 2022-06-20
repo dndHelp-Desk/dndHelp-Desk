@@ -35,17 +35,6 @@ const Home: FC = () => {
     );
   }, [dashboardData]);
 
-  const totalProgress =
-    dashboardData.length >= 1
-      ? (
-          (dashboardData.filter(
-            (data) => data?.status?.toLowerCase() === "solved"
-          ).length /
-            dashboardData?.length) *
-          100
-        )?.toFixed(1)
-      : 0;
-
   //Loop Through All Users ================
   const users =
     allMembers.length >= 1 &&
