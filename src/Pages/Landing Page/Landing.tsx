@@ -132,7 +132,7 @@ const Landing: FC = () => {
             <div className="h-12 w-full justify-center gap-6 hidden md:flex">
               <NavLink
                 to="/pricing"
-                className="hidden sm:inline-block bg-blue-700 h-12 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none border-2 border-slate-500 focus:ring focus:ring-slate-900 hover:bg-blue-600 transition-all duration-200 font-medium"
+                className="hidden sm:inline-block bg-blue-700 h-10 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none hover:bg-blue-600 transition-all duration-200 font-medium"
               >
                 <div className="h-full w-full flex justify-center items-center ">
                   Get started free
