@@ -127,7 +127,7 @@ const Dashboard: FC = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="w-full dark:bg-slate-900 bg-slate-300 flex flex-col selection:bg-blue-600 selection:text-slate-100">
+      <div className="w-full dark:bg-slate-900 bg-slate-300 selection:bg-blue-600 selection:text-slate-100">
         {/**Data Fetching Components */}
         <TicketsnUserData />
 
@@ -144,10 +144,14 @@ const Dashboard: FC = () => {
         </div>
 
         {/**NavBar ============== */}
-        <nav className="flex justify-center flex-[1] h-[5.5rem] w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide">
+        <nav
+          className={`fixed top-0 flex justify-center h-fit w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide  ${
+            !loading ? "z-[99999]" : ""
+          }`}
+        >
           {/**AlertsWrapper */}
           <AlertsWrapper />
-          <div className="w-[95%] 2xl:w-[75rem] h-[3.5rem] flex justify-between items-center relative z-[999]">
+          <div className="w-[95%] 2xl:w-[75rem] h-[3.8rem] flex justify-between items-center relative z-[999]">
             {/**Other Controls and logo ================ */}
             <div className="h-full flex items-center gap-2">
               {/**Small Screen Menu Btn ================ */}
@@ -175,7 +179,7 @@ const Dashboard: FC = () => {
                   <img
                     src={lightLogo}
                     alt="logo"
-                    className="object-cover object-center w-9 h-9 dark:w-8 dark:h-8"
+                    className="object-cover object-center w-9 h-9"
                   />
                 )}
               </Link>
@@ -375,7 +379,7 @@ const Dashboard: FC = () => {
             </div>
           </div>
         </nav>
-        <main className="w-full h-full flex-[8] flex flex-col pb-2 items-center">
+        <main className="w-full h-full flex flex-col pb-2 pt-16 items-center">
           <Home />
           <Outlet />
         </main>

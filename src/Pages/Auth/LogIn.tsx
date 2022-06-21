@@ -235,7 +235,7 @@ const LogIn: FC = () => {
       </div>
 
       <div className="min-h-full w-full flex items-center justify-center pt-4 py-12 px-4 sm:px-6 lg:px-8 z-[99]">
-        <div className="max-w-md w-full space-y-8 border border-slate-300 bg-slate-100 rounded shadow-2xl drop-shadow-2xl p-6 pt-4">
+        <div className="max-w-md w-full space-y-8 border border-slate-300 bg-slate-100 rounded shadow-2xl drop-shadow-2xl p-8 py-10">
           <div>
             <Link to="/">
               <img

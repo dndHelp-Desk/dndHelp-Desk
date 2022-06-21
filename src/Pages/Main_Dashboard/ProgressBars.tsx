@@ -42,7 +42,7 @@ const ProgressBars: FC = () => {
   return (
     <div className="col-span-1 h-[20rem] flex flex-col justify-between dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded overflow-hidden p-4 py-6">
       <div className="w-full">
-        <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold dark:font-semibold font-sans uppercase">
+        <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold font-sans uppercase">
           Top Categories
         </h1>
         <p className="text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400 mt-2 font-sans">
@@ -53,7 +53,7 @@ const ProgressBars: FC = () => {
         {categoriesData?.map((element: any, index) => {
           return (
             <div key={index} className="w-full">
-              <small className="text-slate-800 dark:text-slate-400 text-[0.6rem] font-medium uppercase">
+              <small className="text-slate-800 dark:text-slate-400 text-[0.6rem] font-semibold uppercase">
                 {element.name}
               </small>
               <div className="w-full flex items-center justify-between">
@@ -96,7 +96,7 @@ const ProgressBars: FC = () => {
           [0, 1, 2, 3, 4, 5].map((index) => {
             return (
               <div key={index} className="w-full">
-                <small className="text-slate-700 dark:text-slate-400 text-[0.65rem] font-medium tracking-normal uppercase">
+                <small className="text-slate-700 dark:text-slate-400 text-[0.65rem] font-semibold tracking-normal uppercase">
                   N/A
                 </small>
                 <div className="w-full flex items-center justify-between">

@@ -22,7 +22,6 @@ const RadialBar: FC = () => {
     <RingProgress
       size={90}
       thickness={8}
-      roundCaps
       sections={[{ value: Number(data), color: "#2563eb" }]}
       label={
         <Text color="#1d4ed8" weight={700} align="center" size="sm">

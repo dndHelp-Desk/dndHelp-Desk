@@ -94,7 +94,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             <h4 className="text-base font-bold text-center uppercase">
               {data?.length}
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Total Tickets
             </h4>
           </div>
@@ -102,7 +102,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             <h4 className="text-base font-bold text-center uppercase">
               {totalAggregate}
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Total Messages
             </h4>
           </div>
@@ -145,7 +145,7 @@ const OverviewReport: FC<data> = ({ data }) => {
               }`}
               <span className="text-xs lowercase">Mn</span>
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Resolution Time
             </h4>
           </div>
@@ -155,7 +155,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             <h4 className="text-base font-bold text-center uppercase">
               {data?.filter((data: any) => data?.feedback === "like")?.length}
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Positive
             </h4>
           </div>
@@ -168,7 +168,7 @@ const OverviewReport: FC<data> = ({ data }) => {
                 )?.length
               }
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Neutral
             </h4>
           </div>
@@ -179,7 +179,7 @@ const OverviewReport: FC<data> = ({ data }) => {
                   ?.length
               }
             </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-semibold text-center uppercase">
+            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Negative
             </h4>
           </div>

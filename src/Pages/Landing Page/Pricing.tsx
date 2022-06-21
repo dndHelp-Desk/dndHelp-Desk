@@ -31,7 +31,7 @@ const Pricing: FC = () => {
                 <img
                   src={darkLogo}
                   alt="logo"
-                  className="object-cover object-center w-48"
+                  className="object-cover object-center h-20"
                 />
               </Link>
               {/**Small Menu Options =================== */}

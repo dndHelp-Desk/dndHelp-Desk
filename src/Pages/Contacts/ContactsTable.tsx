@@ -202,7 +202,7 @@ const Table: FC<Prop> = ({ setModal }) => {
           </div>
           <button
             onClick={() => setModal(true)}
-            className="text-slate-100 text-sm font-semibold cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 h-10 px-6 rounded flex items-center justify-center space-x-2"
+            className="text-slate-100 text-sm font-semibold cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 h-10 px-6 rounded-sm flex items-center justify-center space-x-2"
           >
             <HiUserAdd className="text-lg" />
             <span>Add New</span>
