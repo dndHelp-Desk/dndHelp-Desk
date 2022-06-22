@@ -6,6 +6,7 @@ import Landing from "./Pages/Landing Page/Landing";
 import LogIn from "./Pages/Auth/LogIn";
 import TicketsComponent from "./Pages/Tickets/TicketsComponent";
 import ContactsComponent from "./Pages/Contacts/ContactsComponent";
+import animatedLogo from "./Assets/logos/anim.gif";
 import ErrorPage from "./Pages/Landing Page/ErrorPage";
 
 //Lazy Loading Components || Code Splitting ====================
@@ -48,29 +49,13 @@ const App: FC = () => {
       <BrowserRouter>
         <Suspense
           fallback={
-            <div className="h-screen w-screen bg-slate-800 gap-4 flex flex-col items-center justify-center">
+            <div className="h-screen w-screen bg-slate-900 gap-4 flex flex-col items-center justify-center">
               {/* <!--card--> */}
-              <div className="w-64 bg-slate-600 rounded shadow-2xl">
-                {/* <!--image--> */}
-                <div className="h-32 bg-slate-700 rounded-tr rounded-tl flex gap-2 flex-col justify-center items-center p-2"></div>
-                <div className="p-5">
-                  {/* <!--title--> */}
-                  <div className="h-6 rounded-sm bg-slate-700 animate-pulse mb-4"></div>
-                  {/* <!--content--> */}
-                  <div className="grid grid-cols-4 gap-1">
-                    <div className="col-span-3 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="col-span-2 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="col-span-2h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="col-span-3 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                    <div className="col-span-2 h-4 rounded-sm bg-slate-400 animate-pulse mb-1"></div>
-                  </div>
-                </div>
-              </div>
+              <img
+                src={animatedLogo}
+                alt="animatedLogo"
+                className="w-64 object-cover object-center"
+              />
             </div>
           }
         >

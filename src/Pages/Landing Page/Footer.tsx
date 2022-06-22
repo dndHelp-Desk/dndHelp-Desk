@@ -51,23 +51,43 @@ const Footer: FC = () => {
                 <p className="font-bold text-white"> Services </p>
 
                 <nav className="flex flex-col mt-6 space-y-4 text-sm text-gray-300">
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     1on1 Coaching{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Company Review{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Accounts Review{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     HR Consulting{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     SEO Optimisation{" "}
                   </a>
@@ -78,19 +98,35 @@ const Footer: FC = () => {
                 <p className="font-bold text-white"> Company </p>
 
                 <nav className="flex flex-col mt-6 space-y-4 text-sm text-gray-300">
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     About{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Meet the Team{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     History{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Careers{" "}
                   </a>
@@ -101,15 +137,27 @@ const Footer: FC = () => {
                 <p className="font-bold text-white"> Helpful Links </p>
 
                 <nav className="flex flex-col mt-6 space-y-4 text-sm text-gray-300">
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Contact{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     FAQs{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Live Chat{" "}
                   </a>
@@ -120,19 +168,35 @@ const Footer: FC = () => {
                 <p className="font-bold text-white"> Legal </p>
 
                 <nav className="flex flex-col mt-6 space-y-4 text-sm text-gray-300">
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Accessibility{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Returns Policy{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Refund Policy{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Hiring Statistics{" "}
                   </a>
@@ -143,11 +207,19 @@ const Footer: FC = () => {
                 <p className="font-bold text-white"> Downloads </p>
 
                 <nav className="flex flex-col mt-6 space-y-4 text-sm text-gray-300">
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Marketing Calendar{" "}
                   </a>
-                  <a className="inline-block" href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  <a
+                    className="inline-block"
+                    href="https://www.dndhelp-desk.co.za/"
+                    rel="noreferrer"
+                  >
                     {" "}
                     SEO Infographics{" "}
                   </a>
@@ -157,28 +229,8 @@ const Footer: FC = () => {
               <div className="flex col-span-2 space-x-4 text-gray-500 lg:col-span-5">
                 <a
                   className="hover:opacity-75"
-                  href="https://www.dndhelp-desk.co.za/" rel="noreferrer"
-                  target="_blank"
-                >
-                  <span className="sr-only"> Facebook </span>
-
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
-
-                <a
-                  className="hover:opacity-75"
-                  href="https://www.dndhelp-desk.co.za/" rel="noreferrer"
+                  href="https://www.instagram.com/dndhelpdesk/"
+                  rel="noreferrer"
                   target="_blank"
                 >
                   <span className="sr-only"> Instagram </span>
@@ -199,7 +251,8 @@ const Footer: FC = () => {
 
                 <a
                   className="hover:opacity-75"
-                  href="https://www.dndhelp-desk.co.za/" rel="noreferrer"
+                  href="https://twitter.com/dndhelp_desk"
+                  rel="noreferrer"
                   target="_blank"
                 >
                   <span className="sr-only"> Twitter </span>
@@ -216,7 +269,8 @@ const Footer: FC = () => {
 
                 <a
                   className="hover:opacity-75"
-                  href="https://www.dndhelp-desk.co.za/" rel="noreferrer"
+                  href="https://github.com/dndHelp-Desk"
+                  rel="noreferrer"
                   target="_blank"
                 >
                   <span className="sr-only"> GitHub </span>
@@ -237,22 +291,27 @@ const Footer: FC = () => {
 
                 <a
                   className="hover:opacity-75"
-                  href="https://www.dndhelp-desk.co.za/" rel="noreferrer"
+                  href="https://www.linkedin.com/company/dndhelp-desk/"
+                  rel="noreferrer"
                   target="_blank"
                 >
-                  <span className="sr-only"> Dribbble </span>
+                  <span className="sr-only"> Linkedin </span>
 
                   <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
+                    className="w-7 h-6"
+                    fill="none"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
+                    stroke-width="1.5"
+                    stroke="#666f7d"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                      clipRule="evenodd"
-                    />
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <line x1="8" y1="11" x2="8" y2="16" />
+                    <line x1="8" y1="8" x2="8" y2="8.01" />
+                    <line x1="12" y1="16" x2="12" y2="11" />
+                    <path d="M16 16v-3a2 2 0 0 0 -4 0" />
                   </svg>
                 </a>
               </div>
@@ -267,9 +326,18 @@ const Footer: FC = () => {
               </p>
 
               <nav className="flex justify-center space-x-4 text-xs text-gray-400 lg:justify-end">
-                <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer"> Terms & Conditions </a>
-                <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer"> Privacy Policy </a>
-                <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer"> Cookies </a>
+                <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  {" "}
+                  Terms & Conditions{" "}
+                </a>
+                <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  {" "}
+                  Privacy Policy{" "}
+                </a>
+                <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
+                  {" "}
+                  Cookies{" "}
+                </a>
               </nav>
             </div>
           </div>
