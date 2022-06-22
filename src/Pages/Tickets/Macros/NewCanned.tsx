@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import { RichTextEditor } from "@mantine/rte";
 import { BiDetail } from "react-icons/bi";
 import useOnClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
@@ -15,15 +15,14 @@ type Props = {
 const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
+  const scopeSelectionRef = useRef<HTMLSelectElement>(null);
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
-  const [value, onChange] = useState<string>(
-    "<p>Type your response here ...</p>"
-  );
+  const [value, onChange] = useState<string>("<p></p>");
   const modalRef = useOnClickOutside(() => {
     setModal(false);
     document.body.style.overflow = "";
@@ -43,28 +42,55 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
     if (input?.name.length >= 1 && input?.message?.length >= 9) {
       if (input.scope === "private") {
         newCannedRes(user[0]?.id, input?.name, input?.message);
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Macro added succesfully",
+              color: "bg-green-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+        setInput({
+          name: "",
+          message: "",
+          scope: "private",
+        });
+        setModal(false);
+        //Reset Scope Selection ==================
+        onChange("<p></p>");
+        if (scopeSelectionRef && scopeSelectionRef.current) {
+          scopeSelectionRef.current.selectedIndex = 0;
+        }
+        document.body.style.overflow = "";
       } else if (input.scope === "public") {
         allMembers?.forEach((member) => {
           newCannedRes(member?.id, input?.name, input?.message);
         });
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Macro added succesfully",
+              color: "bg-green-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+        setInput({
+          name: "",
+          message: "",
+          scope: "private",
+        });
+        setModal(false);
+        //Reset Scope Selection ==================
+        onChange("<p></p>");
+        if (scopeSelectionRef && scopeSelectionRef.current) {
+          scopeSelectionRef.current.selectedIndex = 0;
+        }
+        document.body.style.overflow = "";
       }
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "Macro added succesfully",
-            color: "bg-green-200",
-            id: new Date().getTime(),
-          },
-        ])
-      );
-      setInput({
-        name: "",
-        message: "<p>Type your template here ...</p>",
-        scope: "private",
-      });
-      setModal(false);
-      document.body.style.overflow = "";
     } else {
       dispatch(
         updateAlert([
@@ -125,6 +151,7 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
             <BiDetail className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <select
+            ref={scopeSelectionRef}
             onChange={(e) => {
               setInput((prev) => ({ ...prev, scope: e.target.value }));
             }}
