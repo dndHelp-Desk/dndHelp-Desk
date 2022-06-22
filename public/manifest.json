@@ -6,7 +6,7 @@
       "src": "./favicon/android_chrome_144x144.png",
       "sizes": "144x144",
       "type": "image/png",
-      "purpose":"any"
+      "purpose": "any"
     },
     {
       "src": "./favicon/android_chrome_192x192.png",
@@ -15,7 +15,7 @@
     },
     {
       "src": "./favicon/maskable_icon.png",
-      "sizes": "81x81",
+      "sizes": "388x388",
       "type": "image/png",
       "purpose": "maskable"
     }
