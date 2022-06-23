@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.12](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.11...v0.7.12) (2022-06-23)
+
+
+### Features
+
+* **canned responses:** users can now move private canned responses to publuc view ([4aedf81](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/4aedf8164734873977a9d04f9cf8c141a3c70412))
+* **messages:** feedback for solution is now fully functional ([cc92f6f](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/cc92f6f1ec1a2d88646eaaeaace94bb3cfff6b1a))
+
+
+### Bug Fixes
+
+* **public:** manifest icon error clearing and adjusting svg attributes to match jsx syntax ([ab16991](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/ab169917ccc276810104ae3fcdc72236e0cd0df7))
+
 ### [0.7.11](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.10...v0.7.11) (2022-06-18)
 
 ### [0.7.10](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.9...v0.7.10) (2022-06-16)
