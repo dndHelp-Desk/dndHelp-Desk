@@ -759,31 +759,17 @@ const TicketsnUserData: FC = () => {
     });
   }, [dispatch, member_details]);
 
-  //Canned Responses ================
+  //Private Canned Responses ================
   useEffect(() => {
-    return (
-      onSnapshot(
-        collection(
-          db,
-          `companies/${org}/members/${member_details[0]?.id}/canned_responses`
-        ),
-        (snapshot: { docs: any[] }) => {
-          if (member_details[0]?.access !== "client") {
-            dispatch(
-              updateCannedRes(
-                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))
-              )
-            );
-          }
-        }
+    return onSnapshot(
+      collection(
+        db,
+        `companies/${org}/members/${member_details[0]?.id}/canned_responses`
       ),
-      onSnapshot(publicCannedResRef, (snapshot: { docs: any[] }) => {
+      (snapshot: { docs: any[] }) => {
         if (member_details[0]?.access !== "client") {
           dispatch(
-            updatePublicCannedRes(
+            updateCannedRes(
               snapshot.docs.map((doc: { data: () => any; id: any }) => ({
                 ...doc.data(),
                 id: doc.id,
@@ -791,8 +777,24 @@ const TicketsnUserData: FC = () => {
             )
           );
         }
-      })
+      }
     );
+  }, [member_details, dispatch]);
+
+  //Public Canned Responses ==========
+  useEffect(() => {
+    return onSnapshot(publicCannedResRef, (snapshot: { docs: any[] }) => {
+      if (member_details[0]?.access !== "client") {
+        dispatch(
+          updatePublicCannedRes(
+            snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+              ...doc.data(),
+              id: doc.id,
+            }))
+          )
+        );
+      }
+    });
   }, [member_details, dispatch]);
 
   //Todo CollectionRef and Notifications ====================
