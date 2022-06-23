@@ -4,13 +4,21 @@
   "icons": [
     {
       "src": "./favicon/android_chrome_144x144.png",
+      "images": "./favicon/android_chrome_144x144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "./favicon/android_chrome_192x192.png",
+      "images": "./favicon/android_chrome_192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./favicon/android_chrome_512x512.png",
+      "images": "./favicon/android_chrome_512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     },
     {

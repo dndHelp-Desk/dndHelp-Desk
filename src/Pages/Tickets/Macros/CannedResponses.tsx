@@ -1,6 +1,10 @@
-import { FC, useState } from "react";
-import { BiSearchAlt, BiTrash } from "react-icons/bi";
-import { deleteCannedRes } from "../../../Adapters/Data_Fetching/TicketsnUserData";
+import { FC, useState, useEffect } from "react";
+import { BiSearchAlt, BiTrash, BiRightArrowAlt } from "react-icons/bi";
+import {
+  deleteCannedRes,
+  deletePublicCannedRes,
+  newPublicCannedRes,
+} from "../../../Adapters/Data_Fetching/TicketsnUserData";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
@@ -29,14 +33,25 @@ const CannedResponses: FC<Props> = ({
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
-  const allCannedRes = useSelector(
+  const privateCannedRes = useSelector(
     (state: RootState) => state.UserInfo.cannedResponses
   );
+  const publicCannedRes = useSelector(
+    (state: RootState) => state.UserInfo.publicCannedResponses
+  );
+  const [allCannedRes, setAllCannedRes] = useState<any[]>([]);
   const [cannedSearch, setCannedSearch] = useState<string>("");
   const [newResponseModal, setModal] = useState<boolean>(false);
   const modRef = useClickOutside(() => {
     setCanned(false);
   });
+
+  //Combined All Canned Responses
+  useEffect(() => {
+    publicCannedRes?.length >= 1 &&
+      privateCannedRes?.length >= 1 &&
+      setAllCannedRes([...privateCannedRes, ...publicCannedRes]);
+  }, [privateCannedRes, publicCannedRes]);
 
   //component ==========
   return (
@@ -118,25 +133,68 @@ const CannedResponses: FC<Props> = ({
                       key={index}
                     >
                       {template.name}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          deleteCannedRes(template.id, user[0]?.id);
-                          dispatch(
-                            updateAlert([
-                              ...alerts,
-                              {
-                                message: "Macro Deleted succesfully",
-                                color: "bg-green-200",
-                                id: new Date().getTime(),
-                              },
-                            ])
-                          );
-                        }}
-                        className="absolute right-0 hidden outline-none fucus:outline-none text-red-500 border border-red-400 h-8 w-8 rounded bg-white dark:bg-slate-800 justify-center items-center shadow-lg"
-                      >
-                        <BiTrash />
-                      </button>
+                      <div className="absolute right-0 flex items-center space-x-2">
+                        <div
+                          className={`${
+                            template?.scope === "public" ? "hidden" : ""
+                          }`}
+                        >
+                          <abbr title="Move to public">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                newPublicCannedRes(
+                                  template?.name,
+                                  template?.message
+                                );
+                                deleteCannedRes(template.id, user[0]?.id);
+                                dispatch(
+                                  updateAlert([
+                                    ...alerts,
+                                    {
+                                      message: "Moved to public",
+                                      color: "bg-green-200",
+                                      id: new Date().getTime(),
+                                    },
+                                  ])
+                                );
+                              }}
+                              className="hidden outline-none fucus:outline-none text-blue-600 border border-blue-600 h-8 w-8 rounded bg-white dark:bg-slate-800 justify-center items-center shadow-lg"
+                            >
+                              <BiRightArrowAlt className="text-lg" />
+                            </button>
+                          </abbr>
+                        </div>
+                        <button
+                          type="button"
+                          disabled={
+                            template?.scope === "public" &&
+                            user[0]?.access !== "admin"
+                              ? true
+                              : false
+                          }
+                          onClick={() => {
+                            if (template?.scope === "public") {
+                              deletePublicCannedRes(template.id);
+                            } else {
+                              deleteCannedRes(template.id, user[0]?.id);
+                            }
+                            dispatch(
+                              updateAlert([
+                                ...alerts,
+                                {
+                                  message: "Macro Deleted succesfully",
+                                  color: "bg-green-200",
+                                  id: new Date().getTime(),
+                                },
+                              ])
+                            );
+                          }}
+                          className="hidden outline-none fucus:outline-none text-red-500 border border-red-400 h-8 w-8 rounded bg-white dark:bg-slate-800 justify-center items-center shadow-lg disabled:cursor-not-allowed disabled:opacity-80"
+                        >
+                          <BiTrash />
+                        </button>
+                      </div>
                     </li>
                   );
                 })}

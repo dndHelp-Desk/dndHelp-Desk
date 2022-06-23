@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import defaultProfile from "./../../default.webp";
+import defaultProfile from "../../Assets/logos/faviLight.png";
 import noUsers from "./images/no-userss.svg";
 import { BsArrowRight } from "react-icons/bs";
 import MostRecent from "./MostRecent";
@@ -87,7 +87,7 @@ const Home: FC = () => {
     <div
       className={`${
         location.pathname === "/app" ? "grid" : "hidden"
-      } dark:bg-transparent bg-transparent w-[95%] 2xl:w-[75rem] min-h-screen mt-4 select-text`}
+      } dark:bg-transparent bg-transparent w-[95%] 2xl:w-[80rem] min-h-screen mt-4 select-text`}
     >
       <div className="grid gap-4 place-content-center pb-4 h-fit tracking-wide">
         <section className="row-span-3 rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

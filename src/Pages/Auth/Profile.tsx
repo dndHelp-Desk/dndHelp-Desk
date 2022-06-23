@@ -14,7 +14,7 @@ import {
   updateProfileUrl,
   updateUID,
 } from "../../Adapters/Data_Fetching/TicketsnUserData";
-import defaultProfile from "./../../default.webp";
+import defaultProfile from "../../Assets/logos/faviLight.png";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { updateUser } from "../../Redux/Slices/UserSlice";
 

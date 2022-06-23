@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import defaultProfile from "./../../default.webp";
+import defaultProfile from "../../Assets/logos/faviLight.png";
 import noUsers from "./../Main_Dashboard/images/no-userss.svg";
 import { Navigate } from "react-router";
 import { deleteUser } from "../../Adapters/Data_Fetching/TicketsnUserData";

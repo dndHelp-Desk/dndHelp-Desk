@@ -15,6 +15,7 @@ interface InitialStateType {
   authenticated: boolean | any;
   routeLocation: string;
   cannedResponses: any[];
+  publicCannedResponses: any[];
   toDo: any[];
   theme: string | null;
   company_name: string | any;
@@ -40,6 +41,7 @@ const initialState: InitialStateType = {
   authenticated: initialAuth === "true" ? true : false,
   routeLocation: initialLocation,
   cannedResponses: [],
+  publicCannedResponses: [],
   toDo: [],
   theme:
     !initialTheme && window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -70,6 +72,9 @@ export const UserSlice = createSlice({
     updateCannedRes: (state, action: PayloadAction<any[]>) => {
       state.cannedResponses = action.payload;
     },
+    updatePublicCannedRes: (state, action: PayloadAction<any[]>) => {
+      state.publicCannedResponses = action.payload;
+    },
     changeTheme: (state, action: PayloadAction<string | null>) => {
       state.theme = action.payload;
     },
@@ -88,6 +93,7 @@ export const {
   changeTheme,
   setCompany,
   updateCannedRes,
+  updatePublicCannedRes,
 } = UserSlice.actions;
 
 export default UserSlice.reducer;

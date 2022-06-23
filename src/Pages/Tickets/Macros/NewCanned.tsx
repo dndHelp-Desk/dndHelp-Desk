@@ -2,7 +2,10 @@ import { FC, useEffect, useState, useRef } from "react";
 import { RichTextEditor } from "@mantine/rte";
 import { BiDetail } from "react-icons/bi";
 import useOnClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
-import { newCannedRes } from "../../../Adapters/Data_Fetching/TicketsnUserData";
+import {
+  newCannedRes,
+  newPublicCannedRes,
+} from "../../../Adapters/Data_Fetching/TicketsnUserData";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
@@ -16,9 +19,6 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const scopeSelectionRef = useRef<HTMLSelectElement>(null);
-  const allMembers = useSelector(
-    (state: RootState) => state.UserInfo.allMembers
-  );
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
@@ -65,9 +65,7 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
         }
         document.body.style.overflow = "";
       } else if (input.scope === "public") {
-        allMembers?.forEach((member) => {
-          newCannedRes(member?.id, input?.name, input?.message);
-        });
+        newPublicCannedRes(input?.name, input?.message);
         dispatch(
           updateAlert([
             ...alerts,

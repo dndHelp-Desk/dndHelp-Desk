@@ -7,6 +7,7 @@ import {
   addAllMembers,
   setToDo,
   updateCannedRes,
+  updatePublicCannedRes,
 } from "../../Redux/Slices/UserSlice";
 import {
   addAllTickets,
@@ -72,6 +73,8 @@ let membersRef: any = org && collection(db, `companies/${org}/members`);
 let ticketsRef: any = org && collection(db, `companies/${org}/tickets`);
 let contactsRef: any = org && collection(db, `companies/${org}/contacts`);
 let settingsRef: any = org && collection(db, `companies/${org}/settings`);
+let publicCannedResRef: any =
+  org && collection(db, `companies/${org}/cannedResponses`);
 let emailAccountsRef: any =
   org && collection(db, `companies/${org}/email_accounts`);
 // let email_TemplatesRef: any =
@@ -270,11 +273,27 @@ export const deleteEmailAccount = (id: string) => {
 };
 
 //=================================== Canned Responses===========================================
+//Public Canned Response
+export const newPublicCannedRes = (name: string, message: string) => {
+  addDoc(publicCannedResRef, {
+    name: name,
+    message: message,
+    scope: "public",
+  });
+};
+
+export const deletePublicCannedRes = (id: string) => {
+  let docRef = doc(db, `companies/${org}/cannedResponses`, id);
+  deleteDoc(docRef);
+};
+
+//Private Canned Response
 //New Template ==========================
 export const newCannedRes = (id: string, name: string, message: string) => {
   addDoc(collection(db, `companies/${org}/members/${id}/canned_responses`), {
     name: name,
     message: message,
+    scope: "private",
   });
 };
 
@@ -743,7 +762,6 @@ const TicketsnUserData: FC = () => {
   //Canned Responses ================
   useEffect(() => {
     return (
-      //Email Tenplates Data Fetching ======================
       onSnapshot(
         collection(
           db,
@@ -761,7 +779,19 @@ const TicketsnUserData: FC = () => {
             );
           }
         }
-      )
+      ),
+      onSnapshot(publicCannedResRef, (snapshot: { docs: any[] }) => {
+        if (member_details[0]?.access !== "client") {
+          dispatch(
+            updatePublicCannedRes(
+              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+                ...doc.data(),
+                id: doc.id,
+              }))
+            )
+          );
+        }
+      })
     );
   }, [member_details, dispatch]);
 
