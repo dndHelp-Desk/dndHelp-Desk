@@ -16,6 +16,8 @@ interface Props {
   setModal: any;
   audioUrl: any;
   setChat: any;
+  inputValue: any;
+  setValues: any;
   newTicketModal: () => any;
 }
 
@@ -26,6 +28,8 @@ const TicketsList: FC<Props> = ({
   newTicketModal,
   setChat,
   audioUrl,
+  inputValue,
+  setValues,
 }) => {
   const dispatch: AppDispatch = useDispatch();
   const company_details = useSelector(
@@ -297,7 +301,12 @@ const TicketsList: FC<Props> = ({
   return (
     <div className="relative">
       {/**New Ticket Form ====================================== */}
-      <NewTicket setModal={setModal} newTicketModal={newTicketModal} />
+      <NewTicket
+        setModal={setModal}
+        newTicketModal={newTicketModal}
+        inputValue={inputValue}
+        setValues={setValues}
+      />
 
       {/**Tickets ========================================== */}
       <div className="w-full h-[47rem] flex flex-col justify-between p-1 pb-0">
@@ -309,6 +318,7 @@ const TicketsList: FC<Props> = ({
           setFilters={setFilters}
           setList={setList}
           contactsList={contactsList}
+          setValues={setValues}
         />
         <div className="w-full h-[43.5rem] flex flex-col justify-between overflow-hidden">
           <div
@@ -354,9 +364,7 @@ const TicketsList: FC<Props> = ({
               </div>
               <button
                 onClick={() => {
-                  setLimit(
-                    fetchedTickets.length > loadMore ? loadMore + 8 : 8
-                  );
+                  setLimit(fetchedTickets.length > loadMore ? loadMore + 8 : 8);
                 }}
                 className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
               >

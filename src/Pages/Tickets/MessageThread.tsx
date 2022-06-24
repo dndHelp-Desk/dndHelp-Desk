@@ -75,7 +75,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   );
   const [recordingFile, setFile] = useState<boolean>(false);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
-  const [value, onChange] = useState<string | any>("<p></p>");
+  const [value, onChange] = useState<string | any>(
+    window.localStorage.getItem("threadDraft") || "<p></p>"
+  );
   const [firstMessage, setFirstMesssage] = useState<any>([]);
   const dispatch: AppDispatch = useDispatch();
   const scrollToNone = useRef<HTMLDivElement | any>();

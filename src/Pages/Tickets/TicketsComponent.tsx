@@ -8,6 +8,34 @@ const TicketsComponent: FC = () => {
   const [newTicketModal, setModal] = useState<any>(false);
   const [deleteArray, setDelete] = useState<any>([]);
 
+  //Get Draft Message From the Local Storage ==============
+  const initialDraft = () => {
+    const draft = localStorage.getItem("draftMsg");
+    return draft
+      ? JSON.parse(draft)
+      : {
+          recipient_name: "",
+          recipient_email: "",
+          agent: "",
+          agent_email: "",
+          priority: "",
+          category: "",
+          branch_company: "",
+          message: "<p></p>",
+          state: "",
+          date: "",
+          complainant_name: "",
+          complainant_email: "none",
+          complainant_number: "",
+          send_as: "",
+        };
+  };
+
+  console.log(initialDraft());
+
+  //New Ticket Values | Draft
+  const [inputValue, setValues] = useState<any>(initialDraft());
+
   //Component ======================
   return (
     <div className="w-[95%] 2xl:w-[80rem] mt-4 min-h-screen pb-6">
@@ -24,6 +52,8 @@ const TicketsComponent: FC = () => {
             newTicketModal={newTicketModal}
             setChat={setChat}
             audioUrl={audioUrl}
+            inputValue={inputValue}
+            setValues={setValues}
           />
         </div>
         <div

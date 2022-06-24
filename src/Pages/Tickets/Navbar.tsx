@@ -29,6 +29,7 @@ interface Props {
   setFilters: any;
   setList: any;
   contactsList: any;
+  setValues: any;
 }
 
 const Navbar: FC<Props> = ({
@@ -39,6 +40,7 @@ const Navbar: FC<Props> = ({
   setFilters,
   setList,
   contactsList,
+  setValues,
 }) => {
   const [filtersModal, setfiltersModal] = useState<boolean | any>(false);
   const activeUser = useSelector(
@@ -188,6 +190,29 @@ const Navbar: FC<Props> = ({
       );
     });
 
+  //Get Draft Message From the Local Storage ==============
+  const initialDraft = () => {
+    const draft = localStorage.getItem("draftMsg");
+    return draft
+      ? JSON.parse(draft)
+      : {
+          recipient_name: "",
+          recipient_email: "",
+          agent: "",
+          agent_email: "",
+          priority: "",
+          category: "",
+          branch_company: "",
+          message: "<p></p>",
+          state: "",
+          date: "",
+          complainant_name: "",
+          complainant_email: "none",
+          complainant_number: "",
+          send_as: "",
+        };
+  };
+
   //Component ======================
   return (
     <nav className="flex h-14 bg-transparent justify-between items-center w-full relative px-1">
@@ -322,6 +347,7 @@ const Navbar: FC<Props> = ({
         <button
           onClick={() => {
             setModal(user[0]?.name !== "User Loader" ? true : false);
+            setValues(initialDraft());
             document.body.style.overflow = "hidden";
           }}
           className="bg-slate-800 dark:bg-blue-700 capitalize text-white h-9 px-4 space-x-1 rounded-sm flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold hover:opacity-80 transition-all"

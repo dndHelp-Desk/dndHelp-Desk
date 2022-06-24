@@ -21,9 +21,16 @@ import HintTooltip from "../../Components/HintTooltip";
 interface Props {
   newTicketModal: any;
   setModal: any;
+  inputValue: any;
+  setValues: any;
 }
 
-const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
+const NewTicket: FC<Props> = ({
+  newTicketModal,
+  setModal,
+  inputValue,
+  setValues,
+}) => {
   const contacts = useSelector((state: RootState) => state.Tickets.contacts);
   const allTickets = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
@@ -54,32 +61,8 @@ const NewTicket: FC<Props> = ({ newTicketModal, setModal }) => {
     setResults(false);
   });
 
-  //Get Draft Message From the Local Storage ==============
-  const initialDraft = () => {
-    const draft = localStorage.getItem("draftMsg");
-    return (
-      draft || {
-        recipient_name: "",
-        recipient_email: "",
-        agent: "",
-        agent_email: "",
-        priority: "",
-        category: "",
-        branch_company: "",
-        message: "<p></p>",
-        state: "",
-        date: "",
-        complainant_name: "",
-        complainant_email: "none",
-        complainant_number: "",
-        send_as: "",
-      }
-    );
-  };
-
-  //Form Input Values =========================
-  const [inputValue, setValues] = useState<string | any>(initialDraft);
-  const [value, onChange] = useState<string | any>("<p></p>");
+  //Message Input Values =========================
+  const [value, onChange] = useState<string | any>(inputValue?.message);
 
   //Check If Ticket Exists ||Customer's history using their numbers ===================
   const numbersArray = useMemo(() => {

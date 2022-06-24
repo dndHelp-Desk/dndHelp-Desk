@@ -18,6 +18,7 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
 
   useEffect(() => {
     setReply((previous: any) => ({ ...previous, message: value }));
+    window.localStorage.setItem("threadDraft", value);
   }, [setReply, value]);
 
   //Upload Files ================================
