@@ -48,9 +48,7 @@ const CannedResponses: FC<Props> = ({
 
   //Combined All Canned Responses
   useEffect(() => {
-    publicCannedRes?.length >= 1 &&
-      privateCannedRes?.length >= 1 &&
-      setAllCannedRes([...privateCannedRes, ...publicCannedRes]);
+    setAllCannedRes([...privateCannedRes, ...publicCannedRes]);
   }, [privateCannedRes, publicCannedRes]);
 
   //component ==========
@@ -117,7 +115,7 @@ const CannedResponses: FC<Props> = ({
                           ...prev,
                           message: template.message,
                         }));
-                        onChange(template.message);
+                        onChange((prev: any) => prev + template.message);
                         setCanned(false);
                       }}
                       className={`capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-600 p-1 pr-4 overflow-hidden overflow-ellipsis whitespace-nowrap h-10 cursor-pointer relative w-full flex items-center cannedResponseList ${
