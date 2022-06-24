@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.13](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.12...v0.7.13) (2022-06-24)
+
+
+### Bug Fixes
+
+* **tickets:** when opening a new ticket or replying to a thread the draft is not saved ([5e4193d](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/5e4193dd962e35f2e7371e2a233bf076fb7bfe84)), closes [#34](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/34)
+
 ### [0.7.12](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.11...v0.7.12) (2022-06-23)
 
 
