@@ -84,7 +84,7 @@ const NewTicket: FC<Props> = ({
       return (
         <li
           key={index}
-          className={`text-white text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 capitalize leading-5 space-y-1 tracking-tight`}
+          className={`text-white text-xs dark:text-slate-300 italic cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 capitalize leading-5 space-y-1 tracking-tight`}
         >
           <div className="flex justify-between border-b border-slate-400 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
@@ -528,7 +528,7 @@ const NewTicket: FC<Props> = ({
     };
 
     //Alert if Due Date is Empty ============
-    if (recipientClicked) {
+    if (recipientClicked && inputValue?.recipient_email?.length >= 4) {
       if (
         new Date(inputValue?.date).toString() !== "Invalid Date" &&
         sendingAccount !== undefined &&
@@ -552,7 +552,7 @@ const NewTicket: FC<Props> = ({
         setSubmit(false);
       }
       setResClicked(false);
-    } else if (!recipientClicked) {
+    } else if (!recipientClicked || inputValue?.recipient_email?.length <= 3) {
       dispatch(
         updateAlert([
           ...alerts,
@@ -915,7 +915,7 @@ const NewTicket: FC<Props> = ({
                           : "hidden"
                       } absolute top-10 right-[-0.5rem] h-[20rem] w-[25rem] bg-slate-500 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2 shadow-2xl drop-shadow-2xl`}
                     >
-                      <h4 className="text-base font-semibold font-sans text-slate-50 underline underline-offset-1">
+                      <h4 className="text-base font-semibold font-sans text-slate-50 dark:text-slate-300 underline underline-offset-1">
                         Customer's History
                       </h4>
                       {exist}
