@@ -192,7 +192,7 @@ const Navbar: FC<Props> = ({
 
   //Get Draft Message From the Local Storage ==============
   const initialDraft = () => {
-    const draft = localStorage.getItem("draftMsg");
+    const draft = localStorage.getItem("newTicketDraftValues");
     return draft
       ? JSON.parse(draft)
       : {

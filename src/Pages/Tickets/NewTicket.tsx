@@ -50,6 +50,7 @@ const NewTicket: FC<Props> = ({
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
+  const [recipientClicked, setResClicked] = useState<boolean>(false);
   const [recepient, setRecipient] = useState<string | any>("");
   const [searchResults, setResults] = useState<boolean | any>(false);
   const [isSubmiting, setSubmit] = useState<boolean | any>(false);
@@ -83,9 +84,9 @@ const NewTicket: FC<Props> = ({
       return (
         <li
           key={index}
-          className={`text-slate-900 text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 capitalize leading-5 space-y-1 tracking-tight`}
+          className={`text-white text-xs dark:text-slate-300 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-3 capitalize leading-5 space-y-1 tracking-tight`}
         >
-          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
               {data.branch_company}
             </p>{" "}
@@ -93,7 +94,7 @@ const NewTicket: FC<Props> = ({
               {data.ticket_id}
             </p>
           </div>
-          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
               Date{" "}
             </p>
@@ -101,7 +102,7 @@ const NewTicket: FC<Props> = ({
               {new Date(data.date).toLocaleString()}
             </p>
           </div>
-          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
               Agent Name
             </p>{" "}
@@ -109,7 +110,7 @@ const NewTicket: FC<Props> = ({
               {data.agent_name}
             </p>
           </div>
-          <div className="flex justify-between border-b border-slate-500 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className="flex justify-between border-b border-slate-400 dark:border-slate-800 overflow-hidden overflow-ellipsis whitespace-nowrap">
             <p className="whitespace-nowrap w-1/2 overflow-hidden overflow-ellipsis">
               Status
             </p>{" "}
@@ -132,6 +133,7 @@ const NewTicket: FC<Props> = ({
         <li
           key={index}
           onClick={() => {
+            setResClicked(true);
             setValues({
               ...inputValue,
               recipient_name: clientName,
@@ -526,22 +528,36 @@ const NewTicket: FC<Props> = ({
     };
 
     //Alert if Due Date is Empty ============
-    if (
-      new Date(inputValue?.date).toString() !== "Invalid Date" &&
-      sendingAccount !== undefined &&
-      inputValue?.branch_company !== "" &&
-      member_details[0]?.id !== false
-    ) {
-      setTimeout(() => {
-        sendNow();
-      }, 500);
-    } else if (new Date(inputValue?.date).toString() === "Invalid Date") {
-      console.log(new Date(inputValue?.date));
+    if (recipientClicked) {
+      if (
+        new Date(inputValue?.date).toString() !== "Invalid Date" &&
+        sendingAccount !== undefined &&
+        inputValue?.branch_company !== "" &&
+        member_details[0]?.id !== false
+      ) {
+        setTimeout(() => {
+          sendNow();
+        }, 500);
+      } else if (new Date(inputValue?.date).toString() === "Invalid Date") {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Add The Due Date to Proceed",
+              color: "bg-yellow-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+        setSubmit(false);
+      }
+      setResClicked(false);
+    } else if (!recipientClicked) {
       dispatch(
         updateAlert([
           ...alerts,
           {
-            message: "Add The Due Date to Proceed",
+            message: "Please select a valid contact / recipient",
             color: "bg-yellow-200",
             id: new Date().getTime(),
           },
@@ -573,7 +589,7 @@ const NewTicket: FC<Props> = ({
                 type="button"
                 onClick={() => {
                   window.localStorage.setItem(
-                    "draftMsg",
+                    "newTicketDraftValues",
                     JSON.stringify(inputValue)
                   );
                   setModal(false);
@@ -590,8 +606,9 @@ const NewTicket: FC<Props> = ({
               <button
                 type="button"
                 onClick={() => {
+                  setResClicked(false);
                   window.localStorage.setItem(
-                    "draftMsg",
+                    "newTicketDraftValues",
                     JSON.stringify({
                       recipient_name: "",
                       recipient_email: "",
@@ -896,13 +913,16 @@ const NewTicket: FC<Props> = ({
                         numbersArray.length >= 1 && showOpenedTickets
                           ? ""
                           : "hidden"
-                      } absolute top-10 right-[-0.5rem] h-[18.5rem] w-[25rem] bg-slate-400 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2 shadow-2xl drop-shadow-2xl`}
+                      } absolute top-10 right-[-0.5rem] h-[20rem] w-[25rem] bg-slate-500 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2 shadow-2xl drop-shadow-2xl`}
                     >
+                      <h4 className="text-base font-semibold font-sans text-slate-50 underline underline-offset-1">
+                        Customer's History
+                      </h4>
                       {exist}
                       <button
                         type="button"
                         onClick={() => setShowOpen(false)}
-                        className="absolute top-[-0.25rem] right-1 bg-slate-800 h-6 w-6 outline-none focus:outline-none hover:opacity-80 rounded text-sm font-semibold text-slate-50"
+                        className="absolute top-[-0.25rem] right-1 border border-slate-300 dark:border-slate-600 h-6 w-6 outline-none focus:outline-none hover:opacity-80 rounded text-sm text-slate-50 font-bold flex justify-center items-center"
                       >
                         &times;
                       </button>

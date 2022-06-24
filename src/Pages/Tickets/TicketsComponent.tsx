@@ -10,7 +10,7 @@ const TicketsComponent: FC = () => {
 
   //Get Draft Message From the Local Storage ==============
   const initialDraft = () => {
-    const draft = localStorage.getItem("draftMsg");
+    const draft = localStorage.getItem("newTicketDraftValues");
     return draft
       ? JSON.parse(draft)
       : {
@@ -30,8 +30,6 @@ const TicketsComponent: FC = () => {
           send_as: "",
         };
   };
-
-  console.log(initialDraft());
 
   //New Ticket Values | Draft
   const [inputValue, setValues] = useState<any>(initialDraft());
