@@ -36,12 +36,12 @@ const TicketsComponent: FC = () => {
 
   //Component ======================
   return (
-    <div className="w-[95%] 2xl:w-[80rem] mt-4 min-h-screen pb-6">
-      <div className="w-full grid grid-cols-5 gap-4">
+    <div className="dark:bg-transparent bg-transparent w-full h-full select-text">
+      <div className="w-full h-full grid grid-cols-5">
         <div
           className={`${
             isChatOpen ? "hidden" : "col-span-5"
-          } lg:grid lg:col-span-2 w-full h-[47rem] rounded bg-white dark:bg-slate-800 border dark:border-slate-700 border-slate-400 overflow-hidden`}
+          } lg:grid lg:col-span-2 w-full h-full bg-white dark:bg-slate-800 border-x dark:border-slate-700 border-slate-400 overflow-hidden`}
         >
           <TicketsList
             deleteArray={deleteArray}
@@ -57,7 +57,7 @@ const TicketsComponent: FC = () => {
         <div
           className={`${
             isChatOpen ? "col-span-5" : "hidden"
-          } lg:flex lg:col-span-3 h-[47rem] rounded bg-inherit`}
+          } lg:flex lg:col-span-3 h-full bg-inherit`}
         >
           <MessageThread
             isChatOpen={isChatOpen}

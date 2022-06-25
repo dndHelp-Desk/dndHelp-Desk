@@ -643,12 +643,12 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
   //Component ======================================
   return (
-    <div className="h-[47rem] flex flex-col w-full lg:rounded-r-lg rounded-md lg:rounded-none bg-transparent">
+    <div className="h-full flex flex-col w-full bg-transparent">
       {/**Zoomed Imag Modal */}
       <ZoomedImg zoomImg={zoomImg} setZoomed={setZoomed} />
       {/**Zoomed Imag Modal */}
 
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-400 rounded-none lg:rounded-tr-md pb-2 gap-2 flex flex-col overflow-hidden">
+      <div className="h-[70%] w-full dark:bg-slate-800 bg-white pb-2 gap-2 flex flex-col overflow-hidden">
         <div className="h-[3.75rem] bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3 pl-0">
@@ -816,7 +816,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {/**Placeholders ======================== */}
           {(!threadId || threadMessages.length <= 0) && (
             <>
-              <div className="m-auto mt-6 w-[80%] h-[20rem] grid grid-rows-6">
+              <div className="m-auto mt-6 w-[80%] max-h-[20rem] grid grid-rows-6">
                 <div className="row-span-4 flex justify-center pt-6 relative">
                   <div className="ml-4 w-[15rem] h-[6.5rem] rounded bg-slate-300 dark:bg-slate-700 flex flex-col space-y-2 justify-center p-6">
                     <div className="h-2 w-2/5 rounded dark:bg-slate-500 bg-slate-700"></div>
@@ -849,8 +849,8 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[30%] w-full bg-transparent pt-6 flex items-center justify-end">
-        <div className="h-full w-full relative rounded dark:bg-slate-800 bg-white border border-slate-400 dark:border-slate-700 before:content-[''] before:absolute before:tooltip_bottom before:left-[5rem] before:h-[20px] before:w-[20px] before:bg-slate-50 dark:before:bg-[#182235] before:border before:border-t-inherit before:border-l-inherit before:border-r-transparent before:border-b-transparent before:rotate-45 pb-[0.07rem]">
+      <div className="h-[30%] w-full bg-transparent flex items-center justify-center dark:bg-slate-800 bg-white">
+        <div className="h-[90%] w-[95%] relative rounded-sm dark:bg-[#33415569] bg-slate-50 border border-slate-400 dark:border-slate-700 hover:border-slate-600 dark:hover:border-slate-500 transion-all pb-[0.10rem] shadow-lg">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999] pt-0"
@@ -865,7 +865,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>
             </div>
             {/**Reply options ======================= */}
-            <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.2rem] w-full flex justify-between items-center">
+            <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.23rem] w-full flex justify-between items-center">
               <div className="h-full flex items-center pr-[0.08rem]">
                 {/**Canned Response ========================================= */}
                 <div className="w-8 h-8 group rounded-l-sm bg-slate-50 dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
@@ -975,7 +975,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   </select>
                 </div>
               </div>
-              <div className="flex items-center pr-[0.08rem]">
+              <div className="flex items-center pr-[0.10rem]">
                 <div className="flex items-center h-8 py-1 rounded-sm text-slate-100 bg-slate-800 dark:bg-blue-700 shadow-lg">
                   <button
                     type="submit"

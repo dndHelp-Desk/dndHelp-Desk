@@ -71,7 +71,7 @@
     "mini-css-extract-plugin": "2.4.5",
     "postcss": "^8.4.5",
     "react-apexcharts": "^1.4.0",
-    "react-icons": "^4.3.1",
+    "react-icons": "^4.4.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.2.1",
     "standard-version": "^9.3.2",

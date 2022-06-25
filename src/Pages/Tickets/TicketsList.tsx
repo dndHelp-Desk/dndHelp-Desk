@@ -309,7 +309,7 @@ const TicketsList: FC<Props> = ({
       />
 
       {/**Tickets ========================================== */}
-      <div className="w-full h-[47rem] flex flex-col justify-between p-1 pb-0">
+      <div className="w-full h-full flex flex-col justify-between p-1 pb-2">
         <Navbar
           deleteArray={deleteArray}
           setDelete={setDelete}
@@ -320,10 +320,10 @@ const TicketsList: FC<Props> = ({
           contactsList={contactsList}
           setValues={setValues}
         />
-        <div className="w-full h-[43.5rem] flex flex-col justify-between overflow-hidden">
+        <div className="w-full h-full flex flex-col justify-between overflow-hidden">
           <div
             role="table"
-            className="w-full h-[40.5rem] flex flex-col overflow-hidden scroll-snap px-1"
+            className="w-full h-full flex flex-col overflow-hidden scroll-snap px-1"
           >
             {tickets}
             {filteredTickets.length <= 0 && (

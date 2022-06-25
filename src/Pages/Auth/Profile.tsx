@@ -97,24 +97,24 @@ const Profile = () => {
         <button
           className={`text-xs ${
             showChange ? "" : "hidden"
-          } font-bold text-base tracking-wide top-1 right-[-2.6rem]  absolute bg-slate-500 p-2 rounded flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300`}
+          } font-bold text-base tracking-wide z-[99] top-1 left-1  absolute bg-slate-50 p-2 rounded-full flex flex-col items-center justify-center text-slate-800 cursor-pointer transition-scale duration-300`}
           type="submit"
         >
           <BsBoxArrowUp />
         </button>
-        <div className="h-10 flex justify-center relative">
+        <div className="h-fit flex justify-center relative">
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-10 w-10  rounded flex justify-center items-center cursor-pointer overflow-hidden"
+            className="h-10 w-10  rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
           >
             <img
-              className="rounded bg-slate-500 h-full w-full object-cover object-center border-2 dark:border-blue-300 border-slate-900"
+              className="rounded-full bg-slate-500 h-full w-full object-cover object-center border-2 dark:border-slate-300 border-slate-900"
               src={photoURL}
               alt="profile"
             />
             <label
-              className={`absolute bg-[#1c105283] h-10 w-10 rounded flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
+              className={`absolute bg-[#1c105283] h-9 w-9 rounded-full flex flex-col items-center justify-center text-slate-200 cursor-pointer transition-scale duration-300 ${showChangeIcon}`}
               htmlFor="profile"
             >
               <BsCameraFill />
@@ -136,7 +136,7 @@ const Profile = () => {
                   member_details[0].status === "busy"
                 ? "bg-yellow-500"
                 : "bg-red-500"
-            } right-[-1px] top-[-2px]`}
+            } right-0 top-[-2px]`}
           ></span>
 
           {/** Change Agent Online Stutus ============*/}

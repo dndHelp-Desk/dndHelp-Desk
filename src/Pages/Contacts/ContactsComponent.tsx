@@ -15,7 +15,7 @@ const ContactsComponent:FC = () => {
   }
   //Component ======================================
   return (
-    <div className=" mt-4 w-[95%] 2xl:w-[80rem] min-h-screen">
+    <div className="dark:bg-transparent bg-transparent w-full 2xl:w-[80rem] min-h-screen select-text">
       <div className="dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 gap-4 flex flex-col tracking-wider rounded-md relative">
         <Table setModal={setModal} />
         <NewContact contactModal={contactModal} setModal={setModal} />

@@ -121,6 +121,9 @@
     background: inherit !important;
     color: inherit !important;
   }
+  .roundedEditor {
+    border-radius: 0px !important;
+  }
 
   .replyEditor h1,
   .replyEditor h2,

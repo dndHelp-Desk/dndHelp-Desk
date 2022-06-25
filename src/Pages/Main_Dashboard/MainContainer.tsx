@@ -1,15 +1,13 @@
 import { FC, useState, useEffect } from "react";
-import { FaChartBar, FaReceipt, FaPoll, FaUserTie } from "react-icons/fa";
-import { BsJustifyLeft } from "react-icons/bs";
 import {
-  HiOutlineSun,
-  HiOutlineSparkles,
-  HiOutlinePhone,
-  HiOutlineCog,
-  HiOutlineBell,
-  HiOutlineSupport,
-} from "react-icons/hi";
-import darkLogo from "../../Assets/logos/dndHelp-desk_ShortDark.webp";
+  TbLayoutDashboard,
+  TbInbox,
+  TbAddressBook,
+  TbChartDonut,
+  TbSettings,
+  TbSearch,
+} from "react-icons/tb";
+import { HiOutlinePhone, HiOutlineBell } from "react-icons/hi";
 import lightLogo from "../../Assets/logos/dndHelp-desk_ShortLight.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
@@ -25,6 +23,7 @@ import Notification from "./Notification";
 import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";
 import VoicexVideoCall from "./VoicexVideoCall";
+import NavlinkToolTip from "./NavlinkToolTip";
 
 const Dashboard: FC = () => {
   const logged = useSelector(
@@ -127,7 +126,7 @@ const Dashboard: FC = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="w-full dark:bg-slate-900 bg-slate-300 selection:bg-blue-600 selection:text-slate-100">
+      <div className="w-full dark:bg-slate-900 bg-slate-300 selection:bg-blue-600 selection:text-slate-100 flex">
         {/**Data Fetching Components */}
         <TicketsnUserData />
 
@@ -142,186 +141,115 @@ const Dashboard: FC = () => {
             className="h-[0.25rem] w-2/5 bg-blue-600 absolute top-0 transition-all"
           ></div>
         </div>
+        {/**AlertsWrapper */}
+        <AlertsWrapper />
 
-        {/**NavBar ============== */}
-        <nav
-          className={`flex justify-center h-fit w-full dark:bg-slate-800 bg-white border-b dark:border-slate-800 border-slate-300 print:hidden tracking-wide`}
+        {/**Side NavBar ================= */}
+        <div
+          role="navigation"
+          className="h-screen w-[4.5rem] bg-slate-800 no-scrollbar no-scrollbar::-webkit-scrollbar p-2 pt-3 flex flex-col justify-between items-center"
         >
-          {/**AlertsWrapper */}
-          <AlertsWrapper />
-          <div className="w-[95%] 2xl:w-[80rem] h-[3.8rem] flex justify-between items-center relative z-[999]">
-            {/**Other Controls and logo ================ */}
-            <div className="h-full flex items-center gap-2">
-              {/**Small Screen Menu Btn ================ */}
-              <button
-                aria-label="button"
-                onClick={() => setShowMenu(showMenu === false ? true : false)}
-                className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded-lg dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex lg:hidden"
-              >
-                <BsJustifyLeft className="text-2xl dark:text-gray-200 text-slate-600 flex cursor-pointer" />
-              </button>
-
-              {/**Logo ==================== */}
+          <div className="w-full space-y-4">
+            {/**Logo ==================== */}
+            <div className="w-full flex justify-center border-b-2 border-slate-500 pb-2">
               <Link
                 to="/"
-                className="h-9 w-9 hidden lg:flex items-center justify-center overflow-hidden"
+                className="h-9 w-9 flex items-center justify-center overflow-hidden"
               >
-                {theme !== "dark" && (
-                  <img
-                    src={darkLogo}
-                    alt="logo"
-                    className="object-cover object-center w-9 h-9"
-                  />
-                )}
-                {theme === "dark" && (
-                  <img
-                    src={lightLogo}
-                    alt="logo"
-                    className="object-cover object-center w-9 h-9"
-                  />
-                )}
+                <img
+                  src={lightLogo}
+                  alt="logo"
+                  className="object-cover object-center w-9 h-9"
+                />
               </Link>
-
-              {/**Support =================================== */}
-              <div className="relative hidden md:flex">
-                <button className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold">
-                  <HiOutlineSupport />
-                </button>
-              </div>
-
-              {/**Change Theme =========================== */}
-              <div className="h-9 w-20 p-[0.2rem] rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 overflow-hidden relative">
-                <div className="w-full h-full flex">
-                  <div
-                    className={`h-full w-2/4 bg-white dark:bg-[#33415569] border dark:border-slate-600 border-slate-300 rounded-sm shadow transition-all duration-500 ${
-                      theme === "dark" && "translate-x-[100%] "
-                    }`}
-                  ></div>
-                </div>
-                <div className="flex justify-between absolute top-1 left-1 right-1 bottom-1">
-                  <button
-                    onClick={() => {
-                      dispatch(changeTheme("light"));
-                      window.localStorage.setItem(
-                        "theme",
-                        JSON.stringify("light")
-                      );
-                    }}
-                    className="flex-[1] bg-transparent outline-none focus:outline-none flex items-center justify-center text-xs text-slate-900 dark:text-slate-300 font-medium"
-                  >
-                    <HiOutlineSun className="text-base" />
-                  </button>
-                  <button
-                    onClick={() => {
-                      dispatch(changeTheme("dark"));
-                      window.localStorage.setItem(
-                        "theme",
-                        JSON.stringify("dark")
-                      );
-                    }}
-                    className="flex-[1] bg-tranparent outline-none focus:outline-none flex items-center justify-center text-xs text-slate-900 dark:text-slate-300 font-medium"
-                  >
-                    <HiOutlineSparkles className="text-base" />
-                  </button>
-                </div>
-              </div>
             </div>
 
-            {/**Large Screens Menu Items===================== */}
-            <div className="dark:text-gray-200 text-slate-900 dark:font-medium font-semibold hidden lg:flex space-x-2 h-full">
-              <NavLink
-                to="/app"
-                className={`TabsLinks flex ${
-                  location.pathname === "/app" ? "navlinks" : ""
-                }`}
-              >
-                Dashboard
-              </NavLink>
-              <NavLink
-                to="/app/tickets"
-                end={true}
-                className={`TabsLinks ${
-                  location.pathname === "/app/tickets" ? "navlinks" : ""
-                }`}
-              >
-                Tickets
-              </NavLink>
-              <NavLink
-                to="/app/contacts"
-                end={true}
-                className={`TabsLinks ${
-                  user.length >= 1 && user[0].access === "client" && "hidden"
-                } ${location.pathname === "/app/contacts" ? "navlinks" : ""}`}
-              >
-                Contacts
-              </NavLink>
-              <NavLink
-                to="/app/reports"
-                className={`TabsLinks ${
-                  location.pathname === "/app/reports" ? "navlinks" : ""
-                }`}
-              >
-                Reports
-              </NavLink>
+            {/**Menu Options ============ */}
+            <div className="w-full flex flex-col items-center space-y-4 p-1">
+              <div className="relative group">
+                <NavLink
+                  to="/app"
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                    location.pathname === "/app"
+                      ? "text-blue-600"
+                      : "text-slate-300"
+                  }`}
+                >
+                  <TbLayoutDashboard />
+                </NavLink>
+                <NavlinkToolTip name={"Dashboard"} />
+              </div>
+              <div className="relative group">
+                <NavLink
+                  to="/app/tickets"
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                    location.pathname === "/app/tickets"
+                      ? "text-blue-600"
+                      : "text-slate-300"
+                  }`}
+                >
+                  <TbInbox />
+                </NavLink>
+                <NavlinkToolTip name={"Tickets"} />
+              </div>
+              <div className="relative group">
+                <NavLink
+                  to="/app/contacts"
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                    location.pathname === "/app/contacts"
+                      ? "text-blue-600"
+                      : "text-slate-300"
+                  }`}
+                >
+                  <TbAddressBook />
+                </NavLink>
+                <NavlinkToolTip name={"Contacts"} />
+              </div>
+              <div className="relative group">
+                <NavLink
+                  to="/app/reports"
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                    location.pathname === "/app/reports"
+                      ? "text-blue-600"
+                      : "text-slate-300"
+                  }`}
+                >
+                  <TbChartDonut />
+                </NavLink>
+                <NavlinkToolTip name={"Reports"} />
+              </div>
             </div>
+          </div>
 
-            {/**Small Screens Menu ====================== */}
-            <div
-              ref={menuModalRef}
-              className={`flex lg:hidden fixed top-12 left-2 w-[12rem] shadow-2xl rounded backdrop-blur-lg bg-white dark:bg-slate-900 border dark:border-slate-700 border-slate-400 ${
-                showMenu ? "h-[10rem] z-[9999]" : "h-0 opacity-0  z-[-99]"
-              } transition-scale duration-300 dark:text-gray-400 text-slate-600 flex flex-col space-y-4 p-4 overflow-hidden`}
-            >
-              <NavLink
-                to="/app"
-                className={`TabsLinks py-2 ${
-                  location.pathname === "/app" ? "navlinks" : ""
-                }`}
+          <div className="w-full flex justify-center">
+            {/**Settings ================================================ */}
+            <div className="rounded  bg-slate-700 text-slate-100 text-xl relative focus:outline-none outline-none h-9 w-10 items-center justify-center flex font-bold group cursor-pointer">
+              <TbSettings />
+              {/**Settings Tooltip ================================== */}
+              <SettingsTooltip theme={theme} changeTheme={changeTheme} />
+            </div>
+          </div>
+        </div>
+
+        {/**Main Body ===================== */}
+        <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
+          {/**Top NavBar ============== */}
+          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-700 bg-slate-100 border-b dark:border-slate-500 border-slate-300 px-4 flex justify-between items-center">
+            {/**Search and New ================ */}
+            <div className="h-full flex items-center gap-2">
+              <label
+                htmlFor="searchAll"
+                className="relative text-slate-700 dark:text-slate-300"
               >
-                <FaPoll
-                  className="inline-block text-lg
-              "
+                <input
+                  type="search"
+                  name="searchAll"
+                  id="searchAll"
+                  className="h-9 w-[15rem] bg-inherit outline-none focus:outline-none border-0 border-slate-400 dark:border-slate-600 focus:border-0 focus:border-b focus:border-x-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-700 focus:ring-0 transition-all p-1 px-2 pl-7 text-sm font-sans"
+                  placeholder="Quick Search ..."
                 />
-                <span className="py-2">Dashboard</span>
-              </NavLink>
-              <NavLink
-                to="/app/tickets"
-                end={true}
-                className={`TabsLinks py-2 ${
-                  location.pathname === "/app/tickets" ? "navlinks" : ""
-                }`}
-              >
-                <FaReceipt
-                  className="inline-block text-lg
-              "
-                />
-                <span className="py-2">Tickets</span>
-              </NavLink>
-              <NavLink
-                to="/app/contacts"
-                end={true}
-                className={`TabsLinks py-2 ${
-                  user.length >= 1 && user[0].access === "client" && "hidden"
-                } ${location.pathname === "/app/contacts" ? "navlinks" : ""}`}
-              >
-                <FaUserTie
-                  className="inline-block text-lg
-              "
-                />
-                <span className="py-2">Contacts</span>
-              </NavLink>
-              <NavLink
-                to="/app/reports"
-                className={`TabsLinks py-2 ${
-                  location.pathname === "/app/reports" ? "navlinks" : ""
-                }`}
-              >
-                <FaChartBar
-                  className="inline-block text-lg
-              "
-                />
-                <span className="py-2">Reports</span>
-              </NavLink>
+                <TbSearch className="absolute left-2 top-2.5" />
+              </label>
             </div>
 
             {/*Notifications , Controls & Calls ====================*/}
@@ -332,7 +260,7 @@ const Dashboard: FC = () => {
                   onClick={() => {
                     openPhone(true);
                   }}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
                 >
                   <HiOutlinePhone />
                 </button>
@@ -346,7 +274,7 @@ const Dashboard: FC = () => {
               <abbr title="Notifications">
                 <button
                   onClick={() => setOpenNotification(true)}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
                 >
                   <HiOutlineBell />
                   {(unread.length >= 1 || notificationMsgs.length >= 1) && (
@@ -363,23 +291,16 @@ const Dashboard: FC = () => {
                 setOpenNotification={setOpenNotification}
               />
 
-              {/**Settings ================================================ */}
-              <div className="rounded dark:bg-[#0f172a91] bg-slate-100 border border-slate-300 dark:border-slate-700 dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold group">
-                <abbr title="Settings">
-                  <HiOutlineCog />
-                </abbr>
-                {/**Settings Tooltip ================================== */}
-                <SettingsTooltip />
-              </div>
-
               {/**Profile And User Settings =========================== */}
               <Profile />
             </div>
+          </nav>
+
+          {/**Main container ============================== */}
+          <div className="w-full h-full flex justify-center pt-[3.65rem]">
+            <Home />
+            <Outlet />
           </div>
-        </nav>
-        <main className="w-full h-full flex flex-col pb-2 items-center">
-          <Home />
-          <Outlet />
         </main>
       </div>
     </div>
