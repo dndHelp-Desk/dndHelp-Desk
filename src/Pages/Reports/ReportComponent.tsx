@@ -97,7 +97,7 @@ const ReportsComponent: FC = () => {
 
   //Component =========================
   return (
-    <div className="dark:bg-transparent bg-transparent w-full 2xl:w-[80rem] min-h-screen select-text space-y-4 flex flex-col tracking-wider relative pb-4">
+    <div className="dark:bg-transparent bg-transparent w-full min-h-[calc(100%-3.65rem)] select-text space-y-4 flex flex-col tracking-wider relative pt-4 px-4">
       {/**Filters ============= */}
       <div className="w-full bg-transparent grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 print:hidden">
         <Filters

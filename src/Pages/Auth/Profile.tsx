@@ -76,12 +76,12 @@ const Profile = () => {
       currentUser
     ) {
       currentUser.photoURL !== null && setPhotoURL(currentUser.photoURL);
-      member_details[0].photoUrl &&
-        currentUser.photoURL === null &&
-        updateProfileUrl(
-          member_details.length >= 1 && member_details[0].id,
-          currentUser.photoURL
-        );
+      if (
+        currentUser?.user?.photoURL !== member_details[0]?.photoUrl &&
+        currentUser?.user?.photoURL
+      ) {
+        updateProfileUrl(member_details[0]?.id, currentUser?.user?.photoURL);
+      }
       member_details[0].uid?.length <= 1 &&
         updateUID(member_details[0].id, currentUser.uid);
     }

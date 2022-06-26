@@ -6,14 +6,15 @@ import {
   TbChartDonut,
   TbSettings,
   TbSearch,
+  TbBrightnessUp,
 } from "react-icons/tb";
+import { BiAdjust } from "react-icons/bi";
 import { HiOutlinePhone, HiOutlineBell } from "react-icons/hi";
 import lightLogo from "../../Assets/logos/dndHelp-desk_ShortLight.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../Redux/Slices/UserSlice";
 import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
-import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
 import AlertsWrapper from "../../Components/AlertsWrapper";
@@ -89,12 +90,6 @@ const Dashboard: FC = () => {
     }
   }, [allTickets, dispatch, user]);
 
-  //Small Screen Menu ===================
-  const [showMenu, setShowMenu] = useState<boolean>(false);
-  const menuModalRef = useOnClickOutside(() => {
-    setShowMenu(false);
-  });
-
   useEffect(() => {
     window.localStorage.setItem("locationPath", routeLocation);
     document.title =
@@ -147,7 +142,7 @@ const Dashboard: FC = () => {
         {/**Side NavBar ================= */}
         <div
           role="navigation"
-          className="h-screen w-[4.5rem] bg-slate-800 no-scrollbar no-scrollbar::-webkit-scrollbar p-2 pt-3 flex flex-col justify-between items-center"
+          className="h-screen w-[4.5rem] bg-slate-800 no-scrollbar no-scrollbar::-webkit-scrollbar p-2 pb-4 pt-3 flex flex-col justify-between items-center border-r dark:border-slate-600 border-slate-300"
         >
           <div className="w-full space-y-4">
             {/**Logo ==================== */}
@@ -221,12 +216,27 @@ const Dashboard: FC = () => {
             </div>
           </div>
 
-          <div className="w-full flex justify-center">
+          <div className="w-full flex flex-col space-y-4 items-center justify-center">
+            {/**Change Theme =========================== */}
+            <button
+              onClick={() => {
+                if (theme === "dark") {
+                  dispatch(changeTheme("light"));
+                  window.localStorage.setItem("theme", JSON.stringify("light"));
+                } else {
+                  dispatch(changeTheme("dark"));
+                  window.localStorage.setItem("theme", JSON.stringify("dark"));
+                }
+              }}
+              className="h-9 w-10 rounded bg-slate-700 text-slate-50 text-xl p-1 relative transition-all duration-200 outline-none focus:outline-none items-center justify-center flex"
+            >
+              {theme === "dark" ? <TbBrightnessUp /> : <BiAdjust />}
+            </button>
             {/**Settings ================================================ */}
             <div className="rounded  bg-slate-700 text-slate-100 text-xl relative focus:outline-none outline-none h-9 w-10 items-center justify-center flex font-bold group cursor-pointer">
               <TbSettings />
               {/**Settings Tooltip ================================== */}
-              <SettingsTooltip theme={theme} changeTheme={changeTheme} />
+              <SettingsTooltip />
             </div>
           </div>
         </div>
@@ -234,7 +244,7 @@ const Dashboard: FC = () => {
         {/**Main Body ===================== */}
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}
-          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-700 bg-slate-100 border-b dark:border-slate-500 border-slate-300 px-4 flex justify-between items-center">
+          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-[#263246] bg-slate-100 border-b dark:border-slate-600 border-slate-300 px-4 flex justify-between items-center">
             {/**Search and New ================ */}
             <div className="h-full flex items-center gap-2">
               <label
@@ -245,10 +255,10 @@ const Dashboard: FC = () => {
                   type="search"
                   name="searchAll"
                   id="searchAll"
-                  className="h-9 w-[15rem] bg-inherit outline-none focus:outline-none border-0 border-slate-400 dark:border-slate-600 focus:border-0 focus:border-b focus:border-x-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-700 focus:ring-0 transition-all p-1 px-2 pl-7 text-sm font-sans"
+                  className="h-9 w-[18rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-200 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-700  transition-all p-1 px-2 pl-7 text-xs font-medium font-sans"
                   placeholder="Quick Search ..."
                 />
-                <TbSearch className="absolute left-2 top-2.5" />
+                <TbSearch className="absolute left-2 top-[0.65rem]" />
               </label>
             </div>
 

@@ -5,7 +5,7 @@ import {
   BiMicrophone,
   BiCollection,
   BiArrowBack,
-  BiConversation,
+  BiUser,
   BiChevronDown,
   BiTrash,
   BiShare,
@@ -16,6 +16,7 @@ import {
   HiOutlineArrowSmDown,
   HiThumbUp,
   HiThumbDown,
+  HiBadgeCheck,
 } from "react-icons/hi";
 import {
   addReply,
@@ -56,6 +57,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     src: "",
   });
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
+  const allMembers = useSelector(
+    (state: RootState) => state.UserInfo.allMembers
+  );
   const [showCanned, setCanned] = useState<boolean>(false);
   const [subject, setSubject] = useState<string>("");
   const allTickets = useSelector(
@@ -552,89 +556,106 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         <div
           ref={threadMessages.length - 1 === index ? targetRef : scrollToNone}
           key={index}
-          className="w-full text-slate-400 text-sm leading-6 flex transition-all tracking-wide bg-white dark:bg-slate-800 rounded border border-slate-300 dark:border-[#33415583]"
+          className="w-full text-slate-400 text-sm flex justify-between space-x-4 transition-all tracking-wide bg-white dark:bg-slate-800"
         >
-          {/**Message ====================== */}
-          <div className="w-full 2xl:w-full bg-tranparent pl-6  relative">
-            <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] w-[2rem] rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white px-1 overflow-hidden">
-              <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
-                <BiConversation />
-              </div>
+          {/**Profile ======================== */}
+          <div className="h-[2.5rem] w-[2.5rem] rounded-md border-2 border-slate-400 dark:border-slate-500 dark:bg-slate-800 bg-white overflow-hidden">
+            <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
+              {allMembers?.filter(
+                (profile) =>
+                  profile?.email === message?.user_email ||
+                  profile?.email === message?.agent_email
+              )[0]?.photoUrl ? (
+                <img
+                  src={
+                    allMembers?.filter(
+                      (profile) =>
+                        profile?.email === message?.user_email ||
+                        profile?.email === message?.agent_email
+                    )[0]?.photoUrl
+                  }
+                  alt="profile"
+                  className="object-cover object-center h-full w-full"
+                />
+              ) : (
+                <BiUser />
+              )}
             </div>
+          </div>
+          {/**Message ====================== */}
+          <div className="border-t border-slate-100 dark:border-[#33415583] w-[calc(100%-2.5rem)] bg-tranparent relative pt-2 md:pt-0 overflow-hidden">
             {/**Contents ======================= */}
-            <div className="w-full bg-transparent rounded-lg pt-2 md:pt-0">
-              <div className="font-semibold dark:font-medium dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-                <div className="flex items-center dark:text-slate-300 text-slate-900 text-xs">
-                  <span className="tracking-normal font-bold capitalize">
-                    {message.agent_name}
-                    {message.user}
-                  </span>
-                  <span
-                    className={`justify-center items-center space-x-[-0.4rem] ml-1 capitalize text-[0.75rem] text-blue-600 italic h-4 w-6 bg-inherit ${
-                      message?.user_email === user[0]?.email ||
-                      message?.agent_email === user[0]?.email
-                        ? "flex"
-                        : "hidden"
+            <div className="font-semibold dark:font-medium dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
+              <div className="flex dark:text-slate-300 text-slate-900 text-xs">
+                <span className="tracking-normal font-bold capitalize">
+                  {message.agent_name}
+                  {message.user}
+                </span>
+                <span
+                  className={`justify-center items-center space-x-[-0.4rem] ml-1 capitalize text-[0.75rem] text-blue-600 italic h-4 w-6 bg-inherit ${
+                    message?.user_email === user[0]?.email ||
+                    message?.agent_email === user[0]?.email
+                      ? "flex"
+                      : "hidden"
+                  }`}
+                >
+                  <HiCheck />
+                  <HiCheck
+                    className={`${
+                      message?.readStatus !== "read"
+                        ? "text-slate-700 dark:text-slate-300"
+                        : ""
                     }`}
+                  />
+                </span>
+              </div>{" "}
+              <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
+                <span className="flex space-x-2">
+                  <span className="text-[0.7rem] dark:text-slate-400 text-slate-700  font-medium">
+                    {`${new Date(message.date).toLocaleString()}`}
+                  </span>
+                </span>
+                {/**Message Options =========================== */}
+                <div className="group relative h-8 w-8 dark:text-slate-400 text-slate-700 flex items-center justify-center cursor-pointer rounded">
+                  <BiDotsVertical className="inline" />
+                  <div
+                    className={`w-[10rem] group-hover:flex flex-col items-center hidden z-[99] shadow-lg border dark:border-slate-800 border-slate-300 dark:bg-slate-900 bg-slate-200 backdrop-blur-sm rounded absolute right-[-0.5rem] top-9 after:contents-[''] after:absolute after:right-3.5 after:top-[-0.5rem] after:bg-inherit after:rotate-45 after:h-4 after:w-4 after:border after:border-inherit after:border-r-0 after:border-b-0 p-1 divide-y divide-slate-300 dark:divide-slate-600`}
                   >
-                    <HiCheck />
-                    <HiCheck
-                      className={`${
-                        message?.readStatus !== "read"
-                          ? "text-slate-700 dark:text-slate-300"
-                          : ""
-                      }`}
-                    />
-                  </span>
-                </div>{" "}
-                <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
-                  <span className="flex space-x-2">
-                    <span className="text-[0.7rem] dark:text-slate-400 text-slate-700  font-medium">
-                      {`${new Date(message.date).toLocaleString()}`}
-                    </span>
-                  </span>
-                  {/**Message Options =========================== */}
-                  <div className="group relative h-8 w-8 dark:text-slate-400 text-slate-700 flex items-center justify-center cursor-pointer rounded">
-                    <BiDotsVertical className="inline" />
-                    <div
-                      className={`w-[10rem] group-hover:flex flex-col items-center hidden z-[99] shadow-lg border dark:border-slate-800 border-slate-300 dark:bg-slate-900 bg-slate-200 backdrop-blur-sm rounded absolute right-[-0.5rem] top-9 after:contents-[''] after:absolute after:right-3.5 after:top-[-0.5rem] after:bg-inherit after:rotate-45 after:h-4 after:w-4 after:border after:border-inherit after:border-r-0 after:border-b-0 p-1 divide-y divide-slate-300 dark:divide-slate-600`}
-                    >
-                      <div className="bg-inherit hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full h-full z-[99]  px-4 py-2 overflow-hidden">
-                        <button className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none">
-                          <span>Reply</span>
-                          <BiShare className="cursor-pointer" />
-                        </button>
-                      </div>
-                      <div className="bg-inherit hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full h-full z-[99]  px-4 py-2 overflow-hidden">
-                        <button
-                          onClick={() => {
-                            if (
-                              message?.message_position !== 1 &&
-                              message?.user_email === user[0]?.email
-                            ) {
-                              deleteTicket(message.id);
-                            }
-                          }}
-                          className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none"
-                        >
-                          <span>Delete</span>
-                          <BiTrash className="hover:text-red-500 cursor-pointer" />
-                        </button>
-                      </div>
+                    <div className="bg-inherit hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full h-full z-[99]  px-4 py-2 overflow-hidden">
+                      <button className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none">
+                        <span>Reply</span>
+                        <BiShare className="cursor-pointer" />
+                      </button>
+                    </div>
+                    <div className="bg-inherit hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full h-full z-[99]  px-4 py-2 overflow-hidden">
+                      <button
+                        onClick={() => {
+                          if (
+                            message?.message_position !== 1 &&
+                            message?.user_email === user[0]?.email
+                          ) {
+                            deleteTicket(message.id);
+                          }
+                        }}
+                        className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none"
+                      >
+                        <span>Delete</span>
+                        <BiTrash className="hover:text-red-500 cursor-pointer" />
+                      </button>
                     </div>
                   </div>
-                  {/**Message Options =========================== */}
                 </div>
+                {/**Message Options =========================== */}
               </div>
-              <div className="py-2 dark:text-slate-400 text-slate-700 p-2 text-[13px]">
-                {message.message && (
-                  <div
-                    onClick={(e) => zoomImage(e)}
-                    dangerouslySetInnerHTML={{ __html: message?.message }}
-                    className="messageContainer dark:marker:text-slate-400 marker:text-slate-800 list-disc"
-                  ></div>
-                )}
-              </div>
+            </div>
+            <div className="dark:text-slate-400 text-slate-700 text-[13px]">
+              {message.message && (
+                <div
+                  onClick={(e) => zoomImage(e)}
+                  dangerouslySetInnerHTML={{ __html: message?.message }}
+                  className="messageContainer dark:marker:text-slate-400 marker:text-slate-800 list-disc"
+                ></div>
+              )}
             </div>
           </div>
         </div>
@@ -643,13 +664,13 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
   //Component ======================================
   return (
-    <div className="h-full flex flex-col w-full bg-transparent">
+    <div className="h-full flex flex-col w-full bg-transparent overflow-hidden">
       {/**Zoomed Imag Modal */}
       <ZoomedImg zoomImg={zoomImg} setZoomed={setZoomed} />
       {/**Zoomed Imag Modal */}
 
-      <div className="h-[70%] w-full dark:bg-slate-800 bg-white pb-2 gap-2 flex flex-col overflow-hidden">
-        <div className="h-[3.75rem] bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
+      <div className="row-span-4 h-full w-full dark:bg-slate-800 bg-white pb-2 gap-2 flex flex-col overflow-hidden">
+        <div className="h-[3.5rem] bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3 pl-0">
             <div className="flex items-center space-x-2">
@@ -703,7 +724,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         {/**Thread Messages ============================ */}
         <div
           ref={scrollableRef}
-          className="h-full w-[98%] m-auto p-6 flex flex-col gap-3 overflow-y-scroll bg-inherit relative"
+          className="h-full w-[98%] m-auto p-6 flex flex-col space-y-8 overflow-y-scroll bg-inherit relative"
         >
           {thread}
           {
@@ -711,103 +732,105 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             firstMessage && firstMessage[0]?.status === "solved" && (
               <div
                 ref={targetRef}
-                className="w-full text-slate-400 text-sm leading-6 flex transition-all bg-white dark:bg-slate-800 rounded-sm border border-slate-300 dark:border-[#33415583] relative"
+                className="w-full text-slate-400 text-sm leading-6 flex justify-between space-x-4 transition-all bg-white dark:bg-slate-800 relative"
               >
-                {/**Message ====================== */}
-                <div className="w-[95%] 2xl:w-full bg-tranparent pl-6 pb-2 relative">
-                  <div className="absolute left-[-1rem] top-[-0.25rem] h-[2rem] rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-[#33415583] dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden p-[1px]">
-                    <div className="w-full h-full dark:bg-slate-800 bg-white rounded-sm  dark:text-gray-300 text-slate-900 flex justify-center items-center uppercase font-bold text-[0.6rem] px-2">
-                      Solution
-                    </div>
-                  </div>
-                  {/**Contents ======================= */}
-                  <div className="w-full bg-transparent rounded-lg">
-                    <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-                      <div className="flex w-full h-full items-center justify-end sm:pr-10 pt-2">
-                        <span className="flex space-x-2">
-                          <span className="text-[0.7rem] dark:text-slate-400 text-slate-700  font-medium">
-                            {`${new Date(
-                              firstMessage && firstMessage[0]?.closed_time
-                            ).toLocaleString()}`}
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="w-full">
-                      <div
-                        onClick={(e) => zoomImage(e)}
-                        dangerouslySetInnerHTML={{
-                          __html: firstMessage && firstMessage[0]?.solution,
-                        }}
-                        className="messageContainer dark:text-slate-400 text-slate-700 p-2 text-[0.79rem] tracking-wide dark:marker:text-slate-400 marker:text-slate-800 list-disc"
-                      ></div>
-                      {/**Play Recording ================================ */}
-                      {(firstMessage[0]?.hasRecording === true ||
-                        firstMessage[0]?.hasRecording === "true") && (
-                        <audio
-                          id="rec"
-                          controls
-                          className="h-[2rem] w-full max-w-[18rem] mt-2 "
-                          src={audio}
-                          preload="metadata"
-                        >
-                          <source src={audio} type="audio/ogg" />
-                          <source src={audio} type="audio/mpeg" />
-                          <source src={audio} type="audio/wav" />
-                          <source src={audio} type="audio/mp3" />
-                          Your browser does not support the
-                          <code>audio</code> element.
-                        </audio>
-                      )}
-                    </div>
+                <div className="w-[2.5rem] h-[2.3rem] rounded-md border-2 border-slate-400 dark:border-slate-500 dark:bg-slate-800 bg-white dark:text-gray-300 text-slate-50 font-medium tracking-widest uppercase text-[0.6rem] overflow-hidden">
+                  <div className="w-full h-full bg-inherit text-green-600 fill-green-600 flex justify-center items-center uppercase font-bold text-xl rounded-sm">
+                    <HiBadgeCheck />
                   </div>
                 </div>
 
-                {/**Ratings =================== */}
-                <div className="flex items-center space-x-2 h-8 w-28 absolute bottom-[-1rem] left-4 text-slate-500 dark:text-slate-400">
-                  <div className="relative group">
-                    <button
-                      onClick={() => {
-                        user[0]?.email === firstMessage[0]?.recipient_email &&
-                          feedBack(firstMessage[0]?.id, "like");
-                      }}
-                      className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all ${
-                        firstMessage[0]?.feedback === "like"
-                          ? "text-blue-700"
-                          : ""
-                      }`}
-                    >
-                      <HiThumbUp />
-                    </button>
-                    <HintTooltip
-                      details={"Helpful"}
-                      positions={{
-                        horizontal: `left-0`,
-                        vertical: `bottom-[-150%]`,
-                      }}
-                    />
+                {/**Message ====================== */}
+                <div className="rounded-sm border-t border-slate-100 dark:border-[#33415583] w-[calc(100%)] bg-tranparent relative">
+                  {/**Contents ======================= */}
+                  <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
+                    <div className="w-full h-full dark:text-slate-300 text-slate-900 text-xs flex flex-col justify-start items-start space-y-2 md:flex-row md:space-y-0 md:justify-between  py-1 sm:pr-10 pt-2">
+                      <span className="tracking-normal font-bold capitalize">
+                        Solution
+                      </span>
+                      <span className="flex space-x-2">
+                        <span className="text-[0.7rem] dark:text-slate-400 text-slate-700  font-medium">
+                          {`${new Date(
+                            firstMessage && firstMessage[0]?.closed_time
+                          ).toLocaleString()}`}
+                        </span>
+                      </span>
+                    </div>
                   </div>
-                  <div className="relative group">
-                    <button
-                      onClick={() => {
-                        user[0]?.email === firstMessage[0]?.recipient_email &&
-                          feedBack(firstMessage[0]?.id, "dislike");
+                  <div className="w-full">
+                    <div
+                      onClick={(e) => zoomImage(e)}
+                      dangerouslySetInnerHTML={{
+                        __html: firstMessage && firstMessage[0]?.solution,
                       }}
-                      className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all ${
-                        firstMessage[0]?.feedback === "dislike"
-                          ? "text-red-600"
-                          : ""
-                      }`}
-                    >
-                      <HiThumbDown />
-                    </button>
-                    <HintTooltip
-                      details={"Not helpful"}
-                      positions={{
-                        horizontal: `left-0`,
-                        vertical: `bottom-[-150%]`,
-                      }}
-                    />
+                      className="messageContainer dark:text-slate-400 text-slate-700 text-[0.79rem] tracking-wide dark:marker:text-slate-400 marker:text-slate-800 list-disc"
+                    ></div>
+                    {/**Play Recording ================================ */}
+                    {(firstMessage[0]?.hasRecording === true ||
+                      firstMessage[0]?.hasRecording === "true") && (
+                      <audio
+                        id="rec"
+                        controls
+                        className="h-[2rem] w-full max-w-[18rem] mt-2 "
+                        src={audio}
+                        preload="metadata"
+                      >
+                        <source src={audio} type="audio/ogg" />
+                        <source src={audio} type="audio/mpeg" />
+                        <source src={audio} type="audio/wav" />
+                        <source src={audio} type="audio/mp3" />
+                        Your browser does not support the
+                        <code>audio</code> element.
+                      </audio>
+                    )}
+                  </div>
+
+                  {/**Ratings =================== */}
+                  <div className="flex items-center space-x-2 h-8 w-28 absolute top-[105%] left-0 text-slate-500 dark:text-slate-400">
+                    <div className="relative group">
+                      <button
+                        onClick={() => {
+                          user[0]?.email === firstMessage[0]?.recipient_email &&
+                            feedBack(firstMessage[0]?.id, "like");
+                        }}
+                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all ${
+                          firstMessage[0]?.feedback === "like"
+                            ? "text-blue-700"
+                            : ""
+                        }`}
+                      >
+                        <HiThumbUp />
+                      </button>
+                      <HintTooltip
+                        details={"Helpful"}
+                        positions={{
+                          horizontal: `left-0`,
+                          vertical: `bottom-[-150%]`,
+                        }}
+                      />
+                    </div>
+                    <div className="relative group">
+                      <button
+                        onClick={() => {
+                          user[0]?.email === firstMessage[0]?.recipient_email &&
+                            feedBack(firstMessage[0]?.id, "dislike");
+                        }}
+                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all ${
+                          firstMessage[0]?.feedback === "dislike"
+                            ? "text-red-600"
+                            : ""
+                        }`}
+                      >
+                        <HiThumbDown />
+                      </button>
+                      <HintTooltip
+                        details={"Not helpful"}
+                        positions={{
+                          horizontal: `left-0`,
+                          vertical: `bottom-[-150%]`,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -816,18 +839,18 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {/**Placeholders ======================== */}
           {(!threadId || threadMessages.length <= 0) && (
             <>
-              <div className="m-auto mt-6 w-[80%] max-h-[20rem] grid grid-rows-6">
-                <div className="row-span-4 flex justify-center pt-6 relative">
-                  <div className="ml-4 w-[15rem] h-[6.5rem] rounded bg-slate-300 dark:bg-slate-700 flex flex-col space-y-2 justify-center p-6">
+              <div className="m-auto w-[80%] h-full flex flex-col justify-center space-y-4 place-content-center">
+                <div className="flex flex-col items-center justify-center pt-6 relative">
+                  <div className="ml-16 w-[15rem] h-[6.5rem] rounded bg-slate-300 dark:bg-slate-700 flex flex-col space-y-2 justify-center p-6">
                     <div className="h-2 w-2/5 rounded dark:bg-slate-500 bg-slate-700"></div>
                     <div className="h-2 w-full rounded dark:bg-slate-900 bg-slate-100"></div>
                   </div>
-                  <div className="absolute bottom-[8%] left-[20%] w-[15rem] h-[6.5rem] rounded bg-slate-200 dark:bg-slate-600 flex flex-col space-y-2 justify-center p-6 shadow-2xl drop-shadow-2xl">
+                  <div className="mt-[-2.25rem] w-[15rem] h-[6.5rem] rounded bg-slate-200 dark:bg-slate-600 flex flex-col space-y-2 justify-center p-6 shadow-2xl drop-shadow-2xl">
                     <div className="h-2 w-2/5 rounded dark:bg-slate-800 bg-slate-400"></div>
                     <div className="h-2 w-full rounded dark:bg-slate-400 bg-slate-400"></div>
                   </div>
                 </div>
-                <div className="row-span-2 flex flex-col space-y-2 justify-center items-center">
+                <div className="flex flex-col space-y-2 justify-center items-center">
                   <h3 className="text-slate-800 dark:text-slate-300 text-xl text-center whitespace-nowrap font-semibold">
                     It's nice to see you again
                   </h3>
@@ -839,9 +862,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>
 
               {/**Deco boxes ================================ */}
-              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#33415569] rotate-12 left-10 bottom-10"></div>
-              <div className="absolute h-8 w-8 rounded bg-slate-100 dark:bg-[#33415569] rotate-12 left-10 bottom-40"></div>
-              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#33415569] rotate-45 right-14 bottom-24"></div>
+              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#263246] rotate-12 left-10 bottom-10"></div>
+              <div className="absolute h-8 w-8 rounded bg-slate-100 dark:bg-[#263246] rotate-12 left-10 bottom-40"></div>
+              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#263246] rotate-45 right-14 bottom-24"></div>
             </>
           )}
           {/**End of Messages ============================ */}
@@ -849,13 +872,13 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="h-[30%] w-full bg-transparent flex items-center justify-center dark:bg-slate-800 bg-white">
-        <div className="h-[90%] w-[95%] relative rounded-sm dark:bg-[#33415569] bg-slate-50 border border-slate-400 dark:border-slate-700 hover:border-slate-600 dark:hover:border-slate-500 transion-all pb-[0.10rem] shadow-lg">
+      <div className="min-h-[11rem] max-h-[15rem] w-full bg-transparent flex items-center justify-center dark:bg-slate-800 bg-white pb-2">
+        <div className="h-[90%] w-[95%] relative rounded-sm dark:bg-[#263246] bg-slate-100 border border-slate-400 dark:border-slate-700 hover:border-slate-600 dark:hover:border-slate-500 transion-all shadow-lg">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999] pt-0"
           >
-            <div className="w-full h-[78%]">
+            <div className="w-full h-[78%] overflow-hidden">
               <div className="h-full w-full bg-transparent rounded resize-none text-sm dark:text-slate-400 text-slate-700 transition-all  dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden pt-0">
                 <TextEditor
                   setReply={setReply}
@@ -865,10 +888,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>
             </div>
             {/**Reply options ======================= */}
-            <div className="h-[30%] max-h-[2.5rem] min-h-[2.5rem] p-[0.15rem] px-[0.23rem] w-full flex justify-between items-center">
-              <div className="h-full flex items-center pr-[0.08rem]">
+            <div className="h-[2.8rem] p-[0.15rem] px-[0.23rem] w-full flex justify-between items-center">
+              <div className="h-full flex items-center pr-[0.10rem]">
                 {/**Canned Response ========================================= */}
-                <div className="w-8 h-8 group rounded-l-sm bg-slate-50 dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
+                <div className="w-8 h-8 group rounded-l-sm bg-white dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
                   <div className="relative group">
                     <HintTooltip
                       details={"Canned responses"}
@@ -917,7 +940,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       user[0]?.access === "client"
                         ? "rounded-r-sm"
                         : "border-r-0"
-                    } bg-slate-50 dark:bg-[#182235]  border-slate-400 dark:border-slate-700 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer`}
+                    } bg-white dark:bg-[#182235]  border-slate-400 dark:border-slate-700 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer`}
                   >
                     <BiMicrophone className="text-base" />
                     <input
@@ -950,7 +973,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-slate-50 dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1 ${
+                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-white dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1 ${
                       user[0]?.access === "client" ? "hidden" : "flex"
                     }`}
                   >
@@ -975,11 +998,11 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   </select>
                 </div>
               </div>
-              <div className="flex items-center pr-[0.10rem]">
+              <div className="flex items-center">
                 <div className="flex items-center h-8 py-1 rounded-sm text-slate-100 bg-slate-800 dark:bg-blue-700 shadow-lg">
                   <button
                     type="submit"
-                    className="h-full outline-none focus:outline-none rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[99] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
+                    className="h-full outline-none focus:outline-none rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[9] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
                   >
                     <span className="text-xs capitalize">Send now</span>
                   </button>

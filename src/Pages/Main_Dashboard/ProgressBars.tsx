@@ -40,11 +40,11 @@ const ProgressBars: FC = () => {
 
   //component ================
   return (
-    <div className="col-span-1 h-[20rem] flex flex-col justify-between dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded overflow-hidden p-4 py-6">
+    <div className="col-span-1 h-[23rem] flex flex-col justify-between dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded overflow-hidden p-4 py-6">
       <div className="w-full">
-        <h1 className="dark:text-slate-300 text-slate-900 text-xs text-center font-bold font-sans uppercase">
+        <div className="dark:text-slate-300 text-slate-700 text-sm text-center font-bold font-sans uppercase">
           Top Categories
-        </h1>
+        </div>
         <p className="text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400 mt-2 font-sans">
           Actual figures can be found on the reports page.
         </p>

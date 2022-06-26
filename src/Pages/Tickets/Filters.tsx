@@ -19,9 +19,16 @@ interface Props {
   setFilters: (filetrs: any) => any;
   setList: any;
   contactsList: any;
+  filtersModal:boolean;
 }
 
-const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
+const Filters: FC<Props> = ({
+  filters,
+  setFilters,
+  setList,
+  contactsList,
+  filtersModal,
+}) => {
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
@@ -154,7 +161,11 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
               ))}
         </select>
       </div>
-      <CompanyFilter setList={setList} contactsList={contactsList} />
+      <CompanyFilter
+        setList={setList}
+        contactsList={contactsList}
+        filtersModal={filtersModal}
+      />
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
         <BiHash className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <input

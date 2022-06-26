@@ -36,12 +36,15 @@ const TicketsComponent: FC = () => {
 
   //Component ======================
   return (
-    <div className="dark:bg-transparent bg-transparent w-full h-full select-text">
+    <div
+      style={{ height: `calc(100% - [3.65rem])` }}
+      className="dark:bg-transparent bg-transparent w-full select-text overflow-hidden"
+    >
       <div className="w-full h-full grid grid-cols-5">
         <div
           className={`${
             isChatOpen ? "hidden" : "col-span-5"
-          } lg:grid lg:col-span-2 w-full h-full bg-white dark:bg-slate-800 border-x dark:border-slate-700 border-slate-400 overflow-hidden`}
+          } lg:grid lg:col-span-2 w-full h-full bg-white dark:bg-slate-800 border-r dark:border-slate-700 border-slate-400 overflow-hidden`}
         >
           <TicketsList
             deleteArray={deleteArray}
@@ -57,7 +60,7 @@ const TicketsComponent: FC = () => {
         <div
           className={`${
             isChatOpen ? "col-span-5" : "hidden"
-          } lg:flex lg:col-span-3 h-full bg-inherit`}
+          } lg:flex lg:col-span-3 h-full bg-inherit overflow-hidden`}
         >
           <MessageThread
             isChatOpen={isChatOpen}

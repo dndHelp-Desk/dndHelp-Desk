@@ -16,7 +16,7 @@ import {
   where,
   query,
 } from "firebase/firestore";
-
+import { updateProfileUrl } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import minidarkLogo from "../../Assets/logos/dndHelp-desk_ShortDark.webp";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -115,6 +115,28 @@ const LogIn: FC = () => {
                     ])
                   );
                 }
+
+                const loggedUser = snapshot.docs
+                  .map((doc: any) => ({
+                    ...doc.data(),
+                    id: doc.id,
+                  }))
+                  .filter(
+                    (member: { email: string }) =>
+                      currentUser.user?.email &&
+                      member?.email.toLowerCase().replace(/\s/g, "") ===
+                        currentUser.user?.email.toLowerCase().replace(/\s/g, "")
+                  )[0];
+
+                //Update user Profile ==============
+                if (
+                  currentUser?.user?.photoURL !== loggedUser?.photoUrl &&
+                  currentUser?.user?.photoURL
+                ) {
+                  updateProfileUrl(loggedUser?.id, currentUser?.user?.photoURL);
+                }
+
+                console.log(currentUser.user);
 
                 //Add User Data =================
                 dispatch(

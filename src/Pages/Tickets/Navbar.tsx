@@ -215,7 +215,7 @@ const Navbar: FC<Props> = ({
 
   //Component ======================
   return (
-    <nav className="flex h-14 bg-transparent justify-between items-center w-full relative px-1">
+    <nav className="flex h-[3.65rem] bg-transparent justify-between items-center w-full relative px-1">
       {/**Delele Ticket Action Panel ====== */}
       <ActionPanel
         openPanel={openPanel}
@@ -238,7 +238,7 @@ const Navbar: FC<Props> = ({
         <div className="relative group">
           <button
             onClick={() => setfiltersModal(true)}
-            className="h-9 w-11 rounded-sm flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:translate-y-[-1px] duration-300 transition-all text-lg font-semibold  border dark:border-slate-700 border-slate-400"
+            className="h-8 w-11 rounded-sm flex space-x-2 justify-center items-center dark:bg-[#182235] bg-slate-100 focus:outline-none outline-none hover:translate-y-[-1px] duration-300 transition-all text-lg font-semibold  border dark:border-slate-700 border-slate-400"
           >
             <HiFilter className="dark:text-slate-300 text-slate-800 font-bold" />
           </button>
@@ -246,7 +246,7 @@ const Navbar: FC<Props> = ({
             details={"Open filters"}
             positions={{
               horizontal: `left-0`,
-              vertical: `bottom-[-100%]`,
+              vertical: `bottom-[-110%]`,
             }}
           />
         </div>
@@ -255,7 +255,7 @@ const Navbar: FC<Props> = ({
         <div className="relative group">
           <button
             onClick={() => setPanel(true)}
-            className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-400 ${
+            className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-8 w-11 rounded-sm  dark:text-slate-300 text-slate-800  font-semibold  border dark:border-slate-700 border-slate-400 ${
               deleteArray.length >= 1 && activeUser[0]?.access === "admin"
                 ? "flex"
                 : "hidden"
@@ -267,7 +267,7 @@ const Navbar: FC<Props> = ({
             details={"Assign Ticket/s"}
             positions={{
               horizontal: `left-0`,
-              vertical: `bottom-[-100%]`,
+              vertical: `bottom-[-110%]`,
             }}
           />
         </div>
@@ -278,7 +278,7 @@ const Navbar: FC<Props> = ({
             onClick={() => {
               setActionPanel(true);
             }}
-            className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  text-red-600  font-semibold  border dark:border-slate-700 border-slate-400 ${
+            className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400  hover:translate-y-[-1px] duration-300 transition-all h-8 w-11 rounded-sm  text-red-600  font-semibold  border dark:border-slate-700 border-slate-400 ${
               deleteArray.length >= 1 && activeUser[0]?.access === "admin"
                 ? "flex"
                 : "hidden"
@@ -290,14 +290,14 @@ const Navbar: FC<Props> = ({
             details={"Delete ticket/s"}
             positions={{
               horizontal: `left-0`,
-              vertical: `bottom-[-100%]`,
+              vertical: `bottom-[-110%]`,
             }}
           />
         </div>
 
         {/**Mark All ================================= */}
         <button
-          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:translate-y-[-1px] duration-300 transition-all h-9 w-11 rounded-sm  flex items-center justify-center  border dark:border-slate-700 border-slate-400  ${
+          className={`dark:bg-[#182235] bg-slate-100 dark:focus:ring-slate-600 focus:ring-slate-400 hover:translate-y-[-1px] duration-300 transition-all h-8 w-11 rounded-sm  flex items-center justify-center  border dark:border-slate-700 border-slate-400  ${
             deleteArray.length >= 1 && activeUser[0]?.access === "admin"
               ? "flex"
               : "hidden"
@@ -350,7 +350,7 @@ const Navbar: FC<Props> = ({
             setValues(initialDraft());
             document.body.style.overflow = "hidden";
           }}
-          className="bg-slate-800 dark:bg-blue-700 capitalize text-white h-9 px-4 space-x-1 rounded-sm flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold hover:opacity-80 transition-all"
+          className="bg-slate-800 dark:bg-blue-700 capitalize text-white h-8 px-4 space-x-1 rounded-sm flex justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-semibold hover:opacity-80 transition-all"
         >
           <span>open new</span>
         </button>
@@ -358,7 +358,7 @@ const Navbar: FC<Props> = ({
           details={"Open a new ticket"}
           positions={{
             horizontal: `right-0`,
-            vertical: `bottom-[-100%]`,
+            vertical: `bottom-[-110%]`,
           }}
         />
       </div>

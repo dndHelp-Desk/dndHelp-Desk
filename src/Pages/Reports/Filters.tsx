@@ -30,7 +30,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
   return (
     <>
       <div className=" w-full col-span-1 h-14 lg:h-10 flex items-center z-[9999]">
-        <BiCalendarWeek className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-3 z-[9999]" />
+        <BiCalendarWeek className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-7 z-[9999]" />
         <DateFilter filters={filters} setFilters={setFilters} />
       </div>
 

@@ -174,11 +174,11 @@
   }
   .messageContainer ul,
   .template ul {
-    @apply list-disc;
+    @apply list-disc pl-6;
   }
   .messageContainer ol,
   .template ol {
-    @apply list-decimal;
+    @apply list-decimal pl-6;
   }
 
   /** Canned Response List ==================*/

@@ -33,14 +33,20 @@ const MostRecent: FC = () => {
       date: new Date().getTime() - 7200000,
       ticket_id: "#123456",
     },
+    {
+      category: "No Event",
+      status: "none",
+      date: new Date().getTime() - 7280000,
+      ticket_id: "#123456",
+    },
   ];
 
   //Component =================
   return (
     <>
-      <div className="w-full h-[75%] p-2 pl-6 pr-0 pt-5 flex flex-col items-center select-none rounded border border-slate-300 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="w-full h-[75%] p-2 pl-6 pr-0 pt-5 flex flex-col items-center justify-center select-none rounded border border-slate-300 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         {activities.length >= 1 &&
-          activities.slice(0, 4).map((activity, index) => {
+          activities.slice(0, 5).map((activity, index) => {
             return (
               <div
                 key={index}
@@ -71,8 +77,8 @@ const MostRecent: FC = () => {
           })}
 
         {/**Preloader ========================== */}
-        {activities.length <= 3 &&
-          noData.slice(activities.length, 4).map((activity, index) => {
+        {activities.length <= 4 &&
+          noData.slice(activities.length, 5).map((activity, index) => {
             return (
               <div
                 key={index}

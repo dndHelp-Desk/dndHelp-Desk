@@ -40,7 +40,7 @@ const StatusSummary: FC = () => {
       <h2 className="text-center uppercase font-bold text-[0.65rem] dark:text-slate-300 text-slate-800 font-sans">
         {dashboardData?.length} total
       </h2>
-      <div className="w-[7rem] h-[8rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t to-blue-600 from-indigo-700 dark:bg-gradient-to-t dark:to-blue-600 dark:from-indigo-700 rounded-b-md shadow-lg z-[99]">
+      <div className="w-[7.5rem] h-[9rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t to-blue-600 from-indigo-700 dark:bg-gradient-to-t dark:to-blue-600 dark:from-indigo-700 rounded-b-md shadow-lg z-[99]">
         {data.length >= 1 &&
           data?.map((status: any, index: number) => {
             return (
