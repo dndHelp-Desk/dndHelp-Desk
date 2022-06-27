@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300&family=Fira+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&family=Gothic+A1&family=IBM+Plex+Sans+Thai+Looped:wght@300&family=League+Spartan:wght@300&family=Manrope:wght@300&family=Open+Sans:wght@500;600&family=Oswald:wght@300&family=PT+Sans&family=Poppins:wght@300;400&family=Sora:wght@300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -172,6 +174,15 @@
   .template h3 {
     @apply text-sm font-bold;
   }
+
+  pre {
+    @apply p-1 px-2 rounded-sm  !bg-slate-200 dark:!text-slate-400 font-mono;
+  }
+
+  blockquote{
+    @apply pl-2 border-l-[3px] border-slate-400 dark:border-slate-700
+  }
+
   .messageContainer ul,
   .template ul {
     @apply list-disc pl-6;
@@ -304,6 +315,12 @@
   *,
   body {
     @apply font-sans;
+  }
+
+  body {
+    font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+      Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+      sans-serif;
   }
 
   html,

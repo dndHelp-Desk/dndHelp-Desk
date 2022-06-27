@@ -165,7 +165,7 @@ const Landing: FC = () => {
             <h2 className="text-slate-800 text-2xl font-bold tracking-tightest">
               Stay on top of your customers
             </h2>
-            <p className="text-slate-600">
+            <p className="text-slate-600 mb-2">
               According to Aspect, 68% of customers patronize companies that
               offer good customer service. One of the easiest ways to execute
               quality customer support is through a reliable help desk solution.
@@ -175,6 +175,7 @@ const Landing: FC = () => {
               individual inquiries sent via email as such can be moved to help
               desk queues.
             </p>
+            <br/>
             <Link to="/pricing">
               <button
                 role="link"
@@ -214,12 +215,13 @@ const Landing: FC = () => {
             <h2 className="text-slate-800 text-2xl font-bold tracking-tightest">
               Better understand your customers
             </h2>
-            <p className="text-slate-600">
+            <p className="text-slate-600 mb-2">
               Aiding agents in redirecting customer queries and concerns to
               competent staff is the principal function of the automation suite.
               This capability makes sure that all tickets are responded to
               quickly, which is made possible by automated notifications.
             </p>
+            <br/>
             <Link to="/pricing">
               <button
                 role="link"

@@ -56,7 +56,7 @@ const CompanyFilter: FC<Props> = ({ setList, contactsList, filtersModal }) => {
             onFocus={() => {
               setModal(true);
             }}
-            className="w-full h-full outline-none focus:outline-none focus:ring-0 border-0 text-xs dark:text-slate-400 text-slate-800 font-medium bg-inherit placeholder-slate-900 dark:placeholder:text-slate-400 rounded-sm"
+            className="w-full h-full outline-none focus:outline-none focus:ring-0 border-0 text-xs dark:text-slate-400 text-slate-800 dark:font-medium font-semibold bg-inherit placeholder-slate-900 dark:placeholder:text-slate-400 rounded-sm"
             placeholder="Company ..."
           />
         </label>

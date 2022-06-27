@@ -149,9 +149,9 @@ const NewTicket: FC<Props> = ({
               .includes(recepient.toLowerCase().replace(/\s/g, "")) === true
               ? ""
               : "hidden"
-          } text-xs dark:text-slate-300 text-slate-800 cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1 dark:hover:bg-slate-700 hover:bg-slate-200 capitalize flex items-center space-x-2 transition-all duration-150 px-2`}
+          } text-xs dark:text-slate-300 text-slate-800 font-sans font-semibold dark:font-medium cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1.5 dark:hover:bg-slate-700 hover:bg-slate-200 capitalize flex items-center space-x-1 transition-all duration-150 rounded px-2`}
         >
-          <BiUser />
+          <BiUser className="text-base" />
           <div>{contact.branch_company}</div>
         </li>
       );
@@ -574,10 +574,10 @@ const NewTicket: FC<Props> = ({
         newTicketModal === true ? "flex z-[999]" : "hidden"
       }`}
     >
-      <div className="container w-[90%] md:w-full 2xl:w-[72rem] h-[50rem] flex justify-end px-6 pt-[5.5rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
+      <div className="w-full h-[50rem] flex justify-center px-6 pt-[1.5rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] min-h-[25rem] h-fit dark:bg-slate-800 bg-white border-2 border-slate-500 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
+          className={`w-[98%] lg:w-[58%] max-w-[40rem] min-h-[25rem] h-fit dark:bg-slate-800 bg-white border-2 border-slate-500 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1 relative`}
         >
@@ -664,12 +664,12 @@ const NewTicket: FC<Props> = ({
               {/**Contact and Subject ============================================== */}
               <div className="w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     To
                   </legend>
                   <label
                     htmlFor="to"
-                    className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <input
                       type="text"
@@ -685,7 +685,7 @@ const NewTicket: FC<Props> = ({
                       onChange={(e) => {
                         setRecipient(e.target.value);
                       }}
-                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 outline-none focus:outline-none dark:placeholder:text-slate-600 placeholder:text-slate-400 focus:ring-0 focus:border-0 text-xs font-semibold"
+                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 outline-none focus:outline-none dark:placeholder:text-slate-600 placeholder:text-slate-400 focus:ring-0 focus:border-0 text-xs font-medium"
                     />
                     <div
                       ref={closeSuggestionsRef}
@@ -700,15 +700,15 @@ const NewTicket: FC<Props> = ({
                   </label>
                 </fieldset>
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     subject
                   </legend>
                   <label
                     htmlFor="subject"
-                    className="w-full h-full flex items-center dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="w-full h-full flex items-center dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <select
-                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold capitalize  ${
+                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1  dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-medium capitalize  ${
                         !inputValue?.category
                           ? "dark:text-slate-600 text-slate-400"
                           : "dark:text-slate-400 text-slate-700"
@@ -748,15 +748,15 @@ const NewTicket: FC<Props> = ({
               {/**Priority and Status =============================================== */}
               <div className="overflow-hidden w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     Priority
                   </legend>
                   <label
                     htmlFor="priority"
-                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <select
-                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold  ${
+                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-medium  ${
                         !inputValue?.priority
                           ? "dark:text-slate-600 text-slate-400"
                           : "dark:text-slate-400 text-slate-700"
@@ -795,15 +795,15 @@ const NewTicket: FC<Props> = ({
                 </fieldset>
 
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     Status
                   </legend>
                   <label
                     htmlFor="status"
-                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <select
-                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold capitalize  ${
+                      className={`w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-medium capitalize  ${
                         !inputValue?.state
                           ? "dark:text-slate-600 text-slate-400"
                           : "dark:text-slate-400 text-slate-700"
@@ -852,15 +852,15 @@ const NewTicket: FC<Props> = ({
               {/**Email and Numbers =============================================== */}
               <div className="w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     Email
                   </legend>
                   <label
                     htmlFor="email"
-                    className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <input
-                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold dark:placeholder:text-slate-600 placeholder:text-slate-400 capitalize"
+                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-medium dark:placeholder:text-slate-600 placeholder:text-slate-400 capitalize"
                       type="text"
                       id="email"
                       title="Enter A valid Email"
@@ -882,15 +882,15 @@ const NewTicket: FC<Props> = ({
                 </fieldset>
 
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     Phone
                   </legend>
                   <label
                     htmlFor="numbers"
-                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="w-full h-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <input
-                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold dark:placeholder:text-slate-600 placeholder:text-slate-400"
+                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-700 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-medium dark:placeholder:text-slate-600 placeholder:text-slate-400"
                       id="numbers"
                       name="numbers"
                       type="text"
@@ -915,14 +915,14 @@ const NewTicket: FC<Props> = ({
                           : "hidden"
                       } absolute top-10 right-[-0.5rem] h-[20rem] w-[25rem] bg-slate-500 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 z-[999] rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar p-6 space-y-2 shadow-2xl drop-shadow-2xl`}
                     >
-                      <h4 className="text-base font-semibold font-sans text-slate-50 dark:text-slate-300 underline underline-offset-1">
+                      <h4 className="text-base font-semibold font-sans italic text-slate-50 dark:text-slate-300">
                         Customer's History
                       </h4>
                       {exist}
                       <button
                         type="button"
                         onClick={() => setShowOpen(false)}
-                        className="absolute top-[-0.25rem] right-1 border border-slate-300 dark:border-slate-600 h-6 w-6 outline-none focus:outline-none hover:opacity-80 rounded text-sm text-slate-50 font-bold flex justify-center items-center"
+                        className="absolute top-[-0.25rem] right-1 border border-slate-300 dark:border-slate-600 h-6 w-6 outline-none focus:outline-none hover:opacity-80 rounded text-sm text-slate-50 dark:font-medium font-semibold flex justify-center items-center"
                       >
                         &times;
                       </button>
@@ -935,15 +935,15 @@ const NewTicket: FC<Props> = ({
               {/**Name And Team =============================================== */}
               <div className="overflow-hidden w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     Name
                   </legend>
                   <label
                     htmlFor="name"
-                    className="h-full w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="h-full w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <input
-                      className="h-full w-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-800 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold dark:placeholder:text-slate-600 placeholder:text-slate-400"
+                      className="h-full w-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 bg-transparent dark:text-slate-400 text-slate-800 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-medium dark:placeholder:text-slate-600 placeholder:text-slate-400"
                       id="name"
                       name="name"
                       type="text"
@@ -963,15 +963,15 @@ const NewTicket: FC<Props> = ({
                 </fieldset>
 
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
-                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 font-bold uppercase text-[0.65rem]">
+                  <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     Team
                   </legend>
                   <label
                     htmlFor="priority"
-                    className="h-full w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-semibold relative"
+                    className="h-full w-full flex items-center justify-between space-x-1 dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                   >
                     <select
-                      className={`h-full w-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white  border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-semibold ${
+                      className={`h-full w-full overflow-hidden whitespace-nowrap text-ellipsis p-2 pt-1 dark:bg-slate-800 bg-white  border-0 outline-none focus:outline-none focus:ring-0 focus:border-0 text-xs font-medium ${
                         !inputValue?.send_as
                           ? "dark:text-slate-600 text-slate-400"
                           : "dark:text-slate-400 text-slate-700"

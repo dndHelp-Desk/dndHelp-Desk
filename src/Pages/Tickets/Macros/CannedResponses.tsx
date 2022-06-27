@@ -59,14 +59,14 @@ const CannedResponses: FC<Props> = ({
       {/**New Canned Response Modal */}
       <div
         ref={modRef}
-        className={`absolute bottom-2 ${
+        className={`absolute bottom-2 z-[999] ${
           tooltipPosition === "[9.4rem]" ? "left-[-9.4rem]" : "left-[-0.7rem]"
         } w-[23rem] h-[23rem] pb-[2.9rem] ${
           showCanned ? "group-hover:flex" : "group-hover:hidden"
         } hidden`}
       >
         <div
-          className={`rounded bg-slate-50 dark:bg-slate-700 z-[999] border border-slate-400 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
+          className={`rounded bg-slate-50 dark:bg-slate-700 z-[9999] border border-slate-400 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
             position === 4 ? "after:left-[9.7rem]" : "after:left-5"
           } after:rotate-45 p-2 relative`}
         >
@@ -118,7 +118,7 @@ const CannedResponses: FC<Props> = ({
                         onChange((prev: any) => prev + template.message);
                         setCanned(false);
                       }}
-                      className={`capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-600 p-1 pr-4 overflow-hidden overflow-ellipsis whitespace-nowrap h-10 cursor-pointer relative w-full flex items-center cannedResponseList ${
+                      className={`capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-600 p-1 pr-4 overflow-hidden overflow-ellipsis whitespace-nowrap h-10 cursor-pointer relative w-full flex items-center text-xs font-sans font-medium cannedResponseList ${
                         template?.name
                           ?.toLowerCase()
                           .replace(/\s/g, "")

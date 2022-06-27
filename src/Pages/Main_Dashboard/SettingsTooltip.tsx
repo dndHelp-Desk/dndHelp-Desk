@@ -6,7 +6,6 @@ import {
   BsChatSquareDotsFill,
   BsFileTextFill,
   BsBookHalf,
-  BsFillDoorOpenFill,
   BsFillCreditCard2BackFill,
 } from "react-icons/bs";
 import { signOut, getAuth } from "firebase/auth";
@@ -96,7 +95,11 @@ const SettingsTooltip: FC = () => {
                 <span>Solutions</span>
               </NavLink>
             </li>
-            <li>
+            <li
+              className={`${
+                user.length >= 1 && user[0].access !== "admin" && "hidden"
+              }`}
+            >
               <NavLink to="/app/settings/solutions" className="settingsNav">
                 <BsFillCreditCard2BackFill />
                 <span>Billing</span>
@@ -118,9 +121,8 @@ const SettingsTooltip: FC = () => {
 
                   logOut();
                 }}
-                className="py-2 px-4 w-full rounded outline-none focus:outline-none bg-red-600 text-slate-300 text-sm font-semibold flex justify-center items-center space-x-1 hover:opacity-80"
+                className="py-2 px-4 w-full rounded-sm outline-none focus:outline-none bg-red-600 text-slate-50 text-sm font-semibold flex justify-center items-center space-x-1 hover:opacity-80"
               >
-                <BsFillDoorOpenFill />
                 <span>Sign Out</span>
               </button>
             </li>

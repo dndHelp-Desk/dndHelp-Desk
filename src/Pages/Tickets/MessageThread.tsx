@@ -583,11 +583,11 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             </div>
           </div>
           {/**Message ====================== */}
-          <div className="border-t border-slate-100 dark:border-[#33415583] w-[calc(100%-2.5rem)] bg-tranparent relative pt-2 md:pt-0 overflow-hidden">
+          <div className="border-t border-slate-100 dark:border-[#33415583] w-[calc(100%-2.5rem)] bg-tranparent relative pt-2 md:pt-0">
             {/**Contents ======================= */}
             <div className="font-semibold dark:font-medium dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-              <div className="flex dark:text-slate-300 text-slate-900 text-xs">
-                <span className="tracking-normal font-bold capitalize">
+              <div className="flex dark:text-slate-300 text-slate-800 text-xs">
+                <span className="tracking-normal text-sm font-bold dark:font-medium capitalize font-sans">
                   {message.agent_name}
                   {message.user}
                 </span>
@@ -611,8 +611,11 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>{" "}
               <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
                 <span className="flex space-x-2">
-                  <span className="text-[0.7rem] dark:text-slate-400 text-slate-700  font-medium">
-                    {`${new Date(message.date).toLocaleString()}`}
+                  <span className="text-[0.7rem] dark:text-slate-300 text-slate-800 font-medium font-sans">
+                    {`${new Date(message.date).toDateString()}`},{" "}
+                    {`${
+                      new Date(message.date).toLocaleString()?.split(",")[1]
+                    }`}
                   </span>
                 </span>
                 {/**Message Options =========================== */}
@@ -622,7 +625,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     className={`w-[10rem] group-hover:flex flex-col items-center hidden z-[99] shadow-lg border dark:border-slate-800 border-slate-300 dark:bg-slate-900 bg-slate-200 backdrop-blur-sm rounded absolute right-[-0.5rem] top-9 after:contents-[''] after:absolute after:right-3.5 after:top-[-0.5rem] after:bg-inherit after:rotate-45 after:h-4 after:w-4 after:border after:border-inherit after:border-r-0 after:border-b-0 p-1 divide-y divide-slate-300 dark:divide-slate-600`}
                   >
                     <div className="bg-inherit hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full h-full z-[99]  px-4 py-2 overflow-hidden">
-                      <button className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none">
+                      <button className="w-full dark:text-slate-300 text-slate-700 font-semibold dark:font-medium text-sm flex justify-between items-center outline-none focus:outline-none">
                         <span>Reply</span>
                         <BiShare className="cursor-pointer" />
                       </button>
@@ -637,7 +640,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                             deleteTicket(message.id);
                           }
                         }}
-                        className="w-full dark:text-slate-300 text-slate-700 font-semibold text-sm flex justify-between items-center outline-none focus:outline-none"
+                        className="w-full dark:text-slate-300 text-slate-700 font-semibold dark:font-medium text-sm flex justify-between items-center outline-none focus:outline-none"
                       >
                         <span>Delete</span>
                         <BiTrash className="hover:text-red-500 cursor-pointer" />
@@ -669,7 +672,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       <ZoomedImg zoomImg={zoomImg} setZoomed={setZoomed} />
       {/**Zoomed Imag Modal */}
 
-      <div className="row-span-4 h-full w-full dark:bg-slate-800 bg-white pb-2 gap-2 flex flex-col overflow-hidden">
+      <div className="row-span-4 h-full w-full dark:bg-slate-800 bg-white pb-2 space-y-2 flex flex-col overflow-hidden">
         <div className="h-[3.5rem] bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3 pl-0">
@@ -695,7 +698,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 />
                 <button
                   onClick={() => setDetails(true)}
-                  className="h-7 px-4 outline-none focus:outline-none border border-slate-400 dark:border-slate-700 rounded-sm font-bold dark:text-slate-300 text-slate-800 text-xs bg-gray-100 dark:bg-[#182235] flex justify-center items-center"
+                  className="h-7 px-4 outline-none focus:outline-none border border-slate-400 dark:border-slate-700 rounded-sm font-medium font-sans dark:text-slate-300 text-slate-800 text-sm bg-gray-100 dark:bg-[#182235] flex justify-center items-center"
                 >
                   Details
                 </button>
@@ -703,20 +706,30 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             </div>
 
             {/**Subject And Scroll To Last Message Details =========================== */}
-            <div className="dark:font-medium font-semibold dark:text-slate-300 text-slate-900 tracking-wide flex flex-col capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
-              <span className="uppercase text-[0.6rem] font-bold">
-                {firstMessage && firstMessage[0]?.category}
-                {(!threadId || threadMessages.length <= 0) &&
-                  "Nothing is selected"}
-              </span>{" "}
+            <div className="dark:text-slate-300 text-slate-900 tracking-wide flex items-center space-x-2">
+              <div className="grid w-44 overflow-hidden">
+                <p className="text-sm font-sans font-medium capitalize text-right whitespace-nowrap overflow-hidden overflow-ellipsis">
+                  {firstMessage && firstMessage[0]?.branch_company}
+                  {(!threadId || threadMessages.length <= 0) &&
+                    "Nothing is selected"}
+                </p>{" "}
+              </div>
               {/**Scroll to Last Message ================== */}
-              <button
-                onClick={() => scrollIntoView()}
-                className="outline-none focus:outline-none text-lg dark:text-slate-400 text-slate-700 capitalize flex items-center justify-end space-x-1"
-              >
-                <HiOutlineArrowSmDown />
-                <span className="text-xs">Jump To Last Message</span>
-              </button>
+              <div className="relative group">
+                <button
+                  onClick={() => scrollIntoView()}
+                  className="outline-none focus:outline-none text-lg dark:text-slate-100 text-slate-800 capitalize flex items-center justify-center border dark:border-slate-600 border-slate-300 h-7 w-7 bg-slate-100 dark:bg-slate-600"
+                >
+                  <HiOutlineArrowSmDown />
+                </button>
+                <HintTooltip
+                  details={"Jump to last message"}
+                  positions={{
+                    horizontal: `right-0`,
+                    vertical: `bottom-[-130%]`,
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -744,15 +757,23 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 <div className="rounded-sm border-t border-slate-100 dark:border-[#33415583] w-[calc(100%)] bg-tranparent relative">
                   {/**Contents ======================= */}
                   <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
-                    <div className="w-full h-full dark:text-slate-300 text-slate-900 text-xs flex flex-col justify-start items-start space-y-2 md:flex-row md:space-y-0 md:justify-between  py-1 sm:pr-10 pt-2">
-                      <span className="tracking-normal font-bold capitalize">
+                    <div className="w-full h-full dark:text-slate-300 text-slate-800 text-xs flex flex-col justify-start items-start space-y-2 md:flex-row md:space-y-0 md:justify-between  py-1 sm:pr-10 pt-2">
+                      <span className="tracking-normal text-sm dark:font-medium font-bold capitalize font-sans">
                         Solution
                       </span>
                       <span className="flex space-x-2">
-                        <span className="text-[0.7rem] dark:text-slate-400 text-slate-700  font-medium">
+                        <span className="text-[0.7rem] dark:text-slate-300 text-slate-800 font-medium font-sans">
                           {`${new Date(
                             firstMessage && firstMessage[0]?.closed_time
-                          ).toLocaleString()}`}
+                          ).toDateString()}`}
+                          ,{" "}
+                          {`${
+                            new Date(
+                              firstMessage && firstMessage[0]?.closed_time
+                            )
+                              .toLocaleString()
+                              ?.split(",")[1]
+                          }`}
                         </span>
                       </span>
                     </div>
@@ -839,7 +860,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {/**Placeholders ======================== */}
           {(!threadId || threadMessages.length <= 0) && (
             <>
-              <div className="m-auto w-[80%] h-full flex flex-col justify-center space-y-4 place-content-center">
+              <div className="m-auto w-[80%] h-full flex flex-col justify-center space-y-8 place-content-center">
                 <div className="flex flex-col items-center justify-center pt-6 relative">
                   <div className="ml-16 w-[15rem] h-[6.5rem] rounded bg-slate-300 dark:bg-slate-700 flex flex-col space-y-2 justify-center p-6">
                     <div className="h-2 w-2/5 rounded dark:bg-slate-500 bg-slate-700"></div>
@@ -850,8 +871,8 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     <div className="h-2 w-full rounded dark:bg-slate-400 bg-slate-400"></div>
                   </div>
                 </div>
-                <div className="flex flex-col space-y-2 justify-center items-center">
-                  <h3 className="text-slate-800 dark:text-slate-300 text-xl text-center whitespace-nowrap font-semibold">
+                <div className="first-letter:flex flex-col space-y-2 justify-center items-center">
+                  <h3 className="text-slate-700 dark:text-slate-300 text-xl text-center whitespace-nowrap font-semibold">
                     It's nice to see you again
                   </h3>
                   <div className="text-slate-600 dark:text-slate-400 text-sm tracking-tight font-medium text-center whitespace-nowrap leading-5">
@@ -973,7 +994,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-white dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize pt-1 ${
+                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-white dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize ${
                       user[0]?.access === "client" ? "hidden" : "flex"
                     }`}
                   >

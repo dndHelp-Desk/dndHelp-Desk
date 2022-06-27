@@ -44,10 +44,12 @@ const Filters: FC<Props> = ({
         <DateFilter />
       </div>
 
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative font-semibold text-xs text-slate-700 dark:text-slate-400 border dark:border-slate-700 border-slate-400 group">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative font-semibold dark:font-medium text-xs text-slate-700 dark:text-slate-400 border dark:border-slate-700 border-slate-400 group">
         <BiAlarm className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
-        <span className="pl-10 capitalize">time</span>
-        <div className="absolute top-[105%] left-0 z-[99] hidden group-hover:flex w-full h-fit rounded-sm  text-xs font-medium p-2 py-4 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-600 border-slate-300 focus:ring-0 focus:outline-none shadow-2xl drop-shadow-2xl space-y-4 overflow-hidden">
+        <span className="pl-10 capitalize">
+          time
+        </span>
+        <div className="absolute top-[105%] left-0 z-[99] hidden group-hover:flex w-full h-fit rounded-sm  text-xs p-2 py-4 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-600 border-slate-300 focus:ring-0 focus:outline-none shadow-2xl drop-shadow-2xl space-y-4 overflow-hidden">
           {" "}
           <div className="w-full flex justify-between items-center space-x-2">
             <select
@@ -57,7 +59,7 @@ const Filters: FC<Props> = ({
                   time: { ...filters.time, from: e.target.value },
                 })
               }
-              className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-full w-full rounded text-xs font-semibold dark:font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="1">From</option>
               {[
@@ -78,7 +80,7 @@ const Filters: FC<Props> = ({
                   time: { ...filters.time, to: e.target.value },
                 })
               }
-              className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-full w-full rounded text-xs font-semibold dark:font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="24">To</option>
               {[
@@ -100,7 +102,7 @@ const Filters: FC<Props> = ({
         <BiCategoryAlt className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-medium"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
         >
           <option value="">Category</option>
           {categories.length >= 1 &&
@@ -119,7 +121,7 @@ const Filters: FC<Props> = ({
         <BiPulse className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-medium"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium"
         >
           <option value="">Status</option>
           <option value="open">Open</option>
@@ -132,7 +134,7 @@ const Filters: FC<Props> = ({
         <BiTagAlt className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-medium"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium"
         >
           <option value="">Priority</option>
           <option value="low">Low</option>
@@ -146,7 +148,7 @@ const Filters: FC<Props> = ({
         <BiUser className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-medium"
+          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
         >
           <option value="">Agents ...</option>
           {allMembers.length >= 1 &&
@@ -176,7 +178,7 @@ const Filters: FC<Props> = ({
           onChange={(e) =>
             setFilters({ ...filters, ticket_id: e.target.value })
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-semibold dark:font-medium"
           placeholder="Ticket-ID ..."
         />
       </div>
@@ -190,7 +192,7 @@ const Filters: FC<Props> = ({
           onChange={(e) =>
             setFilters({ ...filters, complainant_number: e.target.value })
           }
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-medium"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-semibold dark:font-medium"
           placeholder="Customer's Number ..."
         />
       </div>

@@ -1,15 +1,14 @@
 import { FC } from "react";
-import gettingStartedIng from "./images/getting-started.webp";
-import { BsArrowRight, BsFillCaretRightFill } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const BottomSection: FC = () => {
   return (
     <section className=" row-span-1 w-full h-full  rounded">
       <article className="h-full w-full  rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden">
-        <h3 className="flex-[1] dark:text-slate-300 text-slate-900 text-base font-semibold font-sans capitalize tracking-normal py-2 border-b border-slate-200 dark:border-slate-700">
+        <div className="flex-[1] dark:text-slate-300 text-slate-700 text-base font-semibold font-sans capitalize py-2 border-b border-slate-200 dark:border-slate-700 tracking-wider">
           Knowledge Base
-        </h3>
+        </div>
         <p className="my-3 text-xs text-slate-600 dark:text-slate-400 font-medium tracking-normal overflow-hidden overflow-ellipsis leading-5 max-h-[5rem]">
           Optimize your workflows through automated FAQ responses, intent
           detection, and more. A knowledge base allows you to anticipate those

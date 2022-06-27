@@ -37,9 +37,10 @@ const StatusSummary: FC = () => {
   //Component =========================
   return (
     <div className="row-span-3 flex flex-col justify-center items-center relative">
-      <h2 className="text-center uppercase font-bold text-[0.65rem] dark:text-slate-300 text-slate-800 font-sans">
-        {dashboardData?.length} total
-      </h2>
+      <div className="text-center text-slate-700 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal capitalize font-sans">
+        <p className="text-xs font-medium tracking-normal dark:text-slate-300 text-slate-800 mt-2 font-sans">{dashboardData?.length} total tickets
+        </p>
+      </div>
       <div className="w-[7.5rem] h-[9rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t to-blue-600 from-indigo-700 dark:bg-gradient-to-t dark:to-blue-600 dark:from-indigo-700 rounded-b-md shadow-lg z-[99]">
         {data.length >= 1 &&
           data?.map((status: any, index: number) => {

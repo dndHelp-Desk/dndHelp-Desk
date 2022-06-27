@@ -68,9 +68,9 @@ const Home: FC = () => {
                 }`}
               ></div>
             </div>
-            <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-300 text-slate-800 tracking-wider">
+            <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold dark:font-medium capitalize dark:text-slate-300 text-slate-700 tracking-wider">
               <abbr title={user.name}>
-                <p className="tracking-normal font-sans">{user.name}</p>
+                <p className="tracking-wide font-sans">{user.name}</p>
               </abbr>
               <abbr title={user.email}>
                 <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic font-sans">
@@ -99,10 +99,10 @@ const Home: FC = () => {
             {/**Tickets Per Status Summary ================================ */}
             <div className="col-span-1  h-[23rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded px-4 pb-4 py-6">
               <div className="row-span-2 bg-no-repeat bg-center bg-contain flex flex-col items-center px-4">
-                <div className="dark:text-slate-300 text-slate-700 text-sm text-center font-bold uppercase font-sans">
+                <div className="dark:text-slate-300 tracking-wider text-slate-700 text-base text-center font-bold uppercase font-sans">
                   Tickets Status
                 </div>
-                <p className="dark:text-slate-400 text-slate-600 text-center text-xs font-medium tracking-normal mt-2 px-2 font-sans">
+                <p className="dark:text-slate-400 text-slate-600 text-center text-sm font-medium tracking-normal mt-2 px-2 font-sans">
                   Hover your mouse on top of each slice below to see the
                   percentages, for more analytics please visit the reports page.
                 </p>
@@ -112,10 +112,10 @@ const Home: FC = () => {
             {/**MostRecent ================================= */}
             <div className="col-span-1 h-[23rem] md:col-span-2 lg:col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded p-4 pt-3 pb-4 flex flex-col justify-between items-center overflow-hidden">
               <div className="text-center">
-                <div className="dark:text-slate-300 text-slate-700 text-sm text-center font-bold uppercase mt-3 font-sans">
+                <div className="dark:text-slate-300 text-slate-700 text-base text-center tracking-wider font-bold uppercase mt-3 font-sans">
                   Recent Activities
                 </div>
-                <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600 mt-2 font-sans">
+                <p className="text-sm font-medium tracking-normal dark:text-slate-400 text-slate-600 mt-2 font-sans">
                   Your most recent activities.
                 </p>
               </div>
@@ -134,10 +134,10 @@ const Home: FC = () => {
               />
 
               {/**Progress ============================== */}
-              <article className="col-span-5 md:hidden 2xl:flex 2xl:col-span-2 h-[20rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 flex flex-col space-y-2">
-                <h3 className="dark:text-slate-300 text-slate-900 text-base font-semibold font-sans capitalize">
+              <article className="col-span-5 md:hidden 2xl:flex 2xl:col-span-2 h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 pt-6 flex flex-col space-y-2">
+                <div className="dark:text-slate-300 text-slate-600 text-lg font-semibold font-sans capitalize tracking-wider">
                   Progress
-                </h3>
+                </div>
                 <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-600 font-sans">
                   Manage all tickets in one place
                   <br /> currently you have{" "}
@@ -170,20 +170,20 @@ const Home: FC = () => {
             </div>
 
             {/**Online Users ================================ */}
-            <div className="col-span-2 lg:col-span-1 h-[20rem] w-full rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2">
+            <div className="col-span-2 lg:col-span-1 h-[21rem] w-full rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2">
               <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-2 overflow-hidden">
                 {allMembers?.filter(
                   (user) => user.access?.toLowerCase() === "agent"
                 ).length >= 1 &&
                   (user[0]?.access && user[0]?.access) !== "client" && (
                     <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                      <header className="sticky top-0 z-[99] dark:text-slate-300 text-slate-900 text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
-                        <h2 className="flex-[2] text-base font-semibold font-sans tracking-wide capitalize">
+                      <div className="sticky top-0 z-[99] text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between items-center gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
+                        <div className="flex-[2] dark:text-slate-300 text-slate-600 text-lg font-semibold font-sans capitalize tracking-wider">
                           Members
-                        </h2>
-                        <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize">
-                          <div className="col-span-1 flex flex-col justify-center items-center">
-                            <p className="dark:text-slate-300 text-slate-700 text-xs font-bold">
+                        </div>
+                        <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize dark:text-slate-300 text-slate-900">
+                          <div className="col-span-1 flex justify-center items-center space-x-2 relative">
+                            <p className="dark:text-slate-300 text-slate-800 text-sm font-bold dark:font-medium">
                               {
                                 allMembers.filter(
                                   (user) =>
@@ -192,12 +192,10 @@ const Home: FC = () => {
                                 ).length
                               }
                             </p>
-                            <p className="text-slate-500 text-[0.6rem] font-semibold">
-                              available
-                            </p>
+                            <div className="h-2 w-2 rounded-sm bg-green-600"></div>
                           </div>
-                          <div className="col-span-1 flex flex-col justify-center items-center">
-                            <p className="dark:text-slate-300 text-slate-700  text-xs font-bold">
+                          <div className="col-span-1 flex justify-center items-center space-x-2 relative">
+                            <p className="dark:text-slate-300 text-slate-800  text-sm font-bold dark:font-medium">
                               {
                                 allMembers.filter(
                                   (user) =>
@@ -206,12 +204,10 @@ const Home: FC = () => {
                                 ).length
                               }
                             </p>
-                            <p className="text-slate-500 text-[0.6rem] font-semibold">
-                              Busy
-                            </p>
+                            <div className="h-2 w-2 rounded-sm bg-yellow-500"></div>
                           </div>
-                          <div className="col-span-1 flex flex-col justify-center items-center">
-                            <p className="dark:text-slate-300 text-slate-700  text-xs font-bold">
+                          <div className="col-span-1 flex justify-center items-center space-x-2 relative">
+                            <p className="dark:text-slate-300 text-slate-800  text-sm font-bold dark:font-medium">
                               {
                                 allMembers.filter(
                                   (user) =>
@@ -220,12 +216,10 @@ const Home: FC = () => {
                                 ).length
                               }
                             </p>
-                            <p className="text-slate-500 text-[0.6rem] font-semibold">
-                              Unavailable
-                            </p>
+                            <div className="h-2 w-2 rounded-sm bg-red-600"></div>
                           </div>
                         </div>
-                      </header>
+                      </div>
                       {users}
                     </div>
                   )}

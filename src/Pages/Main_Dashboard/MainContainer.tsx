@@ -5,10 +5,9 @@ import {
   TbAddressBook,
   TbChartDonut,
   TbSettings,
-  TbSearch,
   TbBrightnessUp,
 } from "react-icons/tb";
-import { BiAdjust } from "react-icons/bi";
+import { BiAdjust, BiSearchAlt } from "react-icons/bi";
 import { HiOutlinePhone, HiOutlineBell } from "react-icons/hi";
 import lightLogo from "../../Assets/logos/dndHelp-desk_ShortLight.webp";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,6 +24,7 @@ import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";
 import VoicexVideoCall from "./VoicexVideoCall";
 import NavlinkToolTip from "./NavlinkToolTip";
+import UniversalSearch from "./UniversalSearch";
 
 const Dashboard: FC = () => {
   const logged = useSelector(
@@ -142,7 +142,7 @@ const Dashboard: FC = () => {
         {/**Side NavBar ================= */}
         <div
           role="navigation"
-          className="h-screen w-[4.5rem] bg-slate-800 no-scrollbar no-scrollbar::-webkit-scrollbar p-2 pb-4 pt-3 flex flex-col justify-between items-center border-r dark:border-slate-600 border-slate-300"
+          className="h-screen w-[4.5rem] bg-slate-800 no-scrollbar no-scrollbar::-webkit-scrollbar p-2 pb-4 pt-3 flex flex-col justify-between items-center border-r dark:border-slate-700 border-slate-300"
         >
           <div className="w-full space-y-4">
             {/**Logo ==================== */}
@@ -244,22 +244,25 @@ const Dashboard: FC = () => {
         {/**Main Body ===================== */}
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}
-          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-[#263246] bg-slate-100 border-b dark:border-slate-600 border-slate-300 px-4 flex justify-between items-center">
-            {/**Search and New ================ */}
-            <div className="h-full flex items-center gap-2">
-              <label
-                htmlFor="searchAll"
-                className="relative text-slate-700 dark:text-slate-300"
-              >
-                <input
-                  type="search"
-                  name="searchAll"
-                  id="searchAll"
-                  className="h-9 w-[18rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-200 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-700  transition-all p-1 px-2 pl-7 text-xs font-medium font-sans"
-                  placeholder="Quick Search ..."
-                />
-                <TbSearch className="absolute left-2 top-[0.65rem]" />
-              </label>
+          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-[#263246] bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
+            {/**Universal Search  ================ */}
+            <div className="h-full flex items-center">
+              <div className="relative">
+                <label
+                  htmlFor="searchAll"
+                  className="relative text-slate-700 dark:text-slate-300"
+                >
+                  <input
+                    type="search"
+                    name="searchAll"
+                    id="searchAll"
+                    className="h-9 w-[18rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pl-8 text-xs font-semibold dark:font-medium font-sans"
+                    placeholder="Quick Search ..."
+                  />
+                  <BiSearchAlt className="absolute left-2 top-1 text-slate-600 dark:text-slate-400 text-xl" />
+                </label>
+                <UniversalSearch />
+              </div>
             </div>
 
             {/*Notifications , Controls & Calls ====================*/}
@@ -270,7 +273,7 @@ const Dashboard: FC = () => {
                   onClick={() => {
                     openPhone(true);
                   }}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
                 >
                   <HiOutlinePhone />
                 </button>
@@ -284,7 +287,7 @@ const Dashboard: FC = () => {
               <abbr title="Notifications">
                 <button
                   onClick={() => setOpenNotification(true)}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-[#0f172a91] bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
                 >
                   <HiOutlineBell />
                   {(unread.length >= 1 || notificationMsgs.length >= 1) && (

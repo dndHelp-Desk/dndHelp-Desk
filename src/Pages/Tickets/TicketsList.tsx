@@ -138,9 +138,9 @@ const TicketsList: FC<Props> = ({
         <div
           role="row"
           key={ticket.id}
-          className={`w-full h-fit border-t last:border-b dark:border-[#33415583] border-slate-300 relative py-[0.9rem] p-2 space-x-2 flex snap_childTwo hover:bg-slate-50 dark:hover:bg-[#182235] transition-all ${
+          className={`w-full h-fit border-b dark:border-[#33415583] border-slate-300 relative py-3 p-2 space-x-2 flex snap_childTwo hover:bg-slate-50 dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
-              ? "bg-slate-50 dark:bg-[#182235] border-r-slate-800 dark:border-r-blue-700 border-r-2"
+              ? "bg-slate-100 dark:bg-[#182235] border-r-slate-800 dark:border-r-blue-700 border-r-2"
               : "bg-inherit"
           }`}
         >
@@ -222,17 +222,17 @@ const TicketsList: FC<Props> = ({
                   )}
                 </abbr>
               </div>
-              <div className="h-full w-full flex flex-col justify-center space-y-0">
-                <div className="dark:text-slate-300 text-slate-900 text-[0.7rem] font-bold dark:font-semibold font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis tracking-normal flex justify-between">
-                  <p className="capitalize  w-[60%] overflow-hidden">
+              <div className="h-full w-full flex flex-col justify-center space-y-[0.15rem]">
+                <div className="dark:text-slate-300 text-slate-700 text-[0.7rem] font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis flex justify-between">
+                  <p className="capitalize w-[60%] overflow-hidden font-sans text-xs tracking-wide font-semibold dark:font-medium">
                     {ticket.category}
                   </p>
-                  <p className=" text-[0.65rem]">
+                  <p className=" text-[0.65rem] font-sans font-semibold dark:font-medium tracking-wider">
                     {ticket.ticket_id?.replace(/\s/g, "")}
                   </p>
                 </div>
-                <div className="dark:text-slate-400 w-[60%] pr-4 flex flex-row items-center space-x-2 text-slate-700 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
-                  <p className="overflow-hidden whitespace-nowrap overflow-ellipsis text-xs">
+                <div className="dark:text-slate-400 text-slate-700 w-[60%] pr-4 flex flex-row items-center space-x-2 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
+                  <p className="overflow-hidden whitespace-nowrap overflow-ellipsis text-xs font-sans">
                     <abbr title={ticket.branch_company}>
                       {ticket.branch_company}
                     </abbr>
@@ -285,7 +285,7 @@ const TicketsList: FC<Props> = ({
                     } `}
                   >
                     <BiPulse />
-                    <div className="absolute right-0 top-[-1.7rem] h-6 w-24 dark:bg-slate-500 bg-slate-600 rounded-sm after:contents-[''] after:bg-inherit after:h-2 after:w-2 after:rotate-45 after:absolute after:bottom-[-0.25rem] after:right-1.5 text-[0.7rem] text-slate-50 font-semibold hidden group-hover:flex justify-center items-center capitalize">
+                    <div className="absolute right-0 top-[-1.7rem] h-6 w-24 dark:bg-slate-500 bg-slate-600 rounded-sm after:contents-[''] after:bg-inherit after:h-2 after:w-2 after:rotate-45 after:absolute after:bottom-[-0.25rem] after:right-1.5 text-[0.7rem] text-slate-50 font-midim hidden group-hover:flex justify-center items-center capitalize">
                       {ticket?.status}
                     </div>
                   </div>
@@ -309,7 +309,7 @@ const TicketsList: FC<Props> = ({
       />
 
       {/**Tickets ========================================== */}
-      <div className="w-full h-full overflow-hidden flex flex-col justify-between pt-0 p-1 pb-2">
+      <div className="w-full h-full overflow-hidden flex flex-col justify-between pt-0 pb-2">
         <Navbar
           deleteArray={deleteArray}
           setDelete={setDelete}
@@ -320,7 +320,7 @@ const TicketsList: FC<Props> = ({
           contactsList={contactsList}
           setValues={setValues}
         />
-        <div className="w-full h-full flex flex-col justify-between overflow-hidden">
+        <div className="w-full h-full flex flex-col justify-between overflow-hidden px-4">
           <div
             role="table"
             className="w-full h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap px-1"
