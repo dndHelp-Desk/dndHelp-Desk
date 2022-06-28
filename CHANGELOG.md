@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.13...v0.8.0) (2022-06-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* Tickets fields
+
+### Features
+
+* major UI update taking advantage of full screen from top nav to side nav plus code ref ([1293e44](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/1293e4462848323f7e5494eb57bc28211dbe371f))
+
 ### [0.7.13](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.12...v0.7.13) (2022-06-24)
 
 
