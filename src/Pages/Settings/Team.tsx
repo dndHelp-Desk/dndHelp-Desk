@@ -170,7 +170,7 @@ const Team: FC = () => {
       />
       {/**Delele Ticket Action Panel ====== */}
 
-      <div className="flex items-center justify-between sticky top-0 bg-slate-100 z-[99] pt-4">
+      <div className="flex items-center justify-between sticky top-0 bg-slate-100 dark:bg-slate-750 z-[99] pt-4">
         <h1 className="dark:text-slate-300 text-slate-800  text-xl font-bold tracking-wide">
           All Members
         </h1>
