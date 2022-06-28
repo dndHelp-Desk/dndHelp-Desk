@@ -198,7 +198,7 @@ const Categories: FC = () => {
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-9 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
+            className="bg-slate-800 dark:bg-blue-700 min-w-[8rem] h-9 px-4 rounded-sm flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  hover:opacity-900 duration-300 transition-bg font-medium uppercase"
           >
             Add Category
           </button>
@@ -273,7 +273,7 @@ const Categories: FC = () => {
               >
                 <fieldset className="border dark:border-slate-700 border-slate-300 rounded p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
                   {" "}
-                  <legend className="px-2 bg-slate-300 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
+                  <legend className="px-2 bg-slate-100 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
                     {category?.name}
                   </legend>
                   <label
@@ -335,13 +335,13 @@ const Categories: FC = () => {
                         });
                         setEditable(category.id);
                       }}
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-l bg-slate-700 text-slate-100 border-r border-slate-400 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-l-sm bg-slate-700 text-slate-100 border-r border-slate-400 font-medium tracking-wider text-xs uppercase"
                     >
                       Edit
                     </button>
                     <button
                       type="submit"
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all bg-slate-700 text-slate-100 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all bg-slate-700 text-slate-100 font-medium tracking-wider text-xs uppercase"
                     >
                       Save
                     </button>
@@ -360,7 +360,7 @@ const Categories: FC = () => {
                           ])
                         );
                       }}
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-r bg-red-700 text-slate-100 border-l border-slate-400 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-r-sm bg-red-700 text-slate-100 border-l border-slate-400 font-medium tracking-wider text-xs uppercase"
                     >
                       Delete
                     </button>

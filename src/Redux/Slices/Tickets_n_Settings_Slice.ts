@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialId: string | null = window.localStorage.getItem("threadId");
+const initialId: string | any = window.localStorage.getItem("threadId");
 const initialTickestDate = window.localStorage.getItem("ticketsDate");
 interface InitialStateState {
   allTickets: any[];
@@ -20,7 +20,7 @@ interface InitialStateState {
 
 const initialState: InitialStateState = {
   allTickets: [],
-  threadId: initialId,
+  threadId: JSON.parse(initialId),
   contacts: [],
   email_accounts: [],
   email_templates: [],

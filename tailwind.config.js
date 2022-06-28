@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
       },
+      colors: {
+        "slate-750": "#263246",
+      },
     },
     screens: {
       sm: "520px",

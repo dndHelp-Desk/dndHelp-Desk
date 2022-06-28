@@ -133,7 +133,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, name: e.target.value })
               }
               value={inputValues.name}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-100"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -149,7 +149,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, email: e.target.value })
               }
               value={inputValues.email}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-100"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -166,7 +166,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, password: e.target.value })
               }
               value={inputValues.password}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-100"
             />
             <BsLockFill className="absolute text-slate-500 text-lg top-3 left-4" />
             <BiShowAlt
@@ -190,7 +190,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
               onChange={(e) =>
                 setValues({ ...inputValues, access: e.target.value })
               }
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200 "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-100 "
             >
               <option className="capitalize p-2" value="">
                 Access
@@ -222,7 +222,7 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, companies: e.target.value })
               }
               value={inputValues.companies}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-100"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -238,13 +238,13 @@ const NewUser: FC<Props> = ({ newUserModal, setModal }) => {
                 setValues({ ...inputValues, dept: e.target.value })
               }
               value={inputValues.dept}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-700 dark:text-slate-400 dark:bg-[#25396823] bg-slate-100"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none uppercase"
+            className="bg-slate-800 dark:bg-blue-700 px-4 p-2 text-slate-50 font-medium font-sans text-sm rounded-sm hover:opacity-80 outline-none focus:outline-none uppercase"
           >
             Create User
           </button>

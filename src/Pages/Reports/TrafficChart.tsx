@@ -66,16 +66,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
     fill: {
       colors: ["#3b82f6"],
       opacity: 0.9,
-      type: "gradient",
-      gradient: {
-        shade: "#3b82f6",
-        type: "vertical",
-        shadeIntensity: 1,
-        gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-        inverseColors: false,
-        opacityFrom: 1,
-        opacityTo: 0.3,
-      },
+      type: "solid",
     },
     grid: {
       yaxis: {

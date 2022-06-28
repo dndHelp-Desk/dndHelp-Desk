@@ -93,7 +93,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, name: e.target.value })
               }
               value={newAccountValue.name}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-100"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -108,7 +108,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, email: e.target.value })
               }
               value={newAccountValue.email}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-slate-800 bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-slate-800 bg-slate-100"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
@@ -123,7 +123,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, host: e.target.value })
               }
               value={newAccountValue.host}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-100"
             />
             <BsServer className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -138,7 +138,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, port: e.target.value })
               }
               value={newAccountValue.port}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-100"
             />
             <BsFillPlugFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -153,13 +153,13 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, password: e.target.value })
               }
               value={newAccountValue.password}
-              className="bg-transparent w-full h-full rounded border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-200"
+              className="bg-transparent w-full h-full rounded border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-100"
             />
             <BsFillLockFill className="absolute text-slate-500 top-[0.85rem] text-base left-4" />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold uppercase"
+            className="bg-slate-800 dark:bg-blue-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 duration-300 transition-bg font-medium uppercase"
           >
             Add Account
           </button>
@@ -275,7 +275,7 @@ const EmailAccounts: FC = () => {
               >
                 <fieldset className="border dark:border-slate-700 border-slate-300 rounded p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
                   {" "}
-                  <legend className="px-2 bg-slate-300 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
+                  <legend className="px-2 bg-slate-100 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
                     {account.name}
                   </legend>
                   <label
@@ -385,13 +385,13 @@ const EmailAccounts: FC = () => {
                         });
                         setEditable(account.id);
                       }}
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-l bg-slate-700 text-slate-100 border-r border-slate-400 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-l-sm bg-slate-700 text-slate-100 border-r border-slate-400 font-medium tracking-wider text-xs uppercase"
                     >
                       Edit
                     </button>
                     <button
                       type="submit"
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all bg-slate-700 text-slate-100 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all bg-slate-700 text-slate-100 font-medium tracking-wider text-xs uppercase"
                     >
                       Save
                     </button>
@@ -410,7 +410,7 @@ const EmailAccounts: FC = () => {
                           ])
                         );
                       }}
-                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-r bg-red-700 text-slate-100 border-l border-slate-400 font-bold tracking-wider text-xs uppercase"
+                      className="h-8 w-20 px-4 outline-none focus:outline-none hover:opacity-80 transition-all rounded-r-sm bg-red-700 text-slate-100 border-l border-slate-400 font-medium tracking-wider text-xs uppercase"
                     >
                       Delete
                     </button>

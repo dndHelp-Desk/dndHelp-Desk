@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { BiChat } from "react-icons/bi";
+import { BiHash } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
@@ -44,7 +44,7 @@ const MostRecent: FC = () => {
   //Component =================
   return (
     <>
-      <div className="w-full h-[75%] p-2 pl-6 pr-0 pt-5 flex flex-col items-center justify-center select-none rounded border border-slate-300 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <div className="w-full h-[75%] p-2 pl-6 pt-6 pr-0 flex flex-col items-center justify-center select-none rounded border border-slate-300 dark:border-slate-700 overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         {activities.length >= 1 &&
           activities.slice(0, 4).map((activity, index) => {
             return (
@@ -53,8 +53,8 @@ const MostRecent: FC = () => {
                 className="w-full h-14 px-2 pl-6 border-l border-slate-300 dark:border-slate-700 last:border-0 relative"
               >
                 <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-[#222e40] p-1">
-                  <div className="h-full w-full rounded-full bg-slate-700 dark:bg-slate-700 flex items-center justify-center text-xs text-slate-100">
-                    <BiChat />
+                  <div className="h-full w-full rounded-full bg-slate-700 dark:bg-slate-700 flex items-center justify-center text-sm text-slate-100">
+                    <BiHash />
                   </div>
                 </div>
                 <article className="text-slate-700 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal uppercase font-sans subpixel-antialiased">
@@ -86,7 +86,7 @@ const MostRecent: FC = () => {
               >
                 <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-[#222e40] p-1">
                   <div className="h-full w-full rounded-full bg-slate-700 dark:bg-slate-700 flex items-center justify-center text-xs text-slate-100">
-                    <BiChat />
+                    <BiHash />
                   </div>
                 </div>
                 <article className="text-slate-700 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal uppercase font-sans subpixel-antialiased">

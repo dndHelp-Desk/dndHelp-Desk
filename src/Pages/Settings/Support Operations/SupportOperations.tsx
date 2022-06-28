@@ -40,7 +40,7 @@ const SupportOperations: FC = () => {
   //Tabs ========================
   const tabsMenu = menuItems.map((item: any) => {
     return (
-      <button
+      <li
         key={item.id}
         onClick={() =>
           setTab(
@@ -51,21 +51,21 @@ const SupportOperations: FC = () => {
             )
           )
         }
-        className={`text-sm dark:text-slate-300 text-slate-800 font-semibold p-2 w-32 border-b-2 outline-none focus:outline-none  ${
+        className={`text-sm dark:text-slate-300 text-slate-800 font-semibold p-2 w-32 border-b-2 outline-none focus:outline-none whitespace-nowrap cursor-pointer  ${
           item.active
             ? "border-slate-800 dark:border-slate-300"
             : "border-slate-400 dark:border-slate-700"
         } text-center`}
       >
         {item.name}
-      </button>
+      </li>
     );
   });
 
   //Component =================
   return (
-    <section className="bg-transparent w-full h-full grid grid-rows-9 gap-4 overflow-hidden">
-      <nav className="row-span-1 w-full flex justify-center">
+    <section className="bg-transparent w-full h-full grid grid-rows-9 gap-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+      <nav className="row-span-1 w-full flex justify-center sticky top-0 bg-slate-100 py-4 z-[99]">
         <ul className="h-full flex items-center justify-center">{tabsMenu}</ul>
       </nav>
       <div className="row-span-8 w-full min-h-[50rem]">

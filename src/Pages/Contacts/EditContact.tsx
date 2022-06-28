@@ -91,7 +91,7 @@ const EditContact: FC<Props> = ({ edit, setEdit, selectedArray }) => {
         <form
           action=""
           onSubmit={(e) => saveContact(e)}
-          className="space-y-6 h-full w-full max-w-[23rem] flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
+          className="space-y-6 h-full w-[25rem] flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
         >
           <h3 className="text-base text-center dark:text-slate-300 text-slate-800 uppercase font-bold font-sans">
             edit contact
@@ -145,7 +145,7 @@ const EditContact: FC<Props> = ({ edit, setEdit, selectedArray }) => {
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-10 px-6 rounded flex justify-center items-center text-slate-100  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
+            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-blue-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
           >
             Edit Contact
           </button>

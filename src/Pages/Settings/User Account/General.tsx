@@ -114,7 +114,7 @@ const General: FC = () => {
           <h2 className="dark:text-slate-400 text-slate-700 text-sm font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             {member_details.length !== undefined && member_details[0].dept}
           </h2>
-          <p className="dark:text-slate-400 text-slate-700 text-sm lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden italic">
+          <p className="dark:text-slate-400 text-slate-700 text-sm lowercase font-medium whitespace-nowrap text-ellipsis overflow-hidden">
             <BsEnvelope className="inline" />{" "}
             {member_details.length !== undefined && member_details[0].email}
           </p>
@@ -240,7 +240,7 @@ const General: FC = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-700 px-4 p-2 text-slate-50 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
+              className="dark:bg-blue-700 bg-slate-800 px-4 p-2 text-slate-50 font-medium text-sm round-smed hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
             >
               Save Changes
             </button>
@@ -290,7 +290,7 @@ const General: FC = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-700 px-4 p-2 text-slate-50 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
+              className="dark:bg-blue-700 bg-slate-800 px-4 p-2 text-slate-50 font-medium text-sm round-smed hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
             >
               Change Password
             </button>

@@ -66,7 +66,7 @@ const App: FC = () => {
             <Route path="/workspace-setup" element={<WorkSpaceSetUp />} />
 
             {/**Error Page ===========================*/}
-            <Route path="/error-page" element={<ErrorPage />} />
+            <Route path="*" element={<ErrorPage />} />
 
             {/**LogIn ======================== */}
             <Route path="/redirect" element={<Redirects />} />

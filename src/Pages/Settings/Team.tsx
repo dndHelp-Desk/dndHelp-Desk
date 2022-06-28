@@ -5,7 +5,6 @@ import noUsers from "./../Main_Dashboard/images/no-userss.svg";
 import { Navigate } from "react-router";
 import { deleteUser } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { BsFillTrashFill, BsPencilSquare, BsSearch } from "react-icons/bs";
-import { HiUserAdd } from "react-icons/hi";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import NewUser from "./NewUser";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -103,7 +102,7 @@ const Team: FC = () => {
                 className="object-cover w-full h-full object-center rounded-sm"
               />
             </div>
-            <p className="text-sm whitespace-nowrap tracking-tight overflow-hidden text-ellipsis font-semibold capitalize dark:text-slate-300 text-slate-800">
+            <p className="text-sm whitespace-nowrap tracking-tight overflow-hidden text-ellipsis font-medium capitalize dark:text-slate-300 text-slate-800">
               <abbr title={user.name}>{user.name}</abbr>
               <br />
               <small className="capitalize col-span-1 dark:text-slate-400 text-slate-700 tracking-tight">
@@ -112,7 +111,7 @@ const Team: FC = () => {
             </p>
           </td>
           <td className="col-span-4 h-full">
-            <p className=" h-full text-xs lowercase font-medium italic whitespace-nowrap overflow-hidden text-ellipsis dark:text-slate-400 text-slate-700 flex items-center">
+            <p className="h-full text-xs lowercase font-medium italic whitespace-nowrap overflow-hidden text-ellipsis dark:text-slate-400 text-slate-700 hidden md:flex items-center">
               <abbr title={user.email}>{user.email}</abbr>
             </p>
           </td>
@@ -130,7 +129,7 @@ const Team: FC = () => {
                   companies: user.companies,
                 });
               }}
-              className="h-8 w-8 rounded border border-slate-200 dark:border-slate-700 outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
+              className="h-8 w-8 rounded outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
             >
               <abbr title="Edit User">
                 <BsPencilSquare className="text-slate-700 dark:text-slate-400 text-base" />
@@ -143,7 +142,7 @@ const Team: FC = () => {
                 setArg([user.id, user.uid]);
                 setActionPanel(true);
               }}
-              className="h-8 w-8 rounded border border-slate-200 dark:border-slate-700 outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
+              className="h-8 w-8 rounded outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
             >
               <abbr title="Delete Account">
                 <BsFillTrashFill className="text-red-500  text-base" />
@@ -171,7 +170,7 @@ const Team: FC = () => {
       />
       {/**Delele Ticket Action Panel ====== */}
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between sticky top-0 bg-slate-100 z-[99] pt-4">
         <h1 className="dark:text-slate-300 text-slate-800  text-xl font-bold tracking-wide">
           All Members
         </h1>
@@ -195,16 +194,15 @@ const Team: FC = () => {
           </label>
           <button
             onClick={() => setModal(true)}
-            className="h-10 w-10 rounded bg-blue-600 text-slate-100 font-bold text-lg flex items-center justify-center outline-none focus:outline-none"
-          >
-            <HiUserAdd />
+            className="h-10 px-4 rounded-sm bg-slate-800 dark:bg-blue-700 text-slate-100 font-medium text-sm flex items-center justify-center outline-none focus:outline-none"
+          ><span>Add New Member</span>
           </button>
         </div>
       </div>
       <section className="h-[49rem] bg-transparent rounded flex flex-col place-items-center mt-1 py-4 overflow-hidden">
         {allMembers.length >= 1 && (
           <table className="w-full h-full flex flex-col justify-between">
-            <thead className="w-full">
+            <thead className="w-full sticky top-0 bg-inherit">
               <tr className="w-full h-6 mb-4 text-xs sticky top-0 z-[99] grid grid-cols-9 gap-2 font-semibold uppercase dark:text-slate-300 text-slate-700 border-b border-slate-400 dark:border-slate-700 bg-inherit">
                 <th className="col-span-4 text-left">User</th>
                 <th className="col-span-4 text-left pl-4">Email</th>

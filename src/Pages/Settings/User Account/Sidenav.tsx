@@ -6,7 +6,7 @@ const Sidenav: FC = () => {
 
   //Component ==================
   return (
-    <div className="col-span-4 md:col-span-1 min-h-[10rem] h-fit rounded dark:bg-slate-800 bg-white py-4">
+    <div className="col-span-4 md:col-span-1 min-h-[10rem] h-fit rounded dark:bg-slate-800 bg-white border border-slate-200 dark:border-slate-700 py-4">
       <ul>
         <div className="w-full">
           <h2
@@ -21,7 +21,7 @@ const Sidenav: FC = () => {
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
               location.pathname === "/app/settings/account/general"
-                ? "bg-slate-100 dark:bg-slate-700"
+                ? "bg-slate-200 dark:bg-slate-700"
                 : ""
             }`}
           >
@@ -34,8 +34,8 @@ const Sidenav: FC = () => {
           </li>
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
-              location.pathname === "/app/settings/account/general"
-                ? "bg-slate-100 dark:bg-slate-700"
+              location.pathname === "/app/settings/account/generl"
+                ? "bg-slate-200 dark:bg-slate-700"
                 : ""
             }`}
           >
@@ -62,7 +62,7 @@ const Sidenav: FC = () => {
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
               location.pathname === "/app/settings/account/security"
-                ? "bg-slate-100 dark:bg-slate-700"
+                ? "bg-slate-200 dark:bg-slate-700"
                 : ""
             }`}
           >
@@ -89,7 +89,7 @@ const Sidenav: FC = () => {
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
               location.pathname === "/app/settings/account/applications"
-                ? "bg-slate-100 dark:bg-slate-700"
+                ? "bg-slate-200 dark:bg-slate-700"
                 : ""
             }`}
           >

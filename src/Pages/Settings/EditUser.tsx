@@ -95,7 +95,7 @@ const EditUser: FC<Props> = ({
               required
               onChange={(e) => setId({ ...editId, name: e.target.value })}
               value={editId.name}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-100"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -103,7 +103,7 @@ const EditUser: FC<Props> = ({
             <select
               ref={accessRef}
               onChange={(e) => setId({ ...editId, access: e.target.value })}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200 "
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-100 "
             >
               <option className="capitalize p-2" value="">
                 Access
@@ -133,7 +133,7 @@ const EditUser: FC<Props> = ({
               placeholder="Companies / Restuarants ..."
               onChange={(e) => setId({ ...editId, companies: e.target.value })}
               value={editId.companies}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-100"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -147,13 +147,13 @@ const EditUser: FC<Props> = ({
               required
               onChange={(e) => setId({ ...editId, dept: e.target.value })}
               value={editId.dept}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-200"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-100"
             />
             <BsBuilding className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
           <button
             type="submit"
-            className="bg-blue-700 px-4 p-2 text-slate-300 font-semibold text-sm rounded hover:opacity-80 outline-none focus:outline-none uppercase"
+            className="bg-slate-800 dark:bg-blue-700 px-4 p-2 text-slate-50 font-medium font-sans text-sm rounded-sm hover:opacity-80 outline-none focus:outline-none uppercase"
           >
             Edit User
           </button>

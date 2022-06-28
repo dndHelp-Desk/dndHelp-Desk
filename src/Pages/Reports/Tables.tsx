@@ -86,14 +86,14 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
     <div className="col-span-3 h-[35rem] lg:col-span-2 rounded-md flex flex-col gap-2">
       <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-md overflow-hidden p-1">
         <div className="h-12 flex justify-between items-center px-4">
-          <h2 className="text-xs dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-wider">
+          <div className="text-sm dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-wider">
             {option === "agent_email" ? "Agents" : "Company"}
-          </h2>
+          </div>
           <div className="flex space-x-2">
             {/**Select Report ================= */}
             <select
               onChange={(e) => setOption(e.target.value)}
-              className="h-8 w-28 md:w-40 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2 pt-1 dark:bg-slate-900 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-8 w-28 md:w-40 rounded-sm text-xs dark:text-slate-400 text-slate-500 font-semibold p-2 dark:bg-slate-750 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="branch_company">Company</option>
               <option value="agent_email">Agents</option>
@@ -102,7 +102,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
               onClick={() => {
                 window.print();
               }}
-              className="h-8 w-20 rounded text-xs font-semibold p-2 bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
             >
               <span>Print</span>
               <BsPrinter className="text-sm text-white" />
@@ -112,7 +112,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                 let csv = convertToCsv(data);
                 downloadFile("Tickects Report.csv", csv);
               }}
-              className="h-8 w-20 rounded text-xs font-semibold p-2 bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >
               <span>CSV</span>
               <BsCloudDownload className="text-sm text-white" />

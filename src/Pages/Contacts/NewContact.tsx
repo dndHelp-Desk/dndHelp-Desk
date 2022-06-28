@@ -62,9 +62,9 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
   //Component ==========
   return (
     <div
-      className={`bg-[#0813227e] fixed w-screen h-screen z-[999] ${
+      className={`bg-[#0813227e] fixed z-[999] ${
         contactModal ? "flex" : "hidden"
-      }  justify-center pt-28 top-0 bottom-0 left-0 right-0 min-h-screen w-screen`}
+      }  justify-center pt-28 top-0 bottom-0 left-0 right-0 min-h-screen min-w-screen`}
     >
       {/**Add new Contact =========================================== */}
       <div
@@ -103,7 +103,7 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
               multiple
               required
               autoComplete="nope"
-              placeholder="One email or multiple seperated by commas ..."
+              placeholder="Seperated multiple emails by commas ..."
               onChange={(e) =>
                 setValue({ ...newContactValue, email: e.target.value })
               }
@@ -146,7 +146,7 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
           </div>
           <button
             type="submit"
-            className="bg-blue-700 min-w-[8rem] h-10 px-6 rounded flex justify-center items-center text-slate-100  text-sm font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:bg-blue-800 duration-300 transition-bg font-semibold"
+            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-blue-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
           >
             Add Contact
           </button>

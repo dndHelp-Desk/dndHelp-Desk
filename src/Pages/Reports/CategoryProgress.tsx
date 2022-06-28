@@ -35,7 +35,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
         categoriesData?.map((element: any, index) => {
           return (
             <div key={index} className="w-full">
-              <small className="text-slate-700 dark:text-slate-400 text-[0.65rem] font-semibold tracking-normal uppercase">
+              <small className="text-slate-700 dark:text-slate-400 text-[0.7rem] font-medium font-sans tracking-normal uppercase">
                 {element.name}
               </small>
               <div className="w-full flex items-center justify-between">
@@ -78,7 +78,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
         [0, 1, 2, 3, 4, 5].map((index) => {
           return (
             <div key={index} className="w-full">
-              <small className="text-slate-700 dark:text-slate-400 text-[0.65rem] font-semibold tracking-normal uppercase">
+              <small className="text-slate-700 dark:text-slate-400 text-[0.7rem] font-medium font-sans tracking-normal uppercase">
                 N/A
               </small>
               <div className="w-full flex items-center justify-between">

@@ -121,7 +121,7 @@ const Dashboard: FC = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="w-full dark:bg-slate-900 bg-slate-300 selection:bg-blue-600 selection:text-slate-100 flex">
+      <div className="w-full dark:bg-slate-750 bg-slate-100 selection:bg-blue-600 selection:text-slate-100 flex">
         {/**Data Fetching Components */}
         <TicketsnUserData />
 
@@ -244,7 +244,7 @@ const Dashboard: FC = () => {
         {/**Main Body ===================== */}
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}
-          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-[#263246] bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
+          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
             {/**Universal Search  ================ */}
             <div className="h-full flex items-center">
               <div className="relative">
@@ -256,10 +256,10 @@ const Dashboard: FC = () => {
                     type="search"
                     name="searchAll"
                     id="searchAll"
-                    className="h-9 w-[18rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pl-8 text-xs font-semibold dark:font-medium font-sans"
+                    className="h-9 w-[18rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pr-8 text-xs font-semibold dark:font-medium font-sans"
                     placeholder="Quick Search ..."
                   />
-                  <BiSearchAlt className="absolute left-2 top-1 text-slate-600 dark:text-slate-400 text-xl" />
+                  <BiSearchAlt className="absolute right-2 top-1 text-slate-600 dark:text-slate-400 text-xl" />
                 </label>
                 <UniversalSearch />
               </div>

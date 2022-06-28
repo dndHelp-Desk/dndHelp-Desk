@@ -85,29 +85,29 @@ const OverviewReport: FC<data> = ({ data }) => {
   //Component =============================
   return (
     <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
-        <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider">
+      <div className=" h-[22rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
+        <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Statistics
-        </h2>
-        <div className="mt-6 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
+        </div>
+        <div className="mt-8 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
           <div className="dark:text-slate-300 text-slate-900">
-            <h4 className="text-base font-bold text-center uppercase">
+            <div className="text-base font-bold text-center uppercase">
               {data?.length}
-            </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
+            </div>
+            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-bold text-center uppercase">
               Total Tickets
-            </h4>
+            </div>
           </div>
           <div className="dark:text-slate-300 text-slate-800">
-            <h4 className="text-base font-bold text-center uppercase">
+            <div className="text-base font-bold text-center uppercase">
               {totalAggregate}
-            </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
+            </div>
+            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-bold text-center uppercase">
               Total Messages
-            </h4>
+            </div>
           </div>
           <div className="dark:text-slate-300 text-slate-800">
-            <h4 className="text-base font-bold text-center">
+            <div className="text-base font-bold text-center">
               {`${
                 solvedTickets.length >= 1
                   ? (
@@ -125,7 +125,7 @@ const OverviewReport: FC<data> = ({ data }) => {
                       .split(".")[0]
                   : 0
               }`}
-              <span className="text-xs lowercase">Hr</span>{" "}
+              <span className="text-xs lowercase">H</span>{" "}
               {`${
                 solvedTickets.length >= 1
                   ? Number(
@@ -143,45 +143,45 @@ const OverviewReport: FC<data> = ({ data }) => {
                     ) % 60
                   : 0
               }`}
-              <span className="text-xs lowercase">Mn</span>
-            </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
+              <span className="text-xs lowercase">M</span>
+            </div>
+            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-bold text-center uppercase">
               Resolution Time
-            </h4>
+            </div>
           </div>
         </div>
         <div className="mt-6 flex space-x-4 px-2 min-h-14 w-full justify-between">
-          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-900 rounded p-4 border border-slate-300 dark:border-slate-700">
-            <h4 className="text-base font-bold text-center uppercase">
+          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
+            <div className="text-base font-bold text-center uppercase">
               {data?.filter((data: any) => data?.feedback === "like")?.length}
-            </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
+            </div>
+            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Positive
-            </h4>
+            </div>
           </div>
-          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-900 rounded p-4 border border-slate-300 dark:border-slate-700">
-            <h4 className="text-base font-bold text-center uppercase">
+          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
+            <div className="text-base font-bold text-center uppercase">
               {
                 data?.filter(
                   (data: any) =>
                     data?.feedback !== "like" && data?.feedback !== "dislike"
                 )?.length
               }
-            </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
+            </div>
+            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Neutral
-            </h4>
+            </div>
           </div>
-          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-900 rounded p-4 border border-slate-300 dark:border-slate-700">
-            <h4 className="text-base font-bold text-center">
+          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
+            <div className="text-base font-bold text-center">
               {
                 data?.filter((data: any) => data?.feedback === "dislike")
                   ?.length
               }
-            </h4>
-            <h4 className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
+            </div>
+            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Negative
-            </h4>
+            </div>
           </div>
         </div>
         <div
@@ -189,32 +189,32 @@ const OverviewReport: FC<data> = ({ data }) => {
         p-2"
         >
           <p className=" text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
-            Real-time report allows you to check the current status of your
+            Real-time report it allows you to check the current status of your
             team's workload , availability and valuable insights or statistics
             about your team's performance.
           </p>
         </div>
       </div>
 
-      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col gap-2 px-4 h-[20rem]">
-        <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider flex-[2]">
+      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col justify-between gap-2 px-4 h-[22rem]">
+        <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Per Category
-        </h2>
-        <div className="flex-[8] w-full px-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+        </div>
+        <div className="h-[13.2rem] w-full px-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
           <CategoryProgress data={data} />
         </div>
       </div>
 
       {/**Traffic trend chart ======================== */}
-      <div className=" h-[20rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
+      <div className=" h-[22rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
-            <h2 className="text-xs dark:text-slate-300 text-slate-900 dark:font-semibold font-bold uppercase tracking-wider">
+            <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider mt-1">
               Traffic Trend
-            </h2>
+            </div>
             <select
               onChange={(e) => setOption(e.target.value)}
-              className="h-8 w-20 rounded text-xs dark:text-slate-500 text-slate-500 font-semibold p-2  pt-1 dark:bg-slate-900 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+              className="h-8 w-20 rounded text-xs dark:text-slate-400 text-slate-500 font-semibold p-2 dark:bg-slate-750 bg-slate-50 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
               <option value="hour">Hourly</option>
               <option value="day">Daily</option>

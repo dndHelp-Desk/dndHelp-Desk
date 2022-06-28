@@ -52,14 +52,14 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
       className="h-full w-full border-0 text-inherit roundedEditor relative overflow-hidden pl-0"
       classNames={{
         toolbar:
-          "dark:bg-[#263246] bg-slate-100 flex justify-center items-center  flex-nowrap w-full text-slate-700 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700 roundedEditor sticky p-0  overflow-hidden",
+          "dark:bg-slate-750 bg-slate-100 flex justify-center items-center  flex-nowrap w-full text-slate-700 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700 roundedEditor sticky p-0  overflow-hidden",
         toolbarInner:
-          "dark:bg-[#263246] bg-slate-100 text-inherit border-b border-slate-300 dark:border-slate-700 w-full h-[3.25rem] flex justify-center flex-nowrap overflow-hidden py-1 roundedEditor",
+          "dark:bg-slate-750 bg-slate-100 text-inherit border-b border-slate-300 dark:border-slate-700 w-full h-[3.25rem] flex justify-center flex-nowrap overflow-hidden py-1 roundedEditor",
         toolbarGroup:
-          "dark:bg-[#263246] bg-slate-100 text-inherit border-0 border-slate-300 dark:border-slate-600 flex justify-between w-full roundedEditor",
+          "dark:bg-slate-750 bg-slate-100 text-inherit border-0 border-slate-300 dark:border-slate-600 flex justify-between w-full roundedEditor",
         toolbarControl:
-          "dark:bg-[#263246] bg-slate-100 text-inherit border-0  dark:hover:bg-slate-800 hover:bg-white rounded",
-        root: "replyEditor min-h-[3rem] border h-full py-0 pl-0 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar dark:bg-[#263246] bg-slate-100 roundedEditor",
+          "dark:bg-slate-750 bg-slate-100 text-inherit border-0  dark:hover:bg-slate-800 hover:bg-white rounded",
+        root: "replyEditor min-h-[3rem] border h-full py-0 pl-0 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar dark:bg-slate-750 bg-slate-100 roundedEditor",
       }}
       controls={[
         [

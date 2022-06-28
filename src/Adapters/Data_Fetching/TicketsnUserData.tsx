@@ -501,23 +501,21 @@ const TicketsnUserData: FC = () => {
       //Members Data Fetching
       org &&
         onSnapshot(membersRef, (snapshot: { docs: any[] }) => {
-          if (member_details[0]?.access !== "client") {
-            dispatch(
-              addAllMembers(
-                snapshot.docs
-                  .map((doc: { data: () => any; id: any }) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                  }))
-                  .sort(
-                    (
-                      a: { name: string | number },
-                      b: { name: string | number }
-                    ) => (a.name < b.name ? -1 : 1)
-                  )
-              )
-            );
-          }
+          dispatch(
+            addAllMembers(
+              snapshot.docs
+                .map((doc: { data: () => any; id: any }) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }))
+                .sort(
+                  (
+                    a: { name: string | number },
+                    b: { name: string | number }
+                  ) => (a.name < b.name ? -1 : 1)
+                )
+            )
+          );
         }),
       //Contacts Data Fetching ======================
       org &&

@@ -5,7 +5,6 @@ import {
   BiMicrophone,
   BiCollection,
   BiArrowBack,
-  BiUser,
   BiChevronDown,
   BiTrash,
   BiShare,
@@ -17,6 +16,7 @@ import {
   HiThumbUp,
   HiThumbDown,
   HiBadgeCheck,
+  HiUser,
 } from "react-icons/hi";
 import {
   addReply,
@@ -559,7 +559,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           className="w-full text-slate-400 text-sm flex justify-between space-x-4 transition-all tracking-wide bg-white dark:bg-slate-800"
         >
           {/**Profile ======================== */}
-          <div className="h-[2.5rem] w-[2.5rem] rounded-md border-2 border-slate-400 dark:border-slate-500 dark:bg-slate-800 bg-white overflow-hidden">
+          <div className="h-[2.35rem] w-[2.5rem] rounded-md border-2 border-slate-400 dark:border-slate-500 dark:bg-slate-800 bg-white overflow-hidden">
             <div className="w-full h-full dark:bg-slate-800 bg-white dark:text-slate-300 text-slate-900 flex justify-center items-center capitalize font-bold text-base">
               {allMembers?.filter(
                 (profile) =>
@@ -578,7 +578,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   className="object-cover object-center h-full w-full"
                 />
               ) : (
-                <BiUser />
+                <HiUser />
               )}
             </div>
           </div>
@@ -883,9 +883,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>
 
               {/**Deco boxes ================================ */}
-              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#263246] rotate-12 left-10 bottom-10"></div>
-              <div className="absolute h-8 w-8 rounded bg-slate-100 dark:bg-[#263246] rotate-12 left-10 bottom-40"></div>
-              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-[#263246] rotate-45 right-14 bottom-24"></div>
+              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-slate-750 rotate-12 left-10 bottom-10"></div>
+              <div className="absolute h-8 w-8 rounded bg-slate-100 dark:bg-slate-750 rotate-12 left-10 bottom-40"></div>
+              <div className="absolute h-14 w-14 rounded bg-slate-100 dark:bg-slate-750 rotate-45 right-14 bottom-24"></div>
             </>
           )}
           {/**End of Messages ============================ */}
@@ -894,7 +894,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
       {/**Reply ====================================== */}
       <div className="min-h-[11rem] max-h-[15rem] w-full bg-transparent flex items-center justify-center dark:bg-slate-800 bg-white pb-2">
-        <div className="h-[90%] w-[95%] relative rounded-sm dark:bg-[#263246] bg-slate-100 border border-slate-400 dark:border-slate-700 hover:border-slate-600 dark:hover:border-slate-500 transion-all shadow-lg">
+        <div className="h-[90%] w-[95%] relative rounded-sm dark:bg-slate-750 bg-slate-100 border border-slate-400 dark:border-slate-700 hover:border-slate-600 dark:hover:border-slate-500 transion-all shadow-lg">
           <form
             onSubmit={(e) => sendReply(e)}
             className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999] pt-0"

@@ -74,31 +74,38 @@ const Table: FC<Prop> = ({ setModal }) => {
       return (
         <div
           key={contact.id}
-          className="h-[3.7rem] rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-[#182235] p-2 flex items-center relative"
+          className="h-[3.7rem] rounded border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-750 p-2 px-4 pr-14 flex items-center justify-between relative"
         >
-          {/**Mark Contact =========================== */}
-          <input
-            type="checkbox"
-            name="mark"
-            id="mark"
-            checked={selectedArray.includes(contact.id) === true ? true : false}
-            onChange={(e) =>
-              e.target.checked === true
-                ? select([...selectedArray, contact.id])
-                : select(
-                    selectedArray.filter((data: any) => data !== contact.id)
-                  )
-            }
-            className="cursor-pointer w-3 h-3 border rounded-sm border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none absolute right-2 top-2 hidden md:flex"
-          />
-          {/**End of Mark Contact ======================== */}
-          <h3 className="flex-[4] tracking-tight flex items-center space-x-1 px-2 text-sm capitalize font-semibold text-slate-800 dark:text-slate-300 whitespace-nowrap overflow-hidden">
-            <span>{contact.name?.split("/")[0]}</span>
-          </h3>
-          <h4 className="flex-[8] tracking-normal hidden md:flex px-2 text-[0.65rem] uppercase font-semibold text-slate-800 dark:text-slate-400 whitespace-nowrap overflow-hidden overflow-ellipsis">
-            {contact.branch_company}
-          </h4>
-          <div className="h-12 flex-[4] flex items-center gap-2">
+          <div className="flex items-center space-x-4">
+            {/**Mark Contact =========================== */}
+            <input
+              type="checkbox"
+              name="mark"
+              id="mark"
+              checked={
+                selectedArray.includes(contact.id) === true ? true : false
+              }
+              onChange={(e) =>
+                e.target.checked === true
+                  ? select([...selectedArray, contact.id])
+                  : select(
+                      selectedArray.filter((data: any) => data !== contact.id)
+                    )
+              }
+              className="cursor-pointer w-3 h-3 border rounded-sm border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-800 outline-none hidden md:flex"
+            />
+            {/**End of Mark Contact ======================== */}
+            <div className="h-10 w-10 rounded-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 flex justify-center items-center text-base font-semibold dark:font-medium font-sans dark:text-slate-300 text-slate-600 capitalize">
+              {contact.name?.split("/")[0]?.charAt(0)}
+            </div>
+            <div className="tracking-tight flex flex-col justify-center space-y-0 px-2 text-sm capitalize font-semibold dark:font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap overflow-hidden">
+              <span className="text-sm">{contact.name?.split("/")[0]}</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">
+                {contact.branch_company}
+              </span>
+            </div>
+          </div>
+          <div className="h-12 flex items-center gap-2">
             {" "}
             <div className="contact_Option group">
               <HiOutlinePhone />
@@ -160,13 +167,13 @@ const Table: FC<Prop> = ({ setModal }) => {
       />
       {/**Delete Contact Action Panel */}
 
-      <div className="flex flex-row p-4 px-2 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99]">
+      <div className="flex flex-col md:flex-row p-4 px-2 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99]">
         <div className="flex flex-col md:flex-row items-start lg:items-center">
           <div className="flex items-center gap-2">
             <abbr title="Edit">
               <button
                 onClick={() => setEdit(true)}
-                className="contacts-control"
+                className="text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-750 dark:hover:bg-slate-700 hover:bg-slate-200 cursor-pointer rounded focus:outline-none focus:border-gray-800"
               >
                 <HiOutlinePencilAlt />
               </button>
@@ -176,14 +183,14 @@ const Table: FC<Prop> = ({ setModal }) => {
                 onClick={() => {
                   setActionPanel(true);
                 }}
-                className="text-red-500 p-2 border-slate-300 dark:border-slate-700 border bg-slate-200 dark:bg-[#182235] dark:hover:bg-slate-700 hover:bg-gray-300  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
+                className="text-red-500 p-2 border-slate-300 dark:border-slate-700 border bg-slate-100 dark:bg-slate-750 dark:hover:bg-slate-700 hover:bg-slate-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
               >
                 <HiOutlineTrash />
               </button>
             </abbr>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-end gap-4">
+        <div className="flex items-center justify-end gap-4">
           <div className="relative h-8 w-48  border-b dark:border-slate-700 border-slate-400">
             <input
               type="search"
@@ -202,7 +209,7 @@ const Table: FC<Prop> = ({ setModal }) => {
           </div>
           <button
             onClick={() => setModal(true)}
-            className="text-slate-100 text-sm font-semibold dark:font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 h-10 px-6 rounded-sm flex items-center justify-center space-x-2"
+            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-blue-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
           >
             <HiUserAdd className="text-lg" />
             <span>Add New</span>
@@ -216,7 +223,7 @@ const Table: FC<Prop> = ({ setModal }) => {
 
       {/**Pagination ================================ */}
       <div className="h-[8%] w-full bottom-0 flex flex-col justify-center items-center">
-        <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-[#182235] bg-slate-50 py-1 rounded border dark:border-slate-700 border-slate-300">
+        <div className="h-8 w-56 grid grid-cols-4 gap-1 dark:bg-slate-750 bg-slate-50 py-1 rounded border dark:border-slate-700 border-slate-300">
           <button
             onClick={() => {
               setLimit(loadMore <= 19 ? loadMore - 0 : loadMore - 10);

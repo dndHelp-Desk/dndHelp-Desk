@@ -41,7 +41,7 @@ const TopCards: FC<Props> = ({ data }) => {
             </h1>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>Resolved</span>
-              <span className="h-6 w-6 rounded-md   dark:bg-slate-900 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-md   dark:bg-slate-750 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsCheckAll />
               </span>
             </h2>
@@ -69,7 +69,7 @@ const TopCards: FC<Props> = ({ data }) => {
             </h1>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>First-CR</span>
-              <span className="h-6 w-6 rounded-md   dark:bg-slate-900 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-md   dark:bg-slate-750 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsPatchCheck />
               </span>
             </h2>
@@ -108,7 +108,7 @@ const TopCards: FC<Props> = ({ data }) => {
             </h1>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>Overdue</span>
-              <span className="h-6 w-6 rounded-md   dark:bg-slate-900 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-md   dark:bg-slate-750 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsStopwatch />
               </span>
             </h2>
@@ -137,7 +137,7 @@ const TopCards: FC<Props> = ({ data }) => {
             </h1>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>re-opened</span>
-              <span className="h-6 w-6 rounded-md   dark:bg-slate-900 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-md   dark:bg-slate-750 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsArrowClockwise />
               </span>
             </h2>
@@ -169,7 +169,7 @@ const TopCards: FC<Props> = ({ data }) => {
             </h1>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>Open</span>
-              <span className="h-6 w-6 rounded-md   dark:bg-slate-900 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-md   dark:bg-slate-750 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsEnvelopeOpen />
               </span>
             </h2>
@@ -199,7 +199,7 @@ const TopCards: FC<Props> = ({ data }) => {
             </h1>
             <h2 className="dark:text-slate-400 text-slate-700 font-semibold font-sans flex items-center space-x-2 text-[11px] uppercase">
               <span>on hold</span>
-              <span className="h-6 w-6 rounded-md   dark:bg-slate-900 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
+              <span className="h-6 w-6 rounded-md   dark:bg-slate-750 bg-slate-200 flex items-center justify-center font-bold text-sm border border-slate-300 dark:border-slate-800">
                 <BsDashCircleDotted />
               </span>
             </h2>
