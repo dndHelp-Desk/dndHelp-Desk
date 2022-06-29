@@ -171,7 +171,8 @@ export const createUser = (
     bio: bio,
     active: active,
     status: "unavailable",
-    photoUrl: "",
+    photoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dial-n-dine-help-desk.appspot.com/o/faviLight.png?alt=media&token=156086e8-01a6-4d23-8d26-8856a53ea74c",
     companies: companies,
     uid: "",
     createdAt: new Date().getTime(),

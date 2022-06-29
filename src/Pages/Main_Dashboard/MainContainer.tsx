@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import {
   TbLayoutDashboard,
   TbInbox,
@@ -56,6 +56,20 @@ const Dashboard: FC = () => {
   const [loading, setLoading] = useState<any>(false);
   const location = useLocation();
   const dispatch: AppDispatch = useDispatch();
+
+  //Top Search States ============
+  const [option, setOption] = useState<string>("all");
+  const [searchValue, setValue] = useState<any>("");
+  const [searchOpen, setSearch] = useState<boolean>(false);
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  //Serach shorcut Event Listener =======
+  window.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey && e.key === "x") || e.key === "X") {
+      setSearch(true);
+      searchRef.current !== null && searchRef && searchRef.current.focus();
+    }
+  });
 
   //Filter Unread messages =======================
   useEffect(() => {
@@ -247,21 +261,41 @@ const Dashboard: FC = () => {
           <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
             {/**Universal Search  ================ */}
             <div className="h-full flex items-center">
-              <div className="relative">
+              <div
+                className={`relative ${
+                  searchOpen ? "z-[9999] shadow-2xl drop-shadow-2xl" : ""
+                }`}
+              >
                 <label
                   htmlFor="searchAll"
                   className="relative text-slate-700 dark:text-slate-300"
                 >
                   <input
+                    onFocus={() => {
+                      setSearch(true);
+                    }}
+                    onChange={(e: any) => {
+                      setValue(e.target.value);
+                    }}
+                    value={searchValue}
+                    autoComplete="off"
                     type="search"
                     name="searchAll"
                     id="searchAll"
-                    className="h-9 w-[18rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pr-8 text-xs font-semibold dark:font-medium font-sans"
+                    ref={searchRef}
+                    className="h-9 w-[20rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pr-8 text-xs font-semibold dark:font-medium font-sans"
                     placeholder="Quick Search ..."
                   />
                   <BiSearchAlt className="absolute right-2 top-1 text-slate-600 dark:text-slate-400 text-xl" />
                 </label>
-                <UniversalSearch />
+                <UniversalSearch
+                  option={option}
+                  setOption={setOption}
+                  searchOpen={searchOpen}
+                  setSearch={setSearch}
+                  searchValue={searchValue}
+                  setValue={setValue}
+                />
               </div>
             </div>
 

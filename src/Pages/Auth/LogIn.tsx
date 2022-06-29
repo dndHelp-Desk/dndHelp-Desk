@@ -131,7 +131,7 @@ const LogIn: FC = () => {
                 //Update user Profile ==============
                 if (
                   currentUser?.user?.photoURL !== loggedUser?.photoUrl &&
-                  currentUser?.user?.photoURL
+                  currentUser?.user?.photoURL?.length >= 15
                 ) {
                   updateProfileUrl(loggedUser?.id, currentUser?.user?.photoURL);
                 }

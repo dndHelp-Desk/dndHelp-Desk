@@ -814,7 +814,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                           user[0]?.email === firstMessage[0]?.recipient_email &&
                             feedBack(firstMessage[0]?.id, "like");
                         }}
-                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all ${
+                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all text-base ${
                           firstMessage[0]?.feedback === "like"
                             ? "text-blue-700"
                             : ""
@@ -836,7 +836,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                           user[0]?.email === firstMessage[0]?.recipient_email &&
                             feedBack(firstMessage[0]?.id, "dislike");
                         }}
-                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all ${
+                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all text-base ${
                           firstMessage[0]?.feedback === "dislike"
                             ? "text-red-600"
                             : ""

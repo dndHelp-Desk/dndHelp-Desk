@@ -27,7 +27,7 @@ const OffCanvasMenu: FC<Props> = ({
   return (
     <div
       ref={closeCanvasRef}
-      className={`absolute left-[-1rem] top-0 bottom-0 flex justify-center h-screen dark:bg-[#1e293bde] bg-slate-50 backdrop-blur-sm shadow-2xl pt-28 p-4 ${
+      className={`absolute left-[-1rem] top-0 bottom-0 flex justify-center h-screen dark:bg-[#1e293bde] bg-slate-50 backdrop-blur-sm shadow-2xl pt-14 p-4 ${
         filtersModal ? "z-[9999] w-[18rem]" : "w-0 z-[-999]"
       } transition-all`}
     >
