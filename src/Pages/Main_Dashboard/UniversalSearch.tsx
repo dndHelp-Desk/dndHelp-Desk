@@ -44,7 +44,7 @@ const UniversalSearch: FC<Props> = ({
 
   //Search Function ================
   const searchFunc = () => {
-    allContacts.length >= 1
+    allContacts.length >= 1 && searchValue?.length >= 2
       ? setContactsResults(
           allContacts.filter(
             (contact) =>
@@ -76,7 +76,6 @@ const UniversalSearch: FC<Props> = ({
       }`}
     >
       {/**Serchch Area ======================= */}
-
       <form
         onSubmit={(e: any) => {
           e.preventDefault();
@@ -100,7 +99,7 @@ const UniversalSearch: FC<Props> = ({
             name="searchAll"
             id="searchAll"
             ref={searchRef}
-            className="h-9 w-[20rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pr-10 text-xs font-semibold dark:font-medium font-sans"
+            className="h-9 w-[20rem] bg-slate-100 dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b-2 border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pr-10 text-xs font-semibold dark:font-medium font-sans"
             placeholder="Quick Search ..."
           />
           <button type="submit" className="outline-none focus:outline-none">
@@ -110,7 +109,7 @@ const UniversalSearch: FC<Props> = ({
       </form>
       {/**Serchch Area ======================= */}
       <div
-        className={`absolute top-10 z-[99999] h-[14rem] w-full rounded-sm shadow-2xl bg-white dark:bg-slate-700 border border-slate-400 dark:border-slate-600 ${
+        className={`absolute top-10 z-[99999] h-[15rem] w-[25rem] rounded-sm shadow-2xl bg-white dark:bg-slate-700 border border-slate-400 dark:border-slate-600 ${
           searchOpen ? "" : "hidden"
         }`}
       >
@@ -174,14 +173,14 @@ const UniversalSearch: FC<Props> = ({
         {/**Top Navigation ========================== */}
 
         {/**Main Component ========================== */}
-        <div className="h-[9.4rem] w-full overflow-hidden overflow-y-scroll px-2 space-y-1 pt-3">
+        <div className="h-[10.3rem] w-full overflow-hidden overflow-y-scroll px-2 space-y-1 pt-3">
           {/**Place holder ==== */}
           {contactsResults?.length <= 0 && (
             <div className="mt-3 w-full flex flex-col items-center">
               <h2 className="text-slate-400 dark:taxt-slate-600 text-sm font-sans">
                 Press enter to search
               </h2>
-              <img className="h-20 mt-2" src={placeHolder} alt="placeholder" />
+              <img className="h-28 mt-2" src={placeHolder} alt="placeholder" />
             </div>
           )}
           {/**Place holder ==== */}

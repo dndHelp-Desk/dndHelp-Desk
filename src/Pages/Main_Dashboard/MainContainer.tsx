@@ -249,7 +249,7 @@ const Dashboard: FC = () => {
         {/**Main Body ===================== */}
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}
-          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
+          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-white border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
             {/**Universal Search  ================ */}
             <div className="h-full flex items-center">
               <UniversalSearch
@@ -270,7 +270,7 @@ const Dashboard: FC = () => {
                   onClick={() => {
                     openPhone(true);
                   }}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <HiOutlinePhone />
                 </button>
@@ -284,7 +284,7 @@ const Dashboard: FC = () => {
               <abbr title="Notifications">
                 <button
                   onClick={() => setOpenNotification(true)}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-100 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <HiOutlineBell />
                   {(unread.length >= 1 || notificationMsgs.length >= 1) && (

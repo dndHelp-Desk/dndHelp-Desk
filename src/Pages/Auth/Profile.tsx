@@ -109,7 +109,7 @@ const Profile = () => {
             className="h-10 w-10  rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
           >
             <img
-              className="rounded-full bg-slate-500 h-full w-full object-cover object-center border-2 dark:border-slate-300 border-slate-900"
+              className="rounded-full bg-slate-500 h-full w-full object-cover object-center"
               src={photoURL}
               alt="profile"
             />

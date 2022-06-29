@@ -15,6 +15,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Redux/store";
 
 const SettingsTooltip: FC = () => {
+  const company_details = useSelector(
+    (state: RootState) => state.Tickets.company_details
+  );
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,8 +31,8 @@ const SettingsTooltip: FC = () => {
         className="bg-transparent p-1 absolute left-10 bottom-[-0.3rem] hidden group-hover:flex flex-col transition-all duration-500"
       >
         <div className="min-h-[10rem] w-[16rem] z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl drop-shadow-2xl rounded-sm p-2 relative flex flex-col">
-          <h2 className="dark:text-slate-300 text-slate-800 tracking-wider text-xl font-semibold text-left w-full transition-all duration-500 pb-2">
-            Settings
+          <h2 className="dark:text-slate-300 text-slate-800 tracking-wider text-lg font-semibold text-left capitalize whitespace-nowrap overflow-hidden overflow-ellipsis w-full transition-all duration-500 pb-2">
+            {company_details?.name}
           </h2>
           <hr className=" border-b border-slate-300 dark:border-slate-700 w-full" />
 

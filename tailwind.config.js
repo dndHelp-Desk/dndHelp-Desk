@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         "slate-750": "#263246",
+        white: "#ffffff",
       },
     },
     screens: {

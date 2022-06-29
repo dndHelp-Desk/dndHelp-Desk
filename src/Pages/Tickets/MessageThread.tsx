@@ -826,7 +826,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                         details={"Helpful"}
                         positions={{
                           horizontal: `left-0`,
-                          vertical: `bottom-[-150%]`,
+                          vertical: `bottom-[120%]`,
                         }}
                       />
                     </div>
@@ -848,7 +848,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                         details={"Not helpful"}
                         positions={{
                           horizontal: `left-0`,
-                          vertical: `bottom-[-150%]`,
+                          vertical: `bottom-[-120%]`,
                         }}
                       />
                     </div>

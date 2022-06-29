@@ -56,10 +56,10 @@ const Home: FC = () => {
                     : defaultProfile
                 }
                 alt="profile"
-                className={`object-cover w-full h-full object-center rounded-full border-2 border-slate-500 dark:border-slate-300`}
+                className={`object-cover w-full h-full object-center rounded`}
               />
               <div
-                className={`absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white font-sans ${
+                className={`absolute right-[-0.25rem] top-[-0.25rem] h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white font-sans ${
                   user.status === "available"
                     ? "bg-green-600"
                     : user.status === "unavailable"

@@ -77,12 +77,12 @@ const EmailAccounts: FC = () => {
         <form
           action=""
           onSubmit={(e) => handleNewContact(e)}
-          className="space-y-6 flex-[1] w-full flex flex-col items-center mt-2 dark:autofill:bg-slate-900"
+          className="space-y-6 flex-[1] w-full flex flex-col items-center mt-2 dark:autofill:bg-slate-750"
         >
           <h1 className="text-base text-center dark:text-slate-400 text-slate-800 uppercase font-bold font-sans">
             New SMPT Account
           </h1>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-750 bg-slate-100 relative">
             <input
               type="text"
               name="name"
@@ -97,7 +97,7 @@ const EmailAccounts: FC = () => {
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-750 bg-slate-100 relative">
             <input
               type="email"
               name="email"
@@ -112,7 +112,7 @@ const EmailAccounts: FC = () => {
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-750 bg-slate-100 relative">
             <input
               type="text"
               name="host"
@@ -127,7 +127,7 @@ const EmailAccounts: FC = () => {
             />
             <BsServer className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-750 bg-slate-100 relative">
             <input
               type="number"
               name="port"
@@ -142,7 +142,7 @@ const EmailAccounts: FC = () => {
             />
             <BsFillPlugFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
-          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-900 bg-slate-100 relative">
+          <div className="h-11 w-full min-w-[15rem] rounded-xl dark:bg-slate-750 bg-slate-100 relative">
             <input
               type="password"
               name="password"
@@ -275,7 +275,7 @@ const EmailAccounts: FC = () => {
               >
                 <fieldset className="border dark:border-slate-700 border-slate-300 rounded p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
                   {" "}
-                  <legend className="px-2 bg-slate-100 dark:bg-slate-900 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
+                  <legend className="px-2 bg-slate-100 dark:bg-slate-750 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
                     {account.name}
                   </legend>
                   <label
