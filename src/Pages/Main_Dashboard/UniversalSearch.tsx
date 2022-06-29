@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { RootState } from "../../Redux/store";
+import placeHolder from "./images/searchHolder.svg";
 
 type Props = {
   option: string;
@@ -174,6 +175,17 @@ const UniversalSearch: FC<Props> = ({
 
         {/**Main Component ========================== */}
         <div className="h-[9.4rem] w-full overflow-hidden overflow-y-scroll px-2 space-y-1 pt-3">
+          {/**Place holder ==== */}
+          {contactsResults?.length <= 0 && (
+            <div className="mt-3 w-full flex flex-col items-center">
+              <h2 className="text-slate-400 dark:taxt-slate-600 text-sm font-sans">
+                Press enter to search
+              </h2>
+              <img className="h-20 mt-2" src={placeHolder} alt="placeholder" />
+            </div>
+          )}
+          {/**Place holder ==== */}
+
           {/**Contacts List =================== */}
           {(option === "all" || option === "contacts") &&
             contactsResults?.map((contact: any, index: any) => (
@@ -222,7 +234,7 @@ const UniversalSearch: FC<Props> = ({
                 </div>
               </li>
               <li className="mt-2 flex justify-between items-center overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2">
-                <span className="w-2/5">Number</span>
+                <span className="w-2/5">Phone</span>
                 <div className="w-3/5 h-fit flex justify-end  overflow-hidden text-xs italic px-1">
                   <p className="break-all">{currentView?.phone}</p>
                 </div>
@@ -233,6 +245,9 @@ const UniversalSearch: FC<Props> = ({
 
         {/**Footer ============ */}
         <div className="h-9 w-full flex space-x-2 justify-between items-center p-1 border-t border-slate-300 dark:border-slate-600">
+          <span className="text-slate-700 dark:text-slate-400 text-xs font-sans tracking-wider">
+            Shortcut
+          </span>
           <div className="text-slate-700 dark:text-slate-400 text-xs font-mono font-semibold">
             <kbd className="p-1 xp-2 bg-slate-200 dark:bg-slate-800 rounded-sm">
               Ctrl
@@ -242,14 +257,6 @@ const UniversalSearch: FC<Props> = ({
               X
             </kbd>
           </div>
-          <button
-            onClick={() => {
-              searchFunc();
-            }}
-            className="h-[1.65rem] bg-slate-800 dark:bg-blue-700 rounded-sm text-white text-xs font-sans px-3"
-          >
-            Search
-          </button>
         </div>
       </div>
     </div>
