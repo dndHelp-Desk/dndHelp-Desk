@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.1](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.0...v0.8.1) (2022-06-29)
+
+
+### Features
+
+* **unirvesal search:** universal search now available with the shortcut ctrl + x ([d8bb9be](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/d8bb9be07c35b4971decbdb6c512985b6be802a7))
+
 ## [0.8.0](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.7.13...v0.8.0) (2022-06-28)
 
 
