@@ -46,20 +46,26 @@ const TicketsList: FC<Props> = ({
   const [loadMore, setLimit] = useState<number | any>(25);
 
   //Filters =====================
+  const initialFiliters: any = () => {
+    const draft = localStorage.getItem("tickets_filters");
+    return draft
+      ? JSON.parse(draft)
+      : {
+          ticket_id: "",
+          agent: "",
+          category: "",
+          complainant_number: "",
+          status: "",
+          priority: "",
+          fcr: "no",
+          reopened: false,
+          overdue: false,
+          hasRecording: false,
+          time: { from: 1, to: 24 },
+        };
+  };
   const [contactsList, setList] = useState<string[]>([]);
-  const [filters, setFilters] = useState({
-    ticket_id: "",
-    agent: "",
-    category: "",
-    complainant_number: "",
-    status: "",
-    priority: "",
-    fcr: "no",
-    reopened: false,
-    overdue: false,
-    hasRecording: false,
-    time: { from: 1, to: 24 },
-  });
+  const [filters, setFilters] = useState(initialFiliters());
 
   const filteredTickets: any = useMemo(() => {
     setLimit(25);
