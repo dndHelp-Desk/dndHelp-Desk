@@ -57,9 +57,9 @@ const MostRecent: FC = () => {
                     <BiHash />
                   </div>
                 </div>
-                <article className="text-slate-700 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal uppercase font-sans subpixel-antialiased">
+                <article className="text-slate-900 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal uppercase font-sans subpixel-antialiased">
                   <div className="flex items-center justify-between space-y-0 relative">
-                    <p className="flex-[6] overflow-hidden whitespace-nowrap overflow-ellipsistext-slate-700 dark:text-slate-300 text-xs font-medium tracking-normal font-sans capitalize">
+                    <p className="flex-[6] overflow-hidden whitespace-nowrap overflow-ellipsistext-slate-900 dark:text-slate-300 text-xs font-medium tracking-normal font-sans capitalize">
                       {activity.category}
                     </p>
                     <div
@@ -68,7 +68,7 @@ const MostRecent: FC = () => {
                       {activity.status}
                     </div>
                   </div>
-                  <small className="text-slate-600 dark:text-slate-400 text-[0.65rem] font-medium tracking-normal lowercase font-sans">
+                  <small className="text-slate-900 dark:text-slate-400 text-[0.65rem] font-medium tracking-normal lowercase font-sans">
                     {new Date(activity.date).toLocaleString()}
                   </small>
                 </article>
@@ -89,9 +89,9 @@ const MostRecent: FC = () => {
                     <BiHash />
                   </div>
                 </div>
-                <article className="text-slate-700 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal uppercase font-sans subpixel-antialiased">
+                <article className="text-slate-900 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal uppercase font-sans subpixel-antialiased">
                   <div className="flex items-center justify-between space-y-0 relative">
-                    <p className="flex-[6] overflow-hidden whitespace-nowrap overflow-ellipsistext-slate-700 dark:text-slate-300 text-xs font-medium tracking-normal font-sans capitalize">
+                    <p className="flex-[6] overflow-hidden whitespace-nowrap overflow-ellipsistext-slate-900 dark:text-slate-300 text-xs font-medium tracking-normal font-sans capitalize">
                       {activity.category}
                     </p>
                     <div
@@ -100,7 +100,7 @@ const MostRecent: FC = () => {
                       {activity.status}
                     </div>
                   </div>
-                  <small className="text-slate-600 dark:text-slate-400 text-[0.65rem] font-medium tracking-normal lowercase font-sans">
+                  <small className="text-slate-900 dark:text-slate-400 text-[0.65rem] font-medium tracking-normal lowercase font-sans">
                     {new Date(activity.date).toLocaleString()}
                   </small>
                 </article>

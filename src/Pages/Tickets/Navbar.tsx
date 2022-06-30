@@ -311,7 +311,7 @@ const Navbar: FC<Props> = ({
               onChange={(e) =>
                 e.target?.checked === true ? markAll() : setDelete([])
               }
-              className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-sm  text-indigo-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
+              className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-sm  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
               type="checkbox"
               name="selectAll"
               id="selectAll"
@@ -350,7 +350,7 @@ const Navbar: FC<Props> = ({
             setValues(initialDraft());
             document.body.style.overflow = "hidden";
           }}
-          className={`bg-slate-800 dark:bg-indigo-700 capitalize text-white h-8 px-4 space-x-1 rounded-sm justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-medium hover:opacity-80 transition-all ${
+          className={`bg-slate-800 dark:bg-blue-700 capitalize text-white h-8 px-4 space-x-1 rounded-sm justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-medium hover:opacity-80 transition-all ${
             user[0]?.access === "client" ? "hidden" : "flex"
           }`}
         >

@@ -339,7 +339,7 @@ const NewTicket: FC<Props> = ({
       <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
         <i>In order to update or respond to this issue please click the button below,</i>
       </p>
-  <p style="color:indigo;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
        <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>
       </p>
       <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button>
@@ -399,7 +399,7 @@ const NewTicket: FC<Props> = ({
   <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
     <i>In order to update or respond to this issue please click the button below,</i>
   </p>
-  <p style="color:indigo;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
     <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>
   </p>
   <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button>
@@ -1103,7 +1103,7 @@ const NewTicket: FC<Props> = ({
                     });
                   }}
                   id="email"
-                  className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border hover:border-indigo-600 dark:hover:border-indigo-600 transition-all duration-200 dark:border-slate-600 border-slate-300 outline-none focus:outline-none"
+                  className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300 outline-none focus:outline-none"
                 >
                   <BiCollection />
                 </div>
@@ -1132,7 +1132,7 @@ const NewTicket: FC<Props> = ({
                     vertical: `top-[-115%]`,
                   }}
                 />
-                <div className="w-8 h-8 border hover:border-indigo-600 dark:hover:border-indigo-600 transition-all duration-200 border-slate-300 dark:border-slate-600 rounded flex justify-center items-center">
+                <div className="w-8 h-8 border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 border-slate-300 dark:border-slate-600 rounded flex justify-center items-center">
                   <label
                     htmlFor="recording"
                     className="w-full h-full flex justify-center items-center text-base text-slate-600 dark:text-slate-400 cursor-pointer"
@@ -1156,7 +1156,7 @@ const NewTicket: FC<Props> = ({
                 </div>
               </div>
               {/**Send ========================================= */}
-              <div className="flex items-center bg-slate-800 dark:bg-indigo-700 text-slate-100 dark:text-slate-100 rounded-sm">
+              <div className="flex items-center bg-slate-800 dark:bg-blue-700 text-slate-100 dark:text-slate-100 rounded-sm">
                 <button
                   disabled={isSubmiting ? true : false}
                   type="submit"
@@ -1164,7 +1164,7 @@ const NewTicket: FC<Props> = ({
                 >
                   <span>Submit now</span>
                   <div
-                    className={`h-4 w-4 rounded-full border-2 border-indigo-500 border-l-white animate-spin ${
+                    className={`h-4 w-4 rounded-full border-2 border-blue-500 border-l-white animate-spin ${
                       isSubmiting ? "" : "hidden"
                     }`}
                   ></div>{" "}

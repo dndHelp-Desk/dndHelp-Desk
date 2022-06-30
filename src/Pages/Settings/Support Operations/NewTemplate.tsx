@@ -41,13 +41,13 @@ const NewTemplate: FC = () => {
               setInput({ ...input, name: e.target.value });
             }}
             value={input.name}
-            className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 placeholder:text-slate-500 text-slate-800 dark:text-slate-400 dark:bg-slate-800 bg-slate-200"
+            className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-800 dark:text-slate-400 dark:bg-slate-800 bg-slate-200"
           />
           <BiDetail className="absolute text-slate-500 text-lg top-3 left-4" />
         </div>
         <button
           type="submit"
-          className="h-full m-auto px-8 p-2 rounded outline-none focus:outline-none bg-indigo-600 text-slate-100 font-medium"
+          className="h-full m-auto px-8 p-2 rounded outline-none focus:outline-none bg-blue-600 text-slate-100 font-medium"
         >
           Create
         </button>

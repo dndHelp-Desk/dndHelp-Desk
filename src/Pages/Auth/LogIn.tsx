@@ -296,7 +296,7 @@ const LogIn: FC = () => {
                     setValues({ ...inputValues, company: e.target.value });
                   }}
                   value={inputValues.company}
-                  className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-t focus:outline-none focus:ring-0 focus:border-indigo-800 focus:z-10 sm:text-sm"
+                  className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-t focus:outline-none focus:ring-0 focus:border-blue-800 focus:z-10 sm:text-sm"
                   placeholder="Company name"
                 />
               </div>
@@ -315,7 +315,7 @@ const LogIn: FC = () => {
                     setValues({ ...inputValues, email: e.target.value })
                   }
                   value={inputValues.email}
-                  className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-y-slate-300 border-slate-400 placeholder-gray-800 text-gray-800 font-medium focus:outline-none focus:ring-0 focus:border-indigo-800 focus:z-10 sm:text-sm"
+                  className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-y-slate-300 border-slate-400 placeholder-gray-800 text-gray-800 font-medium focus:outline-none focus:ring-0 focus:border-blue-800 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
               </div>
@@ -335,7 +335,7 @@ const LogIn: FC = () => {
                     setValues({ ...inputValues, password: e.target.value })
                   }
                   value={inputValues.password}
-                  className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-t-slate-300 border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-b focus:outline-none focus:ring-0 focus:border-indigo-800 focus:z-10 sm:text-sm"
+                  className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-t-slate-300 border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-b focus:outline-none focus:ring-0 focus:border-blue-800 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
                 <BiShowAlt
@@ -386,7 +386,7 @@ const LogIn: FC = () => {
                         );
                       });
                   }}
-                  className="font-medium text-indigo-800 hover:text-indigo-700 outline-none focus:outline-none cursor-pointer"
+                  className="font-medium text-blue-800 hover:text-blue-700 outline-none focus:outline-none cursor-pointer"
                 >
                   Forgot your password?
                 </button>

@@ -227,7 +227,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
     <i>In order to update or respond to this issue please click the button below,</i>
   </p>
-  <p style="color:indigo;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
     <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>You can alternatively click here.</a></i>
   </p>
   <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>Update or Respond Here</a></button>
@@ -381,7 +381,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
     <i>In order to update or respond to this issue please click the button below,</i>
   </p>
-  <p style="color:indigo;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
+  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
     <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>
   </p>
   <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button>
@@ -592,7 +592,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   {message.user}
                 </span>
                 <span
-                  className={`justify-center items-center space-x-[-0.4rem] ml-1 capitalize text-[0.75rem] text-indigo-600 italic h-4 w-6 bg-inherit ${
+                  className={`justify-center items-center space-x-[-0.4rem] ml-1 capitalize text-[0.75rem] text-blue-600 italic h-4 w-6 bg-inherit ${
                     message?.user_email === user[0]?.email ||
                     message?.agent_email === user[0]?.email
                       ? "flex"
@@ -814,9 +814,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                           user[0]?.email === firstMessage[0]?.recipient_email &&
                             feedBack(firstMessage[0]?.id, "like");
                         }}
-                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-indigo-700 transition-all text-base ${
+                        className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all text-base ${
                           firstMessage[0]?.feedback === "like"
-                            ? "text-indigo-700"
+                            ? "text-blue-700"
                             : ""
                         }`}
                       >
@@ -994,7 +994,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                       setReply({ ...reply, status: e.target.value });
                     }}
                     required
-                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-white dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-700 dark:text-slate-400 text-xs font-medium capitalize ${
+                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-white dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-800 dark:text-slate-400 text-xs font-semibold dark:font-medium capitalize ${
                       user[0]?.access === "client" ? "hidden" : "flex"
                     }`}
                   >
@@ -1020,10 +1020,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="flex items-center h-8 py-1 rounded-sm text-slate-100 bg-slate-800 dark:bg-indigo-700 shadow-lg">
+                <div className="flex items-center h-8 py-1 rounded-sm text-slate-100 bg-slate-800 dark:bg-blue-700 shadow-lg">
                   <button
                     type="submit"
-                    className="h-full outline-none focus:outline-none rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-indigo-700 z-[9] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
+                    className="h-full outline-none focus:outline-none rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[9] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
                   >
                     <span className="text-xs capitalize">Send now</span>
                   </button>

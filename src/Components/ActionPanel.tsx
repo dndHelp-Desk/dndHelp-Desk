@@ -45,7 +45,7 @@ const ActionPanel: FC<Props> = ({
             onClick={() => {
               setActionPanel(false);
             }}
-            className="h-8 rounded-sm text-xs font-normal hover:opacity-80 transition-all duration-200 px-6 bg-indigo-700 text-slate-50 outline-none focus:outline-none"
+            className="h-8 rounded-sm text-xs font-normal hover:opacity-80 transition-all duration-200 px-6 bg-blue-700 text-slate-50 outline-none focus:outline-none"
           >
             Cancel action
           </button>

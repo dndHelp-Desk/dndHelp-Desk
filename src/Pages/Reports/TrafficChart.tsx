@@ -64,7 +64,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
       },
     },
     fill: {
-      colors: ["#4f46e5"],
+      colors: ["#1d4ed8"],
       opacity: 0.9,
       type: "solid",
     },
@@ -80,7 +80,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
         },
       },
     },
-    colors: ["#4f46e5"],
+    colors: ["#1d4ed8"],
     stroke: {
       curve: "smooth",
       width: 2,

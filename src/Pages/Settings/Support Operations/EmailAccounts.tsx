@@ -93,7 +93,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, name: e.target.value })
               }
               value={newAccountValue.name}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-50"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -108,7 +108,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, email: e.target.value })
               }
               value={newAccountValue.email}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 text-slate-500 placeholder:text-slate-500 dark:bg-slate-800 bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-slate-800 bg-slate-50"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
@@ -123,7 +123,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, host: e.target.value })
               }
               value={newAccountValue.host}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-50"
             />
             <BsServer className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -138,7 +138,7 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, port: e.target.value })
               }
               value={newAccountValue.port}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-50"
             />
             <BsFillPlugFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -153,13 +153,13 @@ const EmailAccounts: FC = () => {
                 setValue({ ...newAccountValue, password: e.target.value })
               }
               value={newAccountValue.password}
-              className="bg-transparent w-full h-full rounded border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-100"
+              className="bg-transparent w-full h-full rounded border dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-slate-100"
             />
             <BsFillLockFill className="absolute text-slate-500 top-[0.85rem] text-base left-4" />
           </div>
           <button
             type="submit"
-            className="bg-slate-800 dark:bg-indigo-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 duration-300 transition-bg font-medium uppercase"
+            className="bg-slate-800 dark:bg-blue-700 min-w-[8rem] h-8 px-4 rounded flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  focus:ring dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 duration-300 transition-bg font-medium uppercase"
           >
             Add Account
           </button>
@@ -203,7 +203,7 @@ const EmailAccounts: FC = () => {
                 <a
                   href="https://mxtoolbox.com/"
                   rel="noreferrer"
-                  className="italic text-indigo-700"
+                  className="italic text-blue-700"
                 >
                   {" "}
                   MXTool

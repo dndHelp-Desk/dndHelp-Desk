@@ -63,7 +63,7 @@ const Redirects: FC = () => {
           <br />
           you will be logged in a few seconds.
         </p>
-        <div className="mt-2 m-auto border-4 border-r-indigo-600 border-slate-300 rounded-full h-10 w-10 animate-spin"></div>
+        <div className="mt-2 m-auto border-4 border-r-blue-600 border-slate-300 rounded-full h-10 w-10 animate-spin"></div>
       </section>
     </div>
   );

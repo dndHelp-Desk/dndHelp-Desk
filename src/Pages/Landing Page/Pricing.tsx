@@ -52,19 +52,19 @@ const Pricing: FC = () => {
               <div className="hidden lg:flex space-x-4">
                 <Link
                   to="/pricing"
-                  className="text-slate-900 font-semibold text-base hover:text-indigo-600 transition-all duration-200 outline-none focus:outline-none"
+                  className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Pricing
                 </Link>
                 <Link
                   to=""
-                  className="text-slate-900 font-semibold text-base hover:text-indigo-600 transition-all duration-200 outline-none focus:outline-none"
+                  className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Resources
                 </Link>
                 <Link
                   to=""
-                  className="text-slate-900 font-semibold text-base hover:text-indigo-600 transition-all duration-200 outline-none focus:outline-none"
+                  className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Company
                 </Link>
@@ -106,9 +106,9 @@ const Pricing: FC = () => {
                 </h1>
 
                 <div className="mt-4">
-                  <span className="inline-block w-40 h-1 bg-indigo-500 rounded-full"></span>
-                  <span className="inline-block w-3 h-1 mx-1 bg-indigo-500 rounded-full"></span>
-                  <span className="inline-block w-1 h-1 bg-indigo-500 rounded-full"></span>
+                  <span className="inline-block w-40 h-1 bg-blue-500 rounded-full"></span>
+                  <span className="inline-block w-3 h-1 mx-1 bg-blue-500 rounded-full"></span>
+                  <span className="inline-block w-1 h-1 bg-blue-500 rounded-full"></span>
                 </div>
 
                 <p className="mt-4 font-medium text-gray-500 dark:text-gray-300">
@@ -117,7 +117,7 @@ const Pricing: FC = () => {
 
                 <a
                   href="https://www.dndhelp-desk.co.za/"
-                  className="flex items-center mt-4 -mx-1 text-sm text-gray-700 capitalize dark:text-indigo-400 hover:underline hover:text-indigo-600 dark:hover:text-indigo-500"
+                  className="flex items-center mt-4 -mx-1 text-sm text-gray-700 capitalize dark:text-blue-400 hover:underline hover:text-blue-600 dark:hover:text-blue-500"
                 >
                   <span className="mx-1">read more</span>
                   <svg
@@ -167,7 +167,7 @@ const Pricing: FC = () => {
                         {" "}
                         <button
                           role="link"
-                          className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-700 rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+                          className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                         >
                           Start Now
                         </button>
@@ -183,35 +183,35 @@ const Pricing: FC = () => {
 
                       <ul className="text-sm text-slate-700 font-medium space-y-4 mt-8">
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Email Ticketing</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>2 Agents and 1 admin</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Up to 500 tickets /month</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>2 Teams Max</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Knowledge Base</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Custom email templates</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Contacts 100</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Basic Reports</span>
                         </li>
                         <li className="flex items-center space-x-2 line-through">
@@ -260,7 +260,7 @@ const Pricing: FC = () => {
                       >
                         <button
                           role="link"
-                          className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-700 rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+                          className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                         >
                           Start Now
                         </button>
@@ -276,47 +276,47 @@ const Pricing: FC = () => {
 
                       <ul className="text-sm text-slate-700 font-medium space-y-4 mt-8">
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Omni Channel</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Unlimited Agents and admins</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Up to 500 Free then $0.034 /ticket</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>50 Teams Max</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Knowledge Base</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Custom email templates</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Unlimited contacts</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Advanced Reports - prebuilt</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Automated Reports</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Ticket merging</span>
                         </li>
                         <li className="flex items-center space-x-2">
-                          <BsFillCheckCircleFill className="text-indigo-600 text-lg" />
+                          <BsFillCheckCircleFill className="text-blue-600 text-lg" />
                           <span>Intergrations prebuilt</span>
                         </li>
                       </ul>

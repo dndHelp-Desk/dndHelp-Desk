@@ -140,7 +140,7 @@ const TicketsList: FC<Props> = ({
           key={ticket.id}
           className={`w-full h-fit border-b dark:border-[#33415583] border-slate-300 relative py-3 p-2 space-x-2 flex snap_childTwo hover:bg-slate-50 dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
-              ? "bg-slate-100 dark:bg-[#182235] border-r-slate-800 dark:border-r-indigo-700 border-r-2"
+              ? "bg-slate-100 dark:bg-[#182235] border-r-slate-800 dark:border-r-blue-700 border-r-2"
               : "bg-inherit"
           }`}
         >
@@ -148,7 +148,7 @@ const TicketsList: FC<Props> = ({
           {unread.length >= 1 &&
             unread.filter((data) => data.ticket_id === ticket.ticket_id)
               .length >= 1 && (
-              <div className="absolute left-[0.15rem] top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm h-5 w-12 bg-indigo-600 text-[0.65rem] font-medium text-white overflow-hidden">
+              <div className="absolute left-[0.15rem] top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm h-5 w-12 bg-blue-600 text-[0.65rem] font-medium text-white overflow-hidden">
                 <span>
                   New :{" "}
                   {unread.length >= 1 &&
@@ -164,7 +164,7 @@ const TicketsList: FC<Props> = ({
             <div className="h-full w-[9%] flex justify-between items-center px-2">
               <input
                 type="checkbox"
-                className="rounded-[0.18rem]  text-indigo-600 h-3 w-3 checked:bg-indigo-600 shadow-sm dark:border-slate-600 border-slate-400 dark:checked:bg-indigo-600 bg-slate-50 dark:bg-slate-700 focus:border-indigo-500 focus:ring focus:ring-offset-0 focus:ring-indigo-600 focus:ring-opacity-50 cursor-pointer"
+                className="rounded-[0.18rem]  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-600 border-slate-400 dark:checked:bg-blue-600 bg-slate-50 dark:bg-slate-700 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
                 name="mark"
                 id="mark"
                 checked={
@@ -213,7 +213,7 @@ const TicketsList: FC<Props> = ({
               }}
               className="h-full w-[90%] flex items-center space-x-4 relative"
             >
-              <div className="h-8 w-9 rounded-sm border border-slate-400 dark:border-slate-600 dark:bg-slate-700 bg-slate-50 flex justify-center items-center text-sm uppercase font-bold text-slate-800 dark:text-slate-300">
+              <div className="h-8 w-9 rounded-sm border border-slate-400 dark:border-slate-600 dark:bg-slate-700 bg-slate-50 flex justify-center items-center text-sm uppercase font-bold text-slate-900 dark:text-slate-300">
                 <abbr title="Origin">
                   {ticket?.origin === "Help Desk" ? (
                     <HiOutlineMail />
@@ -223,7 +223,7 @@ const TicketsList: FC<Props> = ({
                 </abbr>
               </div>
               <div className="h-full w-full flex flex-col justify-center space-y-[0.15rem]">
-                <div className="dark:text-slate-300 text-slate-700 text-[0.7rem] font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis flex justify-between">
+                <div className="dark:text-slate-300 text-slate-800 text-[0.7rem] font-sans uppercase whitespace-nowrap w-full overflow-hidden overflow-ellipsis flex justify-between">
                   <p className="capitalize w-[60%] overflow-hidden font-sans text-xs tracking-wide font-semibold dark:font-medium">
                     {ticket.category}
                   </p>
@@ -231,7 +231,7 @@ const TicketsList: FC<Props> = ({
                     {ticket.ticket_id?.replace(/\s/g, "")}
                   </p>
                 </div>
-                <div className="dark:text-slate-400 text-slate-700 w-[60%] pr-4 flex flex-row items-center space-x-2 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
+                <div className="dark:text-slate-400 text-slate-800 w-[60%] pr-4 flex flex-row items-center space-x-2 text-xs font-base cadivitalize font-medium overflow-hidden whitespace-nowrap overflow-ellipsis tracking-normal">
                   <p className="overflow-hidden whitespace-nowrap overflow-ellipsis text-xs font-sans">
                     <abbr title={ticket.branch_company}>
                       {ticket.branch_company}
@@ -239,7 +239,7 @@ const TicketsList: FC<Props> = ({
                   </p>
                 </div>
                 {/**Indicate The ticket that is solved or  overdue and open ================*/}
-                <div className="dark:text-slate-400 text-slate-600 flex items-center justify-between space-x-[0.15rem] text-[0.7rem] font-medium whitespace-nowrap w-full">
+                <div className="dark:text-slate-400 text-slate-700 flex items-center justify-between space-x-[0.15rem] text-[0.7rem] font-medium whitespace-nowrap w-full">
                   <span>
                     {ticket?.status === "solved"
                       ? `Resolution Time  [ ${
@@ -280,7 +280,7 @@ const TicketsList: FC<Props> = ({
                         ? "text-slate-500"
                         : ticket.status &&
                           ticket.status.toLowerCase() === "solved"
-                        ? "text-indigo-600"
+                        ? "text-blue-600"
                         : ""
                     } `}
                   >
@@ -328,8 +328,8 @@ const TicketsList: FC<Props> = ({
             {tickets}
             {filteredTickets.length <= 0 && (
               <div className="flex flex-col items-center space-y-2 mt-[4.5rem]">
-                <h2 className="dark:text-slate-300 text-slate-600 tracking-wide text-center capitalize text-lg font-sans font-bold">
-                  you all caught up!
+                <h2 className="dark:text-slate-300 text-slate-700 tracking-wide text-center capitalize text-lg font-sans font-bold">
+                  all caught up!
                 </h2>
                 <img
                   src={noTickets}
@@ -349,11 +349,11 @@ const TicketsList: FC<Props> = ({
             onClick={() => {
               setLimit(loadMore <= 24 ? loadMore - 0 : loadMore - 25);
             }}
-            className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+            className="col-span-1 dark:text-slate-300 text-slate-900 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
           >
             <BiChevronLeft />
           </button>
-          <div className="col-span-2 dark:text-slate-300 text-slate-800 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-400 overflow-hidden px-1">
+          <div className="col-span-2 dark:text-slate-300 text-slate-900 font-bold text-xs tracking-wider flex items-center justify-center border-l border-r dark:border-slate-700 border-slate-400 overflow-hidden px-1">
             <p className="text-[0.65rem] overflow-hidden overflow-ellipsis whitespace-nowrap">
               {loadMore - 25 === 0 ? 1 : loadMore - 25}{" "}
               <span className="text-slate-500">-</span>{" "}
@@ -368,7 +368,7 @@ const TicketsList: FC<Props> = ({
             onClick={() => {
               setLimit(fetchedTickets.length > loadMore ? loadMore + 25 : 25);
             }}
-            className="col-span-1 dark:text-slate-300 text-slate-800 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
+            className="col-span-1 dark:text-slate-300 text-slate-900 font-bold text-lg tracking-wider flex items-center justify-center outline-none focus:outline-none hover:opacity-80"
           >
             <BiChevronRight />
           </button>

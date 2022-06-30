@@ -126,7 +126,7 @@ const Dashboard: FC = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="w-full dark:bg-slate-750 bg-slate-200 selection:bg-indigo-600 selection:text-slate-100 flex">
+      <div className="w-full dark:bg-slate-750 bg-slate-200 selection:bg-blue-600 selection:text-slate-100 flex">
         {/**Data Fetching Components */}
         <TicketsnUserData />
 
@@ -138,7 +138,7 @@ const Dashboard: FC = () => {
         >
           <div
             id="reportsPreloader"
-            className="h-[0.25rem] w-2/5 bg-indigo-600 absolute top-0 transition-all"
+            className="h-[0.25rem] w-2/5 bg-blue-600 absolute top-0 transition-all"
           ></div>
         </div>
         {/**AlertsWrapper */}
@@ -169,9 +169,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app"
-                      ? "text-indigo-600"
+                      ? "text-blue-600"
                       : "text-slate-300"
                   }`}
                 >
@@ -182,9 +182,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/tickets"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app/tickets"
-                      ? "text-indigo-600"
+                      ? "text-blue-600"
                       : "text-slate-300"
                   }`}
                 >
@@ -195,9 +195,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/contacts"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app/contacts"
-                      ? "text-indigo-600"
+                      ? "text-blue-600"
                       : "text-slate-300"
                   }`}
                 >
@@ -208,9 +208,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/reports"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app/reports"
-                      ? "text-indigo-600"
+                      ? "text-blue-600"
                       : "text-slate-300"
                   }`}
                 >

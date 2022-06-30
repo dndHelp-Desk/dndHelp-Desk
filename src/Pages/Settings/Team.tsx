@@ -194,7 +194,7 @@ const Team: FC = () => {
           </label>
           <button
             onClick={() => setModal(true)}
-            className="h-10 px-4 rounded-sm bg-slate-800 dark:bg-indigo-700 text-slate-100 font-medium text-sm flex items-center justify-center outline-none focus:outline-none"
+            className="h-10 px-4 rounded-sm bg-slate-800 dark:bg-blue-700 text-slate-100 font-medium text-sm flex items-center justify-center outline-none focus:outline-none"
           ><span>Add New Member</span>
           </button>
         </div>

@@ -16,7 +16,7 @@ const Help: FC = () => {
       className={`${
         chatStatus === true
           ? "h-[30rem] w-[22rem] bg-slate-700"
-          : "cursor-pointer hover:bg-slate-800 bg-indigo-700 h-14 w-20"
+          : "cursor-pointer hover:bg-slate-800 bg-blue-700 h-14 w-20"
       } group transition-all flex rounded  fixed right-2 bottom-6 justify-center items-center shadow-2xl drop-shadow-2xl z-[999] ${
         chatStatus ? "after:hidden" : ""
       } after:contents-[''] after:absolute after:bottom-[-0.5rem] after:h-5 after:w-5 after:bg-inherit after:rotate-45 after:hover:bg-inherit`}

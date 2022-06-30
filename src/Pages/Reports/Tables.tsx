@@ -102,7 +102,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
               onClick={() => {
                 window.print();
               }}
-              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-indigo-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
             >
               <span>Print</span>
               <BsPrinter className="text-sm text-white" />
@@ -112,7 +112,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                 let csv = convertToCsv(data);
                 downloadFile("Tickects Report.csv", csv);
               }}
-              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-indigo-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >
               <span>CSV</span>
               <BsCloudDownload className="text-sm text-white" />
@@ -141,7 +141,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                   />
                   <HiOutlineSwitchVertical
                     className={`text-sm cursor-pointer hover:opacity-80 ${
-                      sortBy[0] === "open" && "text-indigo-600"
+                      sortBy[0] === "open" && "text-blue-600"
                     }`}
                   />
                 </label>
@@ -162,7 +162,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                   />
                   <HiOutlineSwitchVertical
                     className={`text-sm cursor-pointer hover:opacity-80 ${
-                      sortBy[0] === "reopened" && "text-indigo-600"
+                      sortBy[0] === "reopened" && "text-blue-600"
                     }`}
                   />
                 </label>
@@ -183,7 +183,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                   />
                   <HiOutlineSwitchVertical
                     className={`text-sm cursor-pointer hover:opacity-80 ${
-                      sortBy[0] === "solved" && "text-indigo-600"
+                      sortBy[0] === "solved" && "text-blue-600"
                     }`}
                   />
                 </label>
@@ -204,7 +204,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                   />
                   <HiOutlineSwitchVertical
                     className={`text-sm cursor-pointer hover:opacity-80 ${
-                      sortBy[0] === "total" && "text-indigo-600"
+                      sortBy[0] === "total" && "text-blue-600"
                     }`}
                   />
                 </label>

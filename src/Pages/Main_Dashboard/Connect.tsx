@@ -20,10 +20,10 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
     <div className="col-span-5 min-h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 pt-4 overflow-hidden relative">
       <div className="rounded w-full h-full p-2 flex-col flex justify-between space-y-4">
         <article>
-          <div className="flex-[1] dark:text-slate-300 text-slate-700 text-lg font-semibold font-sans capitalize">
+          <div className="flex-[1] dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize">
             Connect
           </div>
-          <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 font-medium tracking-normal">
+          <p className="mt-2 text-xs text-slate-700 dark:text-slate-400 font-medium tracking-normal">
             Set up your preferred channels and start communicating with your
             customers in a single thread.
           </p>
@@ -37,8 +37,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             }}
             className="connect_btn"
           >
-            <TbBrandSlack className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbBrandSlack className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               Slack
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden"></span>
@@ -52,8 +52,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             }}
             className="connect_btn"
           >
-            <TbBrandWhatsapp className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbBrandWhatsapp className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               WhatsApp
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden"></span>
@@ -67,8 +67,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             }}
             className="connect_btn"
           >
-            <TbBrandInstagram className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbBrandInstagram className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               Instagram
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden"></span>
@@ -82,8 +82,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             }}
             className="connect_btn"
           >
-            <TbBrandTwitter className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbBrandTwitter className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               Twitter
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden"></span>
@@ -97,8 +97,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             }}
             className="connect_btn"
           >
-            <TbBrandMessenger className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbBrandMessenger className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               Messenger
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden"></span>
@@ -112,8 +112,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             }}
             className="connect_btn"
           >
-            <TbMessage className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbMessage className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               SMS
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden"></span>
@@ -121,8 +121,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
 
           {/**Email =========================== */}
           <Link to="/app/settings/support-operations" className="connect_btn">
-            <TbMail className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbMail className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               Email
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden bg-green-500"></span>
@@ -136,8 +136,8 @@ const Connect: FC<Props> = ({ openAPIModal }) => {
             }}
             className="connect_btn"
           >
-            <TbBrandTelegram className="text-2xl text-slate-600 dark:text-slate-300" />
-            <p className="text-xs capitalize font-medium font-sans text-slate-700 dark:text-slate-400">
+            <TbBrandTelegram className="text-2xl text-slate-700 dark:text-slate-300" />
+            <p className="text-xs capitalize font-medium font-sans text-slate-800 dark:text-slate-400">
               Telegram
             </p>
             <span className="h-2.5 w-2.5 rounded-full absolute right-1 top-1 border border-slate-400 dark:border-slate-600 overflow-hidden"></span>
