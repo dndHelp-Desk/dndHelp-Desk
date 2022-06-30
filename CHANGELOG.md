@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.2](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.1...v0.8.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **new ticket:** clients or Customers are now restricted from opening new tickets ([43f11dc](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/43f11dc8b455a060899cc41015b541126a4a08b9))
+* **unirvesal search:** you can now search by clicking enter or using the serch button at the top ([9d32052](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/9d320521d3af8b202952a10a159587e443a19bc8))
+
 ### [0.8.1](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.0...v0.8.1) (2022-06-29)
 
 
