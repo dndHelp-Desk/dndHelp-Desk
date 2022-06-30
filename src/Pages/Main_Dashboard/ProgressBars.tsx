@@ -78,7 +78,7 @@ const ProgressBars: FC = () => {
                         : "0"
                     }%`,
                   }}
-                  className="h-full bg-gradient-to-r from-indigo-600 to-indigo-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full transition-all duration-200"
+                  className="h-full bg-gradient-to-r from-blue-600 to-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full transition-all duration-200"
                 >
                   <abbr
                     title={`${element.name} : ${
