@@ -67,7 +67,7 @@ const Alerts: FC<Props> = ({ alert }) => {
         ></div>
       </div>
       <div className="col-span-9 flex flex-col justify-center px-1 overflow-hidden whitespace-nowrap overflow-ellipsis space-y-[-0.2rem]">
-        <span className="text-sm dark:text-slate-300 text-slate-800 font-bold">
+        <span className="text-sm dark:text-slate-300 text-slate-800 font-semibold">
           {alert?.color === "bg-green-200"
             ? "Success"
             : alert?.color === "bg-red-200"

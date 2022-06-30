@@ -299,7 +299,7 @@ const WorkSpaceSetUp: FC = () => {
         <div className="absolute top-2 2xl:top-4 right-4 text-slate-800 text-sm font-bold flex items-center space-x-4 w-fit h-fil">
           <span>Already have an account ? </span>
           <Link to="/login" className="flex">
-            <div className="h-8 px-6 flex justify-center items-center text-slate-50 bg-slate-900 rounded-sm">
+            <div className="h-8 px-6 flex justify-center items-center text-slate-50 bg-slate-900 rounded-sm font-sans font-medium text-sm">
               Log in
             </div>
           </Link>

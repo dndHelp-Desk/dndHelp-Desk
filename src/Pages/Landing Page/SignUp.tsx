@@ -262,7 +262,7 @@ const SignUp: FC<Props> = ({
 
       <div className="w-full flex justify-center items-center space-x-4 mt-6">
         <Button
-          className="px-10 h-10 w-36 rounded-sm bg-slate-800 text-slate-50"
+          className="px-10 h-10 w-36 rounded-sm bg-slate-800 text-slate-50 font-sans font-medium text-sm"
           onClick={prevStep}
         >
           Back
@@ -279,7 +279,7 @@ const SignUp: FC<Props> = ({
         ) : (
           <Button
             disabled={active === 2 && loading ? true : false}
-            className="px-2 h-10 w-36 rounded-sm bg-indigo-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
+            className="px-2 h-10 w-36 rounded-sm bg-indigo-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75 font-sans font-medium text-sm"
             onClick={() => {
               active === 1 &&
                 handleSubmit(setUpValues.user_email, setUpValues.user_password);
