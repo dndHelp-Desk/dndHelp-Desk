@@ -21,7 +21,7 @@ const Sidenav: FC = () => {
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
               location.pathname === "/app/settings/account/general"
-                ? "bg-slate-200 dark:bg-slate-700"
+                ? "bg-slate-100 dark:bg-slate-700"
                 : ""
             }`}
           >
@@ -35,7 +35,7 @@ const Sidenav: FC = () => {
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
               location.pathname === "/app/settings/account/generl"
-                ? "bg-slate-200 dark:bg-slate-700"
+                ? "bg-slate-100 dark:bg-slate-700"
                 : ""
             }`}
           >
@@ -62,7 +62,7 @@ const Sidenav: FC = () => {
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
               location.pathname === "/app/settings/account/security"
-                ? "bg-slate-200 dark:bg-slate-700"
+                ? "bg-slate-100 dark:bg-slate-700"
                 : ""
             }`}
           >
@@ -89,7 +89,7 @@ const Sidenav: FC = () => {
           <li
             className={`hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 px-6 py-2 ${
               location.pathname === "/app/settings/account/applications"
-                ? "bg-slate-200 dark:bg-slate-700"
+                ? "bg-slate-100 dark:bg-slate-700"
                 : ""
             }`}
           >

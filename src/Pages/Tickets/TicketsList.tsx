@@ -6,7 +6,7 @@ import { BiChevronRight, BiChevronLeft, BiPulse } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import Navbar from "./Navbar";
-import noTickets from "./images/no-userss.svg";
+import noTickets from "./images/all_caught.png";
 import NewTicket from "./NewTicket";
 import { AppDispatch, RootState } from "../../Redux/store";
 
@@ -140,7 +140,7 @@ const TicketsList: FC<Props> = ({
           key={ticket.id}
           className={`w-full h-fit border-b dark:border-[#33415583] border-slate-300 relative py-3 p-2 space-x-2 flex snap_childTwo hover:bg-slate-50 dark:hover:bg-[#182235] transition-all ${
             ticket.ticket_id === threadId
-              ? "bg-slate-100 dark:bg-[#182235] border-r-slate-800 dark:border-r-blue-700 border-r-2"
+              ? "bg-slate-100 dark:bg-[#182235] border-r-slate-800 dark:border-r-indigo-700 border-r-2"
               : "bg-inherit"
           }`}
         >
@@ -148,7 +148,7 @@ const TicketsList: FC<Props> = ({
           {unread.length >= 1 &&
             unread.filter((data) => data.ticket_id === ticket.ticket_id)
               .length >= 1 && (
-              <div className="absolute left-[0.15rem] top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm h-5 w-12 bg-blue-600 text-[0.65rem] font-medium text-white overflow-hidden">
+              <div className="absolute left-[0.15rem] top-[0.15rem] flex justify-center items-center tracking-wide rounded-sm h-5 w-12 bg-indigo-600 text-[0.65rem] font-medium text-white overflow-hidden">
                 <span>
                   New :{" "}
                   {unread.length >= 1 &&
@@ -164,7 +164,7 @@ const TicketsList: FC<Props> = ({
             <div className="h-full w-[9%] flex justify-between items-center px-2">
               <input
                 type="checkbox"
-                className="rounded-[0.18rem]  text-blue-600 h-3 w-3 checked:bg-blue-600 shadow-sm dark:border-slate-600 border-slate-400 dark:checked:bg-blue-600 bg-slate-50 dark:bg-slate-700 focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer"
+                className="rounded-[0.18rem]  text-indigo-600 h-3 w-3 checked:bg-indigo-600 shadow-sm dark:border-slate-600 border-slate-400 dark:checked:bg-indigo-600 bg-slate-50 dark:bg-slate-700 focus:border-indigo-500 focus:ring focus:ring-offset-0 focus:ring-indigo-600 focus:ring-opacity-50 cursor-pointer"
                 name="mark"
                 id="mark"
                 checked={
@@ -280,7 +280,7 @@ const TicketsList: FC<Props> = ({
                         ? "text-slate-500"
                         : ticket.status &&
                           ticket.status.toLowerCase() === "solved"
-                        ? "text-blue-600"
+                        ? "text-indigo-600"
                         : ""
                     } `}
                   >
@@ -320,23 +320,23 @@ const TicketsList: FC<Props> = ({
           contactsList={contactsList}
           setValues={setValues}
         />
-        <div className="w-full h-full flex flex-col justify-between overflow-hidden px-4">
+        <div className="w-full h-full flex flex-col justify-between overflow-hidden px-3">
           <div
             role="table"
             className="w-full h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap px-1"
           >
             {tickets}
             {filteredTickets.length <= 0 && (
-              <>
-                <h2 className="dark:text-slate-400 text-slate-600 tracking-wide text-center mt-[4.5rem] uppercase text-xs font-sans font-bold mb-20">
-                  There are no tickets
+              <div className="flex flex-col items-center space-y-2 mt-[4.5rem]">
+                <h2 className="dark:text-slate-300 text-slate-600 tracking-wide text-center capitalize text-lg font-sans font-bold">
+                  you all caught up!
                 </h2>
                 <img
                   src={noTickets}
                   alt="No Ticket"
-                  className="w-full h-[10rem] object-contain object-center"
+                  className="h-[10rem] object-contain object-center"
                 />
-              </>
+              </div>
             )}
           </div>
         </div>

@@ -63,25 +63,25 @@ const Landing: FC = () => {
               <div className="hidden lg:flex space-x-4">
                 <button
                   onClick={() => features()}
-                  className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
+                  className="text-slate-900 font-semibold text-base hover:text-indigo-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Features
                 </button>
                 <Link
                   to="/pricing"
-                  className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
+                  className="text-slate-900 font-semibold text-base hover:text-indigo-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Pricing
                 </Link>
                 <Link
                   to=""
-                  className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
+                  className="text-slate-900 font-semibold text-base hover:text-indigo-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Resources
                 </Link>
                 <Link
                   to=""
-                  className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
+                  className="text-slate-900 font-semibold text-base hover:text-indigo-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Company
                 </Link>
@@ -132,7 +132,7 @@ const Landing: FC = () => {
             <div className="h-12 w-full justify-center gap-6 hidden md:flex">
               <NavLink
                 to="/pricing"
-                className="hidden sm:inline-block bg-blue-700 h-10 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none hover:bg-blue-600 transition-all duration-200 font-medium"
+                className="hidden sm:inline-block bg-indigo-700 h-10 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none hover:bg-indigo-600 transition-all duration-200 font-medium"
               >
                 <div className="h-full w-full flex justify-center items-center ">
                   Get started free
@@ -254,7 +254,7 @@ const Landing: FC = () => {
           <article className="block p-8 bg-gray-900 border border-gray-800 shadow-xl rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-checkbox w-10 h-10 text-blue-400"
+              className="icon icon-tabler icon-tabler-checkbox w-10 h-10 text-indigo-400"
               width={24}
               height={24}
               viewBox="0 0 24 24"
@@ -281,7 +281,7 @@ const Landing: FC = () => {
           <article className="block p-8 bg-gray-900 border border-gray-800 shadow-xl rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-writing-sign w-10 h-10 text-blue-400"
+              className="icon icon-tabler icon-tabler-writing-sign w-10 h-10 text-indigo-400"
               width={24}
               height={24}
               viewBox="0 0 24 24"
@@ -310,7 +310,7 @@ const Landing: FC = () => {
           <article className="block p-8 bg-gray-900 border border-gray-800 shadow-xl rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-mail-fast w-10 h-10 text-blue-400"
+              className="icon icon-tabler icon-tabler-mail-fast w-10 h-10 text-indigo-400"
               width={24}
               height={24}
               viewBox="0 0 24 24"
@@ -341,7 +341,7 @@ const Landing: FC = () => {
           <article className="block p-8 bg-gray-900 border border-gray-800 shadow-xl rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-device-desktop-analytics w-10 h-10 text-blue-400"
+              className="icon icon-tabler icon-tabler-device-desktop-analytics w-10 h-10 text-indigo-400"
               width={24}
               height={24}
               viewBox="0 0 24 24"

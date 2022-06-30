@@ -160,7 +160,7 @@ const General: FC = () => {
                         });
                     }
                   }}
-                  className="text-blue-500 underline"
+                  className="text-indigo-500 underline"
                 >
                   click here to get the verification email.
                 </span>
@@ -240,7 +240,7 @@ const General: FC = () => {
             </div>
             <button
               type="submit"
-              className="dark:bg-blue-700 bg-slate-800 px-4 p-2 text-slate-50 font-medium text-sm round-smed hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
+              className="dark:bg-indigo-700 bg-slate-800 px-4 p-2 text-slate-50 font-medium text-sm round-smed hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
             >
               Save Changes
             </button>
@@ -290,7 +290,7 @@ const General: FC = () => {
             </div>
             <button
               type="submit"
-              className="dark:bg-blue-700 bg-slate-800 px-4 p-2 text-slate-50 font-medium text-sm round-smed hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
+              className="dark:bg-indigo-700 bg-slate-800 px-4 p-2 text-slate-50 font-medium text-sm round-smed hover:opacity-80 outline-none focus:outline-none focus:ring-0 focus:border-0"
             >
               Change Password
             </button>

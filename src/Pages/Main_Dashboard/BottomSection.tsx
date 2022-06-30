@@ -18,7 +18,7 @@ const BottomSection: FC = () => {
         </p>
         <Link
           to=""
-          className="text-blue-700 text-sm font-semibold flex items-center space-x-2 tracking-normal"
+          className="text-indigo-700 text-sm font-semibold flex items-center space-x-2 tracking-normal"
         >
           <span>Learn how</span>
           <BsArrowRight />

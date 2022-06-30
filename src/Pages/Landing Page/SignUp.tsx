@@ -244,7 +244,7 @@ const SignUp: FC<Props> = ({
                 <div className="h-2 w-40 rounded bg-slate-600 overflow-hidden relative">
                   <div
                     id="setUpLoading"
-                    className="w-2/5 h-full bg-blue-700 absolute"
+                    className="w-2/5 h-full bg-indigo-700 absolute"
                   ></div>
                 </div>
               </>
@@ -271,7 +271,7 @@ const SignUp: FC<Props> = ({
           <a href={`${setUpValues?.company_url + ".dndhelp-desk.co.za"}/login`}>
             <Button
               disabled={active === 2 && loading ? true : false}
-              className="px-2 h-10 w-36 rounded-sm bg-blue-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
+              className="px-2 h-10 w-36 rounded-sm bg-indigo-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
             >
               Login
             </Button>
@@ -279,7 +279,7 @@ const SignUp: FC<Props> = ({
         ) : (
           <Button
             disabled={active === 2 && loading ? true : false}
-            className="px-2 h-10 w-36 rounded-sm bg-blue-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
+            className="px-2 h-10 w-36 rounded-sm bg-indigo-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
             onClick={() => {
               active === 1 &&
                 handleSubmit(setUpValues.user_email, setUpValues.user_password);

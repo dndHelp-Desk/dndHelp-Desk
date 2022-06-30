@@ -38,7 +38,7 @@ const Footer: FC = () => {
                     />
 
                     <button
-                      className="w-full h-12 px-6 py-3 mt-1 text-sm font-bold tracking-wide uppercase bg-blue-600 sm:ml-4 sm:flex-shrink-0 sm:w-auto sm:mt-0"
+                      className="w-full h-12 px-6 py-3 mt-1 text-sm font-bold tracking-wide uppercase bg-indigo-600 sm:ml-4 sm:flex-shrink-0 sm:w-auto sm:mt-0"
                       type="submit"
                     >
                       Sign Up

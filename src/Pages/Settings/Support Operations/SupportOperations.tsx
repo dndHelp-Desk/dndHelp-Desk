@@ -65,7 +65,7 @@ const SupportOperations: FC = () => {
   //Component =================
   return (
     <section className="bg-transparent w-full h-full grid grid-rows-9 gap-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
-      <nav className="row-span-1 w-full flex justify-center sticky top-0 bg-slate-100 dark:bg-slate-750 py-4 z-[99]">
+      <nav className="row-span-1 w-full flex justify-center sticky top-0 bg-slate-200 dark:bg-slate-750 py-4 z-[99]">
         <ul className="h-full flex items-center justify-center">{tabsMenu}</ul>
       </nav>
       <div className="row-span-8 w-full min-h-[50rem]">

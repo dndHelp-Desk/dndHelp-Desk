@@ -40,7 +40,7 @@ const Notification: FC<Props> = ({
           key={notif.id}
           className="w-full rounded dark:bg-slate-900 bg-slate-50 p-2 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 space-y-1 relative tracking-normal flex space-x-2 items-center"
         >
-          <div className="h-[32px] w-[32px] max-w-[32px] flex-[2] rounded-full flex justify-center items-center border border-blue-600 text-blue-600">
+          <div className="h-[32px] w-[32px] max-w-[32px] flex-[2] rounded-full flex justify-center items-center border border-indigo-600 text-indigo-600">
             <HiOutlineBell />
           </div>
           <p className="dark text-xs font-base  flex-[11]">
@@ -71,12 +71,12 @@ const Notification: FC<Props> = ({
           key={msg.id}
           className="w-full rounded dark:bg-slate-900 bg-slate-50 p-2 border dark:border-slate-600 border-slate-400 dark:text-slate-300 text-slate-800 space-y-1 relative tracking-normal flex space-x-2 items-center"
         >
-          <div className="h-[32px] w-[32px] max-w-[32px] flex-[2] rounded-full flex justify-center items-center border border-blue-600 text-blue-600">
+          <div className="h-[32px] w-[32px] max-w-[32px] flex-[2] rounded-full flex justify-center items-center border border-indigo-600 text-indigo-600">
             <HiOutlineChatAlt2 />
           </div>
           <p className="dark text-xs font-base flex-[11]">
             <strong>Conversation with Ticket-ID :</strong>{" "}
-            <span className="font-semibold text-blue-600">{msg.ticket_id}</span>{" "}
+            <span className="font-semibold text-indigo-600">{msg.ticket_id}</span>{" "}
             has been updated.
             <p className="dark text-[0.6rem] font-semibold text-left dark:text-slate-500 text-slate-500">
               {new Date(msg.date).toLocaleString()}

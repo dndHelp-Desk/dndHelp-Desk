@@ -6,7 +6,7 @@
 
 @layer components {
   .log_In_Input {
-    @apply h-12 bg-[#0f1535] border-[1px] border-gray-700 outline-none focus:outline-none focus:ring focus:ring-blue-400 px-4 text-gray-400 rounded-xl placeholder:text-gray-400 placeholder:text-sm placeholder:font-semibold;
+    @apply h-12 bg-[#0f1535] border-[1px] border-gray-700 outline-none focus:outline-none focus:ring focus:ring-indigo-400 px-4 text-gray-400 rounded-xl placeholder:text-gray-400 placeholder:text-sm placeholder:font-semibold;
   }
 
   /* Change Autocomplete styles in Chrome*/
@@ -27,28 +27,28 @@
   }
 
   .TabsLinks {
-    @apply flex lg:justify-center items-center space-x-1 min-w-[5rem] hover:text-blue-600 text-[0.7rem] outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wider overflow-hidden transition-colors duration-200;
+    @apply flex lg:justify-center items-center space-x-1 min-w-[5rem] hover:text-indigo-600 text-[0.7rem] outline-none focus:outline-none font-sans dark:font-semibold font-bold uppercase tracking-wider overflow-hidden transition-colors duration-200;
   }
   .navlinks.active {
-    @apply text-blue-600 border-blue-600 lg:border-b-2 font-bold;
+    @apply text-indigo-600 border-indigo-600 lg:border-b-2 font-bold;
   }
   .supportlinks.active {
-    @apply border-t-2 border-blue-600;
+    @apply border-t-2 border-indigo-600;
   }
   .settingsNav {
-    @apply dark:text-slate-400 text-slate-700 text-sm font-semibold flex items-center space-x-1 hover:text-blue-500 dark:hover:text-blue-500 outline-none focus:outline-none;
+    @apply dark:text-slate-400 text-slate-700 text-sm font-semibold flex items-center space-x-1 hover:text-indigo-500 dark:hover:text-indigo-500 outline-none focus:outline-none;
   }
 
   .settingsNav.active {
-    @apply text-blue-600;
+    @apply text-indigo-600;
   }
   .sidenav .active {
-    @apply text-blue-500;
+    @apply text-indigo-500;
   }
 
   /*Connect Channels Styles ================================*/
   .connect_btn {
-    @apply min-h-[4rem] col-span-1 rounded bg-slate-100 dark:bg-[#33415569] border border-slate-300 dark:border-slate-700 flex flex-col justify-center items-center gap-2 outline-none focus:outline-none focus:border-0 focus:ring-[1px] focus:ring-blue-600 hover:opacity-90 dark:hover:opacity-80 hover:shadow-lg hover:border-blue-600 dark:hover:border-blue-600 transition-all relative;
+    @apply min-h-[4rem] col-span-1 rounded bg-slate-100 dark:bg-[#33415569] border border-slate-300 dark:border-slate-700 flex flex-col justify-center items-center gap-2 outline-none focus:outline-none focus:border-0 focus:ring-[1px] focus:ring-indigo-600 hover:opacity-90 dark:hover:opacity-80 hover:shadow-lg hover:border-indigo-600 dark:hover:border-indigo-600 transition-all relative;
   }
 
   #connectModal,
@@ -102,7 +102,7 @@
   .messageContainer p a,
   .messageContainer a,
   .messageContainer p span a {
-    @apply text-blue-600 italic;
+    @apply text-indigo-600 italic;
   }
   .messageContainer p a,
   .messageContainer a,
@@ -204,7 +204,7 @@
 
   /*Contact Tooltip options ==================================*/
   .contact_Option {
-    @apply h-10 w-10 rounded hover:border hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-600 dark:hover:text-blue-600 transition-all flex justify-center items-center text-slate-800 dark:text-slate-400 cursor-pointer relative;
+    @apply h-10 w-10 rounded hover:border hover:border-indigo-600 hover:text-indigo-600 dark:hover:border-indigo-600 dark:hover:text-indigo-600 transition-all flex justify-center items-center text-slate-800 dark:text-slate-400 cursor-pointer relative;
   }
 
   /* Reports No data Preloader ======================*/

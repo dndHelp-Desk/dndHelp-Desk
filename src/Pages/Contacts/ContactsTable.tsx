@@ -203,13 +203,13 @@ const Table: FC<Prop> = ({ setModal }) => {
               }}
               value={searchResults}
               placeholder="Quick Search ..."
-              className="bg-transparent w-full h-full border-0 focus:border-0 dark:border-slate-400 border-slate-700 outline-none focus:outline-none focus:ring-0 text-sm px-4 pl-8 focus:ring-blue-700 text-slate-600 dark:text-slate-400 placeholder:text-slate-600 dark:placeholder:text-slate-400"
+              className="bg-transparent w-full h-full border-0 focus:border-0 dark:border-slate-400 border-slate-700 outline-none focus:outline-none focus:ring-0 text-sm px-4 pl-8 focus:ring-indigo-700 text-slate-600 dark:text-slate-400 placeholder:text-slate-600 dark:placeholder:text-slate-400"
             />
             <HiOutlineSearch className="absolute text-slate-600 dark:text-slate-400 text-lg top-2 left-2" />
           </div>
           <button
             onClick={() => setModal(true)}
-            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-blue-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
+            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-indigo-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
           >
             <HiUserAdd className="text-lg" />
             <span>Add New</span>

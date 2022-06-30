@@ -47,7 +47,7 @@ const Home: FC = () => {
             className="w-full snap_child h-14  bg-inherit flex items-center space-x-4 p-2 border-b dark:border-slate-700 border-slate-200 overflow-hidden"
           >
             <div
-              className={`h-9 w-9 flex justify-center items-center rounded-full relative`}
+              className={`h-10 w-10  bg-slate-700 dark:bg-slate-50 flex justify-center items-center rounded-full relative`}
             >
               <img
                 src={
@@ -56,26 +56,32 @@ const Home: FC = () => {
                     : defaultProfile
                 }
                 alt="profile"
-                className={`object-cover w-full h-full object-center rounded`}
+                className={`object-cover w-9 h-9 object-center rounded-full`}
               />
-              <div
-                className={`absolute right-[-0.25rem] top-[-0.25rem] h-2.5 w-2.5 rounded-full border-2 dark:border-slate-800 border-white font-sans ${
-                  user.status === "available"
-                    ? "bg-green-600"
-                    : user.status === "unavailable"
-                    ? "bg-red-600"
-                    : "bg-yellow-500"
-                }`}
-              ></div>
             </div>
             <div className="text-xs whitespace-nowrap overflow-hidden text-ellipsis font-semibold dark:font-medium capitalize dark:text-slate-300 text-slate-700 tracking-wider">
               <abbr title={user.name}>
                 <p className="tracking-wide font-sans">{user.name}</p>
               </abbr>
               <abbr title={user.email}>
-                <p className="text-[0.7rem] font-medium tracking-normal dark:text-slate-400 text-slate-600 lowercase italic font-sans">
-                  {user.email}
-                </p>
+                <div className="text-xs font-medium dark:text-slate-400 text-slate-600 capitalize tracking-wider font-sans flex items-center space-x-1">
+                  <div
+                    className={`h-3 w-3 rounded-full border-2 dark:border-slate-800 border-white font-sans ${
+                      user.status === "available"
+                        ? "bg-green-600"
+                        : user.status === "unavailable"
+                        ? "bg-red-600"
+                        : "bg-yellow-500"
+                    }`}
+                  ></div>{" "}
+                  <span>
+                    {user.status === "available"
+                      ? "Online"
+                      : user.status === "unavailable"
+                      ? "Offline"
+                      : "Busy"}
+                  </span>
+                </div>
               </abbr>
             </div>
           </div>
@@ -161,7 +167,7 @@ const Home: FC = () => {
                 </div>
                 <Link
                   to="/app/tickets"
-                  className="text-blue-600 text-sm font-medium font-sans flex md:hidden xl:flex items-center justify-center space-x-2"
+                  className="text-indigo-600 text-sm font-medium font-sans flex md:hidden xl:flex items-center justify-center space-x-2"
                 >
                   <span>View all Your Tickets</span>
                   <BsArrowRight />

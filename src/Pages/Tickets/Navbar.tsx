@@ -164,7 +164,7 @@ const Navbar: FC<Props> = ({
     );
   };
 
-  //Loop through each contact / available members List ====
+  //Loop through each available member List ====
   const membersList =
     allMembers.length >= 1 &&
     allMembers.map((member) => {
@@ -175,7 +175,7 @@ const Navbar: FC<Props> = ({
             assgn(member.name, member.email, member.id);
             setPanel(false);
           }}
-          className={`border border-slate-400 dark:border-slate-700 dark:bg-slate-800 bg-slate-200 w-full h-8 text-xs font-semibold dark:text-slate-300 text-slate-700 rounded-sm capitalize flex items-center p-2 space-x-2 ${
+          className={`border border-slate-400 dark:border-slate-700 dark:bg-slate-800 bg-slate-100 w-full h-8 text-xs font-medium dark:text-slate-300 text-slate-700 rounded-sm capitalize flex items-center p-2 space-x-2 ${
             member.name
               .toLowerCase()
               .replace(/\s/g, "")
@@ -215,7 +215,7 @@ const Navbar: FC<Props> = ({
 
   //Component ======================
   return (
-    <nav className="flex min-h-[3.5rem] h-[3.9rem] bg-transparent justify-between items-center w-full relative px-4 border-b dark:border-[#33415596] border-slate-300">
+    <nav className="flex min-h-[3.5rem] h-[3.9rem] bg-transparent justify-between items-center w-full relative px-4">
       {/**Delele Ticket Action Panel ====== */}
       <ActionPanel
         openPanel={openPanel}
@@ -311,7 +311,7 @@ const Navbar: FC<Props> = ({
               onChange={(e) =>
                 e.target?.checked === true ? markAll() : setDelete([])
               }
-              className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-sm  text-blue-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
+              className={`dark:bg-slate-800 bg-slate-200 dark:focus:ring-slate-600 focus:ring-slate-400 hover:opacity-80 h-4 w-4 rounded-sm  text-indigo-600 cursor-pointer font-semibold custom-shadow  items-center justify-center text-lg hidden`}
               type="checkbox"
               name="selectAll"
               id="selectAll"
@@ -350,7 +350,7 @@ const Navbar: FC<Props> = ({
             setValues(initialDraft());
             document.body.style.overflow = "hidden";
           }}
-          className={`bg-slate-800 dark:bg-blue-700 capitalize text-white h-8 px-4 space-x-1 rounded-sm justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-medium hover:opacity-80 transition-all ${
+          className={`bg-slate-800 dark:bg-indigo-700 capitalize text-white h-8 px-4 space-x-1 rounded-sm justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-medium hover:opacity-80 transition-all ${
             user[0]?.access === "client" ? "hidden" : "flex"
           }`}
         >

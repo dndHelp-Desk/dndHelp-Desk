@@ -7,7 +7,7 @@ import {
   TbSettings,
   TbBrightnessUp,
 } from "react-icons/tb";
-import { BiAdjust } from "react-icons/bi";
+import { HiSun } from "react-icons/hi";
 import { HiOutlinePhone, HiOutlineBell } from "react-icons/hi";
 import lightLogo from "../../Assets/logos/dndHelp-desk_ShortLight.webp";
 import { useSelector, useDispatch } from "react-redux";
@@ -126,7 +126,7 @@ const Dashboard: FC = () => {
   //Component =================================
   return (
     <div className={`${theme} relative`}>
-      <div className="w-full dark:bg-slate-750 bg-slate-100 selection:bg-blue-600 selection:text-slate-100 flex">
+      <div className="w-full dark:bg-slate-750 bg-slate-200 selection:bg-indigo-600 selection:text-slate-100 flex">
         {/**Data Fetching Components */}
         <TicketsnUserData />
 
@@ -138,7 +138,7 @@ const Dashboard: FC = () => {
         >
           <div
             id="reportsPreloader"
-            className="h-[0.25rem] w-2/5 bg-blue-600 absolute top-0 transition-all"
+            className="h-[0.25rem] w-2/5 bg-indigo-600 absolute top-0 transition-all"
           ></div>
         </div>
         {/**AlertsWrapper */}
@@ -169,9 +169,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
                     location.pathname === "/app"
-                      ? "text-blue-600"
+                      ? "text-indigo-600"
                       : "text-slate-300"
                   }`}
                 >
@@ -182,9 +182,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/tickets"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
                     location.pathname === "/app/tickets"
-                      ? "text-blue-600"
+                      ? "text-indigo-600"
                       : "text-slate-300"
                   }`}
                 >
@@ -195,9 +195,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/contacts"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
                     location.pathname === "/app/contacts"
-                      ? "text-blue-600"
+                      ? "text-indigo-600"
                       : "text-slate-300"
                   }`}
                 >
@@ -208,9 +208,9 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/reports"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-indigo-700 transition-all ${
                     location.pathname === "/app/reports"
-                      ? "text-blue-600"
+                      ? "text-indigo-600"
                       : "text-slate-300"
                   }`}
                 >
@@ -235,7 +235,7 @@ const Dashboard: FC = () => {
               }}
               className="h-9 w-10 rounded bg-slate-700 text-slate-50 text-xl p-1 relative transition-all duration-200 outline-none focus:outline-none items-center justify-center flex"
             >
-              {theme === "dark" ? <TbBrightnessUp /> : <BiAdjust />}
+              {theme === "dark" ? <TbBrightnessUp /> : <HiSun />}
             </button>
             {/**Settings ================================================ */}
             <div className="rounded  bg-slate-700 text-slate-100 text-xl relative focus:outline-none outline-none h-9 w-10 items-center justify-center flex font-bold group cursor-pointer">
@@ -249,7 +249,7 @@ const Dashboard: FC = () => {
         {/**Main Body ===================== */}
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}
-          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-white border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
+          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
             {/**Universal Search  ================ */}
             <div className="h-full flex items-center">
               <UniversalSearch
@@ -270,7 +270,7 @@ const Dashboard: FC = () => {
                   onClick={() => {
                     openPhone(true);
                   }}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <HiOutlinePhone />
                 </button>
@@ -284,7 +284,7 @@ const Dashboard: FC = () => {
               <abbr title="Notifications">
                 <button
                   onClick={() => setOpenNotification(true)}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-slate-100 border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <HiOutlineBell />
                   {(unread.length >= 1 || notificationMsgs.length >= 1) && (

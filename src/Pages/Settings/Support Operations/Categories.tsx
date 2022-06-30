@@ -114,7 +114,7 @@ const Categories: FC = () => {
               }
               value={newCategoryValue.name}
               required
-              className="bg-transparent w-full h-full rounded dark:border-slate-600 border-slate-400 outline-none focus:outline-none text-sm px-6 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
+              className="bg-transparent w-full h-full rounded dark:border-slate-600 border-slate-400 outline-none focus:outline-none text-sm px-6 focus:ring-indigo-700 placeholder:text-slate-500 text-slate-500 dark:bg-slate-800 bg-white"
             />
           </div>
           <p className="dark:text-slate-400 text-slate-700 text-sm font-sans font-medium">
@@ -198,7 +198,7 @@ const Categories: FC = () => {
           </div>
           <button
             type="submit"
-            className="bg-slate-800 dark:bg-blue-700 min-w-[8rem] h-9 px-4 rounded-sm flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  hover:opacity-900 duration-300 transition-bg font-medium uppercase"
+            className="bg-slate-800 dark:bg-indigo-700 min-w-[8rem] h-9 px-4 rounded-sm flex justify-center items-center text-slate-100  text-xs font-base tracking-wide focus:outline-none outline-none  hover:opacity-900 duration-300 transition-bg font-medium uppercase"
           >
             Add Category
           </button>
@@ -273,7 +273,7 @@ const Categories: FC = () => {
               >
                 <fieldset className="border dark:border-slate-700 border-slate-300 rounded p-2 px-4 flex flex-col space-y-2 dark:bg-slate-800 bg-white">
                   {" "}
-                  <legend className="px-2 bg-slate-100 dark:bg-slate-750 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
+                  <legend className="px-2 bg-slate-200 dark:bg-slate-750 rounded text-slate-900 dark:text-slate-300 font-semibold uppercase text-sm">
                     {category?.name}
                   </legend>
                   <label

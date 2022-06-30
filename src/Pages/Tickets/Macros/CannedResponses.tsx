@@ -86,7 +86,7 @@ const CannedResponses: FC<Props> = ({
                   setModal(true);
                   document.body.style.overflow = "hidden";
                 }}
-                className="outline-none focus:outline-none h-9 w-14 text-xs tracking-wide font-medium bg-blue-700 hover:opacity-80 transition-all duration-200 text-white flex justify-center items-center rounded-sm"
+                className="outline-none focus:outline-none h-9 w-14 text-xs tracking-wide font-medium bg-indigo-700 hover:opacity-80 transition-all duration-200 text-white flex justify-center items-center rounded-sm"
               >
                 <abbr title="Add Canned Response">New</abbr>
               </button>
@@ -157,7 +157,7 @@ const CannedResponses: FC<Props> = ({
                                   ])
                                 );
                               }}
-                              className="hidden outline-none fucus:outline-none text-blue-600 border border-blue-600 h-8 w-8 rounded bg-white dark:bg-slate-800 justify-center items-center shadow-lg"
+                              className="hidden outline-none fucus:outline-none text-indigo-600 border border-indigo-600 h-8 w-8 rounded bg-white dark:bg-slate-800 justify-center items-center shadow-lg"
                             >
                               <BiRightArrowAlt className="text-lg" />
                             </button>

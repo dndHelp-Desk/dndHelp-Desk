@@ -51,11 +51,11 @@ const ConnectModal: FC<Props> = ({ apiChannelModal, openAPIModal }) => {
               openAPIModal(false);
               document.body.style.overflow = "";
             }}
-            className="bg-inherit outline-none focus:outline-none border-2 border-blue-600 p-2 px-6 rounded text-blue-700 text-sm font-semibold hover:opacity-90 transition-all"
+            className="bg-inherit outline-none focus:outline-none border-2 border-indigo-600 p-2 px-6 rounded text-indigo-700 text-sm font-semibold hover:opacity-90 transition-all"
           >
             Cancel
           </button>
-          <button className="bg-blue-700 outline-none focus:outline-none p-2 px-6 rounded text-slate-100 text-sm font-semibold hover:opacity-90 transition-all">
+          <button className="bg-indigo-700 outline-none focus:outline-none p-2 px-6 rounded text-slate-100 text-sm font-semibold hover:opacity-90 transition-all">
             Continue
           </button>
         </footer>

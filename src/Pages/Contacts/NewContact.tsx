@@ -91,7 +91,7 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
                 setValue({ ...newContactValue, name: e.target.value })
               }
               value={newContactValue.name}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 placeholder:text-slate-500 text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsFillPersonFill className="absolute text-slate-500 text-lg top-3 left-4" />
           </div>
@@ -108,7 +108,7 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
                 setValue({ ...newContactValue, email: e.target.value })
               }
               value={newContactValue.email}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsFillEnvelopeFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
@@ -124,7 +124,7 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
               }
               value={newContactValue.phoneNumber}
               placeholder="Phone Number ..."
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsFillTelephoneFill className="absolute text-slate-500 top-4 text-sm left-4" />
           </div>
@@ -140,13 +140,13 @@ const NewContact: FC<Props> = ({ contactModal, setModal }) => {
                 setValue({ ...newContactValue, company: e.target.value })
               }
               value={newContactValue.company}
-              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-blue-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
+              className="bg-transparent w-full h-full rounded dark:border-slate-700 border-slate-400 outline-none focus:outline-none text-sm px-4 pl-11 focus:ring-indigo-700 text-slate-500 placeholder:text-slate-500 dark:bg-[#25396823] bg-slate-50"
             />
             <BsPinMapFill className="absolute text-slate-500 top-[0.85rem] text-base left-4" />
           </div>
           <button
             type="submit"
-            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-blue-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
+            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-indigo-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
           >
             Add Contact
           </button>

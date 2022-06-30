@@ -106,10 +106,10 @@ const Profile = () => {
           <div
             onMouseOver={() => setChangeIcon("scale-100")}
             onMouseLeave={() => setChangeIcon("scale-0")}
-            className="h-10 w-10  rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
+            className="h-10 w-10 bg-slate-700 dark:bg-slate-50 rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
           >
             <img
-              className="rounded-full bg-slate-500 h-full w-full object-cover object-center"
+              className="rounded-full bg-slate-500 h-9 w-9 object-cover object-center"
               src={photoURL}
               alt="profile"
             />

@@ -41,16 +41,16 @@ const StatusSummary: FC = () => {
         <p className="text-xs font-medium tracking-normal dark:text-slate-300 text-slate-800 mt-2 font-sans">{dashboardData?.length} total tickets
         </p>
       </div>
-      <div className="w-[7.5rem] h-[9rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t to-blue-600 from-indigo-700 dark:bg-gradient-to-t dark:to-blue-600 dark:from-indigo-700 rounded-b-md shadow-lg z-[99]">
+      <div className="w-[7.5rem] h-[9rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t to-indigo-600 from-indigo-700 dark:bg-gradient-to-t dark:to-indigo-600 dark:from-indigo-700 rounded-b-md shadow-lg z-[99]">
         {data.length >= 1 &&
           data?.map((status: any, index: number) => {
             return (
               <div
                 style={{ height: `calc(${status.value}% + 10px)` }}
                 key={index}
-                className={`bg-inherit transition-all duration-200 hover:bg-blue-800 last:rounded-b  first:border-t-0 border-t-2 border-slate-100 dark:border-slate-800 relative group`}
+                className={`bg-inherit transition-all duration-200 hover:bg-indigo-800 last:rounded-b  first:border-t-0 border-t-2 border-slate-100 dark:border-slate-800 relative group`}
               >
-                <div className="absolute h-6 w-28 p-2 bottom-[40%] right-[-90%] rounded-sm bg-blue-200 text-[0.65rem] font-semibold hidden group-hover:flex justify-between items-center shadow-xl drop-shadow-xl">
+                <div className="absolute h-6 w-28 p-2 bottom-[40%] right-[-90%] rounded-sm bg-indigo-200 text-[0.65rem] font-semibold hidden group-hover:flex justify-between items-center shadow-xl drop-shadow-xl">
                   <span>{status.name} :</span>
                   <span>{status.value}%</span>
                 </div>
