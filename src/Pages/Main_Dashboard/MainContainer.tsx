@@ -71,8 +71,8 @@ const Dashboard: FC = () => {
             allTickets?.filter(
               (ticket) =>
                 ticket?.readStatus !== "read" &&
-                ticket?.recipient_email?.replace(/\s/g, "").toLowerCase() ===
-                  user[0]?.email?.replace(/\s/g, "").toLowerCase()
+                ticket?.recipient_email?.replace(/\s/g, "")?.toLowerCase() ===
+                  user[0]?.email?.replace(/\s/g, "")?.toLowerCase()
             )
         )
       );
@@ -86,9 +86,9 @@ const Dashboard: FC = () => {
                 ticket?.recipient_email
                   .split(",")
                   .map((email: string) =>
-                    email?.replace(/\s/g, "").toLowerCase()
+                    email?.replace(/\s/g, "")?.toLowerCase()
                   )
-                  .includes(user[0]?.email?.replace(/\s/g, "").toLowerCase())
+                  .includes(user[0]?.email?.replace(/\s/g, "")?.toLowerCase())
             )
         )
       );

@@ -46,7 +46,7 @@ const ReportsComponent: FC = () => {
           ?.filter((row: any) =>
             contactsList?.every(
               (item: any) =>
-                item.toLowerCase()?.replace(/\s/g, "") !==
+                item?.toLowerCase()?.replace(/\s/g, "") !==
                 row.branch_company?.toLowerCase()?.replace(/\s/g, "")
             )
           )
@@ -54,24 +54,24 @@ const ReportsComponent: FC = () => {
             (data: any) =>
               data.message_position === 1 &&
               data.status
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.status, "gi")) &&
               data.category
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.category, "gi")) &&
               data.agent_email
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.agent, "gi")) &&
               data.status
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.status, "gi")) &&
               new Date(data.date).getHours() >= Number(filters?.time?.from) &&
               new Date(data.date).getHours() <= Number(filters?.time?.to)

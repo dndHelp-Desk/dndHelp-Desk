@@ -68,7 +68,7 @@ const Landing: FC = () => {
                   Features
                 </button>
                 <Link
-                  to="/pricing"
+                  to="/coming-soon"
                   className="text-slate-900 font-semibold text-base hover:text-blue-600 transition-all duration-200 outline-none focus:outline-none"
                 >
                   Pricing
@@ -131,7 +131,7 @@ const Landing: FC = () => {
             </header>
             <div className="h-12 w-full justify-center gap-6 hidden md:flex">
               <NavLink
-                to="/pricing"
+                to="/coming-soon"
                 className="hidden sm:inline-block bg-blue-700 h-10 px-4 rounded text-slate-50 tracking-wide outline-none focus:outline-none hover:bg-blue-600 transition-all duration-200 font-medium"
               >
                 <div className="h-full w-full flex justify-center items-center ">
@@ -176,7 +176,7 @@ const Landing: FC = () => {
               desk queues.
             </p>
             <br/>
-            <Link to="/pricing">
+            <Link to="/coming-soon">
               <button
                 role="link"
                 className="bg-slate-800 font-semibold text-base h-10 w-[8rem] rounded text-slate-300  tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-700 hover:bg-slate-900"
@@ -222,7 +222,7 @@ const Landing: FC = () => {
               quickly, which is made possible by automated notifications.
             </p>
             <br/>
-            <Link to="/pricing">
+            <Link to="/coming-soon">
               <button
                 role="link"
                 className="bg-slate-800 h-10 w-[8rem] rounded  font-semibold text-base text-slate-300 tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-700 hover:bg-slate-900"

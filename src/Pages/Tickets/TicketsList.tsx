@@ -74,50 +74,50 @@ const TicketsList: FC<Props> = ({
           ?.filter((row) =>
             contactsList?.every(
               (item) =>
-                item.toLowerCase()?.replace(/\s/g, "") !==
+                item?.toLowerCase()?.replace(/\s/g, "") !==
                 row.branch_company?.toLowerCase()?.replace(/\s/g, "")
             )
           )
           ?.filter(
             (ticket) =>
               ticket?.status
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.status, "gi")) &&
               ticket?.category
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.category, "gi")) &&
               ticket?.agent_email
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.agent, "gi")) &&
               ticket?.status
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters.status, "gi")) &&
               ticket?.priority
-                .replace(/\s/g, "")
-                .replace(/\(/g, "")
-                .replace(/\)/g, "")
+                ?.replace(/\s/g, "")
+                ?.replace(/\(/g, "")
+                ?.replace(/\)/g, "")
                 .match(new RegExp(filters?.priority, "gi")) &&
               ticket.date >= Number(ticketsComponentDates.startDate) &&
               ticket.date <= Number(ticketsComponentDates.endDate) + 86400000 &&
               ticket?.complainant_number
-                .toLowerCase()
-                .replace(/\s/g, "")
+                ?.toLowerCase()
+                ?.replace(/\s/g, "")
                 .includes(
-                  filters.complainant_number.toLowerCase().replace(/\s/g, "")
+                  filters.complainant_number?.toLowerCase()?.replace(/\s/g, "")
                 ) === true &&
               ticket?.ticket_id
-                .toLowerCase()
-                .replace(/\s/g, "")
+                ?.toLowerCase()
+                ?.replace(/\s/g, "")
                 .includes(
-                  filters.ticket_id?.toLowerCase().replace(/\s/g, "")
+                  filters.ticket_id?.toLowerCase()?.replace(/\s/g, "")
                 ) === true &&
               new Date(ticket?.date).getHours() >=
                 Number(filters?.time?.from) &&
@@ -277,15 +277,15 @@ const TicketsList: FC<Props> = ({
                       new Date(ticket.due_date).getTime() <=
                         new Date().getTime() &&
                       ticket.status &&
-                      ticket.status.toLowerCase() === "open"
+                      ticket.status?.toLowerCase() === "open"
                         ? "text-red-600"
-                        : (ticket.status.toLowerCase() === "open" &&
+                        : (ticket.status?.toLowerCase() === "open" &&
                             new Date(ticket.due_date).getTime() >
                               new Date().getTime()) ||
-                          ticket.status.toLowerCase() === "on hold"
+                          ticket.status?.toLowerCase() === "on hold"
                         ? "text-slate-500"
                         : ticket.status &&
-                          ticket.status.toLowerCase() === "solved"
+                          ticket.status?.toLowerCase() === "solved"
                         ? "text-blue-600"
                         : ""
                     } `}

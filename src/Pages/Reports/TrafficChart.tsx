@@ -124,8 +124,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
         type="area"
         series={series}
         options={options}
-        width="100%"
-        className="h-[80%]"
+        height="100%"
       />
     </div>
   );

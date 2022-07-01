@@ -61,24 +61,15 @@ const Filters: FC<Props> = ({
                   JSON.stringify({ ...filters, from: e.target.value })
                 );
               }}
+              defaultValue={filters?.time?.from}
               className="h-full w-full rounded text-xs font-semibold dark:font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
-              <option value="1" selected={filters?.from === 1 ? true : false}>
-                From
-              </option>
+              <option value="1">From</option>
               {[
                 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                 19, 20, 21, 22, 23, 24,
               ].map((hour) => {
-                return (
-                  <option
-                    key={hour}
-                    value={hour}
-                    selected={filters?.time?.from === hour ? true : false}
-                  >
-                    {hour}:00 HR
-                  </option>
-                );
+                return <option key={hour}>{hour}:00 HR</option>;
               })}
             </select>
             <select
@@ -92,14 +83,10 @@ const Filters: FC<Props> = ({
                   JSON.stringify({ ...filters, to: e.target.value })
                 );
               }}
+              defaultValue={filters?.time?.to}
               className="h-full w-full rounded text-xs font-semibold dark:font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
             >
-              <option
-                value="24"
-                selected={filters?.time?.to === 1 ? true : false}
-              >
-                To
-              </option>
+              <option value="24">To</option>
               {[
                 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                 19, 20, 21, 22, 23, 24,
@@ -125,23 +112,16 @@ const Filters: FC<Props> = ({
               JSON.stringify({ ...filters, category: e.target.value })
             );
           }}
+          defaultValue={filters?.category}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
         >
-          <option value="" selected={filters?.category === "" ? true : false}>
-            Category
-          </option>
+          <option value="">Category</option>
           {categories.length >= 1 &&
             categories?.map((category, index) => (
               <option
                 key={index}
                 className="capitalize"
                 value={category?.name?.split(" ").join("")}
-                selected={
-                  filters?.category?.toLowerCase()?.replace(/\s/g, "") ===
-                  category?.name?.toLowerCase()?.replace(/\s/g, "")
-                    ? true
-                    : false
-                }
               >
                 {category?.name}
               </option>
@@ -158,23 +138,13 @@ const Filters: FC<Props> = ({
               JSON.stringify({ ...filters, status: e.target.value })
             );
           }}
+          defaultValue={filters?.status}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium capitalize"
         >
-          <option value="" selected={filters?.status === 1 ? true : false}>
-            Status
-          </option>
+          <option value="">Status</option>
           {["open", "solved", "reopened", "onhold"].map((opt) => {
             return (
-              <option
-                key={opt}
-                value={opt}
-                selected={
-                  filters?.status?.toLowerCase()?.replace(/\s/g, "") ===
-                  opt.toLowerCase()?.replace(/\s/g, "")
-                    ? true
-                    : false
-                }
-              >
+              <option key={opt} value={opt}>
                 {opt}
               </option>
             );
@@ -191,24 +161,14 @@ const Filters: FC<Props> = ({
               JSON.stringify({ ...filters, priority: e.target.value })
             );
           }}
+          defaultValue={filters?.priority}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium capitalize"
         >
           <option value="">Priority</option>
-          <option value="" selected={filters?.status === 1 ? true : false}>
-            priority
-          </option>
+          <option value="">priority</option>
           {["low", "medium", "high", "urgent"].map((opt) => {
             return (
-              <option
-                key={opt}
-                value={opt}
-                selected={
-                  filters?.priority?.toLowerCase()?.replace(/\s/g, "") ===
-                  opt.toLowerCase()?.replace(/\s/g, "")
-                    ? true
-                    : false
-                }
-              >
+              <option key={opt} value={opt}>
                 {opt}
               </option>
             );
@@ -226,28 +186,17 @@ const Filters: FC<Props> = ({
               JSON.stringify({ ...filters, agent: e.target.value })
             );
           }}
+          defaultValue={filters?.agent}
           className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
         >
-          <option value="" selected={filters?.agent === "" ? true : false}>
-            Agents ...
-          </option>
+          <option value="">Agents ...</option>
           {allMembers.length >= 1 &&
             allMembers
               .map((agent) => agent.access === "agent" && agent)
               .filter(Boolean)
               .sort((a, b) => (a.name < b.name ? -1 : 1))
               .map((agent, index) => (
-                <option
-                  key={index}
-                  className="capitalize"
-                  value={agent.email}
-                  selected={
-                    filters?.agent?.toLowerCase()?.replace(/\s/g, "") ===
-                    agent?.email?.toLowerCase()?.replace(/\s/g, "")
-                      ? true
-                      : false
-                  }
-                >
+                <option key={index} className="capitalize" value={agent.email}>
                   {agent.name}
                 </option>
               ))}

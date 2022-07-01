@@ -101,8 +101,8 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
                 value={category?.name
                   .split(" ")
                   .join("")
-                  .replace(/\(/g, "")
-                  .replace(/\)/g, "")}
+                  ?.replace(/\(/g, "")
+                  ?.replace(/\)/g, "")}
               >
                 {category?.name}
               </option>

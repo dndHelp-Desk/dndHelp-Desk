@@ -76,9 +76,9 @@ const Home: FC = () => {
                   ></div>{" "}
                   <span>
                     {user.status === "available"
-                      ? "Online"
+                      ? "Available"
                       : user.status === "unavailable"
-                      ? "Offline"
+                      ? "away"
                       : "Busy"}
                   </span>
                 </div>

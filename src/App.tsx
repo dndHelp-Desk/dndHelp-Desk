@@ -8,6 +8,7 @@ import TicketsComponent from "./Pages/Tickets/TicketsComponent";
 import ContactsComponent from "./Pages/Contacts/ContactsComponent";
 import animatedLogo from "./Assets/logos/anim.gif";
 import ErrorPage from "./Pages/Landing Page/ErrorPage";
+import ComingSoon from "./Pages/Landing Page/ComingSoon";
 
 //Lazy Loading Components || Code Splitting ====================
 const Dashboard = lazy(() => import("./Pages/Main_Dashboard/MainContainer"));
@@ -62,6 +63,7 @@ const App: FC = () => {
           <Routes>
             {/**Landing ======================== */}
             <Route path="/" element={<Landing />} />
+            <Route path="/coming-soon" element={<ComingSoon />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/workspace-setup" element={<WorkSpaceSetUp />} />
 

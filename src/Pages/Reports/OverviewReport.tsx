@@ -82,6 +82,13 @@ const OverviewReport: FC<data> = ({ data }) => {
     return Number(a.name) - Number(b.name);
   });
 
+  //Number Spacing ====
+  const numberWithSpaces = (x: any) => {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
+  };
+
   //Component =============================
   return (
     <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -92,17 +99,17 @@ const OverviewReport: FC<data> = ({ data }) => {
         <div className="mt-8 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
           <div className="dark:text-slate-300 text-slate-900">
             <div className="text-base font-bold text-center uppercase">
-              {data?.length}
+              {numberWithSpaces(data?.length)}
             </div>
-            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-bold text-center uppercase">
+            <div className="text-[0.65rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center capitalize">
               Total Tickets
             </div>
           </div>
           <div className="dark:text-slate-300 text-slate-800">
             <div className="text-base font-bold text-center uppercase">
-              {totalAggregate}
+              {numberWithSpaces(totalAggregate)}
             </div>
-            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-bold text-center uppercase">
+            <div className="text-[0.65rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center capitalize">
               Total Messages
             </div>
           </div>
@@ -125,7 +132,7 @@ const OverviewReport: FC<data> = ({ data }) => {
                       .split(".")[0]
                   : 0
               }`}
-              <span className="text-xs lowercase">H</span>{" "}
+              <span className="text-xs uppercase">H</span>{" "}
               {`${
                 solvedTickets.length >= 1
                   ? Number(
@@ -143,9 +150,9 @@ const OverviewReport: FC<data> = ({ data }) => {
                     ) % 60
                   : 0
               }`}
-              <span className="text-xs lowercase">M</span>
+              <span className="text-xs uppercase">M</span>
             </div>
-            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-bold text-center uppercase">
+            <div className="text-[0.65rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center capitalize">
               Resolution Time
             </div>
           </div>
@@ -153,7 +160,9 @@ const OverviewReport: FC<data> = ({ data }) => {
         <div className="mt-6 flex space-x-4 px-2 min-h-14 w-full justify-between">
           <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
             <div className="text-base font-bold text-center uppercase">
-              {data?.filter((data: any) => data?.feedback === "like")?.length}
+              {numberWithSpaces(
+                data?.filter((data: any) => data?.feedback === "like")?.length
+              )}
             </div>
             <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Positive
@@ -161,12 +170,12 @@ const OverviewReport: FC<data> = ({ data }) => {
           </div>
           <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
             <div className="text-base font-bold text-center uppercase">
-              {
+              {numberWithSpaces(
                 data?.filter(
                   (data: any) =>
                     data?.feedback !== "like" && data?.feedback !== "dislike"
                 )?.length
-              }
+              )}
             </div>
             <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Neutral
@@ -174,10 +183,10 @@ const OverviewReport: FC<data> = ({ data }) => {
           </div>
           <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
             <div className="text-base font-bold text-center">
-              {
+              {numberWithSpaces(
                 data?.filter((data: any) => data?.feedback === "dislike")
                   ?.length
-              }
+              )}
             </div>
             <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
               Negative

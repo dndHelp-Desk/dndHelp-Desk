@@ -570,7 +570,7 @@ const NewTicket: FC<Props> = ({
   //Component =====================================
   return (
     <div
-      className={`fixed top-0 left-0 bottom-0 right-0 h-screen bg-[#030d2769] rounded-md justify-center overflow-x-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar ${
+      className={`fixed top-0 left-0 bottom-0 right-0 h-screen bg-[#030d274f] rounded-md justify-center overflow-x-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar ${
         newTicketModal === true ? "flex z-[999]" : "hidden"
       }`}
     >
@@ -1189,6 +1189,7 @@ const NewTicket: FC<Props> = ({
           </div>
         </form>
       </div>
+      
     </div>
   );
 };

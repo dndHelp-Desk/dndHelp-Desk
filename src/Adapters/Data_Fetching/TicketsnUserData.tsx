@@ -22,6 +22,7 @@ import { setMessages } from "../../Redux/Slices/NotificationsSlice";
 
 //Firestore ===================
 import {
+  initializeFirestore,
   getFirestore,
   collection,
   onSnapshot,
@@ -30,6 +31,7 @@ import {
   deleteDoc,
   updateDoc,
   enableIndexedDbPersistence,
+  CACHE_SIZE_UNLIMITED,
   where,
   query,
 } from "firebase/firestore";
@@ -49,7 +51,9 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 // init services for firestore =========================
-const db = getFirestore();
+const db = initializeFirestore(initializeApp(firebaseConfig), {
+  cacheSizeBytes: CACHE_SIZE_UNLIMITED,
+});
 
 // Subsequent queries will use persistence, if it was enabled successfully
 enableIndexedDbPersistence(db);
@@ -637,8 +641,8 @@ const TicketsnUserData: FC = () => {
                     .split(",")
                     .some(
                       (msg: any) =>
-                        msg.toLowerCase().replace(/\s/g, "") ===
-                        data?.branch_company.toLowerCase().replace(/\s/g, "")
+                        msg?.toLowerCase()?.replace(/\s/g, "") ===
+                        data?.branch_company?.toLowerCase()?.replace(/\s/g, "")
                     )
                 )
             )
