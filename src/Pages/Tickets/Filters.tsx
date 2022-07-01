@@ -42,6 +42,7 @@ const Filters: FC<Props> = ({
       <div className="col-span-1 h-10 min-w-[15rem] lg:min-w-0 w-full flex items-center relative z-[99]">
         <BiCalendarWeek className="text-slate-800 dark:text-slate-400 absolute h-10 left-3 z-[999]" />
         <DateFilter />
+        <div className="hidden absolute top-12 w-[25rem] h-40 rounded bg-slate-100"></div>
       </div>
 
       <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative font-semibold dark:font-medium text-xs text-slate-700 dark:text-slate-400 border dark:border-slate-700 border-slate-400 group">

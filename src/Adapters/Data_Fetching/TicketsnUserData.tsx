@@ -23,7 +23,6 @@ import { setMessages } from "../../Redux/Slices/NotificationsSlice";
 //Firestore ===================
 import {
   initializeFirestore,
-  getFirestore,
   collection,
   onSnapshot,
   addDoc,
