@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.3](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.2...v0.8.3) (2022-07-03)
+
+
+### Features
+
+* **landing page:** coming Soon Page now available to avoid new sign ups and minor UI updates ([490418c](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/490418c9c8e02f7317fcc38cc836d28c0894d08b))
+* **tickets filters:** save filters options on reload ([323d504](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/323d504f80ea3ead618b0f9cc386ed3faf4f8b8f))
+* **tickets:** new date picker on sticky top nav allowing more control on data or tickets views ([6b33193](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/6b3319310571bb7e25f57560d225494ebe50b7f8))
+
 ### [0.8.2](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.1...v0.8.2) (2022-06-30)
 
 
