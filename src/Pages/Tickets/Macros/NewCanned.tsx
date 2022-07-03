@@ -164,7 +164,7 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
           <button
             type="button"
             onClick={openNew}
-            className="h-full m-auto px-4 p-2 rounded-sm outline-none focus:outline-none bg-indigo-600 text-slate-100 text-sm font-medium whitespace-nowrap"
+            className="h-full m-auto px-4 p-2 rounded-sm outline-none focus:outline-none bg-blue-600 text-slate-100 text-sm font-medium whitespace-nowrap"
           >
             Create new
           </button>

@@ -57,7 +57,6 @@ const NewTicket: FC<Props> = ({
   const [isSubmiting, setSubmit] = useState<boolean | any>(false);
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
   const [recordingFile, setFile] = useState<boolean | any>(false);
-  const [showCanned, setCanned] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
   const closeSuggestionsRef = useClickOutside(() => {
     setResults(false);
@@ -1094,15 +1093,6 @@ const NewTicket: FC<Props> = ({
               {/**Canned Responses ========================================= */}
               <div className="relative group">
                 <div
-                  onClick={() => {
-                    setCanned((prev) => {
-                      if (prev === true) {
-                        return false;
-                      } else {
-                        return true;
-                      }
-                    });
-                  }}
                   id="email"
                   className="w-8 h-8 group flex items-center justify-center text-slate-600 cursor-pointer dark:text-slate-400 rounded border hover:border-blue-600 dark:hover:border-blue-600 transition-all duration-200 dark:border-slate-600 border-slate-300 outline-none focus:outline-none"
                 >
@@ -1111,8 +1101,6 @@ const NewTicket: FC<Props> = ({
                 <CannedResponses
                   setReply={setValues}
                   onChange={onChange}
-                  showCanned={showCanned}
-                  setCanned={setCanned}
                   position={4}
                   tooltipPosition={`[9.4rem]`}
                 />
@@ -1190,7 +1178,6 @@ const NewTicket: FC<Props> = ({
           </div>
         </form>
       </div>
-      
     </div>
   );
 };

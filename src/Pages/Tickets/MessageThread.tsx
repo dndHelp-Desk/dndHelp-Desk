@@ -142,7 +142,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   let brand: string = firstMessage && firstMessage[0]?.branch_company;
   let ticket_status: string = firstMessage && firstMessage[0]?.status;
   let date: any = firstMessage && firstMessage[0]?.due_date;
-  
+
   //Reply State and value ==================================
   const [reply, setReply] = useState<ReplyOptions>({
     message: "<p></p>",
@@ -174,10 +174,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       )[0];
 
     //Relpy Using Nodemailer ===================
-    let closingTime = `${new Date().toDateString()}, ${new Date().getHours()}:${
-      new Date().getMinutes() + 1
-    } hrs`;
-
     fetch("https://dndhelp-desk-first.herokuapp.com/send", {
       method: "POST",
       headers: {
@@ -194,12 +190,20 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         ticket_id: threadId,
         email_body:
           publicCannedRes?.filter((data) => data.name === "solved").length >= 1
-            ? eval(
-                "`" +
-                  publicCannedRes?.filter((data) => data.name === "solved")[0]
-                    ?.message +
-                  "`"
-              )
+            ? publicCannedRes
+                ?.filter((data) => data.name === "solved")[0]
+                ?.message?.replace("${clientName}", " " + clientName)
+                ?.replace("${threadId}", " " + threadId)
+                ?.replace("${threadId}", threadId)
+                ?.replace("${brand}", " " + brand)
+                ?.replace("${closingTime}", " " + new Date().toString())
+                ?.replace("${reply.message}", " " + reply.message)
+                ?.replace("${ticket_status}", " " + ticket_status)
+                ?.replace("${ticket_status}", " " + ticket_status)
+                ?.replace(
+                  "${new Date(firstMessage[0]?.due_date).toString()}",
+                  " " + new Date(date).toString()
+                )
             : reply.message,
       }),
     })
@@ -234,7 +238,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               },
             ])
           );
-          console.log(date,brand,ticket_status,closingTime)
         }
       });
     setReply({
@@ -297,12 +300,20 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             email_body:
               publicCannedRes?.filter((data) => data.name === "open").length >=
               1
-                ? eval(
-                    "`" +
-                      publicCannedRes?.filter((data) => data.name === "open")[0]
-                        ?.message +
-                      "`"
-                  )
+                ? publicCannedRes
+                    ?.filter((data) => data.name === "open")[0]
+                    .message?.replace("${clientName}", " " + clientName)
+                    ?.replace("${threadId}", " " + threadId)
+                    ?.replace("${threadId}", " " + threadId)
+                    ?.replace("${brand}", " " + brand)
+                    ?.replace("${closingTime}", " " + new Date().toString())
+                    ?.replace("${reply.message}", " " + reply.message)
+                    ?.replace("${ticket_status}", " " + ticket_status)
+                    ?.replace("${ticket_status}", " " + ticket_status)
+                    ?.replace(
+                      "${new Date(firstMessage[0]?.due_date).toString()}",
+                      " " + new Date(date).toString()
+                    )
                 : reply.message,
           }),
         })
@@ -446,6 +457,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         ])
       );
     }
+    scrollIntoView();
   };
 
   //Zoom AttachMent ========================
@@ -848,8 +860,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   <CannedResponses
                     setReply={setReply}
                     onChange={onChange}
-                    showCanned={showCanned}
-                    setCanned={setCanned}
                     position={0.7}
                     tooltipPosition={5}
                   />

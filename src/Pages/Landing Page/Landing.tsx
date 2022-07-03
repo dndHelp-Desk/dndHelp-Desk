@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import heroTop from "./images/heroTop.webp";
 import heroTopSm from "./images/heroTop_sm.webp";
+import omniC from "./images/omniC.webp";
 import darkLogo from "../../Assets/logos/dndHelp-desk_Dark.webp";
 import Cloud from "./Cloud";
 import reportImg from "./images/report.webp";
@@ -169,13 +170,12 @@ const Landing: FC = () => {
               According to Aspect, 68% of customers patronize companies that
               offer good customer service. One of the easiest ways to execute
               quality customer support is through a reliable help desk solution.
-              Aside from the fact that these can automate the customer support
-              process, there are also plenty of reasons why businesses should
-              use these tools. They eliminate the need for agents to respond to
-              individual inquiries sent via email as such can be moved to help
-              desk queues.
+              Classify your inbound tickets into predefined categories like
+              products, sales, support, etc., and see your omnichannel requests
+              flow into the right ticket categories of your support ticket
+              system.
             </p>
-            <br/>
+            <br />
             <Link to="/coming-soon">
               <button
                 role="link"
@@ -216,12 +216,12 @@ const Landing: FC = () => {
               Better understand your customers
             </h2>
             <p className="text-slate-600 mb-2">
-              Aiding agents in redirecting customer queries and concerns to
-              competent staff is the principal function of the automation suite.
-              This capability makes sure that all tickets are responded to
-              quickly, which is made possible by automated notifications.
+              Make data-driven decisions using insights you can gather from your
+              help desk modular, real-time reports. Monitor Ticket Inflow,
+              observe trends & optimize support strategy. Identify peak hours
+              and tweak agent availability.
             </p>
-            <br/>
+            <br />
             <Link to="/coming-soon">
               <button
                 role="link"
@@ -234,7 +234,42 @@ const Landing: FC = () => {
         </div>
       </section>
 
-      {/**Third Section ============================== */}
+      {/**Third Section ================================ */}
+      <section className="w-[90%] md:w-full container mt-8 m-auto 2xl:w-[75rem] grid grid-cols-1 md:grid-cols-2 gap-4 py-4 px-2">
+        <div className="col-span-1 flex flex-col justify-center p-4">
+          <div className="space-y-4 py-2">
+            <h2 className="text-slate-800 text-2xl font-bold tracking-tightest">
+              Omnichannel Customer Service Experience
+            </h2>
+            <p className="text-slate-600 mb-2">
+              All your channels should work harmoniously so that they steer your
+              customers in one direction. By using centralization and data
+              integration, you can create a unique voice for your brand to suit
+              every customer’s specific needs. Omnichannel support is not only
+              beneficial to your customers but also your support team
+            </p>
+            <br />
+            <Link to="/coming-soon">
+              <button
+                role="link"
+                className="bg-slate-800 font-semibold text-base h-10 w-[8rem] rounded text-slate-300  tracking-wide outline-none focus:outline-none focus:ring focus:ring-slate-700 hover:bg-slate-900"
+              >
+                Get started
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className="col-span-1 justify-end flex items-center rounded-tr-md rounded-br-xl py-8">
+          {" "}
+          <img
+            src={omniC}
+            alt=""
+            className="object-center object-fit rounded-l-xl w-[90%] shadow-2xl drop-shadow-2xl"
+          />
+        </div>
+      </section>
+
+      {/**Fourth Section ============================== */}
       <section
         ref={scrollToFeatures}
         className="w-[90%] md:w-full container my-16 pb-10 m-auto 2xl:w-[75rem] bg-slate-300 p-6 rounded flex flex-col justify-center"

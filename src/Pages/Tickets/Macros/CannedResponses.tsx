@@ -8,14 +8,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
-import useClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
 import NewCanned from "./NewCanned";
 
 type Props = {
   setReply: any;
   onChange: any;
-  showCanned: boolean;
-  setCanned: any;
   tooltipPosition: any;
   position: any;
 };
@@ -23,8 +20,6 @@ type Props = {
 const CannedResponses: FC<Props> = ({
   setReply,
   onChange,
-  setCanned,
-  showCanned,
   tooltipPosition,
   position,
 }) => {
@@ -42,9 +37,6 @@ const CannedResponses: FC<Props> = ({
   const [allCannedRes, setAllCannedRes] = useState<any[]>([]);
   const [cannedSearch, setCannedSearch] = useState<string>("");
   const [newResponseModal, setModal] = useState<boolean>(false);
-  const modRef = useClickOutside(() => {
-    setCanned(false);
-  });
 
   //Combined All Canned Responses
   useEffect(() => {
@@ -61,12 +53,9 @@ const CannedResponses: FC<Props> = ({
       <NewCanned newResponseModal={newResponseModal} setModal={setModal} />
       {/**New Canned Response Modal */}
       <div
-        ref={modRef}
         className={`absolute bottom-2 z-[999] ${
           tooltipPosition === "[9.4rem]" ? "left-[-9.4rem]" : "left-[-0.7rem]"
-        } w-[23rem] h-[23rem] pb-[2.9rem] ${
-          showCanned ? "group-hover:flex" : "group-hover:hidden"
-        } hidden`}
+        } w-[23rem] h-[23rem] pb-[2.9rem] group-hover:flex hidden`}
       >
         <div
           className={`rounded bg-slate-50 dark:bg-slate-700 z-[9999] border border-slate-400 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
@@ -89,7 +78,7 @@ const CannedResponses: FC<Props> = ({
                   setModal(true);
                   document.body.style.overflow = "hidden";
                 }}
-                className="outline-none focus:outline-none h-9 w-14 text-xs tracking-wide font-medium bg-indigo-700 hover:opacity-80 transition-all duration-200 text-white flex justify-center items-center rounded-sm"
+                className="outline-none focus:outline-none h-9 w-14 text-xs tracking-wide font-medium bg-blue-700 hover:opacity-80 transition-all duration-200 text-white flex justify-center items-center rounded-sm"
               >
                 <abbr title="Add Canned Response">New</abbr>
               </button>
@@ -119,7 +108,6 @@ const CannedResponses: FC<Props> = ({
                           message: template.message,
                         }));
                         onChange((prev: any) => prev + template.message);
-                        setCanned(false);
                       }}
                       className={`capitalize hover:opacity-80 border-b border-slate-300 dark:border-slate-600 p-1 pr-4 overflow-hidden overflow-ellipsis whitespace-nowrap h-10 cursor-pointer relative w-full flex items-center text-xs font-sans font-medium cannedResponseList ${
                         template?.name
@@ -160,7 +148,7 @@ const CannedResponses: FC<Props> = ({
                                   ])
                                 );
                               }}
-                              className="hidden outline-none fucus:outline-none text-indigo-600 border border-indigo-600 h-8 w-8 rounded bg-white dark:bg-slate-800 justify-center items-center shadow-lg"
+                              className="hidden outline-none fucus:outline-none text-blue-600 border border-blue-600 h-8 w-8 rounded bg-white dark:bg-slate-800 justify-center items-center shadow-lg"
                             >
                               <BiRightArrowAlt className="text-lg" />
                             </button>
