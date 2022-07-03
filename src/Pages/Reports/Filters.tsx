@@ -2,11 +2,9 @@ import { FC } from "react";
 import {
   BiCategoryAlt,
   BiUser,
-  BiCalendarWeek,
   BiPulse,
   BiAlarm,
 } from "react-icons/bi";
-import DateFilter from "./DatePicker";
 import { useSelector } from "react-redux";
 import { RootState } from "./../../Redux/store";
 import CompanyFilter from "./CompanyFilter";
@@ -29,11 +27,6 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
   //Component ==============================
   return (
     <>
-      <div className=" w-full col-span-1 h-14 lg:h-10 flex items-center z-[9999]">
-        <BiCalendarWeek className="dark:text-slate-400 text-slate-900 absolute h-14 lg:h-10 left-7 z-[9999]" />
-        <DateFilter filters={filters} setFilters={setFilters} />
-      </div>
-
       <div className=" w-full col-span-1 h-14 lg:h-10 flex items-center rounded relative text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none group">
         <BiAlarm className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <span className="pl-10 capitalize">time</span>

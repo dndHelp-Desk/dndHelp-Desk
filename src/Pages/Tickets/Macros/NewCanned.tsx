@@ -159,6 +159,7 @@ const NewCanned: FC<Props> = ({ newResponseModal, setModal }) => {
           >
             <option value="private">Private Scope</option>
             <option value="public">Public Scope</option>
+            <option value="reply">Reply Template</option>
           </select>
           <button
             type="button"

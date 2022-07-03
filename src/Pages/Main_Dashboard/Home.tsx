@@ -19,7 +19,6 @@ const Home: FC = () => {
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
-  const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const dashboardData = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
   );
@@ -180,61 +179,59 @@ const Home: FC = () => {
               <div className="h-full w-full dark:bg-slate-800 bg-white rounded-md flex flex-col place-items-center p-2 overflow-hidden">
                 {allMembers?.filter(
                   (user) => user.access?.toLowerCase() === "agent"
-                ).length >= 1 &&
-                  (user[0]?.access && user[0]?.access) !== "client" && (
-                    <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
-                      <div className="sticky top-0 z-[99] text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between items-center gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
-                        <div className="flex-[2] dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
-                          Members
+                ).length >= 1 && (
+                  <div className="w-full h-full overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap space-y-2">
+                    <div className="sticky top-0 z-[99] text-lg font-semibold font-sans tracking-wide capitalize dark:bg-slate-800 bg-white h-12 flex justify-between items-center gap-2 border-b border-slate-300 dark:border-slate-700 pb-2 mb-1">
+                      <div className="flex-[2] dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
+                        Agents
+                      </div>
+                      <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize dark:text-slate-300 text-slate-900">
+                        <div className="col-span-1 flex justify-center items-center space-x-2 relative">
+                          <p className="dark:text-slate-300 text-slate-900 text-sm font-bold dark:font-medium">
+                            {
+                              allMembers.filter(
+                                (user) =>
+                                  user.access?.toLowerCase() === "agent" &&
+                                  user.status === "available"
+                              ).length
+                            }
+                          </p>
+                          <div className="h-2 w-2 rounded-sm bg-green-600"></div>
                         </div>
-                        <div className="flex-[3] gap-1 items-center h-full w-full grid grid-cols-3 capitalize dark:text-slate-300 text-slate-900">
-                          <div className="col-span-1 flex justify-center items-center space-x-2 relative">
-                            <p className="dark:text-slate-300 text-slate-900 text-sm font-bold dark:font-medium">
-                              {
-                                allMembers.filter(
-                                  (user) =>
-                                    user.access?.toLowerCase() === "agent" &&
-                                    user.status === "available"
-                                ).length
-                              }
-                            </p>
-                            <div className="h-2 w-2 rounded-sm bg-green-600"></div>
-                          </div>
-                          <div className="col-span-1 flex justify-center items-center space-x-2 relative">
-                            <p className="dark:text-slate-300 text-slate-900  text-sm font-bold dark:font-medium">
-                              {
-                                allMembers.filter(
-                                  (user) =>
-                                    user.access?.toLowerCase() === "agent" &&
-                                    user.status === "busy"
-                                ).length
-                              }
-                            </p>
-                            <div className="h-2 w-2 rounded-sm bg-yellow-500"></div>
-                          </div>
-                          <div className="col-span-1 flex justify-center items-center space-x-2 relative">
-                            <p className="dark:text-slate-300 text-slate-900  text-sm font-bold dark:font-medium">
-                              {
-                                allMembers.filter(
-                                  (user) =>
-                                    user.access?.toLowerCase() === "agent" &&
-                                    user.status === "unavailable"
-                                ).length
-                              }
-                            </p>
-                            <div className="h-2 w-2 rounded-sm bg-red-600"></div>
-                          </div>
+                        <div className="col-span-1 flex justify-center items-center space-x-2 relative">
+                          <p className="dark:text-slate-300 text-slate-900  text-sm font-bold dark:font-medium">
+                            {
+                              allMembers.filter(
+                                (user) =>
+                                  user.access?.toLowerCase() === "agent" &&
+                                  user.status === "busy"
+                              ).length
+                            }
+                          </p>
+                          <div className="h-2 w-2 rounded-sm bg-yellow-500"></div>
+                        </div>
+                        <div className="col-span-1 flex justify-center items-center space-x-2 relative">
+                          <p className="dark:text-slate-300 text-slate-900  text-sm font-bold dark:font-medium">
+                            {
+                              allMembers.filter(
+                                (user) =>
+                                  user.access?.toLowerCase() === "agent" &&
+                                  user.status === "unavailable"
+                              ).length
+                            }
+                          </p>
+                          <div className="h-2 w-2 rounded-sm bg-red-600"></div>
                         </div>
                       </div>
-                      {users}
                     </div>
-                  )}
+                    {users}
+                  </div>
+                )}
 
                 {/**Placeholders ||Preloader ====================== */}
-                {(allMembers?.filter(
+                {allMembers?.filter(
                   (user) => user.access?.toLowerCase() === "agent"
-                ).length <= 0 ||
-                  (user[0]?.access && user[0]?.access) === "client") && (
+                ).length <= 0 && (
                   <div className="h-full w-full">
                     <div className="h-full w-full rounded-sm dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 p-6 space-y-4">
                       <h2 className="dark:text-slate-400 text-slate-700 tracking-wide text-center uppercase text-xs font-sans font-bold">

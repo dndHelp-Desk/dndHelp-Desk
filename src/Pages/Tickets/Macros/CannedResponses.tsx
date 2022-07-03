@@ -48,7 +48,10 @@ const CannedResponses: FC<Props> = ({
 
   //Combined All Canned Responses
   useEffect(() => {
-    setAllCannedRes([...privateCannedRes, ...publicCannedRes]);
+    setAllCannedRes([
+      ...privateCannedRes,
+      ...publicCannedRes.filter((data) => data.scope !== "reply"),
+    ]);
   }, [privateCannedRes, publicCannedRes]);
 
   //component ==========

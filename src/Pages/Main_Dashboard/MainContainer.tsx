@@ -25,6 +25,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import VoicexVideoCall from "./VoicexVideoCall";
 import NavlinkToolTip from "./NavlinkToolTip";
 import UniversalSearch from "./UniversalSearch";
+import DatePicker from "../../Components/DatePicker";
 
 const Dashboard: FC = () => {
   const logged = useSelector(
@@ -51,6 +52,7 @@ const Dashboard: FC = () => {
   const company_details = useSelector(
     (state: RootState) => state.Tickets.company_details
   );
+  const [openDatePicker, setDateOpen] = useState<boolean>(false);
   const [openNotifications, setOpenNotification] = useState<boolean>(false);
   const [phoneToolTip, openPhone] = useState<boolean>(false);
   const [loading, setLoading] = useState<any>(false);
@@ -169,7 +171,7 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app"
                       ? "text-blue-600"
                       : "text-slate-300"
@@ -182,7 +184,7 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/tickets"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app/tickets"
                       ? "text-blue-600"
                       : "text-slate-300"
@@ -195,7 +197,7 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/contacts"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app/contacts"
                       ? "text-blue-600"
                       : "text-slate-300"
@@ -208,7 +210,7 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/reports"
-                  className={`h-8 w-9 flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
+                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
                     location.pathname === "/app/reports"
                       ? "text-blue-600"
                       : "text-slate-300"
@@ -250,8 +252,13 @@ const Dashboard: FC = () => {
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}
           <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
-            {/**Universal Search  ================ */}
-            <div className="h-full flex items-center">
+            <div className="h-[3.6rem] flex items-center justify-center space-x-2">
+              {/**Date Picker ================ */}
+              <DatePicker
+                openDatePicker={openDatePicker}
+                setDateOpen={setDateOpen}
+              />
+              {/**Universal Search  ================ */}
               <UniversalSearch
                 option={option}
                 setOption={setOption}

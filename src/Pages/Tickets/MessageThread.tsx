@@ -1,6 +1,7 @@
 import React, { FC, useState, useRef, useMemo, useEffect } from "react";
 import { useScrollIntoView } from "@mantine/hooks";
 import { useSelector, useDispatch } from "react-redux";
+import { toUpper } from "../../Reusable Functions/Reusable_Func";
 import {
   BiMicrophone,
   BiCollection,
@@ -56,6 +57,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     open: false,
     src: "",
   });
+  const publicCannedRes = useSelector(
+    (state: RootState) => state.UserInfo.publicCannedResponses
+  );
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
@@ -138,7 +142,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   let brand: string = firstMessage && firstMessage[0]?.branch_company;
   let ticket_status: string = firstMessage && firstMessage[0]?.status;
   let date: any = firstMessage && firstMessage[0]?.due_date;
-
+  
   //Reply State and value ==================================
   const [reply, setReply] = useState<ReplyOptions>({
     message: "<p></p>",
@@ -164,7 +168,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
     //Sending Account =============================
     let sendingAccount: any =
       firstMessage &&
-      email_accounts.filter(
+      email_accounts?.filter(
         (account) =>
           account.name.toLowerCase() === firstMessage[0]?.team.toLowerCase()
       )[0];
@@ -176,7 +180,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
 
     fetch("https://dndhelp-desk-first.herokuapp.com/send", {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-type": "application/json",
       },
@@ -187,61 +190,17 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         host: sendingAccount.host,
         port: sendingAccount.port,
         email: clientEmail,
-        subject: `New Issue Reported Ragarding ${subject} || Ticket-ID: ${threadId}`,
+        subject: `${toUpper(subject)} || Ticket-ID: ${threadId}`,
         ticket_id: threadId,
-        email_body: `<p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-     Hi ${clientName},
-  </p>
-  <h1
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-   <b> A ticket with ID: ${threadId} has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
-  </h1>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
-    <b>Tickect Details:</b>
-  </p>
-  <ul
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
-    <li><b>Brand:</b>
-      ${brand}
-    </li>
-    <li><b>Tickect-ID:</b>
-      ${threadId}
-    </li>
-    <li><b>Closed On:</b>
-      ${closingTime}
-    </li>
-    <li><b>Status:</b>
-      Resolved
-    </li>
-  </ul>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
-    <b>Resolution:</b>
-  </p>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-    ${reply.message}
-  </p>
-  <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i>In order to update or respond to this issue please click the button below,</i>
-  </p>
-  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>You can alternatively click here.</a></i>
-  </p>
-  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>Update or Respond Here</a></button>
-  <p
-    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
-    <b>Disclaimer</b>
-  </p>
-  <p
-    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-    The information contained in this communication from the sender is confidential. It is intended solely for use by
-    the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any
-    disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
-    prohibited and may be unlawful.
-  </p>`,
+        email_body:
+          publicCannedRes?.filter((data) => data.name === "solved").length >= 1
+            ? eval(
+                "`" +
+                  publicCannedRes?.filter((data) => data.name === "solved")[0]
+                    ?.message +
+                  "`"
+              )
+            : reply.message,
       }),
     })
       .then((res) => res.json())
@@ -275,6 +234,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               },
             ])
           );
+          console.log(date,brand,ticket_status,closingTime)
         }
       });
     setReply({
@@ -332,70 +292,18 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             host: sendingAccount.host,
             port: sendingAccount.port,
             email: clientEmail,
-            subject: `New Issue Reported Ragarding ${subject} || Ticket-ID: ${threadId}`,
+            subject: `${toUpper(subject)} || Ticket-ID: ${threadId}`,
             ticket_id: threadId,
-            email_body: `<p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-    Hi ${clientName},
-  </p>
-  <h1
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-   <b> A ticket with ID: ${threadId} has been updated. In order to reply or update this issues please navigate to the link provided at the bottom, don't foget to grab your ticket-id.</b>
-  </h1>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
-    <b>Tickect Details:</b>
-  </p>
-  <ul
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">
-    <li><b>Brand:</b>
-      ${brand}
-    </li>
-    <li><b>Tickect-ID:</b>
-      ${threadId}
-    </li>
-    <li><b>Due Date:</b>
-      ${
-        new Date(date).toDateString() +
-        " " +
-        new Date().getHours() +
-        1 +
-        ":" +
-        new Date().getMinutes() +
-        1 +
-        "hrs"
-      }
-    </li>
-    <li><b>Status:</b>
-      ${ticket_status}
-    </li>
-  </ul>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
-    <b>Feedback:</b>
-  </p>
-  <p
-    style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-    ${reply.message}
-  </p>
-  <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i>In order to update or respond to this issue please click the button below,</i>
-  </p>
-  <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">
-    <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>
-  </p>
-  <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button>
-  <p
-    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">
-    <b>Disclaimer</b>
-  </p>
-  <p
-    style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">
-    The information contained in this communication from the sender is confidential. It is intended solely for use by
-    the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any
-    disclosure, copying, distribution or taking action in relation of the contents of this information is strictly
-    prohibited and may be unlawful.
-  </p>`,
+            email_body:
+              publicCannedRes?.filter((data) => data.name === "open").length >=
+              1
+                ? eval(
+                    "`" +
+                      publicCannedRes?.filter((data) => data.name === "open")[0]
+                        ?.message +
+                      "`"
+                  )
+                : reply.message,
           }),
         })
           .then((res) => res.json())
@@ -893,7 +801,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="min-h-[11rem] max-h-[15rem] w-full bg-transparent flex items-center justify-center dark:bg-slate-800 bg-white pb-2">
+      <div className="min-h-[11rem] max-h-[15rem] w-full flex items-center justify-center dark:bg-slate-800 bg-white pb-2">
         <div className="h-[90%] w-[95%] relative rounded-sm dark:bg-slate-750 bg-slate-100 border border-slate-400 dark:border-slate-700 hover:border-slate-600 dark:hover:border-slate-500 transion-all shadow-lg">
           <form
             onSubmit={(e) => sendReply(e)}

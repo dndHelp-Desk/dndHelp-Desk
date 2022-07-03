@@ -1,5 +1,6 @@
 import React, { FC, useMemo, useState, useEffect } from "react";
 import { RichTextEditor } from "@mantine/rte";
+import { toUpper } from "../../Reusable Functions/Reusable_Func";
 import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addTicket } from "../../Adapters/Data_Fetching/TicketsnUserData";
@@ -295,7 +296,7 @@ const NewTicket: FC<Props> = ({
           host: sendingAccount.host,
           port: sendingAccount.port,
           email: inputValue?.recipient_email,
-          subject: `New Issue Reported Ragarding ${inputValue?.category} || Ticket-ID: ${id}`,
+          subject: `${toUpper(inputValue?.category)} || Ticket-ID: ${id}`,
           ticket_id: id,
           email_body:
             inputValue?.state !== "solved"

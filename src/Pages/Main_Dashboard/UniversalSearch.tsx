@@ -99,7 +99,7 @@ const UniversalSearch: FC<Props> = ({
             name="searchAll"
             id="searchAll"
             ref={searchRef}
-            className="h-9 w-[20rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b-2 border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pr-10 text-xs font-semibold dark:font-medium font-sans"
+            className="h-9 w-[15rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:ring-0 border-b-2 border-0 border-slate-300 dark:border-slate-700 focus:border-b-blue-600 dark:focus:border-b-blue-600 dark:placeholder:text-slate-300 placeholder:text-slate-600  transition-all p-1 px-2 pr-10 text-xs font-semibold dark:font-medium font-sans"
             placeholder="Quick Search ..."
           />
           <button type="submit" className="outline-none focus:outline-none">
