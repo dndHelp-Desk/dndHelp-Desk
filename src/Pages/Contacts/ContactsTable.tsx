@@ -37,17 +37,21 @@ const Table: FC<Prop> = ({ setModal }) => {
               contact.branch_company
                 ?.toLowerCase()
                 ?.replace(/\s/g, "")
-                .includes(searchResults?.toLowerCase().replace(/\s/g, "")) ===
+                .includes(searchResults?.toLowerCase()?.replace(/\s/g, "")) ===
                 true ||
               contact?.name
                 .toLowerCase()
-                .replace(/\s/g, "")
-                .includes(searchResults.toLowerCase().replace(/\s/g, "")) ===
+                ?.replace(/\s/g, "")
+                .includes(searchResults.toLowerCase()?.replace(/\s/g, "")) ===
                 true ||
               contact?.phone
                 .toLowerCase()
-                .replace(/\s/g, "")
-                .includes(searchResults.toLowerCase().replace(/\s/g, "")) ===
+                ?.replace(/\s/g, "")
+                .includes(searchResults.toLowerCase()?.replace(/\s/g, "")) ===
+                true ||
+              contact?.email.toLowerCase()
+                ?.replace(/\s/g, "")
+                .includes(searchResults.toLowerCase()?.replace(/\s/g, "")) ===
                 true
           )
         )
