@@ -80,6 +80,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const alerts = useSelector(
     (state: RootState) => state.NotificationsData.alerts
   );
+  const [uploadingStatus, setUploadStatus] = useState<boolean>(false);
   const [recordingFile, setFile] = useState<boolean>(false);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const [value, onChange] = useState<string | any>(
@@ -240,203 +241,216 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const sendReply = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    //Sending Account ========================
-    let sendingAccount: any =
-      firstMessage &&
-      email_accounts?.filter(
-        (account) =>
-          account.name.toLowerCase() === firstMessage[0]?.team.toLowerCase()
-      )[0];
-
-    //Check if field are filled then send ======================
-    if (
-      user[0].name !== "User Loader" &&
-      reply.ticket_id !== "none" &&
-      reply.status !== "Status" &&
-      reply.status !== "" &&
-      reply.status !== "solved" &&
-      reply.message?.length >= 8
-    ) {
-      addReply(
-        reply.message,
-        reply.message_position,
-        threadId,
-        user[0].name,
-        user[0].email,
-        user[0].access,
-        clientName,
-        clientEmail,
-        firstMessage && firstMessage[0]?.team
-      );
-
-      //Send Using Nodemailer ===================
-      if (user[0]?.access !== "client") {
-        fetch("https://dndhelp-desk-first.herokuapp.com/send", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
+    if (uploadingStatus) {
+      dispatch(
+        updateAlert([
+          ...alerts,
+          {
+            message: "Still Uploading Image Please wait",
+            color: "bg-yellow-200",
+            id: new Date().getTime(),
           },
-          body: JSON.stringify({
-            from: `${sendingAccount.email}`,
-            company: `${company_details.name} ${sendingAccount.name}`,
-            password: sendingAccount.password,
-            host: sendingAccount.host,
-            port: sendingAccount.port,
-            email: clientEmail,
-            subject: `${toUpper(subject)} || Ticket-ID: ${threadId}`,
-            ticket_id: threadId,
-            email_body:
-              publicCannedRes?.filter((data) => data.name === "open").length >=
-              1
-                ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">Hi ${clientName},</p><h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px"><b> A ticket with ID: ${threadId} has been updated. In order to reply or update this issues please navigate to the link provided at the bottom, don't foget to grab your ticket-id.</b></h1><pstyle="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;"><b>Tickect Details:</b></p><ulstyle="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont ,monospace;line-height:25px"> <li><b>Brand:</b> ${brand}</li><li><b>Tickect-ID:</b> ${threadId}</li> <li><b>Due Date:</b> ${new Date(
-                    date
-                  ).toString()}</li><li><b>Status:</b> ${ticket_status}</li></ul> <p  style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;"> <b>Feedback:</b> </p> <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">${
-                    reply.message
-                  }   </p> <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px"><i>In order to update or respond to this issue please click the button below,</i></p> <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px"> <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>   </p> <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button> <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;"><b>Disclaimer</b></p> <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden"> The information contained in this communication from the sender is confidential. It is intended solely for use by     the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful.</p>`
-                : reply.message,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            const resData = data;
-            if (resData.status === "success") {
-              dispatch(
-                updateAlert([
-                  ...alerts,
-                  {
-                    message: "Response Has Been Sent.",
-                    color: "bg-green-200",
-                    id: new Date().getTime(),
-                  },
-                ])
-              );
-              setReply({
-                ...reply,
-                message: "<p></p>",
-                status: "Status",
-              });
-              onChange("<p></p>");
-            } else if (resData.status === "fail") {
-              dispatch(
-                updateAlert([
-                  ...alerts,
-                  {
-                    message: "Email Failed To Send",
-                    color: "bg-red-200",
-                    id: new Date().getTime(),
-                  },
-                ])
-              );
-            }
-          });
+        ])
+      );
+    } else if (!uploadingStatus) {
+      //Sending Account ========================
+      let sendingAccount: any =
+        firstMessage &&
+        email_accounts?.filter(
+          (account) =>
+            account.name.toLowerCase() === firstMessage[0]?.team.toLowerCase()
+        )[0];
+
+      //Check if field are filled then send ======================
+      if (
+        user[0].name !== "User Loader" &&
+        reply.ticket_id !== "none" &&
+        reply.status !== "Status" &&
+        reply.status !== "" &&
+        reply.status !== "solved" &&
+        reply.message?.length >= 8
+      ) {
+        addReply(
+          reply.message,
+          reply.message_position,
+          threadId,
+          user[0].name,
+          user[0].email,
+          user[0].access,
+          clientName,
+          clientEmail,
+          firstMessage && firstMessage[0]?.team
+        );
+
+        //Send Using Nodemailer ===================
+        if (user[0]?.access !== "client") {
+          fetch("https://dndhelp-desk-first.herokuapp.com/send", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              from: `${sendingAccount.email}`,
+              company: `${company_details.name} ${sendingAccount.name}`,
+              password: sendingAccount.password,
+              host: sendingAccount.host,
+              port: sendingAccount.port,
+              email: clientEmail,
+              subject: `${toUpper(subject)} || Ticket-ID: ${threadId}`,
+              ticket_id: threadId,
+              email_body:
+                publicCannedRes?.filter((data) => data.name === "open")
+                  .length >= 1
+                  ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">Hi ${clientName},</p><h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px"><b> A ticket with ID: ${threadId} has been updated. In order to reply or update this issues please navigate to the link provided at the bottom, don't foget to grab your ticket-id.</b></h1><pstyle="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;"><b>Tickect Details:</b></p><ulstyle="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont ,monospace;line-height:25px"> <li><b>Brand:</b> ${brand}</li><li><b>Tickect-ID:</b> ${threadId}</li> <li><b>Due Date:</b> ${new Date(
+                      date
+                    ).toString()}</li><li><b>Status:</b> ${ticket_status}</li></ul> <p  style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;"> <b>Feedback:</b> </p> <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">${
+                      reply.message
+                    }   </p> <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px"><i>In order to update or respond to this issue please click the button below,</i></p> <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px"> <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>   </p> <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button> <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;"><b>Disclaimer</b></p> <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden"> The information contained in this communication from the sender is confidential. It is intended solely for use by     the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful.</p>`
+                  : reply.message,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              const resData = data;
+              if (resData.status === "success") {
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: "Response Has Been Sent.",
+                      color: "bg-green-200",
+                      id: new Date().getTime(),
+                    },
+                  ])
+                );
+                setReply({
+                  ...reply,
+                  message: "<p></p>",
+                  status: "Status",
+                });
+                onChange("<p></p>");
+              } else if (resData.status === "fail") {
+                dispatch(
+                  updateAlert([
+                    ...alerts,
+                    {
+                      message: "Email Failed To Send",
+                      color: "bg-red-200",
+                      id: new Date().getTime(),
+                    },
+                  ])
+                );
+              }
+            });
+        }
+        onChange("<p></p>");
+        setReply({
+          ...reply,
+          message: "<p></p>",
+          status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+        });
+      } else if (reply.message?.length < 8) {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Make sure all fields are filled properly",
+              color: "bg-yellow-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+      }
+
+      //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
+      if (reply.status === "solved" && user[0]?.access !== "client") {
+        sendSolution();
+        setReply({
+          ...reply,
+          message: "<p></p>",
+          status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+        });
+        onChange("<p></p>");
+      } else if (reply.status === "reopened" && reply.message?.length >= 9) {
+        reOpenTicket(firstMessage[0]?.id);
+        setReply({
+          ...reply,
+          message: "<p></p>",
+          status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+        });
+        onChange("<p></p>");
+      } else if (
+        reply.status !== "" &&
+        reply.status !== "Status" &&
+        reply.status !== "solved" &&
+        reply.status !== "reopened" &&
+        reply.message?.length >= 8
+      ) {
+        changeStatus(firstMessage[0]?.id, reply.status);
+        setReply({
+          ...reply,
+          message: "<p></p>",
+          status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+        });
+      } else if (reply.message?.length < 8) {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Make sure all fields are filled properly",
+              color: "bg-yellow-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+      } else if (reply.status === "solved" && user[0]?.access === "client") {
+        changeStatus(firstMessage[0]?.id, "reopened");
+        reOpenTicket(firstMessage[0]?.id);
+        addReply(
+          reply.message,
+          reply.message_position,
+          reply.ticket_id,
+          user[0].name,
+          user[0].email,
+          user[0].access,
+          clientName,
+          clientEmail,
+          firstMessage && firstMessage[0]?.team
+        );
+        setReply({
+          ...reply,
+          message: "<p></p>",
+          status: firstMessage[0] ? firstMessage[0]?.status : "Status",
+        });
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Response Has Been Sent.",
+              color: "bg-green-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
       }
       onChange("<p></p>");
-      setReply({
-        ...reply,
-        message: "<p></p>",
-        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-      });
-    } else if (reply.message?.length < 8) {
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "Make sure all fields are filled properly",
-            color: "bg-yellow-200",
-            id: new Date().getTime(),
-          },
-        ])
-      );
+      if (statusSelectionRef && statusSelectionRef.current) {
+        statusSelectionRef.current.selectedIndex = 0;
+      }
+      if (reply.status !== "Status" && reply.status === "") {
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Please Select A Proper Status",
+              color: "bg-yellow-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+      }
+      scrollIntoView();
     }
-
-    //If There is Solution / Statusis solution send solution / reopen ticket if status is solved
-    if (reply.status === "solved" && user[0]?.access !== "client") {
-      sendSolution();
-      setReply({
-        ...reply,
-        message: "<p></p>",
-        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-      });
-      onChange("<p></p>");
-    } else if (reply.status === "reopened" && reply.message?.length >= 9) {
-      reOpenTicket(firstMessage[0]?.id);
-      setReply({
-        ...reply,
-        message: "<p></p>",
-        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-      });
-      onChange("<p></p>");
-    } else if (
-      reply.status !== "" &&
-      reply.status !== "Status" &&
-      reply.status !== "solved" &&
-      reply.status !== "reopened" &&
-      reply.message?.length >= 8
-    ) {
-      changeStatus(firstMessage[0]?.id, reply.status);
-      setReply({
-        ...reply,
-        message: "<p></p>",
-        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-      });
-    } else if (reply.message?.length < 8) {
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "Make sure all fields are filled properly",
-            color: "bg-yellow-200",
-            id: new Date().getTime(),
-          },
-        ])
-      );
-    } else if (reply.status === "solved" && user[0]?.access === "client") {
-      changeStatus(firstMessage[0]?.id, "reopened");
-      reOpenTicket(firstMessage[0]?.id);
-      addReply(
-        reply.message,
-        reply.message_position,
-        reply.ticket_id,
-        user[0].name,
-        user[0].email,
-        user[0].access,
-        clientName,
-        clientEmail,
-        firstMessage && firstMessage[0]?.team
-      );
-      setReply({
-        ...reply,
-        message: "<p></p>",
-        status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-      });
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "Response Has Been Sent.",
-            color: "bg-green-200",
-            id: new Date().getTime(),
-          },
-        ])
-      );
-    }
-    onChange("<p></p>");
-    if (statusSelectionRef && statusSelectionRef.current) {
-      statusSelectionRef.current.selectedIndex = 0;
-    }
-    if (reply.status !== "Status" && reply.status === "") {
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "Please Select A Proper Status",
-            color: "bg-yellow-200",
-            id: new Date().getTime(),
-          },
-        ])
-      );
-    }
-    scrollIntoView();
   };
 
   //Zoom AttachMent ========================
@@ -804,6 +818,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                   setReply={setReply}
                   value={value}
                   onChange={onChange}
+                  setUploadStatus={setUploadStatus}
                 />
               </div>
             </div>

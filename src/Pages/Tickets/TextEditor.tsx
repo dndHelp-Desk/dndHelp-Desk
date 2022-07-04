@@ -8,9 +8,15 @@ interface Props {
   setReply: (reply: any) => any;
   value: any;
   onChange: any;
+  setUploadStatus: any;
 }
 
-const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
+const TextEditor: FC<Props> = ({
+  setReply,
+  value,
+  onChange,
+  setUploadStatus,
+}) => {
   const threadId = useSelector((state: RootState) => state.Tickets.threadId);
   const company_details = useSelector(
     (state: RootState) => state.Tickets.company_details
@@ -24,6 +30,7 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
   //Upload Files ================================
   const handleImageUpload = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
+      setUploadStatus(true);
       //Upload File if there is one
       const storage = getStorage();
       uploadBytes(
@@ -38,8 +45,12 @@ const TextEditor: FC<Props> = ({ setReply, value, onChange }) => {
         })
         .then((downloadURL) => {
           resolve(downloadURL);
+          setUploadStatus(false);
         })
-        .catch(() => reject(new Error("Upload failed")));
+        .catch(() => {
+          reject(new Error("Upload failed"));
+          setUploadStatus(false);
+        });
     });
 
   //Component ============================
