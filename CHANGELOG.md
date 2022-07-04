@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.4](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.3...v0.8.4) (2022-07-04)
+
+
+### Bug Fixes
+
+* **tickets:** avoid agents from opening tickets while still uploading an image ([6ab1e6a](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/6ab1e6a45af1704ef06ebec4eb01709ca64fc752)), closes [#38](https://github.com/dndHelp-Desk/dndHelp-Desk/issues/38)
+
 ### [0.8.3](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.2...v0.8.3) (2022-07-03)
 
 
