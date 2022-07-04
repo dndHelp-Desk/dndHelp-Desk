@@ -64,7 +64,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
   );
-  const [showCanned, setCanned] = useState<boolean>(false);
   const [subject, setSubject] = useState<string>("");
   const allTickets = useSelector(
     (state: RootState) => state.Tickets.allTickets
@@ -190,20 +189,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         ticket_id: threadId,
         email_body:
           publicCannedRes?.filter((data) => data.name === "solved").length >= 1
-            ? publicCannedRes
-                ?.filter((data) => data.name === "solved")[0]
-                ?.message?.replace("${clientName}", " " + clientName)
-                ?.replace("${threadId}", " " + threadId)
-                ?.replace("${threadId}", threadId)
-                ?.replace("${brand}", " " + brand)
-                ?.replace("${closingTime}", " " + new Date().toString())
-                ?.replace("${reply.message}", " " + reply.message)
-                ?.replace("${ticket_status}", " " + ticket_status)
-                ?.replace("${ticket_status}", " " + ticket_status)
-                ?.replace(
-                  "${new Date(firstMessage[0]?.due_date).toString()}",
-                  " " + new Date(date).toString()
-                )
+            ? `<p     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">      Hi ${clientName},   </p>   <h1     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">    <b> A ticket with ID: ${threadId} has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>   </h1>   <p     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">     <b>Tickect Details:</b>   </p>   <ul     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;line-height:25px">     <li><b>Brand:</b> ${brand}     </li>     <li><b>Tickect-ID:</b> ${threadId}     </li>     <li><b>Closed On:</b> ${new Date().toString()}     </li>     <li><b>Status:</b>       Resolved     </li>   </ul>   <p     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">     <b>Resolution:</b>   </p>   <p     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">     ${
+                reply.message
+              }   </p>   <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">     <i>In order to update or respond to this issue please click the button below,</i>   </p>   <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px">     <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>You can alternatively click here.</a></i>   </p>   <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/support?threadId=${threadId}`}>Update or Respond Here</a></button>   <p     style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;">     <b>Disclaimer</b>   </p>   <p     style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">     The information contained in this communication from the sender is confidential. It is intended solely for use by     the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly     prohibited and may be unlawful.  </p>`
             : reply.message,
       }),
     })
@@ -300,20 +288,11 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             email_body:
               publicCannedRes?.filter((data) => data.name === "open").length >=
               1
-                ? publicCannedRes
-                    ?.filter((data) => data.name === "open")[0]
-                    .message?.replace("${clientName}", " " + clientName)
-                    ?.replace("${threadId}", " " + threadId)
-                    ?.replace("${threadId}", " " + threadId)
-                    ?.replace("${brand}", " " + brand)
-                    ?.replace("${closingTime}", " " + new Date().toString())
-                    ?.replace("${reply.message}", " " + reply.message)
-                    ?.replace("${ticket_status}", " " + ticket_status)
-                    ?.replace("${ticket_status}", " " + ticket_status)
-                    ?.replace(
-                      "${new Date(firstMessage[0]?.due_date).toString()}",
-                      " " + new Date(date).toString()
-                    )
+                ? `<p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">Hi ${clientName},</p><h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px"><b> A ticket with ID: ${threadId} has been updated. In order to reply or update this issues please navigate to the link provided at the bottom, don't foget to grab your ticket-id.</b></h1><pstyle="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;"><b>Tickect Details:</b></p><ulstyle="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont ,monospace;line-height:25px"> <li><b>Brand:</b> ${brand}</li><li><b>Tickect-ID:</b> ${threadId}</li> <li><b>Due Date:</b> ${new Date(
+                    date
+                  ).toString()}</li><li><b>Status:</b> ${ticket_status}</li></ul> <p  style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;"> <b>Feedback:</b> </p> <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden">${
+                    reply.message
+                  }   </p> <p style="color:#0c0c30;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px"><i>In order to update or respond to this issue please click the button below,</i></p> <p style="color:blue;font-family:Arial, Helvetica, sans-serif;line-height:20px;font-size:14px"> <i> <a target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>You can alternatively click here.</a></i>   </p> <button style="background:#e46823;padding-left:10px;padding-right:10px;padding:15px;border-radius:5px;border-width: 0px;outline-width: 0px;box-shadow: 0px 1px 0px rgba(0, 0, 0.68, 0.2);cursor: pointer;"><a style="text-decoration:none;color:#fff;font-weight: 700" target="_blank" href=${`https://www.dndhelp-desk.co.za/logIn`}>Update or Respond Here</a></button> <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;"><b>Disclaimer</b></p> <p style="color:#6b7280;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:15px;white-space:normal;overflow:hidden"> The information contained in this communication from the sender is confidential. It is intended solely for use by     the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any     disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful.</p>`
                 : reply.message,
           }),
         })
@@ -841,21 +820,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                         vertical: `top-[-280%]`,
                       }}
                     />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCanned((prev) => {
-                          if (prev === true) {
-                            return false;
-                          } else {
-                            return true;
-                          }
-                        });
-                      }}
-                      className="h-full w-full flex items-center justify-center outline-none focus:outline-none"
-                    >
+                    <div className="h-full w-full flex items-center justify-center outline-none focus:outline-none">
                       <BiCollection className="text-base hover:opacity-80" />
-                    </button>
+                    </div>
                   </div>
                   <CannedResponses
                     setReply={setReply}

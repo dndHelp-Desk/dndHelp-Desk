@@ -413,11 +413,11 @@ const DatePicker: FC<Props> = ({ openDatePicker, setDateOpen }) => {
         {/**Bottom Nav ========================= */}
         <div className="row-span-1 w-full border-t border-slate-300 dark:border-slate-600 flex justify-between items-center">
           <div className="flex items-center justify-between space-x-2 p-1">
-            <div className="text-xs dark:text-slate-400 text-slate-700 font-sans w-[28] h-8 border dark:border-slate-600 border-slate-300 rounded overflow-hidden whitespace-nowrap overflow-ellipsis p-2 flex items-center justify-center">
-              <span>From {new Date(startDate).toDateString()}</span>
+            <div className="text-xs dark:text-slate-400 text-slate-700 font-sans w-32 h-8 border dark:border-slate-600 border-slate-300 rounded-sm overflow-hidden whitespace-nowrap overflow-ellipsis p-2 flex items-center justify-center">
+              <span><b>From</b> {new Date(startDate).toDateString()}</span>
             </div>
-            <div className="text-xs dark:text-slate-400 text-slate-700 font-sans w-[28] h-8 border dark:border-slate-600 border-slate-300 rounded overflow-hidden whitespace-nowrap overflow-ellipsis p-2 flex items-center justify-center">
-              <span>To {new Date(endDate ? endDate : "").toDateString()}</span>
+            <div className="text-xs dark:text-slate-400 text-slate-700 font-sans w-32 h-8 border dark:border-slate-600 border-slate-300 rounded-sm overflow-hidden whitespace-nowrap overflow-ellipsis p-2 flex items-center justify-center">
+              <span><b>To</b> {new Date(endDate ? endDate : "").toDateString()}</span>
             </div>
           </div>
           <div className="flex items-center space-x-2 p-1">
