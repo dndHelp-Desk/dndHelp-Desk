@@ -464,7 +464,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   //Loop Through Each Message In a thread ====================
   const thread =
     threadMessages &&
-    threadMessages.map((message, index) => {
+    threadMessages.map((message:any, index:any) => {
       return (
         <div
           ref={threadMessages.length - 1 === index ? targetRef : scrollToNone}
