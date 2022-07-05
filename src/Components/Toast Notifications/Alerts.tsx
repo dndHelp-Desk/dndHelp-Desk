@@ -1,8 +1,8 @@
 import { FC, useState, useEffect } from "react";
 import { BiX } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAlert } from "../Redux/Slices/NotificationsSlice";
-import { AppDispatch, RootState } from "../Redux/store";
+import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
+import { AppDispatch, RootState } from "../../Redux/store";
 
 type Props = {
   alert: any;
@@ -66,7 +66,7 @@ const Alerts: FC<Props> = ({ alert }) => {
           }`}
         ></div>
       </div>
-      <div className="col-span-9 flex flex-col justify-center px-1 overflow-hidden whitespace-nowrap overflow-ellipsis space-y-[-0.2rem]">
+      <div className="col-span-9 flex flex-col justify-center px-1 overflow-hidden whitespace-nowrap overflow-ellipsis space-y-1">
         <span className="text-sm dark:text-slate-300 text-slate-800 font-semibold">
           {alert?.color === "bg-green-200"
             ? "Success"

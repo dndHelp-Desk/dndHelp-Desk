@@ -224,13 +224,19 @@ const UniversalSearch: FC<Props> = ({
               <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2">
                 <div className="w-full underline capitalize">Email</div>
                 <div className="w-full text-xs lowercase">
-                  {currentView?.email}
+                  {currentView?.email?.split(/[/,]/)?.map((email: any) => {
+                    return (
+                      <div key={email} className="break-all">
+                        {email}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
                 <div className="w-full underline">Phone</div>
                 <div className="w-full text-xs">
-                  {currentView?.phone?.split("/")?.map((num: any) => {
+                  {currentView?.phone?.split(/[/,]/)?.map((num: any) => {
                     return (
                       <div key={num} className="break-all">
                         {num}

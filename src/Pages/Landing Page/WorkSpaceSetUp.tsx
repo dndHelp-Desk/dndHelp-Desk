@@ -12,7 +12,7 @@ import {
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore";
 import SignUp from "./SignUp";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import AlertsWrapper from "../../Components/AlertsWrapper";
+import AlertsWrapper from "../../Components/Toast Notifications/AlertsWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 

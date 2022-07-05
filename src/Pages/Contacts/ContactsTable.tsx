@@ -11,22 +11,30 @@ import {
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { BsTwitter, BsWhatsapp } from "react-icons/bs";
 import { deleteContact } from "../../Adapters/Data_Fetching/TicketsnUserData";
-import EditContact from "./EditContact";
 import { RootState } from "../../Redux/store";
 import ActionPanel from "../../Components/ActionPanel";
+import NewContact from "./NewContact";
 
-interface Prop {
-  setModal: any;
-}
-
-const Table: FC<Prop> = ({ setModal }) => {
+const Table: FC = () => {
   const contacts = useSelector((state: RootState) => state.Tickets.contacts);
+  const [contactModal, setModal] = useState<boolean | any>(false);
   const [edit, setEdit] = useState<boolean | any>(false);
   const [loadMore, setLimit] = useState<number | any>(10);
   const [searchResults, setResults] = useState<string | any>("");
   const [selectedArray, select] = useState<any>([]);
   const [filteredContacts, setContacts] = useState<any>([]);
   const [openPanel, setActionPanel] = useState<boolean>(false);
+  const [emailChipValid, setEmailValid] = useState<boolean>(false);
+  const [phoneChipValid, setPhoneValid] = useState<boolean>(false);
+  const [newContactValue, setValue] = useState<any>({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    company: "",
+    twitter_handle: "",
+    whatsapp_number: "",
+    contact_id: "",
+  });
 
   //Filter Contacts ============
   useEffect(() => {
@@ -34,7 +42,7 @@ const Table: FC<Prop> = ({ setModal }) => {
       ? setContacts(
           contacts.filter(
             (contact) =>
-              contact.branch_company
+              contact?.branch_company
                 ?.toLowerCase()
                 ?.replace(/\s/g, "")
                 .includes(searchResults?.toLowerCase()?.replace(/\s/g, "")) ===
@@ -49,7 +57,8 @@ const Table: FC<Prop> = ({ setModal }) => {
                 ?.replace(/\s/g, "")
                 .includes(searchResults.toLowerCase()?.replace(/\s/g, "")) ===
                 true ||
-              contact?.email.toLowerCase()
+              contact?.email
+                .toLowerCase()
                 ?.replace(/\s/g, "")
                 .includes(searchResults.toLowerCase()?.replace(/\s/g, "")) ===
                 true
@@ -67,7 +76,7 @@ const Table: FC<Prop> = ({ setModal }) => {
   // const markAll = () => {
   //   select([]);
   //   let arr: any = [];
-  //   contacts.length >= 1 && contacts.forEach((contact) => arr.push(contact.id));
+  //   contacts.length >= 1 && contacts.forEach((contact) => arr.push(contact?.id));
   //   select(arr);
   // };
 
@@ -77,7 +86,7 @@ const Table: FC<Prop> = ({ setModal }) => {
     filteredContacts?.slice(loadMore - 10, loadMore)?.map((contact: any) => {
       return (
         <div
-          key={contact.id}
+          key={contact?.id}
           className="h-[3.7rem] rounded border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-750 p-2 px-4 pr-14 flex items-center justify-between relative"
         >
           <div className="flex items-center space-x-4">
@@ -87,45 +96,76 @@ const Table: FC<Prop> = ({ setModal }) => {
               name="mark"
               id="mark"
               checked={
-                selectedArray.includes(contact.id) === true ? true : false
+                selectedArray.includes(contact?.id) === true ? true : false
               }
               onChange={(e) =>
                 e.target.checked === true
-                  ? select([...selectedArray, contact.id])
+                  ? select([...selectedArray, contact?.id])
                   : select(
-                      selectedArray.filter((data: any) => data !== contact.id)
+                      selectedArray.filter((data: any) => data !== contact?.id)
                     )
               }
               className="cursor-pointer w-3 h-3 border rounded-sm border-gray-400 dark:border-slate-700 bg-white dark:bg-slate-800 outline-none hidden md:flex"
             />
+            {/**End Editi Contact ======================== */}
+            <abbr title="Edit">
+              <button
+                onClick={() => {
+                  setEdit(true);
+                  setModal(true);
+                  setPhoneValid(true);
+                  setEmailValid(true);
+                  setValue({
+                    name: contact?.name?.split(/[/,]/gi)[0],
+                    email: contact?.email,
+                    phoneNumber: contact?.phone,
+                    company: contact?.branch_company,
+                    twitter_handle: contact?.twitter_handle
+                      ? contact?.twitter_handle
+                      : "",
+                    whatsapp_number: contact?.whatsapp_number
+                      ? contact?.whatsapp_number
+                      : "",
+                    contact_id: contact?.id,
+                  });
+                }}
+                className="text-slate-600 dark:text-gray-400 h-6 w-6 flex justify-center items-center border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-750 dark:hover:bg-slate-700 hover:bg-slate-200 cursor-pointer rounded focus:outline-none focus:border-gray-800"
+              >
+                <HiOutlinePencilAlt />
+              </button>
+            </abbr>
             {/**End of Mark Contact ======================== */}
             <div className="h-10 w-10 rounded-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 flex justify-center items-center text-base font-semibold dark:font-medium font-sans dark:text-slate-300 text-slate-600 capitalize">
-              {contact.name?.split("/")[0]?.charAt(0)}
+              {contact?.name?.split(/[/,]/gi)[0]?.charAt(0)}
             </div>
-            <div className="tracking-tight flex flex-col justify-center space-y-0 px-2 text-sm capitalize font-semibold dark:font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap overflow-hidden">
-              <span className="text-sm">{contact.name?.split("/")[0]}</span>
-              <span className="text-xs text-slate-500 dark:text-slate-400">
-                {contact.branch_company}
+            <div className="tracking-tight flex flex-col justify-center space-y-1 px-2 text-xs capitalize font-semibold dark:font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap overflow-hidden">
+              <span>{contact?.name?.split(/[/,]/gi)[0]}</span>
+              <span className="text-slate-500 dark:text-slate-400 font-medium">
+                {contact?.branch_company}
               </span>
             </div>
           </div>
-          <div className="h-12 flex items-center gap-2">
+          <div className="h-12 hidden md:flex items-center gap-2">
             {" "}
             <div className="contact_Option group">
               <HiOutlinePhone />
               <div className="hidden group-hover:flex absolute top-10 pt-3">
-                <div className="contact_Tooltip after:content-[''] after:absolute after: after:top-[0.25rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t after:border-l after:border-inherit italic font-medium">
+                <div className="contact_Tooltip after:content-[''] after:absolute after: after:top-[0.25rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t after:border-l after:border-inherit italic font-medium text-xs whitespace-nowrap overflow-hidden overflow-ellipsis">
                   {" "}
-                  {contact.phone}
+                  {contact?.phone?.split(/[/,]/)?.map((data: any) => {
+                    return <div key={data}>{data}</div>;
+                  })}
                 </div>
               </div>
             </div>
             <div className="contact_Option group">
               <HiOutlineMail />
               <div className="hidden group-hover:flex absolute top-10 pt-3">
-                <div className="contact_Tooltip after:content-[''] after:absolute after: after:top-[0.25rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t after:border-l after:border-inherit lowercase italic font-medium">
+                <div className="contact_Tooltip after:content-[''] after:absolute after: after:top-[0.25rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t after:border-l after:border-inherit lowercase italic font-medium text-xs whitespace-nowrap overflow-hidden overflow-ellipsis">
                   {" "}
-                  {contact.email}
+                  {contact?.email?.split(/[/,]/)?.map((data: any) => {
+                    return <div key={data}>{data}</div>;
+                  })}
                 </div>
               </div>
             </div>
@@ -155,12 +195,20 @@ const Table: FC<Prop> = ({ setModal }) => {
   //Component  =============================
   return (
     <div className="rounded p-2 pb-4 w-full h-[52rem] relative">
-      {/**Edit Contact ============ */}
-      <EditContact
+      {/**New Contact ========================== */}
+      <NewContact
+        contactModal={contactModal}
+        setModal={setModal}
+        newContactValue={newContactValue}
+        setValue={setValue}
         edit={edit}
         setEdit={setEdit}
-        selectedArray={selectedArray}
+        phoneChipValid={phoneChipValid}
+        setPhoneValid={setPhoneValid}
+        emailChipValid={emailChipValid}
+        setEmailValid={setEmailValid}
       />
+      {/**New Contact ========================== */}
 
       {/**Delete Contact Action Panel */}
       <ActionPanel
@@ -172,30 +220,9 @@ const Table: FC<Prop> = ({ setModal }) => {
       {/**Delete Contact Action Panel */}
 
       <div className="flex flex-col md:flex-row p-4 px-2 justify-between items-start lg:items-stretch w-full space-y-2 md:space-y-0 z-[99]">
-        <div className="flex flex-col md:flex-row items-start lg:items-center">
-          <div className="flex items-center gap-2">
-            <abbr title="Edit">
-              <button
-                onClick={() => setEdit(true)}
-                className="text-slate-600 dark:text-gray-400 h-10 w-10 flex justify-center items-center p-2 border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-750 dark:hover:bg-slate-700 hover:bg-slate-200 cursor-pointer rounded focus:outline-none focus:border-gray-800"
-              >
-                <HiOutlinePencilAlt />
-              </button>
-            </abbr>
-            <abbr title="Delete">
-              <button
-                onClick={() => {
-                  setActionPanel(true);
-                }}
-                className="text-red-500 p-2 border-slate-300 dark:border-slate-700 border bg-slate-100 dark:bg-slate-750 dark:hover:bg-slate-700 hover:bg-slate-200  h-10 w-10 flex justify-center items-center cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
-              >
-                <HiOutlineTrash />
-              </button>
-            </abbr>
-          </div>
-        </div>
-        <div className="flex items-center justify-end gap-4">
-          <div className="relative h-8 w-48  border-b dark:border-slate-700 border-slate-400">
+        {/**Search contact ===================== */}
+        <div className="flex w-1/2 xl:w-[30%]">
+          <div className="relative h-10 w-full rounded-full dark:bg-slate-750 bg-slate-50 border border-slate-300 dark:border-slate-700">
             <input
               type="search"
               name="search"
@@ -207,13 +234,29 @@ const Table: FC<Prop> = ({ setModal }) => {
               }}
               value={searchResults}
               placeholder="Quick Search ..."
-              className="bg-transparent w-full h-full border-0 focus:border-0 dark:border-slate-400 border-slate-700 outline-none focus:outline-none focus:ring-0 text-sm px-4 pl-8 focus:ring-blue-700 text-slate-600 dark:text-slate-400 placeholder:text-slate-600 dark:placeholder:text-slate-400"
+              className="bg-transparent w-full h-full border-0 focus:border-0 dark:border-slate-400 border-slate-700 outline-none focus:outline-none focus:ring-0 text-sm px-4 pr-8 focus:ring-blue-700 text-slate-600 dark:text-slate-400 placeholder:text-slate-600 dark:placeholder:text-slate-400"
             />
-            <HiOutlineSearch className="absolute text-slate-600 dark:text-slate-400 text-lg top-2 left-2" />
+            <HiOutlineSearch className="absolute text-slate-600 dark:text-slate-400 text-lg top-2.5 right-3" />
+          </div>
+        </div>
+        {/**Search contact ===================== */}
+
+        <div className="flex items-center justify-end space-x-2">
+          <div className="flex items-center gap-2">
+            <abbr title="Delete">
+              <button
+                onClick={() => {
+                  setActionPanel(true);
+                }}
+                className="text-red-500 p-2 border-slate-300 dark:border-slate-700 border bg-slate-100 dark:bg-slate-750 dark:hover:bg-slate-700 hover:bg-slate-200 h-9 w-9 flex justify-center items-center cursor-pointer rounded-sm focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
+              >
+                <HiOutlineTrash />
+              </button>
+            </abbr>
           </div>
           <button
             onClick={() => setModal(true)}
-            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-blue-700 bg-slate-800 transition duration-150 ease-in-out hover:-translate-y-1 h-10 px-4 rounded-sm flex items-center justify-center space-x-2"
+            className="text-slate-100 text-sm font-medium cursor-pointer outline-none focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray dark:bg-blue-700 bg-slate-800 transition duration-150 ease-in-out hover:opacity-80 h-9 px-4 rounded-sm flex items-center justify-center space-x-2"
           >
             <HiUserAdd className="text-lg" />
             <span>Add New</span>

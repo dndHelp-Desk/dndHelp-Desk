@@ -313,7 +313,7 @@ const NewTicket: FC<Props> = ({
             password: sendingAccount.password,
             host: sendingAccount.host,
             port: sendingAccount.port,
-            email: inputValue?.recipient_email,
+            email: inputValue?.recipient_email?.replace(/[/]/gi, ","),
             subject: `${toUpper(inputValue?.category)} || Ticket-ID: ${id}`,
             ticket_id: id,
             email_body:

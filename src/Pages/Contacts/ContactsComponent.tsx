@@ -1,12 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import Table from "./ContactsTable";
-import NewContact from "./NewContact";
 import { Navigate } from "react-router";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
 const ContactsComponent: FC = () => {
-  const [contactModal, setModal] = useState<boolean | any>(false);
   const member_details = useSelector(
     (state: RootState) => state.UserInfo.member_details
   );
@@ -22,8 +20,7 @@ const ContactsComponent: FC = () => {
         <h1 className="text-slate-800 dark:text-slate-300 text-2xl font-sans font-bold">
           Contacts
         </h1>
-        <Table setModal={setModal} />
-        <NewContact contactModal={contactModal} setModal={setModal} />
+        <Table />
       </div>
     </div>
   );

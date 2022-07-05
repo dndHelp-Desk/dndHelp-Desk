@@ -26,7 +26,7 @@ import {
   setCompany,
   updateUser,
 } from "../../Redux/Slices/UserSlice";
-import AlertsWrapper from "../../Components/AlertsWrapper";
+import AlertsWrapper from "../../Components/Toast Notifications/AlertsWrapper";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import { AppDispatch, RootState } from "../../Redux/store";
 import Help from "../../Components/Help";
@@ -274,7 +274,7 @@ const LogIn: FC = () => {
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="email-address" className="sr-only">
-                  Your Company name
+                  Your Workspace Name
                 </label>
                 <input
                   type="text"
@@ -282,7 +282,7 @@ const LogIn: FC = () => {
                   id="company_name"
                   required
                   aria-required
-                  aria-placeholder="Company name..."
+                  aria-placeholder="Workspace name..."
                   onChange={(e) => {
                     window.localStorage.setItem(
                       "organization_name",
@@ -297,7 +297,7 @@ const LogIn: FC = () => {
                   }}
                   value={inputValues.company}
                   className="appearance-none bg-slate-100 rounded-none relative block w-full px-3 py-2 border border-slate-400 placeholder-gray-800 text-gray-800 font-medium rounded-t focus:outline-none focus:ring-0 focus:border-blue-800 focus:z-10 sm:text-sm"
-                  placeholder="Company name"
+                  placeholder="Workspace name"
                 />
               </div>
               <div>

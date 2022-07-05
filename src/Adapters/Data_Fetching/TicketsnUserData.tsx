@@ -204,13 +204,17 @@ export const newContact = (
   name: string,
   email: string,
   phone: string,
-  company: string
+  company: string,
+  twitter_handle: string,
+  whatsapp_number: string
 ) => {
   addDoc(contactsRef, {
     name: name,
     email: email,
     phone: phone,
     branch_company: company,
+    twitter_handle: twitter_handle,
+    whatsapp_number: whatsapp_number,
   });
 };
 
@@ -218,14 +222,20 @@ export const newContact = (
 export const editContact = (
   id: string,
   name: string,
+  email: string,
   phone: string,
-  email: string
+  company: string,
+  twitter_handle: string,
+  whatsapp_number: string
 ) => {
   let docRef = doc(db, `companies/${org}/contacts`, id);
   updateDoc(docRef, {
     name: name,
-    phone: phone,
     email: email,
+    phone: phone,
+    branch_company: company,
+    twitter_handle: twitter_handle,
+    whatsapp_number: whatsapp_number,
   });
 };
 

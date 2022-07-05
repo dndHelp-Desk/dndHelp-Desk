@@ -4,3 +4,8 @@ export const toUpper = (str: string) => {
   otherPart?.shift();
   return firstChar + otherPart?.join("")?.toLowerCase();
 };
+
+  //Email Valkidation function ============
+ export const isEmail = (email:any)=> {
+  return /[\w\d.-]+@[\w\d.-]+\.[\w\d.-]+/.test(email);
+}

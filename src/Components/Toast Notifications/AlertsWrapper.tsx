@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { useSelector } from "react-redux";
 import Alerts from "./Alerts";
-import { RootState } from "../Redux/store";
+import { RootState } from "../../Redux/store";
 
 const AlertsWrapper: FC = memo(() => {
   //Data From the store ====

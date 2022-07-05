@@ -16,7 +16,7 @@ import { changeLocation, changeTheme } from "../../Redux/Slices/UserSlice";
 import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
-import AlertsWrapper from "../../Components/AlertsWrapper";
+import AlertsWrapper from "../../Components/Toast Notifications/AlertsWrapper";
 import TicketsnUserData from "../../Adapters/Data_Fetching/TicketsnUserData";
 import Profile from "../Auth/Profile";
 import Notification from "./Notification";
