@@ -59,6 +59,10 @@ const TextEditor: FC<Props> = ({
       value={value}
       onImageUpload={handleImageUpload}
       onChange={onChange}
+      onKeyDown={(e)=>{
+        if(e.key === "/"){
+        }
+      }}
       id=""
       className="h-full w-full border-0 text-inherit roundedEditor relative overflow-hidden pl-0"
       classNames={{

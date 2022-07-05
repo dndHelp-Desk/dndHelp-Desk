@@ -946,6 +946,10 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>
             </div>
           </form>
+
+          {/**Slash Command Canned Responses Results ==== */}
+          <div className="absolute left-8 top-11 z-[9999] h-7 w-fit p-1 px-2 rounded-full bg-white dark:bg-slate-800 border border-slate-400 dark:border-slate-600 italic text-xs text-slate-700 dark:text-slate-300 hidden jflex justify-center items-center cursor-pointer">Late delivery</div>
+          {/**Slash Command Canned Responses Results ==== */}
         </div>
       </div>
     </div>

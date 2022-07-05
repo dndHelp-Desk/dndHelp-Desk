@@ -2,7 +2,7 @@ import {FC} from 'react'
 
 const Applications:FC = ()=> {
   return (
-    <div className="col-span-4 md:col-span-3">
+    <div className="col-span-4 md:col-span-3 p-4 md:pl-0">
       <div className="w-full h-40 rounded bg-white dark:bg-slate-800"></div>
     </div>
   );

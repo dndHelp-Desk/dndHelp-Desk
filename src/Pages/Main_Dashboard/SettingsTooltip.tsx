@@ -59,7 +59,7 @@ const SettingsTooltip: FC = () => {
                 }`}
               >
                 <BsPeopleFill />
-                <span>Team</span>
+                <span>Team & Users</span>
               </NavLink>
             </li>
             <li

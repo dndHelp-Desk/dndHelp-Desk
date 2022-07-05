@@ -240,7 +240,7 @@ const Home: FC = () => {
                       <img
                         src={noUsers}
                         alt="no-users"
-                        className="object-center object-fit w-full h-[90%]"
+                        className="object-center object-fit w-full h-[70%]"
                       />
                     </div>
                   </div>

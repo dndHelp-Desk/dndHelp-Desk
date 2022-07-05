@@ -258,7 +258,7 @@ const NewContact: FC<Props> = ({
             </div>
 
             {/**Added Emails Chips ===================== */}
-            <div className="flex flex-wrap w-full h-[4rem] p-2 gap-1 border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 rounded overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
+            <div className="flex flex-wrap w-full h-[4.35rem] p-2 gap-1 border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 rounded overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
               {newContactValue?.email?.trim()?.length >= 3 &&
                 newContactValue?.email
                   ?.trim()
@@ -383,7 +383,7 @@ const NewContact: FC<Props> = ({
             </div>
 
             {/**Added Phone Number Chips ===================== */}
-            <div className="flex flex-wrap w-full h-[4rem] p-2 gap-1 border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 rounded">
+            <div className="flex flex-wrap w-full h-[4.35rem] p-2 gap-1 border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 rounded">
               {newContactValue?.phoneNumber?.trim()?.length >= 3 &&
                 newContactValue?.phoneNumber
                   ?.trim()
@@ -509,6 +509,15 @@ const NewContact: FC<Props> = ({
           <button
             type="button"
             onClick={() => {
+              setValue({
+                name: "",
+                email: "",
+                phoneNumber: "",
+                company: "",
+                twitter_handle: "",
+                whatsapp_number: "",
+                contact_id: "",
+              });
               setModal(false);
               setEdit(false);
               setPhoneValid(false);

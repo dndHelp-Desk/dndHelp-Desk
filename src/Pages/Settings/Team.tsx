@@ -4,11 +4,11 @@ import defaultProfile from "../../Assets/logos/faviLight.png";
 import noUsers from "./../Main_Dashboard/images/no-userss.svg";
 import { Navigate } from "react-router";
 import { deleteUser } from "../../Adapters/Data_Fetching/TicketsnUserData";
-import { BsFillTrashFill, BsPencilSquare, BsSearch } from "react-icons/bs";
+import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
+import { BiSearchAlt } from "react-icons/bi";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
 import NewUser from "./NewUser";
 import { AppDispatch, RootState } from "../../Redux/store";
-import EditUser from "./EditUser";
 import ActionPanel from "../../Components/ActionPanel";
 
 const Team: FC = () => {
@@ -23,11 +23,20 @@ const Team: FC = () => {
     (state: RootState) => state.UserInfo.member_details
   );
   const [newUserModal, setModal] = useState<boolean | any>(false);
-  const [editUserModal, setEditModal] = useState<boolean | any>(false);
-  const [editId, setId] = useState<any>({});
-  const [search, setSearch] = useState<string | any>(" ");
+  const [edit, setEdit] = useState<boolean>(false);
+  const [search, setSearch] = useState<string | any>("");
   const [openPanel, setActionPanel] = useState<boolean>(false);
   const [argument, setArg] = useState<any[]>([]);
+  const [inputValues, setValues] = useState<any>({
+    name: "",
+    dept: "",
+    email: "",
+    access: "",
+    bio: "",
+    active: true,
+    password: "",
+    companies: "",
+  });
 
   //Delete User ================
   const deleteMember = () => {
@@ -73,16 +82,20 @@ const Team: FC = () => {
   const users =
     allMembers.length >= 1 &&
     allMembers.map((user) => {
-      let id = user.id;
+      let id = user?.id;
       return (
         <tr
           key={id}
           className={`w-full snap_child h-16 rounded dark:bg-slate-800 bg-white grid grid-cols-9 space-x-4 p-2 border dark:border-slate-700 border-slate-300 ${
-            user.name
+            user?.name
               .toLowerCase()
               .replace(/\s/g, "")
               .includes(search.toLowerCase().replace(/\s/g, "")) === true ||
-            user.email
+            user?.email
+              .toLowerCase()
+              .replace(/\s/g, "")
+              .includes(search.toLowerCase().replace(/\s/g, "")) === true ||
+            user?.access
               .toLowerCase()
               .replace(/\s/g, "")
               .includes(search.toLowerCase().replace(/\s/g, "")) === true
@@ -94,8 +107,8 @@ const Team: FC = () => {
             <div className="h-10 w-10 rounded border-2 p-[2px] dark:border-slate-500 border-slate-400 relative overflow-hidden">
               <img
                 src={
-                  user.photoUrl !== null && user.photoUrl !== ""
-                    ? user.photoUrl
+                  user?.photoUrl !== null && user?.photoUrl !== ""
+                    ? user?.photoUrl
                     : defaultProfile
                 }
                 alt="profile"
@@ -103,30 +116,32 @@ const Team: FC = () => {
               />
             </div>
             <p className="text-sm whitespace-nowrap tracking-tight overflow-hidden text-ellipsis font-medium capitalize dark:text-slate-300 text-slate-800">
-              <abbr title={user.name}>{user.name}</abbr>
+              <abbr title={user?.name}>{user?.name}</abbr>
               <br />
               <small className="capitalize col-span-1 dark:text-slate-400 text-slate-700 tracking-tight">
-                {user.dept} / {user.access}
+                {user?.access}
               </small>
             </p>
           </td>
           <td className="col-span-4 h-full">
             <p className="h-full text-xs lowercase font-medium italic whitespace-nowrap overflow-hidden text-ellipsis dark:text-slate-400 text-slate-700 hidden md:flex items-center">
-              <abbr title={user.email}>{user.email}</abbr>
+              <abbr title={user?.email}>{user?.email}</abbr>
             </p>
           </td>
           <td className="col-span-1 text-xs items-right flex justify-end items-center space-x-4">
             {/**Edit Account */}
             <button
               onClick={() => {
-                setEditModal(true);
-                setId({
-                  id: user.id,
-                  name: user.name,
-                  dept: user.dept,
-                  access: user.access,
-                  active: user.active,
-                  companies: user.companies,
+                setEdit(true);
+                setModal(true);
+                setValues({
+                  id: user?.id,
+                  name: user?.name,
+                  email: user?.email,
+                  dept: user?.dept,
+                  access: user?.access,
+                  active: user?.active,
+                  companies: user?.companies,
                 });
               }}
               className="h-8 w-8 rounded outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
@@ -139,7 +154,7 @@ const Team: FC = () => {
             {/**Delete Account */}
             <button
               onClick={() => {
-                setArg([user.id, user.uid]);
+                setArg([user?.id, user?.uid]);
                 setActionPanel(true);
               }}
               className="h-8 w-8 rounded outline-none focus:outline-none flex items-center justify-center bg-inherit hover:opacity-80"
@@ -160,7 +175,7 @@ const Team: FC = () => {
 
   //Component ==================
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full p-4">
       {/**Delele Ticket Action Panel ====== */}
       <ActionPanel
         openPanel={openPanel}
@@ -170,11 +185,11 @@ const Team: FC = () => {
       />
       {/**Delele Ticket Action Panel ====== */}
 
-      <div className="flex items-center justify-between sticky top-0 bg-slate-200 dark:bg-slate-750 z-[99] pt-4">
+      <div className="h-20 md:h-14 w-full flex flex-col md:flex-row md:items-center justify-between sticky top-0 bg-slate-200 dark:bg-slate-750 z-[99]">
         <h1 className="dark:text-slate-300 text-slate-800  text-xl font-bold tracking-wide">
           All Members
         </h1>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between space-x-4">
           <label className="relative" htmlFor="searchUser">
             <input
               type="search"
@@ -184,32 +199,33 @@ const Team: FC = () => {
               autoComplete="off"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="h-10 w-[15rem] transition-all bg-transparent border-0 border-b dark:border-slate-700 border-slate-500 focus:ring-0 focus:border-slate-400 dark:focus:border-slate-800 text-slate-600 dark:text-slate-400 placeholder:text-xs placeholder:text-slate-600 dark:placeholder:text-slate-400 z-[999] pl-8"
+              className="h-10 w-[15rem] transition-all bg-transparent rounded-full dark:border-slate-700 border-slate-500 focus:ring-0 focus:border-slate-700 dark:focus:border-slate-300 text-slate-600 dark:text-slate-400 placeholder:text-sm text-sm placeholder:text-slate-600 dark:placeholder:text-slate-400 z-[999] pr-6 p-3"
             />
-            <BsSearch
-              className={`absolute top-3 left-3 text-slate-600 dark:text-slate-400 text-sm ${
-                search !== " " && "hidden"
+            <BiSearchAlt
+              className={`absolute top-3 right-3 text-slate-600 dark:text-slate-400 text-base ${
+                search !== "" && "hidden"
               }`}
             />
           </label>
           <button
             onClick={() => setModal(true)}
-            className="h-10 px-4 rounded-sm bg-slate-800 dark:bg-blue-700 text-slate-100 font-medium text-sm flex items-center justify-center outline-none focus:outline-none"
-          ><span>Add New Member</span>
+            className="h-9 px-4 rounded-sm bg-slate-800 dark:bg-blue-700 text-slate-100 font-medium text-sm flex items-center justify-center outline-none focus:outline-none"
+          >
+            <span>New Member</span>
           </button>
         </div>
       </div>
-      <section className="h-[49rem] bg-transparent rounded flex flex-col place-items-center mt-1 py-4 overflow-hidden">
+      <section className="h-[calc(100%-3.65rem)] bg-transparent rounded flex flex-col mt-1 overflow-hidden">
         {allMembers.length >= 1 && (
-          <table className="w-full h-full flex flex-col justify-between">
+          <table className="w-full h-full flex flex-col">
             <thead className="w-full sticky top-0 bg-inherit">
-              <tr className="w-full h-6 mb-4 text-xs sticky top-0 z-[99] grid grid-cols-9 gap-2 font-semibold uppercase dark:text-slate-300 text-slate-700 border-b border-slate-400 dark:border-slate-700 bg-inherit">
+              <tr className="w-full h-12 mb-4 text-xs sticky top-0 z-[99] grid grid-cols-9 place-content-center gap-2 font-semibold uppercase dark:text-slate-300 text-slate-700 border-b border-slate-400 dark:border-slate-700 bg-inherit">
                 <th className="col-span-4 text-left">User</th>
                 <th className="col-span-4 text-left pl-4">Email</th>
                 <th className="col-span-1 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="w-full h-[45rem] overflow-hidden overflow-y-scroll scroll-snap space-y-2 pr-2">
+            <tbody className="w-full h-[calc(100%-3rem)] overflow-hidden overflow-y-scroll scroll-snap space-y-2 pr-2">
               {users}
             </tbody>
           </table>
@@ -223,7 +239,7 @@ const Team: FC = () => {
               <img
                 src={noUsers}
                 alt="no-users"
-                className="object-center object-fit w-full h-full"
+                className="object-center object-fit h-20"
               />
             </div>
           </div>
@@ -231,14 +247,15 @@ const Team: FC = () => {
       </section>
 
       {/**Add New User ============================= */}
-      <NewUser newUserModal={newUserModal} setModal={setModal} />
-      {/**Edit User =============================== */}
-      <EditUser
-        editUserModal={editUserModal}
-        setEditModal={setEditModal}
-        editId={editId}
-        setId={setId}
+      <NewUser
+        newUserModal={newUserModal}
+        setModal={setModal}
+        inputValues={inputValues}
+        setValues={setValues}
+        edit={edit}
+        setEdit={setEdit}
       />
+      {/**Edit User =============================== */}
     </div>
   );
 };

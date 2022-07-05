@@ -97,7 +97,7 @@ const General: FC = () => {
 
   //Component ===================================
   return (
-    <div className="col-span-4 md:col-span-3">
+    <div className="col-span-4 md:col-span-3 p-4 md:pl-0 overflow-hidden overflow-y-scroll">
       <h1 className="text-xl font-bold font-sans text-slate-800 dark:text-slate-300">
         Personal Account
       </h1>

@@ -97,7 +97,7 @@ const ReportsComponent: FC = () => {
 
   //Component =========================
   return (
-    <div className="dark:bg-transparent bg-transparent w-full min-h-[calc(100%-3.65rem)] select-text tracking-wider relative py-4 px-4 oveflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar grid grid-cols-3 3xl:grid-cols-4 gap-4-">
+    <div className="dark:bg-transparent bg-transparent w-full min-h-[calc(100%-3.65rem)] select-text tracking-wider relative py-4 px-4 oveflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar grid grid-cols-3 3xl:grid-cols-4 gap-4">
       <div className="col-span-3 flex flex-col space-y-4">
         {/**Filters ============= */}
         <div className="w-full bg-transparent grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 print:hidden">
@@ -122,7 +122,7 @@ const ReportsComponent: FC = () => {
         />
       </div>
 
-      <div className="col-span-1 hidden 3xl:flex"></div>
+      <div className="col-span-1 hidden 3xl:flex bg-white dark:bg-slae-800 rounded"></div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ const Sidenav: FC = () => {
 
   //Component ==================
   return (
-    <div className="col-span-4 md:col-span-1 min-h-[10rem] h-fit rounded dark:bg-slate-800 bg-white border border-slate-200 dark:border-slate-700 py-4">
+    <div className="col-span-4 md:col-span-1 h-full dark:bg-slate-800 bg-white py-4">
       <ul>
         <div className="w-full">
           <h2
