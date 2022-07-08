@@ -34,7 +34,7 @@ const NewTicket: FC<Props> = ({
 }) => {
   const contacts = useSelector((state: RootState) => state.Tickets.contacts);
   const allTickets = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
+    (state: RootState) => state.Tickets.allTickets
   );
   const email_accounts = useSelector(
     (state: RootState) => state.Tickets.email_accounts

@@ -10,17 +10,18 @@ const BottomSection: FC = () => {
           Knowledge Base
         </div>
         <p className="my-3 text-xs text-slate-800 dark:text-slate-400 font-medium tracking-normal overflow-hidden overflow-ellipsis leading-5 max-h-[5rem]">
-          Optimize your workflows through automated FAQ responses, intent
-          detection, and more. A knowledge base allows you to anticipate those
-          needs before they're noticed by customers. As opposed to reactive
-          support, which can leave customers frustrated. Benefits of a proactive
-          knowledge base system include: Reduced ticket resolution times.
+          A knowledge base is a digital library containing product, service, and
+          topical information. It is the ultimate self-service resource used by
+          customers, employees, and support teams. Enabling them to quickly and
+          easily find solutions to common issues. It consists of FAQs, manuals,
+          how-to guides, and troubleshooting information. With each resource
+          providing a solution to a commonly asked question.
         </p>
         <Link
           to=""
-          className="text-blue-700 text-sm font-semibold flex items-center space-x-2 tracking-normal"
+          className="text-blue-700 text-sm font-medium flex items-center space-x-2 tracking-normal"
         >
-          <span>Learn how</span>
+          <span>Browse solutions</span>
           <BsArrowRight />
         </Link>
       </article>
