@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addTicket } from "../../Adapters/Data_Fetching/TicketsnUserData";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { addRecording } from "../Auth/Firebase";
 import {
   BiTrash,
@@ -59,9 +58,6 @@ const NewTicket: FC<Props> = ({
   const [showOpenedTickets, setShowOpen] = useState<boolean | any>(true);
   const [recordingFile, setFile] = useState<boolean | any>(false);
   const dispatch: AppDispatch = useDispatch();
-  const closeSuggestionsRef = useClickOutside(() => {
-    setResults(false);
-  });
 
   //Message Input Values =========================
   const [value, onChange] = useState<string | any>(inputValue?.message);
@@ -142,6 +138,7 @@ const NewTicket: FC<Props> = ({
               branch_company: brand,
             });
             setRecipient(brand);
+            setResults(false);
           }}
           className={`${
             contact.branch_company
@@ -600,7 +597,7 @@ const NewTicket: FC<Props> = ({
       <div className="w-full h-[50rem] flex justify-center px-6 pt-[1rem] pb-2 overflow-hidden overflow-y-scroll no-scrollbar::-webkit-scrollbar no-scrollbar tracking-wider">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className={`w-[98%] lg:w-[58%] max-w-[40rem] min-h-[25rem] h-fit dark:bg-slate-800 bg-white border-2 border-slate-500 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
+          className={`w-[98%] lg:w-[58%] max-w-[40rem] min-h-[25rem] h-fit dark:bg-slate-800 bg-white border-2 border-slate-300 dark:border-slate-700 shadow drop-shadow rounded-md overflow-hidden  ${
             newTicketModal === true ? "flex" : "hidden"
           } flex-col justify-between space-y-1 relative`}
         >
@@ -686,41 +683,77 @@ const NewTicket: FC<Props> = ({
             <div className="w-full h-fit flex flex-col space-y-2 mt-2">
               {/**Contact and Subject ============================================== */}
               <div className="w-full min-h-14 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
+                <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2 relative">
                   <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">
                     To
                   </legend>
-                  <label
-                    htmlFor="to"
-                    className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-medium relative"
-                  >
-                    <input
-                      type="text"
-                      id="to"
-                      name="to"
-                      placeholder="Search Contact ..."
-                      required={true}
-                      autoComplete="off"
-                      value={recepient}
-                      onKeyPress={() => setResults(true)}
-                      onKeyDown={() => setResults(true)}
-                      onFocus={() => setResults(true)}
-                      onChange={(e) => {
-                        setRecipient(e.target.value);
-                      }}
-                      className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 outline-none focus:outline-none dark:placeholder:text-slate-600 placeholder:text-slate-400 focus:ring-0 focus:border-0 text-xs font-medium"
-                    />
-                    <div
-                      ref={closeSuggestionsRef}
-                      className={`${
-                        searchResults ? "" : "hidden"
-                      } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md z-[999] p-2 px-1 space-y-1 border dark:border-slate-700 border-slate-400`}
+                  <div className="h-full w-full">
+                    <label
+                      htmlFor="to"
+                      className="w-full h-full flex items-center justify-between dark:text-slate-300 text-slate-700 text-xs font-medium relative"
                     >
-                      <ul className="h-full w-full overflow-y-scroll overflow-hidden px-1">
-                        {contactsList}
-                      </ul>
-                    </div>{" "}
-                  </label>
+                      {/**Selected ========= */}
+                      <div
+                        className={`h-6 w-fit max-w-[12rem] mt-[-0.25rem] dark:bg-slate-700 bg-slate-200 border dark:border-slate-600 border-slate-300 dark:text-slate-300 text-slate-800 font-sans tracking-normal rounded-full ${
+                          inputValue?.recipient_name?.length >= 1
+                            ? "flex"
+                            : "hidden"
+                        } justify-center items-center space-x-1 overflow-hidden text-xs`}
+                      >
+                        <div className="flex items-center space-x-1 px-2 w-fit max-w-[calc(100%-1.6rem)]">
+                          <BiUser className="text-base" />
+                          <span className="w-full overflow-hidden whitespace-nowrap overflow-ellipsis">
+                            {inputValue?.branch_company}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setResClicked(false);
+                            setValues({
+                              ...inputValue,
+                              recipient_name: "",
+                              recipient_email: "",
+                              branch_company: "",
+                            });
+                            setRecipient("");
+                            setResults(true);
+                          }}
+                          className="h-full w-7 pr-[0.15rem] outline-none focus:outline-none border-l dark:border-slate-600 border-slate-300 font-semibold text-sm text-red-600"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                      {/**Selected ========= */}
+                      <input
+                        type="search"
+                        id="to"
+                        name="to"
+                        placeholder="Search Contact ..."
+                        autoComplete="off"
+                        value={recepient}
+                        onKeyDown={() => setResults(true)}
+                        onChange={(e) => {
+                          setRecipient(e.target.value);
+                        }}
+                        className={`w-full h-full mt-[-0.5rem] overflow-hidden whitespace-nowrap text-ellipsis bg-transparent dark:text-slate-400 border-0 outline-none focus:outline-none dark:placeholder:text-slate-600 placeholder:text-slate-400 focus:ring-0 focus:border-0 text-xs font-medium ${
+                          inputValue?.recipient_name?.length <= 1
+                            ? ""
+                            : "hidden"
+                        }`}
+                      />
+                      {/***Serch Results List ====================== */}
+                      <div
+                        className={`${
+                          searchResults ? "" : "hidden"
+                        } absolute top-9 h-[11rem] w-full shadow-2xl drop-shadow-2xl dark:bg-slate-800 bg-white rounded-md z-[999] p-2 px-1 space-y-1 border dark:border-slate-700 border-slate-400`}
+                      >
+                        <ul className="h-full w-full overflow-y-scroll overflow-hidden px-1">
+                          {contactsList}
+                        </ul>
+                      </div>{" "}
+                    </label>
+                  </div>
                 </fieldset>
                 <fieldset className="col-span-1 w-full h-12 border border-slate-400 dark:border-slate-700 rounded px-2">
                   <legend className="px-2 bg-white dark:bg-slate-800 rounded text-slate-900 dark:text-slate-300 dark:font-medium font-semibold uppercase text-[0.65rem]">

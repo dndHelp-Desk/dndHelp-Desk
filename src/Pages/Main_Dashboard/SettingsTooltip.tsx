@@ -7,6 +7,7 @@ import {
   BsFileTextFill,
   BsBookHalf,
   BsFillCreditCard2BackFill,
+  BsFillFileEarmarkTextFill,
 } from "react-icons/bs";
 import { signOut, getAuth } from "firebase/auth";
 import { changeLocation, isAuthenticated } from "../../Redux/Slices/UserSlice";
@@ -75,6 +76,23 @@ const SettingsTooltip: FC = () => {
               >
                 <BsChatSquareDotsFill />
                 <span>Support Operations</span>
+              </NavLink>
+            </li>
+            <li
+              className={`${
+                user.length >= 1 && user[0].access !== "admin" && "hidden"
+              }`}
+            >
+              <NavLink
+                to="/app/settings/support-operations"
+                className={`settingsNav ${
+                  user.length >= 1 && user[0].access !== "admin" && "hidden"
+                }`}
+              >
+                <BsFillFileEarmarkTextFill />
+                <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+                  Service Level Agreement (SLA)
+                </span>
               </NavLink>
             </li>
             <li

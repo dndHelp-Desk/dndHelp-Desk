@@ -828,13 +828,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 {/**Canned Response ========================================= */}
                 <div className="w-8 h-8 group rounded-l-sm bg-white dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
                   <div className="relative group">
-                    <HintTooltip
-                      details={"Canned responses"}
-                      positions={{
-                        horizontal: `left-0`,
-                        vertical: `top-[-280%]`,
-                      }}
-                    />
                     <div className="h-full w-full flex items-center justify-center outline-none focus:outline-none">
                       <BiCollection className="text-base hover:opacity-80" />
                     </div>

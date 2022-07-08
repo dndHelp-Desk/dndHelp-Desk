@@ -55,12 +55,10 @@ const CannedResponses: FC<Props> = ({
       <div
         className={`absolute bottom-2 z-[999] ${
           tooltipPosition === "[9.4rem]" ? "left-[-9.4rem]" : "left-[-0.7rem]"
-        } w-[23rem] h-[23rem] pb-[2.9rem] group-hover:flex hidden`}
+        } w-[23rem] h-[23rem] pb-[2.3rem] group-hover:flex hidden`}
       >
         <div
-          className={`rounded bg-slate-50 dark:bg-slate-700 z-[9999] border border-slate-400 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 relative after:absolute after:contents-[''] after:h-5 after:w-5 after:bg-inherit after:border after:border-inherit after:border-l-transparent after:border-t-transparent after:bottom-[-0.65rem] ${
-            position === 4 ? "after:left-[9.7rem]" : "after:left-5"
-          } after:rotate-45 p-2 relative`}
+          className={`rounded bg-slate-50 dark:bg-slate-700 z-[9999] border border-slate-400 dark:border-slate-600  w-full h-full shadow-2xl drop-shadow-2xl grid grid-rows-6 p-2 relative`}
         >
           <div
             className={`row-span-1 grid ${
