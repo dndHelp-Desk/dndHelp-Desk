@@ -464,7 +464,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
   //Loop Through Each Message In a thread ====================
   const thread =
     threadMessages &&
-    threadMessages.map((message:any, index:any) => {
+    threadMessages.map((message: any, index: any) => {
       return (
         <div
           ref={threadMessages.length - 1 === index ? targetRef : scrollToNone}
@@ -941,7 +941,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           </form>
 
           {/**Slash Command Canned Responses Results ==== */}
-          <div className="absolute left-8 top-11 z-[9999] h-7 w-fit p-1 px-2 rounded-full bg-white dark:bg-slate-800 border border-slate-400 dark:border-slate-600 italic text-xs text-slate-700 dark:text-slate-300 hidden jflex justify-center items-center cursor-pointer">Late delivery</div>
+          <div className="absolute left-8 top-11 z-[9999] h-7 w-fit p-1 px-2 rounded-full bg-white dark:bg-slate-800 border border-slate-400 dark:border-slate-600 italic text-xs text-slate-700 dark:text-slate-300 hidden jflex justify-center items-center cursor-pointer">
+            Late delivery
+          </div>
           {/**Slash Command Canned Responses Results ==== */}
         </div>
       </div>

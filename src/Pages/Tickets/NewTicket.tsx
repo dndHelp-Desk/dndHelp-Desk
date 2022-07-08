@@ -13,6 +13,7 @@ import {
   BiMinus,
   BiMicrophone,
   BiUser,
+  BiX,
 } from "react-icons/bi";
 import { AppDispatch, RootState } from "../../Redux/store";
 import CannedResponses from "./Macros/CannedResponses";
@@ -719,9 +720,9 @@ const NewTicket: FC<Props> = ({
                             setRecipient("");
                             setResults(true);
                           }}
-                          className="h-full w-7 pr-[0.15rem] outline-none focus:outline-none border-l dark:border-slate-600 border-slate-300 font-semibold text-sm text-red-600"
+                          className="h-full w-7 flex justify-center items-center outline-none focus:outline-none border-l dark:border-slate-600 border-slate-300 font-semibold text-sm hover:text-red-600"
                         >
-                          &times;
+                          <BiX/>
                         </button>
                       </div>
                       {/**Selected ========= */}

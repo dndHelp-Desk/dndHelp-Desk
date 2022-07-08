@@ -574,16 +574,14 @@ const TicketsnUserData: FC = () => {
       //Company Details Data Fetching ======================
       org &&
         onSnapshot(companyDetailsRef, (snapshot: { docs: any[] }) => {
-          if (member_details[0]?.access !== "client") {
-            dispatch(
-              setCompanyDetails(
-                snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }))[0]
-              )
-            );
-          }
+          dispatch(
+            setCompanyDetails(
+              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+                ...doc.data(),
+                id: doc.id,
+              }))[0]
+            )
+          );
         })
     );
   }, [dispatch, member_details, currentUser?.email]);

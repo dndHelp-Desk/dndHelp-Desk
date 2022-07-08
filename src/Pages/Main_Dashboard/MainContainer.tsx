@@ -194,7 +194,11 @@ const Dashboard: FC = () => {
                 </NavLink>
                 <NavlinkToolTip name={"Tickets"} />
               </div>
-              <div className="relative group">
+              <div
+                className={`relative group ${
+                  user[0]?.access === "client" ? "hidden" : ""
+                }`}
+              >
                 <NavLink
                   to="/app/contacts"
                   className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
