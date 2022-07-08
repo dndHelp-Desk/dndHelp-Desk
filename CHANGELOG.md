@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.5](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.4...v0.8.5) (2022-07-08)
+
+
+### Features
+
+* **new ticket:** added Chip on "to" field when opening a new ticket to better visualize selected ([6832422](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/68324222d2b32bfb9b60307e62fe9e9f442d2f83))
+
 ### [0.8.4](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.3...v0.8.4) (2022-07-04)
 
 
