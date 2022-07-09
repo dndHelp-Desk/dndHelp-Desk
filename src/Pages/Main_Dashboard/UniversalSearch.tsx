@@ -251,7 +251,7 @@ const UniversalSearch: FC<Props> = ({
         </div>
 
         {/**Footer ============ */}
-        <div className="h-9 w-full flex space-x-2 justify-between items-center p-1 border-t border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-750">
+        <div className="h-9 w-full flex space-x-2 justify-between items-center p-1 px-2 border-t border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-750">
           <span className="text-slate-700 dark:text-slate-400 text-xs font-sans tracking-wider">
             Shortcut
           </span>

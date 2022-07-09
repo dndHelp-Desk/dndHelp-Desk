@@ -145,7 +145,7 @@ const Home: FC = () => {
                 <div className="mt-2 h-6 dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
                   Monthly Trend
                 </div>
-                <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2 font-sans">
+                <p className="text-sm font-sans font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2">
                   Hover your mouse or cursor on top of each bar to see details.
                 </p>
                 <div className="w-full h-[calc(100%-4rem)] overflow-hidden bg-inherit rounded flex justify-between items-end pr-2 relative">
@@ -189,9 +189,9 @@ const Home: FC = () => {
                 <div className="dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
                   Progress
                 </div>
-                <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700 font-sans">
+                <p className="text-sm font-sans font-medium tracking-normal dark:text-slate-400 text-slate-700">
                   Manage all tickets in one place
-                  <br /> currently you have{" "}
+                  currently you have{" "}
                   <span className="text-slate-900 dark:text-slate-300 font-semibold">
                     {" "}
                     {(dashboardData.length >= 1 &&

@@ -9,7 +9,7 @@ const BottomSection: FC = () => {
         <div className="flex-[1] dark:text-slate-300 text-slate-800 text-base font-semibold font-sans capitalize py-2 border-b border-slate-200 dark:border-slate-700 tracking-wider">
           Knowledge Base
         </div>
-        <p className="my-3 text-xs text-slate-800 dark:text-slate-400 font-medium tracking-normal overflow-hidden overflow-ellipsis leading-5 max-h-[5rem]">
+        <p className="my-3 text-sm text-slate-800 dark:text-slate-400 font-medium tracking-normal overflow-hidden overflow-ellipsis leading-5 max-h-[5rem]">
           A knowledge base is a digital library containing product, service, and
           topical information. It is the ultimate self-service resource used by
           customers, employees, and support teams. Enabling them to quickly and
