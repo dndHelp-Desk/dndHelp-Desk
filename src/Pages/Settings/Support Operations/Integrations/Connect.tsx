@@ -17,7 +17,7 @@ type Props = {
 
 const Connect: FC<Props> = ({ openAPIModal }) => {
   return (
-    <div className="col-span-5 min-h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 pt-4 overflow-hidden relative">
+    <div className="w-[35rem] h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-2 pt-4 overflow-hidden relative">
       <div className="rounded w-full h-full p-2 flex-col flex justify-between space-y-4">
         <article>
           <div className="flex-[1] dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize">

@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "../../Assets/logos/faviLight.png";
@@ -7,14 +7,11 @@ import { BsArrowRight } from "react-icons/bs";
 import MostRecent from "./MostRecent";
 import StatusSummary from "./StatusSummary";
 import { RootState } from "../../Redux/store";
-import Connect from "./Connect";
-import ConnectModal from "./ConnectModal";
 import ProgressBars from "./ProgressBars";
 import BottomSection from "./BottomSection";
 import RadialBar from "./RadialBar";
 
 const Home: FC = () => {
-  const [apiChannelModal, openAPIModal] = useState<boolean>(false);
   const location = useLocation();
   const allMembers = useSelector(
     (state: RootState) => state.UserInfo.allMembers
@@ -34,12 +31,24 @@ const Home: FC = () => {
     );
   }, [dashboardData]);
 
+  //Monthly Data =================
+  const monthlyData = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 28, 29, 30,
+  ].map((day: any) => ({
+    day: day,
+    data: dashboardData.filter(
+      (ticket: any) => new Date(ticket?.date).getDate() === day
+    )?.length,
+  }));
+  const maxValue = Math.max(...monthlyData?.map((day) => day?.data));
+
   //Loop Through All Users ================
   const users =
     allMembers.length >= 1 &&
     allMembers
-      ?.filter((user) => user.access?.toLowerCase() === "agent")
-      ?.map((user) => {
+      ?.filter((user: any) => user.access?.toLowerCase() === "agent")
+      ?.map((user: any) => {
         return (
           <div
             key={user.id}
@@ -131,12 +140,49 @@ const Home: FC = () => {
           {/**Middle Half ================================ */}
           <section className="w-full h-fit rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-y-4 lg:space-y-0 lg:gap-4">
             <div className="col-span-2 w-full h-fit rounded grid grid-cols-2 2xl:grid-cols-7 gap-4">
-              {/**Connect Other Sources || Omni Channel Settings==================================== */}
-              <Connect openAPIModal={openAPIModal} />
-              <ConnectModal
-                apiChannelModal={apiChannelModal}
-                openAPIModal={openAPIModal}
-              />
+              {/***Monthly Trend ========================================= */}
+              <div className="col-span-5 min-h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden flex flex-col justify-between space-y-2 relative">
+                <div className="mt-2 h-6 dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
+                  Monthly Trend
+                </div>
+                <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2 font-sans">
+                  Hover your mouse or cursor on top of each bar to see details.
+                </p>
+                <div className="w-full h-[calc(100%-4rem)] overflow-hidden bg-inherit rounded flex justify-between items-end pr-2">
+                  {monthlyData?.map((day) => {
+                    return (
+                      <div
+                        key={day?.day}
+                        className="h-full w-3 grid grid-rows-6 p-2 overflow group"
+                      >
+                        <div className="row-span-5 w-3 h-full rounded-sm bg-slate-200 dark:bg-slate-700 flex items-end relative pt-2">
+                          <div
+                            style={{
+                              height: `${(
+                                (Number(day?.data) / Number(maxValue)) *
+                                100
+                              ).toFixed(2)}%`,
+                            }}
+                            className="w-full rounded-sm bg-blue-700 hover:opacity-80 transition-all duration-150 overflow-hidden"
+                          ></div>
+                          {/**Tooltip=  */}
+                          <div className="hidden group-hover:flex justify-center items-center absolute top-[10%] left-1 h-6 min-w-[5rem] w-fit whitespace-nowrap overflow-hidden overflow-ellipsis shadow-2xl z-[999]  rounded-sm bg-slate-800 text-slate-100 text-xs px-2">
+                            Day {day?.day} - {day?.data} tickets
+                          </div>
+                          {/**Tooltip=  */}
+                        </div>
+                        <div
+                          className={`row-span-1 w-3 flex justify-center items-end text-xs capitalize  dark:text-slate-300 text-slate-800 font-semibold font-sans ${
+                            Number(day.day) % 2 === 0 ? "opacity-0" : ""
+                          }`}
+                        >
+                          {day?.day}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
 
               {/**Progress ============================== */}
               <article className="col-span-5 md:hidden 2xl:flex 2xl:col-span-2 h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 pt-6 flex flex-col space-y-2">

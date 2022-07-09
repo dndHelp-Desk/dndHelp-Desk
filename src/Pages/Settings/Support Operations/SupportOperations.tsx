@@ -5,6 +5,7 @@ import EmailAccounts from "./EmailAccounts";
 import Templates from "./Templates";
 import Categories from "./Categories";
 import { RootState } from "../../../Redux/store";
+import Integrations from "./Integrations/Integrations";
 
 const SupportOperations: FC = () => {
   const member_details = useSelector(
@@ -78,6 +79,9 @@ const SupportOperations: FC = () => {
         {menuItems.filter(
           (item: any) => item.name === "Categories" && item.active === true
         ).length >= 1 && <Categories />}
+        {menuItems.filter(
+          (item: any) => item.name === "Integrations" && item.active === true
+        ).length >= 1 && <Integrations/>}
       </div>
     </section>
   );

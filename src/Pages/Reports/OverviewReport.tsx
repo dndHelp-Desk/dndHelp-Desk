@@ -35,7 +35,7 @@ const OverviewReport: FC<data> = ({ data }) => {
   }, [categories, data]);
 
   categoriesData &&
-    categoriesData?.sort((a, b) => {
+    categoriesData?.sort((a: any, b: any) => {
       return Number(b.value) - Number(a.value);
     });
 

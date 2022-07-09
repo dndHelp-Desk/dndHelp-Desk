@@ -323,10 +323,7 @@ const NewContact: FC<Props> = ({
                       });
                     }
                     setPhone(
-                      e.target.value?.replace(
-                        /[\s|\\*!-@#$%^&()\[\]\{\}.\,]/gi,
-                        ""
-                      )
+                      e.target.value?.replace(/[\s|\\*!-@#$%^&()[\]{}.,]/gi, "")
                     );
                   }}
                   onKeyDown={(e) => {
