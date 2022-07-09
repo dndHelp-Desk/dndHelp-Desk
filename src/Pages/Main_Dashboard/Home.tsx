@@ -148,7 +148,7 @@ const Home: FC = () => {
                 <p className="text-xs font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2 font-sans">
                   Hover your mouse or cursor on top of each bar to see details.
                 </p>
-                <div className="w-full h-[calc(100%-4rem)] overflow-hidden bg-inherit rounded flex justify-between items-end pr-2">
+                <div className="w-full h-[calc(100%-4rem)] overflow-hidden bg-inherit rounded flex justify-between items-end pr-2 relative">
                   {monthlyData?.map((day) => {
                     return (
                       <div

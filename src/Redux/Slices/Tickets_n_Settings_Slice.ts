@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const initialId: string | any = window.localStorage.getItem("threadId");
 const initialTickestDate = window.localStorage.getItem("ticketsDate");
 interface InitialStateState {
+  loadingStatus: boolean;
   allTickets: any[];
   threadId: string | null;
   contacts: string[] | any[];
@@ -19,6 +20,7 @@ interface InitialStateState {
 }
 
 const initialState: InitialStateState = {
+  loadingStatus: false,
   allTickets: [],
   threadId: JSON.parse(initialId),
   contacts: [],
@@ -54,6 +56,9 @@ export const TicketsSlice = createSlice({
   name: "Tickets",
   initialState,
   reducers: {
+    changeLoadingStatus: (state, action: PayloadAction<boolean>) => {
+      state.loadingStatus = action.payload;
+    },
     addAllTickets: (state, action: PayloadAction<any[]>) => {
       state.allTickets = action.payload;
     },
@@ -102,6 +107,7 @@ export const TicketsSlice = createSlice({
 });
 
 export const {
+  changeLoadingStatus,
   addAllTickets,
   setContacts,
   loadSettings,

@@ -13,7 +13,10 @@ import lightLogo from "../../Assets/logos/dndHelp-desk_ShortLight.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { changeLocation, changeTheme } from "../../Redux/Slices/UserSlice";
-import { setUnread } from "../../Redux/Slices/Tickets_n_Settings_Slice";
+import {
+  setUnread,
+  changeLoadingStatus,
+} from "../../Redux/Slices/Tickets_n_Settings_Slice";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
 import AlertsWrapper from "../../Components/Toast Notifications/AlertsWrapper";
@@ -34,16 +37,13 @@ const Dashboard: FC = () => {
   const routeLocation = useSelector(
     (state: RootState) => state.UserInfo.routeLocation
   );
+  const loadingStatus = useSelector(
+    (state: RootState) => state.Tickets.loadingStatus
+  );
   const theme = useSelector((state: RootState) => state.UserInfo.theme);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
-  const dashboardData = useSelector(
-    (state: RootState) => state.Tickets.filteredTickets
-  );
   const allTickets = useSelector(
     (state: RootState) => state.Tickets.allTickets
-  );
-  const ticketsComponentDates = useSelector(
-    (state: RootState) => state.Tickets.ticketsComponentDates
   );
   const unread = useSelector((state: RootState) => state.Tickets.unread);
   const notificationMsgs = useSelector(
@@ -55,7 +55,6 @@ const Dashboard: FC = () => {
   const [openDatePicker, setDateOpen] = useState<boolean>(false);
   const [openNotifications, setOpenNotification] = useState<boolean>(false);
   const [phoneToolTip, openPhone] = useState<boolean>(false);
-  const [loading, setLoading] = useState<any>(false);
   const location = useLocation();
   const dispatch: AppDispatch = useDispatch();
 
@@ -110,18 +109,15 @@ const Dashboard: FC = () => {
 
   //Check if The data is loading
   useEffect(() => {
-    dashboardData?.filter(
-      (data) =>
-        data.date >= new Date(ticketsComponentDates?.startDate).getTime() &&
-        data.date <= new Date(ticketsComponentDates?.endDate).getTime()
-    ).length <= 0
-      ? setLoading(true)
-      : setLoading(false);
-    setTimeout(() => setLoading(false), 20000);
+    loadingStatus === true &&
+      setTimeout(() => {
+        dispatch(changeLoadingStatus(false));
+      }, 60000);
     return clearTimeout();
-  }, [dashboardData, ticketsComponentDates]);
+  }, [loadingStatus, dispatch]);
 
   if (logged !== true) {
+    dispatch(changeLoadingStatus(true));
     return <Navigate to="/login" />;
   }
 
@@ -135,7 +131,7 @@ const Dashboard: FC = () => {
         {/**Preloader =========================== */}
         <div
           className={`${
-            !loading ? "hidden" : ""
+            !loadingStatus ? "hidden" : ""
           } fixed z-[9999] top-0 bottom-0 left-0 right-0 bg-[#030d2769] before:content-[''] before:h-[0.25rem] before:w-full before:bg-[#93c4fd70] before:absolute`}
         >
           <div

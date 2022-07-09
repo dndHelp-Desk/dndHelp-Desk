@@ -10,6 +10,7 @@ import {
   updatePublicCannedRes,
 } from "../../Redux/Slices/UserSlice";
 import {
+  changeLoadingStatus,
   addAllTickets,
   updateFilteredTickets,
   setContacts,
@@ -18,7 +19,10 @@ import {
   setCategories,
   setCompanyDetails,
 } from "../../Redux/Slices/Tickets_n_Settings_Slice";
-import { setMessages } from "../../Redux/Slices/NotificationsSlice";
+import {
+  setMessages,
+  updateAlert,
+} from "../../Redux/Slices/NotificationsSlice";
 
 //Firestore ===================
 import {
@@ -508,6 +512,9 @@ const TicketsnUserData: FC = () => {
   const ticketsComponentDates = useSelector(
     (state: RootState) => state.Tickets.ticketsComponentDates
   );
+  const alerts = useSelector(
+    (state: RootState) => state.NotificationsData.alerts
+  );
 
   //Data Loading =====================================
   useEffect((): any => {
@@ -720,6 +727,7 @@ const TicketsnUserData: FC = () => {
           )
         ),
         (snapshot: { docs: any[] }) => {
+          dispatch(changeLoadingStatus(true));
           dispatch(
             addAllTickets(
               snapshot.docs
@@ -744,6 +752,20 @@ const TicketsnUserData: FC = () => {
                 )
             )
           );
+          dispatch(changeLoadingStatus(false));
+        },
+        (error) => {
+          dispatch(
+            updateAlert([
+              ...alerts,
+              {
+                message: error.message,
+                color: "bg-red-200",
+                id: new Date().getTime(),
+              },
+            ])
+          );
+          dispatch(changeLoadingStatus(false));
         }
       )
     );
@@ -751,6 +773,7 @@ const TicketsnUserData: FC = () => {
     ticketsComponentDates.endDate,
     ticketsComponentDates.startDate,
     dispatch,
+    alerts,
   ]);
 
   //Load Email_Accounts ====================

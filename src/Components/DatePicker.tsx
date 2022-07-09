@@ -2,7 +2,10 @@ import { FC, useState } from "react";
 import { TbChevronLeft, TbChevronRight, TbCalendarEvent } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/store";
-import { updateTicketsComponentDates } from "../Redux/Slices/Tickets_n_Settings_Slice";
+import {
+  updateTicketsComponentDates,
+  changeLoadingStatus,
+} from "../Redux/Slices/Tickets_n_Settings_Slice";
 import useOnClickOutside from "../Custom-Hooks/useOnClickOutsideRef";
 
 type Props = { openDatePicker: any; setDateOpen: any };
@@ -411,7 +414,7 @@ const DatePicker: FC<Props> = ({ openDatePicker, setDateOpen }) => {
         </div>
 
         {/**Bottom Nav ========================= */}
-        <div className="row-span-1 w-full border-t border-slate-300 dark:border-slate-600 flex justify-between items-center">
+        <div className="row-span-1 w-full border-t border-slate-300 dark:border-slate-600 flex justify-between items-center px-1">
           <div className="flex items-center justify-between space-x-2 p-1">
             <div className="text-xs dark:text-slate-400 text-slate-700 font-sans w-32 h-8 border dark:border-slate-600 border-slate-300 rounded-sm overflow-hidden whitespace-nowrap overflow-ellipsis p-2 flex items-center justify-center">
               <span className="w-full overflow-hidden whitespace-nowrap overflow-ellipsis">
@@ -449,6 +452,7 @@ const DatePicker: FC<Props> = ({ openDatePicker, setDateOpen }) => {
                   })
                 );
                 setDateOpen(false);
+                dispatch(changeLoadingStatus(true));
               }}
               className="h-8 w-24 bg-slate-800 dark:bg-blue-700 text-slate-50 text-xs font-sans uppercase hover:opacity-80 transition-all rounded-sm"
             >

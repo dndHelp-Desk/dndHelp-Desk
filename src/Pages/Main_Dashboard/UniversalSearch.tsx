@@ -36,7 +36,8 @@ const UniversalSearch: FC<Props> = ({
 
   //Serach shorcut Event Listener =======
   window.addEventListener("keydown", (e) => {
-    if ((e.ctrlKey && e.key === "x") || e.key === "X") {
+    e.preventDefault()
+    if ((e.ctrlKey && e.key === "k") || e.key === "K") {
       setSearch(true);
       searchRef.current !== null && searchRef && searchRef.current.focus();
     }
@@ -260,7 +261,7 @@ const UniversalSearch: FC<Props> = ({
             </kbd>{" "}
             <b>+</b>{" "}
             <kbd className="p-1 px-2 bg-slate-200 dark:bg-slate-800 rounded-sm">
-              X
+              K
             </kbd>
           </div>
         </div>
