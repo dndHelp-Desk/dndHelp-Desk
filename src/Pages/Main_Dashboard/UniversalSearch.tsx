@@ -36,8 +36,8 @@ const UniversalSearch: FC<Props> = ({
 
   //Serach shorcut Event Listener =======
   window.addEventListener("keydown", (e) => {
-    e.preventDefault()
     if ((e.ctrlKey && e.key === "k") || e.key === "K") {
+      e.preventDefault();
       setSearch(true);
       searchRef.current !== null && searchRef && searchRef.current.focus();
     }
