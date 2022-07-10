@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.6](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.5...v0.8.6) (2022-07-10)
+
+
+### Features
+
+* **dashboard:** monthly Trend now visible in the dashboard and integrations are now moved to sett ([4467db8](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/4467db873241d639254917e4b0abe5b55277fad5))
+
+
+### Bug Fixes
+
+* agents are now able to pick duplicate tickets while typing the number ([92886ab](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/92886ab5806d519d727925b219dc0b507356dd9f))
+* **date picker:** fixed loading status to be controlled by data being being fetched and Minor UI Upd ([805a9de](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/805a9de6b00fc3e40058f9d1c51ca91560d3dd51))
+
 ### [0.8.5](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.4...v0.8.5) (2022-07-08)
 
 
