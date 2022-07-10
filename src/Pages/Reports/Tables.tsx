@@ -30,7 +30,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
       return (
         <tr
           key={index}
-          className={`w-full h-10 text-center items-left grid grid-cols-5 md:grid-cols-7 border-b dark:border-slate-800 border-slate-300 px-2 capitalize ${
+          className={`w-full h-10 text-center items-left grid grid-cols-5 border-b dark:border-slate-800 border-slate-300 px-2 capitalize ${
             loadMore - 10 <= index + 1 && index + 1 <= loadMore ? "" : "hidden"
           }`}
         >
@@ -41,17 +41,11 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                   ?.name
               : elem?.name}
           </td>
-          <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-            {elem.open}
+          <td className="col-span-1 px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+            {elem?.resolution_time}
           </td>
-          <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-            {elem.reopened}
-          </td>
-          <td className="px-2 hidden md:flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-            {elem.solved}
-          </td>
-          <td className="px-2 flex items-center justify-end sm:justify-center overflow-hidden text-ellipsis whitespace-nowrap">
-            {elem.total}
+          <td className="col-span-1 px-2 flex items-center justify-end sm:justify-center overflow-hidden text-ellipsis whitespace-nowrap">
+            {elem?.total}
           </td>
         </tr>
       );
@@ -102,7 +96,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
               onClick={() => {
                 window.print();
               }}
-              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded-sm text-xs font-medium p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none hidden md:flex justify-center items-center space-x-2"
             >
               <span>Print</span>
               <BsPrinter className="text-sm text-white" />
@@ -112,7 +106,7 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
                 let csv = convertToCsv(data);
                 downloadFile("Tickects Report.csv", csv);
               }}
-              className="h-8 w-20 rounded-sm text-xs font-semibold p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
+              className="h-8 w-20 rounded-sm text-xs font-medium p-2 bg-slate-800 dark:bg-blue-700  hover:opacity-80 text-slate-200 focus:ring-0 focus:outline-none flex justify-center items-center space-x-2"
             >
               <span>CSV</span>
               <BsCloudDownload className="text-sm text-white" />
@@ -121,75 +115,34 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
         </div>
         <table className="w-full h-[28rem] flex flex-col px-4 gap-1">
           <thead className="w-full flex items-center  dark:bg-slate-700 bg-slate-100 text-[0.65rem] font-semibold uppercase dark:text-slate-400 text-slate-700">
-            <tr className="w-full h-10 grid grid-cols-5 md:grid-cols-7 text-left px-2">
+            <tr className="w-full h-10 grid grid-cols-5 text-left px-2">
               <th className="flex col-span-3 space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 Name
               </th>
-              <th className="hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
-                <span>Open</span>
-                <label htmlFor="open">
+              <th className="col-span-1 hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
+                <span>Resolution Time</span>
+                <label htmlFor="resTime">
                   <input
                     type="checkbox"
-                    name="open"
-                    id="open"
+                    name="resTime"
+                    id="resTime"
                     className="hidden"
                     onChange={(e) =>
                       e.target.checked
-                        ? setSort(["open", 1])
-                        : setSort(["open", 2])
+                        ? setSort(["unfiltered_resolution_time", 1])
+                        : setSort(["unfiltered_resolution_time", 2])
                     }
                   />
                   <HiOutlineSwitchVertical
                     className={`text-sm cursor-pointer hover:opacity-80 ${
-                      sortBy[0] === "open" && "text-blue-600"
+                      sortBy[0] === "unfiltered_resolution_time" &&
+                      "text-blue-600"
                     }`}
                   />
                 </label>
               </th>
-              <th className="hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
-                <span>Reopened</span>
-                <label htmlFor="reopened">
-                  <input
-                    type="checkbox"
-                    name="reopened"
-                    id="reopened"
-                    className="hidden"
-                    onChange={(e) =>
-                      e.target.checked
-                        ? setSort(["reopened", 1])
-                        : setSort(["reopened", 2])
-                    }
-                  />
-                  <HiOutlineSwitchVertical
-                    className={`text-sm cursor-pointer hover:opacity-80 ${
-                      sortBy[0] === "reopened" && "text-blue-600"
-                    }`}
-                  />
-                </label>
-              </th>
-              <th className="hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
-                <span>Solved</span>
-                <label htmlFor="solved">
-                  <input
-                    type="checkbox"
-                    name="solved"
-                    id="solved"
-                    className="hidden"
-                    onChange={(e) =>
-                      e.target.checked
-                        ? setSort(["solved", 1])
-                        : setSort(["solved", 2])
-                    }
-                  />
-                  <HiOutlineSwitchVertical
-                    className={`text-sm cursor-pointer hover:opacity-80 ${
-                      sortBy[0] === "solved" && "text-blue-600"
-                    }`}
-                  />
-                </label>
-              </th>
-              <th className="flex space-x-1 items-center justify-between px-3 overflow-hidden text-ellipsis whitespace-nowrap">
-                <span>Total</span>
+              <th className="col-span-1 flex space-x-1 items-center justify-between px-3 overflow-hidden text-ellipsis whitespace-nowrap">
+                <span>Total Tickets</span>
                 <label htmlFor="total">
                   <input
                     type="checkbox"

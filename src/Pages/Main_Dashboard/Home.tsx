@@ -1,15 +1,13 @@
-import { FC, useMemo } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { FC} from "react";
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "../../Assets/logos/faviLight.png";
 import noUsers from "./images/no-userss.svg";
-import { BsArrowRight } from "react-icons/bs";
 import MostRecent from "./MostRecent";
 import StatusSummary from "./StatusSummary";
 import { RootState } from "../../Redux/store";
 import ProgressBars from "./ProgressBars";
 import BottomSection from "./BottomSection";
-import RadialBar from "./RadialBar";
 
 const Home: FC = () => {
   const location = useLocation();
@@ -19,17 +17,6 @@ const Home: FC = () => {
   const dashboardData = useSelector(
     (state: RootState) => state.Tickets.filteredTickets
   );
-
-  const overDue = useMemo(() => {
-    return (
-      dashboardData &&
-      dashboardData.filter(
-        (firstMsg) =>
-          new Date(firstMsg.due_date !== null && firstMsg.due_date).getTime() <=
-            new Date().getTime() && firstMsg.status === "open"
-      )
-    );
-  }, [dashboardData]);
 
   //Monthly Data =================
   const monthlyData = [
@@ -111,8 +98,8 @@ const Home: FC = () => {
             {/**Todo List ================================ */}
             {/* <ToDo />*/}
             {/**Tickets Per Status Summary ================================ */}
-            <div className="col-span-1  h-[23rem] grid grid-rows-5 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded px-4 pb-4 py-6">
-              <div className="row-span-2 bg-no-repeat bg-center bg-contain flex flex-col items-center px-4">
+            <div className="col-span-1  h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded px-4 py-4 pt-6">
+              <div className="bg-no-repeat bg-center bg-contain flex flex-col items-center px-4">
                 <div className="dark:text-slate-300 tracking-wider text-slate-800 text-base text-center font-bold uppercase font-sans">
                   Tickets Status
                 </div>
@@ -139,85 +126,48 @@ const Home: FC = () => {
 
           {/**Middle Half ================================ */}
           <section className="w-full h-fit rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-y-4 lg:space-y-0 lg:gap-4">
-            <div className="col-span-2 w-full h-fit rounded grid grid-cols-2 2xl:grid-cols-7 gap-4">
-              {/***Monthly Trend ========================================= */}
-              <div className="col-span-5 min-h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden flex flex-col justify-between space-y-2 relative">
-                <div className="mt-2 h-6 dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
-                  Monthly Trend
-                </div>
-                <p className="text-sm font-sans font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2">
-                  Hover your mouse or cursor on top of each bar to see details.
-                </p>
-                <div className="w-full h-[calc(100%-4rem)] overflow-hidden bg-inherit rounded flex justify-between items-end pr-2 relative">
-                  {monthlyData?.map((day) => {
-                    return (
-                      <div
-                        key={day?.day}
-                        className="h-full w-3 grid grid-rows-6 p-2 overflow group"
-                      >
-                        <div className="row-span-5 w-3 h-full rounded-sm bg-slate-200 dark:bg-slate-700 flex items-end relative pt-2">
-                          <div
-                            style={{
-                              height: `${(
-                                (Number(day?.data) / Number(maxValue)) *
-                                100
-                              ).toFixed(2)}%`,
-                            }}
-                            className="w-full rounded-sm bg-blue-700 hover:opacity-80 transition-all duration-150 overflow-hidden"
-                          ></div>
-                          {/**Tooltip=  */}
-                          <div className="hidden group-hover:flex justify-center items-center absolute top-[10%] left-1 h-6 min-w-[5rem] w-fit whitespace-nowrap overflow-hidden overflow-ellipsis shadow-2xl z-[999]  rounded-sm bg-slate-800 text-slate-100 text-xs px-2">
-                            Day {day?.day} - {day?.data} tickets
-                          </div>
-                          {/**Tooltip=  */}
-                        </div>
-                        <div
-                          className={`row-span-1 w-3 flex justify-center items-end text-xs capitalize  dark:text-slate-300 text-slate-800 font-semibold font-sans ${
-                            Number(day.day) % 2 === 0 ? "opacity-0" : ""
-                          }`}
-                        >
-                          {day?.day}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+            {/***Monthly Traffic ========================================= */}
+            <div className="col-span-2 min-h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 overflow-hidden flex flex-col justify-between space-y-2 relative">
+              <div className="mt-2 h-6 dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
+                Monthly Traffic
               </div>
-
-              {/**Progress ============================== */}
-              <article className="col-span-5 md:hidden 2xl:flex 2xl:col-span-2 h-[21rem] rounded dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 p-4 pt-6 flex flex-col space-y-2">
-                <div className="dark:text-slate-300 text-slate-800 text-lg font-semibold font-sans capitalize tracking-wider">
-                  Progress
-                </div>
-                <p className="text-sm font-sans font-medium tracking-normal dark:text-slate-400 text-slate-700">
-                  Manage all tickets in one place
-                  currently you have{" "}
-                  <span className="text-slate-900 dark:text-slate-300 font-semibold">
-                    {" "}
-                    {(dashboardData.length >= 1 &&
-                      dashboardData.filter((ticket) => ticket.status === "open")
-                        ?.length) ||
-                      0}
-                  </span>{" "}
-                  open tickets, and{" "}
-                  <span className="text-slate-900 dark:text-slate-300 font-semibold">
-                    {overDue.length}
-                  </span>{" "}
-                  overdue tickets.
-                </p>
-                <div
-                  className={`w-full h-[6.5rem] overflow-hidden flex justify-center items-center mb-4 relative`}
-                >
-                  <RadialBar />
-                </div>
-                <Link
-                  to="/app/tickets"
-                  className="text-blue-600 text-sm font-medium font-sans flex md:hidden xl:flex items-center justify-center space-x-2"
-                >
-                  <span>View all Your Tickets</span>
-                  <BsArrowRight />
-                </Link>
-              </article>
+              <p className="text-sm font-sans font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2">
+                Hover your mouse or cursor on top of each bar to see details.
+              </p>
+              <div className="w-full h-[calc(100%-5rem)] overflow-hidden bg-inherit rounded flex justify-between items-end pr-2 relative">
+                {monthlyData?.map((day) => {
+                  return (
+                    <div
+                      key={day?.day}
+                      className="h-full w-3 grid grid-rows-6 p-2 overflow group"
+                    >
+                      <div className="row-span-5 w-3 h-full rounded-sm bg-slate-200 dark:bg-slate-700 flex items-end relative pt-2">
+                        <div
+                          style={{
+                            height: `${(
+                              (Number(day?.data) / Number(maxValue)) *
+                              100
+                            ).toFixed(2)}%`,
+                          }}
+                          className="w-full rounded-sm bg-blue-700 hover:opacity-80 transition-all duration-150 overflow-hidden"
+                        ></div>
+                        {/**Tooltip=  */}
+                        <div className="hidden group-hover:flex justify-center items-center absolute top-[10%] left-1 h-6 min-w-[5rem] w-fit whitespace-nowrap overflow-hidden overflow-ellipsis shadow-2xl z-[999]  rounded-sm bg-slate-800 text-slate-100 text-xs px-2">
+                          Day {day?.day} - {day?.data} tickets
+                        </div>
+                        {/**Tooltip=  */}
+                      </div>
+                      <div
+                        className={`row-span-1 w-3 flex justify-center items-end text-xs capitalize  dark:text-slate-300 text-slate-800 font-semibold font-sans ${
+                          Number(day.day) % 2 === 0 ? "opacity-0" : ""
+                        }`}
+                      >
+                        {day?.day}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/**Online Users ================================ */}

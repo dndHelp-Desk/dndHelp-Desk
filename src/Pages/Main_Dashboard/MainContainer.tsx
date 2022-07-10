@@ -115,9 +115,11 @@ const Dashboard: FC = () => {
       }, 60000);
     return clearTimeout();
   }, [loadingStatus, dispatch]);
+  window.onload = () => {
+    dispatch(changeLoadingStatus(true));
+  };
 
   if (logged !== true) {
-    dispatch(changeLoadingStatus(true));
     return <Navigate to="/login" />;
   }
 
@@ -131,7 +133,7 @@ const Dashboard: FC = () => {
         {/**Preloader =========================== */}
         <div
           className={`${
-            !loadingStatus ? "hidden" : ""
+            loadingStatus ? "" : "hidden"
           } fixed z-[9999] top-0 bottom-0 left-0 right-0 bg-[#030d2769] before:content-[''] before:h-[0.25rem] before:w-full before:bg-[#93c4fd70] before:absolute`}
         >
           <div

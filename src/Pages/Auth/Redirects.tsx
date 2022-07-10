@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import redirect_img from "./images/redirect_img.webp";
 import { setCompany } from "../../Redux/Slices/UserSlice";
 import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
+import { changeLoadingStatus } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 
 const Redirects: FC = () => {
   const auth = getAuth();
@@ -46,6 +47,7 @@ const Redirects: FC = () => {
         } else {
           navigate("/login");
         }
+        dispatch(changeLoadingStatus(true));
       });
     }, 2000);
   }, [alerts, auth, dispatch, navigate, routeLocation, workspace, location]);

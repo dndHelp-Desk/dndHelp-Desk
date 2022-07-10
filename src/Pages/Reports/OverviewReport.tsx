@@ -91,12 +91,12 @@ const OverviewReport: FC<data> = ({ data }) => {
 
   //Component =============================
   return (
-    <div className="w-full rounded-md grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <div className=" h-[22rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
+    <div className="w-full rounded-md grid grid-cols-2 lg:grid-cols-6 gap-4">
+      <div className="hidden col-span-2 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
         <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
-          Tickets Statistics
+          Tickets Summary
         </div>
-        <div className="mt-8 flex space-x-4 px-2 h-14 w-full justify-between  border-b border-slate-300 dark:border-slate-700">
+        <div className="mt-4 pb-2 border-b dark:border-slate-800 border-slate-300 flex h-fit w-full justify-between">
           <div className="dark:text-slate-300 text-slate-900">
             <div className="text-base font-bold text-center uppercase">
               {numberWithSpaces(data?.length)}
@@ -157,7 +157,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="mt-6 flex space-x-4 px-2 min-h-14 w-full justify-between">
+        <div className="mt-4 flex space-x-4 px-2 min-h-14 w-full justify-between">
           <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
             <div className="text-base font-bold text-center uppercase">
               {numberWithSpaces(
@@ -197,7 +197,7 @@ const OverviewReport: FC<data> = ({ data }) => {
           className="flex flex-col mt-2 h-44 space-y-2 w-full overflow-hidden rounded-md 
         p-2"
         >
-          <p className=" text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
+          <p className="text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
             Real-time report it allows you to check the current status of your
             team's workload , availability and valuable insights or statistics
             about your team's performance.
@@ -205,7 +205,7 @@ const OverviewReport: FC<data> = ({ data }) => {
         </div>
       </div>
 
-      <div className="col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col justify-between gap-2 px-4 h-[22rem]">
+      <div className="col-span-2 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col justify-between gap-2 px-4 h-[23rem]">
         <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Per Category
         </div>
@@ -215,7 +215,7 @@ const OverviewReport: FC<data> = ({ data }) => {
       </div>
 
       {/**Traffic trend chart ======================== */}
-      <div className=" h-[22rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
+      <div className="col-span-4 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
             <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider mt-1">

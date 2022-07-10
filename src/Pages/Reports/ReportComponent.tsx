@@ -81,16 +81,81 @@ const ReportsComponent: FC = () => {
 
   const tableData = useMemo(() => {
     let names = Array.from(new Set(data?.map((data: any) => data[option])));
-    const calcuFunction = (elem: any, param: any, opt: string | boolean) => {
+    const calcuFunction = (elem: any) => {
       return data?.filter(
-        (data: any) => data[option] === elem && data[param] === opt
-      )?.length;
+        (data: any) => data[option] === elem && data?.status === "solved"
+      );
     };
     return names?.map((elem): any => ({
       name: elem,
-      open: calcuFunction(elem, "status", "open"),
-      solved: calcuFunction(elem, "status", "solved"),
-      reopened: calcuFunction(elem, "reopened", true),
+      resolution_time: `${
+        calcuFunction(elem)?.length >= 1
+          ? (
+              Number(
+                (
+                  calcuFunction(elem)
+                    .map((data: any) => data.closed_time - data.date)
+                    .reduce((acc: any, value: any) => acc + value, 0) /
+                  calcuFunction(elem)?.length /
+                  60000
+                ).toFixed(0)
+              ) / 60
+            )
+              .toString()
+              .split(".")[0]
+          : 0
+      }H : ${
+        calcuFunction(elem)?.length >= 1
+          ? Number(
+              (
+                calcuFunction(elem)
+                  ?.map(
+                    (data: any) =>
+                      new Date(data.closed_time).getTime() -
+                      new Date(data.date).getTime()
+                  )
+                  .reduce((acc: any, value: any) => acc + value, 0) /
+                calcuFunction(elem)?.length /
+                60000
+              ).toFixed(0)
+            ) % 60
+          : 0
+      }M`,
+      unfiltered_resolution_time: parseFloat(
+        `${
+          calcuFunction(elem)?.length >= 1
+            ? (
+                Number(
+                  (
+                    calcuFunction(elem)
+                      .map((data: any) => data.closed_time - data.date)
+                      .reduce((acc: any, value: any) => acc + value, 0) /
+                    calcuFunction(elem)?.length /
+                    60000
+                  ).toFixed(0)
+                ) / 60
+              )
+                .toString()
+                .split(".")[0]
+            : 0
+        }.${
+          calcuFunction(elem)?.length >= 1
+            ? Number(
+                (
+                  calcuFunction(elem)
+                    ?.map(
+                      (data: any) =>
+                        new Date(data.closed_time).getTime() -
+                        new Date(data.date).getTime()
+                    )
+                    .reduce((acc: any, value: any) => acc + value, 0) /
+                  calcuFunction(elem)?.length /
+                  60000
+                ).toFixed(0)
+              ) % 60
+            : 0
+        }`
+      ),
       total: data?.filter((data: any) => data[option] === elem)?.length,
     }));
   }, [data, option]);
@@ -122,7 +187,7 @@ const ReportsComponent: FC = () => {
         />
       </div>
 
-      <div className="col-span-1 hidden 3xl:flex bg-white dark:bg-slae-800 rounded"></div>
+      <div className="col-span-1 hidden 3xl:flex bg-white dark:bg-slate-800 rounded"></div>
     </div>
   );
 };

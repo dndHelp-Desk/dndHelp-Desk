@@ -69,7 +69,7 @@ const NewTicket: FC<Props> = ({
       ? allTickets.filter(
           (ticket) =>
             ticket.message_position === 1 &&
-            ticket.complainant_number.includes(
+            ticket.complainant_number?.includes(
               inputValue?.complainant_number
             ) === true &&
             inputValue?.complainant_number.split("").length >= 9
@@ -143,9 +143,9 @@ const NewTicket: FC<Props> = ({
           }}
           className={`${
             contact.branch_company
-              .toLowerCase()
-              .replace(/\s/g, "")
-              .includes(recepient.toLowerCase().replace(/\s/g, "")) === true
+              ?.toLowerCase()
+              ?.replace(/\s/g, "")
+              .includes(recepient.toLowerCase()?.replace(/\s/g, "")) === true
               ? ""
               : "hidden"
           } text-xs dark:text-slate-300 text-slate-800 font-sans font-semibold dark:font-medium cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1.5 dark:hover:bg-slate-700 hover:bg-slate-200 capitalize flex items-center space-x-1 transition-all duration-150 rounded px-2`}

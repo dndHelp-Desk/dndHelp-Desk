@@ -120,12 +120,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
 
   return (
     <div className="h-[80%] overflow-hidden">
-      <Chart
-        type="area"
-        series={series}
-        options={options}
-        height="100%"
-      />
+      <Chart type="area" series={series} options={options} height="100%" />
     </div>
   );
 };

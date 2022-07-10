@@ -136,8 +136,6 @@ const LogIn: FC = () => {
                   updateProfileUrl(loggedUser?.id, currentUser?.user?.photoURL);
                 }
 
-                console.log(currentUser.user);
-
                 //Add User Data =================
                 dispatch(
                   updateUser(
