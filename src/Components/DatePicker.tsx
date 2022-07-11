@@ -77,7 +77,7 @@ const DatePicker: FC<Props> = ({ openDatePicker, setDateOpen }) => {
         onClick={() => {
           setDateOpen(true);
         }}
-        className="h-9 w-[8rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:border-slate-700 dark:focus:border-blue-600 border border-slate-300 dark:border-slate-700 rounded-sm flex items-center justify-start px-2 relative"
+        className="h-9 w-[8rem] bg-white dark:bg-slate-800 outline-none focus:outline-none focus:border-slate-700 dark:focus:border-blue-600 border-b-2 border-slate-300 dark:border-slate-700 rounded-sm flex items-center justify-start px-2 relative"
       >
         <span className="text-xs dark:text-slate-300 text-slate-600 font-sans overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold dark:font-medium">
           Select Date

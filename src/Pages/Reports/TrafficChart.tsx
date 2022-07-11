@@ -33,7 +33,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
         enabled: false,
       },
       labels: {
-        show: false,
+        show: true,
         rotate: 0,
         style: {
           colors: theme !== "dark" ? "#1e293b" : "#94a3b8",

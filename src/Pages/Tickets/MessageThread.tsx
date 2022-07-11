@@ -724,7 +724,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     <div className="relative group">
                       <button
                         onClick={() => {
-                          user[0]?.email === firstMessage[0]?.recipient_email &&
+                          firstMessage[0]?.recipient_email
+                            ?.toLowerCase()
+                            ?.includes(user[0]?.email) &&
                             feedBack(firstMessage[0]?.id, "like");
                         }}
                         className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-blue-700 transition-all text-base ${
@@ -746,7 +748,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     <div className="relative group">
                       <button
                         onClick={() => {
-                          user[0]?.email === firstMessage[0]?.recipient_email &&
+                          firstMessage[0]?.recipient_email
+                            ?.toLowerCase()
+                            ?.includes(user[0]?.email) &&
                             feedBack(firstMessage[0]?.id, "dislike");
                         }}
                         className={`h-7 w-7 rounded border border-slate-300 dark:border-[#33415583] dark:bg-slate-800 bg-white flex justify-center items-center hover:text-red-600 transition-all text-base ${

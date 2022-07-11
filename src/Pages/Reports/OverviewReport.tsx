@@ -2,6 +2,7 @@ import { FC, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 import CategoryProgress from "./CategoryProgress";
+import Sentiment from "./Sentiment";
 import TrafficChart from "./TrafficChart";
 
 export type data = any;
@@ -118,29 +119,30 @@ const OverviewReport: FC<data> = ({ data }) => {
   //Component =============================
   return (
     <div className="w-full rounded-md grid grid-cols-2 lg:grid-cols-6 gap-4">
-      <div className="col-span-2 lg:col-span-3 xl:col-span-2 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
+      {/**Tickets Summary ================ */}
+      <div className="col-span-2 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
         <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Summary
         </div>
-        <div className="mt-12 pb-2 border-b dark:border-slate-750 border-slate-300 flex h-fit w-full justify-between">
-          <div className="dark:text-slate-300 text-slate-900">
-            <div className="text-base font-bold text-center uppercase">
+        <div className="mt-4 p-2 grid grid-cols-2 grid-rows-2 w-full h-[13rem] ">
+          <div className="col-span-1 row-span-1 border-b dark:border-slate-700 border-slate-300 flex flex-col justify-center items-center dark:text-slate-300 text-slate-900">
+            <div className="text-lg font-bold text-center uppercase">
               {numberWithSpaces(data?.length)}
             </div>
-            <div className="text-[0.65rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center capitalize">
+            <div className="text-[0.65rem] tracking-wider space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center uppercase">
               Total Tickets
             </div>
           </div>
-          <div className="dark:text-slate-300 text-slate-800">
-            <div className="text-base font-bold text-center uppercase">
+          <div className="col-span-1 row-span-1 border-b dark:border-slate-700 border-slate-300 flex flex-col justify-center items-center dark:text-slate-300 text-slate-800">
+            <div className="text-lg font-bold text-center uppercase">
               {numberWithSpaces(totalAggregate)}
             </div>
-            <div className="text-[0.65rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center capitalize">
+            <div className="text-[0.65rem] tracking-wider space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center uppercase">
               Total Messages
             </div>
           </div>
-          <div className="dark:text-slate-300 text-slate-800">
-            <div className="text-base font-bold text-center">
+          <div className="col-span-1 row-span-1 flex flex-col justify-center items-center dark:text-slate-300 text-slate-800">
+            <div className="text-lg font-bold text-center">
               {`${
                 solvedTickets.length >= 1
                   ? (
@@ -178,70 +180,30 @@ const OverviewReport: FC<data> = ({ data }) => {
               }`}
               <span className="text-xs uppercase">M</span>
             </div>
-            <div className="text-[0.65rem] space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center capitalize">
+            <div className="text-[0.65rem] tracking-wider space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center uppercase">
               Resolution Time
             </div>
           </div>
-        </div>
-        <div className="mt-4 flex space-x-4 px-2 min-h-14 w-full justify-between">
-          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
-            <div className="text-base font-bold text-center uppercase">
-              {numberWithSpaces(
-                data?.filter((data: any) => data?.feedback === "like")?.length
-              )}
+          <div className="col-span-1 row-span-1 flex flex-col justify-center items-center dark:text-slate-300 text-slate-800">
+            <div className="text-lg font-bold text-center">
+              {Number((Number(totalAggregate) / data?.length)?.toFixed(2)) > 1
+                ? (Number(totalAggregate) / data?.length)?.toFixed(2)
+                : 0}
             </div>
-            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
-              Positive
-            </div>
-          </div>
-          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
-            <div className="text-base font-bold text-center uppercase">
-              {numberWithSpaces(
-                data?.filter(
-                  (data: any) =>
-                    data?.feedback !== "like" && data?.feedback !== "dislike"
-                )?.length
-              )}
-            </div>
-            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
-              Neutral
-            </div>
-          </div>
-          <div className="dark:text-slate-300 text-slate-900 bg-slate-100 dark:bg-slate-750 rounded p-4 border border-slate-300 dark:border-slate-700">
-            <div className="text-base font-bold text-center">
-              {numberWithSpaces(
-                data?.filter((data: any) => data?.feedback === "dislike")
-                  ?.length
-              )}
-            </div>
-            <div className="text-[0.6rem] space-y-2 dark:text-slate-400 text-slate-700 font-bold text-center uppercase">
-              Negative
+            <div className="text-[0.65rem] tracking-wider space-y-2 dark:text-slate-400 text-slate-700 font-sans font-semibold text-center uppercase">
+              Avg responses
             </div>
           </div>
         </div>
-        <div
-          className="flex flex-col mt-2 h-44 space-y-2 w-full overflow-hidden rounded-md 
-        p-2"
-        >
-          <p className="text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400">
-            Real-time report it allows you to check the current status of your
-            team's workload , availability and valuable insights or statistics
-            about your team's performance.
-          </p>
-        </div>
-      </div>
-
-      <div className="col-span-2 lg:col-span-3 xl:col-span-2 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col justify-between gap-2 px-4 h-[23rem]">
-        <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
-          Tickets Per Category
-        </div>
-        <div className="h-[15rem] w-full px-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-5">
-          <CategoryProgress data={data} />
-        </div>
+        <p className="mt-2 text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400 overflow-hidden text-ellipsis">
+          Real-time report it allows you to check the current status of your
+          team's workload , availability and valuable insights or statistics
+          about your team's performance.
+        </p>
       </div>
 
       {/**Traffic trend chart ======================== */}
-      <div className="col-span-2 lg:col-span-6 xl:col-span-2 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
+      <div className="col-span-2 lg:col-span-4 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
             <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider mt-1">
@@ -258,6 +220,24 @@ const OverviewReport: FC<data> = ({ data }) => {
           </div>
           <TrafficChart chartData={chartData} option={option} />
         </div>
+      </div>
+
+      {/**Tickets By Category ================================= */}
+      <div className="col-span-2 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col justify-between gap-2 px-4 h-[23rem]">
+        <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
+          Tickets Per Category
+        </div>
+        <div className="h-[15rem] w-full px-4 overflow-hidden overflow-y-scroll space-y-5">
+          <CategoryProgress data={data} />
+        </div>
+      </div>
+
+      {/**Customers Sentiment ================================= */}
+      <div className="col-span-2 lg:col-span-4 min-h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full overflow-hidden rounded-md p-4 py-6 flex flex-col space-y-4 px-4">
+        <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
+          Clients Sentiment
+        </div>
+        <Sentiment data={data} />
       </div>
     </div>
   );

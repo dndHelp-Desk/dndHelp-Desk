@@ -1,5 +1,11 @@
 import { FC } from "react";
-import { BiCategoryAlt, BiUser, BiPulse, BiAlarm } from "react-icons/bi";
+import {
+  BiCategoryAlt,
+  BiUser,
+  BiPulse,
+  BiAlarm,
+  BiGitPullRequest,
+} from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState } from "./../../Redux/store";
 import CompanyFilter from "./CompanyFilter";
@@ -113,6 +119,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         </select>
       </div>
       <CompanyFilter setList={setList} contactsList={contactsList} />
+
       <div className=" w-full col-span-1 h-14 lg:h-10 flex items-center rounded relative">
         <BiPulse className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <select
@@ -124,6 +131,23 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
           <option value="onhold">On Hold</option>
           <option value="reopened">Reopened</option>
           <option value="solved">Resolved</option>
+        </select>
+      </div>
+
+      {/**Filter By Traffic Source ========================== */}
+      <div className=" w-full col-span-1 h-14 lg:h-10 flex items-center rounded relative">
+        <BiGitPullRequest className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
+        <select
+          onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+          className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 dark:border-slate-750 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+        >
+          <option value="">Source</option>
+          <option value="open">Email</option>
+          <option value="onhold">Web Chat</option>
+          <option value="reopened">WhatsApp</option>
+          <option value="reopened">Messanger</option>
+          <option value="solved">Twitter</option>
+          <option value="solved">Slack</option>
         </select>
       </div>
     </>
