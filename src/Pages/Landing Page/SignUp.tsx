@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { BiRocket } from "react-icons/bi";
 import { Stepper, Button } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 type Props = {
   setValues: any;
@@ -268,14 +269,14 @@ const SignUp: FC<Props> = ({
           Back
         </Button>
         {logged && active === 2 ? (
-          <a href={`${setUpValues?.company_url + ".dndhelp-desk.co.za"}/login`}>
+          <Link to="/login">
             <Button
               disabled={active === 2 && loading ? true : false}
               className="px-2 h-10 w-36 rounded-sm bg-blue-700 text-slate-50 disabled:cursor-not-allowed disabled:opacity-75"
             >
               Login
             </Button>
-          </a>
+          </Link>
         ) : (
           <Button
             disabled={active === 2 && loading ? true : false}
