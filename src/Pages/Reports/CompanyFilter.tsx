@@ -36,7 +36,7 @@ const CompanyFilter: FC<Props> = ({ setList, contactsList }) => {
   //Component ==================
   return (
     <div ref={modalRef} className="relative w-full col-span-1">
-      <div className="w-full h-14 lg:h-10 flex items-center dark:bg-slate-800 bg-white overflow-hidden relative rounded border dark:border-slate-700 border-slate-300 pl-8">
+      <div className="w-full h-14 lg:h-10 flex items-center dark:bg-slate-800 bg-white overflow-hidden relative rounded border dark:border-slate-750 border-slate-300 pl-8">
         <BiBuilding className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <label htmlFor="company" className="">
           <input

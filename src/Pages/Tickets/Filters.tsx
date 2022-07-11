@@ -194,7 +194,10 @@ const Filters: FC<Props> = ({
               });
               window.localStorage.setItem(
                 "tickets_filters",
-                JSON.stringify({ ...filters, from: e.target.value })
+                JSON.stringify({
+                  ...filters,
+                  time: { ...filters.time, from: e.target.value },
+                })
               );
             }}
             defaultValue={filters?.time?.from}
@@ -205,7 +208,11 @@ const Filters: FC<Props> = ({
               1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
               20, 21, 22, 23, 24,
             ].map((hour) => {
-              return <option key={hour}>{hour}:00 HR</option>;
+              return (
+                <option key={hour} value={hour}>
+                  {hour}:00 HR
+                </option>
+              );
             })}
           </select>
           <select
@@ -216,7 +223,10 @@ const Filters: FC<Props> = ({
               });
               window.localStorage.setItem(
                 "tickets_filters",
-                JSON.stringify({ ...filters, to: e.target.value })
+                JSON.stringify({
+                  ...filters,
+                  time: { ...filters.time, to: e.target.value },
+                })
               );
             }}
             defaultValue={filters?.time?.to}

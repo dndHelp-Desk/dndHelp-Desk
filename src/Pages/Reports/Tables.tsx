@@ -77,8 +77,8 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
 
   //Component ==========================================
   return (
-    <div className="col-span-3 h-[35rem] lg:col-span-2 rounded-md flex flex-col gap-2">
-      <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-3000 rounded-md overflow-hidden p-1">
+    <div className="col-span-3 h-[35rem] lg:col-span-2 rounded-md flex flex-col gap-2 border dark:border-slate-750 border-slate-300">
+      <section className="h-full min-h-[25rem] dark:bg-slate-800 bg-white rounded-md overflow-hidden p-1">
         <div className="h-12 flex justify-between items-center px-4">
           <div className="text-sm dark:text-slate-300 text-slate-900 font-sans dark:font-semibold font-bold uppercase tracking-wider">
             {option === "agent_email" ? "Agents" : "Company"}
@@ -119,8 +119,8 @@ const Tables: FC<Props> = ({ data, option, setOption, tableData }) => {
               <th className="flex col-span-3 space-x-1 items-center px-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 Name
               </th>
-              <th className="col-span-1 hidden md:flex space-x-1 items-center justify-between px-3 border-r border-slate-400 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
-                <span>Resolution Time</span>
+              <th className="col-span-1 hidden md:flex space-x-1 items-center justify-between px-3 dark:border-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">
+                <span>Average Resolution Time</span>
                 <label htmlFor="resTime">
                   <input
                     type="checkbox"

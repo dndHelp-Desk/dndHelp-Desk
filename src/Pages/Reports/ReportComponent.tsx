@@ -83,7 +83,11 @@ const ReportsComponent: FC = () => {
     let names = Array.from(new Set(data?.map((data: any) => data[option])));
     const calcuFunction = (elem: any) => {
       return data?.filter(
-        (data: any) => data[option] === elem && data?.status === "solved"
+        (data: any) =>
+          data[option] === elem &&
+          data?.status === "solved" &&
+          data?.fcr === "no" &&
+          data?.closed_time?.toString().length === 13
       );
     };
     return names?.map((elem): any => ({
@@ -175,6 +179,7 @@ const ReportsComponent: FC = () => {
         </div>
         {/**Stats ==================================== */}
         <TopCards data={data} />
+
         {/** Overview Report ============================ */}
         <div className="w-full rounded-xl bg-transparent">
           <OverviewReport data={data} />

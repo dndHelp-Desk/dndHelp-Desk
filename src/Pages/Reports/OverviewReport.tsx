@@ -58,20 +58,46 @@ const OverviewReport: FC<data> = ({ data }) => {
 
   //Trafiic Chart Data ===============
   const chartData = useMemo(() => {
-    return Array.from(
-      new Set(
-        data?.map((data: any) =>
-          option === "day"
-            ? new Date(data.date).getDate()
-            : new Date(data.date).getHours() + 1
-        )
-      )
+    return (
+      option === "day"
+        ? [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+          ]
+        : option === "month"
+        ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
+        : [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21, 22, 23, 24,
+          ]
     )?.map((elem) => ({
-      name: elem,
+      name:
+        option !== "day" && option !== "month"
+          ? elem + ":00"
+          : option === "month"
+          ? [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
+            ][elem - 1]
+          : elem,
       value:
         option === "day"
           ? data?.filter((data: any) => new Date(data.date).getDate() === elem)
               ?.length
+          : option === "month"
+          ? data?.filter(
+              (data: any) => new Date(data.date).getMonth() + 1 === elem
+            )?.length
           : data?.filter((data: any) => new Date(data.date).getHours() === elem)
               ?.length,
     }));
@@ -92,11 +118,11 @@ const OverviewReport: FC<data> = ({ data }) => {
   //Component =============================
   return (
     <div className="w-full rounded-md grid grid-cols-2 lg:grid-cols-6 gap-4">
-      <div className="hidden col-span-2 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
+      <div className="col-span-2 lg:col-span-3 xl:col-span-2 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 pt-6 overflow-hidden rounded-md">
         <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Summary
         </div>
-        <div className="mt-4 pb-2 border-b dark:border-slate-800 border-slate-300 flex h-fit w-full justify-between">
+        <div className="mt-12 pb-2 border-b dark:border-slate-750 border-slate-300 flex h-fit w-full justify-between">
           <div className="dark:text-slate-300 text-slate-900">
             <div className="text-base font-bold text-center uppercase">
               {numberWithSpaces(data?.length)}
@@ -205,17 +231,17 @@ const OverviewReport: FC<data> = ({ data }) => {
         </div>
       </div>
 
-      <div className="col-span-2 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col justify-between gap-2 px-4 h-[23rem]">
+      <div className="col-span-2 lg:col-span-3 xl:col-span-2 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 py-6 overflow-hidden rounded-md flex flex-col justify-between gap-2 px-4 h-[23rem]">
         <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Per Category
         </div>
-        <div className="h-[13.2rem] w-full px-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-3">
+        <div className="h-[15rem] w-full px-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-5">
           <CategoryProgress data={data} />
         </div>
       </div>
 
       {/**Traffic trend chart ======================== */}
-      <div className="col-span-4 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
+      <div className="col-span-2 lg:col-span-6 xl:col-span-2 h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 w-full p-4 overflow-hidden rounded-md">
         <div className="h-full w-full flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-center">
             <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider mt-1">
@@ -227,6 +253,7 @@ const OverviewReport: FC<data> = ({ data }) => {
             >
               <option value="hour">Hourly</option>
               <option value="day">Daily</option>
+              <option value="month">Monthly</option>
             </select>
           </div>
           <TrafficChart chartData={chartData} option={option} />

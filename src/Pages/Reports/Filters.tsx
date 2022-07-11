@@ -22,7 +22,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
   //Component ==============================
   return (
     <>
-      <div className=" w-full col-span-1 h-14 lg:h-10 flex items-center rounded relative text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none group">
+      <div className=" w-full col-span-1 h-14 lg:h-10 flex items-center rounded relative text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-750 border-slate-300 focus:ring-0 focus:outline-none group">
         <BiAlarm className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <div className="pl-8 w-full flex justify-between items-center">
           <select
@@ -32,7 +32,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
                 time: { ...filters.time, from: e.target.value },
               })
             }
-            className="h-full w-full text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border-0 border-r  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none"
+            className="h-full w-full text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border-0 border-r  dark:border-slate-750 border-slate-300 focus:ring-0 focus:outline-none"
           >
             <option value="1">From</option>
             {[
@@ -74,7 +74,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         <BiCategoryAlt className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-          className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border  dark:border-slate-750 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
           <option value="">Category</option>
           {categories.length >= 1 &&
@@ -97,7 +97,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         <BiUser className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, agent: e.target.value })}
-          className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 border dark:border-slate-750 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
           <option value="">Agents</option>
           {allMembers.length >= 1 &&
@@ -117,7 +117,7 @@ const Filters: FC<Props> = ({ filters, setFilters, setList, contactsList }) => {
         <BiPulse className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <select
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 dark:border-slate-700 border-slate-300 focus:ring-0 focus:outline-none pl-10"
+          className="h-full w-full rounded text-xs font-medium p-2 dark:bg-slate-800 bg-white dark:text-slate-400 text-slate-900 dark:border-slate-750 border-slate-300 focus:ring-0 focus:outline-none pl-10"
         >
           <option value="">Status</option>
           <option value="open">Open</option>

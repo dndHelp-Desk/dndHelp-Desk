@@ -54,7 +54,7 @@ const ProgressBars: FC = () => {
           Actual figures can be found on the reports page.
         </p>
       </div>
-      <div className="flex flex-col space-y-4 mt-2 w-full rounded-lg px-4 pb-6 overflow-hidden">
+      <div className="flex flex-col space-y-4 mt-8 w-full rounded-lg px-4 pb-6 overflow-hidden">
         {categoriesData?.map((element: any, index) => {
           return (
             <div key={index} className="w-full space-y-1">

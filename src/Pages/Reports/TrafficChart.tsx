@@ -10,7 +10,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
 
   const series = [
     {
-      name: "Tickets Per Hour/Day ",
+      name: "Tickets",
       data: chartData.map((data: any) => data.value),
     },
   ];
@@ -35,6 +35,13 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
       labels: {
         show: false,
         rotate: 0,
+        style: {
+          colors: theme !== "dark" ? "#1e293b" : "#94a3b8",
+          fontSize: "12px",
+          fontFamily: "sans-serif",
+          fontWeight: 500,
+          cssClass: "apexcharts-xaxis-label",
+        },
       },
       axisTicks: {
         show: false,
@@ -54,7 +61,7 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
         style: {
           colors: theme !== "dark" ? ["#1e293b"] : ["#94a3b8"],
           fontSize: "12px",
-          fontFamily: "Helvetica, Arial, sans-serif",
+          fontFamily: "sans-serif",
           fontWeight: 500,
           cssClass: "apexcharts-xaxis-label",
         },
@@ -87,30 +94,6 @@ const TrafficChart: FC<chartData> = ({ chartData, option }) => {
     },
     tooltip: {
       enabled: true,
-      custom: function ({
-        series,
-        seriesIndex,
-        dataPointIndex,
-      }: {
-        series: any;
-        seriesIndex: any;
-        dataPointIndex: any;
-      }) {
-        return (
-          '<div class="text-xs font-semibold bg-slate-50 p-2">' +
-          "<span>" +
-          "&nbsp;" +
-          (option !== "hour" ? "Day " : "Hour | ") +
-          chartData.map((data: any) => data.name)[dataPointIndex] +
-          (option === "hour" ? ":00" : "") +
-          " &nbsp; - &nbsp;" +
-          series[seriesIndex][dataPointIndex] +
-          "&nbsp;" +
-          "Ticket/s" +
-          "</span>" +
-          "</div>"
-        );
-      },
     },
     markers: {
       size: [4, 7],

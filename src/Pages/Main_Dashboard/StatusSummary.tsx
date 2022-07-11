@@ -25,7 +25,23 @@ const StatusSummary: FC = () => {
               ).length /
                 dashboardData.length) *
               100
-            ).toFixed(0),
+            ).toFixed(0)
+              ? (
+                  (dashboardData?.filter(
+                    (data) =>
+                      data?.status
+                        ?.toLowerCase()
+                        ?.replace(/[^a-zA-Z0-9]/g, "")
+                        ?.replace(/\s/g, "") ===
+                      status
+                        ?.toLowerCase()
+                        ?.replace(/[^a-zA-Z0-9]/g, "")
+                        ?.replace(/\s/g, "")
+                  ).length /
+                    dashboardData.length) *
+                  100
+                ).toFixed(0)
+              : 0,
             name: status,
             color: ["#1d4ed8", "#0f766e", "#0891b2", "#0e7490"][index],
           }))
@@ -39,9 +55,9 @@ const StatusSummary: FC = () => {
   return (
     <div className="mt-6 flex flex-col justify-center items-center relative">
       <div className="text-center text-slate-700 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal capitalize font-sans">
-        <p className="text-xs font-semibold tracking-normal dark:text-slate-300 text-slate-800 mt-2 font-sans">
-          {dashboardData?.length} total tickets
-        </p>
+        <div className="text-sm font-semibold dark:font-medium tracking-wider dark:text-slate-300 text-slate-800 mt-2 font-sans">
+          {dashboardData?.length} tickets
+        </div>
       </div>
       <div className="w-[7.5rem] h-[9rem] border border-inherit dark:border-slate-800 mt-3 flex flex-col bg-gradient-to-t to-blue-600 from-blue-700 dark:bg-gradient-to-t dark:to-blue-600 dark:from-blue-700 rounded-b-md shadow-lg z-[99]">
         {data.length >= 1 &&
@@ -55,7 +71,7 @@ const StatusSummary: FC = () => {
                 key={index}
                 className={`bg-inherit transition-all duration-200 hover:bg-blue-800 last:rounded-b  first:border-t-0 border-t-2 border-slate-100 dark:border-slate-800 relative group`}
               >
-                <div className="absolute h-6 w-28 p-2 bottom-[40%] right-[-90%] rounded-sm bg-blue-200 text-[0.65rem] font-semibold hidden group-hover:flex justify-between items-center shadow-xl drop-shadow-xl">
+                <div className="absolute h-6 min-w-28 p-2 bottom-[40%] right-[-90%] rounded-sm bg-blue-200 text-[0.65rem] font-semibold hidden group-hover:flex justify-between items-center shadow-xl drop-shadow-xl overflow-hidden whitespace-nowrap">
                   <span>{status.name} :</span>
                   <span>{status.value}%</span>
                 </div>
