@@ -7,7 +7,6 @@ import {
   BsFileTextFill,
   BsBookHalf,
   BsFillCreditCard2BackFill,
-  BsFillFileEarmarkTextFill,
 } from "react-icons/bs";
 import { signOut, getAuth } from "firebase/auth";
 import { changeLocation, isAuthenticated } from "../../Redux/Slices/UserSlice";
