@@ -43,7 +43,7 @@ const StatusSummary: FC = () => {
                 ).toFixed(0)
               : 0,
             name: status,
-            color: ["#1d4ed8", "#0f766e", "#0891b2", "#0e7490"][index],
+            color: ["#1d4ed8", "#2563eb", "#47B5FF", "#0284c7"][index],
           }))
           ?.sort((a: any, b: any) => {
             return a.value - b.value;
@@ -69,10 +69,10 @@ const StatusSummary: FC = () => {
                   backgroundColor: status?.color,
                 }}
                 key={index}
-                className={`bg-inherit transition-all duration-200 hover:bg-blue-800 last:rounded-b  first:border-t-0 border-t-2 border-slate-100 dark:border-slate-800 relative group`}
+                className={`bg-inherit duration-200 hover:opacity-80 transition-all last:rounded-b  first:border-t-0 border-t-2 border-slate-100 dark:border-slate-800 relative group`}
               >
-                <div className="absolute h-6 min-w-28 p-2 bottom-[40%] right-[-90%] rounded-sm bg-blue-200 text-[0.65rem] font-semibold hidden group-hover:flex justify-between items-center shadow-xl drop-shadow-xl overflow-hidden whitespace-nowrap">
-                  <span>{status.name} :</span>
+                <div className="absolute h-7 w-32 p-2 bottom-[40%] right-[-80%] z-[99] rounded-sm bg-blue-200 text-xs font-semibold hidden group-hover:flex justify-between items-center shadow-xl drop-shadow-xl overflow-hidden whitespace-nowrap">
+                  <span>{status.name} </span>
                   <span>{status.value}%</span>
                 </div>
               </div>
