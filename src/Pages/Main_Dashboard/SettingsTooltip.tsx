@@ -84,23 +84,6 @@ const SettingsTooltip: FC = () => {
               }`}
             >
               <NavLink
-                to="/app/settings/support-operations"
-                className={`settingsNav ${
-                  user.length >= 1 && user[0].access !== "admin" && "hidden"
-                }`}
-              >
-                <BsFillFileEarmarkTextFill />
-                <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
-                  Service Level Agreement (SLA)
-                </span>
-              </NavLink>
-            </li>
-            <li
-              className={`${
-                user.length >= 1 && user[0].access !== "admin" && "hidden"
-              }`}
-            >
-              <NavLink
                 to="/app/settings/automated-reports"
                 className={`settingsNav ${
                   user.length >= 1 && user[0].access !== "admin" && "hidden"

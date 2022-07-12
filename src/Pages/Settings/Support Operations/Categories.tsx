@@ -311,11 +311,9 @@ const Categories: FC = () => {
                       readOnly={true}
                       name={`${category?.id}`}
                       id={`${category?.id}`}
-                      value={
-                        (editable === category?.id
-                          ? updatedValues.turnaround_time
-                          : (Number(category?.turnaround_time) / 3600000))?.toFixed(2)
-                      }
+                      value={(
+                        Number(category?.turnaround_time) / 3600000
+                      )?.toFixed(2)}
                       className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-700"
                     />
                   </label>

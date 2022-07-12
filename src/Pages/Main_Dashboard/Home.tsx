@@ -235,7 +235,7 @@ const Home: FC = () => {
                       </h2>
                       <p className="text-sm text-center font-sans dark:text-slate-100 text-slate-700">
                         Click the button below to add all your teammates and
-                        users/clients.
+                        users or clients.
                       </p>
                       <Link to="/app/settings/team">
                         <button className="h-8 px-6 bg-blue-700 rounded-sm outline-none focus:outline-none text-slate-50 font=sans text-sm tracking-wider hover:opacity-80 transition-all duration-150">

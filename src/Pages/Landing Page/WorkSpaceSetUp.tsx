@@ -149,12 +149,12 @@ const WorkSpaceSetUp: FC = () => {
               addDoc(emailAccountsRef, {
                 name: "Support",
                 email:
-                  "support@" +
+                  "support." +
                   setUpValues.company_name
                     ?.replace(/[^a-zA-Z0-9]/g, "")
                     ?.replace(/\s/g, "")
                     ?.toLowerCase() +
-                  ".dndhelp-desk.co.za",
+                  "@dndhelp-desk.co.za",
                 password: setUpValues.password,
                 host: setUpValues.host,
                 port: setUpValues.port,
