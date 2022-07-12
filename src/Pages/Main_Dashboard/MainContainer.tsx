@@ -258,7 +258,6 @@ const Dashboard: FC = () => {
             </div>
           </div>
         </div>
-
         {/**Main Body ===================== */}
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}

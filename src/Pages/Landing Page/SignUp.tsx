@@ -130,7 +130,7 @@ const SignUp: FC<Props> = ({
 
         {/** ========================Step Two ========================== */}
         <Stepper.Step
-          label="Company Dtails"
+          label="Company Details"
           description="Name and email"
           allowStepSelect={active > 1}
         >

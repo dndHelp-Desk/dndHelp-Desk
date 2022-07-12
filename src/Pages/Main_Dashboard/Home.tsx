@@ -2,12 +2,12 @@ import { FC } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "../../Assets/logos/faviLight.png";
-import noUsers from "./images/no-userss.svg";
 import MostRecent from "./MostRecent";
 import StatusSummary from "./StatusSummary";
 import { RootState } from "../../Redux/store";
 import ProgressBars from "./ProgressBars";
 import BottomSection from "./BottomSection";
+import { Link } from "react-router-dom";
 
 const Home: FC = () => {
   const location = useLocation();
@@ -229,15 +229,19 @@ const Home: FC = () => {
                   (user) => user.access?.toLowerCase() === "agent"
                 ).length <= 0 && (
                   <div className="h-full w-full">
-                    <div className="h-full w-full rounded-sm dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 p-6 space-y-4">
-                      <h2 className="dark:text-slate-400 text-slate-700 tracking-wide text-center uppercase text-xs font-sans font-bold">
-                        add your team members
+                    <div className="h-full w-full rounded-sm dark:bg-slate-750 bg-slate-100 border dark:border-slate-700 border-slate-300 p-6 pt-4 flex flex-col items-center justify-center space-y-4">
+                      <h2 className="dark:text-slate-300 text-slate-700 tracking-wide text-center capitalize text-lg font-sans font-bold">
+                        Create a team
                       </h2>
-                      <img
-                        src={noUsers}
-                        alt="no-users"
-                        className="object-center object-fit w-full h-[70%]"
-                      />
+                      <p className="text-sm text-center font-sans dark:text-slate-100 text-slate-700">
+                        Click the button below to add all your teammates and
+                        users/clients.
+                      </p>
+                      <Link to="/app/settings/team">
+                        <button className="h-8 px-6 bg-blue-700 rounded-sm outline-none focus:outline-none text-slate-50 font=sans text-sm tracking-wider hover:opacity-80 transition-all duration-150">
+                          Create
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 )}

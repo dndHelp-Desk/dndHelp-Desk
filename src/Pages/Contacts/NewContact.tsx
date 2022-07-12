@@ -322,12 +322,21 @@ const NewContact: FC<Props> = ({
                         phoneNumber: e.target.value,
                       });
                     }
-                    setPhone(
-                      e.target.value?.replace(/[\s|\\*!-@#$%^&()[\]{}.,]/gi, "")
-                    );
+                    setPhone(e.target.value?.replace(/\s/g, ""));
                   }}
                   onKeyDown={(e) => {
-                    if (["Enter", "Tab", ",", "/", "Space"].includes(e.key)) {
+                    if (
+                      [
+                        "Enter",
+                        "Tab",
+                        ",",
+                        "/",
+                        ".",
+                        "-",
+                        "|",
+                        "Space",
+                      ].includes(e.key)
+                    ) {
                       e.preventDefault();
                       setPhoneValid(true);
                       if (
