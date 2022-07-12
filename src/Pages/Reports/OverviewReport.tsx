@@ -227,7 +227,7 @@ const OverviewReport: FC<data> = ({ data }) => {
         <div className="text-base dark:text-slate-300 text-slate-800 font-sans dark:font-semibold font-bold uppercase tracking-wider">
           Tickets Per Category
         </div>
-        <div className="h-[15rem] w-full px-4 overflow-hidden overflow-y-scroll space-y-5">
+        <div className="h-[15rem] w-full px-4 overflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-5">
           <CategoryProgress data={data} />
         </div>
       </div>

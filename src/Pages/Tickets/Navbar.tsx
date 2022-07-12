@@ -350,7 +350,7 @@ const Navbar: FC<Props> = ({
             setValues(initialDraft());
             document.body.style.overflow = "hidden";
           }}
-          className={`bg-slate-800 dark:bg-blue-700 capitalize text-white h-8 px-4 space-x-1 rounded-sm justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-medium hover:opacity-80 transition-all ${
+          className={`bg-slate-750 dark:bg-blue-700 capitalize text-white h-8 px-4 space-x-1 rounded-sm justify-center items-center text-xs font-base tracking-wide focus:outline-none outline-none duration-300 transition-bg font-medium hover:opacity-80 transition-all ${
             user[0]?.access === "client" ? "hidden" : "flex"
           }`}
         >

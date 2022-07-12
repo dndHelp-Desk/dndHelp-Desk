@@ -85,6 +85,9 @@ const Sentiment: FC<Props> = ({ data }) => {
               key={data?.color}
               className="flex flex-col justify-center items-center"
             >
+              <div className="text-xs dark:text-slate-300 text-slate-800 font-sans font-semibold tracking-wider">
+                {data?.count ? data?.count : 0}
+              </div>
               <div className="flex items-center space-x-1">
                 <div
                   style={{ background: data?.color }}
@@ -98,14 +101,11 @@ const Sentiment: FC<Props> = ({ data }) => {
                     : "Neutral"}
                 </span>
               </div>
-              <div className="text-xs dark:text-slate-300 text-slate-800 font-sans font-semibold tracking-wider">
-                {data?.count ? data?.count : 0}
-              </div>
             </div>
           );
         })}
       </div>
-      <p className="mt-2 text-center text-xs font-medium tracking-normal text-slate-600 dark:text-slate-400 overflow-hidden text-ellipsis">
+      <p className="mt-2 text-center text-sm font-medium tracking-normal text-slate-600 dark:text-slate-400 overflow-hidden text-ellipsis">
         Sentiment data is collection on each ticket resolution. If the
         customer/client does not respond, the feedback is marked as neutral.
       </p>

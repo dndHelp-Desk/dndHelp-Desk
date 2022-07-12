@@ -150,8 +150,14 @@ const NewTicket: FC<Props> = ({
               : "hidden"
           } text-xs dark:text-slate-300 text-slate-800 font-sans font-semibold dark:font-medium cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis p-1.5 dark:hover:bg-slate-700 hover:bg-slate-200 capitalize flex items-center space-x-1 transition-all duration-150 rounded px-2`}
         >
-          <BiUser className="text-base" />
-          <div>{contact.branch_company}</div>
+          <div className="w-5">
+            <BiUser className="text-base" />
+          </div>
+          <div className="w-[calc(100%-3rem)]">
+            <span className="white-space-nowrap w-full overflow-hidden overflow-ellipsis pr-2">
+              {contact.branch_company}
+            </span>
+          </div>
         </li>
       );
     });
@@ -722,7 +728,7 @@ const NewTicket: FC<Props> = ({
                           }}
                           className="h-full w-7 flex justify-center items-center outline-none focus:outline-none border-l dark:border-slate-600 border-slate-300 font-semibold text-sm hover:text-red-600"
                         >
-                          <BiX/>
+                          <BiX />
                         </button>
                       </div>
                       {/**Selected ========= */}

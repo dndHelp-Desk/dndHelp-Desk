@@ -6,6 +6,7 @@ import {
   TbChartDonut,
   TbSettings,
   TbBrightnessUp,
+  TbLayoutSidebar,
 } from "react-icons/tb";
 import { HiSun } from "react-icons/hi";
 import { HiOutlinePhone, HiOutlineBell } from "react-icons/hi";
@@ -21,6 +22,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import Home from "./Home";
 import AlertsWrapper from "../../Components/Toast Notifications/AlertsWrapper";
 import TicketsnUserData from "../../Adapters/Data_Fetching/TicketsnUserData";
+import useClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import Profile from "../Auth/Profile";
 import Notification from "./Notification";
 import SettingsTooltip from "./SettingsTooltip";
@@ -40,6 +42,10 @@ const Dashboard: FC = () => {
   const loadingStatus = useSelector(
     (state: RootState) => state.Tickets.loadingStatus
   );
+  const [smallMenuOpen, openMenu] = useState<boolean>(false);
+  const menuStatusListener = useClickOutside(() => {
+    openMenu(false);
+  });
   const theme = useSelector((state: RootState) => state.UserInfo.theme);
   const user = useSelector((state: RootState) => state.UserInfo.member_details);
   const allTickets = useSelector(
@@ -146,8 +152,11 @@ const Dashboard: FC = () => {
 
         {/**Side NavBar ================= */}
         <div
+          ref={menuStatusListener}
           role="navigation"
-          className="h-screen w-[4.5rem] bg-slate-800 no-scrollbar no-scrollbar::-webkit-scrollbar p-2 pb-4 pt-3 flex flex-col justify-between items-center border-r dark:border-slate-700 border-slate-300"
+          className={`${
+            smallMenuOpen ? "fixed left-0" : "fixed left-[-200%]"
+          } transition-all duration-150 shadow-2xl md:shadow-none z-[9999] h-screen w-[4.5rem] bg-slate-800 no-scrollbar no-scrollbar::-webkit-scrollbar p-2 pb-4 pt-3 md:left-0 md:relative flex flex-col justify-between items-center border-r dark:border-slate-700 border-slate-300`}
         >
           <div className="w-full space-y-4">
             {/**Logo ==================== */}
@@ -253,8 +262,17 @@ const Dashboard: FC = () => {
         {/**Main Body ===================== */}
         <main className="w-full h-screen flex flex-col justify-between overflow-hidden relative">
           {/**Top NavBar ============== */}
-          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 flex justify-between items-center">
+          <nav className="absolute top-0 w-full h-[3.6rem] dark:bg-slate-750 bg-slate-100 border-b dark:border-slate-700 border-slate-300 px-4 md:pl-2 flex justify-between items-center">
             <div className="h-[3.6rem] flex items-center justify-center space-x-2">
+              {/**Small Menu Icon =============== */}
+              <button
+                onClick={() => {
+                  openMenu((prev) => (prev === true ? false : true));
+                }}
+                className="h-9 w-9 bg-slate-800 border-b-2 border-slate-300 dark:border-slate-700 outline-none focus:outline-none dark:text-slate-300 text-xl md:hidden flex justify-center items-center"
+              >
+                <TbLayoutSidebar />
+              </button>
               {/**Date Picker ================ */}
               <DatePicker
                 openDatePicker={openDatePicker}

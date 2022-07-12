@@ -2,12 +2,7 @@ import React, { FC, useState, useRef, useMemo, useEffect } from "react";
 import { useScrollIntoView } from "@mantine/hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { toUpper } from "../../../Reusable Functions/Reusable_Func";
-import {
-  BiArrowBack,
-  BiTrash,
-  BiShare,
-  BiDotsVertical,
-} from "react-icons/bi";
+import { BiArrowBack, BiTrash, BiShare, BiDotsVertical } from "react-icons/bi";
 import {
   HiCheck,
   HiOutlineArrowSmDown,
@@ -492,13 +487,15 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
             </div>
           </div>
           {/**Message ====================== */}
-          <div className="border-t border-slate-100 dark:border-[#33415583] w-[calc(100%-2.5rem)] bg-tranparent relative pt-2 md:pt-0">
+          <div className="border-t border-slate-100 dark:border-slate-750 w-[calc(100%-2.5rem)] bg-tranparent relative pt-2 md:pt-0">
             {/**Contents ======================= */}
             <div className="font-semibold dark:font-medium dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
               <div className="flex dark:text-slate-300 text-slate-800 text-xs">
                 <span className="tracking-normal text-sm font-bold dark:font-medium capitalize font-sans">
-                  {message.agent_name}
-                  {message.user}
+                  {message?.agent_name === user[0]?.name
+                    ? "You"
+                    : message?.agent_name}
+                  {message?.user === user[0]?.name ? "You" : message?.user}
                 </span>
                 <span
                   className={`justify-center items-center space-x-[-0.4rem] ml-1 capitalize text-[0.75rem] text-blue-600 italic h-4 w-6 bg-inherit ${
@@ -521,9 +518,9 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               <div className="flex space-x-0 md:space-x-2 h-full items-center justify-between">
                 <span className="flex space-x-2">
                   <span className="text-[0.7rem] dark:text-slate-300 text-slate-800 font-medium font-sans">
-                    {`${new Date(message.date).toDateString()}`},{" "}
+                    {`${new Date(message?.date).toDateString()}`},{" "}
                     {`${
-                      new Date(message.date).toLocaleString()?.split(",")[1]
+                      new Date(message?.date).toLocaleString()?.split(",")[1]
                     }`}
                   </span>
                 </span>
@@ -546,7 +543,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                             message?.message_position !== 1 &&
                             message?.user_email === user[0]?.email
                           ) {
-                            deleteTicket(message.id);
+                            deleteTicket(message?.id);
                           }
                         }}
                         className="w-full dark:text-slate-300 text-slate-700 font-semibold dark:font-medium text-sm flex justify-between items-center outline-none focus:outline-none"
@@ -561,7 +558,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               </div>
             </div>
             <div className="dark:text-slate-400 text-slate-700 text-[13px]">
-              {message.message && (
+              {message?.message && (
                 <div
                   onClick={(e) => zoomImage(e)}
                   dangerouslySetInnerHTML={{ __html: message?.message }}
@@ -581,7 +578,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       <ZoomedImg zoomImg={zoomImg} setZoomed={setZoomed} />
       {/**Zoomed Imag Modal */}
 
-      <div className="row-span-4 h-full w-full dark:bg-slate-800 bg-white pb-2 space-y-2flex flex-col overflow-hidden">
+      <div className="row-span-4 h-full w-full dark:bg-slate-800 bg-white pb-2 space-y-2 flex flex-col overflow-hidden">
         <div className="h-[3.5rem] bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3 pl-0">
@@ -646,7 +643,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
         {/**Thread Messages ============================ */}
         <div
           ref={scrollableRef}
-          className="h-full w-[98%] m-auto p-6 flex flex-col space-y-8 overflow-y-scroll bg-inherit relative"
+          className="h-[calc(100%-3.5rem)] w-[98%] m-auto p-6 flex flex-col space-y-8 overflow-y-scroll bg-inherit relative"
         >
           {thread}
           {
@@ -663,7 +660,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 </div>
 
                 {/**Message ====================== */}
-                <div className="rounded-sm border-t border-slate-100 dark:border-[#33415583] w-[calc(100%)] bg-tranparent relative">
+                <div className="rounded-sm border-t border-slate-100 dark:border-slate-750 w-[calc(100%)] bg-tranparent relative">
                   {/**Contents ======================= */}
                   <div className="font-bold  dark:text-slate-400 text-slate-500 justify-between md:items-center w-full flex flex-col md:flex-row relative">
                     <div className="w-full h-full dark:text-slate-300 text-slate-800 text-xs flex flex-col justify-start items-start space-y-2 md:flex-row md:space-y-0 md:justify-between  py-1 sm:pr-10 pt-2">

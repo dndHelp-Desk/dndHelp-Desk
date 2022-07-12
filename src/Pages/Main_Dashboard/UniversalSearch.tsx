@@ -72,7 +72,7 @@ const UniversalSearch: FC<Props> = ({
   return (
     <div
       ref={closeSearch}
-      className={`relative ${
+      className={`relative hidden md:block ${
         searchOpen ? "z-[99999] shadow-2xl drop-shadow-2xl" : ""
       }`}
     >

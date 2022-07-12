@@ -1,4 +1,4 @@
-import { FC} from "react";
+import { FC } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "../../Assets/logos/faviLight.png";
