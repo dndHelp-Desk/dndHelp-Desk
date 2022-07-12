@@ -269,7 +269,7 @@ const Dashboard: FC = () => {
                 onClick={() => {
                   openMenu((prev) => (prev === true ? false : true));
                 }}
-                className="h-9 w-9 bg-slate-800 border-b-2 border-slate-300 dark:border-slate-700 outline-none focus:outline-none dark:text-slate-300 text-xl md:hidden flex justify-center items-center"
+                className="h-9 w-9 bg-white dark:bg-slate-800 border-b-2 border-slate-300 dark:border-slate-700 outline-none focus:outline-none dark:text-slate-300 text-slate-600 text-xl md:hidden flex justify-center items-center"
               >
                 <TbLayoutSidebar />
               </button>
@@ -297,7 +297,7 @@ const Dashboard: FC = () => {
                   onClick={() => {
                     openPhone(true);
                   }}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                  className="dark:text-gray-300 text-slate-600 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <HiOutlinePhone />
                 </button>
@@ -311,7 +311,7 @@ const Dashboard: FC = () => {
               <abbr title="Notifications">
                 <button
                   onClick={() => setOpenNotification(true)}
-                  className="dark:text-gray-200 text-slate-900 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
+                  className="dark:text-gray-300 text-slate-600 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
                   <HiOutlineBell />
                   {(unread.length >= 1 || notificationMsgs.length >= 1) && (
