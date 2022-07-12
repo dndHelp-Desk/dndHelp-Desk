@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import MessageThread from "./MessageThread";
+import MessageThread from "./Thread/MessageThread";
 import TicketsList from "./TicketsList";
 
 const TicketsComponent: FC = () => {

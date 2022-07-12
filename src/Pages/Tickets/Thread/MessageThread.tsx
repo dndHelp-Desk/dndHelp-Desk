@@ -1,12 +1,9 @@
 import React, { FC, useState, useRef, useMemo, useEffect } from "react";
 import { useScrollIntoView } from "@mantine/hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { toUpper } from "../../Reusable Functions/Reusable_Func";
+import { toUpper } from "../../../Reusable Functions/Reusable_Func";
 import {
-  BiMicrophone,
-  BiCollection,
   BiArrowBack,
-  BiChevronDown,
   BiTrash,
   BiShare,
   BiDotsVertical,
@@ -26,15 +23,14 @@ import {
   changeStatus,
   reOpenTicket,
   feedBack,
-} from "../../Adapters/Data_Fetching/TicketsnUserData";
-import { updateAlert } from "../../Redux/Slices/NotificationsSlice";
-import { addRecording } from "../Auth/Firebase";
-import TextEditor from "./TextEditor";
-import { AppDispatch, RootState } from "../../Redux/store";
-import CannedResponses from "./Macros/CannedResponses";
+} from "../../../Adapters/Data_Fetching/TicketsnUserData";
+import { updateAlert } from "../../../Redux/Slices/NotificationsSlice";
+import { addRecording } from "../../Auth/Firebase";
+import { AppDispatch, RootState } from "../../../Redux/store";
 import ZoomedImg from "./ZoomedImg";
 import Details from "./Details";
-import HintTooltip from "../../Components/HintTooltip";
+import HintTooltip from "../../../Components/HintTooltip";
+import Reply from "../Reply/Reply";
 
 interface Props {
   isChatOpen: boolean;
@@ -585,7 +581,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       <ZoomedImg zoomImg={zoomImg} setZoomed={setZoomed} />
       {/**Zoomed Imag Modal */}
 
-      <div className="row-span-4 h-full w-full dark:bg-slate-800 bg-white pb-2 space-y-2 flex flex-col overflow-hidden">
+      <div className="row-span-4 h-full w-full dark:bg-slate-800 bg-white pb-2 space-y-2flex flex-col overflow-hidden">
         <div className="h-[3.5rem] bg-inherit sticky py-2 top-0 w-full flex justify-between z-[99] border-b dark:border-[#33415596] border-slate-300 px-2">
           {/**Opened Ticket Details ================================== */}
           <div className="flex justify-between items-center w-full space-x-2 bg-transparent px-3 pl-0">
@@ -778,7 +774,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
           {(!threadId || threadMessages.length <= 0) && (
             <>
               <div className="m-auto w-[80%] h-full flex flex-col justify-center space-y-8 place-content-center">
-                <div className="flex flex-col items-center justify-center pt-6 relative">
+                <div className="flex flex-col items-center justify-center relative">
                   <div className="ml-16 w-[15rem] h-[6.5rem] rounded bg-slate-300 dark:bg-slate-700 flex flex-col space-y-2 justify-center p-6">
                     <div className="h-2 w-2/5 rounded dark:bg-slate-500 bg-slate-700"></div>
                     <div className="h-2 w-full rounded dark:bg-slate-900 bg-slate-100"></div>
@@ -810,147 +806,17 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
       </div>
 
       {/**Reply ====================================== */}
-      <div className="min-h-[11rem] max-h-[15rem] w-full flex items-center justify-center dark:bg-slate-800 bg-white pb-2">
-        <div className="h-[90%] w-[95%] relative rounded-sm dark:bg-slate-750 bg-slate-100 border border-slate-400 dark:border-slate-700 hover:border-slate-600 dark:hover:border-slate-500 transion-all shadow-lg">
-          <form
-            onSubmit={(e) => sendReply(e)}
-            className="w-full h-full bg-transparent rounded-lg flex flex-col justify-between overflow-hidden z-[999] pt-0"
-          >
-            <div className="w-full h-[78%] overflow-hidden">
-              <div className="h-full w-full bg-transparent rounded resize-none text-sm dark:text-slate-400 text-slate-700 transition-all  dark:placeholder:text-slate-600 placeholder:text-slate-500 placeholder:text-sm overflow-hidden pt-0">
-                <TextEditor
-                  setReply={setReply}
-                  value={value}
-                  onChange={onChange}
-                  setUploadStatus={setUploadStatus}
-                />
-              </div>
-            </div>
-            {/**Reply options ======================= */}
-            <div className="h-[2.8rem] p-[0.15rem] px-[0.23rem] w-full flex justify-between items-center">
-              <div className="h-full flex items-center pr-[0.10rem]">
-                {/**Canned Response ========================================= */}
-                <div className="w-8 h-8 group rounded-l-sm bg-white dark:bg-[#182235] border border-r-0 border-slate-400 dark:border-slate-700 flex justify-center items-center text-base  text-slate-700 dark:text-slate-400">
-                  <div className="relative group">
-                    <div className="h-full w-full flex items-center justify-center outline-none focus:outline-none">
-                      <BiCollection className="text-base hover:opacity-80" />
-                    </div>
-                  </div>
-                  <CannedResponses
-                    setReply={setReply}
-                    onChange={onChange}
-                    position={0.7}
-                    tooltipPosition={5}
-                  />
-                </div>
-                {/**Upload Recordings ========================================= */}
-                <div className="relative group">
-                  <HintTooltip
-                    details={"Upload an audio"}
-                    positions={{
-                      horizontal: `left-[0%]`,
-                      vertical: `top-[-115%]`,
-                    }}
-                  />
-                  <label
-                    htmlFor="replyRecording"
-                    className={`w-8 h-8 border ${
-                      user[0]?.access === "client"
-                        ? "rounded-r-sm"
-                        : "border-r-0"
-                    } bg-white dark:bg-[#182235]  border-slate-400 dark:border-slate-700 flex justify-center items-center text-base outline-none focus:outline-none hover:opacity-80 text-slate-700 dark:text-slate-400 cursor-pointer`}
-                  >
-                    <BiMicrophone className="text-base" />
-                    <input
-                      type="file"
-                      id="replyRecording"
-                      accept=".wav"
-                      name="replyRecording"
-                      title="Upload Recording"
-                      onChange={(e) => {
-                        let target: any = e.target; //<-- This (any) will tell compiler to shut up!
-                        let content: any = target.files[0];
-                        setFile(content);
-                      }}
-                      className="outline-none focus:outline-none hidden"
-                    />
-                  </label>
-                </div>
-                {/**Change Status ========================================= */}
-                <div className="h-8 relative group">
-                  <HintTooltip
-                    details={"Change Status"}
-                    positions={{
-                      horizontal: `right-0`,
-                      vertical: `top-[-115%]`,
-                    }}
-                  />
-                  <select
-                    ref={statusSelectionRef}
-                    onChange={(e) => {
-                      setReply({ ...reply, status: e.target.value });
-                    }}
-                    required
-                    className={`w-24 md:w-28 h-8 rounded-r-sm bg-white dark:bg-[#182235] border border-slate-400 dark:border-slate-700 justify-center items-center outline-none focus:outline-none focus:ring-0 hover:opacity-80 text-slate-800 dark:text-slate-400 text-xs font-semibold dark:font-medium capitalize ${
-                      user[0]?.access === "client" ? "hidden" : "flex"
-                    }`}
-                  >
-                    <option
-                      className="p-2"
-                      value={firstMessage[0]?.status || "Status"}
-                    >
-                      {firstMessage[0]?.status || "Status"}
-                    </option>
-                    <option className="p-2" value="open">
-                      open
-                    </option>
-                    <option className="p-2" value="on hold">
-                      on hold
-                    </option>
-                    <option className="p-2" value="solved">
-                      solved
-                    </option>
-                    <option className="p-2" value="reopened">
-                      reopened
-                    </option>
-                  </select>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="flex items-center h-8 py-1 rounded-sm text-slate-100 bg-slate-800 dark:bg-blue-700 shadow-lg">
-                  <button
-                    type="submit"
-                    className="h-full outline-none focus:outline-none rounded-sm text-lg p-2 px-4 font-medium  text-slate-100 bg-slate-800 dark:bg-blue-700 z-[9] flex items-center space-x-1 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
-                  >
-                    <span className="text-xs capitalize">Send now</span>
-                  </button>
-                  <div className="h-full flex items-center relative group">
-                    <button
-                      type="button"
-                      className="h-[80%] px-2 bg-inherit text-inherit border-0 outline-none focus:outline-none border-l border-slate-400 hover:opacity-80 transition-all  disabled:cursor-not-allowed disabled:opacity-80"
-                    >
-                      <BiChevronDown className="text-lg" />
-                    </button>
-                    <HintTooltip
-                      details={"Schedule for later"}
-                      positions={{
-                        horizontal: `right-0`,
-                        vertical: `top-[-170%]`,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-
-          {/**Slash Command Canned Responses Results ==== */}
-          <div className="absolute left-8 top-11 z-[9999] h-7 w-fit p-1 px-2 rounded-full bg-white dark:bg-slate-800 border border-slate-400 dark:border-slate-600 italic text-xs text-slate-700 dark:text-slate-300 hidden jflex justify-center items-center cursor-pointer">
-            Late delivery
-          </div>
-          {/**Slash Command Canned Responses Results ==== */}
-        </div>
-      </div>
+      <Reply
+        setReply={setReply}
+        value={value}
+        onChange={onChange}
+        setUploadStatus={setUploadStatus}
+        sendReply={sendReply}
+        setFile={setFile}
+        statusSelectionRef={statusSelectionRef}
+        firstMessage={firstMessage}
+        reply={reply}
+      />
     </div>
   );
 };

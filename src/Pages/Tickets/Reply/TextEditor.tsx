@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { RichTextEditor } from "@mantine/rte";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
-import { RootState } from "../../Redux/store";
+import { RootState } from "../../../Redux/store";
 
 interface Props {
   setReply: (reply: any) => any;

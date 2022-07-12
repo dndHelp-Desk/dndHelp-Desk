@@ -304,23 +304,17 @@ const Categories: FC = () => {
                     className="text-sm text-slate-600 dark:text-slate-400"
                   >
                     <span className="text-slate-800 dark:text-slate-300 font-semibold">
-                      Turn-around Time in Milliseconds
+                      Turn-around Time in Hours
                     </span>
                     <input
                       type="text"
+                      readOnly={true}
                       name={`${category?.id}`}
                       id={`${category?.id}`}
-                      readOnly={editable === category?.id ? false : true}
                       value={
-                        editable === category?.id
+                        (editable === category?.id
                           ? updatedValues.turnaround_time
-                          : category?.turnaround_time
-                      }
-                      onChange={(e) =>
-                        setValues({
-                          ...updatedValues,
-                          turnaround_time: e.target.value,
-                        })
+                          : (Number(category?.turnaround_time) / 3600000))?.toFixed(2)
                       }
                       className="h-10 w-full bg-transparent outline-none focus:outline-none focus:ring-0 border-0 border-b border-slate-300 dark:border-slate-700"
                     />

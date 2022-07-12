@@ -1,5 +1,5 @@
 import { FC } from "react";
-import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
+import useOnClickOutside from "../../../Custom-Hooks/useOnClickOutsideRef";
 
 type Props = {
   zoomImg: any;
