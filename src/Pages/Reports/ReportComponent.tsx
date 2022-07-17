@@ -166,8 +166,8 @@ const ReportsComponent: FC = () => {
 
   //Component =========================
   return (
-    <div className="dark:bg-transparent bg-transparent w-full min-h-[calc(100%-3.65rem)] select-text tracking-wider relative py-4 px-4 oveflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar grid grid-cols-3 3xl:grid-cols-4 gap-4">
-      <div className="col-span-3 flex flex-col space-y-4">
+    <div className="dark:bg-transparent bg-transparent w-full min-h-[calc(100%-3.65rem)] select-text tracking-wider relative p-4 oveflow-hidden overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar flex">
+      <div className="w-full flex flex-col space-y-4">
         {/**Filters ============= */}
         <div className="w-full bg-transparent grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 print:hidden">
           <Filters
@@ -191,8 +191,6 @@ const ReportsComponent: FC = () => {
           tableData={tableData}
         />
       </div>
-
-      <div className="col-span-1 hidden 3xl:flex bg-white dark:bg-slate-800 rounded"></div>
     </div>
   );
 };

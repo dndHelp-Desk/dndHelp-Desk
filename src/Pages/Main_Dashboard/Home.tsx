@@ -21,7 +21,7 @@ const Home: FC = () => {
   //Monthly Data =================
   const monthlyData = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30,
+    22, 23, 24, 25, 26, 27, 28, 29, 30,31
   ].map((day: any) => ({
     day: day,
     data: dashboardData.filter(
@@ -90,8 +90,8 @@ const Home: FC = () => {
         location.pathname === "/app" ? "grid" : "hidden"
       }`}
     >
-      <div className="grid-cols-3 3xl:grid-cols-4 grid gap-4 h-full overflow-x-hidden overflow-y-scroll pb-4 no-scrollbar no-scrollbar::-webkit-scrollbar">
-        <div className="col-span-3 flex flex-col space-y-4 min-h-[58rem] tracking-wide">
+      <div className="w-full flex h-full overflow-x-hidden overflow-y-scroll pb-4 no-scrollbar no-scrollbar::-webkit-scrollbar">
+        <div className="flex flex-col space-y-4 min-h-[58rem] tracking-wide">
           <section className="row-span-1 rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-fit">
             {/**Top 5 Categories  ========================= */}
             <ProgressBars />
@@ -230,7 +230,7 @@ const Home: FC = () => {
                 ).length <= 0 && (
                   <div className="h-full w-full">
                     <div className="h-full w-full rounded-sm dark:bg-slate-750 bg-slate-100 border dark:border-slate-700 border-slate-300 p-6 pt-4 flex flex-col items-center justify-center space-y-4">
-                      <h2 className="dark:text-slate-300 text-slate-700 tracking-wide text-center capitalize text-lg font-sans font-bold">
+                      <h2 className="dark:text-slate-300 text-slate-700 tracking-wide text-center text-lg font-sans font-bold">
                         Create a team
                       </h2>
                       <p className="text-sm text-center font-sans dark:text-slate-100 text-slate-700">
@@ -252,9 +252,6 @@ const Home: FC = () => {
           {/**Bottom Half ================================ */}
           <BottomSection />
         </div>
-
-        {/***What's new ==================== */}
-        <div className="col-span-1 bg-white dark:bg-slate-800 rounded"></div>
       </div>
     </div>
   );
