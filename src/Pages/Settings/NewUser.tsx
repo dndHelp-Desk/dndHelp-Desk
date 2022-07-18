@@ -112,7 +112,7 @@ const NewUser: FC<Props> = ({
           ...alerts,
           {
             message: "User edited successfully",
-            color: "bg-red-200",
+            color: "bg-green-200",
             id: new Date().getTime(),
           },
         ])

@@ -43,72 +43,87 @@ const NewContact: FC<Props> = ({
   //Add new Contact  =======================
   const handleNewContact = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
-    if (edit) {
-      editContact(
-        newContactValue?.contact_id,
-        newContactValue?.name,
-        newContactValue?.email,
-        newContactValue?.phoneNumber,
-        newContactValue?.company,
-        newContactValue?.twitter_handle,
-        newContactValue?.whatsapp_number
-      );
+    if (
+      newContactValue?.email?.length > 3 &&
+      newContactValue?.contact.length > 3
+    ) {
+      if (edit) {
+        editContact(
+          newContactValue?.contact_id,
+          newContactValue?.name,
+          newContactValue?.email,
+          newContactValue?.phoneNumber,
+          newContactValue?.company,
+          newContactValue?.twitter_handle,
+          newContactValue?.whatsapp_number
+        );
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "Contact has been edited Successfully",
+              color: "bg-green-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+        setValue({
+          name: "",
+          email: "",
+          phoneNumber: "",
+          company: "",
+          twitter_handle: "",
+          whatsapp_number: "",
+          contact_id: "",
+        });
+        setModal(false);
+        setEdit(false);
+        setPhoneValid(false);
+        setEmailValid(false);
+      } else if (!edit) {
+        newContact(
+          newContactValue?.name,
+          newContactValue?.email,
+          newContactValue?.phoneNumber,
+          newContactValue?.company,
+          newContactValue?.twitter_handle,
+          newContactValue?.whatsapp_number
+        );
+        dispatch(
+          updateAlert([
+            ...alerts,
+            {
+              message: "New Contact Has Been Added Successfully",
+              color: "bg-green-200",
+              id: new Date().getTime(),
+            },
+          ])
+        );
+        setValue({
+          name: "",
+          email: "",
+          phoneNumber: "",
+          company: "",
+          twitter_handle: "",
+          whatsapp_number: "",
+          contact_id: "",
+        });
+        setModal(false);
+        setEdit(false);
+        setPhoneValid(false);
+        setEmailValid(false);
+      }
+    } else {
       dispatch(
         updateAlert([
           ...alerts,
           {
-            message: "Contact has been edited Successfully",
-            color: "bg-green-200",
+            message: "Please make sure all fields are added correctly",
+            color: "bg-red-200",
             id: new Date().getTime(),
           },
         ])
       );
-      setValue({
-        name: "",
-        email: "",
-        phoneNumber: "",
-        company: "",
-        twitter_handle: "",
-        whatsapp_number: "",
-        contact_id: "",
-      });
-      setModal(false);
-      setEdit(false);
-      setPhoneValid(false);
-      setEmailValid(false);
-    } else if (!edit) {
-      newContact(
-        newContactValue?.name,
-        newContactValue?.email,
-        newContactValue?.phoneNumber,
-        newContactValue?.company,
-        newContactValue?.twitter_handle,
-        newContactValue?.whatsapp_number
-      );
-      dispatch(
-        updateAlert([
-          ...alerts,
-          {
-            message: "New Contact Has Been Added Successfully",
-            color: "bg-green-200",
-            id: new Date().getTime(),
-          },
-        ])
-      );
-      setValue({
-        name: "",
-        email: "",
-        phoneNumber: "",
-        company: "",
-        twitter_handle: "",
-        whatsapp_number: "",
-        contact_id: "",
-      });
-      setModal(false);
-      setEdit(false);
-      setPhoneValid(false);
-      setEmailValid(false);
     }
   };
 
