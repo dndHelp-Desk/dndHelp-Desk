@@ -45,7 +45,7 @@ const NewContact: FC<Props> = ({
     e.preventDefault();
     if (
       newContactValue?.email?.length > 3 &&
-      newContactValue?.contact.length > 3
+      newContactValue?.phoneNumber.length > 3
     ) {
       if (edit) {
         editContact(
