@@ -20,7 +20,11 @@ const Table: FC = () => {
   const [contactModal, setModal] = useState<boolean | any>(false);
   const [edit, setEdit] = useState<boolean | any>(false);
   const [loadMore, setLimit] = useState<number | any>(10);
-  const [searchResults, setResults] = useState<string | any>("");
+  const [searchResults, setResults] = useState<string | any>(
+    window.localStorage.getItem("contactSearch")
+      ? window.localStorage.getItem("contactSearch")
+      : ""
+  );
   const [selectedArray, select] = useState<any>([]);
   const [filteredContacts, setContacts] = useState<any>([]);
   const [openPanel, setActionPanel] = useState<boolean>(false);

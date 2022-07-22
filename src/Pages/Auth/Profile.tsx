@@ -145,11 +145,13 @@ const Profile = () => {
             className="bg-transparent p-1 pt-4 absolute right-[-0.3rem] top-[2.3rem] hidden group-hover:flex flex-col transition-all duration-500"
           >
             <div className="min-w-[12rem] p-4 z-[999] dark:bg-slate-900 bg-white border dark:border-slate-700 border-slate-300 flex flex-col items-center pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl rounded after:content-[''] after:absolute after:right-[1rem] after:top-[0.5rem] after:h-4 after:w-4 after:rotate-45 after:bg-inherit after:border-t  after:border-l after:border-inherit transition-all duration-500">
-              <div className="pb-2">
-                <h1 className="dark:text-slate-300 text-slate-900 text-sm text-center capitalize font-semibold flex items-center gap-1">
+              <div className="pb-2 w-full">
+                <h1 className="dark:text-slate-300 text-slate-900 text-sm capitalize font-semibold flex items-center justify-start space-x-1 pl-6">
                   <BsPerson />
                   <span>
-                    {member_details.length >= 1 && member_details[0].name}
+                    {member_details[0]?.name
+                      ? member_details[0]?.name?.split(" ")[0]
+                      : "Loading ..."}
                   </span>
                 </h1>
               </div>

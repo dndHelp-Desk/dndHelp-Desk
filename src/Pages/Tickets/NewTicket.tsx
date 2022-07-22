@@ -791,7 +791,7 @@ const NewTicket: FC<Props> = ({
                                   (data) => data?.name === e.target.value
                                 )[0]?.turnaround_time
                               )
-                          ).toLocaleString(),
+                          ).getTime(),
                         })
                       }
                     >

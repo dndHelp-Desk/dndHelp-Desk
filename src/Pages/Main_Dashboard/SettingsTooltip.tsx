@@ -32,7 +32,7 @@ const SettingsTooltip: FC = () => {
       >
         <div className="min-h-[10rem] w-[16rem] z-[999] dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-300 pt-3 no-scrollbar no-scrollbar::-webkit-scrollbar scroll-snap shadow-2xl drop-shadow-2xl rounded-sm p-2 relative flex flex-col">
           <h2 className="dark:text-slate-300 text-slate-800 tracking-wider text-lg font-semibold text-left capitalize whitespace-nowrap overflow-hidden overflow-ellipsis w-full transition-all duration-500 pb-2">
-            {company_details?.name}
+            {company_details?.name ? company_details?.name : "Loading ..."}
           </h2>
           <hr className=" border-b border-slate-300 dark:border-slate-700 w-full" />
 

@@ -210,7 +210,12 @@ const UniversalSearch: FC<Props> = ({
           } flex flex-col items-center space-y-4 shadow-2xl drop-shadow-2xl`}
         >
           <div className="h-10 w-full border-b dark:border-slate-600 border-slate-300 flex justify-end items-center p-1">
-            <Link to="/">
+            <Link to="/app/contacts" onClick={()=>{
+              window.localStorage.setItem(
+                "contactSearch",
+                searchValue?.toLowerCase().replace(/\s/g, "")
+              );
+            }}>
               <div className="h-7 px-4 dark:bg-slate-750 bg-slate-200 dark:text-slate-400 text-slate-700 font-sans text-sm flex justify-center items-center rounded-sm hover:opacity-80 transition-all border border-slate-300 dark:border-slate-600">
                 View
               </div>

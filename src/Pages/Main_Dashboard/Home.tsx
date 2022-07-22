@@ -104,8 +104,7 @@ const Home: FC = () => {
                   Tickets Status
                 </div>
                 <p className="dark:text-slate-400 text-slate-700 text-center text-sm font-medium tracking-normal mt-2 px-2 font-sans">
-                  Hover your mouse on top of each slice below to see the
-                  percentages, for more analytics please visit the reports page.
+                  Hover your mouse on top of each slice.
                 </p>
               </div>
               <StatusSummary />

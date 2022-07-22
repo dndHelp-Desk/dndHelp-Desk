@@ -29,6 +29,7 @@ import {
   initializeFirestore,
   collection,
   onSnapshot,
+  getDocs,
   addDoc,
   doc,
   deleteDoc,
@@ -516,7 +517,20 @@ const TicketsnUserData: FC = () => {
     (state: RootState) => state.NotificationsData.alerts
   );
 
-  //Data Loading =====================================
+  //Company Details Data Fetching ======================
+  useEffect(() => {
+    getDocs(companyDetailsRef).then((snapshot) => {
+      dispatch(
+        setCompanyDetails(
+          snapshot.docs.map((doc: { data: () => any; id: any }) => ({
+            ...doc.data(),
+            id: doc.id,
+          }))[0]
+        )
+      );
+    });
+  }, [dispatch]);
+
   useEffect((): any => {
     return (
       //Members Data Fetching
@@ -575,18 +589,6 @@ const TicketsnUserData: FC = () => {
                 ...doc.data(),
                 id: doc.id,
               }))
-            )
-          );
-        }),
-      //Company Details Data Fetching ======================
-      org &&
-        onSnapshot(companyDetailsRef, (snapshot: { docs: any[] }) => {
-          dispatch(
-            setCompanyDetails(
-              snapshot.docs.map((doc: { data: () => any; id: any }) => ({
-                ...doc.data(),
-                id: doc.id,
-              }))[0]
             )
           );
         })
