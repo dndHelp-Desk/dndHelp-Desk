@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.7](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.6...v0.8.7) (2022-07-22)
+
+
+### Bug Fixes
+
+* new Contacts When not adding properly because of w a wrong property "contact" inst of phoneNumb ([2552d81](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/2552d81a6cfc377d6d15fc0c32a8924e62826a3b))
+* **pages:** contacts view option on unirvesal search now redirects to contacts not home page & bug ([d35e0be](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/d35e0bed326b5981ca7b1b2d694255c22c1535d2))
+
 ### [0.8.6](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.5...v0.8.6) (2022-07-10)
 
 
