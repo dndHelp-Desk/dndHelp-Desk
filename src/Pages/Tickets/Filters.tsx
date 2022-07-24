@@ -37,7 +37,7 @@ const Filters: FC<Props> = ({
   //Component ==============================
   return (
     <>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-sm relative">
         <BiCategoryAlt className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => {
@@ -48,7 +48,7 @@ const Filters: FC<Props> = ({
             );
           }}
           defaultValue={filters?.category}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
+          className="h-full w-full rounded-sm text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
         >
           <option value="">Category</option>
           {categories.length >= 1 &&
@@ -64,7 +64,7 @@ const Filters: FC<Props> = ({
         </select>
       </div>
 
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-sm relative">
         <BiPulse className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => {
@@ -75,7 +75,7 @@ const Filters: FC<Props> = ({
             );
           }}
           defaultValue={filters?.status}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium capitalize"
+          className="h-full w-full rounded-sm text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium capitalize"
         >
           <option value="">Status</option>
           {["open", "solved", "reopened", "onhold"].map((opt) => {
@@ -87,7 +87,7 @@ const Filters: FC<Props> = ({
           })}
         </select>
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-sm relative">
         <BiTagAlt className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => {
@@ -98,7 +98,7 @@ const Filters: FC<Props> = ({
             );
           }}
           defaultValue={filters?.priority}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium capitalize"
+          className="h-full w-full rounded-sm text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none outline-none pl-10 font-semibold dark:font-medium capitalize"
         >
           <option value="">Priority</option>
           <option value="">priority</option>
@@ -112,7 +112,7 @@ const Filters: FC<Props> = ({
         </select>
       </div>
 
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-sm relative">
         <BiUser className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <select
           onChange={(e) => {
@@ -123,7 +123,7 @@ const Filters: FC<Props> = ({
             );
           }}
           defaultValue={filters?.agent}
-          className="h-full w-full rounded text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
+          className="h-full w-full rounded-sm text-xs p-2 dark:bg-slate-900 bg-slate-100 text-slate-800 dark:text-slate-400 dark:border-slate-700 border-slate-400 focus:ring-0 focus:outline-none pl-10 font-semibold dark:font-medium"
         >
           <option value="">Agents ...</option>
           {allMembers.length >= 1 &&
@@ -143,7 +143,7 @@ const Filters: FC<Props> = ({
         contactsList={contactsList}
         filtersModal={filtersModal}
       />
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-sm relative">
         <BiHash className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -158,11 +158,11 @@ const Filters: FC<Props> = ({
             );
           }}
           value={filters?.ticket_id}
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-semibold dark:font-medium"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded-sm duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-semibold dark:font-medium"
           placeholder="Ticket-ID ..."
         />
       </div>
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-sm relative">
         <BiUserPin className="text-slate-800 dark:text-slate-400 text-lg absolute h-10 left-3" />
         <input
           type="search"
@@ -178,12 +178,12 @@ const Filters: FC<Props> = ({
             );
           }}
           value={filters?.complainant_number}
-          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-semibold dark:font-medium"
+          className="h-full w-full bg-transparent outline-none focus:outline-none dark:border-slate-700 border-slate-400 rounded-sm duration-300 dark:text-slate-400 text-slate-800 placeholder:text-slate-800 dark:placeholder:text-slate-400 placeholder:text-xs text-sm pl-10 font-semibold dark:font-medium"
           placeholder="Customer's Number ..."
         />
       </div>
 
-      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded relative font-semibold dark:font-medium text-xs text-slate-700 dark:text-slate-400 border dark:border-slate-700 border-slate-400 group">
+      <div className="col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[15rem] lg:min-w-0 flex items-center rounded-sm relative font-semibold dark:font-medium text-xs text-slate-700 dark:text-slate-400 border dark:border-slate-700 border-slate-400 group">
         <BiAlarm className="dark:text-slate-400 text-slate-900 text-lg absolute h-14 lg:h-10 left-3" />
         <div className="w-full flex justify-between items-center space-x-2 pl-8 py-2">
           <select

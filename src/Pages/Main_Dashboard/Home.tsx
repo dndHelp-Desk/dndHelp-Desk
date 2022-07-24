@@ -98,26 +98,20 @@ const Home: FC = () => {
             {/**Todo List ================================ */}
             {/* <ToDo />*/}
             {/**Tickets Per Status Summary ================================ */}
-            <div className="col-span-1  h-[23rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded px-4 py-4 pt-6">
+            <div className="col-span-1  h-[24rem] dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded px-4 py-4 pt-8">
               <div className="bg-no-repeat bg-center bg-contain flex flex-col items-center px-4">
                 <div className="dark:text-slate-300 tracking-wider text-slate-800 text-base text-center font-bold uppercase font-sans">
                   Tickets Status
                 </div>
-                <p className="dark:text-slate-400 text-slate-700 text-center text-sm font-medium tracking-normal mt-2 px-2 font-sans">
-                  Hover your mouse on top of each slice.
-                </p>
               </div>
               <StatusSummary />
             </div>
             {/**MostRecent ================================= */}
-            <div className="col-span-1 h-[23rem] md:col-span-2 lg:col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded p-4 pt-3 pb-4 flex flex-col justify-between items-center overflow-hidden">
+            <div className="col-span-1 h-[24rem] md:col-span-2 lg:col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded p-4 pt-3 pb-4 flex flex-col justify-between items-center overflow-hidden">
               <div className="text-center">
-                <div className="dark:text-slate-300 text-slate-800 text-base text-center tracking-wider font-bold uppercase mt-3 font-sans">
+                <div className="dark:text-slate-300 text-slate-800 text-base text-center tracking-wider font-bold uppercase mt-5 font-sans">
                   Recent Activities
                 </div>
-                <p className="text-sm font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2 font-sans">
-                  Your most recent activities.
-                </p>
               </div>
               <MostRecent />
             </div>

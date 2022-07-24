@@ -40,7 +40,7 @@ const CompanyFilter: FC<Props> = ({ setList, contactsList, filtersModal }) => {
       <div
         className={`col-span-1 h-10 dark:bg-slate-900 bg-slate-100 w-full min-w-[16rem] ${
           filtersModal ? "flex" : "hidden"
-        } pl-7 items-center overflow-hidden relative rounded border dark:border-slate-700 border-slate-400`}
+        } pl-7 items-center overflow-hidden relative rounded-sm border dark:border-slate-700 border-slate-400`}
       >
         <BiBuilding className="dark:text-slate-400 text-slate-900 text-lg absolute h-full left-3" />
         <label htmlFor="company" className="">

@@ -53,7 +53,7 @@ const StatusSummary: FC = () => {
 
   //Component =========================
   return (
-    <div className="mt-6 flex flex-col justify-center items-center relative">
+    <div className="mt-20 flex flex-col justify-center items-center relative">
       <div className="text-center text-slate-700 dark:text-slate-300 text-[0.7rem] font-medium tracking-normal capitalize font-sans">
         <div className="text-sm font-semibold dark:font-medium tracking-wider dark:text-slate-300 text-slate-800 mt-2 font-sans">
           {dashboardData?.length} tickets

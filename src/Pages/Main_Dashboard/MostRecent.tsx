@@ -46,7 +46,7 @@ const MostRecent: FC = () => {
     <>
       <div className="w-full h-[75%] p-2 pl-6 pt-6 pr-0 flex flex-col items-center justify-center select-none rounded overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar">
         {activities.length >= 1 &&
-          activities.slice(0, 4).map((activity, index) => {
+          activities.slice(0, 5).map((activity, index) => {
             return (
               <div
                 key={index}
@@ -78,7 +78,7 @@ const MostRecent: FC = () => {
 
         {/**Preloader ========================== */}
         {activities.length <= 3 &&
-          noData.slice(activities.length, 4).map((activity, index) => {
+          noData.slice(activities.length, 5).map((activity, index) => {
             return (
               <div
                 key={index}

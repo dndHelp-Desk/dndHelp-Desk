@@ -1,11 +1,12 @@
 import { FC, useState, useRef } from "react";
 import { TbAddressBook, TbUsers, TbTicket } from "react-icons/tb";
 import { BiSearchAlt } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useOnClickOutside from "../../Custom-Hooks/useOnClickOutsideRef";
 import { RootState } from "../../Redux/store";
 import placeHolder from "./images/searchHolder.svg";
+import { setThreadId } from "../../Redux/Slices/Tickets_n_Settings_Slice";
 
 type Props = {
   option: string;
@@ -24,9 +25,14 @@ const UniversalSearch: FC<Props> = ({
   searchValue,
   setValue,
 }) => {
+  const dispatch = useDispatch();
   const [currentView, setView] = useState<any>(null);
   const allContacts = useSelector((state: RootState) => state.Tickets.contacts);
+  const fetchedTickets = useSelector(
+    (state: RootState) => state.Tickets.filteredTickets
+  );
   const [contactsResults, setContactsResults] = useState<any>([]);
+  const [ticketsResults, setTicketsResults] = useState<any>([]);
   const searchRef = useRef<HTMLInputElement>(null);
   const closeSearch = useOnClickOutside(() => {
     setSearch(false);
@@ -34,7 +40,7 @@ const UniversalSearch: FC<Props> = ({
     setValue("");
   });
 
-  //Serach shorcut Event Listener =======
+  //Search shorcut Event Listener =======
   window.addEventListener("keydown", (e) => {
     if ((e.ctrlKey && e.key === "k") || e.key === "K") {
       e.preventDefault();
@@ -55,17 +61,58 @@ const UniversalSearch: FC<Props> = ({
                 .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
                 true ||
               contact?.name
-                .toLowerCase()
+                ?.toLowerCase()
                 .replace(/\s/g, "")
-                .includes(searchValue.toLowerCase().replace(/\s/g, "")) ===
+                .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
                 true ||
               contact?.phone
-                .toLowerCase()
+                ?.toLowerCase()
                 .replace(/\s/g, "")
-                .includes(searchValue.toLowerCase().replace(/\s/g, "")) === true
+                .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
+                true
           )
         )
       : setContactsResults([]);
+    {
+      /**Search Tickets ============================= */
+    }
+    fetchedTickets.length >= 1 && searchValue?.length >= 2
+      ? setTicketsResults(
+          fetchedTickets.filter(
+            (ticket) =>
+              ticket.branch_company
+                ?.toLowerCase()
+                ?.replace(/\s/g, "")
+                .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
+                true ||
+              ticket?.complainant_number
+                ?.toString()
+                .replace(/\s/g, "")
+                .includes(searchValue?.toString().replace(/\s/g, "")) ===
+                true ||
+              ticket?.ticket_id
+                ?.toLowerCase()
+                .replace(/\s/g, "")
+                .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
+                true ||
+              ticket?.recipient_name
+                ?.toLowerCase()
+                .replace(/\s/g, "")
+                .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
+                true ||
+              ticket?.complainant_name
+                ?.toLowerCase()
+                .replace(/\s/g, "")
+                .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
+                true ||
+              ticket?.agent_name
+                ?.toLowerCase()
+                .replace(/\s/g, "")
+                .includes(searchValue?.toLowerCase().replace(/\s/g, "")) ===
+                true
+          )
+        )
+      : setTicketsResults([]);
   };
 
   //Component ========================
@@ -110,7 +157,7 @@ const UniversalSearch: FC<Props> = ({
       </form>
       {/**Serchch Area ======================= */}
       <div
-        className={`absolute top-10 z-[99999] h-[15rem] w-[25rem] rounded-sm shadow-2xl bg-white dark:bg-slate-700 border border-slate-400 dark:border-slate-600 ${
+        className={`absolute top-10 z-[99999] h-[15rem] w-[25rem] rounded-sm shadow-2xl bg-white dark:bg-slate-700 border border-slate-400 dark:border-slate-600 px-2 ${
           searchOpen ? "" : "hidden"
         }`}
       >
@@ -146,19 +193,6 @@ const UniversalSearch: FC<Props> = ({
           </button>
           <button
             onClick={() => {
-              setOption("users");
-            }}
-            className={`h-full col-span-1 outline-none focus:outline-none flex justify-center items-center space-x-1 ${
-              option === "users"
-                ? "border-b-2 dark:border-slate-300 border-slate-800 dark:text-slate-100 text-slate-700 dark:font-medium font-semibold"
-                : ""
-            }`}
-          >
-            <TbUsers className="text-lg" />
-            <span>Users</span>
-          </button>
-          <button
-            onClick={() => {
               setOption("tickets");
             }}
             className={`h-full col-span-1 outline-none focus:outline-none flex justify-center items-center space-x-1 ${
@@ -170,13 +204,26 @@ const UniversalSearch: FC<Props> = ({
             <TbTicket className="text-lg" />
             <span>Tickets</span>
           </button>
+          <button
+            onClick={() => {
+              setOption("users");
+            }}
+            className={`h-full col-span-1 outline-none focus:outline-none flex justify-center items-center space-x-1 ${
+              option === "users"
+                ? "border-b-2 dark:border-slate-300 border-slate-800 dark:text-slate-100 text-slate-700 dark:font-medium font-semibold"
+                : ""
+            }`}
+          >
+            <TbUsers className="text-lg" />
+            <span>Users</span>
+          </button>
         </div>
         {/**Top Navigation ========================== */}
 
         {/**Main Component ========================== */}
         <div className="h-[10.3rem] w-full overflow-hidden overflow-y-scroll px-2 space-y-1 pt-3">
           {/**Place holder ==== */}
-          {contactsResults?.length <= 0 && (
+          {contactsResults?.length <= 0 && ticketsResults?.length <= 0 && (
             <div className="mt-3 w-full flex flex-col items-center">
               <img className="w-28 h-24" src={placeHolder} alt="placeholder" />
               <h2 className="text-slate-400 dark:taxt-slate-600 text-sm font-sans">
@@ -193,11 +240,37 @@ const UniversalSearch: FC<Props> = ({
                 key={index}
                 onClick={() => {
                   setView(contact);
+                  setOption("contacts");
                 }}
-                className={`w-full h-8 bg-slate-100 dark:bg-slate-750 rounded-sm flex items-center space-x-1 whitespace-nowrap overflow-hidden overflow-ellipsis px-2 dark:text-slate-300 text-slate-800 text-xs font-sans tracking-wider relative cursor-pointer hover:opacity-80 transition-all`}
+                className={`w-full h-8 bg-slate-100 dark:bg-slate-750 rounded-sm flex items-center space-x-1 whitespace-nowrap overflow-hidden overflow-ellipsis px-2 dark:text-slate-300 text-slate-800 text-xs font-sans tracking-wider relative cursor-pointer hover:opacity-80 transition-all ${
+                  currentView === contact
+                    ? "border-l-2 border-slate-700 dark:border-slate-400 bg-slate-200 dark:bg-slate-800"
+                    : "bg-slate-100 dark:bg-slate-750"
+                }`}
               >
                 <TbAddressBook className="text-lg" />
                 <span>{contact?.branch_company}</span>
+              </div>
+            ))}
+
+          {/**Tickets List =================== */}
+          {(option === "all" || option === "tickets") &&
+            ticketsResults?.map((ticket: any, index: any) => (
+              <div
+                key={index}
+                onClick={() => {
+                  setView(ticket);
+                  setOption("tickets");
+                }}
+                className={`w-full h-8 rounded-sm flex items-center space-x-1 whitespace-nowrap overflow-hidden overflow-ellipsis px-2 dark:text-slate-300 text-slate-800 text-xs font-sans tracking-wider relative cursor-pointer hover:opacity-80 transition-all ${
+                  currentView === ticket
+                    ? "border-l-2 border-slate-700 dark:border-slate-400 bg-slate-200 dark:bg-slate-800"
+                    : "bg-slate-100 dark:bg-slate-750"
+                }`}
+              >
+                <TbTicket className="text-lg" />
+                <span>{ticket?.category}</span>&nbsp; ||{" "}
+                <span>{ticket?.ticket_id}</span>
               </div>
             ))}
           {/**Results List =================== */}
@@ -205,58 +278,119 @@ const UniversalSearch: FC<Props> = ({
 
         {/**More Details ======== */}
         <div
-          className={`absolute top-0 left-[102%] h-[18rem] w-[18rem] bg-white dark:bg-slate-700 border border-slate-400 dark:border-slate-600 rounded ${
+          className={`absolute top-0 left-[102%] h-[18rem] w-[18rem] bg-white dark:bg-slate-700 border border-slate-400 dark:border-slate-600 rounded px-2 ${
             !currentView ? "hidden" : "flex"
           } flex flex-col items-center space-y-4 shadow-2xl drop-shadow-2xl`}
         >
-          <div className="h-10 w-full border-b dark:border-slate-600 border-slate-300 flex justify-end items-center p-1">
-            <Link to="/app/contacts" onClick={()=>{
-              window.localStorage.setItem(
-                "contactSearch",
-                searchValue?.toLowerCase().replace(/\s/g, "")
-              );
-            }}>
+          <div className="h-10 w-[calc(100%+1rem)] mx-[-0.5rem] border-b dark:border-slate-600 border-slate-300 flex justify-end items-center p-1">
+            <Link
+              to={
+                option === "contacts"
+                  ? "/app/contacts"
+                  : option === "tickets"
+                  ? "/app/tickets"
+                  : "/app/tickets"
+              }
+              onClick={() => {
+                if (option === "contacts") {
+                  window.localStorage.setItem(
+                    "contactSearch",
+                    searchValue?.toLowerCase().replace(/\s/g, "")
+                  );
+                  setSearch(false);
+                  setView(null);
+                } else if (option === "tickets") {
+                  dispatch(setThreadId(currentView?.ticket_id));
+                  setSearch(false);
+                  window.localStorage.setItem(
+                    "threadId",
+                    JSON.stringify(currentView?.ticket_id)
+                  );
+                  setView(null);
+                  setValue("");
+                }
+              }}
+            >
               <div className="h-7 px-4 dark:bg-slate-750 bg-slate-200 dark:text-slate-400 text-slate-700 font-sans text-sm flex justify-center items-center rounded-sm hover:opacity-80 transition-all border border-slate-300 dark:border-slate-600">
                 View
               </div>
             </Link>
           </div>
-          <div className="flex flex-col items-center px-4 p-2 h-[14rem] w-full overflow-hidden overflow-y-scroll">
-            <div className="w-full space-y-2">
-              <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
-                <div className="w-full underline">Name</div>
-                <div className="w-full text-xs">{currentView?.name}</div>
-              </div>
-              <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2">
-                <div className="w-full underline capitalize">Email</div>
-                <div className="w-full text-xs lowercase">
-                  {currentView?.email?.split(/[/,]/)?.map((email: any) => {
-                    return (
-                      <div key={email} className="break-all">
-                        {email}
-                      </div>
-                    );
-                  })}
+          <div className="flex flex-col items-center px-4 p-2 pt-0 h-[13.5rem] w-full overflow-hidden overflow-y-scroll">
+            {option === "contacts" ? (
+              <div className="w-full space-y-2">
+                <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
+                  <div className="w-full underline">Name</div>
+                  <div className="w-full text-xs">{currentView?.name}</div>
+                </div>
+                <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2">
+                  <div className="w-full underline capitalize">Email</div>
+                  <div className="w-full text-xs lowercase">
+                    {currentView?.email?.split(/[/,]/)?.map((email: any) => {
+                      return (
+                        <div key={email} className="break-all">
+                          {email}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
+                  <div className="w-full underline">Phone</div>
+                  <div className="w-full text-xs">
+                    {currentView?.phone?.split(/[/,]/)?.map((num: any) => {
+                      return (
+                        <div key={num} className="break-all">
+                          {num}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
-                <div className="w-full underline">Phone</div>
-                <div className="w-full text-xs">
-                  {currentView?.phone?.split(/[/,]/)?.map((num: any) => {
-                    return (
-                      <div key={num} className="break-all">
-                        {num}
-                      </div>
-                    );
-                  })}
+            ) : option === "tickets" ? (
+              <div className="w-full space-y-2">
+                <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
+                  <div className="w-full underline">Open Date</div>
+                  <div className="w-full text-xs">
+                    {new Date(
+                      currentView?.date ? currentView?.date : ""
+                    )?.toDateString()}
+                  </div>
+                </div>
+                <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
+                  <div className="w-full underline">Company Name</div>
+                  <div className="w-full text-xs">
+                    {currentView?.branch_company}
+                  </div>
+                </div>
+                <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2">
+                  <div className="w-full underline capitalize">Assignee</div>
+                  <div className="w-full text-xs capitalize">
+                    {currentView?.assignee}
+                  </div>
+                </div>
+                <div className="flex flex-col overflow-hidden dark:text-slate-300 text-slate-700 text-sm px-2 capitalize">
+                  <div className="w-full underline">Customer's Details</div>
+                  <div className="w-full text-xs">
+                    Name : {currentView?.complainant_name}
+                  </div>
+                  <div className="w-full text-xs">
+                    Phone : {currentView?.complainant_number}
+                  </div>
+                  <div className="w-full text-xs">
+                    Email : {currentView?.complainant_email}
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 
         {/**Footer ============ */}
-        <div className="h-9 w-full flex space-x-2 justify-between items-center p-1 px-2 border-t border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-750">
+        <div className="h-9 w-[calc(100%+1rem)] mx-[-0.5rem] flex space-x-2 justify-between items-center p-1 px-2 border-t border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-750">
           <span className="text-slate-700 dark:text-slate-400 text-xs font-sans tracking-wider">
             Shortcut
           </span>

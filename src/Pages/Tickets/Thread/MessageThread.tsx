@@ -776,7 +776,7 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     <div className="h-2 w-2/5 rounded dark:bg-slate-500 bg-slate-700"></div>
                     <div className="h-2 w-full rounded dark:bg-slate-900 bg-slate-100"></div>
                   </div>
-                  <div className="mt-[-2.25rem] w-[15rem] h-[6.5rem] rounded bg-slate-200 dark:bg-slate-600 flex flex-col space-y-2 justify-center p-6 shadow-lg drop-shadow-sm">
+                  <div className="mt-[-2rem] w-[15rem] h-[6.5rem] rounded bg-slate-200 dark:bg-slate-600 flex flex-col space-y-2 justify-center p-6 shadow-lg drop-shadow-sm">
                     <div className="h-2 w-2/5 rounded dark:bg-slate-800 bg-slate-400"></div>
                     <div className="h-2 w-full rounded dark:bg-slate-400 bg-slate-400"></div>
                   </div>
@@ -786,8 +786,17 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     It's nice to see you again
                   </h3>
                   <div className="text-slate-600 dark:text-slate-400 text-sm tracking-tight font-medium text-center whitespace-nowrap leading-5">
-                    <p>Pick a ticket from your left list </p>
-                    <p>to start a conversation</p>
+                    {threadMessages.length <= 0 ? (
+                      <>
+                        <p>There are no tickets under the current view, </p>
+                        <p>or you don't have access.</p>
+                      </>
+                    ) : (
+                      <>
+                        <p>Pick a ticket from your left list </p>
+                        <p>to start a conversation</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

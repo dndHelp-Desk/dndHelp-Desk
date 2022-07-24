@@ -324,11 +324,11 @@ const Navbar: FC<Props> = ({
         {activeUser[0]?.access === "admin" && (
           <div
             ref={assigneeRef}
-            className={`h-[15.5rem] w-[12.5rem] dark:bg-slate-900 bg-white shadow-2xl drop-shadow-2xl backdrop-blur-sm px-2 border border-slate-400 dark:border-slate-700 rounded-sm absolute left-0 top-12 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 pt-2 ${
+            className={`h-[15.5rem] w-[12.5rem] dark:bg-slate-900 bg-white shadow-2xl drop-shadow-2xl backdrop-blur-sm px-2 border border-slate-400 dark:border-slate-700 rounded-sm absolute left-0 top-12 z-[99] overflow-y-scroll no-scrollbar no-scrollbar::-webkit-scrollbar space-y-2 ${
               contactsPanel ? "" : "hidden"
             }`}
           >
-            <div className="flex sticky top-0 border-b border-slate-400 dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-8 items-center justify-center ">
+            <div className="flex sticky top-0 border-b border-slate-400 dark:border-slate-700 dark:bg-slate-800 bg-white shadow-2xl h-10 items-center justify-center ">
               <BiSearchAlt className="absolute left-3 dark:text-slate-400 text-slate-700 font-semibold" />
               <input
                 className="w-full h-8 bg-transparent rounded-lg dark:text-slate-400 text-slate-700 text-sm md:px-10  dark:placeholder-slate-400 placeholder:text-slate-700 border-0 focus:outline-none outline-none  focus:ring-0 transition-h duration-300"

@@ -36,6 +36,48 @@ const OffCanvasMenu: FC<Props> = ({
           filtersModal ? "w-full z-[999]" : "w-0 z-[-99]"
         } transition-all`}
       >
+        <div className="flex items-center justify-between bg-inherit w-full mb-4">
+          <h2 className="text-base font-sans capitalize text-slate-700 dark:text-slate-300">
+            All Filters
+          </h2>
+          {/**Reset Filters ================ */}
+          <button
+            onClick={() => {
+              setFilters({
+                ticket_id: "",
+                agent: "",
+                category: "",
+                complainant_number: "",
+                status: "",
+                priority: "",
+                fcr: "no",
+                reopened: false,
+                overdue: false,
+                hasRecording: false,
+                time: { from: 1, to: 24 },
+              });
+              window.localStorage.setItem(
+                "tickets_filters",
+                JSON.stringify({
+                  ticket_id: "",
+                  agent: "",
+                  category: "",
+                  complainant_number: "",
+                  status: "",
+                  priority: "",
+                  fcr: "no",
+                  reopened: false,
+                  overdue: false,
+                  hasRecording: false,
+                  time: { from: 1, to: 24 },
+                })
+              );
+            }}
+            className="h-8 p-1 px-4 rounded-sm outline-none focus:outline-none text-sm text-slate-700 dark:text-slate-300 border border-slate-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-750 hover:opacity-80 transition-all"
+          >
+            Reset
+          </button>
+        </div>
         <Filters
           filters={filters}
           setFilters={setFilters}
