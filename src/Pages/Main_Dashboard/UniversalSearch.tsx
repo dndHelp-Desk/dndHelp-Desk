@@ -73,9 +73,6 @@ const UniversalSearch: FC<Props> = ({
           )
         )
       : setContactsResults([]);
-    {
-      /**Search Tickets ============================= */
-    }
     fetchedTickets.length >= 1 && searchValue?.length >= 2
       ? setTicketsResults(
           fetchedTickets.filter(
@@ -301,11 +298,11 @@ const UniversalSearch: FC<Props> = ({
                   setView(null);
                 } else if (option === "tickets") {
                   dispatch(setThreadId(currentView?.ticket_id));
-                  setSearch(false);
                   window.localStorage.setItem(
                     "threadId",
                     JSON.stringify(currentView?.ticket_id)
                   );
+                  setSearch(false);
                   setView(null);
                   setValue("");
                 }

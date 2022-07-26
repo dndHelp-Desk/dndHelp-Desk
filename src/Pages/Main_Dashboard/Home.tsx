@@ -3,11 +3,11 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultProfile from "../../Assets/logos/faviLight.png";
 import MostRecent from "./MostRecent";
-import StatusSummary from "./StatusSummary";
 import { RootState } from "../../Redux/store";
 import ProgressBars from "./ProgressBars";
 import BottomSection from "./BottomSection";
 import { Link } from "react-router-dom";
+import PieCharts from "./PieChart";
 
 const Home: FC = () => {
   const location = useLocation();
@@ -104,7 +104,9 @@ const Home: FC = () => {
                   Tickets Status
                 </div>
               </div>
-              <StatusSummary />
+              <div className="mt-6 h-[16rem] relative">
+                <PieCharts />
+              </div>
             </div>
             {/**MostRecent ================================= */}
             <div className="col-span-1 h-[24rem] md:col-span-2 lg:col-span-1 dark:bg-slate-800 bg-white border dark:border-slate-800 border-slate-300 rounded p-4 pt-3 pb-4 flex flex-col justify-between items-center overflow-hidden">
@@ -222,17 +224,17 @@ const Home: FC = () => {
                   (user) => user.access?.toLowerCase() === "agent"
                 ).length <= 0 && (
                   <div className="h-full w-full">
-                    <div className="h-full w-full rounded-sm dark:bg-slate-750 bg-slate-100 border dark:border-slate-700 border-slate-300 p-6 pt-4 flex flex-col items-center justify-center space-y-4">
+                    <div className="h-full w-full rounded-sm dark:bg-slate-750 bg-slate-100 border dark:border-slate-700 border-slate-300 p-6 pt-4 flex flex-col items-center justify-center space-y-6">
                       <h2 className="dark:text-slate-300 text-slate-700 tracking-wide text-center text-lg font-sans font-bold">
                         Create a team
                       </h2>
-                      <p className="text-sm text-center font-sans dark:text-slate-100 text-slate-700">
+                      <p className="text-sm text-center font-sans dark:text-slate-100 text-slate-700 italic">
                         Click the button below to add all your teammates and
                         users or clients.
                       </p>
                       <Link to="/app/settings/team">
                         <button className="h-8 px-6 bg-blue-700 rounded-sm outline-none focus:outline-none text-slate-50 font=sans text-sm tracking-wider hover:opacity-80 transition-all duration-150">
-                          Create
+                          Get started
                         </button>
                       </Link>
                     </div>

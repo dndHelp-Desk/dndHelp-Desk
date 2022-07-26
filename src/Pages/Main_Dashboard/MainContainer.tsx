@@ -9,7 +9,7 @@ import {
   TbLayoutSidebar,
 } from "react-icons/tb";
 import { HiSun } from "react-icons/hi";
-import { HiOutlinePhone, HiOutlineBell } from "react-icons/hi";
+import { HiOutlineSpeakerphone, HiOutlineBell } from "react-icons/hi";
 import lightLogo from "../../Assets/logos/dndHelp-desk_ShortLight.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router";
@@ -27,7 +27,7 @@ import Profile from "../Auth/Profile";
 import Notification from "./Notification";
 import SettingsTooltip from "./SettingsTooltip";
 import { AppDispatch, RootState } from "../../Redux/store";
-import VoicexVideoCall from "./VoicexVideoCall";
+import WhatsNew from "./WhatsNew";
 import NavlinkToolTip from "./NavlinkToolTip";
 import UniversalSearch from "./UniversalSearch";
 import DatePicker from "../../Components/DatePicker";
@@ -60,7 +60,7 @@ const Dashboard: FC = () => {
   );
   const [openDatePicker, setDateOpen] = useState<boolean>(false);
   const [openNotifications, setOpenNotification] = useState<boolean>(false);
-  const [phoneToolTip, openPhone] = useState<boolean>(false);
+  const [whatsNewOpen, openWhatsNew] = useState<boolean>(false);
   const location = useLocation();
   const dispatch: AppDispatch = useDispatch();
 
@@ -174,14 +174,12 @@ const Dashboard: FC = () => {
             </div>
 
             {/**Menu Options ============ */}
-            <div className="w-full flex flex-col items-center space-y-4 p-1">
+            <div className="w-full flex flex-col items-center space-y-3 p-1">
               <div className="relative group">
                 <NavLink
                   to="/app"
-                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
-                    location.pathname === "/app"
-                      ? "text-blue-600"
-                      : "text-slate-300"
+                  className={`h-10 w-10 outline-none focus:outline-none flex justify-center items-center text-2xl hover:bg-slate-700 transition-all text-slate-300 rounded ${
+                    location.pathname === "/app" ? "bg-slate-700" : ""
                   }`}
                 >
                   <TbLayoutDashboard />
@@ -191,10 +189,8 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/tickets"
-                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
-                    location.pathname === "/app/tickets"
-                      ? "text-blue-600"
-                      : "text-slate-300"
+                  className={`h-10 w-10 outline-none focus:outline-none flex justify-center items-center text-2xl hover:bg-slate-700 transition-all text-slate-300 rounded ${
+                    location.pathname === "/app/tickets" ? "bg-slate-700" : ""
                   }`}
                 >
                   <TbInbox />
@@ -208,10 +204,8 @@ const Dashboard: FC = () => {
               >
                 <NavLink
                   to="/app/contacts"
-                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
-                    location.pathname === "/app/contacts"
-                      ? "text-blue-600"
-                      : "text-slate-300"
+                  className={`h-10 w-10 outline-none focus:outline-none flex justify-center items-center text-2xl hover:bg-slate-700 transition-all text-slate-300 rounded ${
+                    location.pathname === "/app/contacts" ? "bg-slate-700" : ""
                   }`}
                 >
                   <TbAddressBook />
@@ -221,10 +215,8 @@ const Dashboard: FC = () => {
               <div className="relative group">
                 <NavLink
                   to="/app/reports"
-                  className={`h-8 w-9 outline-none focus:outline-none flex justify-center items-center text-2xl hover:text-blue-700 transition-all ${
-                    location.pathname === "/app/reports"
-                      ? "text-blue-600"
-                      : "text-slate-300"
+                  className={`h-10 w-10 outline-none focus:outline-none flex justify-center items-center text-2xl hover:bg-slate-700 transition-all text-slate-300 rounded ${
+                    location.pathname === "/app/reports" ? "bg-slate-700" : ""
                   }`}
                 >
                   <TbChartDonut />
@@ -234,24 +226,33 @@ const Dashboard: FC = () => {
             </div>
           </div>
 
-          <div className="w-full flex flex-col space-y-4 items-center justify-center">
+          <div className="w-full flex flex-col space-y-2 items-center justify-center">
             {/**Change Theme =========================== */}
-            <button
-              onClick={() => {
-                if (theme === "dark") {
-                  dispatch(changeTheme("light"));
-                  window.localStorage.setItem("theme", JSON.stringify("light"));
-                } else {
-                  dispatch(changeTheme("dark"));
-                  window.localStorage.setItem("theme", JSON.stringify("dark"));
-                }
-              }}
-              className="h-9 w-10 rounded bg-slate-700 text-slate-50 text-xl p-1 relative transition-all duration-200 outline-none focus:outline-none items-center justify-center flex"
-            >
-              {theme === "dark" ? <TbBrightnessUp /> : <HiSun />}
-            </button>
+            <div className="relative group">
+              <button
+                onClick={() => {
+                  if (theme === "dark") {
+                    dispatch(changeTheme("light"));
+                    window.localStorage.setItem(
+                      "theme",
+                      JSON.stringify("light")
+                    );
+                  } else {
+                    dispatch(changeTheme("dark"));
+                    window.localStorage.setItem(
+                      "theme",
+                      JSON.stringify("dark")
+                    );
+                  }
+                }}
+                className="h-9 w-10 rounded bg-inherit border border-slate-500 hover:text-slate-500 text-slate-50 text-xl p-1 relative transition-all duration-200 outline-none focus:outline-none items-center justify-center flex"
+              >
+                {theme === "dark" ? <TbBrightnessUp /> : <HiSun />}
+              </button>
+              <NavlinkToolTip name={"Theme"} />
+            </div>
             {/**Settings ================================================ */}
-            <div className="rounded  bg-slate-700 text-slate-100 text-xl relative focus:outline-none outline-none h-9 w-10 items-center justify-center flex font-bold group cursor-pointer">
+            <div className="rounded  bg-inherit border border-slate-500  hover:text-slate-500 text-slate-100 text-xl relative focus:outline-none outline-none h-9 w-10 items-center justify-center flex font-bold group cursor-pointer">
               <TbSettings />
               {/**Settings Tooltip ================================== */}
               <SettingsTooltip />
@@ -290,19 +291,21 @@ const Dashboard: FC = () => {
 
             {/*Notifications , Controls & Calls ====================*/}
             <div className="flex items-center h-full space-x-2">
-              {/**Voice & Video Call =================================== */}
+              {/**What's New =================================== */}
               <div className="relative hidden md:flex">
                 <button
                   onClick={() => {
-                    openPhone(true);
+                    openWhatsNew(true);
                   }}
                   className="dark:text-gray-300 text-slate-600 text-xl relative focus:outline-none outline-none h-9 w-9 rounded dark:bg-slate-800 bg-white border border-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 hover:bg-slate-200 items-center justify-center flex font-bold"
                 >
-                  <HiOutlinePhone />
+                  <abbr title="What's New">
+                    <HiOutlineSpeakerphone />
+                  </abbr>
                 </button>
-                <VoicexVideoCall
-                  phoneToolTip={phoneToolTip}
-                  openPhone={openPhone}
+                <WhatsNew
+                  whatsNewOpen={whatsNewOpen}
+                  openWhatsNew={openWhatsNew}
                 />
               </div>
 
