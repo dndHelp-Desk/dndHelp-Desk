@@ -218,7 +218,7 @@ const OverviewReport: FC<data> = ({ data }) => {
               <option value="month">Monthly</option>
             </select>
           </div>
-          <TrafficChart chartData={chartData} option={option} />
+          <TrafficChart chartData={chartData} />
         </div>
       </div>
 

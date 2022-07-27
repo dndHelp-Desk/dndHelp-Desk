@@ -8,6 +8,7 @@ import ProgressBars from "./ProgressBars";
 import BottomSection from "./BottomSection";
 import { Link } from "react-router-dom";
 import PieCharts from "./PieChart";
+import MonthlyTraffic from "./MonthlyTraffic";
 
 const Home: FC = () => {
   const location = useLocation();
@@ -23,12 +24,11 @@ const Home: FC = () => {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
   ].map((day: any) => ({
-    day: day,
-    data: dashboardData.filter(
+    name: day,
+    value: dashboardData.filter(
       (ticket: any) => new Date(ticket?.date).getDate() === day
     )?.length,
   }));
-  const maxValue = Math.max(...monthlyData?.map((day) => day?.data));
 
   //Loop Through All Users ================
   const users =
@@ -104,7 +104,7 @@ const Home: FC = () => {
                   Tickets Status
                 </div>
               </div>
-              <div className="mt-6 h-[16rem] relative">
+              <div className="mt-9 h-[16rem] relative">
                 <PieCharts />
               </div>
             </div>
@@ -129,39 +129,8 @@ const Home: FC = () => {
               <p className="text-sm font-sans font-medium tracking-normal dark:text-slate-400 text-slate-700 mt-2">
                 Hover your mouse or cursor on top of each bar to see details.
               </p>
-              <div className="w-full h-[calc(100%-5rem)] overflow-hidden bg-inherit rounded flex justify-between items-end pr-2 relative">
-                {monthlyData?.map((day) => {
-                  return (
-                    <div
-                      key={day?.day}
-                      className="h-full w-3 grid grid-rows-6 p-2 overflow group"
-                    >
-                      <div className="row-span-5 w-3 h-full rounded-sm bg-slate-200 dark:bg-slate-700 flex items-end relative pt-2">
-                        <div
-                          style={{
-                            height: `${(
-                              (Number(day?.data) / Number(maxValue)) *
-                              100
-                            ).toFixed(2)}%`,
-                          }}
-                          className="w-full rounded-sm bg-blue-700 hover:opacity-80 transition-all duration-150 overflow-hidden"
-                        ></div>
-                        {/**Tooltip=  */}
-                        <div className="hidden group-hover:flex justify-center items-center absolute top-[10%] left-1 h-6 min-w-[5rem] w-fit whitespace-nowrap overflow-hidden overflow-ellipsis shadow-2xl z-[999]  rounded-sm bg-slate-800 text-slate-100 text-xs px-2">
-                          Day {day?.day} - {day?.data} tickets
-                        </div>
-                        {/**Tooltip=  */}
-                      </div>
-                      <div
-                        className={`row-span-1 w-3 flex justify-center items-end text-xs capitalize  dark:text-slate-300 text-slate-800 font-semibold font-sans ${
-                          Number(day.day) % 2 === 0 ? "opacity-0" : ""
-                        }`}
-                      >
-                        {day?.day}
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="w-full h-[calc(100%-5rem)] overflow-hidden bg-inherit relative">
+                <MonthlyTraffic monthlyData={monthlyData} />
               </div>
             </div>
 

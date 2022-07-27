@@ -65,7 +65,7 @@ const ProgressBars: FC = () => {
               <div
                 role="progressbar"
                 aria-label="progressbas"
-                className="h-3 w-full  rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden"
+                className="h-3 w-full  rounded-sm bg-slate-200 dark:bg-slate-700 overflow-hidden"
               >
                 <div
                   style={{
@@ -75,7 +75,7 @@ const ProgressBars: FC = () => {
                         : "0"
                     }%`,
                   }}
-                  className="h-full bg-gradient-to-r from-blue-600 to-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 rounded-full transition-all duration-200"
+                  className="h-full bg-gradient-to-r from-blue-600 to-blue-700 text.[0.15rem] border-r dark:border-slate-800 border-slate-400 text-slate-300 relative hover:opacity-80 transition-all duration-200"
                 >
                   <abbr
                     title={`${element.name} : ${

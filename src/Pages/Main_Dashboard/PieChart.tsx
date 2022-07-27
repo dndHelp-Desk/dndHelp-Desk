@@ -50,13 +50,13 @@ const PieCharts: FC = () => {
   //Component ====================
   return (
     <div className="w-full h-full flex flex-col justify-between items-center px-4 p-2">
-      <PieChart width={200} height={200}>
+      <PieChart width={150} height={150}>
         <Pie
           data={data}
-          cx={100}
-          cy={100}
-          innerRadius={60}
-          outerRadius={80}
+          cx={75}
+          cy={75}
+          innerRadius={45}
+          outerRadius={65}
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"
@@ -79,7 +79,7 @@ const PieCharts: FC = () => {
           ))}
         </Pie>
       </PieChart>
-      <div className="h-fit w-full border-t border-slate-300 dark:border-slate-700 grid grid-cols-2 place-content-center gap-2 p-2 pl-4">
+      <div className="h-fit w-full border-t border-slate-300 dark:border-slate-700 grid grid-cols-2 place-content-center gap-2 p-2 pl-4 pt-4">
         {data.map((status, index) => (
           <div
             key={index + status.name}
