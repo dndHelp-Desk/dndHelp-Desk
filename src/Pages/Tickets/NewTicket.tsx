@@ -453,9 +453,6 @@ const NewTicket: FC<Props> = ({
                   },
                 ])
               );
-              onChange("<p></p>");
-              setSubmit(false);
-              setShowOpen(true);
             } else if (resData.status === "fail") {
               setSubmit(false);
               dispatch(

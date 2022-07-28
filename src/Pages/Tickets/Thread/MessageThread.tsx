@@ -201,12 +201,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
               },
             ])
           );
-          onChange("<p></p>");
-          setReply({
-            ...reply,
-            message: "<p></p>",
-            status: firstMessage[0] ? firstMessage[0]?.status : "Status",
-          });
         } else if (resData.status === "fail") {
           dispatch(
             updateAlert([
@@ -314,12 +308,6 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                     },
                   ])
                 );
-                setReply({
-                  ...reply,
-                  message: "<p></p>",
-                  status: "Status",
-                });
-                onChange("<p></p>");
               } else if (resData.status === "fail") {
                 dispatch(
                   updateAlert([
@@ -333,6 +321,12 @@ const MessageThread: FC<Props> = ({ setChat, isChatOpen, audio }) => {
                 );
               }
             });
+          setReply({
+            ...reply,
+            message: "<p></p>",
+            status: "Status",
+          });
+          onChange("<p></p>");
         }
         onChange("<p></p>");
         setReply({
