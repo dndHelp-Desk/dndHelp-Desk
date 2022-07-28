@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.8](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.7...v0.8.8) (2022-07-28)
+
+
+### Features
+
+* **unirvesal search:** universal search can now search tickets ([2895e8f](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/2895e8f2f89bc0026cae350591256d3b54748211))
+
+
+### Bug Fixes
+
+* **replies and new tickets:** interuptions when sending multiple replies consecutively ([e4f3e27](https://github.com/dndHelp-Desk/dndHelp-Desk/commit/e4f3e27237da1a7d94ce677bfa7bc56c70142919))
+
 ### [0.8.7](https://github.com/dndHelp-Desk/dndHelp-Desk/compare/v0.8.6...v0.8.7) (2022-07-22)
 
 
