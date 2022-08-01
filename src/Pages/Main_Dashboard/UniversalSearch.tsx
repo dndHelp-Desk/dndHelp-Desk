@@ -42,7 +42,7 @@ const UniversalSearch: FC<Props> = ({
 
   //Search shorcut Event Listener =======
   window.addEventListener("keydown", (e) => {
-    if ((e.ctrlKey && e.key === "k") || e.key === "K") {
+    if ((e.ctrlKey && e.key === "k" && !e.shiftKey) || (e.ctrlKey && e.key === "K" && !e.shiftKey)) {
       e.preventDefault();
       setSearch(true);
       searchRef.current !== null && searchRef && searchRef.current.focus();
