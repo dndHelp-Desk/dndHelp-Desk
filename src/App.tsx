@@ -11,6 +11,7 @@ import ErrorPage from "./Pages/Landing Page/ErrorPage";
 import ComingSoon from "./Pages/Landing Page/ComingSoon";
 
 //Lazy Loading Components || Code Splitting ====================
+const TermsConditionds = lazy(()=>import("./Pages/Legal/TermsConditionds"));
 const Dashboard = lazy(() => import("./Pages/Main_Dashboard/MainContainer"));
 const SettingsComponent = lazy(
   () => import("./Pages/Settings/SettingsComponents")
@@ -73,6 +74,7 @@ const App: FC = () => {
             {/**LogIn ======================== */}
             <Route path="/redirect" element={<Redirects />} />
             <Route path="/logIn" element={<LogIn />} />
+            <Route path="/terms_and_conditions" element={<TermsConditionds/>}/>
 
             {/**Support ======================== */}
             {/* <Route path="/support" element={<SupportHome />}>

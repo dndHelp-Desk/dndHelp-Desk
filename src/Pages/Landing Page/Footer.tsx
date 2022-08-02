@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 const Footer: FC = () => {
   //Component =============================
@@ -326,10 +327,7 @@ const Footer: FC = () => {
               </p>
 
               <nav className="flex justify-center space-x-4 text-xs text-gray-400 lg:justify-end">
-                <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
-                  {" "}
-                  Terms & Conditions{" "}
-                </a>
+                <Link to="/terms_and_conditions">Terms & Conditions </Link>
                 <a href="https://www.dndhelp-desk.co.za/" rel="noreferrer">
                   {" "}
                   Privacy Policy{" "}

@@ -66,14 +66,14 @@ const PieCharts: FC = () => {
               key={`cell-${index}`}
               fill={
                 data.name === "Solved"
-                  ? "#10b981"
-                  : data.name === "Open"
                   ? "#2563eb"
+                  : data.name === "Open"
+                  ? "#14b8a6"
                   : data?.name === "On-hold"
-                  ? "#facc15"
+                  ? "#0284c7"
                   : data?.name === "Re-opened"
-                  ? "#dc2626"
-                  : "#2563eb"
+                  ? "#60a5fa"
+                  : "#60a5fa"
               }
             />
           ))}
@@ -89,14 +89,14 @@ const PieCharts: FC = () => {
               style={{
                 background:
                   status.name === "Solved"
-                    ? "#10b981"
-                    : status.name === "Open"
                     ? "#2563eb"
+                    : status.name === "Open"
+                    ? "#14b8a6"
                     : status?.name === "On-hold"
-                    ? "#facc15"
+                    ? "#0284c7"
                     : status?.name === "Re-opened"
-                    ? "#dc2626"
-                    : "#2563eb",
+                    ? "#60a5fa"
+                    : "#60a5fa",
               }}
               className="h-3 w-3 rounded-full"
             ></div>

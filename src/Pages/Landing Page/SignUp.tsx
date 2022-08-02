@@ -125,6 +125,22 @@ const SignUp: FC<Props> = ({
                 />
               </label>
             </div>
+
+            {/**==== Tms and Conditions ================== */}
+            <div className="py-4 flex">
+              <div className="bg-white dark:bg-gray-800 border rounded-sm border-gray-400 dark:border-gray-700 w-5 h-5 flex flex-shrink-0 justify-center relative">
+                <input
+                  type="checkbox"
+                  className="checkbox cursor-pointer w-full h-full"
+                />
+              </div>
+              <p className="ml-3 leading-4 font-normal text-sm text-slate-700">
+                I agree to the{" "}
+                <Link to="./terms_and_conditionds" className="text-blue-600">
+                  Terms and Conditions.
+                </Link>
+              </p>
+            </div>
           </div>
         </Stepper.Step>
 
