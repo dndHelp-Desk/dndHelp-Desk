@@ -18,7 +18,6 @@ const TermsConditionds = () => {
               data-custom-class="title"
               style={{ textAlign: "left", lineHeight: "1.5" }}
             >
-              <a name="_gm5sejt4p02f" />
               <strong>
                 <span
                   style={{
@@ -37,9 +36,7 @@ const TermsConditionds = () => {
               align="center"
               className="MsoNormal"
               style={{ textAlign: "center", lineHeight: "1.5" }}
-            >
-              <a name="_7m5b3xg56u7y" />
-            </div>
+            ></div>
             <div
               align="center"
               className="MsoNormal"
@@ -112,267 +109,12 @@ const TermsConditionds = () => {
             <br />
           </div>
           <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <strong>
-              <span data-custom-class="heading_1">TABLE OF CONTENTS</span>
-            </strong>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <br />
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#agreement">
-              <span style={{ fontSize: 15 }}>
-                <span data-custom-class="body_text">1. AGREEMENT TO TERMS</span>
-              </span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#ip">
-              <span data-custom-class="body_text">
-                2. INTELLECTUAL PROPERTY RIGHTS
-              </span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#userreps">
-              <span data-custom-class="body_text">3. USER REPRESENTATIONS</span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-            <a data-custom-class="link" href="#userreg">
-              <span data-custom-class="body_text">4. USER REGISTRATION</span>
-            </a>
-            <bdt className="statement-end-if-in-editor">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#payment">
-              <span data-custom-class="body_text">5. FEES AND PAYMENT</span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-            <a data-custom-class="link" href="#freetrial">
-              <span data-custom-class="body_text">6. FREE TRIAL</span>
-            </a>
-            <bdt className="statement-end-if-in-editor">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#cancel">
-              <span data-custom-class="body_text">7. CANCELLATION</span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#prohibited">
-              <span data-custom-class="body_text">
-                8. PROHIBITED ACTIVITIES
-              </span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#ugc">
-              <span data-custom-class="body_text">
-                9. USER GENERATED CONTRIBUTIONS
-              </span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#license">
-              <span data-custom-class="body_text">
-                10. CONTRIBUTION LICENSE
-              </span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-            <a data-custom-class="link" href="#reviews">
-              <span data-custom-class="body_text">
-                11. GUIDELINES FOR REVIEWS
-              </span>
-            </a>
-            <bdt className="statement-end-if-in-editor">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-            <a data-custom-class="link" href="#socialmedia">
-              <span data-custom-class="body_text">12. SOCIAL MEDIA</span>
-            </a>
-            <bdt className="statement-end-if-in-editor">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#submissions">
-              <span data-custom-class="body_text">13. SUBMISSIONS</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#sitemanage">
-              <span data-custom-class="body_text">14. SITE MANAGEMENT</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-            <a data-custom-class="link" href="#privacypolicy2">
-              <span data-custom-class="body_text">15. PRIVACY POLICY</span>
-            </a>
-            <bdt className="statement-end-if-in-editor">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-            <bdt className="block-component" />
-            <a data-custom-class="link" href="#copyright2">
-              <span data-custom-class="body_text">
-                16. COPYRIGHT INFRINGEMENTS
-              </span>
-            </a>
-            <span data-custom-class="body_text">
-              <bdt className="statement-end-if-in-editor" />
-            </span>
-            <bdt className="statement-end-if-in-editor">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#terms">
-              <span data-custom-class="body_text">
-                17. TERM AND TERMINATION
-              </span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#modifications">
-              <span data-custom-class="body_text">
-                18. MODIFICATIONS AND INTERRUPTIONS
-              </span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#law">
-              <span data-custom-class="body_text">19. GOVERNING LAW</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#disputes">
-              <span data-custom-class="body_text">20. DISPUTE RESOLUTION</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#corrections">
-              <span data-custom-class="body_text">21. CORRECTIONS</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#disclaimer">
-              <span data-custom-class="body_text">22. DISCLAIMER</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#liability">
-              <span data-custom-class="body_text">
-                23. LIMITATIONS OF LIABILITY
-              </span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#indemnification">
-              <span data-custom-class="body_text">24. INDEMNIFICATION</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#userdata">
-              <span data-custom-class="body_text">25. USER DATA</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#electronic">
-              <span data-custom-class="body_text">
-                26. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES
-              </span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <bdt className="block-component">
-              <span data-custom-class="body_text" />
-            </bdt>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#misc">
-              <span data-custom-class="body_text">27. MISCELLANEOUS</span>
-            </a>
-          </div>
-          <div style={{ lineHeight: "1.5" }}>
-            <a data-custom-class="link" href="#contact">
-              <span data-custom-class="body_text">28. CONTACT US</span>
-            </a>
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <br />
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
-            <br />
-          </div>
-          <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
             <div
               className="MsoNormal"
               data-custom-class="heading_1"
               id="agreement"
               style={{ lineHeight: "1.5" }}
             >
-              <a name="_6aa3gkhykvst" />
               <strong>
                 <span
                   style={{
@@ -675,7 +417,6 @@ const TermsConditionds = () => {
               id="ip"
               style={{ lineHeight: "1.5" }}
             >
-              <a name="_b6y29mp52qvx" />
               <strong>
                 <span
                   style={{
@@ -765,7 +506,6 @@ const TermsConditionds = () => {
               id="userreps"
               style={{ lineHeight: "1.5" }}
             >
-              <a name="_5hg7kgyv9l8z" />
               <strong>
                 <span
                   style={{
@@ -1107,7 +847,6 @@ const TermsConditionds = () => {
               id="payment"
               style={{ lineHeight: "1.5" }}
             >
-              <a name="_ynub0jdx8pob" />
               <strong>
                 <span
                   style={{
@@ -1476,9 +1215,7 @@ const TermsConditionds = () => {
               <div
                 className="MsoNormal"
                 style={{ lineHeight: "1.5", textAlign: "left" }}
-              >
-                <a name="_drzjqilz2ujm" />
-              </div>
+              ></div>
               <bdt
                 className="block-container if"
                 data-type="if"
@@ -1605,7 +1342,6 @@ const TermsConditionds = () => {
                 id="cancel"
                 style={{ textAlign: "left", lineHeight: "1.5" }}
               >
-                <a name="_e993diqrk0qx" />
                 <strong>
                   <span
                     style={{
@@ -1841,7 +1577,6 @@ const TermsConditionds = () => {
                 id="prohibited"
                 style={{ lineHeight: "1.5", textAlign: "left" }}
               >
-                <a name="_h284p8mrs3r7" />
                 <strong>
                   <span
                     style={{
@@ -3484,9 +3219,7 @@ const TermsConditionds = () => {
                 </li>
               </ul>
             </div>
-            <div className="MsoNormal" style={{ lineHeight: "1.5" }}>
-              <a name="_zbbv9tgty199" />
-            </div>
+            <div className="MsoNormal" style={{ lineHeight: "1.5" }}></div>
           </div>
           <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
             <br />
@@ -4317,7 +4050,6 @@ const TermsConditionds = () => {
               id="submissions"
               style={{ lineHeight: "1.5" }}
             >
-              <a name="_wfq2hvrw11j4" />
               <strong>
                 <span
                   style={{
@@ -4406,7 +4138,6 @@ const TermsConditionds = () => {
             id="sitemanage"
             style={{ lineHeight: "1.5" }}
           >
-            <a name="_wj13r09u8u3u" />
             <strong>
               <span
                 style={{
@@ -4419,7 +4150,8 @@ const TermsConditionds = () => {
               </span>
             </strong>
           </div>
-        </div>        <div align="center" style={{ textAlign: "left", lineHeight: 1 }}>
+        </div>{" "}
+        <div align="center" style={{ textAlign: "left", lineHeight: 1 }}>
           <br />
         </div>
         <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
@@ -4452,9 +4184,7 @@ const TermsConditionds = () => {
               facilitate the proper functioning of the Site.
             </span>
           </div>
-          <div className="MsoNormal" style={{ lineHeight: "1.5" }}>
-            <a name="_jugvcvcw0oj9" />
-          </div>
+          <div className="MsoNormal" style={{ lineHeight: "1.5" }}></div>
         </div>
         <div align="center" style={{ textAlign: "left", lineHeight: "1.5" }}>
           <br />
@@ -4733,7 +4463,6 @@ const TermsConditionds = () => {
             id="terms"
             style={{ lineHeight: "1.5" }}
           >
-            <a name="_k3mndam4w6w1" />
             <strong>
               <span
                 style={{
@@ -4887,7 +4616,6 @@ const TermsConditionds = () => {
             id="modifications"
             style={{ lineHeight: "1.5" }}
           >
-            <a name="_e2dep1hfgltt" />
             <strong>
               <span style={{ lineHeight: "115%", fontFamily: "Arial" }}>
                 <span style={{ fontSize: 19 }}>
@@ -4969,7 +4697,6 @@ const TermsConditionds = () => {
             id="law"
             style={{ lineHeight: "1.5" }}
           >
-            <a name="_p6vbf8atcwhs" />
             <strong>
               <span style={{ lineHeight: "115%", fontFamily: "Arial" }}>
                 <span style={{ fontSize: 19 }}>19. GOVERNING LAW</span>
@@ -5033,7 +4760,6 @@ const TermsConditionds = () => {
             id="disputes"
             style={{ lineHeight: "1.5" }}
           >
-            <a name="_v5i5tjw62cyw" />
             <strong>
               <span
                 style={{
