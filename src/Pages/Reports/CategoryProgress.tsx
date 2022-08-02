@@ -40,7 +40,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
         categoriesData?.map((element: any, index) => {
           return (
             <div key={index} className="w-full space-y-1">
-              <div className="flex justify-between items-center text-slate-800 dark:text-slate-300 text-xs font-medium tracking-normal capitalize font-sans">
+              <div className="flex justify-between items-center text-slate-700 dark:text-slate-300 text-xs font-medium tracking-normal capitalize font-sans">
                 <span className="">{element.name}</span>
                 <span className="text-[0.65rem]">
                   ({element.count}) {element.value >= 0.1 ? element.value : "0"}
@@ -82,7 +82,7 @@ const CategoryProgress: FC<data> = ({ data }) => {
         [0, 1, 2, 3, 4, 5].map((index) => {
           return (
             <div key={index} className="w-full space-y-1">
-              <div className="flex justify-between items-center text-slate-800 dark:text-slate-300 text-xs font-medium tracking-normal capitalize font-sans">
+              <div className="flex justify-between items-center text-slate-700 dark:text-slate-300 text-xs font-medium tracking-normal capitalize font-sans">
                 <span className="">N/A</span>
                 <span className="text-[0.65rem]">(0) 0%</span>
               </div>
