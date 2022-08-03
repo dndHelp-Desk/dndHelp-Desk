@@ -55,7 +55,7 @@ const MostRecent: FC = () => {
                 key={index}
                 className="w-full h-20 px-2 pl-6 border-l border-slate-300 dark:border-slate-700 last:border-0 relative"
               >
-                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-[#222e40] p-1">
+                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-750 p-1">
                   <div className="h-full w-full rounded-full bg-slate-700 dark:bg-slate-700 flex items-center justify-center text-sm text-slate-100">
                     <BiHash />
                   </div>
@@ -66,8 +66,8 @@ const MostRecent: FC = () => {
                       {activity.category}
                     </p>
                     <Link
-                    onClick={() => {
-                      dispatch(setThreadId(activity?.ticket_id));
+                      onClick={() => {
+                        dispatch(setThreadId(activity?.ticket_id));
                         window.localStorage.setItem(
                           "threadId",
                           JSON.stringify(activity?.ticket_id)
@@ -95,7 +95,7 @@ const MostRecent: FC = () => {
                 key={index}
                 className="w-full h-14 px-2 pl-6 border-l border-slate-300 dark:border-slate-700 last:border-0 relative"
               >
-                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-[#222e40] p-1">
+                <div className="absolute left-[-1rem] top-0 h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-750 p-1">
                   <div className="h-full w-full rounded-full bg-slate-700 dark:bg-slate-700 flex items-center justify-center text-xs text-slate-100">
                     <BiHash />
                   </div>
