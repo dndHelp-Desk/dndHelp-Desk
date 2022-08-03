@@ -136,7 +136,7 @@ const SignUp: FC<Props> = ({
               </div>
               <p className="ml-3 leading-4 font-normal text-sm text-slate-700">
                 I agree to the{" "}
-                <Link to="./terms_and_conditionds" className="text-blue-600">
+                <Link to="/terms_and_conditions" className="text-blue-600">
                   Terms and Conditions.
                 </Link>
               </p>
