@@ -326,9 +326,9 @@ const NewTicket: FC<Props> = ({
         Hi ${inputValue?.recipient_name},
       </p>
       <h1 style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace;font-size:15px">
-        <b>Dial & Dine has opened a new ticket regarding ${
-          inputValue?.category
-        }. The case details are as follows:</b>
+        <b>${company_details?.name} has opened a new ticket regarding ${
+                    inputValue?.category
+                  }. The case details are as follows:</b>
       </h1>
       <p style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
         <b>Tickect Details:</b>
@@ -378,7 +378,9 @@ const NewTicket: FC<Props> = ({
   </p>
   <h1
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont , monospace; ;font-size:15px">
-    <b>Dial & Dine has opened a new ticket with ID: ${id} which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
+    <b>${
+      company_details?.name
+    } has opened a new ticket with ID: ${id} which has been Resolved. If you feel unsatisfied by the solution please don't hesitate to cantact us thruogh the links provided below, don't foget to grab your ticket-id.</b>
   </h1>
   <p
     style="color:#0c0c30;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,monospace ;line-height:20px;font-size:16px;text-decoration: underline;">
