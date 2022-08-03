@@ -461,8 +461,13 @@ const DatePicker: FC<Props> = ({ openDatePicker, setDateOpen }) => {
                 title="Please Select A Proper End Date"
                 className={`${endDate ? "hidden" : ""}`}
               >
-                apply
+                error
               </abbr>
+              <span
+                className={`${endDate ? "" : "hidden"}`}
+              >
+                apply
+              </span>
             </button>
           </div>
         </div>
