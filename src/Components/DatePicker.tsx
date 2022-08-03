@@ -454,9 +454,15 @@ const DatePicker: FC<Props> = ({ openDatePicker, setDateOpen }) => {
                 setDateOpen(false);
                 dispatch(changeLoadingStatus(true));
               }}
-              className="h-8 w-24 bg-slate-800 dark:bg-blue-700 text-slate-50 text-xs font-sans uppercase hover:opacity-80 transition-all rounded-sm"
+              disabled={endDate ? false : true}
+              className="h-8 w-24 bg-slate-800 dark:bg-blue-700 text-slate-50 text-xs font-sans uppercase hover:opacity-80 transition-all rounded-sm disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              apply
+              <abbr
+                title="Please Select A Proper End Date"
+                className={`${endDate ? "hidden" : ""}`}
+              >
+                apply
+              </abbr>
             </button>
           </div>
         </div>
